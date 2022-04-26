@@ -64,7 +64,7 @@ END
 // Bitmap
 //
 
-IDB_BITMAP_VQF          BITMAP  DISCARDABLE     "bitmap_acc.bmp"
+IDB_BITMAP_VQF          BITMAP  DISCARDABLE     "bitmap_acc-24.bmp"
 #endif    // “ú–{Œê resources
 /////////////////////////////////////////////////////////////////////////////
 

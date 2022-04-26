@@ -104,7 +104,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="bitmap_tta.bmp">
+    <Image Include="bitmap_tta-24.bmp">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

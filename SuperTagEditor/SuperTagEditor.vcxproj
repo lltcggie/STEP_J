@@ -22,31 +22,31 @@
     <ProjectGuid>{E18DA30E-6AC6-4BD5-A16A-32420644345F}</ProjectGuid>
     <RootNamespace>SuperTagEditor</RootNamespace>
     <Keyword>MFCProj</Keyword>
-    <WindowsTargetPlatformVersion>7.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v141_xp</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <UseOfMfc>Static</UseOfMfc>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v141_xp</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <UseOfMfc>Static</UseOfMfc>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v141_xp</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <UseOfMfc>Static</UseOfMfc>
     <CharacterSet>Unicode</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v141_xp</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <UseOfMfc>Static</UseOfMfc>
     <CharacterSet>Unicode</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -498,15 +498,15 @@ copy $(ProjectDir)..\Help\SuperTagEditor.chm /b $(outputpath)..\
     <None Include="SuperTagEditor.def" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="res\check.bmp" />
+    <Image Include="res\check-24.bmp" />
     <Image Include="res\folders.bmp" />
     <Image Include="res\icon1.ico" />
     <Image Include="res\subitems.bmp" />
     <Image Include="res\SuperTagEditor.ico" />
     <Image Include="res\SuperTagEditorDoc.ico" />
-    <Image Include="res\Toolbar.bmp" />
-    <Image Include="res\toolbar_.bmp" />
-    <Image Include="res\tree.bmp" />
+    <Image Include="res\Toolbar-32.bmp" />
+    <Image Include="res\toolbar_-32.bmp" />
+    <Image Include="res\tree-24.bmp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\step_k_history.txt" />

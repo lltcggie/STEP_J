@@ -469,11 +469,11 @@
 			Filter="ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe"
 			>
 			<File
-				RelativePath="bitmap1.bmp"
+				RelativePath="bitmap1-24.bmp"
 				>
 			</File>
 			<File
-				RelativePath="bmp00001.bmp"
+				RelativePath="bmp00001-24.bmp"
 				>
 			</File>
 			<File

@@ -62,7 +62,7 @@ END
 // Bitmap
 //
 
-IDB_BITMAP_TTA          BITMAP                  "bitmap_tta.bmp"
+IDB_BITMAP_TTA          BITMAP                  "bitmap_tta-24.bmp"
 
 
 /////////////////////////////////////////////////////////////////////////////

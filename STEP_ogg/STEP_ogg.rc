@@ -64,7 +64,7 @@ END
 // Bitmap
 //
 
-IDB_BITMAP_OGG          BITMAP  DISCARDABLE     "bitmap1.bmp"
+IDB_BITMAP_OGG          BITMAP  DISCARDABLE     "bitmap1-24.bmp"
 
 /////////////////////////////////////////////////////////////////////////////
 //

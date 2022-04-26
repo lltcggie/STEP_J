@@ -2453,7 +2453,7 @@
 				>
 			</File>
 			<File
-				RelativePath="res\check.bmp"
+				RelativePath="res\check-24.bmp"
 				>
 			</File>
 			<File
@@ -2489,15 +2489,15 @@
 				>
 			</File>
 			<File
-				RelativePath="res\Toolbar.bmp"
+				RelativePath="res\Toolbar-32.bmp"
 				>
 			</File>
 			<File
-				RelativePath="res\toolbar_.bmp"
+				RelativePath="res\toolbar_-32.bmp"
 				>
 			</File>
 			<File
-				RelativePath="res\tree.bmp"
+				RelativePath="res\tree-24.bmp"
 				>
 			</File>
 		</Filter>

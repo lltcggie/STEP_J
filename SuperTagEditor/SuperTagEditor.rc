@@ -81,13 +81,13 @@ IDR_SUPERTTYPE          ICON                    "res\\SuperTagEditorDoc.ico"
 // Bitmap
 //
 
-IDR_MAINFRAME           BITMAP                  "res\\Toolbar.bmp"
+IDR_MAINFRAME           BITMAP                  "res\\Toolbar-32.bmp"
 
-IDB_BITMAP_TREE         BITMAP                  "res\\tree.bmp"
+IDB_BITMAP_TREE         BITMAP                  "res\\tree-24.bmp"
 
-IDB_BITMAP_CHECK        BITMAP                  "res\\check.bmp"
+IDB_BITMAP_CHECK        BITMAP                  "res\\check-24.bmp"
 
-IDR_TOOLBAR_DYNAMIC     BITMAP                  "res\\toolbar_.bmp"
+IDR_TOOLBAR_DYNAMIC     BITMAP                  "res\\toolbar_-32.bmp"
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -95,7 +95,7 @@ IDR_TOOLBAR_DYNAMIC     BITMAP                  "res\\toolbar_.bmp"
 // Toolbar
 //
 
-IDR_MAINFRAME TOOLBAR 16, 15
+IDR_MAINFRAME TOOLBAR 32, 31
 BEGIN
     BUTTON      ID_FILE_NEW
     BUTTON      ID_OPEN_FOLDER
@@ -138,7 +138,7 @@ BEGIN
     BUTTON      ID_DLG_SETUP_PLUGIN
 END
 
-IDR_TOOLBAR_DYNAMIC TOOLBAR 16, 15
+IDR_TOOLBAR_DYNAMIC TOOLBAR 32, 31
 BEGIN
     BUTTON      ID_BUTTON32892
     BUTTON      ID_BUTTON32892

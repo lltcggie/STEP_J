@@ -310,7 +310,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="bitmap_tta.bmp" />
+    <Image Include="bitmap_tta-24.bmp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
