@@ -415,7 +415,7 @@ int CMySuperGrid::OnCreate(LPCREATESTRUCT lpCreateStruct)
 
 	//associate imagelist with listviewctrl,
 	//this imagelist is only for the first column re: the tree column
-	if(!m_image.Create(IDB_BITMAP_TREE,16,1,RGB(255, 0, 255)))
+	if(!m_image.Create(IDB_BITMAP_TREE,24,1,RGB(255, 0, 255)))
 		return -1;
 
 	SetImageList(&m_image, LVSIL_SMALL);
@@ -432,7 +432,7 @@ int CMySuperGrid::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	// if(!m_imageCheck.Create(IDB_BITMAP_CHECK,16,1,RGB(255, 0, 255)))
 	// 	return -1;
 	// SetImageList(&m_imageCheck, LVSIL_STATE);
-	g_imageCheckMark.Create(IDB_BITMAP_CHECK,16,1,RGB(255, 0, 255));
+	g_imageCheckMark.Create(IDB_BITMAP_CHECK,24,1,RGB(255, 0, 255));
 
 	//If you want to assiciate images to subitems, create an imagelist
 	//and call SetSubItemImageList
@@ -1996,7 +1996,7 @@ void CMySuperGrid::PasteString(TCHAR *sBuffer, int nPastePos, bool bText/* RockD
 
 // =============================================
 // CMySuperGrid::ClipboardPaste
-// 概要  : クリップボードへからのペースト処理
+// 概要  : クリップボードからのペースト処理
 // 引数  : none
 // 戻り値: bool			= true:正常終了 / false:エラー
 // =============================================
@@ -4324,7 +4324,7 @@ bool CMySuperGrid::DirectoryMake(CString &strDir)
 //	if (sDir[1] != _T(':') || sDir[2] != _T('\\')) return(false);
 
 	sTemp = strDir.GetBuffer(strDir.GetLength());
-	// i = 3 で初期化しているのは、最初の'\\'(ﾙｰﾄﾃﾞｨﾚｸﾄﾘ)を飛ばす為
+	// i = 3 で初期化しているのは、最初の'\\'(ルートディレクトリ)を飛ばす為
 	for (i = 3; i <= nLen; i++) {
 #ifndef _UNICODE
 		unsigned char c = sTemp[i];
@@ -5577,13 +5577,13 @@ BOOL CMySuperGrid::OnToolTipNotify(UINT id, NMHDR *pNMHDR, LRESULT *pResult)
 					}
 				} else if ((int)pInfo->GetLParam() >= 0) {
 					FILE_MP3	*fileMP3 = m_pDoc->GetListMP3((int)pInfo->GetLParam());
-					strToolTip += (_T("\r[ﾀｲﾄﾙ] ") + GetFileColumnText(fileMP3, COLUMN_TRACK_NAME));
-					strToolTip += (_T("\n[ｱｰﾃｨｽﾄ] ") + GetFileColumnText(fileMP3, COLUMN_ARTIST_NAME));
-					strToolTip += (_T("\n[ｱﾙﾊﾞﾑ] ") + GetFileColumnText(fileMP3, COLUMN_ALBUM_NAME));
+					strToolTip += (_T("\r[タイトル] ") + GetFileColumnText(fileMP3, COLUMN_TRACK_NAME));
+					strToolTip += (_T("\n[アーティスト] ") + GetFileColumnText(fileMP3, COLUMN_ARTIST_NAME));
+					strToolTip += (_T("\n[アルバム] ") + GetFileColumnText(fileMP3, COLUMN_ALBUM_NAME));
 					strToolTip += (_T("\n[TrackNo] ") + GetFileColumnText(fileMP3, COLUMN_TRACK_NUMBER));
 					strToolTip += (_T("\n[演奏時間] ") + GetFileColumnText(fileMP3, COLUMN_PLAY_TIME));
 					strToolTip += (_T("\n[年] ") + GetFileColumnText(fileMP3, COLUMN_YEAR));
-					strToolTip += (_T("\n[ｼﾞｬﾝﾙ] ") + GetFileColumnText(fileMP3, COLUMN_GENRE));
+					strToolTip += (_T("\n[ジャンル] ") + GetFileColumnText(fileMP3, COLUMN_GENRE));
 					CString strComment = GetFileColumnText(fileMP3, COLUMN_COMMENT);
 					{
 						BOOL bLead = FALSE;
@@ -5600,7 +5600,7 @@ BOOL CMySuperGrid::OnToolTipNotify(UINT id, NMHDR *pNMHDR, LRESULT *pResult)
 						}
 					}
 					//strComment.Remove(_T('\r'));
-					strToolTip += (_T("\n[ｺﾒﾝﾄ] ") + strComment);
+					strToolTip += (_T("\n[コメント] ") + strComment);
 					/* Conspiracy 198 */
 					strComment = GetFileColumnText(fileMP3, COLUMN_FORMAT);
 					{
@@ -5617,9 +5617,9 @@ BOOL CMySuperGrid::OnToolTipNotify(UINT id, NMHDR *pNMHDR, LRESULT *pResult)
 							}
 						}
 					}
-					strToolTip += (_T("\n[ﾌｫｰﾏｯﾄ] ") + strComment);
+					strToolTip += (_T("\n[フォーマット] ") + strComment);
 					strToolTip += (_T("\n[ファイル] ") + GetFileColumnText(fileMP3, COLUMN_FILE_NAME));
-					strToolTip += (_T("\n[ﾊﾟｽ] ") + GetFileColumnText(fileMP3, COLUMN_FULL_PATH_NAME));
+					strToolTip += (_T("\n[パス] ") + GetFileColumnText(fileMP3, COLUMN_FULL_PATH_NAME));
 				}
 			}
 			//if (m_strToolTip != strToolTip) {

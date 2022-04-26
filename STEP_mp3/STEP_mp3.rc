@@ -62,19 +62,19 @@ END
 // Bitmap
 //
 
-IDB_BITMAP_MP3          BITMAP                  "bitmap1.bmp"
+IDB_BITMAP_MP3          BITMAP                  "bitmap1-24.bmp"
 
-IDB_BITMAP_ID3V2        BITMAP                  "bmp00001.bmp"
+IDB_BITMAP_ID3V2        BITMAP                  "bmp00001-24.bmp"
 
-IDB_BITMAP_RMP          BITMAP                  "bmp00002.bmp"
+IDB_BITMAP_RMP          BITMAP                  "bmp00002-24.bmp"
 
-IDB_FILE_CONV_AUTO_ID3  BITMAP                  "file_con.bmp"
+IDB_FILE_CONV_AUTO_ID3  BITMAP                  "file_con-24.bmp"
 
-IDB_FILE_CONV_MP3       BITMAP                  "bmp00003.bmp"
+IDB_FILE_CONV_MP3       BITMAP                  "bmp00003-24.bmp"
 
-IDB_FILE_CONV_RMP       BITMAP                  "bmp00004.bmp"
+IDB_FILE_CONV_RMP       BITMAP                  "bmp00004-24.bmp"
 
-IDB_FILE_CONV_ID3V2     BITMAP                  "bmp00005.bmp"
+IDB_FILE_CONV_ID3V2     BITMAP                  "bmp00005-24.bmp"
 
 
 /////////////////////////////////////////////////////////////////////////////

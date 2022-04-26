@@ -299,7 +299,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="bitmap_acc.bmp" />
+    <Image Include="bitmap_acc-24.bmp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />

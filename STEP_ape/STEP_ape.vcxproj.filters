@@ -263,10 +263,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="bitmap1.bmp">
+    <Image Include="bitmap1-24.bmp">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="bmp00001.bmp">
+    <Image Include="bmp00001-24.bmp">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

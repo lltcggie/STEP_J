@@ -62,9 +62,9 @@ END
 // Bitmap
 //
 
-IDB_BITMAP_WAV          BITMAP                  "bitmap1.bmp"
+IDB_BITMAP_WAV          BITMAP                  "bitmap1-24.bmp"
 
-IDB_BITMAP_AVI          BITMAP                  "bmp00001.bmp"
+IDB_BITMAP_AVI          BITMAP                  "bmp00001-24.bmp"
 
 
 /////////////////////////////////////////////////////////////////////////////

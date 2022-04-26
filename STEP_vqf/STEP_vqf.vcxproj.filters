@@ -71,7 +71,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="bitmap_acc.bmp">
+    <Image Include="bitmap_acc-24.bmp">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

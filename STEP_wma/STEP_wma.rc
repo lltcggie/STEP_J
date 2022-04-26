@@ -64,7 +64,7 @@ END
 // Bitmap
 //
 
-IDB_BITMAP_WMA          BITMAP  DISCARDABLE     "bitmap_w.bmp"
+IDB_BITMAP_WMA          BITMAP  DISCARDABLE     "bitmap_w-24.bmp"
 
 /////////////////////////////////////////////////////////////////////////////
 //

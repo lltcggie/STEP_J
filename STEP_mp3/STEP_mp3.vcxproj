@@ -336,13 +336,13 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="bitmap1.bmp" />
-    <Image Include="bmp00001.bmp" />
-    <Image Include="bmp00002.bmp" />
-    <Image Include="bmp00003.bmp" />
-    <Image Include="bmp00004.bmp" />
-    <Image Include="bmp00005.bmp" />
-    <Image Include="file_con.bmp" />
+    <Image Include="bitmap1-24.bmp" />
+    <Image Include="bmp00001-24.bmp" />
+    <Image Include="bmp00002-24.bmp" />
+    <Image Include="bmp00003-24.bmp" />
+    <Image Include="bmp00004-24.bmp" />
+    <Image Include="bmp00005-24.bmp" />
+    <Image Include="file_con-24.bmp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="STEP_mp3_memo.txt" />

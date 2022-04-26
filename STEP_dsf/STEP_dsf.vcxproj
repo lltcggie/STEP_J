@@ -276,7 +276,7 @@
     <ResourceCompile Include="STEP_dsf.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="bmpdsf.bmp" />
+    <Image Include="bmpdsf-24.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

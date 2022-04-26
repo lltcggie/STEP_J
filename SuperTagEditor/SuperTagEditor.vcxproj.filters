@@ -527,7 +527,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="res\check.bmp">
+    <Image Include="res\check-24.bmp">
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="res\folders.bmp">
@@ -545,13 +545,13 @@
     <Image Include="res\SuperTagEditorDoc.ico">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="res\Toolbar.bmp">
+    <Image Include="res\Toolbar-32.bmp">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="res\toolbar_.bmp">
+    <Image Include="res\toolbar_-32.bmp">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="res\tree.bmp">
+    <Image Include="res\tree-24.bmp">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

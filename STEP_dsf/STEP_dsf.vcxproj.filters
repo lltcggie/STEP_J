@@ -92,7 +92,7 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="bmpdsf.bmp">
+    <Image Include="bmpdsf-24.bmp">
       <Filter>リソース ファイル</Filter>
     </Image>
   </ItemGroup>
