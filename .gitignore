@@ -1,0 +1,10 @@
+*.bak
+*.vcxproj.user
+*.chw
+
+Thumbs.db
+*/.vs
+*/Release
+*/Debug
+*/_temp
+*/_bin
