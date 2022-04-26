@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{7c28b2f1-a550-4601-91f5-dd7977009892}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{7a8f7a4e-7872-4ff7-b456-8747ac02fffb}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{d560c6b8-99f6-47e4-8f8a-f291b3d66abe}</UniqueIdentifier>
+      <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
+    </Filter>
+    <Filter Include="mp3infp">
+      <UniqueIdentifier>{a703e547-cfb9-4026-995a-df41062113eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SuperTagEditor">
+      <UniqueIdentifier>{66b76c27-afb4-40fd-9325-70f2cf04eab3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SuperTagEditor\INI">
+      <UniqueIdentifier>{2f96b369-755a-4f00-bb79-4d22c750c1de}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="DlgSetup.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FileTTA.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="STEP_tta.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\STEP_SDK\STEPlugin.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mp3infp\GlobalCommand.cpp">
+      <Filter>mp3infp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mp3infp\Id3tagv1.cpp">
+      <Filter>mp3infp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mp3infp\Id3tagv2.cpp">
+      <Filter>mp3infp</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SuperTagEditor\strcnv.cpp">
+      <Filter>SuperTagEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SuperTagEditor\INI\ini.cpp">
+      <Filter>SuperTagEditor\INI</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="STEP_tta.def">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="res\STEP_tta.rc2">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="STEP_tta.rc">
+      <Filter>Source Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DlgSetup.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="STEP_tta.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FileTTA.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mp3infp\GlobalCommand.h">
+      <Filter>mp3infp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mp3infp\Id3tagv1.h">
+      <Filter>mp3infp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mp3infp\Id3tagv2.h">
+      <Filter>mp3infp</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SuperTagEditor\strcnv.h">
+      <Filter>SuperTagEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SuperTagEditor\INI\ini.h">
+      <Filter>SuperTagEditor\INI</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="bitmap_tta.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+</Project>

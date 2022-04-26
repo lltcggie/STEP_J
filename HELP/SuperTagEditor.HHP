@@ -1,0 +1,85 @@
+[OPTIONS]
+Auto Index=Yes
+Binary Index=Yes
+Compatibility=1.1 or later
+Compiled file=SuperTagEditor.chm
+Contents file=SuperTagEditor.hhc
+Index file=SuperTagEditor.hhk
+Default Font=MS UI Gothic,10,128
+Default Window=XHP
+Default topic=_RESOURCE\index.html
+Display compile progress=No
+Error log file=C:\STEP_K_src\STEP\HELP\Compile.Log
+Flat=No
+Full-text search=Yes
+Language=0x0411 Japanese
+Title=SuperTagEditor
+
+[WINDOWS]
+XHP="SuperTagEditor","C:\STEP_K_src\STEP\HELP\SuperTagEditor.hhc","C:\STEP_K_src\STEP\HELP\SuperTagEditor.hhk","_RESOURCE\index.html",,,,,,0x60720,200,0xE,[200,200,800,600],0x0,0x0,,,,,0
+$global_Web="Remote URL",,,,,,,,,,,0x383c,[125,144,721,602],,,,,,,0
+
+[FILES]
+_RESOURCE\index.html
+_RESOURCE\ol_top.html
+_RESOURCE\ol_style.html
+_RESOURCE\ol_osusume.html
+_RESOURCE\menu_top.html
+_RESOURCE\menu_file.html
+_RESOURCE\menu_edit.html
+_RESOURCE\menu_disp.html
+_RESOURCE\menu_conv.html
+_RESOURCE\menu_playlist.html
+_RESOURCE\menu_player.html
+_RESOURCE\menu_window.html
+_RESOURCE\menu_help.html
+_RESOURCE\opt_top.html
+_RESOURCE\opt_nor_normal.html
+_RESOURCE\opt_nor_rmp_id3v2.html
+_RESOURCE\opt_nor_lyric.html
+_RESOURCE\opt_nor_player.html
+_RESOURCE\opt_nor_conf.html
+_RESOURCE\opt_nor_key.html
+_RESOURCE\opt_cnv_user.html
+_RESOURCE\opt_cnv_ext.html
+_RESOURCE\opt_cnv_name.html
+_RESOURCE\opt_adv_sync.html
+_RESOURCE\opt_adv_write.html
+_RESOURCE\opt_adv_disp.html
+_RESOURCE\opt_adv_genre.html
+_RESOURCE\faq.html
+_RESOURCE\history.html
+_RESOURCE\schedule.html
+_RESOURCE\copyright.html
+_RESOURCE\COPYRIGHT.HTML
+_RESOURCE\FAQ.HTML
+_RESOURCE\HISTORY.HTML
+_RESOURCE\INDEX.HTML
+_RESOURCE\MENU_CONV.HTML
+_RESOURCE\MENU_DISP.HTML
+_RESOURCE\MENU_EDIT.HTML
+_RESOURCE\MENU_FILE.HTML
+_RESOURCE\MENU_HELP.HTML
+_RESOURCE\MENU_PLAYER.HTML
+_RESOURCE\MENU_PLAYLIST.HTML
+_RESOURCE\MENU_TOP.HTML
+_RESOURCE\MENU_WINDOW.HTML
+_RESOURCE\OL_OSUSUME.HTML
+_RESOURCE\OL_STYLE.HTML
+_RESOURCE\OL_TOP.HTML
+_RESOURCE\OPT_ADV_CLASS.HTML
+_RESOURCE\OPT_ADV_DISP.HTML
+_RESOURCE\OPT_ADV_GENRE.HTML
+_RESOURCE\OPT_ADV_SYNC.HTML
+_RESOURCE\OPT_ADV_WRITE.HTML
+_RESOURCE\OPT_CNV_EXT.HTML
+_RESOURCE\OPT_CNV_NAME.HTML
+_RESOURCE\OPT_CNV_USER.HTML
+_RESOURCE\OPT_NOR_CONF.HTML
+_RESOURCE\OPT_NOR_KEY.HTML
+_RESOURCE\OPT_NOR_LYRIC.HTML
+_RESOURCE\OPT_NOR_NORMAL.HTML
+_RESOURCE\OPT_NOR_PLAYER.HTML
+_RESOURCE\OPT_NOR_RMP_ID3V2.HTML
+_RESOURCE\OPT_TOP.HTML
+_RESOURCE\SCHEDULE.HTML

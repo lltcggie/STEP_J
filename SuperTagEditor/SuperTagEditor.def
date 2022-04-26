@@ -1,0 +1,50 @@
+EXPORTS
+    STEPGetCommandID
+    STEPGetMenu
+    STEPAddToolBarButton
+    STEPRegisterExt
+    STEPKeyAssign
+    STEPGetGenreNameSIF
+    STEPGetGenreCode
+    STEPIsUserGenre
+    STEPGetNumericTrackNumber
+    STEPGetIntegerTrackNumber
+    STEPGetNumericDiscNumber
+    STEPGetIntegerDiscNumber
+
+    STEPGetBooleanValue
+    STEPSetBooleanValue
+    STEPGetLongValue
+    STEPSetLongValue
+    STEPGetIntValue
+    STEPSetIntValue
+    STEPGetVoidValue
+    STEPSetVoidValue
+    STEPGetValue
+    STEPSetValue
+    STEPProcessSelectedFiles
+    STEPProcessSelectedFilesForUpdate
+
+    STEPIsRangeSelected
+    STEPGetSelectedCount
+    STEPGetSelectedItem
+    STEPIsCurrentCellEditOK
+    STEPItemHasChildren
+    STEPGetSelectedRange
+    STEPIsItemFile
+    STEPChangeSubItemText
+    STEPGetSubItemText
+    STEPGetFileInfo
+    STEPGETColumnType
+    STEPIsCurrentCellEditOK
+    STEPIsNumeric
+    STEPConvSiFieldToId3tag
+
+    STEPInitDataSIF
+    STEPInitDataID3
+    STEPInitData
+    STEPFileNameChange
+    STEPWriteTag
+
+    STEPUpdateCellInfo
+

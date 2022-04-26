@@ -1,0 +1,63 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "STEP_fla", "STEP_fla.vcxproj", "{BB1EF202-3F68-4605-87EB-C4AEBD2BF3FB}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4CEFBE02-C215-11DB-8314-0800200C9A66} = {4CEFBE02-C215-11DB-8314-0800200C9A66}
+		{15CBFEFF-7965-41F5-B4E2-21E8795C9159} = {15CBFEFF-7965-41F5-B4E2-21E8795C9159}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libogg_static", "libogg-1.3.2\win32\VS2010\libogg_static.vcxproj", "{15CBFEFF-7965-41F5-B4E2-21E8795C9159}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "win_utf8_io_static", "flac-1.3.1\src\share\win_utf8_io\win_utf8_io_static.vcxproj", "{4CEFBE02-C215-11DB-8314-0800200C9A66}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libFLAC_dynamic", "flac-1.3.1\src\libFLAC\libFLAC_dynamic.vcxproj", "{4CEFBC83-C215-11DB-8314-0800200C9A66}"
+	ProjectSection(ProjectDependencies) = postProject
+		{15CBFEFF-7965-41F5-B4E2-21E8795C9159} = {15CBFEFF-7965-41F5-B4E2-21E8795C9159}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BB1EF202-3F68-4605-87EB-C4AEBD2BF3FB}.Debug|x64.ActiveCfg = Debug|Win32
+		{BB1EF202-3F68-4605-87EB-C4AEBD2BF3FB}.Debug|x86.ActiveCfg = Debug|Win32
+		{BB1EF202-3F68-4605-87EB-C4AEBD2BF3FB}.Debug|x86.Build.0 = Debug|Win32
+		{BB1EF202-3F68-4605-87EB-C4AEBD2BF3FB}.Release|x64.ActiveCfg = Release|Win32
+		{BB1EF202-3F68-4605-87EB-C4AEBD2BF3FB}.Release|x86.ActiveCfg = Release|Win32
+		{BB1EF202-3F68-4605-87EB-C4AEBD2BF3FB}.Release|x86.Build.0 = Release|Win32
+		{15CBFEFF-7965-41F5-B4E2-21E8795C9159}.Debug|x64.ActiveCfg = Debug|x64
+		{15CBFEFF-7965-41F5-B4E2-21E8795C9159}.Debug|x64.Build.0 = Debug|x64
+		{15CBFEFF-7965-41F5-B4E2-21E8795C9159}.Debug|x86.ActiveCfg = Debug|Win32
+		{15CBFEFF-7965-41F5-B4E2-21E8795C9159}.Debug|x86.Build.0 = Debug|Win32
+		{15CBFEFF-7965-41F5-B4E2-21E8795C9159}.Release|x64.ActiveCfg = Release|x64
+		{15CBFEFF-7965-41F5-B4E2-21E8795C9159}.Release|x64.Build.0 = Release|x64
+		{15CBFEFF-7965-41F5-B4E2-21E8795C9159}.Release|x86.ActiveCfg = Release|Win32
+		{15CBFEFF-7965-41F5-B4E2-21E8795C9159}.Release|x86.Build.0 = Release|Win32
+		{4CEFBE02-C215-11DB-8314-0800200C9A66}.Debug|x64.ActiveCfg = Debug|x64
+		{4CEFBE02-C215-11DB-8314-0800200C9A66}.Debug|x64.Build.0 = Debug|x64
+		{4CEFBE02-C215-11DB-8314-0800200C9A66}.Debug|x86.ActiveCfg = Debug|Win32
+		{4CEFBE02-C215-11DB-8314-0800200C9A66}.Debug|x86.Build.0 = Debug|Win32
+		{4CEFBE02-C215-11DB-8314-0800200C9A66}.Release|x64.ActiveCfg = Release|x64
+		{4CEFBE02-C215-11DB-8314-0800200C9A66}.Release|x64.Build.0 = Release|x64
+		{4CEFBE02-C215-11DB-8314-0800200C9A66}.Release|x86.ActiveCfg = Release|Win32
+		{4CEFBE02-C215-11DB-8314-0800200C9A66}.Release|x86.Build.0 = Release|Win32
+		{4CEFBC83-C215-11DB-8314-0800200C9A66}.Debug|x64.ActiveCfg = Debug|x64
+		{4CEFBC83-C215-11DB-8314-0800200C9A66}.Debug|x64.Build.0 = Debug|x64
+		{4CEFBC83-C215-11DB-8314-0800200C9A66}.Debug|x86.ActiveCfg = Debug|Win32
+		{4CEFBC83-C215-11DB-8314-0800200C9A66}.Debug|x86.Build.0 = Debug|Win32
+		{4CEFBC83-C215-11DB-8314-0800200C9A66}.Release|x64.ActiveCfg = Release|x64
+		{4CEFBC83-C215-11DB-8314-0800200C9A66}.Release|x64.Build.0 = Release|x64
+		{4CEFBC83-C215-11DB-8314-0800200C9A66}.Release|x86.ActiveCfg = Release|Win32
+		{4CEFBC83-C215-11DB-8314-0800200C9A66}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

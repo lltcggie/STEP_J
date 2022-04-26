@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML><HEAD>
+<meta name="GENERATOR" content="HelpMachine 2.5.1">
+<!-- Sitemap 1.0 -->
+</HEAD><BODY>
+<UL>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="SuperTagEditor の概要">
+<param name="Local" value="_RESOURCE\ol_top.html">
+</OBJECT>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="特徴">
+<param name="Local" value="_RESOURCE\ol_style.html">
+</OBJECT>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="こんな人にオススメ">
+<param name="Local" value="_RESOURCE\ol_osusume.html">
+</OBJECT>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="メニュー">
+<param name="Local" value="_RESOURCE\menu_top.html">
+</OBJECT>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="メニュー：ファイル">
+<param name="Local" value="_RESOURCE\menu_file.html">
+</OBJECT>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="メニュー：編集">
+<param name="Local" value="_RESOURCE\menu_edit.html">
+</OBJECT>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="メニュー：表示">
+<param name="Local" value="_RESOURCE\menu_disp.html">
+</OBJECT>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="メニュー：変換">
+<param name="Local" value="_RESOURCE\menu_conv.html">
+</OBJECT>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="メニュー：プレイリスト">
+<param name="Local" value="_RESOURCE\menu_playlist.html">
+</OBJECT>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="メニュー：プレイヤー制御">
+<param name="Local" value="_RESOURCE\menu_player.html">
+</OBJECT>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="メニュー：オプション">
+<param name="Local" value="_RESOURCE\menu_window.html">
+</OBJECT>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="メニュー：ヘルプ">
+<param name="Local" value="_RESOURCE\menu_help.html">
+</OBJECT>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="オプション設定について">
+<param name="Local" value="_RESOURCE\opt_top.html">
+</OBJECT>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="オプション設定(一般)：一般">
+<param name="Local" value="_RESOURCE\opt_nor_normal.html">
+</OBJECT>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="オプション設定(一般)：RIFF MP3/ID3v2">
+<param name="Local" value="_RESOURCE\opt_nor_rmp_id3v2.html">
+</OBJECT>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="オプション設定(一般)：歌詞">
+<param name="Local" value="_RESOURCE\opt_nor_lyric.html">
+</OBJECT>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="オプション設定(一般)：プレイヤー">
+<param name="Local" value="_RESOURCE\opt_nor_player.html">
+</OBJECT>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="オプション設定(一般)：確認メッセージ">
+<param name="Local" value="_RESOURCE\opt_nor_conf.html">
+</OBJECT>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="オプション設定(一般)：キー割り当て">
+<param name="Local" value="_RESOURCE\opt_nor_key.html">
+</OBJECT>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="オプション設定(変換)：ユーザー変換書式">
+<param name="Local" value="_RESOURCE\opt_cnv_user.html">
+</OBJECT>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="オプション設定(変換)：拡張変換書式">
+<param name="Local" value="_RESOURCE\opt_cnv_ext.html">
+</OBJECT>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="オプション設定(変換)：ファイル名文字置換">
+<param name="Local" value="_RESOURCE\opt_cnv_name.html">
+</OBJECT>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="オプション設定(上級者向け)：フォルダの同期">
+<param name="Local" value="_RESOURCE\opt_adv_sync.html">
+</OBJECT>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="オプション設定(上級者向け)：ジャンル設定">
+<param name="Local" value="_RESOURCE\opt_adv_write.html">
+</OBJECT>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="オプション設定(上級者向け)：表示項目設定">
+<param name="Local" value="_RESOURCE\opt_adv_disp.html">
+</OBJECT>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="オプション設定(上級者向け)：分類設定">
+<param name="Local" value="_RESOURCE\opt_adv_genre.html">
+</OBJECT>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="オプション設定(上級者向け)：リスト出力">
+<param name="Local" value="_RESOURCE\opt_adv_write.html">
+</OBJECT>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="ＦＡＱ">
+<param name="Local" value="_RESOURCE\faq.html">
+</OBJECT>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="更新履歴">
+<param name="Local" value="_RESOURCE\history.html">
+</OBJECT>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="今後の予定">
+<param name="Local" value="_RESOURCE\schedule.html">
+</OBJECT>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="著作権・転載等について">
+<param name="Local" value="_RESOURCE\copyright.html">
+</OBJECT>
+</UL>
+</BODY></HTML>

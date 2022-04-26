@@ -1,0 +1,571 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{065ea8c3-43d0-4a51-b07b-6f6edf889414}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{729f52a2-c543-405c-9dc2-525712eb8617}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{1829e029-2f58-4ace-8726-ca079f951955}</UniqueIdentifier>
+      <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
+    </Filter>
+    <Filter Include="オプション設定関連">
+      <UniqueIdentifier>{0cb55450-0e39-4f52-9725-df7ad61abd2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HELP">
+      <UniqueIdentifier>{57f30594-3a3f-4711-9fda-c971b89d9af8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Plugin">
+      <UniqueIdentifier>{b230b529-bb3c-4b35-b225-e031b3951e16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\dde">
+      <UniqueIdentifier>{7e85cd62-6c6f-43ba-bbc4-5081383aceb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\dde">
+      <UniqueIdentifier>{c094ce08-217d-4953-afdd-e9ca730d1076}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ini">
+      <UniqueIdentifier>{40edda95-b2ee-43b2-99ab-eea6916e0afa}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ComboInListView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DkToolBar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgAddNumber.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgAddUserGenre.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgCommonProg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgDeleteChar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgFavorites.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgFileNameChange.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgFileOverWrite.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgFileOverWrite2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgFixedString.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgFixedUpperLower.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgListSort.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgLoadPlayList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgNameChange.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgPluginSetup.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgReplaceWord.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgSetCheck.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgTeikei.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgTeikeiPaste.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgUnifyChar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgUserConvFormartTag2Tag.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DoubleZeroString.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FileMP3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HeaderCtrlEx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HistoryComboEx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ListEditCtrl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MainFrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MyFileDialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MyFileDialogPlaylist.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MyRecentFileList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MySuperGrid.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OXToolTipCtrl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Regexp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SHBrowseForFolder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="strcnv.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SuperGridCtrl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SuperTagEditor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SuperTagEditorDoc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SuperTagEditorView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgConv.cpp">
+      <Filter>オプション設定関連</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgConvFormatEx.cpp">
+      <Filter>オプション設定関連</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgCopyFormat.cpp">
+      <Filter>オプション設定関連</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgDefaultValue.cpp">
+      <Filter>オプション設定関連</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgEditShowColumn.cpp">
+      <Filter>オプション設定関連</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgEnvConf.cpp">
+      <Filter>オプション設定関連</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgEnvironment.cpp">
+      <Filter>オプション設定関連</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgEnvPlayer.cpp">
+      <Filter>オプション設定関連</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgEnvSheet.cpp">
+      <Filter>オプション設定関連</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgFileNameMaxCheck.cpp">
+      <Filter>オプション設定関連</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgFolderSync.cpp">
+      <Filter>オプション設定関連</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgKeyConfig.cpp">
+      <Filter>オプション設定関連</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgLyricFile.cpp">
+      <Filter>オプション設定関連</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgMoveFolder.cpp">
+      <Filter>オプション設定関連</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgReplaceFileName.cpp">
+      <Filter>オプション設定関連</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgSetClassification.cpp">
+      <Filter>オプション設定関連</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgSetupGenre.cpp">
+      <Filter>オプション設定関連</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgUserConvFormat.cpp">
+      <Filter>オプション設定関連</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgWriteForm.cpp">
+      <Filter>オプション設定関連</Filter>
+    </ClCompile>
+    <ClCompile Include="OptionPage\OptionListBox.cpp">
+      <Filter>オプション設定関連</Filter>
+    </ClCompile>
+    <ClCompile Include="OptionPage\OptionPage.cpp">
+      <Filter>オプション設定関連</Filter>
+    </ClCompile>
+    <ClCompile Include="OptionPage\OptionPageStaticText.cpp">
+      <Filter>オプション設定関連</Filter>
+    </ClCompile>
+    <ClCompile Include="OptionPage\OptionSheet.cpp">
+      <Filter>オプション設定関連</Filter>
+    </ClCompile>
+    <ClCompile Include="OptionPage\SMLDoc.cpp">
+      <Filter>オプション設定関連</Filter>
+    </ClCompile>
+    <ClCompile Include="OptionPage\SMLStatic.cpp">
+      <Filter>オプション設定関連</Filter>
+    </ClCompile>
+    <ClCompile Include="Plugin.cpp">
+      <Filter>Plugin</Filter>
+    </ClCompile>
+    <ClCompile Include="dde\kbdde.cpp">
+      <Filter>Source Files\dde</Filter>
+    </ClCompile>
+    <ClCompile Include="dde\player_control.cpp">
+      <Filter>Source Files\dde</Filter>
+    </ClCompile>
+    <ClCompile Include="STEP_api.cpp">
+      <Filter>Plugin</Filter>
+    </ClCompile>
+    <ClCompile Include="INI\ini.cpp">
+      <Filter>Source Files\ini</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="SuperTagEditor.rc">
+      <Filter>Source Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AutoBuildCount.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ComboInListView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DkToolBar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgAddNumber.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgAddUserGenre.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgCommonProg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgDeleteChar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgFavorites.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgFileNameChange.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgFileOverWrite.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgFileOverWrite2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgFixedString.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgFixedUpperLower.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgListSort.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgLoadPlayList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgNameChange.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgPluginSetup.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgReplaceWord.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgSetCheck.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgTeikei.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgTeikeiPaste.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgUnifyChar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgUserConvFormartTag2Tag.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DoubleZeroString.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FileMP3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HeaderCtrlEx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HistoryComboEx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ListEditCtrl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MainFrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MyFileDialog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MyFileDialogPlaylist.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MyRecentFileList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MySuperGrid.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OXDllExt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OXToolTipCtrl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Regexp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Registry.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SHBrowseForFolder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SuperGridCtrl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SuperTagEditor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SuperTagEditorDoc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SuperTagEditorView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgConv.h">
+      <Filter>オプション設定関連</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgConvFormatEx.h">
+      <Filter>オプション設定関連</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgCopyFormat.h">
+      <Filter>オプション設定関連</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgDefaultValue.h">
+      <Filter>オプション設定関連</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgEditShowColumn.h">
+      <Filter>オプション設定関連</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgEnvConf.h">
+      <Filter>オプション設定関連</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgEnvironment.h">
+      <Filter>オプション設定関連</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgEnvPlayer.h">
+      <Filter>オプション設定関連</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgEnvSheet.h">
+      <Filter>オプション設定関連</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgFileNameMaxCheck.h">
+      <Filter>オプション設定関連</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgFolderSync.h">
+      <Filter>オプション設定関連</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgKeyConfig.h">
+      <Filter>オプション設定関連</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgLyricFile.h">
+      <Filter>オプション設定関連</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgMoveFolder.h">
+      <Filter>オプション設定関連</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgReplaceFileName.h">
+      <Filter>オプション設定関連</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgSetClassification.h">
+      <Filter>オプション設定関連</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgSetupGenre.h">
+      <Filter>オプション設定関連</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgUserConvFormat.h">
+      <Filter>オプション設定関連</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgWriteForm.h">
+      <Filter>オプション設定関連</Filter>
+    </ClInclude>
+    <ClInclude Include="OptionPage\OptionListBox.h">
+      <Filter>オプション設定関連</Filter>
+    </ClInclude>
+    <ClInclude Include="OptionPage\OptionPage.h">
+      <Filter>オプション設定関連</Filter>
+    </ClInclude>
+    <ClInclude Include="OptionPage\OptionPageStaticText.h">
+      <Filter>オプション設定関連</Filter>
+    </ClInclude>
+    <ClInclude Include="OptionPage\OptionSheet.h">
+      <Filter>オプション設定関連</Filter>
+    </ClInclude>
+    <ClInclude Include="OptionPage\SMLDoc.h">
+      <Filter>オプション設定関連</Filter>
+    </ClInclude>
+    <ClInclude Include="OptionPage\SMLStatic.h">
+      <Filter>オプション設定関連</Filter>
+    </ClInclude>
+    <ClInclude Include="Plugin.h">
+      <Filter>Plugin</Filter>
+    </ClInclude>
+    <ClInclude Include="..\STEP_SDK\STEP_api.h">
+      <Filter>Plugin</Filter>
+    </ClInclude>
+    <ClInclude Include="..\STEP_SDK\STEPlugin.h">
+      <Filter>Plugin</Filter>
+    </ClInclude>
+    <ClInclude Include="dde\kbdde.h">
+      <Filter>Header Files\dde</Filter>
+    </ClInclude>
+    <ClInclude Include="dde\player_control.h">
+      <Filter>Header Files\dde</Filter>
+    </ClInclude>
+    <ClInclude Include="strcnv.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dde\scmpx.h">
+      <Filter>Header Files\dde</Filter>
+    </ClInclude>
+    <ClInclude Include="dde\wa_ipc.h">
+      <Filter>Header Files\dde</Filter>
+    </ClInclude>
+    <ClInclude Include="dde\winamp.h">
+      <Filter>Header Files\dde</Filter>
+    </ClInclude>
+    <ClInclude Include="INI\ini.h">
+      <Filter>Source Files\ini</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\a1.bin">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\bin00001.bin">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\cursor1.cur">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\rt_manif.bin">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\SuperTagEditor.rc2">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Help\history.html">
+      <Filter>HELP</Filter>
+    </None>
+    <None Include="Help\index.html">
+      <Filter>HELP</Filter>
+    </None>
+    <None Include="Help\schedule.html">
+      <Filter>HELP</Filter>
+    </None>
+    <None Include="SuperTagEditor.def">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="res\ini1.bin">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\check.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\folders.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\icon1.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\subitems.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\SuperTagEditor.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\SuperTagEditorDoc.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Toolbar.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\toolbar_.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\tree.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\STEP_SDK\STEP_API.txt">
+      <Filter>Plugin</Filter>
+    </Text>
+    <Text Include="..\var_list.txt" />
+    <Text Include="..\var_list2.txt" />
+    <Text Include="..\step_k_history.txt" />
+    <Text Include="..\step_k_readme.txt" />
+    <Text Include="..\step_k_memo.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="VisualStyle.manifest" />
+  </ItemGroup>
+</Project>

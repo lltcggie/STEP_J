@@ -1,0 +1,28 @@
+﻿; STEP_dsf.def : DLL のモジュール パラメーターを宣言します。
+
+LIBRARY      "STEP_dsf.ste"
+
+EXPORTS
+    ;プラグインに必ず実装しなければいけない関数
+    STEPInit
+    STEPFinalize
+    STEPGetAPIVersion
+    STEPGetPluginName
+    STEPGetPluginInfo
+
+    ;プラグインがタグの読み書きをサポートする場合に実装しなければいけない関数
+    STEPGetControlType
+    STEPGetColumnMax
+    STEPLoad
+    STEPSave
+
+    ;プラグインに実装できる関数 
+    STEPSupportSIF
+    STEPSupportTrackNumberSIF
+	STEPShowOptionDialog
+	STEPGetToolTipText
+	STEPGetStatusMessage
+	STEPOnUpdateCommand
+	STEPOnCommand
+	STEPOnLoadMenu
+	STEPOnLoadMainMenu

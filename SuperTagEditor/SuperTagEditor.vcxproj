@@ -1,0 +1,532 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{E18DA30E-6AC6-4BD5-A16A-32420644345F}</ProjectGuid>
+    <RootNamespace>SuperTagEditor</RootNamespace>
+    <Keyword>MFCProj</Keyword>
+    <WindowsTargetPlatformVersion>7.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v141_xp</PlatformToolset>
+    <UseOfMfc>Static</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v141_xp</PlatformToolset>
+    <UseOfMfc>Static</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v141_xp</PlatformToolset>
+    <UseOfMfc>Static</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v141_xp</PlatformToolset>
+    <UseOfMfc>Static</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>14.0.24720.0</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)_bin\$(PlatformShortName)\</OutDir>
+    <IntDir>$(SolutionDir)_temp\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <IntDir>$(SolutionDir)_temp\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)_bin\$(PlatformShortName)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)_bin\$(PlatformShortName)\</OutDir>
+    <IntDir>$(SolutionDir)_temp\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <IntDir>$(SolutionDir)_temp\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)_bin\$(PlatformShortName)\</OutDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>.\Release/SuperTagEditor.tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.\;..\STEP_SDK;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;SUPORT_DRAGDROP;RECONVERT_ID3V2;FLICKERFREE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>None</DebugInformationFormat>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <OmitFramePointers>true</OmitFramePointers>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+      <SDLCheck>true</SDLCheck>
+      <WarningLevel>Level3</WarningLevel>
+      <BrowseInformation>true</BrowseInformation>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0411</Culture>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>htmlhelp.lib;imm32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <SubSystem>Windows</SubSystem>
+      <TargetMachine>MachineX86</TargetMachine>
+      <ProgramDatabaseFile>$(IntDir)$(TargetName).pdb</ProgramDatabaseFile>
+      <ImportLibrary>$(IntDir)$(TargetName).lib</ImportLibrary>
+      <GenerateDebugInformation>No</GenerateDebugInformation>
+      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <ModuleDefinitionFile>SuperTagEditor.def</ModuleDefinitionFile>
+    </Link>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>$(IntDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+    <Manifest />
+    <Manifest>
+      <EnableDpiAwareness>true</EnableDpiAwareness>
+    </Manifest>
+    <PostBuildEvent>
+      <Command>copy $(ProjectDir)..\*.txt /b $(outputpath)..\
+copy $(ProjectDir)..\Copying /b $(outputpath)..\
+copy $(ProjectDir)..\Help\SuperTagEditor.chm /b $(outputpath)..\
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TypeLibraryName>.\Release/SuperTagEditor.tlb</TypeLibraryName>
+      <HeaderFileName>
+      </HeaderFileName>
+    </Midl>
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.\;..\STEP_SDK;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;SUPORT_DRAGDROP;RECONVERT_ID3V2;FLICKERFREE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>None</DebugInformationFormat>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <OmitFramePointers>true</OmitFramePointers>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+      <SDLCheck>true</SDLCheck>
+      <WarningLevel>Level3</WarningLevel>
+      <BrowseInformation>true</BrowseInformation>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0411</Culture>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>htmlhelp.lib;imm32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <SubSystem>Windows</SubSystem>
+      <ProgramDatabaseFile>$(IntDir)$(TargetName).pdb</ProgramDatabaseFile>
+      <ImportLibrary>$(IntDir)$(TargetName).lib</ImportLibrary>
+      <GenerateDebugInformation>No</GenerateDebugInformation>
+      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <ModuleDefinitionFile>SuperTagEditor.def</ModuleDefinitionFile>
+      <AdditionalOptions>/HIGHENTROPYVA:NO %(AdditionalOptions)</AdditionalOptions>
+    </Link>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>$(IntDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+    <Manifest />
+    <Manifest>
+      <EnableDpiAwareness>true</EnableDpiAwareness>
+    </Manifest>
+    <PostBuildEvent>
+      <Command>copy $(ProjectDir)..\*.txt /b $(outputpath)..\
+copy $(ProjectDir)..\Copying /b $(outputpath)..\
+copy $(ProjectDir)..\Help\SuperTagEditor.chm /b $(outputpath)..\
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>.\Debug/SuperTagEditor.tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>.\;..\STEP_SDK;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;SUPORT_DRAGDROP;RECONVERT_ID3V2;FLICKERFREE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <SDLCheck>true</SDLCheck>
+      <WarningLevel>Level3</WarningLevel>
+      <BrowseInformation>true</BrowseInformation>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0411</Culture>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>htmlhelp.lib;imm32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <SubSystem>Windows</SubSystem>
+      <DataExecutionPrevention />
+      <TargetMachine>MachineX86</TargetMachine>
+      <ProgramDatabaseFile>$(IntDir)$(TargetName).pdb</ProgramDatabaseFile>
+      <ImportLibrary>$(IntDir)$(TargetName).lib</ImportLibrary>
+      <ModuleDefinitionFile>SuperTagEditor.def</ModuleDefinitionFile>
+    </Link>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>$(IntDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+    <Manifest />
+    <Manifest>
+      <EnableDpiAwareness>true</EnableDpiAwareness>
+    </Manifest>
+    <ManifestResourceCompile />
+    <ManifestResourceCompile />
+    <PostBuildEvent>
+      <Command>copy $(ProjectDir)..\*.txt /b $(outputpath)..\
+copy $(ProjectDir)..\Copying /b $(outputpath)..\
+copy $(ProjectDir)..\Help\SuperTagEditor.chm /b $(outputpath)..\
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TypeLibraryName>.\Debug/SuperTagEditor.tlb</TypeLibraryName>
+      <HeaderFileName>
+      </HeaderFileName>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>.\;..\STEP_SDK;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;SUPORT_DRAGDROP;RECONVERT_ID3V2;FLICKERFREE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <SDLCheck>true</SDLCheck>
+      <WarningLevel>Level3</WarningLevel>
+      <BrowseInformation>true</BrowseInformation>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0411</Culture>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>htmlhelp.lib;imm32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <SubSystem>Windows</SubSystem>
+      <ProgramDatabaseFile>$(IntDir)$(TargetName).pdb</ProgramDatabaseFile>
+      <ImportLibrary>$(IntDir)$(TargetName).lib</ImportLibrary>
+      <ModuleDefinitionFile>SuperTagEditor.def</ModuleDefinitionFile>
+      <AdditionalOptions>/HIGHENTROPYVA:NO %(AdditionalOptions)</AdditionalOptions>
+    </Link>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>$(IntDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+    <Manifest />
+    <Manifest>
+      <EnableDpiAwareness>true</EnableDpiAwareness>
+    </Manifest>
+    <ManifestResourceCompile />
+    <ManifestResourceCompile />
+    <ManifestResourceCompile />
+    <PostBuildEvent>
+      <Command>copy $(ProjectDir)..\*.txt /b $(outputpath)..\
+copy $(ProjectDir)..\Copying /b $(outputpath)..\
+copy $(ProjectDir)..\Help\SuperTagEditor.chm /b $(outputpath)..\
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="ComboInListView.cpp" />
+    <ClCompile Include="dde\kbdde.cpp" />
+    <ClCompile Include="dde\player_control.cpp" />
+    <ClCompile Include="DkToolBar.cpp" />
+    <ClCompile Include="DlgAddNumber.cpp" />
+    <ClCompile Include="DlgAddUserGenre.cpp" />
+    <ClCompile Include="DlgCommonProg.cpp" />
+    <ClCompile Include="DlgConv.cpp" />
+    <ClCompile Include="DlgConvFormatEx.cpp" />
+    <ClCompile Include="DlgCopyFormat.cpp" />
+    <ClCompile Include="DlgDefaultValue.cpp" />
+    <ClCompile Include="DlgDeleteChar.cpp" />
+    <ClCompile Include="DlgEditShowColumn.cpp" />
+    <ClCompile Include="DlgEnvConf.cpp" />
+    <ClCompile Include="DlgEnvironment.cpp" />
+    <ClCompile Include="DlgEnvPlayer.cpp" />
+    <ClCompile Include="DlgEnvSheet.cpp" />
+    <ClCompile Include="DlgFavorites.cpp" />
+    <ClCompile Include="DlgFileNameChange.cpp" />
+    <ClCompile Include="DlgFileNameMaxCheck.cpp" />
+    <ClCompile Include="DlgFileOverWrite.cpp" />
+    <ClCompile Include="DlgFileOverWrite2.cpp" />
+    <ClCompile Include="DlgFixedString.cpp" />
+    <ClCompile Include="DlgFixedUpperLower.cpp" />
+    <ClCompile Include="DlgFolderSync.cpp" />
+    <ClCompile Include="DlgKeyConfig.cpp" />
+    <ClCompile Include="DlgListSort.cpp" />
+    <ClCompile Include="DlgLoadPlayList.cpp" />
+    <ClCompile Include="DlgLyricFile.cpp" />
+    <ClCompile Include="DlgMoveFolder.cpp" />
+    <ClCompile Include="DlgNameChange.cpp" />
+    <ClCompile Include="DlgPluginSetup.cpp" />
+    <ClCompile Include="DlgReplaceFileName.cpp" />
+    <ClCompile Include="DlgReplaceWord.cpp" />
+    <ClCompile Include="DlgSetCheck.cpp" />
+    <ClCompile Include="DlgSetClassification.cpp" />
+    <ClCompile Include="DlgSetupGenre.cpp" />
+    <ClCompile Include="DlgTeikei.cpp" />
+    <ClCompile Include="DlgTeikeiPaste.cpp" />
+    <ClCompile Include="DlgUnifyChar.cpp" />
+    <ClCompile Include="DlgUserConvFormartTag2Tag.cpp" />
+    <ClCompile Include="DlgUserConvFormat.cpp" />
+    <ClCompile Include="DlgWriteForm.cpp" />
+    <ClCompile Include="DoubleZeroString.cpp" />
+    <ClCompile Include="FileMP3.cpp" />
+    <ClCompile Include="HeaderCtrlEx.cpp" />
+    <ClCompile Include="HistoryComboEx.cpp" />
+    <ClCompile Include="INI\ini.cpp" />
+    <ClCompile Include="ListEditCtrl.cpp" />
+    <ClCompile Include="MainFrm.cpp" />
+    <ClCompile Include="MyFileDialog.cpp" />
+    <ClCompile Include="MyFileDialogPlaylist.cpp" />
+    <ClCompile Include="MyRecentFileList.cpp" />
+    <ClCompile Include="MySuperGrid.cpp" />
+    <ClCompile Include="OptionPage\OptionListBox.cpp" />
+    <ClCompile Include="OptionPage\OptionPage.cpp" />
+    <ClCompile Include="OptionPage\OptionPageStaticText.cpp" />
+    <ClCompile Include="OptionPage\OptionSheet.cpp" />
+    <ClCompile Include="OptionPage\SMLDoc.cpp" />
+    <ClCompile Include="OptionPage\SMLStatic.cpp" />
+    <ClCompile Include="OXToolTipCtrl.cpp" />
+    <ClCompile Include="Plugin.cpp" />
+    <ClCompile Include="Regexp.cpp" />
+    <ClCompile Include="SHBrowseForFolder.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="STEP_api.cpp" />
+    <ClCompile Include="strcnv.cpp" />
+    <ClCompile Include="SuperGridCtrl.cpp" />
+    <ClCompile Include="SuperTagEditor.cpp" />
+    <ClCompile Include="SuperTagEditorDoc.cpp" />
+    <ClCompile Include="SuperTagEditorView.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="SuperTagEditor.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\STEP_SDK\STEPlugin.h" />
+    <ClInclude Include="..\STEP_SDK\STEP_api.h" />
+    <ClInclude Include="AutoBuildCount.h" />
+    <ClInclude Include="ComboInListView.h" />
+    <ClInclude Include="dde\kbdde.h" />
+    <ClInclude Include="dde\player_control.h" />
+    <ClInclude Include="dde\scmpx.h" />
+    <ClInclude Include="dde\wa_ipc.h" />
+    <ClInclude Include="dde\winamp.h" />
+    <ClInclude Include="DkToolBar.h" />
+    <ClInclude Include="DlgAddNumber.h" />
+    <ClInclude Include="DlgAddUserGenre.h" />
+    <ClInclude Include="DlgCommonProg.h" />
+    <ClInclude Include="DlgConv.h" />
+    <ClInclude Include="DlgConvFormatEx.h" />
+    <ClInclude Include="DlgCopyFormat.h" />
+    <ClInclude Include="DlgDefaultValue.h" />
+    <ClInclude Include="DlgDeleteChar.h" />
+    <ClInclude Include="DlgEditShowColumn.h" />
+    <ClInclude Include="DlgEnvConf.h" />
+    <ClInclude Include="DlgEnvironment.h" />
+    <ClInclude Include="DlgEnvPlayer.h" />
+    <ClInclude Include="DlgEnvSheet.h" />
+    <ClInclude Include="DlgFavorites.h" />
+    <ClInclude Include="DlgFileNameChange.h" />
+    <ClInclude Include="DlgFileNameMaxCheck.h" />
+    <ClInclude Include="DlgFileOverWrite.h" />
+    <ClInclude Include="DlgFileOverWrite2.h" />
+    <ClInclude Include="DlgFixedString.h" />
+    <ClInclude Include="DlgFixedUpperLower.h" />
+    <ClInclude Include="DlgFolderSync.h" />
+    <ClInclude Include="DlgKeyConfig.h" />
+    <ClInclude Include="DlgListSort.h" />
+    <ClInclude Include="DlgLoadPlayList.h" />
+    <ClInclude Include="DlgLyricFile.h" />
+    <ClInclude Include="DlgMoveFolder.h" />
+    <ClInclude Include="DlgNameChange.h" />
+    <ClInclude Include="DlgPluginSetup.h" />
+    <ClInclude Include="DlgReplaceFileName.h" />
+    <ClInclude Include="DlgReplaceWord.h" />
+    <ClInclude Include="DlgSetCheck.h" />
+    <ClInclude Include="DlgSetClassification.h" />
+    <ClInclude Include="DlgSetupGenre.h" />
+    <ClInclude Include="DlgTeikei.h" />
+    <ClInclude Include="DlgTeikeiPaste.h" />
+    <ClInclude Include="DlgUnifyChar.h" />
+    <ClInclude Include="DlgUserConvFormartTag2Tag.h" />
+    <ClInclude Include="DlgUserConvFormat.h" />
+    <ClInclude Include="DlgWriteForm.h" />
+    <ClInclude Include="DoubleZeroString.h" />
+    <ClInclude Include="FileMP3.h" />
+    <ClInclude Include="HeaderCtrlEx.h" />
+    <ClInclude Include="HistoryComboEx.h" />
+    <ClInclude Include="INI\ini.h" />
+    <ClInclude Include="ListEditCtrl.h" />
+    <ClInclude Include="MainFrm.h" />
+    <ClInclude Include="MyFileDialog.h" />
+    <ClInclude Include="MyFileDialogPlaylist.h" />
+    <ClInclude Include="MyRecentFileList.h" />
+    <ClInclude Include="MySuperGrid.h" />
+    <ClInclude Include="OptionPage\OptionListBox.h" />
+    <ClInclude Include="OptionPage\OptionPage.h" />
+    <ClInclude Include="OptionPage\OptionPageStaticText.h" />
+    <ClInclude Include="OptionPage\OptionSheet.h" />
+    <ClInclude Include="OptionPage\SMLDoc.h" />
+    <ClInclude Include="OptionPage\SMLStatic.h" />
+    <ClInclude Include="OXDllExt.h" />
+    <ClInclude Include="OXToolTipCtrl.h" />
+    <ClInclude Include="Plugin.h" />
+    <ClInclude Include="Regexp.h" />
+    <ClInclude Include="Registry.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="SHBrowseForFolder.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="strcnv.h" />
+    <ClInclude Include="SuperGridCtrl.h" />
+    <ClInclude Include="SuperTagEditor.h" />
+    <ClInclude Include="SuperTagEditorDoc.h" />
+    <ClInclude Include="SuperTagEditorView.h" />
+    <ClInclude Include="targetver.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Help\history.html" />
+    <None Include="Help\index.html" />
+    <None Include="Help\schedule.html" />
+    <None Include="res\a1.bin" />
+    <None Include="res\bin00001.bin" />
+    <None Include="res\cursor1.cur" />
+    <None Include="res\ini1.bin" />
+    <None Include="res\rt_manif.bin" />
+    <None Include="res\SuperTagEditor.rc2" />
+    <None Include="SuperTagEditor.def" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\check.bmp" />
+    <Image Include="res\folders.bmp" />
+    <Image Include="res\icon1.ico" />
+    <Image Include="res\subitems.bmp" />
+    <Image Include="res\SuperTagEditor.ico" />
+    <Image Include="res\SuperTagEditorDoc.ico" />
+    <Image Include="res\Toolbar.bmp" />
+    <Image Include="res\toolbar_.bmp" />
+    <Image Include="res\tree.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\step_k_history.txt" />
+    <Text Include="..\step_k_memo.txt" />
+    <Text Include="..\step_k_readme.txt" />
+    <Text Include="..\STEP_SDK\STEP_API.txt" />
+    <Text Include="..\var_list.txt" />
+    <Text Include="..\var_list2.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="VisualStyle.manifest">
+      <SubType>Designer</SubType>
+    </Manifest>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties RESOURCE_FILE="SuperTagEditor.rc" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>
