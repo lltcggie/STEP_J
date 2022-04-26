@@ -57,6 +57,7 @@ BEGIN_MESSAGE_MAP(CDlgConvFormatEx, COptionPage)
 	ON_BN_CLICKED(IDC_BT_FILE_NAME, OnBtFileName)
 	ON_BN_CLICKED(IDC_BT_FIX_STRING, OnBtFixString)
 	ON_BN_CLICKED(IDC_BT_NUMBER, OnBtNumber)
+	ON_BN_CLICKED(IDC_BT_NUMBER2, OnBtNumber2)
 	ON_BN_CLICKED(IDC_BT_RELEASE_YEAR, OnBtReleaseYear)
 	ON_BN_CLICKED(IDC_BT_TRACK_NAME, OnBtTrackName)
 	ON_BN_CLICKED(IDC_BT_TRACK_NUMBER, OnBtTrackNumber)
@@ -104,6 +105,11 @@ void CDlgConvFormatEx::OnBtFixString()
 void CDlgConvFormatEx::OnBtNumber() 
 {
 	OutputFormatString(_T("%NUMBER%"));
+}
+
+void CDlgConvFormatEx::OnBtNumber2() 
+{
+	OutputFormatString(_T("%NUMBER2%"));
 }
 
 void CDlgConvFormatEx::OnBtReleaseYear() 
