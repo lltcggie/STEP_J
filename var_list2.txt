@@ -12,7 +12,8 @@
 %RELEASE_YEAR%
 %COMMENT%               ¦‚Ps–Ú‚Ì‚Ý
 %GENRE%
-%NUMBER%
+%NUMBER%           ¦˜A”Ô
+%NUMBER2%          ¦“rØ‚ê‚½‚ç‰ÁŽZ
 %STRING%
 %COPYRIGHT%
 %ENGINEER%

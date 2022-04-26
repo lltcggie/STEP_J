@@ -46,6 +46,7 @@ BEGIN_MESSAGE_MAP(CDlgCopyFormat, COptionPage)
 	ON_BN_CLICKED(IDC_BT_FIX_STRING, OnBtFixString)
 	ON_BN_CLICKED(IDC_BT_NAME_CHANGE, OnBtNameChange)
 	ON_BN_CLICKED(IDC_BT_NUMBER, OnBtNumber)
+	ON_BN_CLICKED(IDC_BT_NUMBER2, OnBtNumber2)
 	ON_BN_CLICKED(IDC_BT_RELEASE_YEAR, OnBtReleaseYear)
 	ON_BN_CLICKED(IDC_BT_TRACK_NAME, OnBtTrackName)
 	ON_BN_CLICKED(IDC_BT_TRACK_NUMBER, OnBtTrackNumber)
@@ -101,6 +102,11 @@ void CDlgCopyFormat::OnBtFixString()
 void CDlgCopyFormat::OnBtNumber() 
 {
 	OutputFormatString(_T("%NUMBER%"));
+}
+
+void CDlgCopyFormat::OnBtNumber2() 
+{
+	OutputFormatString(_T("%NUMBER2%"));
 }
 
 void CDlgCopyFormat::OnBtReleaseYear() 

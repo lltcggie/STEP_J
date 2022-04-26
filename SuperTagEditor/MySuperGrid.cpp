@@ -3928,6 +3928,7 @@ bool CMySuperGrid::ConvUserFormatEx(USER_CONV_FORMAT_EX *pForm)
 	_sntprintf_s(sNumFormat,20, _TRUNCATE, _T("%s0%dd"),_T("%"),pForm->nColumnCount);
 
 	int		nNumber = pForm->nInitNumber;
+	int		nNumber2 = pForm->nInitNumber;
 	int		fileCount = 0;
 	for (int nItem = sy; nItem <= ey; nItem++) {
 		CTreeItem	*pItem = GetTreeItem(nItem);
@@ -3941,9 +3942,11 @@ bool CMySuperGrid::ConvUserFormatEx(USER_CONV_FORMAT_EX *pForm)
 			_tsplitpath_s(strFileName, NULL, 0, NULL, 0, sFileName, _MAX_FNAME, NULL, 0);
 
 			CString	strText = pForm->strFormat;
-			CString	strNumber, strTrackNumber, strTrackNumber2, strTrackNumber3, strDiscNumber, strDiscNumber2, strDiscNumber3;
+			CString	strNumber, strNumber2, strTrackNumber, strTrackNumber2, strTrackNumber3, strDiscNumber, strDiscNumber2, strDiscNumber3;
 			// 連番
 			strNumber.Format(sNumFormat, nNumber);
+			// 途切れたら加算する連番2
+			strNumber2.Format(sNumFormat, nNumber2);
 			// １桁のトラック番号
 			strTrackNumber.Format(_T("%d"), _ttoi(CFileMP3::GetIntTrackNo(GetFileColumnText(fileMP3, COLUMN_TRACK_NUMBER).SpanExcluding(_T("\r")))));
 			// ２桁のトラック番号
@@ -3973,6 +3976,7 @@ bool CMySuperGrid::ConvUserFormatEx(USER_CONV_FORMAT_EX *pForm)
 			strText = StrReplace(strText, _T("%COMMENT%")      , GetFileColumnText(fileMP3, COLUMN_COMMENT).SpanExcluding(_T("\r"))/* BeachMonster 089 */);
 			strText = StrReplace(strText, _T("%GENRE%")        , GetFileColumnText(fileMP3, COLUMN_GENRE).SpanExcluding(_T("\r")));
 			strText = StrReplace(strText, _T("%NUMBER%")       , strNumber);
+			strText = StrReplace(strText, _T("%NUMBER2%")      , strNumber2);
 			strText = StrReplace(strText, _T("%STRING%")       , pForm->strFixString);
 			// SIF の項目
 			strText = StrReplace(strText, _T("%COPYRIGHT%") , fileMP3->strCopyrightSI.SpanExcluding(_T("\r")));
@@ -4012,6 +4016,8 @@ bool CMySuperGrid::ConvUserFormatEx(USER_CONV_FORMAT_EX *pForm)
 			if (pForm->bSpaceInitNumber) {
 				nNumber = pForm->nInitNumber;
 			}
+			// 連番2を進める
+			nNumber2 += pForm->nAddNumber;
 			fileCount = GetFolderFileCount(NodeToIndex(pItem)); /* STEP 0007 */
 		}
 	}

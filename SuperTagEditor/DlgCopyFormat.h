@@ -48,6 +48,7 @@ protected:
 	afx_msg void OnBtFixString();
 	afx_msg void OnBtNameChange();
 	afx_msg void OnBtNumber();
+	afx_msg void OnBtNumber2();
 	afx_msg void OnBtReleaseYear();
 	afx_msg void OnBtTrackName();
 	afx_msg void OnBtTrackNumber();
