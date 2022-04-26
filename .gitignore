@@ -1,9 +1,0 @@
-*.bak
-*.vcxproj.user
-
-Thumbs.db
-*/.vs
-*/Release
-*/Debug
-*/_temp
-*/_bin
