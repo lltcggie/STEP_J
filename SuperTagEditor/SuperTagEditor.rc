@@ -926,7 +926,7 @@ BEGIN
     CONTROL         "STEP_K Version x.xx",IDC_ST_VERSION,"Static",SS_LEFTNOWORDWRAP | SS_NOPREFIX | WS_GROUP,30,10,186,52
     DEFPUSHBUTTON   "OK",IDOK,90,282,50,14,WS_GROUP
     LTEXT           "Mimura 様制作 STEP_M 1.054 f の Kobarin による改造版\n不具合報告・要望・苦情等は上記連絡先へお願いします。\nオリジナル作者に問い合わせをしないで下さい。",IDC_STATIC,4,68,212,34,SS_SUNKEN
-    LTEXT           "オリジナル作者\n\nSuperTagEditor\nCopyright (C) 2000 MERCURY\nhttp://www5.wisnet.ne.jp/~mercury/\n\nSTEP\nCopyright (C) 2001-2006 haseta\nhttp://haseta2003.hp.infoseek.co.jp/\n\nSTEP_M\nCopyright (C) 2008-2010 Mimura\nhttp://mimumimu.net",IDC_STATIC,4,106,212,106,SS_SUNKEN
+    LTEXT           "オリジナル作者\n\nSuperTagEditor\nCopyright (C) 2000 MERCURY\nhttp://www5.wisnet.ne.jp/~mercury/\n\nSTEP\nCopyright (C) 2001-2006 haseta\nhttps://hp.vector.co.jp/authors/VA012911/\n\nSTEP_M\nCopyright (C) 2008-2010 Mimura\nhttps://mimumimu.net/",IDC_STATIC,4,106,212,106,SS_SUNKEN
     LTEXT           "本ソフトウェアでは、ID3Tag/RIFF/OggVorbis/MP4/ApeTag/VQF のタグ取得・更新に mp3infp/u のソースコードが組み込まれています。\n\nmp3infp/u\nCopyright (C) 1998-2019 T-Matsuo, Rem, K.Takata\nhttps://github.com/k-takata/mp3infp/releases",IDC_STATIC,4,216,212,64,SS_SUNKEN
 END
 
@@ -1461,7 +1461,7 @@ BEGIN
     LTEXT           "後に",IDC_STATIC,74,65,14,8
     EDITTEXT        IDC_EDIT_ADD_AFTER,91,62,40,14,ES_AUTOHSCROLL
     LTEXT           "を追加",IDC_STATIC,136,65,22,8
-    CONTROL         "書き込みできるセルが途切れたら連番を初期値に戻す",IDC_CH_SPACE_INIT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,83,174,10
+    CONTROL         "書き込みできるセルが途切れたら連番を初期値に戻す",IDC_CH_SPACE_INIT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,83,169,10
     DEFPUSHBUTTON   "OK",IDOK,50,98,34,14
     PUSHBUTTON      "キャンセル",IDCANCEL,98,98,34,14
     LTEXT           "初期値",IDC_STATIC,7,10,22,8
