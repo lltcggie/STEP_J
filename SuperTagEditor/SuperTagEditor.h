@@ -14,20 +14,20 @@
 
 #include "resource.h"       // メイン シンボル
 
-#define PROG_NAME       _T("STEP_K")     // プログラム名
-#define PROG_VERSION    _T("1.05a")  // バージョン
-#define PROG_COPYRIGHT  _T("Copyright (C) 2016-2021 Kobarin")
-#define PROG_URL        _T("https://kobarin.sakura.ne.jp/")
-#define PROG_MAIL       _T("hidkob@pb.highway.ne.jp")
+#define PROG_NAME       _T("STEP_J")     // プログラム名
+#define PROG_VERSION    _T("1.00")  // バージョン
+#define PROG_COPYRIGHT  _T("Copyright (C) 2022 jarupxx")
+#define PROG_URL        _T("https://github.com/jarupxx/STEP_J/")
+// #define PROG_MAIL       _T("example@co.jp")
 #ifdef _WIN64
 #define PROG_PLATFORM   _T("x64")
 #else
 #define PROG_PLATFORM   _T("x86")
 #endif
 
-#define STEP_MUTEX_NAME       _T("STEP_K")    //起動済み Mutex オブジェクト名
-#define STEP_DDE_SERVICE_NAME _T("STEP_K")    //STEP DDE サービス名
-#define STEP_DDE_TOPIC_NAME   _T("STEP_K")    //STEP DDE トピック名
+#define STEP_MUTEX_NAME       _T("STEP_J")    //起動済み Mutex オブジェクト名
+#define STEP_DDE_SERVICE_NAME _T("STEP_J")    //STEP DDE サービス名
+#define STEP_DDE_TOPIC_NAME   _T("STEP_J")    //STEP DDE トピック名
 
 #define PROG_NAME_ORG       _T("SuperTagEditor")    // プログラム名
 #define PROG_VERSION_ORG    _T("2.00β")            // バージョン
@@ -35,6 +35,8 @@
 #define PROG_VERSION_ORG2   _T("1.02")              // バージョン
 #define PROG_NAME_ORG3      _T("STEP_M")
 #define PROG_VERSION_ORG3   _T("1.054f")
+#define PROG_NAME_ORG4      _T("STEP_K")
+#define PROG_VERSION_ORG4   _T("1.05a")
 
 #define VCRUNTIME_URL _T("https://visualstudio.microsoft.com/ja/downloads/#other-ja-family") //VS2019 再頒布可能パッケージURL
 #define WM_USER_SET_STATUS_POS      WM_USER+1
