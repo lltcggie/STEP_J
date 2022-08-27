@@ -10,9 +10,12 @@ Kobarin 様STEP_Kとの相違点
 
 ・高DPI環境向けにツールバーと大アイコンを追加
 
-・既定のフォントをMeiryo UIに
+・既定のフォントをMeiryo UIに変更
 
-となっています。フォントを変更した影響でWindows XPでは動作しないと思われます。
+・開発環境をVS2022に変更
+
+となっています。STEP_KではWindows XPまで幅広く対応していましたが、
+開発環境を変更した影響でWindows 10以外では動作しないと思われます。
 
 STEP_J についての要望・苦情等はissuesまでお願いします。
 原作者である MERCURY 様、haseta 様、Mimura 様、 Kobarin 様に問い合わせはしないようにお願いします。

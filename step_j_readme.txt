@@ -1,35 +1,31 @@
 -------------------------------------------------------------------------------
 
-               STEP_M 1.054 f 改 STEP_K Version 1.05a          (2021/07/02公開)
+  五代目 SuperTagEditor STEP_J Version 1.00                    (2022/08/27公開)
 
-                       Copyright(C) 2000-2021 MERCURY, haseta, Mimura, Kobarin
-                         E-Mail: hidkob@pb.highway.ne.jp
-                       HomePage: https://kobarin.sakura.ne.jp/
+         Copyright(C) 2000-2022 MERCURY, haseta, Mimura, Kobarin, jarupxx
+         HomePage: https://github.com/jarupxx/STEP_J/
 -------------------------------------------------------------------------------
-【 タイトル 】 STEP_K
-【バージョン】 1.05a.2021.0702
-【ファイル名】 step_k_105a.exe
-【 動作環境 】 Windows XP/Vista/7/8/10(Windows 2000 以前では動作しません)
-               64bit 版は 64bit OS 専用、32bit 版は 32bit OS/64bit OS 両対応
-               Visual Studio 2019 の Microsoft Visual C++ 再頒布可能パッケージ
+【 タイトル 】 STEP_J
+【バージョン】 1.00
+【ファイル名】 step_j_x64_100.zip
+【 動作環境 】 Windows 10 64bit (Windows 8 以前では動作確認していません)
+               Visual Studio 2022 の Microsoft Visual C++ 再頒布可能パッケージ
                (ランタイム)のインストールが必要です。
                https://visualstudio.microsoft.com/ja/downloads/#other-ja-family
-               https://aka.ms/vs/16/release/VC_redist.x64.exe (直リンク)(x64)
-               https://aka.ms/vs/16/release/VC_redist.x86.exe (直リンク)(x86)
+               https://aka.ms/vs/17/release/VC_redist.x64.exe (直リンク)(x64)
                インストールされていなければ起動時にその旨表示されます。
                本体が起動してもランタイムがないと何も出来ません。
-               64bit版では32bit版のランタイムもインストールして下さい。
 【ソフト種別】 フリーソフト
-【 公 開 日 】 2021/07/02
+【 公 開 日 】 2022/08/27
 【転載の可否】 可
 【ライセンス】 GPL
 -------------------------------------------------------------------------------
 
 【概要】
 
-    STEP_M(MERCURY 様制作「Super Tag Editor」の haseta 様による改造版である
-  「STEP」を Mimura 様によってさらに改造したもの)の Kobarin による改造版です。
-  改造版の改造版の改造版です。（笑）
+    2000年に MERCURY様 によって制作された「SuperTagEditor」が
+  STEP (haseta様)、STEP_M (Mimura様)、STEP_K (Kobarin様)、STEP_J (jarupxx)と
+  進化を続けるタグエディターです。（笑）
 
     エクセル風の操作性で様々な形式のマルチメディアファイルのタグ情報を編集する
   ことが出来ます。以下の形式に対応しています。
@@ -60,8 +56,6 @@
   ・取得・更新可能なタグ情報の追加
     ・主にアルバムアーティスト、作詞者、作曲者、トラック数、ディスク番号、ディ
       スク数等
-  ・64bit版も同梱
-    ・32bit版と動作に違いはなく、追加機能や制限も特にありません
 
   オリジナルからの修正点について詳細は step_k_history.txt を参照して下さい。
 
@@ -69,7 +63,7 @@
 
   ・STEP_M の設定ファイルと互換性はない(流用することは出来ない)
 
-    STEP_M が生成した SuperTagEditor.ini を STEP_K のフォルダにコピーして実行し
+    STEP_M が生成した SuperTagEditor.ini を STEP_J のフォルダにコピーして実行し
   ても設定を正しく読み込むことは出来ません。警告やエラーメッセージを何も出さず
   に起動しますが、動作がおかしくなるので、お手数ですが最初から設定し直して下さ
   い。
@@ -97,7 +91,7 @@
   ・MP3 の ID3v1 を書き換え時、30 文字分の入力が可能なのに、更新実行すると文字
     が切り捨てられることがある
 
-    ID3v1 で扱える文字は ANSI で 30 バイトまでですが、STEP_K では入力時は
+    ID3v1 で扱える文字は ANSI で 30 バイトまでですが、STEP_J では入力時は
   UNICODE で 30 文字として数えます。UNICODE の 30 文字を ANSI に変換すると 30
   バイトを超えることがあります。(全角文字を含む場合)
     その場合、超えた分は切り捨てられます。タグの仕様上 ANSI しか扱えず、文字の
@@ -110,18 +104,15 @@
 
 【著作権・免責事項】
 
-    STEP_K はフリーソフトウェアです。著作権は Kobarin が保有します。
+    STEP_J はフリーソフトウェアです。著作権は jarupxx が保有します。
   このプログラムを使用することによって、いかなる損害が生じても、作者はその責任
   を負いません。プログラムにバグがあり、タグの書き換えに失敗してデータを破壊し
   たとしても、作者はそのデータの修復義務は負わないものとします。
 
 【ライセンス】
 
-    STEP_M は GPL ですので、STEP_K も GPL となります。ソースコードは
-
-  Kobarin のホームページ: https://kobarin.sakura.ne.jp/
-
-  にて入手可能です。最新のソースコードがない場合は催促頂ければお送りします。
+    STEP_K は GPL ですので、STEP_J も GPL となります。ソースコードは
+  ホームページ: ( https://github.com/jarupxx/STEP_J/ ) にて入手可能です。
 
 【転載・配布】
 
@@ -133,30 +124,27 @@
 
 【サポート】
 
-    STEP_K についての感想・要望・苦情等は掲示板でお願いします。
+    STEP_J についての感想・要望・苦情等はサポート掲示板までお願いします。
 
-  Kobarin のホームページ：https://kobarin.sakura.ne.jp/
-  E-mail:                 hidkob@pb.highway.ne.jp
+    サポート掲示板: https://github.com/jarupxx/STEP_J/issues
 
-    メールによる個別対応は基本的にやっていませんので、質問は出来るだけ掲示板で
-  お願いします。原作者である MERCURY 様、haseta 様、Mimura 様に問い合わせはし
+    原作者である MERCURY 様、haseta 様、Mimura 様、Kobarin 様に問い合わせはし
   ないようにお願いします。
 
-    STEP_K のオリジナルである STEP_M には数多くの機能が実装されています。動作
+    STEP_J のオリジナルである STEP_K には数多くの機能が実装されています。動作
   確認しきれていない機能もあるかもしれませんので、不具合が見つかったらなるべく
   報告をお願いします。ファイルを破壊するなどの致命的なものは特に、です。
 
 【謝辞】
 
-    オリジナルの原作者である MERCURY 様、haseta 様、Mimura 様がおられなければ
-  STEP_K は存在していません。この場を借りてお礼申し上げます。
-    その他、不具合報告、要望、情報提供して下さった方など、STEP_K の開発に関わ
+    オリジナルの原作者である MERCURY 様、haseta 様、Mimura 様、Kobarin 様が
+    おられなければSTEP_J は存在していません。この場を借りてお礼申し上げます。
+    その他、不具合報告、要望、情報提供して下さった方など、STEP_J の開発に関わ
   って下さった全ての方々に感謝いたします。
 
 【最後に】
 
-    感想お待ちしています。(^^)
+    プルリクエスト歓迎します。(∩´∀｀)
 
 -------------------------------------------------------------------------------
-Kobarin(hidkob@pb.highway.ne.jp)
-https://kobarin.sakura.ne.jp/
+jarupxx(https://github.com/jarupxx/STEP_J/)
