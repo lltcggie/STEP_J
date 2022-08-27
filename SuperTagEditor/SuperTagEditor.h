@@ -38,7 +38,7 @@
 #define PROG_NAME_ORG4      _T("STEP_K")
 #define PROG_VERSION_ORG4   _T("1.05a")
 
-#define VCRUNTIME_URL _T("https://visualstudio.microsoft.com/ja/downloads/#other-ja-family") //VS2019 再頒布可能パッケージURL
+#define VCRUNTIME_URL _T("https://visualstudio.microsoft.com/ja/downloads/#other-ja-family") //VS2022 再頒布可能パッケージURL
 #define WM_USER_SET_STATUS_POS      WM_USER+1
 #define WM_USER_SET_STATUS_SIZE     WM_USER+2
 #define WM_USER_SET_STATUS_INPUT_MODE   WM_USER+3 /* Misirlou 150 */

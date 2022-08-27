@@ -732,7 +732,7 @@ BOOL CSuperTagEditorApp::InitInstance()
 
     // ドラッグ/ドロップ オープンを許可します
 //  m_pMainWnd->DragAcceptFiles();
-    //VS2019 ランタイムの有無を確認
+    //VS2022 ランタイムの有無を確認
 #ifdef _WIN64
     HINSTANCE hDll = LoadLibrary(_T("vcruntime140_1.dll"));
 #else
@@ -747,8 +747,8 @@ BOOL CSuperTagEditorApp::InitInstance()
 #endif
     if(!hDll){//インストールされていない
         MessageBox(NULL, 
-                   _T("VS2019 ランタイムがインストールされていません。\n")
-                   _T("STEP_J の動作には VS2019 ランタイムのインストールが必要です。\n")
+                   _T("VS2022 ランタイムがインストールされていません。\n")
+                   _T("STEP_J の動作には VS2022 ランタイムのインストールが必要です。\n")
                    _T("既にインストール済みなのにこのダイアログが表示される場合はランタイムの\r\n")
                    _T("バージョンが古い可能性があります。最新版をインストールし直して下さい。\r\n" )
                    _T("インストールしないと標準のプラグインを使用出来ないため、何も出来ません。\n")
