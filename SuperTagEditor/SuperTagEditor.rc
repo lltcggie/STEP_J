@@ -1328,15 +1328,15 @@ STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSM
 CAPTION "フォルダの同期"
 FONT 9, "Meiryo UI", 0, 0, 0x0
 BEGIN
-    CONTROL         "フォルダの同期機能を有効にする(STEP_K では使用不可)",IDC_CH_ENABLE_FOLDER_SYNC,
-                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,7,189,10
+    CONTROL         "フォルダの同期機能を有効にする(STEP_J では使用不可)",IDC_CH_ENABLE_FOLDER_SYNC,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP | WS_DISABLED,7,7,189,10
     EDITTEXT        IDC_ED_ROOT_FOLDER,13,34,150,14,ES_AUTOHSCROLL
     PUSHBUTTON      "参照...",IDC_BT_REF_ROOT,165,34,28,14
-    CONTROL         "実行時に、毎回フォルダ指定ダイアログを開く",IDC_CH_SELECT_ALWAYS,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,13,51,146,10
+    CONTROL         "実行時に、毎回フォルダ指定ダイアログを開く",IDC_CH_SELECT_ALWAYS,"Button",BS_AUTOCHECKBOX | WS_TABSTOP | WS_DISABLED,13,51,146,10
     GROUPBOX        "ツリーの""Root""に対応するフォルダ",IDC_ST_ROOT_FOLDER,7,22,189,44
     GROUPBOX        "動作設定",IDC_ST_OPTION,7,72,189,41
-    CONTROL         "ファイルの移動により空になったフォルダは削除する",IDC_CH_DELETE_FOLDER,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,13,84,160,10
-    CONTROL         "同じフォルダにある歌詞ファイルも対象にする",IDC_CH_MOVE_LYRICS_FILE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,13,98,143,10
+    CONTROL         "ファイルの移動により空になったフォルダは削除する",IDC_CH_DELETE_FOLDER,"Button",BS_AUTOCHECKBOX | WS_TABSTOP | WS_DISABLED,13,84,160,10
+    CONTROL         "同じフォルダにある歌詞ファイルも対象にする",IDC_CH_MOVE_LYRICS_FILE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP | WS_DISABLED,13,98,143,10
     PUSHBUTTON      "初期値に戻す",IDC_BT_RESET_PAGE,7,116,48,14
 END
 
