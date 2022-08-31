@@ -8,11 +8,11 @@
 // {E5FB989D-B0A5-401D-BAD5-D9CA080C2B56}
 static const GUID guid_TakFilemapObj =
 { 0xe5fb989d, 0xb0a5, 0x401d, { 0xba, 0xd5, 0xd9, 0xca, 0x8, 0xc, 0x2b, 0x56 } };
-//ªTAK_FILEMAP_OBJ ‚Ìd—l‚ª•Ï‚í‚Á‚½‚ç•ÏX‚·‚é‚±‚Æ
+//â†‘TAK_FILEMAP_OBJ ã®ä»•æ§˜ãŒå¤‰ã‚ã£ãŸã‚‰å¤‰æ›´ã™ã‚‹ã“ã¨
 
 #pragma pack(push, 1)
 struct TAK_FILEMAP_OBJ
-{//32bit ”Å‚Æ 64bit ”Å‚Ì—¼•û‚©‚çQÆ‚³‚ê‚é‚Ì‚ÅŠe•Ï”‚ÌƒTƒCƒY‚É’ˆÓ‚·‚é‚±‚Æ
+{//32bit ç‰ˆã¨ 64bit ç‰ˆã®ä¸¡æ–¹ã‹ã‚‰å‚ç…§ã•ã‚Œã‚‹ã®ã§å„å¤‰æ•°ã®ã‚µã‚¤ã‚ºã«æ³¨æ„ã™ã‚‹ã“ã¨
     GUID  guid;  //=guid_TakFilemapObj
     DWORD cb;    //=sizeof(TAK_FILEMAP_OBJ)
     TCHAR szFormat[256];
@@ -21,7 +21,7 @@ struct TAK_FILEMAP_OBJ
 #pragma pack(pop)
 
 #ifdef _WIN64
-//runtak.exe ‚ğŒÄ‚Ño‚·‘¤‚¾‚¯‚ªg—p
+//runtak.exe ã‚’å‘¼ã³å‡ºã™å´ã ã‘ãŒä½¿ç”¨
 struct TAK_FORMAT
 {
     HANDLE hFileMap;
@@ -91,7 +91,7 @@ static TtakBool tak_GetLength(void *      AUser,
     return tak_True;
 }
 ////////////////////////////////////////////////////////
-//32bit”Å STEP_ape.ste or 32bit”Å runtak.exe ‚Åg—p
+//32bitç‰ˆ STEP_ape.ste or 32bitç‰ˆ runtak.exe ã§ä½¿ç”¨
 ////////////////////////////////////////////////////////
 void GetAudioFormatTak(const TCHAR *cszFileName,
                        TCHAR *pszFormat, int nSize,
@@ -164,7 +164,7 @@ void GetAudioFormatTak(const TCHAR *cszFileName,
     fclose(fp);
 }
 ////////////////////////////////////////////////////////
-//32bit”Å runtak.exe ‚Å‚Ì‚İg—p
+//32bitç‰ˆ runtak.exe ã§ã®ã¿ä½¿ç”¨
 ////////////////////////////////////////////////////////
 void GetAudioFormatTakToFileMap(const TCHAR *cszFileName,
                                 const TCHAR *cszFileMapName)
@@ -180,8 +180,8 @@ void GetAudioFormatTakToFileMap(const TCHAR *cszFileName,
         CloseHandle(hFileMap);
         return;
     }
-    if(pObj->guid != guid_TakFilemapObj ||  //ŒİŠ·«‚Ì‚È‚¢ƒo[ƒWƒ‡ƒ“‚©‚çŒÄ‚Î‚ê‚½
-       pObj->cb != sizeof(TAK_FILEMAP_OBJ)){//Ansi”Å‚Åƒrƒ‹ƒh‚µ‚½‚à‚Ì‚ğUnicode”Å‚Åg‚Á‚½ê‡‚Æ‚©
+    if(pObj->guid != guid_TakFilemapObj ||  //äº’æ›æ€§ã®ãªã„ãƒãƒ¼ã‚¸ãƒ§ãƒ³ã‹ã‚‰å‘¼ã°ã‚ŒãŸ
+       pObj->cb != sizeof(TAK_FILEMAP_OBJ)){//Ansiç‰ˆã§ãƒ“ãƒ«ãƒ‰ã—ãŸã‚‚ã®ã‚’Unicodeç‰ˆã§ä½¿ã£ãŸå ´åˆã¨ã‹
         UnmapViewOfFile(pObj);
         CloseHandle(hFileMap);
         return;
@@ -192,7 +192,7 @@ void GetAudioFormatTakToFileMap(const TCHAR *cszFileName,
 }
 #else
 ////////////////////////////////////////////////////////
-//64bit”Å STEP_ape.ste ‚Å‚Ì‚İg—p
+//64bitç‰ˆ STEP_ape.ste ã§ã®ã¿ä½¿ç”¨
 ////////////////////////////////////////////////////////
 void GetAudioFormatTakFromFileMap(void *pFileMap,
                                   TCHAR *pszFormat, int nSize,

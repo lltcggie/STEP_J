@@ -6,7 +6,7 @@
 HINSTANCE g_hInstance = NULL;
 HINSTANCE hLib = NULL;
 
-/* プラグインから呼び出せる関数 */
+/* 繝励Λ繧ｰ繧､繝ｳ縺九ｉ蜻ｼ縺ｳ蜃ｺ縺帙ｋ髢｢謨ｰ */
 extern "C" {
 UINT (WINAPI *STEPGetCommandID)(void);
 HMENU (WINAPI *STEPGetMenu)(UINT);

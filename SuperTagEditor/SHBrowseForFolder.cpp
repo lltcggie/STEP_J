@@ -1,22 +1,22 @@
 // ======================================================
-// ŠT  —v    F ƒtƒHƒ‹ƒ_‘I‘ðƒ_ƒCƒAƒƒO‚Ìƒ‰ƒbƒpƒNƒ‰ƒX
-// ƒ^[ƒQƒbƒgF Windows95/98/NT
-// ˆ—Œn    F Visual C++ Ver 6.0
-// ì¬ŽÒ    F MERCURY
-// ì¬“ú    F 00/06/17(“y)
-// ’˜ìŒ •\‹LF Copyright(C) 2000 MERCURY.
+// æ¦‚  è¦    ï¼š ãƒ•ã‚©ãƒ«ãƒ€é¸æŠžãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã®ãƒ©ãƒƒãƒ‘ã‚¯ãƒ©ã‚¹
+// ã‚¿ãƒ¼ã‚²ãƒƒãƒˆï¼š Windows95/98/NT
+// å‡¦ç†ç³»    ï¼š Visual C++ Ver 6.0
+// ä½œæˆè€…    ï¼š MERCURY
+// ä½œæˆæ—¥    ï¼š 00/06/17(åœŸ)
+// è‘—ä½œæ¨©è¡¨è¨˜ï¼š Copyright(C) 2000 MERCURY.
 // ======================================================
 
 
 
 // ======================================
-// =====   ðŒƒRƒ“ƒpƒCƒ‹ƒtƒ‰ƒO     =====
+// =====   æ¡ä»¶ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«ãƒ•ãƒ©ã‚°     =====
 // ======================================
 
 
 
 // ======================================
-// =====   ƒCƒ“ƒNƒ‹[ƒhƒtƒ@ƒCƒ‹     =====
+// =====   ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰ãƒ•ã‚¡ã‚¤ãƒ«     =====
 // ======================================
 #include "stdafx.h"
 #include "SHBrowseForFolder.h"
@@ -24,72 +24,72 @@
 
 
 // ======================================
-// =====           ’è  ”           =====
+// =====           å®š  æ•°           =====
 // ======================================
-#define IDC_CH_SUB_DIR      1000        // ƒtƒHƒ‹ƒ_ŽQÆ‚Ì[ƒTƒuƒfƒBƒŒƒNƒgƒŠ‚ðŒŸõ]ƒ{ƒ^ƒ“‚ÌID
-
-
-
-// ======================================
-// =====           ƒ}ƒNƒ           =====
-// ======================================
+#define IDC_CH_SUB_DIR      1000        // ãƒ•ã‚©ãƒ«ãƒ€å‚ç…§ã®[ã‚µãƒ–ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’æ¤œç´¢]ãƒœã‚¿ãƒ³ã®ID
 
 
 
 // ======================================
-// =====       typedef^enum        =====
+// =====           ãƒžã‚¯ãƒ­           =====
 // ======================================
 
 
 
 // ======================================
-// =====       \‘¢‘Ì^‹¤—p‘Ì       =====
+// =====       typedefï¼enum        =====
 // ======================================
 
 
 
 // ======================================
-// =====         const •Ï”         =====
+// =====       æ§‹é€ ä½“ï¼å…±ç”¨ä½“       =====
 // ======================================
 
 
 
 // ======================================
-// =====        extern •Ï”         =====
+// =====         const å¤‰æ•°         =====
+// ======================================
+
+
+
+// ======================================
+// =====        extern å¤‰æ•°         =====
 // ======================================
 //bool    CSHBrowseForFolder::m_bEnableSubDirButton = false;
 //bool    CSHBrowseForFolder::m_bSearchSubDirState = false;
-//const TCHAR* CSHBrowseForFolder::pCheckBoxTitle = NULL;/* FunnyCorn 185 *///"ƒTƒuƒfƒBƒŒƒNƒgƒŠ‚ðŒŸõ";
+//const TCHAR* CSHBrowseForFolder::pCheckBoxTitle = NULL;/* FunnyCorn 185 *///"ã‚µãƒ–ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’æ¤œç´¢";
 //WNDPROC CSHBrowseForFolder::m_VSSelectOrgProc;
 
 
 
 // ======================================
-// =====        static •Ï”         =====
+// =====        static å¤‰æ•°         =====
 // ======================================
 
 
 // ======================================
-// =====     ŠÖ”ƒvƒƒgƒ^ƒCƒv       =====
+// =====     é–¢æ•°ãƒ—ãƒ­ãƒˆã‚¿ã‚¤ãƒ—       =====
 // ======================================
 
 
 
 // ======================================
-// =====      ƒvƒƒOƒ‰ƒ€—Ìˆæ        =====
+// =====      ãƒ—ãƒ­ã‚°ãƒ©ãƒ é ˜åŸŸ        =====
 // ======================================
 // =============================================
 // CSHBrowseForFolder::CSHBrowseForFolder
-// Func  : ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-// Input : bEnable      = [ƒTƒuƒfƒBƒŒƒNƒgƒŠ‚ðŒŸõ]ƒ{ƒ^ƒ“‚ð’Ç‰Á‚·‚é‚©?
-//       : bState       = [ƒTƒuƒfƒBƒŒƒNƒgƒŠ‚ðŒŸõ]ƒ{ƒ^ƒ“‚Ì‰Šúó‘Ô
+// Func  : ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+// Input : bEnable      = [ã‚µãƒ–ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’æ¤œç´¢]ãƒœã‚¿ãƒ³ã‚’è¿½åŠ ã™ã‚‹ã‹?
+//       : bState       = [ã‚µãƒ–ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’æ¤œç´¢]ãƒœã‚¿ãƒ³ã®åˆæœŸçŠ¶æ…‹
 // Output: none
 // =============================================
 CSHBrowseForFolder::CSHBrowseForFolder(bool bEnable, bool bState)
 {
     m_pSubDir = NULL;
     m_szInitialFolder[0] = 0;
-    _tcsncpy_s(m_szCheckBoxTitle, _T("ƒTƒuƒfƒBƒŒƒNƒgƒŠ‚ðŒŸõ"), _TRUNCATE);
+    _tcsncpy_s(m_szCheckBoxTitle, _T("ã‚µãƒ–ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’æ¤œç´¢"), _TRUNCATE);
     m_VSSelectOrgProc = NULL;
     m_bEnableSubDirButton = bEnable;
     m_bSearchSubDirState = bState;
@@ -97,7 +97,7 @@ CSHBrowseForFolder::CSHBrowseForFolder(bool bEnable, bool bState)
 
 // =============================================
 // CSHBrowseForFolder::~CSHBrowseForFolder
-// Func  : ƒfƒXƒgƒ‰ƒNƒ^
+// Func  : ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 // Input : none
 // Output: none
 // =============================================
@@ -108,9 +108,9 @@ CSHBrowseForFolder::~CSHBrowseForFolder()
 
 // =============================================
 // VSSelectFolderSubProc
-// ŠT—v  : ƒtƒHƒ‹ƒ_ŽQÆ‚Ì[ƒTƒuƒfƒBƒŒƒNƒgƒŠ‚ðŒŸõ]ƒ{ƒ^ƒ“ˆ—
-// ˆø”  : ...
-// –ß‚è’l: int CALLBACK
+// æ¦‚è¦  : ãƒ•ã‚©ãƒ«ãƒ€å‚ç…§ã®[ã‚µãƒ–ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’æ¤œç´¢]ãƒœã‚¿ãƒ³å‡¦ç†
+// å¼•æ•°  : ...
+// æˆ»ã‚Šå€¤: int CALLBACK
 // =============================================
 LRESULT CALLBACK CSHBrowseForFolder::VSSelectFolderSubProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
@@ -125,11 +125,11 @@ LRESULT CALLBACK CSHBrowseForFolder::VSSelectFolderSubProc(HWND hWnd, UINT uMsg,
 LRESULT CSHBrowseForFolder::VSSelectFolderSubProcInternal(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
     if ((uMsg == WM_COMMAND) && (LOWORD(wParam) == IDC_CH_SUB_DIR)) {
-        // ƒ{ƒ^ƒ“‚Ìˆ—
+        // ãƒœã‚¿ãƒ³ã®å‡¦ç†
         CWnd    *pClient = CWnd::FromHandle(hWnd);
         CButton *pSubDir = (CButton *)pClient->GetDlgItem(IDC_CH_SUB_DIR);
 
-        // ƒ`ƒFƒbƒNó‘Ô‚ð”½“]
+        // ãƒã‚§ãƒƒã‚¯çŠ¶æ…‹ã‚’åè»¢
         SetSearchSubDirState(GetSearchSubDirState() ? false : true);
         pSubDir->SetCheck(GetSearchSubDirState() ? TRUE : FALSE);
     }
@@ -139,10 +139,10 @@ LRESULT CSHBrowseForFolder::VSSelectFolderSubProcInternal(HWND hWnd, UINT uMsg, 
 
 // =============================================
 // CallbackSelectDir
-// ŠT—v  : ƒtƒHƒ‹ƒ_ŽQÆ‚ÅŽg—p‚·‚éƒR[ƒ‹ƒoƒbƒNŠÖ”
-//       : ŠJ‚¢‚½‚Æ‚«‚ÉƒtƒHƒ‹ƒ_‚ð‘I‘ð‚µ‚½ó‘Ô‚ÅŠJ‚©‚¹‚éˆ—‚ð‚·‚éê‡‚É•K—v
-// ˆø”  : ...
-// –ß‚è’l: int CALLBACK
+// æ¦‚è¦  : ãƒ•ã‚©ãƒ«ãƒ€å‚ç…§ã§ä½¿ç”¨ã™ã‚‹ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯é–¢æ•°
+//       : é–‹ã„ãŸã¨ãã«ãƒ•ã‚©ãƒ«ãƒ€ã‚’é¸æŠžã—ãŸçŠ¶æ…‹ã§é–‹ã‹ã›ã‚‹å‡¦ç†ã‚’ã™ã‚‹å ´åˆã«å¿…è¦
+// å¼•æ•°  : ...
+// æˆ»ã‚Šå€¤: int CALLBACK
 // =============================================
 int CALLBACK CSHBrowseForFolder::CallbackSelectDir(HWND hWnd, UINT uMsg, LPARAM lParam, LPARAM lpData)
 {
@@ -151,10 +151,10 @@ int CALLBACK CSHBrowseForFolder::CallbackSelectDir(HWND hWnd, UINT uMsg, LPARAM 
 int CSHBrowseForFolder::CallbackSelectDirInternal(HWND hWnd, UINT uMsg, LPARAM lParam)
 {
     if (uMsg == BFFM_INITIALIZED) {
-        // ƒfƒtƒHƒ‹ƒg‚ÌƒtƒHƒ‹ƒ_‚ð‘I‘ð‚³‚¹‚é
+        // ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã®ãƒ•ã‚©ãƒ«ãƒ€ã‚’é¸æŠžã•ã›ã‚‹
         SendMessage(hWnd, BFFM_SETSELECTION, (WPARAM)TRUE, (LPARAM)m_szInitialFolder);
         {
-            // ƒtƒHƒ‹ƒ_[ƒcƒŠ[‚Åí‚É‘I‘ðó‘Ô‚ð•\Ž¦
+            // ãƒ•ã‚©ãƒ«ãƒ€ãƒ¼ãƒ„ãƒªãƒ¼ã§å¸¸ã«é¸æŠžçŠ¶æ…‹ã‚’è¡¨ç¤º
             HWND hwndTree = FindWindowEx(hWnd, NULL, _T("SysTreeView32"), NULL);
             if (hwndTree != NULL) {
                 LONG style;
@@ -164,7 +164,7 @@ int CSHBrowseForFolder::CallbackSelectDirInternal(HWND hWnd, UINT uMsg, LPARAM l
             }
         }
 
-        // [ƒTƒuƒfƒBƒŒƒNƒgƒŠ‚ðŒŸõ] ƒ{ƒ^ƒ“‚ð’Ç‰Á
+        // [ã‚µãƒ–ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’æ¤œç´¢] ãƒœã‚¿ãƒ³ã‚’è¿½åŠ 
         if (GetEnableSubDirButton()) {
             m_pSubDir = new CButton; /* WildCherry2 080 */
             if (m_pSubDir) {
@@ -172,30 +172,30 @@ int CSHBrowseForFolder::CallbackSelectDirInternal(HWND hWnd, UINT uMsg, LPARAM l
                 CWnd    *pClient    = CWnd::FromHandle(hWnd);
                 CWnd    *pOK        = pClient->GetDlgItem(IDOK);
                 CWnd    *pCANCEL    = pClient->GetDlgItem(IDCANCEL);
-                // ƒNƒ‰ƒCƒAƒ“ƒgƒEƒBƒ“ƒhƒEƒTƒCƒY‚ðŽæ“¾
+                // ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚µã‚¤ã‚ºã‚’å–å¾—
                 pClient->GetClientRect(&rectClient);
-                // [OK] / [CANCEL] ‚ÌƒEƒBƒ“ƒhƒEˆÊ’u‚ðŽæ“¾
+                // [OK] / [CANCEL] ã®ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ä½ç½®ã‚’å–å¾—
                 pOK->GetWindowRect(&rectOK);
                 pCANCEL->GetWindowRect(&rectCancel);
                 pClient->ScreenToClient(&rectOK) ;
                 pClient->ScreenToClient(&rectCancel) ;
-                // ƒTƒuƒfƒBƒŒƒNƒgƒŠ‘ÎÛƒ`ƒFƒbƒNƒ{ƒ^ƒ“‚Ì RECT ‚ð‹‚ß‚é
+                // ã‚µãƒ–ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªå¯¾è±¡ãƒã‚§ãƒƒã‚¯ãƒœã‚¿ãƒ³ã® RECT ã‚’æ±‚ã‚ã‚‹
                 rect = CRect(rectClient.right - rectCancel.right,
                              rectCancel.top,
                              rectOK.left,
                              rectCancel.bottom);
-                // ƒ`ƒFƒbƒNƒ{ƒ^ƒ“ì¬
+                // ãƒã‚§ãƒƒã‚¯ãƒœã‚¿ãƒ³ä½œæˆ
                 if (m_pSubDir->Create(GetCheckBoxTitle(),
                                     WS_CHILD | WS_VISIBLE | BS_CHECKBOX | WS_TABSTOP,
                                     rect, pClient, IDC_CH_SUB_DIR)) {
-                    // ƒtƒHƒ“ƒg‚ðÝ’è
+                    // ãƒ•ã‚©ãƒ³ãƒˆã‚’è¨­å®š
                     HFONT hFontCurr = (HFONT)pClient->SendMessage(WM_GETFONT, 0, 0);
                     if (hFontCurr != NULL) m_pSubDir->SendMessage(WM_SETFONT, (WPARAM)hFontCurr, 0);
 
-                    // ƒ`ƒFƒbƒNó‘Ô‚ðÝ’è
+                    // ãƒã‚§ãƒƒã‚¯çŠ¶æ…‹ã‚’è¨­å®š
                     m_pSubDir->SetCheck(GetSearchSubDirState() ? TRUE : FALSE);
 
-                    // ƒTƒuƒNƒ‰ƒX‰»
+                    // ã‚µãƒ–ã‚¯ãƒ©ã‚¹åŒ–
                     SetWindowLongPtr(hWnd, GWLP_USERDATA, (LONG_PTR)this);
                     m_VSSelectOrgProc = (WNDPROC)SetWindowLongPtr(hWnd, GWLP_WNDPROC, (LONG_PTR)VSSelectFolderSubProc);
                 }
@@ -207,17 +207,17 @@ int CSHBrowseForFolder::CallbackSelectDirInternal(HWND hWnd, UINT uMsg, LPARAM l
 
 // =============================================
 // CSHBrowseForFolder::SelectDirectory
-// ŠT—v  : ƒtƒHƒ‹ƒ_ŽQÆƒ_ƒCƒAƒƒOˆ—
-// ˆø”  : sLocal           = ƒpƒX(“üo—Í)
-// –ß‚è’l: bool
+// æ¦‚è¦  : ãƒ•ã‚©ãƒ«ãƒ€å‚ç…§ãƒ€ã‚¤ã‚¢ãƒ­ã‚°å‡¦ç†
+// å¼•æ•°  : sLocal           = ãƒ‘ã‚¹(å…¥å‡ºåŠ›)
+// æˆ»ã‚Šå€¤: bool
 // =============================================
 bool CSHBrowseForFolder::Exec(TCHAR *sLocal, int size)
 {
     BOOL            bResult = FALSE;
     BROWSEINFO      bi;
     LPTSTR          lpBuffer;
-    LPITEMIDLIST    pidlRoot;      // ƒuƒ‰ƒEƒY‚Ìƒ‹[ƒgPIDL
-    LPITEMIDLIST    pidlBrowse;    // ƒ†[ƒU[‚ª‘I‘ð‚µ‚½PIDL
+    LPITEMIDLIST    pidlRoot;      // ãƒ–ãƒ©ã‚¦ã‚ºã®ãƒ«ãƒ¼ãƒˆPIDL
+    LPITEMIDLIST    pidlBrowse;    // ãƒ¦ãƒ¼ã‚¶ãƒ¼ãŒé¸æŠžã—ãŸPIDL
     LPMALLOC        lpMalloc = NULL;
 
     HRESULT hr = SHGetMalloc(&lpMalloc);
@@ -225,16 +225,16 @@ bool CSHBrowseForFolder::Exec(TCHAR *sLocal, int size)
 
     HWND    hwnd = AfxGetMainWnd()->GetSafeHwnd();
 
-    // ƒuƒ‰ƒEƒYî•ñŽó‚¯Žæ‚èƒoƒbƒtƒ@—Ìˆæ‚ÌŠm•Û
+    // ãƒ–ãƒ©ã‚¦ã‚ºæƒ…å ±å—ã‘å–ã‚Šãƒãƒƒãƒ•ã‚¡é ˜åŸŸã®ç¢ºä¿
     if ((lpBuffer = (LPTSTR) lpMalloc->Alloc(_MAX_PATH*sizeof(TCHAR))) == NULL) {
         lpMalloc->Release(); /* WildCherry2 080 */
         return(FALSE);
     }
-    // ƒ_ƒCƒAƒƒO•\Ž¦Žž‚Ìƒ‹[ƒgƒtƒHƒ‹ƒ_‚ÌPIDL‚ðŽæ“¾
-    // ¦ˆÈ‰º‚ÍƒfƒXƒNƒgƒbƒv‚ðƒ‹[ƒg‚Æ‚µ‚Ä‚¢‚éBƒfƒXƒNƒgƒbƒv‚ðƒ‹[ƒg‚Æ‚·‚é
-    //   ê‡‚ÍA’P‚É bi.pidlRoot ‚É‚O‚ðÝ’è‚·‚é‚¾‚¯‚Å‚à‚æ‚¢B‚»‚Ì‘¼‚Ì“Á
-    //   ŽêƒtƒHƒ‹ƒ_‚ðƒ‹[ƒg‚Æ‚·‚éŽ–‚à‚Å‚«‚éBÚ×‚ÍSHGetSpecialFolderLoca
-    //   tion‚Ìƒwƒ‹ƒv‚ðŽQÆ‚ÌŽ–B
+    // ãƒ€ã‚¤ã‚¢ãƒ­ã‚°è¡¨ç¤ºæ™‚ã®ãƒ«ãƒ¼ãƒˆãƒ•ã‚©ãƒ«ãƒ€ã®PIDLã‚’å–å¾—
+    // â€»ä»¥ä¸‹ã¯ãƒ‡ã‚¹ã‚¯ãƒˆãƒƒãƒ—ã‚’ãƒ«ãƒ¼ãƒˆã¨ã—ã¦ã„ã‚‹ã€‚ãƒ‡ã‚¹ã‚¯ãƒˆãƒƒãƒ—ã‚’ãƒ«ãƒ¼ãƒˆã¨ã™ã‚‹
+    //   å ´åˆã¯ã€å˜ã« bi.pidlRoot ã«ï¼ã‚’è¨­å®šã™ã‚‹ã ã‘ã§ã‚‚ã‚ˆã„ã€‚ãã®ä»–ã®ç‰¹
+    //   æ®Šãƒ•ã‚©ãƒ«ãƒ€ã‚’ãƒ«ãƒ¼ãƒˆã¨ã™ã‚‹äº‹ã‚‚ã§ãã‚‹ã€‚è©³ç´°ã¯SHGetSpecialFolderLoca
+    //   tionã®ãƒ˜ãƒ«ãƒ—ã‚’å‚ç…§ã®äº‹ã€‚
     if (!SUCCEEDED(SHGetSpecialFolderLocation(  hwnd,
                                                 CSIDL_DESKTOP,
                                                 &pidlRoot))) {
@@ -242,29 +242,29 @@ bool CSHBrowseForFolder::Exec(TCHAR *sLocal, int size)
         lpMalloc->Release(); /* WildCherry2 080 */
         return(FALSE);
     }
-    // BROWSEINFO\‘¢‘Ì‚Ì‰Šú’lÝ’è
-    // ¦BROWSEINFO\‘¢‘Ì‚ÌŠeƒƒ“ƒo‚ÌÚ×à–¾‚àƒwƒ‹ƒv‚ðŽQÆ
+    // BROWSEINFOæ§‹é€ ä½“ã®åˆæœŸå€¤è¨­å®š
+    // â€»BROWSEINFOæ§‹é€ ä½“ã®å„ãƒ¡ãƒ³ãƒã®è©³ç´°èª¬æ˜Žã‚‚ãƒ˜ãƒ«ãƒ—ã‚’å‚ç…§
     bi.hwndOwner = hwnd;
     bi.pidlRoot = pidlRoot;
     bi.pszDisplayName = lpBuffer;
-    bi.lpszTitle = _T("ƒtƒHƒ‹ƒ_‚ð‘I‘ð‚µ‚Ä‰º‚³‚¢B");
+    bi.lpszTitle = _T("ãƒ•ã‚©ãƒ«ãƒ€ã‚’é¸æŠžã—ã¦ä¸‹ã•ã„ã€‚");
     bi.ulFlags = 0;
-    bi.lpfn = CallbackSelectDir;        // ƒR[ƒ‹ƒoƒbƒNŠÖ”‚ÌƒAƒhƒŒƒX‚ðÝ’è
+    bi.lpfn = CallbackSelectDir;        // ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯é–¢æ•°ã®ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’è¨­å®š
     bi.lParam = (LPARAM)this;
     _tcsncpy_s(m_szInitialFolder, sLocal, _TRUNCATE);
-    // ƒtƒHƒ‹ƒ_‘I‘ðƒ_ƒCƒAƒƒO‚Ì•\Ž¦
+    // ãƒ•ã‚©ãƒ«ãƒ€é¸æŠžãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã®è¡¨ç¤º
     pidlBrowse = SHBrowseForFolder(&bi);
     if (pidlBrowse != NULL) {
-        // PIDLŒ`Ž®‚Ì–ß‚è’l‚Ìƒtƒ@ƒCƒ‹ƒVƒXƒeƒ€‚ÌƒpƒX‚É•ÏŠ·
+        // PIDLå½¢å¼ã®æˆ»ã‚Šå€¤ã®ãƒ•ã‚¡ã‚¤ãƒ«ã‚·ã‚¹ãƒ†ãƒ ã®ãƒ‘ã‚¹ã«å¤‰æ›
         if (SHGetPathFromIDList(pidlBrowse, lpBuffer)) {
-            // Žæ“¾¬Œ÷
+            // å–å¾—æˆåŠŸ
             _tcsncpy_s(sLocal, size, lpBuffer, _TRUNCATE);
             bResult = TRUE;
         }
-        // SHBrowseForFolder‚Ì–ß‚è’lPIDL‚ð‰ð•ú
+        // SHBrowseForFolderã®æˆ»ã‚Šå€¤PIDLã‚’è§£æ”¾
         lpMalloc->Free(pidlBrowse);
     }
-    // ƒNƒŠ[ƒ“ƒAƒbƒvˆ—
+    // ã‚¯ãƒªãƒ¼ãƒ³ã‚¢ãƒƒãƒ—å‡¦ç†
     lpMalloc->Free(pidlRoot);
     lpMalloc->Free(lpBuffer);
     lpMalloc->Release();

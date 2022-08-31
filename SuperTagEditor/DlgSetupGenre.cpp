@@ -1,4 +1,4 @@
-// DlgSetupGenre.cpp : ƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“ ƒtƒ@ƒCƒ‹
+// DlgSetupGenre.cpp : ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³ ãƒ•ã‚¡ã‚¤ãƒ«
 //
 
 #include "stdafx.h"
@@ -20,14 +20,14 @@ static char THIS_FILE[] = __FILE__;
 #define ListView_GetSelectedItem(listCtrl)			listCtrl.GetNextItem(-1, LVNI_ALL | LVNI_SELECTED | LVIS_FOCUSED)
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgSetupGenre ƒvƒƒpƒeƒB ƒy[ƒW
+// CDlgSetupGenre ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ ãƒšãƒ¼ã‚¸
 
 IMPLEMENT_DYNCREATE(CDlgSetupGenre, COptionPage)
 
 CDlgSetupGenre::CDlgSetupGenre() : COptionPage(CDlgSetupGenre::IDD)
 {
 	//{{AFX_DATA_INIT(CDlgSetupGenre)
-		// ƒƒ‚ - ClassWizard ‚Í‚±‚ÌˆÊ’u‚Éƒƒ“ƒo‚Ì‰Šú‰»ˆ—‚ğ’Ç‰Á‚µ‚Ü‚·B
+		// ãƒ¡ãƒ¢ - ClassWizard ã¯ã“ã®ä½ç½®ã«ãƒ¡ãƒ³ãƒã®åˆæœŸåŒ–å‡¦ç†ã‚’è¿½åŠ ã—ã¾ã™ã€‚
 	//}}AFX_DATA_INIT
 }
 
@@ -58,14 +58,14 @@ BEGIN_MESSAGE_MAP(CDlgSetupGenre, COptionPage)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgSetupGenre ƒƒbƒZ[ƒW ƒnƒ“ƒhƒ‰
+// CDlgSetupGenre ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒãƒ³ãƒ‰ãƒ©
 
 BOOL CDlgSetupGenre::OnInitDialog() 
 {
 	COptionPage::OnInitDialog();
 
-	// TODO: ‚±‚ÌˆÊ’u‚É‰Šú‰»‚Ì•â‘«ˆ—‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
-	// Šg’£ƒXƒ^ƒCƒ‹‚Ìİ’èFƒ`ƒFƒbƒNƒ{ƒbƒNƒX’Ç‰ÁA‚Ps‘I‘ğ
+	// TODO: ã“ã®ä½ç½®ã«åˆæœŸåŒ–ã®è£œè¶³å‡¦ç†ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
+	// æ‹¡å¼µã‚¹ã‚¿ã‚¤ãƒ«ã®è¨­å®šï¼šãƒã‚§ãƒƒã‚¯ãƒœãƒƒã‚¯ã‚¹è¿½åŠ ã€ï¼‘è¡Œé¸æŠ
 	DWORD	dwStyle;
 	dwStyle = m_listGenre.SendMessage(LVM_GETEXTENDEDLISTVIEWSTYLE, 0, 0);
 	dwStyle |= LVS_EX_CHECKBOXES | LVS_EX_FULLROWSELECT;
@@ -74,13 +74,13 @@ BOOL CDlgSetupGenre::OnInitDialog()
 	RECT	rect;
 	m_listGenre.GetClientRect(&rect);
 
-	m_listGenre.InsertColumn(1, _T("ƒWƒƒƒ“ƒ‹"), LVCFMT_LEFT, rect.right-rect.left-16, -1);
-	m_listGenre.DeleteAllItems();					// ƒNƒŠƒA
+	m_listGenre.InsertColumn(1, _T("ã‚¸ãƒ£ãƒ³ãƒ«"), LVCFMT_LEFT, rect.right-rect.left-16, -1);
+	m_listGenre.DeleteAllItems();					// ã‚¯ãƒªã‚¢
 
 	int nIndex; for (nIndex = 0; g_genreListSCMPX[nIndex].sName != NULL; nIndex++) {
 		GENRE_LIST	*pGenre = &g_genreListSCMPX[nIndex];
 		CString	strText;
-		strText.Format(_T("%3dF%s"), pGenre->byGenre, pGenre->sName);
+		strText.Format(_T("%3dï¼š%s"), pGenre->byGenre, pGenre->sName);
 		m_listGenre.InsertItem(nIndex, strText);
 		//m_listGenre.SetItemData(nIndex, pGenre->byGenre);
 		m_listGenre.SetItemData(nIndex, (DWORD_PTR)pGenre);
@@ -88,8 +88,8 @@ BOOL CDlgSetupGenre::OnInitDialog()
 	}
 	AddUserGenre(nIndex);
 
-	return TRUE;  // ƒRƒ“ƒgƒ[ƒ‹‚ÉƒtƒH[ƒJƒX‚ğİ’è‚µ‚È‚¢‚Æ‚«A–ß‚è’l‚Í TRUE ‚Æ‚È‚è‚Ü‚·
-	              // —áŠO: OCX ƒvƒƒpƒeƒB ƒy[ƒW‚Ì–ß‚è’l‚Í FALSE ‚Æ‚È‚è‚Ü‚·
+	return TRUE;  // ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã«ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ã‚’è¨­å®šã—ãªã„ã¨ãã€æˆ»ã‚Šå€¤ã¯ TRUE ã¨ãªã‚Šã¾ã™
+	              // ä¾‹å¤–: OCX ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ ãƒšãƒ¼ã‚¸ã®æˆ»ã‚Šå€¤ã¯ FALSE ã¨ãªã‚Šã¾ã™
 }
 
 void CDlgSetupGenre::OnBtCheckAll() 
@@ -172,7 +172,7 @@ void CDlgSetupGenre::OnBtCheckScmpx()
 
 void CDlgSetupGenre::OnOK() 
 {
-	// •ÒWŒã‚Ìó‘Ô‚ğ•Û‘¶
+	// ç·¨é›†å¾Œã®çŠ¶æ…‹ã‚’ä¿å­˜
 	//int nIndex; for (nIndex = 0; nIndex < m_listGenre.GetItemCount(); nIndex++) {
 	if (!::IsWindow(m_hWnd))	return;
 	int nIndex; for (nIndex = 0; g_genreListSCMPX[nIndex].sName != NULL; nIndex++) {
@@ -198,13 +198,13 @@ void CDlgSetupGenre::OnOK()
 	for (i = 0; i < USER_GENRE_LIST_MAX; i++) {
 		g_genreListUSER[i] = m_genreListUSER[i];
 	}
-	// •ÏXŒã‚ÌƒWƒƒƒ“ƒ‹ƒŠƒXƒg‚Ìó‘Ô‚ğƒŒƒWƒXƒgƒŠ‚É•Û‘¶
+	// å¤‰æ›´å¾Œã®ã‚¸ãƒ£ãƒ³ãƒ«ãƒªã‚¹ãƒˆã®çŠ¶æ…‹ã‚’ãƒ¬ã‚¸ã‚¹ãƒˆãƒªã«ä¿å­˜
 	((CSuperTagEditorApp *)AfxGetApp())->WriteGenreList();
 
 	COptionPage::OnOK();
 }
 
-// ‰Šú’l‚É–ß‚·
+// åˆæœŸå€¤ã«æˆ»ã™
 void CDlgSetupGenre::OnBtResetPage() 
 {
 	OnBtCheckAll();
@@ -212,12 +212,12 @@ void CDlgSetupGenre::OnBtResetPage()
 
 void CDlgSetupGenre::OnBtAddUser() 
 {
-	// TODO: ‚±‚ÌˆÊ’u‚ÉƒRƒ“ƒgƒ[ƒ‹’Ê’mƒnƒ“ƒhƒ‰—p‚ÌƒR[ƒh‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
+	// TODO: ã“ã®ä½ç½®ã«ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«é€šçŸ¥ãƒãƒ³ãƒ‰ãƒ©ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
 	CDlgAddUserGenre dialog;
 	dialog.m_genreListUSER = m_genreListUSER;
 	if (dialog.DoModal() == IDOK) {
 	}
-	// ƒ†[ƒUw’èƒWƒƒƒ“ƒ‹‚ğÄ•\¦
+	// ãƒ¦ãƒ¼ã‚¶æŒ‡å®šã‚¸ãƒ£ãƒ³ãƒ«ã‚’å†è¡¨ç¤º
 	int nIndex; for (nIndex = 0; g_genreListSCMPX[nIndex].sName != NULL; nIndex++) {
 	}
 	int i; for (i = 0; i < USER_GENRE_LIST_MAX; i++) {
@@ -230,13 +230,13 @@ void CDlgSetupGenre::OnBtAddUser()
 
 void CDlgSetupGenre::OnBtDelUser() 
 {
-	// TODO: ‚±‚ÌˆÊ’u‚ÉƒRƒ“ƒgƒ[ƒ‹’Ê’mƒnƒ“ƒhƒ‰—p‚ÌƒR[ƒh‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
+	// TODO: ã“ã®ä½ç½®ã«ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«é€šçŸ¥ãƒãƒ³ãƒ‰ãƒ©ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
 	POSITION pos = m_listGenre.GetFirstSelectedItemPosition();
 	if (pos == NULL) {
 		return;
 	}
 	int nIndex = m_listGenre.GetNextSelectedItem(pos);
-	// ‘I‘ğ‚³‚ê‚Ä‚¢‚é‚Ì‚ªƒ†[ƒUƒWƒƒƒ“ƒ‹‚©ƒ`ƒFƒbƒN
+	// é¸æŠã•ã‚Œã¦ã„ã‚‹ã®ãŒãƒ¦ãƒ¼ã‚¶ã‚¸ãƒ£ãƒ³ãƒ«ã‹ãƒã‚§ãƒƒã‚¯
 	int i; for (i = 0; g_genreListSCMPX[i].sName != NULL; i++) {
 	}
 	if (nIndex >= i) {
@@ -260,7 +260,7 @@ void CDlgSetupGenre::AddUserGenre(int nIndex)
 				break;
 			}
 		}
-		strText.Format(_T("%s ¨ %s"), pGenre->sName, strDefaultName);
+		strText.Format(_T("%s â†’ %s"), pGenre->sName, strDefaultName);
 		m_listGenre.InsertItem(nIndex, strText);
 		m_listGenre.SetItemData(nIndex, pGenre->byGenre);
 		m_listGenre.SetItemData(nIndex, (DWORD_PTR)pGenre);

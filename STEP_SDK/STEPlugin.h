@@ -6,7 +6,7 @@
 //extern HINSTANCE g_hInstance;
 //extern HINSTANCE hLib;
 
-/* ƒvƒ‰ƒOƒCƒ“‚©‚çŒÄ‚Ño‚¹‚éŠÖ” */
+/* ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ã‹ã‚‰å‘¼ã³å‡ºã›ã‚‹é–¢æ•° */
 extern "C" {
 extern STEP_API UINT (WINAPI *STEPGetCommandID)(void);
 extern STEP_API HMENU (WINAPI *STEPGetMenu)(UINT);
@@ -51,7 +51,7 @@ extern STEP_API bool (WINAPI *STEPUpdateCellInfo)(void);
 extern bool Initialize(void);
 extern void Finalize(void);
 
-/* ƒ^ƒOî•ñ‚Ìæ“¾^İ’è */
+/* ã‚¿ã‚°æƒ…å ±ã®å–å¾—ï¼è¨­å®š */
 extern LPCTSTR GetFullPath(FILE_INFO* info);
 extern LPCTSTR GetFileName(FILE_INFO* info);
 extern LPCTSTR GetFilePath(FILE_INFO* info);

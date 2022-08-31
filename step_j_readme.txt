@@ -1,150 +1,150 @@
 -------------------------------------------------------------------------------
 
-  �ܑ�� SuperTagEditor STEP_J Version 1.00                    (2022/08/27���J)
+  五代目 SuperTagEditor STEP_J Version 1.00                    (2022/08/27公開)
 
          Copyright(C) 2000-2022 MERCURY, haseta, Mimura, Kobarin, jarupxx
          HomePage: https://github.com/jarupxx/STEP_J/
 -------------------------------------------------------------------------------
-�y �^�C�g�� �z STEP_J
-�y�o�[�W�����z 1.00
-�y�t�@�C�����z step_j_x64_100.zip
-�y ����� �z Windows 10 64bit (Windows 8 �ȑO�ł͓���m�F���Ă��܂���)
-               Visual Studio 2022 �� Microsoft Visual C++ �ĔЕz�\�p�b�P�[�W
-               (�����^�C��)�̃C���X�g�[�����K�v�ł��B
+【 タイトル 】 STEP_J
+【バージョン】 1.00
+【ファイル名】 step_j_x64_100.zip
+【 動作環境 】 Windows 10 64bit (Windows 8 以前では動作確認していません)
+               Visual Studio 2022 の Microsoft Visual C++ 再頒布可能パッケージ
+               (ランタイム)のインストールが必要です。
                https://visualstudio.microsoft.com/ja/downloads/#other-ja-family
-               https://aka.ms/vs/17/release/VC_redist.x64.exe (�������N)(x64)
-               �C���X�g�[������Ă��Ȃ���΋N�����ɂ��̎|�\������܂��B
-               �{�̂��N�����Ă������^�C�����Ȃ��Ɖ����o���܂���B
-�y�\�t�g��ʁz �t���[�\�t�g
-�y �� �J �� �z 2022/08/27
-�y�]�ڂ̉ہz ��
-�y���C�Z���X�z GPL
+               https://aka.ms/vs/17/release/VC_redist.x64.exe (直リンク)(x64)
+               インストールされていなければ起動時にその旨表示されます。
+               本体が起動してもランタイムがないと何も出来ません。
+【ソフト種別】 フリーソフト
+【 公 開 日 】 2022/08/27
+【転載の可否】 可
+【ライセンス】 GPL
 -------------------------------------------------------------------------------
 
-�y�T�v�z
+【概要】
 
-    2000�N�� MERCURY�l �ɂ���Đ��삳�ꂽ�uSuperTagEditor�v��
-  STEP (haseta�l)�ASTEP_M (Mimura�l)�ASTEP_K (Kobarin�l)�ASTEP_J (jarupxx)��
-  �i���𑱂���^�O�G�f�B�^�[�ł��B�i�΁j
+    2000年に MERCURY様 によって制作された「SuperTagEditor」が
+  STEP (haseta様)、STEP_M (Mimura様)、STEP_K (Kobarin様)、STEP_J (jarupxx)と
+  進化を続けるタグエディターです。（笑）
 
-    �G�N�Z�����̑��쐫�ŗl�X�Ȍ`���̃}���`���f�B�A�t�@�C���̃^�O����ҏW����
-  ���Ƃ��o���܂��B�ȉ��̌`���ɑΉ����Ă��܂��B
+    エクセル風の操作性で様々な形式のマルチメディアファイルのタグ情報を編集する
+  ことが出来ます。以下の形式に対応しています。
 
-  �EMP3/RIFF MP3(*.mp3/*.rmp)(ApeTag �͖��Ή�)
-  �ERIFF WAV/AVI(*.wav/*.avi)
-  �EMP4(*.m4a/*.mp4/*.m4v)
-  �EMonkey's Audio(*.ape)
-  �ETom's lossless Audio Kompresso(*.tak)
-  �EOptim FROG(*.ofr/*.ofs)
-  �EWavPack(*.wv)
-  �EOgg Vorbis(*.ogg/*.oga)
-  �EOgg Opus(*.opus)(�������A���擾�݂̂̑Ή��ŏ��������͖��Ή�)
-  �EThe True Audio(*.tta)
-  �EWindows Media(*.wma/*.asf/*.wmv)
-  �ETwinVQ(*.vqf)
-  �EDSF(*.dsf)(DJ Toyo ���񐧍�� STEP_dsf �𓯍������Ē����Ă��܂�)
+  ・MP3/RIFF MP3(*.mp3/*.rmp)(ApeTag は未対応)
+  ・RIFF WAV/AVI(*.wav/*.avi)
+  ・MP4(*.m4a/*.mp4/*.m4v)
+  ・Monkey's Audio(*.ape)
+  ・Tom's lossless Audio Kompresso(*.tak)
+  ・Optim FROG(*.ofr/*.ofs)
+  ・WavPack(*.wv)
+  ・Ogg Vorbis(*.ogg/*.oga)
+  ・Ogg Opus(*.opus)(未完成、情報取得のみの対応で書き換えは未対応)
+  ・The True Audio(*.tta)
+  ・Windows Media(*.wma/*.asf/*.wmv)
+  ・TwinVQ(*.vqf)
+  ・DSF(*.dsf)(DJ Toyo さん制作の STEP_dsf を同梱させて頂いています)
 
-  �x�[�X�� Mimura �l�ɂ������� STEP_M 1.054f �ł��B�I���W�i���Ƃ̎�ȈႢ��
+  ベースは Mimura 様による改造版 STEP_M 1.054f です。オリジナルとの主な違いは
 
-  �EUNICODE �ɑΉ�
-  �E�Ή��`���̒ǉ�
-    �ETAK(*.tak)
-    �EOptimFROG(*.ofr/*.ofs)
-    �EWavPack(*.wv)
-    �EOggOpus(*.opus)(�������A���擾�݂̂̑Ή��ŏ��������͖��Ή�)
-  �E�v���C���[����Ő���\�ȃv���C���[�̒ǉ�(uLilith/foobar2000)
-  �E�擾�E�X�V�\�ȃ^�O���̒ǉ�
-    �E��ɃA���o���A�[�e�B�X�g�A�쎌�ҁA��ȎҁA�g���b�N���A�f�B�X�N�ԍ��A�f�B
-      �X�N����
+  ・UNICODE に対応
+  ・対応形式の追加
+    ・TAK(*.tak)
+    ・OptimFROG(*.ofr/*.ofs)
+    ・WavPack(*.wv)
+    ・OggOpus(*.opus)(未完成、情報取得のみの対応で書き換えは未対応)
+  ・プレイヤー制御で制御可能なプレイヤーの追加(uLilith/foobar2000)
+  ・取得・更新可能なタグ情報の追加
+    ・主にアルバムアーティスト、作詞者、作曲者、トラック数、ディスク番号、ディ
+      スク数等
 
-  �I���W�i������̏C���_�ɂ��ďڍׂ� step_k_history.txt ���Q�Ƃ��ĉ������B
+  オリジナルからの修正点について詳細は step_k_history.txt を参照して下さい。
 
-�y���m�̖��z
+【既知の問題】
 
-  �ESTEP_M �̐ݒ�t�@�C���ƌ݊����͂Ȃ�(���p���邱�Ƃ͏o���Ȃ�)
+  ・STEP_M の設定ファイルと互換性はない(流用することは出来ない)
 
-    STEP_M ���������� SuperTagEditor.ini �� STEP_J �̃t�H���_�ɃR�s�[���Ď��s��
-  �Ă��ݒ�𐳂����ǂݍ��ނ��Ƃ͏o���܂���B�x����G���[���b�Z�[�W�������o����
-  �ɋN�����܂����A���삪���������Ȃ�̂ŁA���萔�ł����ŏ�����ݒ肵�����ĉ���
-  ���B
+    STEP_M が生成した SuperTagEditor.ini を STEP_J のフォルダにコピーして実行し
+  ても設定を正しく読み込むことは出来ません。警告やエラーメッセージを何も出さず
+  に起動しますが、動作がおかしくなるので、お手数ですが最初から設定し直して下さ
+  い。
 
-  �E�����v���O�C��(�I���W�i�������̂��̓�)�͎g�p�s�B
+  ・既存プラグイン(オリジナル同梱のもの等)は使用不可。
 
-    64bit�ł��r���h�o����悤�ɂ����֌W��A�G�N�X�|�[�g����֐������ς���Ă���
-  ���߁A�g�p���邱�Ƃ͏o���܂���B�\�[�X�R�[�h�� SDK �����Ƀv���O�C�����r���h��
-  �����K�v������܂��BUNICODE �Ή��̊֌W��A������x�̏C�������Ȃ��Ɛ���ɓ���
-  �����邱�Ƃ͏o���Ȃ��Ǝv���܂��B
+    64bit版もビルド出来るようにした関係上、エクスポートする関数名が変わっている
+  ため、使用することは出来ません。ソースコードと SDK を元にプラグインをビルドし
+  直す必要があります。UNICODE 対応の関係上、ある程度の修正をしないと正常に動作
+  させることは出来ないと思われます。
 
-  �E�����ϊ��̎d�l���ׂ��ȓ_�ŃI���W�i���ƈقȂ�ꍇ������
+  ・文字変換の仕様が細かな点でオリジナルと異なる場合がある
 
-    UNICODE ���̓s����A�S�������ɂ��邱�Ƃ��o���܂���ł����B����҂̈Ӑ}����
-  ����Ƒ傫������Ă��邱�Ƃ͂Ȃ��Ǝv���܂����A�Ⴂ���C�ɂȂ�l�͂ǂ��Ȃ��ė~
-  ��������̓I�ȕ�����ƂƂ��ɘA��������ΑP�����܂��B
+    UNICODE 化の都合上、全く同じにすることが出来ませんでした。原作者の意図した
+  動作と大きくずれていることはないと思いますが、違いが気になる人はどうなって欲
+  しいか具体的な文字列とともに連絡頂ければ善処します。
 
-  �EUNICODE �ɑΉ����Ȃ��^�O�`��(ID3v1/RMP/WAV/VQF��)�ɑ΂��� UNICODE �ŗL�̕�
-    �����g�p���ă^�O�X�V�����s����Ǝ��ۂ� ANSI ��(�\���o���Ȃ������� ? �����
-    �����ɒu�������)�ۑ������B
+  ・UNICODE に対応しないタグ形式(ID3v1/RMP/WAV/VQF等)に対して UNICODE 固有の文
+    字を使用してタグ更新を実行すると実際は ANSI で(表現出来ない文字は ? か代替
+    文字に置換されて)保存される。
 
-    �^�O�`���̕����Ή����Ă��Ȃ��̂����瓖�R�ł����A�X�V�O��Ɍx�����b�Z�[�W��
-  �\�����邱�Ƃ͂���܂���B�X�V��� ANSI �ɂȂ�܂��B
+    タグ形式の方が対応していないのだから当然ですが、更新前後に警告メッセージを
+  表示することはありません。更新後は ANSI になります。
 
-  �EMP3 �� ID3v1 �������������A30 �������̓��͂��\�Ȃ̂ɁA�X�V���s����ƕ���
-    ���؂�̂Ă��邱�Ƃ�����
+  ・MP3 の ID3v1 を書き換え時、30 文字分の入力が可能なのに、更新実行すると文字
+    が切り捨てられることがある
 
-    ID3v1 �ň����镶���� ANSI �� 30 �o�C�g�܂łł����ASTEP_J �ł͓��͎���
-  UNICODE �� 30 �����Ƃ��Đ����܂��BUNICODE �� 30 ������ ANSI �ɕϊ������ 30
-  �o�C�g�𒴂��邱�Ƃ�����܂��B(�S�p�������܂ޏꍇ)
-    ���̏ꍇ�A���������͐؂�̂Ă��܂��B�^�O�̎d�l�� ANSI �����������A������
-  �����ɐ���������`���͑S�ē��l�̓���ɂȂ�܂��B
+    ID3v1 で扱える文字は ANSI で 30 バイトまでですが、STEP_J では入力時は
+  UNICODE で 30 文字として数えます。UNICODE の 30 文字を ANSI に変換すると 30
+  バイトを超えることがあります。(全角文字を含む場合)
+    その場合、超えた分は切り捨てられます。タグの仕様上 ANSI しか扱えず、文字の
+  長さに制限がある形式は全て同様の動作になります。
 
-  �E���̑�
+  ・その他
 
-    ���ɂ����삵�Ă��Ȃ��ӏ������邩������܂���B�񍐒�����Ώo�������̂���
-  �͂��܂��B
+    他にも動作していない箇所があるかもしれません。報告頂ければ出来る限りのこと
+  はします。
 
-�y���쌠�E�Ɛӎ����z
+【著作権・免責事項】
 
-    STEP_J �̓t���[�\�t�g�E�F�A�ł��B���쌠�� jarupxx ���ۗL���܂��B
-  ���̃v���O�������g�p���邱�Ƃɂ���āA�����Ȃ鑹�Q�������Ă��A��҂͂��̐ӔC
-  �𕉂��܂���B�v���O�����Ƀo�O������A�^�O�̏��������Ɏ��s���ăf�[�^��j��
-  ���Ƃ��Ă��A��҂͂��̃f�[�^�̏C���`���͕���Ȃ����̂Ƃ��܂��B
+    STEP_J はフリーソフトウェアです。著作権は jarupxx が保有します。
+  このプログラムを使用することによって、いかなる損害が生じても、作者はその責任
+  を負いません。プログラムにバグがあり、タグの書き換えに失敗してデータを破壊し
+  たとしても、作者はそのデータの修復義務は負わないものとします。
 
-�y���C�Z���X�z
+【ライセンス】
 
-    STEP_K �� GPL �ł��̂ŁASTEP_J �� GPL �ƂȂ�܂��B�\�[�X�R�[�h��
-  �z�[���y�[�W: ( https://github.com/jarupxx/STEP_J/ ) �ɂē���\�ł��B
+    STEP_K は GPL ですので、STEP_J も GPL となります。ソースコードは
+  ホームページ: ( https://github.com/jarupxx/STEP_J/ ) にて入手可能です。
 
-�y�]�ځE�z�z�z
+【転載・配布】
 
-    ���̃h�L�������g�̖`���́y�]�ڂ̉ہz�ɏ]���ĉ������B�P�Ɂu�v�Ƃ���Ă�
-  ��ꍇ�́A��҂Ɏ��O�ɘA�����邱�ƂȂ��z�z���邱�Ƃ��\�ł��B�G���Ȃǂւ̎�
-  �^���\�ł��B���O�A���͕s�v�ł��B�A�������Ă���{�I�ɕԐM���܂���B
-    GPL �Ȃ̂Ŋ�{�I�Ɂu�s�v�͂���܂��񂪁A���ł̏ꍇ�̓v���O�����̊����x��
-  �Ⴂ���߁A�Ĕz�z�͏o���邾�������ĉ������B
+    このドキュメントの冒頭の【転載の可否】に従って下さい。単に「可」とされてい
+  る場合は、作者に事前に連絡することなく配布することが可能です。雑誌などへの収
+  録も可能です。事前連絡は不要です。連絡頂いても基本的に返信しません。
+    GPL なので基本的に「不可」はありませんが、α版の場合はプログラムの完成度が
+  低いため、再配布は出来るだけ避けて下さい。
 
-�y�T�|�[�g�z
+【サポート】
 
-    STEP_J �ɂ��Ă̊��z�E�v�]�E���̓T�|�[�g�f���܂ł��肢���܂��B
+    STEP_J についての感想・要望・苦情等はサポート掲示板までお願いします。
 
-    �T�|�[�g�f����: https://github.com/jarupxx/STEP_J/issues
+    サポート掲示板: https://github.com/jarupxx/STEP_J/issues
 
-    ����҂ł��� MERCURY �l�Ahaseta �l�AMimura �l�AKobarin �l�ɖ₢���킹�͂�
-  �Ȃ��悤�ɂ��肢���܂��B
+    原作者である MERCURY 様、haseta 様、Mimura 様、Kobarin 様に問い合わせはし
+  ないようにお願いします。
 
-    STEP_J �̃I���W�i���ł��� STEP_K �ɂ͐������̋@�\����������Ă��܂��B����
-  �m�F������Ă��Ȃ��@�\�����邩������܂���̂ŁA�s�������������Ȃ�ׂ�
-  �񍐂����肢���܂��B�t�@�C����j�󂷂�Ȃǂ̒v���I�Ȃ��͓̂��ɁA�ł��B
+    STEP_J のオリジナルである STEP_K には数多くの機能が実装されています。動作
+  確認しきれていない機能もあるかもしれませんので、不具合が見つかったらなるべく
+  報告をお願いします。ファイルを破壊するなどの致命的なものは特に、です。
 
-�y�ӎ��z
+【謝辞】
 
-    �I���W�i���̌���҂ł��� MERCURY �l�Ahaseta �l�AMimura �l�AKobarin �l��
-    �����Ȃ����STEP_J �͑��݂��Ă��܂���B���̏���؂�Ă���\���グ�܂��B
-    ���̑��A�s��񍐁A�v�]�A���񋟂��ĉ����������ȂǁASTEP_J �̊J���Ɋւ�
-  ���ĉ��������S�Ă̕��X�Ɋ��ӂ������܂��B
+    オリジナルの原作者である MERCURY 様、haseta 様、Mimura 様、Kobarin 様が
+    おられなければSTEP_J は存在していません。この場を借りてお礼申し上げます。
+    その他、不具合報告、要望、情報提供して下さった方など、STEP_J の開発に関わ
+  って下さった全ての方々に感謝いたします。
 
-�y�Ō�Ɂz
+【最後に】
 
-    �v�����N�G�X�g���}���܂��B(���L�́M)
+    プルリクエスト歓迎します。(∩´∀｀)
 
 -------------------------------------------------------------------------------
 jarupxx(https://github.com/jarupxx/STEP_J/)

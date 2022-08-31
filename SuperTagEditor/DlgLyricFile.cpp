@@ -1,4 +1,4 @@
-// DlgLyricFile.cpp : ƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“ ƒtƒ@ƒCƒ‹
+// DlgLyricFile.cpp : ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³ ãƒ•ã‚¡ã‚¤ãƒ«
 //
 
 #include "stdafx.h"
@@ -14,9 +14,9 @@ static char THIS_FILE[] = __FILE__;
 
 // =============================================
 // SelectDirectory
-// ŠT—v  : ƒtƒHƒ‹ƒ_ŽQÆƒ_ƒCƒAƒƒOˆ—
-// ˆø”  : sLocal			= ƒpƒX(“üo—Í)
-// –ß‚è’l: BOOL
+// æ¦‚è¦  : ãƒ•ã‚©ãƒ«ãƒ€å‚ç…§ãƒ€ã‚¤ã‚¢ãƒ­ã‚°å‡¦ç†
+// å¼•æ•°  : sLocal			= ãƒ‘ã‚¹(å…¥å‡ºåŠ›)
+// æˆ»ã‚Šå€¤: BOOL
 // =============================================
 BOOL SelectDirectory(TCHAR *sLocal, int size)
 {
@@ -26,7 +26,7 @@ BOOL SelectDirectory(TCHAR *sLocal, int size)
 }
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgLyricFile ƒvƒƒpƒeƒB ƒy[ƒW
+// CDlgLyricFile ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ ãƒšãƒ¼ã‚¸
 
 IMPLEMENT_DYNCREATE(CDlgLyricFile, COptionPage)
 
@@ -70,16 +70,16 @@ BEGIN_MESSAGE_MAP(CDlgLyricFile, COptionPage)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgLyricFile ƒƒbƒZ[ƒW ƒnƒ“ƒhƒ‰
+// CDlgLyricFile ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒãƒ³ãƒ‰ãƒ©
 BOOL CDlgLyricFile::OnInitDialog() 
 {
 	COptionPage::OnInitDialog();
 
-	// TODO: ‚±‚ÌˆÊ’u‚É‰Šú‰»‚Ì•â‘«ˆ—‚ð’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
+	// TODO: ã“ã®ä½ç½®ã«åˆæœŸåŒ–ã®è£œè¶³å‡¦ç†ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
 	UpdateStatus();
 
-	return TRUE;  // ƒRƒ“ƒgƒ[ƒ‹‚ÉƒtƒH[ƒJƒX‚ðÝ’è‚µ‚È‚¢‚Æ‚«A–ß‚è’l‚Í TRUE ‚Æ‚È‚è‚Ü‚·
-	              // —áŠO: OCX ƒvƒƒpƒeƒB ƒy[ƒW‚Ì–ß‚è’l‚Í FALSE ‚Æ‚È‚è‚Ü‚·
+	return TRUE;  // ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã«ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ã‚’è¨­å®šã—ãªã„ã¨ãã€æˆ»ã‚Šå€¤ã¯ TRUE ã¨ãªã‚Šã¾ã™
+	              // ä¾‹å¤–: OCX ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ ãƒšãƒ¼ã‚¸ã®æˆ»ã‚Šå€¤ã¯ FALSE ã¨ãªã‚Šã¾ã™
 }
 
 void CDlgLyricFile::UpdateStatus(void)
@@ -94,11 +94,11 @@ void CDlgLyricFile::UpdateStatus(void)
 
 void CDlgLyricFile::OnBtRefLyrics() 
 {
-	// Œ»ÝŽw’è‚³‚ê‚Ä‚¢‚éƒƒOƒtƒ@ƒCƒ‹–¼‚ðŽæ“¾
+	// ç¾åœ¨æŒ‡å®šã•ã‚Œã¦ã„ã‚‹ãƒ­ã‚°ãƒ•ã‚¡ã‚¤ãƒ«åã‚’å–å¾—
 	CString	strFileName;
 	GetDlgItemText(IDC_ED_LYRICS_PATH, strFileName);
 
-	// ƒtƒHƒ‹ƒ_‘I‘ðƒ_ƒCƒAƒƒO‚ðŠJ‚­
+	// ãƒ•ã‚©ãƒ«ãƒ€é¸æŠžãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚’é–‹ã
 	TCHAR	sFolderName[_MAX_PATH] = {'\0'};
 	_tcsncpy_s(sFolderName, strFileName, _TRUNCATE);
 	if (SelectDirectory(sFolderName, _MAX_PATH) == TRUE) {
@@ -116,10 +116,10 @@ void CDlgLyricFile::OnChChangeTextFilename()
 	UpdateStatus();
 }
 
-// ‰Šú’l‚É–ß‚·
+// åˆæœŸå€¤ã«æˆ»ã™
 void CDlgLyricFile::OnBtResetPage() 
 {
-	// ‰ÌŽŒƒtƒ@ƒCƒ‹
+	// æ­Œè©žãƒ•ã‚¡ã‚¤ãƒ«
 	((CButton *)GetDlgItem(IDC_CH_CHANGE_TEXT_FILENAME))->SetCheck(TRUE);
 	((CButton *)GetDlgItem(IDC_CH_SET_LYRICS_DIR))->SetCheck(FALSE);
 	((CButton *)GetDlgItem(IDC_CH_SEARCH_LYRICS_SUB_DIR))->SetCheck(FALSE);

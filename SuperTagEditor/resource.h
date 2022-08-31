@@ -1,6 +1,6 @@
 //{{NO_DEPENDENCIES}}
-// Microsoft Visual C++ ‚Å¶¬‚³‚ê‚½ƒCƒ“ƒNƒ‹[ƒh ƒtƒ@ƒCƒ‹B
-// SuperTagEditor.rc ‚Åg—p
+// Microsoft Visual C++ ã§ç”Ÿæˆã•ã‚ŒãŸã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰ ãƒ•ã‚¡ã‚¤ãƒ«ã€‚
+// SuperTagEditor.rc ã§ä½¿ç”¨
 //
 #define ID_BT_REPLACE                   3
 #define IDC_BT_SKIP                     4

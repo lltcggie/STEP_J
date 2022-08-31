@@ -1,4 +1,4 @@
-// DlgFileRmpID3v2.cpp : ƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“ ƒtƒ@ƒCƒ‹
+// DlgFileRmpID3v2.cpp : ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³ ãƒ•ã‚¡ã‚¤ãƒ«
 //
 
 #include "stdafx.h"
@@ -12,7 +12,7 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgFileRmpID3v2 ƒvƒƒpƒeƒB ƒy[ƒW
+// CDlgFileRmpID3v2 ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ ãƒšãƒ¼ã‚¸
 
 IMPLEMENT_DYNCREATE(CDlgFileRmpID3v2, CPropertyPage)
 
@@ -62,16 +62,16 @@ BEGIN_MESSAGE_MAP(CDlgFileRmpID3v2, CPropertyPage)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgFileRmpID3v2 ƒƒbƒZ[ƒW ƒnƒ“ƒhƒ‰
+// CDlgFileRmpID3v2 ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒãƒ³ãƒ‰ãƒ©
 BOOL CDlgFileRmpID3v2::OnInitDialog()
 {
     CPropertyPage::OnInitDialog();
 
-    // TODO: ‚±‚ÌˆÊ’u‚É‰Šú‰»‚Ì•â‘«ˆ—‚ð’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
+    // TODO: ã“ã®ä½ç½®ã«åˆæœŸåŒ–ã®è£œè¶³å‡¦ç†ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
     UpdateStatus();
 
-    return TRUE;  // ƒRƒ“ƒgƒ[ƒ‹‚ÉƒtƒH[ƒJƒX‚ðÝ’è‚µ‚È‚¢‚Æ‚«A–ß‚è’l‚Í TRUE ‚Æ‚È‚è‚Ü‚·
-                  // —áŠO: OCX ƒvƒƒpƒeƒB ƒy[ƒW‚Ì–ß‚è’l‚Í FALSE ‚Æ‚È‚è‚Ü‚·
+    return TRUE;  // ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã«ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ã‚’è¨­å®šã—ãªã„ã¨ãã€æˆ»ã‚Šå€¤ã¯ TRUE ã¨ãªã‚Šã¾ã™
+                  // ä¾‹å¤–: OCX ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ ãƒšãƒ¼ã‚¸ã®æˆ»ã‚Šå€¤ã¯ FALSE ã¨ãªã‚Šã¾ã™
 }
 
 void CDlgFileRmpID3v2::UpdateStatus(void)
@@ -80,7 +80,7 @@ void CDlgFileRmpID3v2::UpdateStatus(void)
     ((CButton *)GetDlgItem(IDC_CH_ID3V2_ID3TAG_AUTO_WRITE))->EnableWindow(!m_bID3v2Id3tagAutoDelete);
 }
 
-// ‰Šú’l‚É–ß‚·
+// åˆæœŸå€¤ã«æˆ»ã™
 void CDlgFileRmpID3v2::OnBtResetPage()
 {
     extern const bool bOptAutoConvID3v2_default;
@@ -118,7 +118,7 @@ void CDlgFileRmpID3v2::OnBtResetPage()
 
 void CDlgFileRmpID3v2::OnChId3v2Id3tagAutoDelete()
 {
-    // TODO: ‚±‚ÌˆÊ’u‚ÉƒRƒ“ƒgƒ[ƒ‹’Ê’mƒnƒ“ƒhƒ‰—p‚ÌƒR[ƒh‚ð’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
+    // TODO: ã“ã®ä½ç½®ã«ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«é€šçŸ¥ãƒãƒ³ãƒ‰ãƒ©ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
     //UpdateData();
     //if (m_bID3v2Id3tagAutoDelete) {
         //((CButton *)GetDlgItem(IDC_CH_ID3V2_ID3TAG_AUTO_WRITE))->SetCheck(FALSE);

@@ -145,7 +145,7 @@ void CDkToolBar::SaveState()
         GetToolBarCtrl().DeleteButton(nPos);
     }
 
-    // •W€ƒ{ƒ^ƒ“‚ÌˆÊ’u‚ğ•Û‘¶
+    // æ¨™æº–ãƒœã‚¿ãƒ³ã®ä½ç½®ã‚’ä¿å­˜
     for (i=0;i<GetToolBarCtrl().GetButtonCount();i++) {
         TBBUTTON tbButton;
         CString strRegName;
@@ -173,21 +173,21 @@ void CDkToolBar::RestoreState()
     //  GetToolBarCtrl().RestoreState(registryKey, registrySubKey, registryValue);
     //}
     CIniFile *pIniFile = ((CSuperTagEditorApp*)AfxGetApp())->GetIniFile();
-    // ‚P‚Â‚à“o˜^‚³‚ê‚Ä‚¢‚È‚¢ê‡‚ÍƒfƒtƒHƒ‹ƒg•\¦
+    // ï¼‘ã¤ã‚‚ç™»éŒ²ã•ã‚Œã¦ã„ãªã„å ´åˆã¯ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆè¡¨ç¤º
     if (pIniFile->ReadInt(_T("STEP\\DefaultToolbarPosition"), _T("Pos00"), -1) == -1) return;
-    // ƒvƒ‰ƒOƒCƒ“ƒ{ƒ^ƒ“‚ğíœ
+    // ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ãƒœã‚¿ãƒ³ã‚’å‰Šé™¤
     int i;
     for (i=0;i<pluginToolBarInfo.GetSize();i++) {
         CPluginToolBarInfo* button = (CPluginToolBarInfo*)pluginToolBarInfo.GetAt(i);
         int nPos = GetToolBarCtrl().CommandToIndex(button->tbButton.idCommand);
         GetToolBarCtrl().DeleteButton(nPos);
     }
-    // •W€ƒ{ƒ^ƒ“‚ÌƒNƒŠƒA
+    // æ¨™æº–ãƒœã‚¿ãƒ³ã®ã‚¯ãƒªã‚¢
     for (i=GetToolBarCtrl().GetButtonCount();i>0;i--) {
         GetToolBarCtrl().DeleteButton(i-1);
     }
 
-    // •W€ƒ{ƒ^ƒ“‚ÌƒŠƒXƒgƒA
+    // æ¨™æº–ãƒœã‚¿ãƒ³ã®ãƒªã‚¹ãƒˆã‚¢
     for (i=0;;i++) {
         CString strRegName;
         strRegName.Format(_T("Pos%02d"), i);
@@ -209,7 +209,7 @@ void CDkToolBar::RestoreState()
         }
     }
 
-    // ƒvƒ‰ƒOƒCƒ“ƒ{ƒ^ƒ“‚ÌƒŠƒXƒgƒA
+    // ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ãƒœã‚¿ãƒ³ã®ãƒªã‚¹ãƒˆã‚¢
     for (i=0;i<pluginToolBarInfo.GetSize();i++) {
         CPluginToolBarInfo* button = (CPluginToolBarInfo*)pluginToolBarInfo.GetAt(i);
         button->nIndex = -1;
@@ -564,8 +564,8 @@ CPluginToolBarInfo* CDkToolBar::FindPluginToolBarInfo(int nPos)
     CPluginToolBarInfo* info = NULL;
     for (int i=0;i<pluginToolBarInfo.GetSize();i++) {
         CPluginToolBarInfo* button = (CPluginToolBarInfo*)pluginToolBarInfo.GetAt(i);
-        if (button->nIndex > -1/* ’Ç‰ÁÏ‚İ */ || button->nIndex == -2) continue;
-        if (button->nPos == -1) continue; /* ’Ç‰Á•s—v */ // 2006.01.19
+        if (button->nIndex > -1/* è¿½åŠ æ¸ˆã¿ */ || button->nIndex == -2) continue;
+        if (button->nPos == -1) continue; /* è¿½åŠ ä¸è¦ */ // 2006.01.19
         if (nMinPos == -1) {
             nMinPos = button->nPos;
             info = button;

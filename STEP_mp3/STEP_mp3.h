@@ -1,4 +1,4 @@
-// STEP_mp3.h : STEP_MP3 �A�v���P�[�V�����̃��C�� �w�b�_�[ �t�@�C���ł��B
+// STEP_mp3.h : STEP_MP3 アプリケーションのメイン ヘッダー ファイルです。
 //
 
 #if !defined(AFX_STEP_MP3_H__F4707E45_2B14_44B2_8276_EFAFAFC465EE__INCLUDED_)
@@ -12,11 +12,11 @@
     #error include 'stdafx.h' before including this file for PCH
 #endif
 
-#include "resource.h"       // ���C�� �V���{��
+#include "resource.h"       // メイン シンボル
 
 /////////////////////////////////////////////////////////////////////////////
 // CSTEP_mp3App
-// ���̃N���X�̓���̒�`�Ɋւ��Ă� STEP_mp3.cpp �t�@�C�����Q�Ƃ��Ă��������B
+// このクラスの動作の定義に関しては STEP_mp3.cpp ファイルを参照してください。
 //
 
 class CSTEP_mp3App : public CWinApp
@@ -24,14 +24,14 @@ class CSTEP_mp3App : public CWinApp
 public:
     CSTEP_mp3App();
 
-// �I�[�o�[���C�h
-    // ClassWizard �͉��z�֐��̃I�[�o�[���C�h�𐶐����܂��B
+// オーバーライド
+    // ClassWizard は仮想関数のオーバーライドを生成します。
     //{{AFX_VIRTUAL(CSTEP_mp3App)
     //}}AFX_VIRTUAL
 
     //{{AFX_MSG(CSTEP_mp3App)
-        // ���� -  ClassWizard �͂��̈ʒu�Ƀ����o�֐���ǉ��܂��͍폜���܂��B
-        //         ���̈ʒu�ɐ��������R�[�h��ҏW���Ȃ��ł��������B
+        // メモ -  ClassWizard はこの位置にメンバ関数を追加または削除します。
+        //         この位置に生成されるコードを編集しないでください。
     //}}AFX_MSG
     DECLARE_MESSAGE_MAP()
 };
@@ -46,6 +46,6 @@ public:
 /////////////////////////////////////////////////////////////////////////////
 
 //{{AFX_INSERT_LOCATION}}
-// Microsoft Visual C++ �͑O�s�̒��O�ɒǉ��̐錾��}�����܂��B
+// Microsoft Visual C++ は前行の直前に追加の宣言を挿入します。
 
 #endif // !defined(AFX_STEP_MP3_H__F4707E45_2B14_44B2_8276_EFAFAFC465EE__INCLUDED_)

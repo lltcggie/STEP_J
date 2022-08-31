@@ -1,4 +1,4 @@
-// DlgKeyConfig.cpp : ƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“ ƒtƒ@ƒCƒ‹
+// DlgKeyConfig.cpp : ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³ ãƒ•ã‚¡ã‚¤ãƒ«
 //
 
 #include "stdafx.h"
@@ -14,7 +14,7 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgKeyConfig ƒ_ƒCƒAƒƒO
+// CDlgKeyConfig ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
 static	int		g_nLastSelectGroup = 0;
 static	int		g_nLastSelectCommand = 0;
 
@@ -27,7 +27,7 @@ struct	KEY_DATA	{
 };
 
 static	KEY_DATA	g_keyData[] = {
-	{_T("(‚È‚µ)"), 0x0000},
+	{_T("(ãªã—)"), 0x0000},
 	{_T("F1"), VK_F1},
 	{_T("F2"), VK_F2},
 	{_T("F3"), VK_F3},
@@ -133,16 +133,16 @@ BEGIN_MESSAGE_MAP(CDlgKeyConfig, COptionPage)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgKeyConfig ƒƒbƒZ[ƒW ƒnƒ“ƒhƒ‰
+// CDlgKeyConfig ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒãƒ³ãƒ‰ãƒ©
 BOOL CDlgKeyConfig::OnInitDialog() 
 {
 	COptionPage::OnInitDialog();
 
 	m_bExecCommandChange = false;
 
-	// ƒRƒ}ƒ“ƒhƒOƒ‹[ƒv‚Ìì¬
+	// ã‚³ãƒãƒ³ãƒ‰ã‚°ãƒ«ãƒ¼ãƒ—ã®ä½œæˆ
 	static	TCHAR	*sGroupList[COMMAND_GROUP_MAX+1] = {
-		_T("ƒtƒ@ƒCƒ‹"), _T("•ÒW"), _T("•\¦"), _T("•ÏŠ·")/* 2006.03.02 */, _T("ƒvƒŒƒCƒŠƒXƒg"), _T("ƒvƒŒƒCƒ„[§Œä"), _T("ƒvƒ‰ƒOƒCƒ“"), NULL
+		_T("ãƒ•ã‚¡ã‚¤ãƒ«"), _T("ç·¨é›†"), _T("è¡¨ç¤º"), _T("å¤‰æ›")/* 2006.03.02 */, _T("ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆ"), _T("ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼åˆ¶å¾¡"), _T("ãƒ—ãƒ©ã‚°ã‚¤ãƒ³"), NULL
 	};
 	m_listGroup.ResetContent();
 	for (int nGroup = 0; sGroupList[nGroup] != NULL; nGroup++) {
@@ -154,8 +154,8 @@ BOOL CDlgKeyConfig::OnInitDialog()
 	m_listCommand.SetCurSel(g_nLastSelectCommand);
 	OnSelChangeListCommand();
 
-	return TRUE;  // ƒRƒ“ƒgƒ[ƒ‹‚ÉƒtƒH[ƒJƒX‚ğİ’è‚µ‚È‚¢‚Æ‚«A–ß‚è’l‚Í TRUE ‚Æ‚È‚è‚Ü‚·
-	              // —áŠO: OCX ƒvƒƒpƒeƒB ƒy[ƒW‚Ì–ß‚è’l‚Í FALSE ‚Æ‚È‚è‚Ü‚·
+	return TRUE;  // ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã«ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ã‚’è¨­å®šã—ãªã„ã¨ãã€æˆ»ã‚Šå€¤ã¯ TRUE ã¨ãªã‚Šã¾ã™
+	              // ä¾‹å¤–: OCX ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ ãƒšãƒ¼ã‚¸ã®æˆ»ã‚Šå€¤ã¯ FALSE ã¨ãªã‚Šã¾ã™
 }
 
 void CDlgKeyConfig::UpdateHotKey(void)
@@ -163,7 +163,7 @@ void CDlgKeyConfig::UpdateHotKey(void)
 	KEY_CONFIG *pKeyData;
 	WORD	wCmdID = (WORD)m_listCommand.GetItemData(m_listCommand.GetCurSel());
 	if (wCmdID != 0x0000 && (pKeyData = SearchKeyConfigID(wCmdID)) != NULL) {
-		// ƒzƒbƒgƒL[ƒR[ƒh‚ğæ“¾•XV
+		// ãƒ›ãƒƒãƒˆã‚­ãƒ¼ã‚³ãƒ¼ãƒ‰ã‚’å–å¾—ï¼†æ›´æ–°
 		WORD	wKeyCode, wModifiers;
 		wKeyCode = (WORD)m_listKey.GetItemData(m_listKey.GetCurSel());
 		wModifiers = (((wKeyCode < 0x30)   ? 0x0008 : 0x0000)
@@ -171,14 +171,14 @@ void CDlgKeyConfig::UpdateHotKey(void)
 		           |  (m_btAlt.GetCheck()  ? 0x0004 : 0x0000));
 		pKeyData->dwKeyCode = wKeyCode | ((DWORD)wModifiers << 16);
 
-		// Šù‚É“o˜^‚³‚ê‚Ä‚¢‚È‚¢‚©‚Ç‚¤‚©‚ğƒ`ƒFƒbƒN
+		// æ—¢ã«ç™»éŒ²ã•ã‚Œã¦ã„ãªã„ã‹ã©ã†ã‹ã‚’ãƒã‚§ãƒƒã‚¯
 		if (wKeyCode != 0x0000) {
 			int i; for (i = 0; g_listKeyConfig[i].sName != NULL; i++) {
 				if (&g_listKeyConfig[i] != pKeyData
 				&&  g_listKeyConfig[i].dwKeyCode == pKeyData->dwKeyCode) {
 					CString	strBuffer;
-					strBuffer.Format(_T("w’è‚³‚ê‚½ƒVƒ‡[ƒgƒJƒbƒgƒL[‚ÍA\n\n[%s]\n\n‚Å‚àg—p‚³‚ê‚Ä‚¢‚Ü‚·\n\n‚Ç‚¿‚ç‚©‚ÌƒVƒ‡[ƒgƒJƒbƒg‚ğ•ÏX‚µ‚Ä‚­‚¾‚³‚¢"), g_listKeyConfig[i].sName);
-					MessageBox(strBuffer, _T("ƒVƒ‡[ƒgƒJƒbƒgƒL[‚Ìd•¡"), MB_ICONSTOP|MB_OK|MB_TOPMOST);
+					strBuffer.Format(_T("æŒ‡å®šã•ã‚ŒãŸã‚·ãƒ§ãƒ¼ãƒˆã‚«ãƒƒãƒˆã‚­ãƒ¼ã¯ã€\n\n[%s]\n\nã§ã‚‚ä½¿ç”¨ã•ã‚Œã¦ã„ã¾ã™\n\nã©ã¡ã‚‰ã‹ã®ã‚·ãƒ§ãƒ¼ãƒˆã‚«ãƒƒãƒˆã‚’å¤‰æ›´ã—ã¦ãã ã•ã„"), g_listKeyConfig[i].sName);
+					MessageBox(strBuffer, _T("ã‚·ãƒ§ãƒ¼ãƒˆã‚«ãƒƒãƒˆã‚­ãƒ¼ã®é‡è¤‡"), MB_ICONSTOP|MB_OK|MB_TOPMOST);
 					break;
 				}
 			}
@@ -188,8 +188,8 @@ void CDlgKeyConfig::UpdateHotKey(void)
 				if (pKey != pKeyData
 				&&  pKey->dwKeyCode == pKeyData->dwKeyCode) {
 					CString	strBuffer;
-					strBuffer.Format(_T("w’è‚³‚ê‚½ƒVƒ‡[ƒgƒJƒbƒgƒL[‚ÍA\n\n[%s]\n\n‚Å‚àg—p‚³‚ê‚Ä‚¢‚Ü‚·\n\n‚Ç‚¿‚ç‚©‚ÌƒVƒ‡[ƒgƒJƒbƒg‚ğ•ÏX‚µ‚Ä‚­‚¾‚³‚¢"), pKey->sName);
-					MessageBox(strBuffer, _T("ƒVƒ‡[ƒgƒJƒbƒgƒL[‚Ìd•¡"), MB_ICONSTOP|MB_OK|MB_TOPMOST);
+					strBuffer.Format(_T("æŒ‡å®šã•ã‚ŒãŸã‚·ãƒ§ãƒ¼ãƒˆã‚«ãƒƒãƒˆã‚­ãƒ¼ã¯ã€\n\n[%s]\n\nã§ã‚‚ä½¿ç”¨ã•ã‚Œã¦ã„ã¾ã™\n\nã©ã¡ã‚‰ã‹ã®ã‚·ãƒ§ãƒ¼ãƒˆã‚«ãƒƒãƒˆã‚’å¤‰æ›´ã—ã¦ãã ã•ã„"), pKey->sName);
+					MessageBox(strBuffer, _T("ã‚·ãƒ§ãƒ¼ãƒˆã‚«ãƒƒãƒˆã‚­ãƒ¼ã®é‡è¤‡"), MB_ICONSTOP|MB_OK|MB_TOPMOST);
 					break;
 				}
 			}
@@ -206,10 +206,10 @@ void CDlgKeyConfig::UpdateKeyList(void)
 	if (bCtrl) strExt += _T("Ctrl+");
 	if (bAlt) strExt += _T("Alt+");
 
-	// Œ»İ‚Ì‘I‘ğ‚ğ•Û‘¶
+	// ç¾åœ¨ã®é¸æŠã‚’ä¿å­˜
 	int		nOldSel = m_listKey.GetCurSel();
 
-	// ƒL[ˆê——‚Ìì¬
+	// ã‚­ãƒ¼ä¸€è¦§ã®ä½œæˆ
 	m_listKey.ResetContent();
 	int i; for (i = 0; g_keyData[i].sKeyName != NULL; i++) {
 		int		nIndex;
@@ -217,14 +217,14 @@ void CDlgKeyConfig::UpdateKeyList(void)
 		WORD	wKeyCode = g_keyData[i].wKeyCode;
 
 		if (bAlt && bCtrl && wKeyCode == VK_DELETE) {
-			// Alt + Ctrl + Del ‚ÍŠ„‚è“–‚Ä‹Ö~
+			// Alt + Ctrl + Del ã¯å‰²ã‚Šå½“ã¦ç¦æ­¢
 		} else {
 			strName.Format(_T("%s%s"), strExt, g_keyData[i].sKeyName);
 			nIndex = m_listKey.AddString(strName);
-			// ƒAƒCƒeƒ€ƒf[ƒ^‚ÉƒL[ƒR[ƒh‚ğİ’è
+			// ã‚¢ã‚¤ãƒ†ãƒ ãƒ‡ãƒ¼ã‚¿ã«ã‚­ãƒ¼ã‚³ãƒ¼ãƒ‰ã‚’è¨­å®š
 			m_listKey.SetItemData(nIndex, wKeyCode);
 
-			// Ctrl ‚à Alt ‚àƒ`ƒFƒbƒN‚³‚ê‚Ä‚¢‚È‚¢ê‡‚ÍADEL ƒL[‚Ü‚Å‚µ‚©g‚¦‚È‚¢
+			// Ctrl ã‚‚ Alt ã‚‚ãƒã‚§ãƒƒã‚¯ã•ã‚Œã¦ã„ãªã„å ´åˆã¯ã€DEL ã‚­ãƒ¼ã¾ã§ã—ã‹ä½¿ãˆãªã„
 			if (bAlt == false && bCtrl == false) {
 				if (wKeyCode == VK_DELETE) {
 					break;
@@ -233,13 +233,13 @@ void CDlgKeyConfig::UpdateKeyList(void)
 		}
 	}
 	
-	// ‘I‘ğ‚µ‚È‚¨‚·
+	// é¸æŠã—ãªãŠã™
 	m_listKey.SetCurSel((nOldSel >= 0 && nOldSel < i) ? nOldSel : 0);
 }
 
 void CDlgKeyConfig::UpdateCommandList(void)
 {
-	// ƒRƒ}ƒ“ƒhˆê——‚Ìì¬
+	// ã‚³ãƒãƒ³ãƒ‰ä¸€è¦§ã®ä½œæˆ
 	m_listCommand.ResetContent();
 	int i; for (i = 0; g_listKeyConfig[i].sName != NULL; i++) {
 		KEY_CONFIG	*pKey = &g_listKeyConfig[i];
@@ -248,75 +248,75 @@ void CDlgKeyConfig::UpdateCommandList(void)
 			CString	strName = pKey->sName;
 			switch(pKey->wCmdID) {
 			case ID_CONV_FORMAT_EX_01:
-				strName.Format(_T("01F%s"), g_userConvFormatEx[0].strName);
+				strName.Format(_T("01ï¼š%s"), g_userConvFormatEx[0].strName);
 				break;
 			case ID_CONV_FORMAT_EX_02:
-				strName.Format(_T("02F%s"), g_userConvFormatEx[1].strName);
+				strName.Format(_T("02ï¼š%s"), g_userConvFormatEx[1].strName);
 				break;
 			case ID_CONV_FORMAT_EX_03:
-				strName.Format(_T("03F%s"), g_userConvFormatEx[2].strName);
+				strName.Format(_T("03ï¼š%s"), g_userConvFormatEx[2].strName);
 				break;
 			case ID_CONV_FORMAT_EX_04:
-				strName.Format(_T("04F%s"), g_userConvFormatEx[3].strName);
+				strName.Format(_T("04ï¼š%s"), g_userConvFormatEx[3].strName);
 				break;
 			case ID_CONV_FORMAT_EX_05:
-				strName.Format(_T("05F%s"), g_userConvFormatEx[4].strName);
+				strName.Format(_T("05ï¼š%s"), g_userConvFormatEx[4].strName);
 				break;
 			case ID_CONV_FORMAT_EX_06:
-				strName.Format(_T("06F%s"), g_userConvFormatEx[5].strName);
+				strName.Format(_T("06ï¼š%s"), g_userConvFormatEx[5].strName);
 				break;
 			case ID_CONV_FORMAT_EX_07:
-				strName.Format(_T("07F%s"), g_userConvFormatEx[6].strName);
+				strName.Format(_T("07ï¼š%s"), g_userConvFormatEx[6].strName);
 				break;
 			case ID_CONV_FORMAT_EX_08:
-				strName.Format(_T("08F%s"), g_userConvFormatEx[7].strName);
+				strName.Format(_T("08ï¼š%s"), g_userConvFormatEx[7].strName);
 				break;
 			case ID_CONV_FORMAT_EX_09:
-				strName.Format(_T("09F%s"), g_userConvFormatEx[8].strName);
+				strName.Format(_T("09ï¼š%s"), g_userConvFormatEx[8].strName);
 				break;
 			case ID_CONV_FORMAT_EX_10:
-				strName.Format(_T("10F%s"), g_userConvFormatEx[9].strName);
+				strName.Format(_T("10ï¼š%s"), g_userConvFormatEx[9].strName);
 				break;
 			case ID_CONV_FORMAT_USER_01: /* TyphoonSwell 027 */
-				strName.Format(_T("01F%s"), g_userConvFormat[0].strName);
+				strName.Format(_T("01ï¼š%s"), g_userConvFormat[0].strName);
 			case ID_CONV_FORMAT_USER_T2F_01: /* STEP 030 */
 			case ID_CONV_FORMAT_USER_F2T_01: /* STEP 030 */
-				strName.Format(_T("01F%s"), g_userConvFormat[0].strName);
+				strName.Format(_T("01ï¼š%s"), g_userConvFormat[0].strName);
 				break;
 			case ID_CONV_FORMAT_USER_02: /* TyphoonSwell 027 */
 			case ID_CONV_FORMAT_USER_T2F_02: /* STEP 030 */
 			case ID_CONV_FORMAT_USER_F2T_02: /* STEP 030 */
-				strName.Format(_T("02F%s"), g_userConvFormat[1].strName);
+				strName.Format(_T("02ï¼š%s"), g_userConvFormat[1].strName);
 				break;
 			case ID_CONV_FORMAT_USER_03: /* TyphoonSwell 027 */
 			case ID_CONV_FORMAT_USER_T2F_03: /* STEP 030 */
 			case ID_CONV_FORMAT_USER_F2T_03: /* STEP 030 */
-				strName.Format(_T("03F%s"), g_userConvFormat[2].strName);
+				strName.Format(_T("03ï¼š%s"), g_userConvFormat[2].strName);
 				break;
 			case ID_CONV_FORMAT_USER_04: /* LastTrain 057 */
 			case ID_CONV_FORMAT_USER_T2F_04: /* STEP 030 */
 			case ID_CONV_FORMAT_USER_F2T_04: /* STEP 030 */
-				strName.Format(_T("04F%s"), g_userConvFormat[3].strName);
+				strName.Format(_T("04ï¼š%s"), g_userConvFormat[3].strName);
 				break;
 			case ID_CONV_FORMAT_USER_05: /* LastTrain 057 */
 			case ID_CONV_FORMAT_USER_T2F_05: /* STEP 030 */
 			case ID_CONV_FORMAT_USER_F2T_05: /* STEP 030 */
-				strName.Format(_T("05F%s"), g_userConvFormat[4].strName);
+				strName.Format(_T("05ï¼š%s"), g_userConvFormat[4].strName);
 				break;
 			case ID_CONV_TAG_TO_TAG_01: /* STEP 034 */
-				strName.Format(_T("01F%s"), g_userConvFormatTag2Tag[0].strName);
+				strName.Format(_T("01ï¼š%s"), g_userConvFormatTag2Tag[0].strName);
 				break;
 			case ID_CONV_TAG_TO_TAG_02: /* STEP 034 */
-				strName.Format(_T("02F%s"), g_userConvFormatTag2Tag[1].strName);
+				strName.Format(_T("02ï¼š%s"), g_userConvFormatTag2Tag[1].strName);
 				break;
 			case ID_CONV_TAG_TO_TAG_03: /* STEP 034 */
-				strName.Format(_T("03F%s"), g_userConvFormatTag2Tag[2].strName);
+				strName.Format(_T("03ï¼š%s"), g_userConvFormatTag2Tag[2].strName);
 				break;
 			case ID_CONV_TAG_TO_TAG_04: /* STEP 034 */
-				strName.Format(_T("04F%s"), g_userConvFormatTag2Tag[3].strName);
+				strName.Format(_T("04ï¼š%s"), g_userConvFormatTag2Tag[3].strName);
 				break;
 			case ID_CONV_TAG_TO_TAG_05: /* STEP 034 */
-				strName.Format(_T("05F%s"), g_userConvFormatTag2Tag[4].strName);
+				strName.Format(_T("05ï¼š%s"), g_userConvFormatTag2Tag[4].strName);
 				break;
 			case ID_TEIKEI_01: /* SeaKnows 030 */
 				strName.Format(_T("01: %s"), shortString(g_teikeiInfo[0].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
@@ -411,7 +411,7 @@ void CDlgKeyConfig::UpdateCommandList(void)
 			}
 			nIndex = m_listCommand.AddString(strName);
 
-			// ƒAƒCƒeƒ€ƒf[ƒ^‚ÉƒRƒ}ƒ“ƒh‚h‚c‚ğİ’è
+			// ã‚¢ã‚¤ãƒ†ãƒ ãƒ‡ãƒ¼ã‚¿ã«ã‚³ãƒãƒ³ãƒ‰ï¼©ï¼¤ã‚’è¨­å®š
 			m_listCommand.SetItemData(nIndex, pKey->wCmdID);
 		}
 	}
@@ -423,7 +423,7 @@ void CDlgKeyConfig::UpdateCommandList(void)
 			CString	strName = pKey->sName;
 			nIndex = m_listCommand.AddString(strName);
 
-			// ƒAƒCƒeƒ€ƒf[ƒ^‚ÉƒRƒ}ƒ“ƒh‚h‚c‚ğİ’è
+			// ã‚¢ã‚¤ãƒ†ãƒ ãƒ‡ãƒ¼ã‚¿ã«ã‚³ãƒãƒ³ãƒ‰ï¼©ï¼¤ã‚’è¨­å®š
 			m_listCommand.SetItemData(nIndex, pKey->wCmdID);
 		}
 	}
@@ -469,24 +469,24 @@ void CDlgKeyConfig::OnSelChangeListCommand()
 	KEY_CONFIG *pKeyData;
 	WORD	wCmdID = (WORD)m_listCommand.GetItemData(m_listCommand.GetCurSel());
 	if (wCmdID != 0x0000 && (pKeyData = SearchKeyConfigID(wCmdID)) != NULL) {
-		// ƒzƒbƒgƒL[ƒR[ƒh‚ğæ“¾
+		// ãƒ›ãƒƒãƒˆã‚­ãƒ¼ã‚³ãƒ¼ãƒ‰ã‚’å–å¾—
 		WORD	wKeyCode, wModifiers;
 		wKeyCode = (WORD)pKeyData->dwKeyCode;
 		wModifiers = (WORD)(pKeyData->dwKeyCode >> 16);
 
 		if (wKeyCode != 0x0000) {
-			// “ÁêƒL[‚Ìƒ`ƒFƒbƒNó‘Ô‚ğİ’è
+			// ç‰¹æ®Šã‚­ãƒ¼ã®ãƒã‚§ãƒƒã‚¯çŠ¶æ…‹ã‚’è¨­å®š
 			BOOL	bCtrlOld = m_btCtrl.GetCheck();
 			BOOL	bAltOld = m_btAlt.GetCheck();
 			m_btCtrl.SetCheck((wModifiers & 0x0002) ? TRUE : FALSE);
 			m_btAlt.SetCheck((wModifiers & 0x0004) ? TRUE : FALSE);
 			if (bCtrlOld != m_btCtrl.GetCheck() || bAltOld != m_btAlt.GetCheck()) {
-				// ƒL[ˆê——‚ğXV
+				// ã‚­ãƒ¼ä¸€è¦§ã‚’æ›´æ–°
 				UpdateKeyList();
 			}
 		}
 
-		// ƒL[‚ğ‘I‘ğó‘Ô‚É‚·‚é
+		// ã‚­ãƒ¼ã‚’é¸æŠçŠ¶æ…‹ã«ã™ã‚‹
 		int i; for (i = 0; g_keyData[i].sKeyName != NULL; i++) {
 			if (wKeyCode == g_keyData[i].wKeyCode) {
 				m_listKey.SetCurSel(i);

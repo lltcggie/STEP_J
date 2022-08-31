@@ -33,21 +33,21 @@ bool LoadFileOGG(FILE_INFO *pFileMP3)
         TCHAR *szField;
         CString *pstrContents;
     }VC[] = {
-        {_T("TITLE"),       &strTrackName}, //ƒ^ƒCƒgƒ‹
-        {_T("ARTIST"),      &strArtistName},//ƒA[ƒeƒBƒXƒg
-        {_T("ALBUM"),       &strAlbumName}, //ƒAƒ‹ƒoƒ€
-        {_T("ALBUMARTIST"), &strAlbumArtist}, //ƒAƒ‹ƒoƒ€ƒA[ƒeƒBƒXƒg
-        {_T("GENRE"),       &strGenre},     //ƒWƒƒƒ“ƒ‹
-        {_T("DATE"),        &strYear},      //”N
-        {_T("COMMENT"),     &strComment},   //ƒRƒƒ“ƒg
-        {_T("TRACKNUMBER"), &strTrackNumber}, //ƒgƒ‰ƒbƒN”Ô†
-        {_T("TRACKTOTAL"),  &strTrackTotal},  //ƒgƒ‰ƒbƒN”
-        {_T("DISCNUMBER"),  &strDiscNumber},  //ƒfƒBƒXƒN”Ô†
-        {_T("DISCTOTAL"),   &strDiscTotal},   //ƒfƒBƒXƒN”
-        {_T("COPYRIGHT"),   &strCopyright},   //’˜ìŒ 
-        {_T("LYRICIST"),    &strLyricist},    //ìŒÒ
-        {_T("COMPOSER"),    &strComposer},    //ì‹ÈÒ
-        {_T("ENCODED BY"),  &strSoftware},    //ƒ\ƒtƒgƒEƒFƒA
+        {_T("TITLE"),       &strTrackName}, //ã‚¿ã‚¤ãƒˆãƒ«
+        {_T("ARTIST"),      &strArtistName},//ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆ
+        {_T("ALBUM"),       &strAlbumName}, //ã‚¢ãƒ«ãƒãƒ 
+        {_T("ALBUMARTIST"), &strAlbumArtist}, //ã‚¢ãƒ«ãƒãƒ ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆ
+        {_T("GENRE"),       &strGenre},     //ã‚¸ãƒ£ãƒ³ãƒ«
+        {_T("DATE"),        &strYear},      //å¹´
+        {_T("COMMENT"),     &strComment},   //ã‚³ãƒ¡ãƒ³ãƒˆ
+        {_T("TRACKNUMBER"), &strTrackNumber}, //ãƒˆãƒ©ãƒƒã‚¯ç•ªå·
+        {_T("TRACKTOTAL"),  &strTrackTotal},  //ãƒˆãƒ©ãƒƒã‚¯æ•°
+        {_T("DISCNUMBER"),  &strDiscNumber},  //ãƒ‡ã‚£ã‚¹ã‚¯ç•ªå·
+        {_T("DISCTOTAL"),   &strDiscTotal},   //ãƒ‡ã‚£ã‚¹ã‚¯æ•°
+        {_T("COPYRIGHT"),   &strCopyright},   //è‘—ä½œæ¨©
+        {_T("LYRICIST"),    &strLyricist},    //ä½œè©è€…
+        {_T("COMPOSER"),    &strComposer},    //ä½œæ›²è€…
+        {_T("ENCODED BY"),  &strSoftware},    //ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢
         {NULL,          NULL}
     };
     int i = 0;
@@ -72,7 +72,7 @@ bool LoadFileOGG(FILE_INFO *pFileMP3)
     SetSoftwareSI(pFileMP3, strSoftware);
 
 #if 0
-    { // ”ñ•W€ƒ^ƒO
+    { // éæ¨™æº–ã‚¿ã‚°
         CString strDisp;
         CStringArray strArray;
         fileOGG->GetCommentNames(strArray);
@@ -90,7 +90,7 @@ bool LoadFileOGG(FILE_INFO *pFileMP3)
                     break;
                 }
 
-                //•W€–¼‚ÍœŠO
+                //æ¨™æº–åã¯é™¤å¤–
                 if((j == 1) &&
                     (
                     !strName.Compare(_T("TITLE")) ||
@@ -118,7 +118,7 @@ bool LoadFileOGG(FILE_INFO *pFileMP3)
 	SetAudioFormat(pFileMP3, fileOGG->GetAudioFormatString());
     CString strTimeString = fileOGG->GetTimeString();
     TCHAR *time = strTimeString.GetBuffer();
-    //szTime = "xx:xx (xxxsec) ‚Ì‚æ‚¤‚É‚È‚Á‚Ä‚¢‚é
+    //szTime = "xx:xx (xxxsec) ã®ã‚ˆã†ã«ãªã£ã¦ã„ã‚‹
     TCHAR *pszSec = _tcschr(time, _T('('));
     if(pszSec){
         pszSec++;
@@ -153,21 +153,21 @@ bool WriteFileOGG(FILE_INFO *pFileMP3)
         TCHAR *szField;
         CString *pstrContents;
     }VC[] = {
-        {_T("TITLE"),       &strTrackName}, //ƒ^ƒCƒgƒ‹
-        {_T("ARTIST"),      &strArtistName},//ƒA[ƒeƒBƒXƒg
-        {_T("ALBUM"),       &strAlbumName}, //ƒAƒ‹ƒoƒ€
-        {_T("ALBUMARTIST"), &strAlbumArtist}, //ƒAƒ‹ƒoƒ€ƒA[ƒeƒBƒXƒg
-        {_T("GENRE"),       &strGenre},     //ƒWƒƒƒ“ƒ‹
-        {_T("DATE"),        &strYear},      //”N
-        {_T("COMMENT"),     &strComment},   //ƒRƒƒ“ƒg
-        {_T("TRACKNUMBER"), &strTrackNumber}, //ƒgƒ‰ƒbƒN”Ô†
-        {_T("TRACKTOTAL"),  &strTrackTotal},  //ƒgƒ‰ƒbƒN”
-        {_T("DISCNUMBER"),  &strDiscNumber},  //ƒfƒBƒXƒN”Ô†
-        {_T("DISCTOTAL"),   &strDiscTotal},   //ƒfƒBƒXƒN”
-        {_T("COPYRIGHT"),   &strCopyright},   //’˜ìŒ 
-        {_T("LYRICIST"),    &strLyricist},    //ìŒÒ
-        {_T("COMPOSER"),    &strComposer},    //ì‹ÈÒ
-        {_T("ENCODED BY"),  &strSoftware},    //ƒ\ƒtƒgƒEƒFƒA
+        {_T("TITLE"),       &strTrackName}, //ã‚¿ã‚¤ãƒˆãƒ«
+        {_T("ARTIST"),      &strArtistName},//ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆ
+        {_T("ALBUM"),       &strAlbumName}, //ã‚¢ãƒ«ãƒãƒ 
+        {_T("ALBUMARTIST"), &strAlbumArtist}, //ã‚¢ãƒ«ãƒãƒ ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆ
+        {_T("GENRE"),       &strGenre},     //ã‚¸ãƒ£ãƒ³ãƒ«
+        {_T("DATE"),        &strYear},      //å¹´
+        {_T("COMMENT"),     &strComment},   //ã‚³ãƒ¡ãƒ³ãƒˆ
+        {_T("TRACKNUMBER"), &strTrackNumber}, //ãƒˆãƒ©ãƒƒã‚¯ç•ªå·
+        {_T("TRACKTOTAL"),  &strTrackTotal},  //ãƒˆãƒ©ãƒƒã‚¯æ•°
+        {_T("DISCNUMBER"),  &strDiscNumber},  //ãƒ‡ã‚£ã‚¹ã‚¯ç•ªå·
+        {_T("DISCTOTAL"),   &strDiscTotal},   //ãƒ‡ã‚£ã‚¹ã‚¯æ•°
+        {_T("COPYRIGHT"),   &strCopyright},   //è‘—ä½œæ¨©
+        {_T("LYRICIST"),    &strLyricist},    //ä½œè©è€…
+        {_T("COMPOSER"),    &strComposer},    //ä½œæ›²è€…
+        {_T("ENCODED BY"),  &strSoftware},    //ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢
         {NULL,          NULL}
     };
     int i = 0;
@@ -215,18 +215,18 @@ bool LoadFileOPUS(FILE_INFO *pFileMP3)
         const char *cszField;
         CString *pstrContents;
     }oc[] = {
-        {"TITLE",       &strTrackName}, //ƒ^ƒCƒgƒ‹
-        {"ARTIST",      &strArtistName},//ƒA[ƒeƒBƒXƒg
-        {"ALBUM",       &strAlbumName}, //ƒAƒ‹ƒoƒ€
-        {"ALBUMARTIST", &strAlbumArtist}, //ƒAƒ‹ƒoƒ€ƒA[ƒeƒBƒXƒg
-        {"GENRE",       &strGenre},     //ƒWƒƒƒ“ƒ‹
-        {"DATE",        &strYear},      //”N
-        {"DESCRIPTION", &strComment},   //ƒRƒƒ“ƒg(–{—ˆ‚ª‚±‚¿‚ç‚ª³‚µ‚¢H)
-        {"COMMENT",     &strComment},   //ƒRƒƒ“ƒg(foobar2000 ‚Å‘‚«‚Ş‚Æ‚±‚¿‚ç‚É‚È‚é)
-        {"TRACKNUMBER", &strTrackNumber}, //ƒgƒ‰ƒbƒN”Ô†
-        {"TRACKTOTAL",  &strTrackTotal},  //ƒgƒ‰ƒbƒN”
-        {"DISCNUMBER",  &strDiscNumber},  //ƒfƒBƒXƒN”Ô†
-        {"DISCTOTAL",   &strDiscTotal},   //ƒfƒBƒXƒN”
+        {"TITLE",       &strTrackName}, //ã‚¿ã‚¤ãƒˆãƒ«
+        {"ARTIST",      &strArtistName},//ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆ
+        {"ALBUM",       &strAlbumName}, //ã‚¢ãƒ«ãƒãƒ 
+        {"ALBUMARTIST", &strAlbumArtist}, //ã‚¢ãƒ«ãƒãƒ ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆ
+        {"GENRE",       &strGenre},     //ã‚¸ãƒ£ãƒ³ãƒ«
+        {"DATE",        &strYear},      //å¹´
+        {"DESCRIPTION", &strComment},   //ã‚³ãƒ¡ãƒ³ãƒˆ(æœ¬æ¥ãŒã“ã¡ã‚‰ãŒæ­£ã—ã„ï¼Ÿ)
+        {"COMMENT",     &strComment},   //ã‚³ãƒ¡ãƒ³ãƒˆ(foobar2000 ã§æ›¸ãè¾¼ã‚€ã¨ã“ã¡ã‚‰ã«ãªã‚‹)
+        {"TRACKNUMBER", &strTrackNumber}, //ãƒˆãƒ©ãƒƒã‚¯ç•ªå·
+        {"TRACKTOTAL",  &strTrackTotal},  //ãƒˆãƒ©ãƒƒã‚¯æ•°
+        {"DISCNUMBER",  &strDiscNumber},  //ãƒ‡ã‚£ã‚¹ã‚¯ç•ªå·
+        {"DISCTOTAL",   &strDiscTotal},   //ãƒ‡ã‚£ã‚¹ã‚¯æ•°
         {NULL,          NULL}
     };
     int i = 0;
@@ -272,8 +272,8 @@ bool WriteFileOPUS(FILE_INFO *pFileMP3)
 {
     static DWORD s_dwTime = 0;
     if(GetTickCount() - s_dwTime > 30*1000){
-        //‘O‰ñƒ_ƒCƒAƒƒO•\¦‚©‚ç  30•bˆÈãŒo‰ß
-        MessageBox(NULL, _T("OggOpus ‚Ìƒ^ƒOXV‚Í–¢‘Î‰‚Å‚·B"), _T("STEP_ogg"), MB_OK);
+        //å‰å›ãƒ€ã‚¤ã‚¢ãƒ­ã‚°è¡¨ç¤ºã‹ã‚‰  30ç§’ä»¥ä¸ŠçµŒé
+        MessageBox(NULL, _T("OggOpus ã®ã‚¿ã‚°æ›´æ–°ã¯æœªå¯¾å¿œã§ã™ã€‚"), _T("STEP_ogg"), MB_OK);
         s_dwTime = GetTickCount();
     }
 #if 0
@@ -310,17 +310,17 @@ bool WriteFileOPUS(FILE_INFO *pFileMP3)
         const char *cszField;
         CString *pstrContents;
     }oc[] = {
-        {"TITLE",       &strTrackName}, //ƒ^ƒCƒgƒ‹
-        {"ARTIST",      &strArtistName},//ƒA[ƒeƒBƒXƒg
-        {"ALBUM",       &strAlbumName}, //ƒAƒ‹ƒoƒ€
-        {"ALBUMARTIST", &strAlbumArtist}, //ƒAƒ‹ƒoƒ€ƒA[ƒeƒBƒXƒg
-        {"GENRE",       &strGenre},     //ƒWƒƒƒ“ƒ‹
-        {"DATE",        &strYear},      //”N
-        {"DESCRIPTION", &strComment},   //ƒRƒƒ“ƒg
-        {"TRACKNUMBER", &strTrackNumber}, //ƒgƒ‰ƒbƒN”Ô†
-        {"TRACKTOTAL",  &strTrackTotal},  //ƒgƒ‰ƒbƒN”
-        {"DISCNUMBER",  &strDiscNumber},  //ƒfƒBƒXƒN”Ô†
-        {"DISCTOTAL",   &strDiscTotal},   //ƒfƒBƒXƒN”
+        {"TITLE",       &strTrackName}, //ã‚¿ã‚¤ãƒˆãƒ«
+        {"ARTIST",      &strArtistName},//ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆ
+        {"ALBUM",       &strAlbumName}, //ã‚¢ãƒ«ãƒãƒ 
+        {"ALBUMARTIST", &strAlbumArtist}, //ã‚¢ãƒ«ãƒãƒ ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆ
+        {"GENRE",       &strGenre},     //ã‚¸ãƒ£ãƒ³ãƒ«
+        {"DATE",        &strYear},      //å¹´
+        {"DESCRIPTION", &strComment},   //ã‚³ãƒ¡ãƒ³ãƒˆ
+        {"TRACKNUMBER", &strTrackNumber}, //ãƒˆãƒ©ãƒƒã‚¯ç•ªå·
+        {"TRACKTOTAL",  &strTrackTotal},  //ãƒˆãƒ©ãƒƒã‚¯æ•°
+        {"DISCNUMBER",  &strDiscNumber},  //ãƒ‡ã‚£ã‚¹ã‚¯ç•ªå·
+        {"DISCTOTAL",   &strDiscTotal},   //ãƒ‡ã‚£ã‚¹ã‚¯æ•°
         {NULL,          NULL}
     };
     int i = 0;

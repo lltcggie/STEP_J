@@ -1,4 +1,4 @@
-// DlgFolderSync.cpp : ƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“ ƒtƒ@ƒCƒ‹
+// DlgFolderSync.cpp : ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³ ãƒ•ã‚¡ã‚¤ãƒ«
 //
 
 #include "stdafx.h"
@@ -12,7 +12,7 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgFolderSync ƒvƒƒpƒeƒB ƒy[ƒW
+// CDlgFolderSync ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ ãƒšãƒ¼ã‚¸
 
 IMPLEMENT_DYNCREATE(CDlgFolderSync, COptionPage)
 
@@ -54,17 +54,17 @@ BEGIN_MESSAGE_MAP(CDlgFolderSync, COptionPage)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgFolderSync ƒƒbƒZ[ƒW ƒnƒ“ƒhƒ‰
+// CDlgFolderSync ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒãƒ³ãƒ‰ãƒ©
 
 BOOL CDlgFolderSync::OnInitDialog() 
 {
 	COptionPage::OnInitDialog();
 
-	// TODO: ‚±‚ÌˆÊ’u‚É‰Šú‰»‚Ì•â‘«ˆ—‚ð’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
+	// TODO: ã“ã®ä½ç½®ã«åˆæœŸåŒ–ã®è£œè¶³å‡¦ç†ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
 	UpdateStatus();
 
-	return TRUE;  // ƒRƒ“ƒgƒ[ƒ‹‚ÉƒtƒH[ƒJƒX‚ðÝ’è‚µ‚È‚¢‚Æ‚«A–ß‚è’l‚Í TRUE ‚Æ‚È‚è‚Ü‚·
-	              // —áŠO: OCX ƒvƒƒpƒeƒB ƒy[ƒW‚Ì–ß‚è’l‚Í FALSE ‚Æ‚È‚è‚Ü‚·
+	return TRUE;  // ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã«ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ã‚’è¨­å®šã—ãªã„ã¨ãã€æˆ»ã‚Šå€¤ã¯ TRUE ã¨ãªã‚Šã¾ã™
+	              // ä¾‹å¤–: OCX ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ ãƒšãƒ¼ã‚¸ã®æˆ»ã‚Šå€¤ã¯ FALSE ã¨ãªã‚Šã¾ã™
 }
 
 void CDlgFolderSync::UpdateStatus(void)
@@ -87,11 +87,11 @@ void CDlgFolderSync::OnChEnableFolderSync()
 
 void CDlgFolderSync::OnBtRefRoot() 
 {
-	// Œ»ÝŽw’è‚³‚ê‚Ä‚¢‚éƒƒOƒtƒ@ƒCƒ‹–¼‚ðŽæ“¾
+	// ç¾åœ¨æŒ‡å®šã•ã‚Œã¦ã„ã‚‹ãƒ­ã‚°ãƒ•ã‚¡ã‚¤ãƒ«åã‚’å–å¾—
 	CString	strFileName;
 	GetDlgItemText(IDC_ED_ROOT_FOLDER, strFileName);
 
-	// ƒtƒHƒ‹ƒ_‘I‘ðƒ_ƒCƒAƒƒO‚ðŠJ‚­
+	// ãƒ•ã‚©ãƒ«ãƒ€é¸æŠžãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚’é–‹ã
 	extern	BOOL SelectDirectory(TCHAR *sLocal, int size);
 	TCHAR	sFolderName[_MAX_PATH] = {'\0'};
 	_tcsncpy_s(sFolderName, strFileName, _TRUNCATE);
@@ -100,17 +100,17 @@ void CDlgFolderSync::OnBtRefRoot()
 	}
 }
 
-// ‰Šú’l‚É–ß‚·
+// åˆæœŸå€¤ã«æˆ»ã™
 void CDlgFolderSync::OnBtResetPage() 
 {
-	// —LŒø‚É‚·‚é
+	// æœ‰åŠ¹ã«ã™ã‚‹
 	((CButton *)GetDlgItem(IDC_CH_ENABLE_FOLDER_SYNC))->SetCheck(FALSE);
 
-	// root ‚É‘Î‰ž‚·‚éƒtƒHƒ‹ƒ_
+	// root ã«å¯¾å¿œã™ã‚‹ãƒ•ã‚©ãƒ«ãƒ€
 	((CWnd *)GetDlgItem(IDC_ED_ROOT_FOLDER))->SetWindowText(_T(""));
 	((CButton *)GetDlgItem(IDC_CH_SELECT_ALWAYS))->SetCheck(FALSE);
 
-	// “®ìÝ’è
+	// å‹•ä½œè¨­å®š
 	((CButton *)GetDlgItem(IDC_CH_DELETE_FOLDER))->SetCheck(TRUE);
 	((CButton *)GetDlgItem(IDC_CH_MOVE_LYRICS_FILE))->SetCheck(TRUE);
 

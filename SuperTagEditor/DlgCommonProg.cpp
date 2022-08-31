@@ -1,5 +1,5 @@
-//  DlgCommonProg.cpp : ƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“ ƒtƒ@ƒCƒ‹
-// CG: ‚±‚Ìƒtƒ@ƒCƒ‹‚ÍuƒvƒƒOƒŒƒX ƒ_ƒCƒAƒƒOvƒRƒ“ƒ|[ƒlƒ“ƒg‚É‚æ‚è’Ç‰Á‚³‚ê‚Ä‚¢‚Ü‚·B
+//  DlgCommonProg.cpp : ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³ ãƒ•ã‚¡ã‚¤ãƒ«
+// CG: ã“ã®ãƒ•ã‚¡ã‚¤ãƒ«ã¯ã€Œãƒ—ãƒ­ã‚°ãƒ¬ã‚¹ ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã€ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã«ã‚ˆã‚Šè¿½åŠ ã•ã‚Œã¦ã„ã¾ã™ã€‚
 
 #include "stdafx.h"
 #include "resource.h"
@@ -11,7 +11,7 @@ static char BASED_CODE THIS_FILE[] = __FILE__;
 #endif
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgCommonProgress ƒ_ƒCƒAƒƒO
+// CDlgCommonProgress ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
 
 CDlgCommonProgress::CDlgCommonProgress(UINT nCaptionID)
 {
@@ -23,10 +23,10 @@ CDlgCommonProgress::CDlgCommonProgress(UINT nCaptionID)
     m_nUpper=100;
     m_nStep=10;
     //{{AFX_DATA_INIT(CDlgCommonProgress)
-    // ƒƒ‚: ClassWizard ‚ÍA‚±‚ÌˆÊ’u‚Éƒƒ“ƒo‚Ì‰Šú‰»ƒR[ƒh‚ğ’Ç‰Á‚µ‚Ü‚·B
+    // ãƒ¡ãƒ¢: ClassWizard ã¯ã€ã“ã®ä½ç½®ã«ãƒ¡ãƒ³ãƒã®åˆæœŸåŒ–ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¾ã™ã€‚
     //}}AFX_DATA_INIT
     m_bParentDisabled = FALSE;
-    m_bCanceled = FALSE;//’Ç‰Á by Kobarin
+    m_bCanceled = FALSE;//è¿½åŠ  by Kobarin
 }
 
 CDlgCommonProgress::~CDlgCommonProgress()
@@ -56,12 +56,12 @@ void CDlgCommonProgress::EnableCancelButton(BOOL bEnable)
 
 BOOL CDlgCommonProgress::Create(CWnd *pParent)
 {
-    // ƒ_ƒCƒAƒƒO‚ÌÀÛ‚ÌeƒEƒBƒ“ƒhƒE‚ğæ“¾‚µ‚Ü‚·B
+    // ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã®å®Ÿéš›ã®è¦ªã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚’å–å¾—ã—ã¾ã™ã€‚
     m_pParentWnd = CWnd::GetSafeOwner(pParent);
 
-    // m_bParentDisabled ‚ÍA‚±‚Ìƒ_ƒCƒAƒƒO‚ª”jŠü‚³‚ê‚½‚ÉAeƒEƒBƒ“ƒhƒE‚ğ
-    // Ä‚Ñ—LŒø‚É‚·‚é‚½‚ß‚Ég—p‚µ‚Ü‚·B]‚Á‚ÄA‚±‚Ì“_‚ÅeƒEƒBƒ“ƒhƒE‚ª‚·‚Å‚É
-    // —LŒø‚Èê‡‚Ì‚İA‚±‚Ì•Ï”‚É TRUE ‚ğİ’è‚µ‚Ü‚·B
+    // m_bParentDisabled ã¯ã€ã“ã®ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ãŒç ´æ£„ã•ã‚ŒãŸæ™‚ã«ã€è¦ªã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚’
+    // å†ã³æœ‰åŠ¹ã«ã™ã‚‹ãŸã‚ã«ä½¿ç”¨ã—ã¾ã™ã€‚å¾“ã£ã¦ã€ã“ã®æ™‚ç‚¹ã§è¦ªã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãŒã™ã§ã«
+    // æœ‰åŠ¹ãªå ´åˆã®ã¿ã€ã“ã®å¤‰æ•°ã« TRUE ã‚’è¨­å®šã—ã¾ã™ã€‚
 
     if((m_pParentWnd!=NULL) && m_pParentWnd->IsWindowEnabled())
     {
@@ -92,8 +92,8 @@ END_MESSAGE_MAP()
 
 void CDlgCommonProgress::OnCancel()
 {
-	//’Ç‰Á by Kobarin
-	if (MessageBox(_T("’†’f‚µ‚Ä‚à‚æ‚ë‚µ‚¢‚Å‚·‚©H"), _T("ˆ—‚Ì’†’f"), MB_ICONQUESTION|MB_YESNOCANCEL|MB_DEFBUTTON2|MB_TOPMOST) == IDYES) {
+	//è¿½åŠ  by Kobarin
+	if (MessageBox(_T("ä¸­æ–­ã—ã¦ã‚‚ã‚ˆã‚ã—ã„ã§ã™ã‹ï¼Ÿ"), _T("å‡¦ç†ã®ä¸­æ–­"), MB_ICONQUESTION|MB_YESNOCANCEL|MB_DEFBUTTON2|MB_TOPMOST) == IDYES) {
 		m_bCanceled = TRUE;
 	}
 }
@@ -118,7 +118,7 @@ int CDlgCommonProgress::SetPos(int nPos)
 
 int CDlgCommonProgress::SetStep(int nStep)
 {
-    m_nStep = nStep; // Œã‚Åƒp[ƒZƒ“ƒe[ƒW‚ÌŒvZ‚ğs‚¤Û‚É—˜—p‚µ‚Ü‚·B
+    m_nStep = nStep; // å¾Œã§ãƒ‘ãƒ¼ã‚»ãƒ³ãƒ†ãƒ¼ã‚¸ã®è¨ˆç®—ã‚’è¡Œã†éš›ã«åˆ©ç”¨ã—ã¾ã™ã€‚
     return m_Progress.SetStep(nStep);
 }
 
@@ -140,12 +140,12 @@ int CDlgCommonProgress::StepIt()
 
 void CDlgCommonProgress::PumpMessages()
 {
-    // ƒ_ƒCƒAƒƒO‚ğg—p‚·‚é‘O‚É Create() ‚ğŒÄ‚ñ‚Å‚­‚¾‚³‚¢B
+    // ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚’ä½¿ç”¨ã™ã‚‹å‰ã« Create() ã‚’å‘¼ã‚“ã§ãã ã•ã„ã€‚
 	if (GetSafeHwnd() == NULL) return;
 //    ASSERT(m_hWnd!=NULL);
 
     MSG msg;
-    // ƒ_ƒCƒAƒƒO ƒƒbƒZ[ƒW‚Ìˆ—
+    // ãƒ€ã‚¤ã‚¢ãƒ­ã‚° ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã®å‡¦ç†
     while(PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
     {
       if(!IsDialogMessage(&msg))
@@ -164,23 +164,23 @@ void CDlgCommonProgress::UpdatePercent(int nNewPos)
     int nPercent;
     
     int nDivisor = m_nUpper - m_nLower;
-    ASSERT(nDivisor>0);  // m_nLower ‚Í m_nUpper –¢–‚Å‚È‚¯‚ê‚Î‚¢‚¯‚Ü‚¹‚ñB
+    ASSERT(nDivisor>0);  // m_nLower ã¯ m_nUpper æœªæº€ã§ãªã‘ã‚Œã°ã„ã‘ã¾ã›ã‚“ã€‚
 
     int nDividend = (nNewPos - m_nLower);
-    ASSERT(nDividend>=0);   // Œ»İˆÊ’u‚Í m_nLower ˆÈã‚Å‚È‚¯‚ê‚Î‚¢‚¯‚Ü‚¹‚ñB
+    ASSERT(nDividend>=0);   // ç¾åœ¨ä½ç½®ã¯ m_nLower ä»¥ä¸Šã§ãªã‘ã‚Œã°ã„ã‘ã¾ã›ã‚“ã€‚
 
     nPercent = nDividend * 100 / nDivisor;
 
-    // ƒvƒƒOƒŒƒX ƒRƒ“ƒgƒ[ƒ‹‚ÍÜ‚è•Ô‚µ‰Â”\‚È‚Ì‚ÅA‚»‚ê‚É‰‚¶‚Äƒp[ƒZƒ“ƒe[ƒW‚à
-    // Ü‚è•Ô‚·‚æ‚¤‚É‚µ‚Ü‚·B‚½‚¾‚µAè—]‚ğæ‚éÛA100% ‚ğ 0% ‚Æ‚µ‚Ä‚Í‚¢‚¯‚Ü‚¹‚ñB
+    // ãƒ—ãƒ­ã‚°ãƒ¬ã‚¹ ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã¯æŠ˜ã‚Šè¿”ã—å¯èƒ½ãªã®ã§ã€ãã‚Œã«å¿œã˜ã¦ãƒ‘ãƒ¼ã‚»ãƒ³ãƒ†ãƒ¼ã‚¸ã‚‚
+    // æŠ˜ã‚Šè¿”ã™ã‚ˆã†ã«ã—ã¾ã™ã€‚ãŸã ã—ã€å‰°ä½™ã‚’å–ã‚‹éš›ã€100% ã‚’ 0% ã¨ã—ã¦ã¯ã„ã‘ã¾ã›ã‚“ã€‚
     if(nPercent!=100)
       nPercent %= 100;
 
-    // ƒp[ƒZƒ“ƒe[ƒW‚ğ•\¦‚µ‚Ü‚·B
+    // ãƒ‘ãƒ¼ã‚»ãƒ³ãƒ†ãƒ¼ã‚¸ã‚’è¡¨ç¤ºã—ã¾ã™ã€‚
     CString strBuf;
     strBuf.Format(_T("%d%c"),nPercent,_T('%'));
 
-	CString strCur; // Œ»İ‚Ìƒp[ƒZƒ“ƒe[ƒW‚ğæ“¾
+	CString strCur; // ç¾åœ¨ã®ãƒ‘ãƒ¼ã‚»ãƒ³ãƒ†ãƒ¼ã‚¸ã‚’å–å¾—
     pWndPercent->GetWindowText(strCur);
 
 	if (strCur != strBuf)
@@ -188,7 +188,7 @@ void CDlgCommonProgress::UpdatePercent(int nNewPos)
 }
     
 /////////////////////////////////////////////////////////////////////////////
-// CDlgCommonProgress ƒƒbƒZ[ƒW ƒnƒ“ƒhƒ‰
+// CDlgCommonProgress ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒãƒ³ãƒ‰ãƒ©
 
 BOOL CDlgCommonProgress::OnInitDialog() 
 {

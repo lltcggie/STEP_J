@@ -1,6 +1,6 @@
 //{{NO_DEPENDENCIES}}
-// Microsoft Visual C++ ‚Å¶¬‚³‚ê‚½ƒCƒ“ƒNƒ‹[ƒh ƒtƒ@ƒCƒ‹B
-// STEP_riff.rc ‚ÅŽg—p
+// Microsoft Visual C++ ã§ç”Ÿæˆã•ã‚ŒãŸã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰ ãƒ•ã‚¡ã‚¤ãƒ«ã€‚
+// STEP_riff.rc ã§ä½¿ç”¨
 //
 #define IDD_DLG_SETUP                   171
 #define IDC_CH_WAV_GENRE_LIST_SELECT    1104

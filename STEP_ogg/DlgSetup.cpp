@@ -1,4 +1,4 @@
-// CDlgSetup.cpp : ƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“ ƒtƒ@ƒCƒ‹
+// CDlgSetup.cpp : ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³ ãƒ•ã‚¡ã‚¤ãƒ«
 //
 
 #include "stdafx.h"
@@ -12,7 +12,7 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 /////////////////////////////////////////////////////////////////////////////
-// CCDlgSetup ƒvƒƒpƒeƒB ƒy[ƒW
+// CCDlgSetup ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ ãƒšãƒ¼ã‚¸
 
 IMPLEMENT_DYNCREATE(CDlgSetup, CPropertyPage)
 
@@ -38,9 +38,9 @@ void CDlgSetup::DoDataExchange(CDataExchange* pDX)
 
 BEGIN_MESSAGE_MAP(CDlgSetup, CPropertyPage)
 	//{{AFX_MSG_MAP(CDlgSetup)
-		// ƒƒ‚: ClassWizard ‚Í‚±‚ÌˆÊ’u‚É DDX ‚¨‚æ‚Ñ DDV ‚ÌŒÄ‚Ño‚µƒR[ƒh‚ð’Ç‰Á‚µ‚Ü‚·B
+		// ãƒ¡ãƒ¢: ClassWizard ã¯ã“ã®ä½ç½®ã« DDX ãŠã‚ˆã³ DDV ã®å‘¼ã³å‡ºã—ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¾ã™ã€‚
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgSetup ƒƒbƒZ[ƒW ƒnƒ“ƒhƒ‰
+// CDlgSetup ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒãƒ³ãƒ‰ãƒ©

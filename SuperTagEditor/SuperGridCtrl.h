@@ -110,7 +110,7 @@ public:
     void SetLParam(LPARAM param) {m_lParam = param;}
     LPARAM GetLParam(void) {return(m_lParam);}
 
-    // Šg’£ˆ——pƒtƒ‰ƒO(‚R‚Qƒrƒbƒg)
+    // æ‹¡å¼µå‡¦ç†ç”¨ãƒ•ãƒ©ã‚°(ï¼“ï¼’ãƒ“ãƒƒãƒˆ)
     enum    {
         FLAG_EX_CHECK_MASK      = 0x00000003,
     };
@@ -265,17 +265,17 @@ public:
     virtual BOOL OnVkReturn(void);
     //called before from within OnlButtonDown and OnDblclk, but before anything happens, return TRUE to continue, FALSE to say not selecting the item
     virtual BOOL OnItemLButtonDown(LVHITTESTINFO& ht);
-    // ‘I‘ğƒJ[ƒ\ƒ‹‚ª•ÏX‚³‚ê‚½
+    // é¸æŠã‚«ãƒ¼ã‚½ãƒ«ãŒå¤‰æ›´ã•ã‚ŒãŸ
     virtual BOOL OnChangeSelect(void);
-    // ƒ†[ƒU[‚É‚æ‚éƒZƒ‹‚Ì”wŒi•`‰æˆ—
+    // ãƒ¦ãƒ¼ã‚¶ãƒ¼ã«ã‚ˆã‚‹ã‚»ãƒ«ã®èƒŒæ™¯æç”»å‡¦ç†
     virtual BOOL OnDrawCustomCellBG(CDC *, int, int, RECT &);
-    // ƒJƒ‰ƒ€‚ÌÅ‘å•¶š”æ“¾ˆ—
+    // ã‚«ãƒ©ãƒ ã®æœ€å¤§æ–‡å­—æ•°å–å¾—å‡¦ç†
     virtual int OnGetColumLimitText(int, int);
-    // ƒXƒy[ƒXƒL[‚ª‰Ÿ‚³‚ê‚½ê‡‚Ìˆ—
+    // ã‚¹ãƒšãƒ¼ã‚¹ã‚­ãƒ¼ãŒæŠ¼ã•ã‚ŒãŸå ´åˆã®å‡¦ç†
     virtual void OnKeyDownSpace(void);
-    // ƒ`ƒFƒbƒNó‘Ô‚ª•ÏX‚³‚ê‚½
+    // ãƒã‚§ãƒƒã‚¯çŠ¶æ…‹ãŒå¤‰æ›´ã•ã‚ŒãŸ
     virtual void OnChangeCheck(CTreeItem *, BOOL);
-    // ƒAƒCƒeƒ€‚ªƒ_ƒuƒ‹ƒNƒŠƒbƒN‚³‚ê‚½
+    // ã‚¢ã‚¤ãƒ†ãƒ ãŒãƒ€ãƒ–ãƒ«ã‚¯ãƒªãƒƒã‚¯ã•ã‚ŒãŸ
     virtual BOOL OnItemDblClick(int);
 
 public:
@@ -460,12 +460,12 @@ private:
     CBrush m_brushErase;
     friend class CRectangle;
     HIMAGELIST m_himl;
-    // Œ»İ‚ÌƒJ[ƒ\ƒ‹ˆÊ’u‚ÌƒZƒ‹•ÒWŠJn
+    // ç¾åœ¨ã®ã‚«ãƒ¼ã‚½ãƒ«ä½ç½®ã®ã‚»ãƒ«ç·¨é›†é–‹å§‹
     bool    CellEditStart(void);
-    // •ÒWƒEƒBƒ“ƒhƒE‚ÌˆÊ’u‚ğ’²®‚·‚é
+    // ç·¨é›†ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®ä½ç½®ã‚’èª¿æ•´ã™ã‚‹
     void    AdjustEditWindowPos(void);
 
-    // ”ÍˆÍ‘I‘ğˆ——p
+    // ç¯„å›²é¸æŠå‡¦ç†ç”¨
 public:
     CString GetItemText(int nItem, int nSubItem);
     void UpdateWindow();

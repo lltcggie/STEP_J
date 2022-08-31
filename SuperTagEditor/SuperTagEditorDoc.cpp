@@ -1,4 +1,4 @@
-// SuperTagEditorDoc.cpp : CSuperTagEditorDoc ƒNƒ‰ƒX‚Ì“®ì‚Ì’è‹`‚ğs‚¢‚Ü‚·B
+// SuperTagEditorDoc.cpp : CSuperTagEditorDoc ã‚¯ãƒ©ã‚¹ã®å‹•ä½œã®å®šç¾©ã‚’è¡Œã„ã¾ã™ã€‚
 //
 
 #include "stdafx.h"
@@ -25,21 +25,21 @@ static char THIS_FILE[] = __FILE__;
 
 //////////////////////////////////////////////////////////////////////////////
 //GetLongPathName
-//’Z‚¢ƒtƒ@ƒCƒ‹–¼‚ğ’·‚¢ƒtƒ@ƒCƒ‹–¼‚É•ÏŠ·
+//çŸ­ã„ãƒ•ã‚¡ã‚¤ãƒ«åã‚’é•·ã„ãƒ•ã‚¡ã‚¤ãƒ«åã«å¤‰æ›
 //////////////////////////////////////////////////////////////////////////////
 /*
-ˆø”F
-    LPSTR lpszLongFileName  ’·‚¢ƒtƒ@ƒCƒ‹–¼‚ğó‚¯æ‚éƒoƒbƒtƒ@‚Ö‚Ìƒ|ƒCƒ“ƒ^
-    LPSTR lpszShortPathName ’Z‚¢ƒtƒ@ƒCƒ‹–¼‚ğŠÜ‚ŞƒpƒX–¼‚Ö‚Ìƒ|ƒCƒ“ƒ^
-    DWORD dwSize            ƒoƒbƒtƒ@ƒTƒCƒY
-–ß‚è’l:
-    DWORD ƒoƒbƒtƒ@‚ÉƒRƒs[‚µ‚½•¶š—ñ‚Ì’·‚³
-        ‚O‚Ì‚Æ‚«ˆÙíI—¹
+å¼•æ•°ï¼š
+    LPSTR lpszLongFileName  é•·ã„ãƒ•ã‚¡ã‚¤ãƒ«åã‚’å—ã‘å–ã‚‹ãƒãƒƒãƒ•ã‚¡ã¸ã®ãƒã‚¤ãƒ³ã‚¿
+    LPSTR lpszShortPathName çŸ­ã„ãƒ•ã‚¡ã‚¤ãƒ«åã‚’å«ã‚€ãƒ‘ã‚¹åã¸ã®ãƒã‚¤ãƒ³ã‚¿
+    DWORD dwSize            ãƒãƒƒãƒ•ã‚¡ã‚µã‚¤ã‚º
+æˆ»ã‚Šå€¤:
+    DWORD ãƒãƒƒãƒ•ã‚¡ã«ã‚³ãƒ”ãƒ¼ã—ãŸæ–‡å­—åˆ—ã®é•·ã•
+        ï¼ã®ã¨ãç•°å¸¸çµ‚äº†
 */
 /*
-”p~FWin32API ‚Ì GetLongPathName ‚ğg—p‚·‚é‚æ‚¤‚É•ÏX
-(“–‚Í Windows95 ‚Å‚à“®ì‚³‚¹‚é•K—v‚ª‚ ‚Á‚Ä©ì‚µ‚Ä‚¢‚½H)
-ˆø”‚ª‹t‚¾‚Á‚½‚Ì‚ÅŒÄ‚Ño‚µ‘¤‚àC³
+å»ƒæ­¢ï¼šWin32API ã® GetLongPathName ã‚’ä½¿ç”¨ã™ã‚‹ã‚ˆã†ã«å¤‰æ›´
+(å½“æ™‚ã¯ Windows95 ã§ã‚‚å‹•ä½œã•ã›ã‚‹å¿…è¦ãŒã‚ã£ã¦è‡ªä½œã—ã¦ã„ãŸï¼Ÿ)
+å¼•æ•°ãŒé€†ã ã£ãŸã®ã§å‘¼ã³å‡ºã—å´ã‚‚ä¿®æ­£
 //DWORD GetLongPathName(LPTSTR lpszLongFileName, LPCTSTR lpszShortPathName, DWORD dwSize)
 DWORD GetLongPathName(LPCTSTR lpszShortPathName, LPTSTR lpszLongFileName, DWORD dwSize)
 {
@@ -47,18 +47,18 @@ DWORD GetLongPathName(LPCTSTR lpszShortPathName, LPTSTR lpszLongFileName, DWORD 
     WIN32_FIND_DATA fd;
     HANDLE  hFind;
 
-    //’Z‚¢ƒtƒ@ƒCƒ‹–¼‚Åƒtƒ@ƒCƒ‹‚ğŒŸõ
+    //çŸ­ã„ãƒ•ã‚¡ã‚¤ãƒ«åã§ãƒ•ã‚¡ã‚¤ãƒ«ã‚’æ¤œç´¢
     if((hFind = FindFirstFile(lpszShortPathName,&fd)) != INVALID_HANDLE_VALUE) {
         FindClose(hFind);
         if((DWORD)lstrlen(fd.cFileName) <= dwSize) {
-            //’·‚¢ƒtƒ@ƒCƒ‹–¼‚ğƒoƒbƒtƒ@‚ÉƒRƒs[
+            //é•·ã„ãƒ•ã‚¡ã‚¤ãƒ«åã‚’ãƒãƒƒãƒ•ã‚¡ã«ã‚³ãƒ”ãƒ¼
             _tcsncpy_s(lpszLongFileName, dwSize, fd.cFileName, _TRUNCATE);
-            //ƒoƒbƒtƒ@‚ÉƒRƒs[‚µ‚½•¶š—ñ‚ğ•Ô‚·
+            //ãƒãƒƒãƒ•ã‚¡ã«ã‚³ãƒ”ãƒ¼ã—ãŸæ–‡å­—åˆ—ã‚’è¿”ã™
             return _tcslen(lpszLongFileName);
         }
     }
     lpszLongFileName[0] = 0;
-    //ƒoƒbƒtƒ@‚ÌƒTƒCƒY‚ğ’´‚¦‚½‚©ƒtƒ@ƒCƒ‹‚ªŒ©‚Â‚©‚ç‚È‚©‚Á‚½‚Æ‚«‚ÍˆÙíI—¹
+    //ãƒãƒƒãƒ•ã‚¡ã®ã‚µã‚¤ã‚ºã‚’è¶…ãˆãŸã‹ãƒ•ã‚¡ã‚¤ãƒ«ãŒè¦‹ã¤ã‹ã‚‰ãªã‹ã£ãŸã¨ãã¯ç•°å¸¸çµ‚äº†
     return 0;
 }
 */
@@ -90,17 +90,17 @@ BEGIN_MESSAGE_MAP(CSuperTagEditorDoc, CDocument)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// CSuperTagEditorDoc ƒNƒ‰ƒX‚Ì\’z/Á–Å
+// CSuperTagEditorDoc ã‚¯ãƒ©ã‚¹ã®æ§‹ç¯‰/æ¶ˆæ»…
 
 CSuperTagEditorDoc::CSuperTagEditorDoc()
 {
-    // TODO: ‚±‚ÌˆÊ’u‚É‚P“x‚¾‚¯ŒÄ‚Î‚ê‚é\’z—p‚ÌƒR[ƒh‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢B
+    // TODO: ã“ã®ä½ç½®ã«ï¼‘åº¦ã ã‘å‘¼ã°ã‚Œã‚‹æ§‹ç¯‰ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„ã€‚
     m_dlgLoadProgress = new CDlgCommonProgress;
     m_nArrayFileCount = 0;
     m_nArrayRequestFileCount = 0;
 
-    m_StartLoadFileCount = 0;//’Ç‰Á by Kobarin
-    m_TagUpdatingCount = 0;//’Ç‰Á by Kobarin
+    m_StartLoadFileCount = 0;//è¿½åŠ  by Kobarin
+    m_TagUpdatingCount = 0;//è¿½åŠ  by Kobarin
 
     m_bInitialized = false; /* StartInaction2 055 */
 }
@@ -113,7 +113,7 @@ CSuperTagEditorDoc::~CSuperTagEditorDoc()
 
 BOOL CSuperTagEditorDoc::OnNewDocument()
 {
-    // •Û‘¶Šm”F
+    // ä¿å­˜ç¢ºèª
     if (m_nArrayFileCount && CanCloseFrame((CFrameWnd *)AfxGetMainWnd()) == FALSE) {
         return FALSE;
     }
@@ -121,22 +121,22 @@ BOOL CSuperTagEditorDoc::OnNewDocument()
     if (!CDocument::OnNewDocument())
         return FALSE;
 
-    // TODO: ‚±‚ÌˆÊ’u‚ÉÄ‰Šú‰»ˆ—‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢B
-    // (SDI ƒhƒLƒ…ƒƒ“ƒg‚Í‚±‚ÌƒhƒLƒ…ƒƒ“ƒg‚ğÄ—˜—p‚µ‚Ü‚·B)
+    // TODO: ã“ã®ä½ç½®ã«å†åˆæœŸåŒ–å‡¦ç†ã‚’è¿½åŠ ã—ã¦ãã ã•ã„ã€‚
+    // (SDI ãƒ‰ã‚­ãƒ¥ãƒ¡ãƒ³ãƒˆã¯ã“ã®ãƒ‰ã‚­ãƒ¥ãƒ¡ãƒ³ãƒˆã‚’å†åˆ©ç”¨ã—ã¾ã™ã€‚)
 
-    InitFileList();         // ƒtƒ@ƒCƒ‹ƒŠƒXƒg‚Ì‰Šú‰»
-    ClearRequestFiles();    // ’Ç‰ÁƒŠƒNƒGƒXƒgƒtƒ@ƒCƒ‹ƒŠƒXƒg‚Ì‰Šú‰»
+    InitFileList();         // ãƒ•ã‚¡ã‚¤ãƒ«ãƒªã‚¹ãƒˆã®åˆæœŸåŒ–
+    ClearRequestFiles();    // è¿½åŠ ãƒªã‚¯ã‚¨ã‚¹ãƒˆãƒ•ã‚¡ã‚¤ãƒ«ãƒªã‚¹ãƒˆã®åˆæœŸåŒ–
 
 
     if (!m_bInitialized) {
-        InitPlugin();           // ƒvƒ‰ƒOƒCƒ“‚Ìƒ[ƒh
+        InitPlugin();           // ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ã®ãƒ­ãƒ¼ãƒ‰
 
-        // ‰Šú‰»ˆ—
+        // åˆæœŸåŒ–å‡¦ç†
         GetView()->m_List.InitializeGrid();
-        // ƒtƒHƒ“ƒg‚Ìİ’è
+        // ãƒ•ã‚©ãƒ³ãƒˆã®è¨­å®š
         GetView()->UpdateFontListView();
     }
-    InitGridList();         // ƒOƒŠƒbƒh‚ğ‰Šú‰»
+    InitGridList();         // ã‚°ãƒªãƒƒãƒ‰ã‚’åˆæœŸåŒ–
 
     m_bInitialized = true;
 
@@ -144,7 +144,7 @@ BOOL CSuperTagEditorDoc::OnNewDocument()
 }
 
 /////////////////////////////////////////////////////////////////////////////
-// CSuperTagEditorDoc ƒVƒŠƒAƒ‰ƒCƒ[[ƒVƒ‡ƒ“
+// CSuperTagEditorDoc ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚¼ãƒ¼ã‚·ãƒ§ãƒ³
 
 void CSuperTagEditorDoc::Serialize(CArchive& ar)
 {
@@ -154,7 +154,7 @@ void CSuperTagEditorDoc::Serialize(CArchive& ar)
 }
 
 /////////////////////////////////////////////////////////////////////////////
-// CSuperTagEditorDoc ƒNƒ‰ƒX‚Ìf’f
+// CSuperTagEditorDoc ã‚¯ãƒ©ã‚¹ã®è¨ºæ–­
 
 #ifdef _DEBUG
 void CSuperTagEditorDoc::AssertValid() const
@@ -169,15 +169,15 @@ void CSuperTagEditorDoc::Dump(CDumpContext& dc) const
 #endif //_DEBUG
 
 /////////////////////////////////////////////////////////////////////////////
-// CSuperTagEditorDoc ƒRƒ}ƒ“ƒh
+// CSuperTagEditorDoc ã‚³ãƒãƒ³ãƒ‰
 //****************************************************************************
-//                              ƒtƒ@ƒCƒ‹ŒŸõˆ—ŠÖ˜A
+//                              ãƒ•ã‚¡ã‚¤ãƒ«æ¤œç´¢å‡¦ç†é–¢é€£
 //****************************************************************************
 // =============================================
 // CSuperTagEditorDoc::GetFileTime
-// ŠT—v  : ƒtƒ@ƒCƒ‹‚Ìƒ^ƒCƒ€ƒXƒ^ƒ“ƒv‚ğæ“¾
-// ˆø”  : sFileName    = ƒtƒ@ƒCƒ‹–¼
-// –ß‚è’l: CTime        = ƒ^ƒCƒ€ƒXƒ^ƒ“ƒv(CTime(0):ƒGƒ‰[)
+// æ¦‚è¦  : ãƒ•ã‚¡ã‚¤ãƒ«ã®ã‚¿ã‚¤ãƒ ã‚¹ã‚¿ãƒ³ãƒ—ã‚’å–å¾—
+// å¼•æ•°  : sFileName    = ãƒ•ã‚¡ã‚¤ãƒ«å
+// æˆ»ã‚Šå€¤: CTime        = ã‚¿ã‚¤ãƒ ã‚¹ã‚¿ãƒ³ãƒ—(CTime(0):ã‚¨ãƒ©ãƒ¼)
 // =============================================
 CTime CSuperTagEditorDoc::GetFileTime(const TCHAR *sFileName)
 {
@@ -198,27 +198,27 @@ CTime CSuperTagEditorDoc::GetFileTime(const TCHAR *sFileName)
 
 // =============================================
 // CSuperTagEditorDoc::AddRequestFile
-// ŠT—v  : ƒtƒ@ƒCƒ‹’Ç‰ÁƒŠƒNƒGƒXƒgƒŠƒXƒg‚Éƒtƒ@ƒCƒ‹‚ğ’Ç‰Á‚·‚é
-// ˆø”  : sFillPath        = ƒtƒ‹ƒpƒX–¼
-//       : pParent          = eƒAƒCƒeƒ€(NULL‚à‰Â)
-// –ß‚è’l: int              = ƒCƒ“ƒfƒbƒNƒX(’Ç‰Á‚µ‚È‚©‚Á‚½ê‡‚Í-1‚ğ•Ô‚·)
+// æ¦‚è¦  : ãƒ•ã‚¡ã‚¤ãƒ«è¿½åŠ ãƒªã‚¯ã‚¨ã‚¹ãƒˆãƒªã‚¹ãƒˆã«ãƒ•ã‚¡ã‚¤ãƒ«ã‚’è¿½åŠ ã™ã‚‹
+// å¼•æ•°  : sFillPath        = ãƒ•ãƒ«ãƒ‘ã‚¹å
+//       : pParent          = è¦ªã‚¢ã‚¤ãƒ†ãƒ (NULLã‚‚å¯)
+// æˆ»ã‚Šå€¤: int              = ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹(è¿½åŠ ã—ãªã‹ã£ãŸå ´åˆã¯-1ã‚’è¿”ã™)
 // =============================================
 int CSuperTagEditorDoc::AddRequestFile(const TCHAR *sFillPath, CSuperGridCtrl::CTreeItem *pParent)
 {
-    //’Ç‰Á by Kobarin
-    if(IsTagUpdating())//ƒ^ƒO‚ğXV’†‚Í’Ç‰Á‚µ‚È‚¢
+    //è¿½åŠ  by Kobarin
+    if(IsTagUpdating())//ã‚¿ã‚°ã‚’æ›´æ–°ä¸­ã¯è¿½åŠ ã—ãªã„
         return -1;
     if(m_dlgLoadProgress->IsCanceled()){
-        //ƒLƒƒƒ“ƒZƒ‹ƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚Ä‚¢‚é
+        //ã‚­ãƒ£ãƒ³ã‚»ãƒ«ãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚Œã¦ã„ã‚‹
         return -1;
     }
 
     FILE_STATE  stat;
     stat.strFullPathName = sFillPath;
     stat.pParent = pParent;
-    // ”z—ñ‚É’Ç‰Á
+    // é…åˆ—ã«è¿½åŠ 
     if (m_nArrayRequestFileCount > m_arrayRequestFiles.GetUpperBound()) {
-        // ”z—ñ‚ª‘«‚è‚È‚¢ê‡‚ÍAŠm•ÛƒTƒCƒY‚ğ‘‰Á‚³‚¹‚é
+        // é…åˆ—ãŒè¶³ã‚Šãªã„å ´åˆã¯ã€ç¢ºä¿ã‚µã‚¤ã‚ºã‚’å¢—åŠ ã•ã›ã‚‹
         m_arrayRequestFiles.SetSize(m_arrayRequestFiles.GetUpperBound() + ADD_ARRAY_SIZE);
     }
 
@@ -231,33 +231,33 @@ void CSuperTagEditorDoc::StartLoadFile(const TCHAR *sTitle)
 {
     //try{
     //by Kobarin
-    //‚È‚º‚© Debug Assersion Failed ‚ª”­¶‚·‚é‚±‚Æ‚ª‚ ‚é‚Ì‚Å‚²‚Ü‚©‚·
-    //‰EƒNƒŠƒbƒN->•W€MP3Œ`®‚É•ÏŠ·Às‚È‚Ç‚É”­¶
-    //Œ´ˆö•s–¾
+    //ãªãœã‹ Debug Assersion Failed ãŒç™ºç”Ÿã™ã‚‹ã“ã¨ãŒã‚ã‚‹ã®ã§ã”ã¾ã‹ã™
+    //å³ã‚¯ãƒªãƒƒã‚¯->æ¨™æº–MP3å½¢å¼ã«å¤‰æ›å®Ÿè¡Œæ™‚ãªã©ã«ç™ºç”Ÿ
+    //åŸå› ä¸æ˜
     if (m_dlgLoadProgress->GetSafeHwnd() == NULL) {
-        // ƒvƒƒOƒŒƒXƒo[‚ğ¶¬
+        // ãƒ—ãƒ­ã‚°ãƒ¬ã‚¹ãƒãƒ¼ã‚’ç”Ÿæˆ
 //      m_dlgLoadProgress = new CDlgCommonProgress;
         if(m_dlgLoadProgress->Create(AfxGetMainWnd())){
             m_dlgLoadProgress->SetWindowText(sTitle);
             UpdateAllViews(NULL);
         }
     }
-    m_dlgLoadProgress->SetDlgItemText(IDC_ST_MESSAGE, _T("ƒtƒ@ƒCƒ‹ŒŸõ’†..."));
+    m_dlgLoadProgress->SetDlgItemText(IDC_ST_MESSAGE, _T("ãƒ•ã‚¡ã‚¤ãƒ«æ¤œç´¢ä¸­..."));
     //}catch(...){
 //#ifdef _DEBUG
 //        MessageBox(NULL, _T("StartLoadFile"), _T("error"), MB_OK);
 //#endif
 //    }
-    m_StartLoadFileCount++;//’Ç‰Á by Kobarin
+    m_StartLoadFileCount++;//è¿½åŠ  by Kobarin
 
 }
 
 void CSuperTagEditorDoc::EndLoadFile(void)
 {
-    if(--m_StartLoadFileCount > 0)return;//’Ç‰Á by Kobarin
+    if(--m_StartLoadFileCount > 0)return;//è¿½åŠ  by Kobarin
     if (m_dlgLoadProgress->GetSafeHwnd() != NULL) {
         m_dlgLoadProgress->DestroyWindow();
-        m_dlgLoadProgress->SetCanceled(FALSE);//’Ç‰Á by Kobarin
+        m_dlgLoadProgress->SetCanceled(FALSE);//è¿½åŠ  by Kobarin
 //      delete  m_dlgLoadProgress;
 //      m_dlgLoadProgress = NULL;
     }
@@ -265,14 +265,14 @@ void CSuperTagEditorDoc::EndLoadFile(void)
 
 // =============================================
 // CSuperTagEditorDoc::ExecRequestFiles
-// ŠT—v  : ’Ç‰ÁƒŠƒNƒGƒXƒgƒŠƒXƒg‚Ìƒtƒ@ƒCƒ‹‚ğˆ—‚·‚é
-// ˆø”  : bListClear       = ’Ç‰Áˆ—I—¹Œã‚É’Ç‰ÁƒŠƒNƒGƒXƒg‚ÌƒŠƒXƒg‚ğƒNƒŠƒA‚·‚é‚©H
-//       : bCheck           = ƒ`ƒFƒbƒNƒ}[ƒN‚ğ•t‚¯‚é‚©‚Ç‚¤‚©
-// –ß‚è’l: none
+// æ¦‚è¦  : è¿½åŠ ãƒªã‚¯ã‚¨ã‚¹ãƒˆãƒªã‚¹ãƒˆã®ãƒ•ã‚¡ã‚¤ãƒ«ã‚’å‡¦ç†ã™ã‚‹
+// å¼•æ•°  : bListClear       = è¿½åŠ å‡¦ç†çµ‚äº†å¾Œã«è¿½åŠ ãƒªã‚¯ã‚¨ã‚¹ãƒˆã®ãƒªã‚¹ãƒˆã‚’ã‚¯ãƒªã‚¢ã™ã‚‹ã‹ï¼Ÿ
+//       : bCheck           = ãƒã‚§ãƒƒã‚¯ãƒãƒ¼ã‚¯ã‚’ä»˜ã‘ã‚‹ã‹ã©ã†ã‹
+// æˆ»ã‚Šå€¤: none
 // =============================================
 void CSuperTagEditorDoc::ExecRequestFiles(bool bListClear, bool bCheck)
 {
-    m_dlgLoadProgress->SetDlgItemText(IDC_ST_MESSAGE, _T("ƒ^ƒOî•ñ‚Ì“Ç‚İ‚İ’†..."));
+    m_dlgLoadProgress->SetDlgItemText(IDC_ST_MESSAGE, _T("ã‚¿ã‚°æƒ…å ±ã®èª­ã¿è¾¼ã¿ä¸­..."));
 
 //  CMySuperGrid    &listCtrl = GetListCtrl();
 //  listCtrl.SetRedraw(FALSE);
@@ -280,17 +280,17 @@ void CSuperTagEditorDoc::ExecRequestFiles(bool bListClear, bool bCheck)
     //int       nFileCount = m_nArrayFileCount; /* STEP 015 */
     for (int no = 0; no < m_nArrayRequestFileCount; no++) {
         int     nFileCount = m_nArrayFileCount; /* STEP 015 */
-        // ƒvƒƒOƒŒƒXƒo[XV
+        // ãƒ—ãƒ­ã‚°ãƒ¬ã‚¹ãƒãƒ¼æ›´æ–°
         if (m_nArrayRequestFileCount > 1) {
             m_dlgLoadProgress->SetPos(no * 100 / (m_nArrayRequestFileCount-1));
         }
-        // ’Ç‰Á by Kobarin
+        // è¿½åŠ  by Kobarin
         if(m_dlgLoadProgress->IsCanceled()){
-            //ƒLƒƒƒ“ƒZƒ‹ƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚Ä‚¢‚½
+            //ã‚­ãƒ£ãƒ³ã‚»ãƒ«ãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚Œã¦ã„ãŸ
             break;
         }
 
-        // ‘½d“o˜^ƒ`ƒFƒbƒN
+        // å¤šé‡ç™»éŒ²ãƒã‚§ãƒƒã‚¯
         if (nFileCount > 0) {
             bool    bFound = false;
             CString *strFileName = &m_arrayRequestFiles[no].strFullPathName;
@@ -301,11 +301,11 @@ void CSuperTagEditorDoc::ExecRequestFiles(bool bListClear, bool bCheck)
                 }
             }
             if (bFound == false) {
-                // ‚l‚o‚Rƒtƒ@ƒCƒ‹î•ñ‚Ìæ“¾
+                // ï¼­ï¼°ï¼“ãƒ•ã‚¡ã‚¤ãƒ«æƒ…å ±ã®å–å¾—
                 FoundFile(*strFileName, m_arrayRequestFiles[no].pParent, bCheck);
             }
         } else {
-            // ‚l‚o‚Rƒtƒ@ƒCƒ‹î•ñ‚Ìæ“¾
+            // ï¼­ï¼°ï¼“ãƒ•ã‚¡ã‚¤ãƒ«æƒ…å ±ã®å–å¾—
             FoundFile(m_arrayRequestFiles[no].strFullPathName, m_arrayRequestFiles[no].pParent, bCheck);
         }
 
@@ -322,7 +322,7 @@ void CSuperTagEditorDoc::ExecRequestFiles(bool bListClear, bool bCheck)
         listCtrl.CalcSum(0);
     }
 
-    // ƒJƒ‰ƒ€•‚Ì©“®’²®
+    // ã‚«ãƒ©ãƒ å¹…ã®è‡ªå‹•èª¿æ•´
     if (g_bOptLoadFileAdjustColumn) {
         CMySuperGrid    &listCtrl = GetListCtrl();
         listCtrl.AutoSizeColumns(-1);
@@ -331,9 +331,9 @@ void CSuperTagEditorDoc::ExecRequestFiles(bool bListClear, bool bCheck)
 
 // =============================================
 // CSuperTagEditorDoc::ClearRequestFiles
-// ŠT—v  : ’Ç‰ÁƒŠƒNƒGƒXƒgƒtƒ@ƒCƒ‹ƒŠƒXƒg‚Ì‰Šú‰»
-// ˆø”  : none
-// –ß‚è’l: none
+// æ¦‚è¦  : è¿½åŠ ãƒªã‚¯ã‚¨ã‚¹ãƒˆãƒ•ã‚¡ã‚¤ãƒ«ãƒªã‚¹ãƒˆã®åˆæœŸåŒ–
+// å¼•æ•°  : none
+// æˆ»ã‚Šå€¤: none
 // =============================================
 void CSuperTagEditorDoc::ClearRequestFiles(void)
 {
@@ -344,16 +344,16 @@ void CSuperTagEditorDoc::ClearRequestFiles(void)
 
 // =============================================
 // CSuperTagEditorDoc::LoadPlayList
-// ŠT—v  : ƒvƒŒƒCƒŠƒXƒg‚ğ“Ç‚İ‚±‚İ‚Ü‚·
-// ˆø”  : sPlayList    = ƒvƒŒƒCƒŠƒXƒgƒtƒ@ƒCƒ‹–¼(â‘ÎƒpƒX‚Åw’è)
-// –ß‚è’l: bool         = true:³íI—¹ / false:ƒGƒ‰[
+// æ¦‚è¦  : ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆã‚’èª­ã¿ã“ã¿ã¾ã™
+// å¼•æ•°  : sPlayList    = ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆãƒ•ã‚¡ã‚¤ãƒ«å(çµ¶å¯¾ãƒ‘ã‚¹ã§æŒ‡å®š)
+// æˆ»ã‚Šå€¤: bool         = true:æ­£å¸¸çµ‚äº† / false:ã‚¨ãƒ©ãƒ¼
 // =============================================
 bool CSuperTagEditorDoc::LoadPlayList(const TCHAR *sPlayList)
 {
     TRY {
         CFile   file;
 
-        // ƒvƒŒƒCƒŠƒXƒgƒtƒ@ƒCƒ‹‚ÌƒJƒŒƒ“ƒgƒfƒBƒŒƒNƒgƒŠ‚ğæ“¾
+        // ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆãƒ•ã‚¡ã‚¤ãƒ«ã®ã‚«ãƒ¬ãƒ³ãƒˆãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’å–å¾—
         TCHAR   drive[_MAX_DRIVE], dir[_MAX_DIR], ext[_MAX_EXT];
         _tsplitpath_s(sPlayList, drive, _MAX_DRIVE, dir, _MAX_DIR, NULL, 0, ext, _MAX_EXT);
         int nUtf8 = _tcsicmp(ext, _T(".m3u8")) == 0;
@@ -363,19 +363,19 @@ bool CSuperTagEditorDoc::LoadPlayList(const TCHAR *sPlayList)
             while(ar.ReadString(strLine)) {
                 if (strLine.GetLength() >= 3) {
                     if (strLine[0] != _T('#')) {
-                        // ƒŠƒXƒg‚É’Ç‰Á
+                        // ãƒªã‚¹ãƒˆã«è¿½åŠ 
                         if ((strLine[0] == _T('\\') && strLine[1] == _T('\\'))
                         ||  strLine[1] == _T(':')) {
-                            // â‘ÎƒpƒX
+                            // çµ¶å¯¾ãƒ‘ã‚¹
                             AddRequestFile(strLine, NULL);
                         } else {
-                            // ‘Š‘ÎƒpƒX
+                            // ç›¸å¯¾ãƒ‘ã‚¹
                             CString strName;
                             if (strLine[0] == '\\') {
-                                // ƒhƒ‰ƒCƒu–¼–³‚µ‚Ìƒ‹[ƒgw’è
+                                // ãƒ‰ãƒ©ã‚¤ãƒ–åç„¡ã—ã®ãƒ«ãƒ¼ãƒˆæŒ‡å®š
                                 strName.Format(_T("%s%s"), drive, strLine);
                             } else {
-                                // ƒ‹[ƒgˆÈŠO
+                                // ãƒ«ãƒ¼ãƒˆä»¥å¤–
                                 strName.Format(_T("%s%s%s"), drive, dir, strLine);
                             }
                             AddRequestFile(strName, NULL);
@@ -385,12 +385,12 @@ bool CSuperTagEditorDoc::LoadPlayList(const TCHAR *sPlayList)
             }
 */
             LONGLONG size = file.GetLength();
-            if(size > 32 * 1024 * 1024){//ƒTƒCƒY‚ª‘å‚«‚·‚¬
+            if(size > 32 * 1024 * 1024){//ã‚µã‚¤ã‚ºãŒå¤§ãã™ã
                 size = 32 * 1024 * 1024;
             }
             BYTE *pBuffer = (BYTE*)malloc(size+3);
             size = file.Read(pBuffer, size);
-            //conv_data_to_tstr “à‚Å‚Ìƒoƒbƒtƒ@‚ÌÄŠm•Û‚ğ‰ñ”ğ‚·‚é‚½‚ßAI’[‚ª 0 ‚ÅI‚í‚é‚æ‚¤‚É‚µ‚Ä‚¨‚­
+            //conv_data_to_tstr å†…ã§ã®ãƒãƒƒãƒ•ã‚¡ã®å†ç¢ºä¿ã‚’å›é¿ã™ã‚‹ãŸã‚ã€çµ‚ç«¯ãŒ 0 ã§çµ‚ã‚ã‚‹ã‚ˆã†ã«ã—ã¦ãŠã
             pBuffer[size] = pBuffer[size+1] = pBuffer[size+2] = 0;
             void *pFree;
             TCHAR *line = conv_data_to_tstr(pBuffer, size + 3, &pFree);
@@ -398,19 +398,19 @@ bool CSuperTagEditorDoc::LoadPlayList(const TCHAR *sPlayList)
             while(_tcstok_s(line, _T("\r\n"), &next)){
                 StrTrim(line, _T("\r\n \t"));
                 if(*line && *line != _T('#')){
-                    //ƒŠƒXƒg‚É’Ç‰Á
+                    //ãƒªã‚¹ãƒˆã«è¿½åŠ 
                     if ((line[0] == _T('\\') && line[1] == _T('\\'))
                         ||  line[1] == _T(':')) {
-                        // â‘ÎƒpƒX
+                        // çµ¶å¯¾ãƒ‘ã‚¹
                         AddRequestFile(line, NULL);
                     } else {
-                        // ‘Š‘ÎƒpƒX
+                        // ç›¸å¯¾ãƒ‘ã‚¹
                         CString strName;
                         if (line[0] == _T('\\')) {
-                            // ƒhƒ‰ƒCƒu–¼–³‚µ‚Ìƒ‹[ƒgw’è
+                            // ãƒ‰ãƒ©ã‚¤ãƒ–åç„¡ã—ã®ãƒ«ãƒ¼ãƒˆæŒ‡å®š
                             strName.Format(_T("%s%s"), drive, line);
                         } else {
-                            // ƒ‹[ƒgˆÈŠO
+                            // ãƒ«ãƒ¼ãƒˆä»¥å¤–
                             strName.Format(_T("%s%s%s"), drive, dir, line);
                         }
                         AddRequestFile(strName, NULL);
@@ -426,8 +426,8 @@ bool CSuperTagEditorDoc::LoadPlayList(const TCHAR *sPlayList)
     }
     CATCH( CFileException, e) {
         CString str;
-        str.Format(_T("%s ‚Ì“Ç‚İ‚İ‚É¸”s‚µ‚Ü‚µ‚½"), sPlayList);
-        MessageBox(NULL, str, _T("ƒtƒ@ƒCƒ‹ƒGƒ‰["), MB_ICONSTOP|MB_OK|MB_TOPMOST);
+        str.Format(_T("%s ã®èª­ã¿è¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ"), sPlayList);
+        MessageBox(NULL, str, _T("ãƒ•ã‚¡ã‚¤ãƒ«ã‚¨ãƒ©ãƒ¼"), MB_ICONSTOP|MB_OK|MB_TOPMOST);
     }
     END_CATCH
 
@@ -436,43 +436,43 @@ bool CSuperTagEditorDoc::LoadPlayList(const TCHAR *sPlayList)
 
 // =============================================
 // CSuperTagEditorDoc::FoundFile
-// ŠT—v  : ƒtƒ@ƒCƒ‹ŒŸõFƒtƒ@ƒCƒ‹‚ğ”­Œ©
-// ˆø”  : sFileName    = ƒtƒ@ƒCƒ‹–¼
-//       : pItemParent  = eƒAƒCƒeƒ€(NULL=ƒ‹[ƒg)
-//       : bCheck       = ƒ`ƒFƒbƒNƒ}[ƒN‚ğ•t‚¯‚é‚©‚Ç‚¤‚©
-// –ß‚è’l: bool         = true:³íI—¹ / false:ˆÙíI—¹
+// æ¦‚è¦  : ãƒ•ã‚¡ã‚¤ãƒ«æ¤œç´¢ï¼šãƒ•ã‚¡ã‚¤ãƒ«ã‚’ç™ºè¦‹
+// å¼•æ•°  : sFileName    = ãƒ•ã‚¡ã‚¤ãƒ«å
+//       : pItemParent  = è¦ªã‚¢ã‚¤ãƒ†ãƒ (NULL=ãƒ«ãƒ¼ãƒˆ)
+//       : bCheck       = ãƒã‚§ãƒƒã‚¯ãƒãƒ¼ã‚¯ã‚’ä»˜ã‘ã‚‹ã‹ã©ã†ã‹
+// æˆ»ã‚Šå€¤: bool         = true:æ­£å¸¸çµ‚äº† / false:ç•°å¸¸çµ‚äº†
 // =============================================
 bool CSuperTagEditorDoc::FoundFile(const TCHAR *sFileName, CSuperGridCtrl::CTreeItem *pItemParent, bool bCheck)
 {
-    // ‚l‚o‚Rƒtƒ@ƒCƒ‹î•ñ‚Ìæ“¾
+    // ï¼­ï¼°ï¼“ãƒ•ã‚¡ã‚¤ãƒ«æƒ…å ±ã®å–å¾—
     CFileMP3    fileMP3;
     if (fileMP3.Attach(sFileName)) {
         int     nIndex = m_nArrayFileCount;
 
-        // ”z—ñ‚É’Ç‰Á
+        // é…åˆ—ã«è¿½åŠ 
         if (m_nArrayFileCount > m_arrayFiles.GetUpperBound()) {
-            // ”z—ñ‚ª‘«‚è‚È‚¢ê‡‚ÍAŠm•ÛƒTƒCƒY‚ğ‘‰Á‚³‚¹‚é
+            // é…åˆ—ãŒè¶³ã‚Šãªã„å ´åˆã¯ã€ç¢ºä¿ã‚µã‚¤ã‚ºã‚’å¢—åŠ ã•ã›ã‚‹
             m_arrayFiles.SetSize(m_arrayFiles.GetUpperBound() + ADD_ARRAY_SIZE);
         }
         m_arrayFiles[m_nArrayFileCount] = fileMP3.m_fileMP3;
         m_nArrayFileCount++;
 
-        // ƒŠƒXƒgƒRƒ“ƒgƒ[ƒ‹‚ğæ“¾
+        // ãƒªã‚¹ãƒˆã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã‚’å–å¾—
         CMySuperGrid    &listCtrl = GetListCtrl();
         if (g_classInfo.nType == 0) {
-            // ƒtƒHƒ‹ƒ_‚Å•ª—Ş
+            // ãƒ•ã‚©ãƒ«ãƒ€ã§åˆ†é¡
             listCtrl.AddFile(GetListMP3(nIndex), pItemParent, (LPARAM)nIndex, bCheck);
         } else {
-            // ƒ^ƒOî•ñ‚Å•ª—Ş
+            // ã‚¿ã‚°æƒ…å ±ã§åˆ†é¡
             listCtrl.AddFile2(GetListMP3(nIndex), pItemParent, (LPARAM)nIndex, bCheck);
         }
 
         return(true);
     } else {
         CString strMessage;
-        strMessage.Format(_T("%s ‚Ì“Ç‚İ‚İ‚É¸”s‚µ‚Ü‚µ‚½"), sFileName);
-        //MessageBox(NULL, strMessage, "ƒtƒ@ƒCƒ‹“Ç‚İ‚İƒGƒ‰[", MB_ICONSTOP|MB_OK|MB_TOPMOST);
-        ((CMainFrame *)AfxGetMainWnd())->SetStatusBarText(strMessage);  // ƒXƒe[ƒ^ƒXƒo[‚ÉƒGƒ‰[‚ğ•\¦
+        strMessage.Format(_T("%s ã®èª­ã¿è¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ"), sFileName);
+        //MessageBox(NULL, strMessage, "ãƒ•ã‚¡ã‚¤ãƒ«èª­ã¿è¾¼ã¿ã‚¨ãƒ©ãƒ¼", MB_ICONSTOP|MB_OK|MB_TOPMOST);
+        ((CMainFrame *)AfxGetMainWnd())->SetStatusBarText(strMessage);  // ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ãƒãƒ¼ã«ã‚¨ãƒ©ãƒ¼ã‚’è¡¨ç¤º
     }
 
     return(false);
@@ -480,14 +480,14 @@ bool CSuperTagEditorDoc::FoundFile(const TCHAR *sFileName, CSuperGridCtrl::CTree
 
 // =============================================
 // CSuperTagEditorDoc::SearchFileReent
-// ŠT—v  : ƒtƒ@ƒCƒ‹ŒŸõFŒŸõˆ—
-// ˆø”  : sDir     = ŒŸõ‚·‚éƒfƒBƒŒƒNƒgƒŠ
-//       : pItemDir = ƒfƒBƒŒƒNƒgƒŠƒAƒCƒeƒ€(NULL=ƒ‹[ƒg)
-// –ß‚è’l: bool     = true:³íI—¹ / false:ˆÙíI—¹
+// æ¦‚è¦  : ãƒ•ã‚¡ã‚¤ãƒ«æ¤œç´¢ï¼šæ¤œç´¢å‡¦ç†
+// å¼•æ•°  : sDir     = æ¤œç´¢ã™ã‚‹ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª
+//       : pItemDir = ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚¢ã‚¤ãƒ†ãƒ (NULL=ãƒ«ãƒ¼ãƒˆ)
+// æˆ»ã‚Šå€¤: bool     = true:æ­£å¸¸çµ‚äº† / false:ç•°å¸¸çµ‚äº†
 // =============================================
 bool CSuperTagEditorDoc::SearchFileReent(const TCHAR *sDir, CSuperGridCtrl::CTreeItem *pItemDir)
 {
-    //’Ç‰Á by Kobarin
+    //è¿½åŠ  by Kobarin
     if(m_dlgLoadProgress->IsCanceled()){
         return true;
     }
@@ -496,21 +496,21 @@ bool CSuperTagEditorDoc::SearchFileReent(const TCHAR *sDir, CSuperGridCtrl::CTre
     WIN32_FIND_DATA data;
     TCHAR   *sCurFile = new TCHAR [MAX_PATH + 1];
 
-    if (sCurFile == NULL) return(false);    // Š„‚è“–‚Ä¸”s
+    if (sCurFile == NULL) return(false);    // å‰²ã‚Šå½“ã¦å¤±æ•—
 
-    // ŒŸõŠJnƒfƒBƒŒƒNƒgƒŠ‚Ìê‡‚Ìˆ—
+    // æ¤œç´¢é–‹å§‹ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã®å ´åˆã®å‡¦ç†
     if (pItemDir == NULL) {
-        // ƒ‹[ƒg‚ÉƒfƒBƒŒƒNƒgƒŠƒAƒCƒeƒ€’Ç‰Á
+        // ãƒ«ãƒ¼ãƒˆã«ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚¢ã‚¤ãƒ†ãƒ è¿½åŠ 
         if (g_classInfo.nType == 0) {
-            // ƒtƒHƒ‹ƒ_‚Å•ª—Ş
+            // ãƒ•ã‚©ãƒ«ãƒ€ã§åˆ†é¡
             CMySuperGrid    &listCtrl = GetListCtrl();
 //          pItemDir = listCtrl.AddDirectory(sDir, listCtrl.m_itemClassOK, 0);
             pItemDir = listCtrl.m_pItemRoot;
         }
     }
 
-    // “¯ˆêƒfƒBƒŒƒNƒgƒŠ‚Ì‘S‚Ä‚Ìƒtƒ@ƒCƒ‹‚ğŒŸõ
-    // ƒTƒuƒfƒBƒŒƒNƒgƒŠ‚ÌŒŸõ‚Ís‚í‚È‚¢
+    // åŒä¸€ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã®å…¨ã¦ã®ãƒ•ã‚¡ã‚¤ãƒ«ã‚’æ¤œç´¢
+    // ã‚µãƒ–ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã®æ¤œç´¢ã¯è¡Œã‚ãªã„
     //static    char    *sFindPattern[] = {
     //  "*.rmp", "*.mp3", "*.ape", "*.wma", "*.wmv", "*.asf", "*.ogg"/* Conspiracy 196 */, "*.wav"/* Conspiracy 197 */, "*.avi"/* Conspiracy 197 */, NULL,
     //};
@@ -518,22 +518,22 @@ bool CSuperTagEditorDoc::SearchFileReent(const TCHAR *sDir, CSuperGridCtrl::CTre
     CStringArray arExt;
     GetFileExtList(arExt);
     for (int nType = 0; nType < arExt.GetSize() ; nType++) {
-        // ŒŸõƒtƒ@ƒCƒ‹‚Ìƒpƒ^[ƒ“‚ğİ’è
+        // æ¤œç´¢ãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ‘ã‚¿ãƒ¼ãƒ³ã‚’è¨­å®š
         _sntprintf_s(sCurFile, MAX_PATH, _TRUNCATE, _T("%s%s"), sDir, (LPCTSTR)CString(_T("*.") + arExt[nType]));
 
-        // ƒtƒ@ƒCƒ‹ŒŸõ
+        // ãƒ•ã‚¡ã‚¤ãƒ«æ¤œç´¢
         if ((hFindFile = FindFirstFile(sCurFile, &data)) != INVALID_HANDLE_VALUE) {
             do {
-                m_dlgLoadProgress->SetPos(0);//’Ç‰Á by Kobarin
+                m_dlgLoadProgress->SetPos(0);//è¿½åŠ  by Kobarin
                 if(m_dlgLoadProgress->IsCanceled()){
                     break;
                 }
                 if ((data.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) == 0) {
-                    // ƒfƒBƒŒƒNƒgƒŠ•t‚«ƒtƒ@ƒCƒ‹–¼ì¬
+                    // ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªä»˜ããƒ•ã‚¡ã‚¤ãƒ«åä½œæˆ
                     _tcsncpy_s(sCurFile, MAX_PATH, sDir, _TRUNCATE);
                     _tcsncat_s(sCurFile, MAX_PATH, data.cFileName, _TRUNCATE);
                     //m_sTargetFile = sCurFile;
-                    // ƒtƒ@ƒCƒ‹”­Œ©ˆ—
+                    // ãƒ•ã‚¡ã‚¤ãƒ«ç™ºè¦‹å‡¦ç†
                     AddRequestFile(/*m_sTargetFile*/sCurFile, pItemDir);
                 }
             } while(FindNextFile(hFindFile, &data));
@@ -541,41 +541,41 @@ bool CSuperTagEditorDoc::SearchFileReent(const TCHAR *sDir, CSuperGridCtrl::CTre
         if (hFindFile != INVALID_HANDLE_VALUE) FindClose(hFindFile);
     }
 
-    if (g_bEnableSearchSubDir) {    // ƒTƒuƒfƒBƒŒƒNƒgƒŠ‚ÌŒŸõ
+    if (g_bEnableSearchSubDir) {    // ã‚µãƒ–ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã®æ¤œç´¢
         _sntprintf_s(sCurFile, MAX_PATH, _TRUNCATE, _T("%s*.*"), sDir);
         if ((hFindFile = FindFirstFile(sCurFile, &data)) != INVALID_HANDLE_VALUE) {
             do {
-                m_dlgLoadProgress->SetPos(0);//’Ç‰Á by Kobarin
+                m_dlgLoadProgress->SetPos(0);//è¿½åŠ  by Kobarin
                 if(m_dlgLoadProgress->IsCanceled()){
                     break;
                 }
                 if ((data.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) != 0) {
-                    if (_tcscmp(data.cFileName, _T(".") ) != 0      // ƒJƒŒƒ“ƒgƒfƒBƒŒƒNƒgƒŠˆÈŠO
-                    &&  _tcscmp(data.cFileName, _T("..")) != 0      // eƒfƒBƒŒƒNƒgƒŠˆÈŠO
-                    && (data.dwFileAttributes & FILE_ATTRIBUTE_HIDDEN) == 0/* STEP 032 */) { // ‰B‚µƒtƒHƒ‹ƒ_ˆÈŠO
-                        // ƒfƒBƒŒƒNƒgƒŠ•t‚«ƒtƒ@ƒCƒ‹–¼ì¬
+                    if (_tcscmp(data.cFileName, _T(".") ) != 0      // ã‚«ãƒ¬ãƒ³ãƒˆãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªä»¥å¤–
+                    &&  _tcscmp(data.cFileName, _T("..")) != 0      // è¦ªãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªä»¥å¤–
+                    && (data.dwFileAttributes & FILE_ATTRIBUTE_HIDDEN) == 0/* STEP 032 */) { // éš ã—ãƒ•ã‚©ãƒ«ãƒ€ä»¥å¤–
+                        // ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªä»˜ããƒ•ã‚¡ã‚¤ãƒ«åä½œæˆ
                         _tcsncpy_s(sCurFile, MAX_PATH, sDir, _TRUNCATE);
                         _tcsncat_s(sCurFile, MAX_PATH, data.cFileName, _TRUNCATE);
                         //m_sTargetFile = sCurFile;
-                        // ƒcƒŠ[‚ÉƒfƒBƒŒƒNƒgƒŠƒAƒCƒeƒ€’Ç‰Á
+                        // ãƒ„ãƒªãƒ¼ã«ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚¢ã‚¤ãƒ†ãƒ è¿½åŠ 
                         CSuperGridCtrl::CTreeItem   *pItemSubDir = NULL;
                         if (g_classInfo.nType == 0) {
-                            // ƒtƒHƒ‹ƒ_‚Å•ª—Ş
+                            // ãƒ•ã‚©ãƒ«ãƒ€ã§åˆ†é¡
                             CMySuperGrid    &listCtrl = GetListCtrl();
                             pItemSubDir = listCtrl.AddDirectory(data.cFileName, pItemDir);
                         }
-                        // ƒTƒuƒfƒBƒŒƒNƒgƒŠ“Ë“üˆ—
+                        // ã‚µãƒ–ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªçªå…¥å‡¦ç†
                         _tcsncat_s(sCurFile, MAX_PATH, _T("\\"), _TRUNCATE);
                         if (!SearchFileReent(sCurFile, pItemSubDir)) {
-                            break;              // ƒTƒuƒfƒBƒŒƒNƒgƒŠŒŸõƒGƒ‰[
+                            break;              // ã‚µãƒ–ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªæ¤œç´¢ã‚¨ãƒ©ãƒ¼
                         }
                         sCurFile[_tcslen(sCurFile)-1] = NULL;
-                        //m_sTargetFile = sCurFile;   // ƒTƒuƒfƒBƒŒƒNƒgƒŠ‚Ìˆ—‚ª“ü‚é‚Ì‚ÅÄİ’è
+                        //m_sTargetFile = sCurFile;   // ã‚µãƒ–ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã®å‡¦ç†ãŒå…¥ã‚‹ã®ã§å†è¨­å®š
                     }
                 }
             } while(FindNextFile(hFindFile, &data));
         }
-        if (hFindFile != INVALID_HANDLE_VALUE) FindClose(hFindFile); /* 2004.02.18 ‚±‚Á‚¿‚ÉˆÚ“® */
+        if (hFindFile != INVALID_HANDLE_VALUE) FindClose(hFindFile); /* 2004.02.18 ã“ã£ã¡ã«ç§»å‹• */
     }
 
     delete[] sCurFile;
@@ -585,9 +585,9 @@ bool CSuperTagEditorDoc::SearchFileReent(const TCHAR *sDir, CSuperGridCtrl::CTre
 
 // =============================================
 // CSenkyokuMeijinDoc::SelectDirectory
-// ŠT—v  : ƒtƒHƒ‹ƒ_QÆƒ_ƒCƒAƒƒOˆ—
-// ˆø”  : sLocal           = ƒpƒX(“üo—Í)
-// –ß‚è’l: bool
+// æ¦‚è¦  : ãƒ•ã‚©ãƒ«ãƒ€å‚ç…§ãƒ€ã‚¤ã‚¢ãƒ­ã‚°å‡¦ç†
+// å¼•æ•°  : sLocal           = ãƒ‘ã‚¹(å…¥å‡ºåŠ›)
+// æˆ»ã‚Šå€¤: bool
 // =============================================
 BOOL CSuperTagEditorDoc::SelectDirectory(TCHAR *sLocal, int size)
 {
@@ -600,34 +600,34 @@ BOOL CSuperTagEditorDoc::SelectDirectory(TCHAR *sLocal, int size)
 
 void CSuperTagEditorDoc::OpenFolder(const TCHAR *sOpenDir)
 {
-    //’Ç‰Á by Kobarin
-    if(IsTagUpdating())//ƒ^ƒO‚ğXV’†‚Í’Ç‰Á‚µ‚È‚¢
+    //è¿½åŠ  by Kobarin
+    if(IsTagUpdating())//ã‚¿ã‚°ã‚’æ›´æ–°ä¸­ã¯è¿½åŠ ã—ãªã„
         return;
     if(m_dlgLoadProgress->IsCanceled()){
-        //ƒLƒƒƒ“ƒZƒ‹ƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚Ä‚¢‚é
+        //ã‚­ãƒ£ãƒ³ã‚»ãƒ«ãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚Œã¦ã„ã‚‹
         return ;
     }
 
     ((CSuperTagEditorApp *)AfxGetApp())->AddToRecentFileList (sOpenDir); /* StartInaction 053 */
 
-    // ƒfƒBƒŒƒNƒgƒŠ‚Ìƒtƒ@ƒCƒ‹‚ğ“Ç‚İ‚Ş
+    // ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã®ãƒ•ã‚¡ã‚¤ãƒ«ã‚’èª­ã¿è¾¼ã‚€
     TCHAR   sFolderName[_MAX_PATH] = {'\0'};
 
     _tcsncpy_s(sFolderName, sOpenDir, _TRUNCATE);
 
     if (sFolderName[0]) {
         if (IsFolderName(sFolderName) == false) {
-            // ÅŒã‚Í '\\' ‚Å‚ ‚é–
+            // æœ€å¾Œã¯ '\\' ã§ã‚ã‚‹äº‹
             _tcsncat_s(sFolderName, _T("\\"), _TRUNCATE);
         }
 
-        // ƒvƒƒOƒŒƒXƒo[‰Šú‰»
+        // ãƒ—ãƒ­ã‚°ãƒ¬ã‚¹ãƒãƒ¼åˆæœŸåŒ–
         BOOL    bIsOpen = (m_dlgLoadProgress->GetSafeHwnd() == NULL) ? TRUE : FALSE;
-        if (bIsOpen) StartLoadFile(_T("ƒtƒ@ƒCƒ‹“Ç‚İ‚İ’†..."));
+        if (bIsOpen) StartLoadFile(_T("ãƒ•ã‚¡ã‚¤ãƒ«èª­ã¿è¾¼ã¿ä¸­..."));
 
-        // ƒtƒHƒ‹ƒ_“Ç‚İ‚İ
+        // ãƒ•ã‚©ãƒ«ãƒ€èª­ã¿è¾¼ã¿
         if (g_classInfo.nType == 0) {
-            // ƒtƒHƒ‹ƒ_‚Å•ª—Ş
+            // ãƒ•ã‚©ãƒ«ãƒ€ã§åˆ†é¡
             CMySuperGrid    &listCtrl = GetListCtrl();
             TCHAR   drive[_MAX_DRIVE], dir[_MAX_DIR];
             _tsplitpath_s(sFolderName, drive, _MAX_DRIVE, dir, _MAX_DIR, NULL, 0, NULL, 0);
@@ -635,11 +635,11 @@ void CSuperTagEditorDoc::OpenFolder(const TCHAR *sOpenDir)
             str.Format(_T("%s%s"), drive, dir);
             SearchFileReent(sFolderName, listCtrl.AddDirectory(str, listCtrl.m_pItemRoot, 2));
         } else {
-            // ƒ^ƒOî•ñ‚Å•ª—Ş
+            // ã‚¿ã‚°æƒ…å ±ã§åˆ†é¡
             SearchFileReent(sFolderName);
         }
 
-        // ’Ç‰ÁƒŠƒNƒGƒXƒg‚Ì‚ ‚Á‚½ƒtƒ@ƒCƒ‹‚Ìƒ^ƒOî•ñ‚ğ“Ç‚İ‚Ş
+        // è¿½åŠ ãƒªã‚¯ã‚¨ã‚¹ãƒˆã®ã‚ã£ãŸãƒ•ã‚¡ã‚¤ãƒ«ã®ã‚¿ã‚°æƒ…å ±ã‚’èª­ã¿è¾¼ã‚€
 #ifdef FLICKERFREE
         //CMySuperGrid  &listCtrl = GetListCtrl();
         //listCtrl.SetRedraw(FALSE);
@@ -651,7 +651,7 @@ void CSuperTagEditorDoc::OpenFolder(const TCHAR *sOpenDir)
         //GetView()->SetRedraw(TRUE);
 #endif
 
-        // ƒvƒƒOƒŒƒXƒo[I—¹
+        // ãƒ—ãƒ­ã‚°ãƒ¬ã‚¹ãƒãƒ¼çµ‚äº†
         if (bIsOpen) EndLoadFile();
 
         UpdateAllViews(NULL);
@@ -666,7 +666,7 @@ void CSuperTagEditorDoc::OnOpenFolder()
 {
     TCHAR   sFolderName[_MAX_PATH] = {'\0'};
 
-    // ƒtƒHƒ‹ƒ_‘I‘ğƒ_ƒCƒAƒƒO‚ğŠJ‚­
+    // ãƒ•ã‚©ãƒ«ãƒ€é¸æŠãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚’é–‹ã
     _tcsncpy_s(sFolderName, g_strCurrentDirectory, _TRUNCATE);
     if (SelectDirectory(sFolderName, _MAX_PATH) == TRUE) {
         g_strCurrentDirectory = sFolderName;
@@ -679,9 +679,9 @@ BOOL CSuperTagEditorDoc::CanCloseFrame(CFrameWnd* pFrame)
 {
     if (CheckFileModified()) {
         int     nResult;
-        nResult = MessageBox(AfxGetMainWnd()->GetSafeHwnd(), _T("ƒ^ƒOî•ñ‚ª•ÏX‚³‚ê‚Ä‚¢‚Ü‚·B\n")
-                                   _T("•ÏX‚³‚ê‚Ä‚¢‚éƒtƒ@ƒCƒ‹‚ğXV‚µ‚Ä‚à‚æ‚ë‚µ‚¢‚Å‚·‚©H"),
-                                   _T("•Û‘¶Šm”F"), MB_YESNOCANCEL);
+        nResult = MessageBox(AfxGetMainWnd()->GetSafeHwnd(), _T("ã‚¿ã‚°æƒ…å ±ãŒå¤‰æ›´ã•ã‚Œã¦ã„ã¾ã™ã€‚\n")
+                                   _T("å¤‰æ›´ã•ã‚Œã¦ã„ã‚‹ãƒ•ã‚¡ã‚¤ãƒ«ã‚’æ›´æ–°ã—ã¦ã‚‚ã‚ˆã‚ã—ã„ã§ã™ã‹ï¼Ÿ"),
+                                   _T("ä¿å­˜ç¢ºèª"), MB_YESNOCANCEL);
         switch(nResult) {
         case IDYES:
             //OnSaveAllTag();
@@ -715,14 +715,14 @@ void CSuperTagEditorDoc::OnUpdateFileOpen(CCmdUI* pCmdUI)
     pCmdUI->Enable(FALSE);
 }
 
-// [ƒIƒvƒVƒ‡ƒ“İ’è]-[‘S•”]
+// [ã‚ªãƒ—ã‚·ãƒ§ãƒ³è¨­å®š]-[å…¨éƒ¨]
 void CSuperTagEditorDoc::OnUpdateDlgEnvironment(CCmdUI* pCmdUI)
 {
     pCmdUI->Enable(TRUE);
 }
 void CSuperTagEditorDoc::OnDlgEnvironment()
 {
-    CDlgEnvSheet    dialog(_T("ƒIƒvƒVƒ‡ƒ“İ’è"));
+    CDlgEnvSheet    dialog(_T("ã‚ªãƒ—ã‚·ãƒ§ãƒ³è¨­å®š"));
     bool    bKeepTimeStamp = g_bOptKeepTimeStamp;
     bool    bHideMP3ListFile = g_bOptHideMP3ListFile;
     bool    bFileNameMaxCellColor = g_bFileNameMaxCellColor; /* SeaKnows 036 */
@@ -732,24 +732,24 @@ void CSuperTagEditorDoc::OnDlgEnvironment()
 
     CMySuperGrid    &listCtrl = GetListCtrl();
 
-    // ƒ^ƒCƒ€ƒXƒ^ƒ“ƒv•Û‚Ìİ’è€–Ú‚ª•ÏX‚³‚ê‚½
-    // MP3 List ‚Ìƒtƒ@ƒCƒ‹–¼•\¦‚Ì—L–³‚ª•ÏX‚³‚ê‚½
+    // ã‚¿ã‚¤ãƒ ã‚¹ã‚¿ãƒ³ãƒ—ä¿æŒã®è¨­å®šé …ç›®ãŒå¤‰æ›´ã•ã‚ŒãŸ
+    // MP3 List ã®ãƒ•ã‚¡ã‚¤ãƒ«åè¡¨ç¤ºã®æœ‰ç„¡ãŒå¤‰æ›´ã•ã‚ŒãŸ
     if (bKeepTimeStamp != g_bOptKeepTimeStamp
     ||  bHideMP3ListFile != g_bOptHideMP3ListFile) {
-        // •\¦‚ğXV‚³‚¹‚é
+        // è¡¨ç¤ºã‚’æ›´æ–°ã•ã›ã‚‹
         listCtrl.UpdateAllFiles();
-        // ƒJƒ‰ƒ€•‚Ì©“®’²®
+        // ã‚«ãƒ©ãƒ å¹…ã®è‡ªå‹•èª¿æ•´
         if (g_bOptLoadFileAdjustColumn) listCtrl.AutoSizeColumns(-1);
     }
     if (bFileNameMaxCellColor != g_bFileNameMaxCellColor) { /* SeaKnows 036 */
-        // •\¦‚ğXV‚³‚¹‚é
+        // è¡¨ç¤ºã‚’æ›´æ–°ã•ã›ã‚‹
         listCtrl.UpdateAllFiles();
     }
 
-    // •ª—ŞÏ‚İƒtƒHƒ‹ƒ_‚Ì–¼Ì‚ğXV‚·‚é
+    // åˆ†é¡æ¸ˆã¿ãƒ•ã‚©ãƒ«ãƒ€ã®åç§°ã‚’æ›´æ–°ã™ã‚‹
     listCtrl.UpdateSyncFolderItemName();
 
-    // ƒWƒƒƒ“ƒ‹ƒŠƒXƒg‚ğXV‚³‚¹‚é
+    // ã‚¸ãƒ£ãƒ³ãƒ«ãƒªã‚¹ãƒˆã‚’æ›´æ–°ã•ã›ã‚‹
     listCtrl.MakeStrListGenre();
 }
 
@@ -761,36 +761,36 @@ BOOL CSuperTagEditorDoc::OnOpenDocument(LPCTSTR lpszPathName)
     TCHAR   sFileName[MAX_PATH];
     GetLongPathName(lpszPathName, sFileName, MAX_PATH);
 
-    // ‰Šú‰»ˆ—
+    // åˆæœŸåŒ–å‡¦ç†
     if (m_bInitialized == false) { /* StartInaction2 055 */
-        InitFileList();         // ƒtƒ@ƒCƒ‹ƒŠƒXƒg‚Ì‰Šú‰»
-        ClearRequestFiles();    // ’Ç‰ÁƒŠƒNƒGƒXƒgƒtƒ@ƒCƒ‹ƒŠƒXƒg‚Ì‰Šú‰»
+        InitFileList();         // ãƒ•ã‚¡ã‚¤ãƒ«ãƒªã‚¹ãƒˆã®åˆæœŸåŒ–
+        ClearRequestFiles();    // è¿½åŠ ãƒªã‚¯ã‚¨ã‚¹ãƒˆãƒ•ã‚¡ã‚¤ãƒ«ãƒªã‚¹ãƒˆã®åˆæœŸåŒ–
         m_bInitialized = true;
-        InitPlugin();           // ƒvƒ‰ƒOƒCƒ“‚Ìƒ[ƒh
-        // ‰Šú‰»ˆ—
+        InitPlugin();           // ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ã®ãƒ­ãƒ¼ãƒ‰
+        // åˆæœŸåŒ–å‡¦ç†
         GetView()->m_List.InitializeGrid();
-        // ƒtƒHƒ“ƒg‚Ìİ’è
+        // ãƒ•ã‚©ãƒ³ãƒˆã®è¨­å®š
         GetView()->UpdateFontListView();
-        InitGridList();         // ƒOƒŠƒbƒh‚ğ‰Šú‰»
+        InitGridList();         // ã‚°ãƒªãƒƒãƒ‰ã‚’åˆæœŸåŒ–
     }
 
-    // ƒvƒŒƒCƒŠƒXƒg‚©H
+    // ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆã‹ï¼Ÿ
     CString strFileName = sFileName;
     strFileName.MakeLower();
     if (strFileName.Find(_T(".m3u")) != -1 ||
         strFileName.Find(_T(".m3u8")) != -1) {
-        // ƒvƒŒƒCƒŠƒXƒg’Ç‰Á
+        // ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆè¿½åŠ 
         GetView()->LoadPlayList(sFileName);
         return(TRUE);
     }
-    // ƒvƒƒOƒŒƒXƒo[‰Šú‰»
-    StartLoadFile(_T("ƒtƒ@ƒCƒ‹“Ç‚İ‚İ’†..."));
+    // ãƒ—ãƒ­ã‚°ãƒ¬ã‚¹ãƒãƒ¼åˆæœŸåŒ–
+    StartLoadFile(_T("ãƒ•ã‚¡ã‚¤ãƒ«èª­ã¿è¾¼ã¿ä¸­..."));
 
     DWORD dwAttr = GetFileAttributes(sFileName);
     if(dwAttr != INVALID_FILE_ATTRIBUTES){
         if (dwAttr & FILE_ATTRIBUTE_DIRECTORY) {
-            // ƒfƒBƒŒƒNƒgƒŠ‚Ìê‡
-            // ÅŒã‚Ì '\\' ‚Í•K—v
+            // ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã®å ´åˆ
+            // æœ€å¾Œã® '\\' ã¯å¿…è¦
             if (IsFolderName(sFileName) == false) {
                 _tcsncat_s(sFileName, _T("\\"), _TRUNCATE);
             }
@@ -804,11 +804,11 @@ BOOL CSuperTagEditorDoc::OnOpenDocument(LPCTSTR lpszPathName)
             g_bEnableSearchSubDir = bEnableSearchSubDir;
         }
         else {
-            // ƒtƒ@ƒCƒ‹‚Ìê‡(ƒƒ“ƒOƒtƒ@ƒCƒ‹–¼‚É•ÏŠ·‚µ‚Ä‚©‚çˆ—‚·‚é)
+            // ãƒ•ã‚¡ã‚¤ãƒ«ã®å ´åˆ(ãƒ­ãƒ³ã‚°ãƒ•ã‚¡ã‚¤ãƒ«åã«å¤‰æ›ã—ã¦ã‹ã‚‰å‡¦ç†ã™ã‚‹)
             AddRequestFile(sFileName, NULL);
         }
     }
-    // ’Ç‰ÁƒŠƒNƒGƒXƒg‚Ì‚ ‚Á‚½ƒtƒ@ƒCƒ‹‚Ìƒ^ƒOî•ñ‚ğ“Ç‚İ‚Ş
+    // è¿½åŠ ãƒªã‚¯ã‚¨ã‚¹ãƒˆã®ã‚ã£ãŸãƒ•ã‚¡ã‚¤ãƒ«ã®ã‚¿ã‚°æƒ…å ±ã‚’èª­ã¿è¾¼ã‚€
 #ifdef FLICKERFREE
         //GetView()->SetRedraw(FALSE);
 #endif
@@ -817,7 +817,7 @@ BOOL CSuperTagEditorDoc::OnOpenDocument(LPCTSTR lpszPathName)
         //GetView()->SetRedraw(TRUE);
 #endif
 
-    // ƒvƒƒOƒŒƒXƒo[I—¹
+    // ãƒ—ãƒ­ã‚°ãƒ¬ã‚¹ãƒãƒ¼çµ‚äº†
     EndLoadFile();
 
     UpdateAllViews(NULL);
@@ -825,7 +825,7 @@ BOOL CSuperTagEditorDoc::OnOpenDocument(LPCTSTR lpszPathName)
     return(TRUE);
 }
 
-// SI ƒtƒB[ƒ‹ƒh‚ğ•\¦^•ÒW
+// SI ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã‚’è¡¨ç¤ºï¼ç·¨é›†
 void CSuperTagEditorDoc::OnUpdateEditFieldSi(CCmdUI* pCmdUI)
 {
     pCmdUI->Enable(TRUE);
@@ -836,12 +836,12 @@ void CSuperTagEditorDoc::OnEditFieldSi()
     if (g_bOptEditFieldSIF != true) {
         g_bOptEditFieldSIF = true;
 
-        // î•ñ‚ğXV
+        // æƒ…å ±ã‚’æ›´æ–°
         UpdateAllFiles(true);
     }
 }
 
-// ID3 tag î•ñ‚ğ•\¦^•ÒW
+// ID3 tag æƒ…å ±ã‚’è¡¨ç¤ºï¼ç·¨é›†
 void CSuperTagEditorDoc::OnUpdateEditTd3Tag(CCmdUI* pCmdUI)
 {
     pCmdUI->Enable(TRUE);
@@ -852,12 +852,12 @@ void CSuperTagEditorDoc::OnEditTd3Tag()
     if (g_bOptEditFieldSIF != false) {
         g_bOptEditFieldSIF = false;
 
-        // î•ñ‚ğXV
+        // æƒ…å ±ã‚’æ›´æ–°
         UpdateAllFiles(true);
     }
 }
 
-// [ID3 tag] <=> [SIƒtƒB[ƒ‹ƒh]‚ğØ‘Ö
+// [ID3 tag] <=> [SIãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰]ã‚’åˆ‡æ›¿
 void CSuperTagEditorDoc::OnUpdateEditChangeField(CCmdUI* pCmdUI)
 {
     pCmdUI->Enable(TRUE);
@@ -866,37 +866,37 @@ void CSuperTagEditorDoc::OnEditChangeField()
 {
     g_bOptEditFieldSIF = g_bOptEditFieldSIF ? false : true;
 
-    // î•ñ‚ğXV
+    // æƒ…å ±ã‚’æ›´æ–°
     UpdateAllFiles(true);
 }
 
-// •ª—Ş•\¦‚ÌXV
+// åˆ†é¡è¡¨ç¤ºã®æ›´æ–°
 void CSuperTagEditorDoc::OnUpdateExecClassification(CCmdUI* pCmdUI)
 {
     pCmdUI->Enable((m_nArrayFileCount > 0 && g_classInfo.nType) ? TRUE : FALSE);
 }
 void CSuperTagEditorDoc::OnExecClassification()
 {
-    // ƒvƒŒƒCƒŠƒXƒg“Ç‚İ‚±‚İ
-    StartLoadFile(_T("•ª—Ş•\¦‚ğXV’†..."));
-    m_dlgLoadProgress->SetDlgItemText(IDC_ST_MESSAGE, _T("ˆ—’†..."));
+    // ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆèª­ã¿ã“ã¿
+    StartLoadFile(_T("åˆ†é¡è¡¨ç¤ºã‚’æ›´æ–°ä¸­..."));
+    m_dlgLoadProgress->SetDlgItemText(IDC_ST_MESSAGE, _T("å‡¦ç†ä¸­..."));
     m_dlgLoadProgress->EnableCancelButton(FALSE);
 
-    // ƒOƒŠƒbƒh‚ÉÄ“o˜^
+    // ã‚°ãƒªãƒƒãƒ‰ã«å†ç™»éŒ²
     CMySuperGrid    &listCtrl = GetListCtrl();
-    listCtrl.DeleteAllEx();         // ƒOƒŠƒbƒh‚ğ‰Šú‰»
+    listCtrl.DeleteAllEx();         // ã‚°ãƒªãƒƒãƒ‰ã‚’åˆæœŸåŒ–
     for (int no = 0; no < m_nArrayFileCount; no++) {
-        // ƒvƒƒOƒŒƒXƒo[XV
+        // ãƒ—ãƒ­ã‚°ãƒ¬ã‚¹ãƒãƒ¼æ›´æ–°
         if (m_nArrayFileCount > 1) {
             m_dlgLoadProgress->SetPos(no * 100 / (m_nArrayFileCount-1));
         }
-        // ƒtƒHƒ‹ƒ_‚Å•ª—Ş
+        // ãƒ•ã‚©ãƒ«ãƒ€ã§åˆ†é¡
         if (GetListMP3(no)->nFormat != FILE_FORMAT_UNKNOWN) {
             listCtrl.AddFile2(GetListMP3(no), NULL, (LPARAM)no, g_bOptLoadFileChecked);
         }
     }
 
-    // ƒtƒ@ƒCƒ‹‚Ìƒ^ƒOî•ñ‚ğ“Ç‚İ‚Ş
+    // ãƒ•ã‚¡ã‚¤ãƒ«ã®ã‚¿ã‚°æƒ…å ±ã‚’èª­ã¿è¾¼ã‚€
     EndLoadFile();
 
     UpdateAllViews(NULL);
@@ -907,10 +907,10 @@ bool CSuperTagEditorDoc::CheckFileAttribute(FILE_MP3 *fileMP3)
 {
     extern  int     g_nWriteTagProcFlag;
     if (g_nWriteTagProcFlag == 3) {
-        return(false);                      // ˆÈ~’†~
+        return(false);                      // ä»¥é™ä¸­æ­¢
     }
 
-    // ƒtƒ@ƒCƒ‹î•ñ‚ğæ“¾
+    // ãƒ•ã‚¡ã‚¤ãƒ«æƒ…å ±ã‚’å–å¾—
     CFileStatus fileStatus;
     try{
     if (CFile::GetStatus(fileMP3->strFullPathName, fileStatus) == FALSE) {
@@ -920,10 +920,10 @@ bool CSuperTagEditorDoc::CheckFileAttribute(FILE_MP3 *fileMP3)
     catch(...){
         fileStatus.m_mtime = CTime(0);
     }
-    // “Ç‚İo‚µê—pƒtƒ@ƒCƒ‹‚ÍAã‘‚«Šm”F‚ğs‚¤
+    // èª­ã¿å‡ºã—å°‚ç”¨ãƒ•ã‚¡ã‚¤ãƒ«ã¯ã€ä¸Šæ›¸ãç¢ºèªã‚’è¡Œã†
     if (fileStatus.m_attribute & CFile::readOnly) {
         if (g_nWriteTagProcFlag != 1) {
-            // ã‘‚«Šm”Fƒ_ƒCƒAƒƒO‚ğŠJ‚­
+            // ä¸Šæ›¸ãç¢ºèªãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚’é–‹ã
             CDlgFileOverWrite   dialog;
             dialog.m_strFileName = fileMP3->strFullPathName;
             dialog.m_strSize.Format(_T("%ld byte"), fileStatus.m_size);
@@ -941,17 +941,17 @@ bool CSuperTagEditorDoc::CheckFileAttribute(FILE_MP3 *fileMP3)
             dialog.DoModal();
             g_nWriteTagProcFlag = dialog.m_nResult;
             switch(dialog.m_nResult) {
-            case 0:             // ‚±‚Ìƒtƒ@ƒCƒ‹‚ğã‘‚«
-            case 1:             // ˆÈ~‘S‚Äã‘‚«
+            case 0:             // ã“ã®ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ä¸Šæ›¸ã
+            case 1:             // ä»¥é™å…¨ã¦ä¸Šæ›¸ã
                 break;
-            case 2:             // ƒXƒLƒbƒv
-            case 3:             // ’†~
+            case 2:             // ã‚¹ã‚­ãƒƒãƒ—
+            case 3:             // ä¸­æ­¢
             default:
                 return(false);
             }
         }
 
-        // “Ç‚İ‚İê—p‘®«‚ğ‰ğœ
+        // èª­ã¿è¾¼ã¿å°‚ç”¨å±æ€§ã‚’è§£é™¤
         SetFileAttributes(fileMP3->strFullPathName, CFile::normal);
     }
     return(true);
@@ -959,7 +959,7 @@ bool CSuperTagEditorDoc::CheckFileAttribute(FILE_MP3 *fileMP3)
 
 void CSuperTagEditorDoc::OnDlgSetupPlugin()
 {
-    // TODO: ‚±‚ÌˆÊ’u‚ÉƒRƒ}ƒ“ƒh ƒnƒ“ƒhƒ‰—p‚ÌƒR[ƒh‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
+    // TODO: ã“ã®ä½ç½®ã«ã‚³ãƒãƒ³ãƒ‰ ãƒãƒ³ãƒ‰ãƒ©ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
     CDlgPluginSetup dialog;
 
     if (dialog.DoModal() == IDOK) {
@@ -969,7 +969,7 @@ void CSuperTagEditorDoc::OnDlgSetupPlugin()
 
 void CSuperTagEditorDoc::OnUpdateDlgSetupPlugin(CCmdUI* pCmdUI)
 {
-    // TODO: ‚±‚ÌˆÊ’u‚É command update UI ƒnƒ“ƒhƒ‰—p‚ÌƒR[ƒh‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
+    // TODO: ã“ã®ä½ç½®ã« command update UI ãƒãƒ³ãƒ‰ãƒ©ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
     pCmdUI->Enable(TRUE);
 }
 
@@ -978,24 +978,24 @@ void CSuperTagEditorDoc::SaveAllTag(BOOL bSaveOnly)
     m_bSaveAllTagResult = true;
     extern  int     g_nWriteTagProcFlag;
 
-    // ƒvƒƒOƒŒƒXƒo[•\¦
-    StartLoadFile(_T("ƒ^ƒOî•ñ‚ğXV’†..."));
-    m_dlgLoadProgress->SetDlgItemText(IDC_ST_MESSAGE, _T("ˆ—’†..."));
+    // ãƒ—ãƒ­ã‚°ãƒ¬ã‚¹ãƒãƒ¼è¡¨ç¤º
+    StartLoadFile(_T("ã‚¿ã‚°æƒ…å ±ã‚’æ›´æ–°ä¸­..."));
+    m_dlgLoadProgress->SetDlgItemText(IDC_ST_MESSAGE, _T("å‡¦ç†ä¸­..."));
 
-    //§Œä‘ÎÛ‚ÌƒvƒŒƒCƒ„[‚ªÄ¶’†‚Ì‹È‚ğXV‚·‚éê‡‚ÍAƒtƒ@ƒCƒ‹‚ğ•Â‚¶‚é‚æ‚¤‚É
-    //ƒvƒŒƒCƒ„[‚É—v‹‚·‚é
+    //åˆ¶å¾¡å¯¾è±¡ã®ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒå†ç”Ÿä¸­ã®æ›²ã‚’æ›´æ–°ã™ã‚‹å ´åˆã¯ã€ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‰ã˜ã‚‹ã‚ˆã†ã«
+    //ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã«è¦æ±‚ã™ã‚‹
     CPlayerControl player(g_sOptWinAmpPath, g_nOptPlayerType);
-    TCHAR szPlayingFileName[MAX_PATH];//§Œä‘ÎÛ‚ÌƒvƒŒƒCƒ„[‚ªÄ¶’†‚Ìƒtƒ@ƒCƒ‹
+    TCHAR szPlayingFileName[MAX_PATH];//åˆ¶å¾¡å¯¾è±¡ã®ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒå†ç”Ÿä¸­ã®ãƒ•ã‚¡ã‚¤ãƒ«
     player.GetPlayingFileName(szPlayingFileName, MAX_PATH);
 
-    // XVƒtƒ@ƒCƒ‹‚Ìƒ^ƒOî•ñXV
+    // æ›´æ–°ãƒ•ã‚¡ã‚¤ãƒ«ã®ã‚¿ã‚°æƒ…å ±æ›´æ–°
     g_nWriteTagProcFlag = 0;
     for (int no = 0; no < m_nArrayFileCount; no++) {
         FILE_MP3    *fileMP3 = GetListMP3(no);
         if (m_nArrayFileCount != 1) {
-            // ƒvƒƒOƒŒƒXƒo[XV
+            // ãƒ—ãƒ­ã‚°ãƒ¬ã‚¹ãƒãƒ¼æ›´æ–°
             m_dlgLoadProgress->SetPos(no * 100 / (m_nArrayFileCount-1));
-            // ’Ç‰Á by Kobarin
+            // è¿½åŠ  by Kobarin
             if(m_dlgLoadProgress->IsCanceled()){
                 m_bSaveAllTagResult = false;
                 break;
@@ -1004,16 +1004,16 @@ void CSuperTagEditorDoc::SaveAllTag(BOOL bSaveOnly)
         if (fileMP3->nFormat != FILE_FORMAT_UNKNOWN && fileMP3->bModifyFlag) {
             if(szPlayingFileName[0]){
                 if(_tcsicmp((LPCTSTR)fileMP3->strFullPathName, szPlayingFileName) == 0){
-                //Ä¶’†‚Ì‹È‚ğƒ^ƒOXV‚µ‚æ‚¤‚Æ‚µ‚Ä‚¢‚é
-                    if(player.SupportClose()){//ƒtƒ@ƒCƒ‹ƒNƒ[ƒY‚É‘Î‰
-                        player.FileClose();//ƒtƒ@ƒCƒ‹‚ğ•Â‚¶‚é
-                        Sleep(500);//”O‚Ì‚½‚ß­‚µ‘Ò‚Â
+                //å†ç”Ÿä¸­ã®æ›²ã‚’ã‚¿ã‚°æ›´æ–°ã—ã‚ˆã†ã¨ã—ã¦ã„ã‚‹
+                    if(player.SupportClose()){//ãƒ•ã‚¡ã‚¤ãƒ«ã‚¯ãƒ­ãƒ¼ã‚ºã«å¯¾å¿œ
+                        player.FileClose();//ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‰ã˜ã‚‹
+                        Sleep(500);//å¿µã®ãŸã‚å°‘ã—å¾…ã¤
                     }
-                    else if(player.SupportStop()){//‰‰‘t’â~‚É‘Î‰
-                        player.Stop();//‚¹‚ß‚Ä‰‰‘t’â~(ƒ^ƒOXV‰Â”\‚©‚Ç‚¤‚©‚ÍƒvƒŒƒCƒ„[‚É‚æ‚é)
-                        Sleep(500);//”O‚Ì‚½‚ß­‚µ‘Ò‚Â
+                    else if(player.SupportStop()){//æ¼”å¥åœæ­¢ã«å¯¾å¿œ
+                        player.Stop();//ã›ã‚ã¦æ¼”å¥åœæ­¢(ã‚¿ã‚°æ›´æ–°å¯èƒ½ã‹ã©ã†ã‹ã¯ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã«ã‚ˆã‚‹)
+                        Sleep(500);//å¿µã®ãŸã‚å°‘ã—å¾…ã¤
                     }
-                    //else{//‚¨‚»‚ç‚­ƒ^ƒOXV‚É¸”s‚·‚é‚ª“Á‚É‰½‚à‚µ‚È‚¢
+                    //else{//ãŠãã‚‰ãã‚¿ã‚°æ›´æ–°ã«å¤±æ•—ã™ã‚‹ãŒç‰¹ã«ä½•ã‚‚ã—ãªã„
 
                     //}
                 }
@@ -1022,18 +1022,18 @@ void CSuperTagEditorDoc::SaveAllTag(BOOL bSaveOnly)
             if (CFileMP3::WriteTag(fileMP3, g_bOptKeepTimeStamp)) {
                 fileMP3->bModifyFlag = FALSE;
             } else {
-                MessageBox(NULL, _T("ƒ^ƒOî•ñ‚ğƒtƒ@ƒCƒ‹‚ğXV‚Å‚«‚Ü‚¹‚ñ‚Å‚µ‚½"), fileMP3->strFullPathName, MB_ICONSTOP|MB_OK|MB_TOPMOST);
+                MessageBox(NULL, _T("ã‚¿ã‚°æƒ…å ±ã‚’ãƒ•ã‚¡ã‚¤ãƒ«ã‚’æ›´æ–°ã§ãã¾ã›ã‚“ã§ã—ãŸ"), fileMP3->strFullPathName, MB_ICONSTOP|MB_OK|MB_TOPMOST);
                 m_bSaveAllTagResult = false;
             }
         }
     }
 
-    // ƒvƒƒOƒŒƒXƒo[I—¹
+    // ãƒ—ãƒ­ã‚°ãƒ¬ã‚¹ãƒãƒ¼çµ‚äº†
     EndLoadFile();
 
     if (bSaveOnly)  return;
 
-    // î•ñ‚ğXV
+    // æƒ…å ±ã‚’æ›´æ–°
     CMySuperGrid    &listCtrl = GetListCtrl();
 #ifdef FLICKERFREE
     //listCtrl.SetRedraw(FALSE);

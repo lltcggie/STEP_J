@@ -1,54 +1,54 @@
-// DlgCommonProg.h : ƒwƒbƒ_ ƒtƒ@ƒCƒ‹
-// CG: ‚±‚Ìƒtƒ@ƒCƒ‹‚ÍuƒvƒƒOƒŒƒX ƒ_ƒCƒAƒƒOvƒRƒ“ƒ|[ƒlƒ“ƒg‚É‚æ‚è’Ç‰Á‚³‚ê‚Ä‚¢‚Ü‚·B
+// DlgCommonProg.h : ãƒ˜ãƒƒãƒ€ ãƒ•ã‚¡ã‚¤ãƒ«
+// CG: ã“ã®ãƒ•ã‚¡ã‚¤ãƒ«ã¯ã€Œãƒ—ãƒ­ã‚°ãƒ¬ã‚¹ ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã€ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã«ã‚ˆã‚Šè¿½åŠ ã•ã‚Œã¦ã„ã¾ã™ã€‚
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgCommonProgress ƒ_ƒCƒAƒƒO
+// CDlgCommonProgress ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
 
 #ifndef __DLGCOMMONPROG_H__
 #define __DLGCOMMONPROG_H__
 
 class CDlgCommonProgress : public CDialog
 {
-// \’z/Á–Å
+// æ§‹ç¯‰/æ¶ˆæ»…
 public:
-    CDlgCommonProgress(UINT nCaptionID = 0);   // •W€ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+    CDlgCommonProgress(UINT nCaptionID = 0);   // æ¨™æº–ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     ~CDlgCommonProgress();
 
     BOOL Create(CWnd *pParent=NULL);
 
-    // ƒvƒƒOƒŒƒX ƒ_ƒCƒAƒƒO‚Ìˆ—
+    // ãƒ—ãƒ­ã‚°ãƒ¬ã‚¹ ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã®å‡¦ç†
     void SetRange(int nLower,int nUpper);
     int  SetStep(int nStep);
     int  SetPos(int nPos);
     int  OffsetPos(int nPos);
     int  StepIt();
 	void EnableCancelButton(BOOL);
-    BOOL IsCanceled(void){return m_bCanceled;}//’Ç‰Á by Kobarin    
-    void SetCanceled(BOOL bCanceled){m_bCanceled = bCanceled;}//’Ç‰Á by Kobarin
+    BOOL IsCanceled(void){return m_bCanceled;}//è¿½åŠ  by Kobarin    
+    void SetCanceled(BOOL bCanceled){m_bCanceled = bCanceled;}//è¿½åŠ  by Kobarin
         
-// ƒ_ƒCƒAƒƒO ƒf[ƒ^
+// ãƒ€ã‚¤ã‚¢ãƒ­ã‚° ãƒ‡ãƒ¼ã‚¿
     //{{AFX_DATA(CDlgCommonProgress)
     enum { IDD = CG_IDD_PROGRESS };
     CProgressCtrl	m_Progress;
     //}}AFX_DATA
 
-// ƒI[ƒo[ƒ‰ƒCƒh
-    // ClassWizard ‚Í‰¼‘zŠÖ”‚ÌƒI[ƒoƒ‰ƒCƒh‚ğ¶¬‚µ‚Ü‚·B
+// ã‚ªãƒ¼ãƒãƒ¼ãƒ©ã‚¤ãƒ‰
+    // ClassWizard ã¯ä»®æƒ³é–¢æ•°ã®ã‚ªãƒ¼ãƒãƒ©ã‚¤ãƒ‰ã‚’ç”Ÿæˆã—ã¾ã™ã€‚
     //{{AFX_VIRTUAL(CDlgCommonProgress)
     public:
     virtual BOOL DestroyWindow();
     protected:
-    virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV ƒTƒ|[ƒg
+    virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV ã‚µãƒãƒ¼ãƒˆ
     //}}AFX_VIRTUAL
 
-// ƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“
+// ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³
 protected:
 	UINT m_nCaptionID;
     int m_nLower;
     int m_nUpper;
     int m_nStep;
     BOOL m_bParentDisabled;
-    BOOL m_bCanceled;// ’Ç‰Á by Kobarin
+    BOOL m_bCanceled;// è¿½åŠ  by Kobarin
 
     void ReEnableParent();
 
@@ -57,7 +57,7 @@ protected:
     void UpdatePercent(int nCurrent);
     void PumpMessages();
 
-    // ¶¬‚³‚ê‚½ƒƒbƒZ[ƒW ƒ}ƒbƒvŠÖ”
+    // ç”Ÿæˆã•ã‚ŒãŸãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒãƒƒãƒ—é–¢æ•°
     //{{AFX_MSG(CDlgCommonProgress)
     virtual BOOL OnInitDialog();
     //}}AFX_MSG

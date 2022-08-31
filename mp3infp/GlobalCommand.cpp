@@ -3,14 +3,14 @@
 
 #pragma comment(lib,"Version.lib")
 
-//�����Ă���\���̂���Q�o�C�g�����Ή�
+//欠けている可能性のある２バイト文字対応
 void mbsncpy2(unsigned char *dst,const unsigned char *src,int c)
 {
 	for(int i=0; i<c; i++)
 	{
 		if(IsDBCSLeadByte(src[i]))
 		{
-			//�����Ă��郊�[�h�o�C�g�̓R�s�[���Ȃ�
+			//欠けているリードバイトはコピーしない
 			if((i+1) == c)
 			{
 				dst[i] = '\0';
@@ -102,7 +102,7 @@ BOOL GetDLLVersion(IN LPCTSTR szDLLFileName,
 	}
 	
 
-	//�o�[�W�������𐔎��ɕ���
+	//バージョン情報を数字に分解
 	LPTSTR ptr = _tcstok(fileVersion,_T(",. "));
 	if(ptr == NULL)
 		return TRUE;
@@ -126,7 +126,7 @@ BOOL GetDLLVersion(IN LPCTSTR szDLLFileName,
 	return TRUE;
 }
 
-//������Yen�̂Ƃ�TRUE
+//文末がYenのときTRUE
 BOOL IsTailYenSign(LPCTSTR szStr)
 {
 	LPCTSTR yen = _tcsrchr(szStr,_T('\\'));
@@ -137,7 +137,7 @@ BOOL IsTailYenSign(LPCTSTR szStr)
 	return FALSE;
 }
 
-//������'\\'��ǉ�(����'\\'�̂Ƃ��͉������Ȃ�)
+//文末に'\\'を追加(既に'\\'のときは何もしない)
 void AddTailYenSign(LPTSTR szStr)
 {
 	if(!IsTailYenSign(szStr))
@@ -160,17 +160,17 @@ void AddTailYenSign(CString &str)
 #define CHAR_FUDGE 2    // two BYTES unused for case of DBC last char
 #endif
 
-//LoadString�̃o�O�΍�(MSKB Q140452)
+//LoadStringのバグ対策(MSKB Q140452)
 CString LoadResString(HINSTANCE hInstance,UINT uID)
 {
-	TCHAR szTmp[256*2];	//UNICODE��256����
+	TCHAR szTmp[256*2];	//UNICODEで256文字
 	CString strRet;
 
-	//�K�v�ȃT�C�Y���v�Z
+	//必要なサイズを計算
 	int iLength = LoadString(hInstance,uID,szTmp,256);
 	if(256 - iLength > CHAR_FUDGE)
 	{
-		return szTmp;	//256�ő��肽�ꍇ
+		return szTmp;	//256で足りた場合
 	}
 	
 	// try buffer size of 512, then larger size until entire string is retrieved
@@ -192,16 +192,16 @@ LPCTSTR getFileNameExtName(LPCTSTR szPath)
 
 	while(*szPtr != '\0')
 	{
-		//�Q�o�C�g�����̐擪�̓X�L�b�v
+		//２バイト文字の先頭はスキップ
 		if(IS_LEAD_TBYTE(*szPtr) == 0)
 		{
-			//[\],[/],[:]���������猻�ݒn+1�̃|�C���^��ۑ�
+			//[\],[/],[:]を見つけたら現在地+1のポインタを保存
 			if((*szPtr == '\\') || (*szPtr == '/') || (*szPtr == ':'))
 			{
 				szPath=szPtr+1;
 			}
 		}
-		//���̕�����
+		//次の文字へ
 		szPtr=CharNext(szPtr);
 	}
 	return szPath;
@@ -213,10 +213,10 @@ CString getFileNameExtName(const CString &path)
 	int pathOffset = 0;
 	while(path.GetLength() > i)
 	{
-		//�Q�o�C�g�����̐擪�̓X�L�b�v
+		//２バイト文字の先頭はスキップ
 		if(IS_LEAD_TBYTE(path[i]) == 0)
 		{
-			//[\],[/],[:]���������猻�ݒn+1�̃|�C���^��ۑ�
+			//[\],[/],[:]を見つけたら現在地+1のポインタを保存
 			if((path[i] == '\\') || (path[i] == '/') || (path[i] == ':'))
 			{
 				pathOffset = i+1;
@@ -236,22 +236,22 @@ LPCTSTR getExtName(LPCTSTR szPath)
 {
 	LPCTSTR szPtr = szPath;
 
-	//�t�@�C���������𕪗�
+	//ファイル名だけを分離
 	szPtr=getFileNameExtName(szPath);
-	//�g���q���܂܂Ȃ��Ƃ���""�ւ̃|�C���^
+	//拡張子を含まないときは""へのポインタ
 	szPath+=lstrlen(szPath);
 	while(*szPtr != '\0')
 	{
-		//�Q�o�C�g�����̐擪�̓X�L�b�v
+		//２バイト文字の先頭はスキップ
 		if(IS_LEAD_TBYTE(*szPtr) == 0)
 		{
-			//[.]���������猻�ݒn�̃|�C���^��ۑ�
+			//[.]を見つけたら現在地のポインタを保存
 			if(*szPtr == '.')
 			{
 				szPath=szPtr;
 			}
 		}
-		//���̕�����
+		//次の文字へ
 		szPtr=CharNext(szPtr);
 	}
 	return szPath;
@@ -259,18 +259,18 @@ LPCTSTR getExtName(LPCTSTR szPath)
 
 CString getExtName(const CString &path)
 {
-	//�t�@�C���������𕪗�
+	//ファイル名だけを分離
 	CString fName = getFileNameExtName(path);
 
-	//�g���q���܂܂Ȃ��Ƃ���""�ւ̃|�C���^
+	//拡張子を含まないときは""へのポインタ
 	int i = 0;
 	int pathOffset = -1;
 	while(fName.GetLength() > i)
 	{
-		//�Q�o�C�g�����̐擪�̓X�L�b�v
+		//２バイト文字の先頭はスキップ
 		if(IS_LEAD_TBYTE(fName[i]) == 0)
 		{
-			//[.]���������猻�ݒn�̃|�C���^��ۑ�
+			//[.]を見つけたら現在地のポインタを保存
 			if(fName[i] == '.')
 			{
 				pathOffset = i;
@@ -320,7 +320,7 @@ void cutFileName(LPTSTR szPath)
 	
 	while(*szPath != '\0')
 	{
-		//�Q�o�C�g�����̐擪�̓X�L�b�v
+		//２バイト文字の先頭はスキップ
 		if(IS_LEAD_TBYTE(*szPath) == 0)
 		{
 			if((*szPath == '\\') || (*szPath == '/') || (*szPath == ':'))
@@ -330,12 +330,12 @@ void cutFileName(LPTSTR szPath)
 		}
 		szPath=CharNext(szPath);
 	}
-	//�p�X���Ƀt�@�C�����܂܂Ȃ������ꍇ�������Ȃ�
+	//パス名にファイルを含まなかった場合何もしない
 	if(szEnd == szPath)
 	{
 		return;
 	}
-	//�p�X������t�@�C������؂藣��
+	//パス名からファイル名を切り離す
 	*szEnd='\0';
 	return;
 }
@@ -346,7 +346,7 @@ CString getPathName(const CString &path)
 	int pathOffset = 0;
 	while(path.GetLength() > i)
 	{
-		//�Q�o�C�g�����̐擪�̓X�L�b�v
+		//２バイト文字の先頭はスキップ
 		if(IS_LEAD_TBYTE(path[i]) == 0)
 		{
 			if((path[i] == '\\') || (path[i] == '/') || (path[i] == ':'))
@@ -398,12 +398,12 @@ void cutExtName(LPTSTR szFileName)
 		}
 		pStart++;
 	}
-	//�t�@�C�����Ɋg���q���܂܂Ȃ������ꍇ�������Ȃ�
+	//ファイル名に拡張子を含まなかった場合何もしない
 	if(pEnd == szFileName)
 	{
 		return;
 	}
-	//�t�@�C��������g���q��؂藣��
+	//ファイル名から拡張子を切り離す
 	*pEnd='\0';
 }
 
@@ -478,7 +478,7 @@ CString BytesToCString(const char *data, int size, BTC_CODE code)
 		
 	case BTC_CODE_UTF8:
 		{
-			// Win95�ł�CP_UTF8���g���Ȃ����l�����Ȃ�
+			// Win95ではCP_UTF8が使えないが考慮しない
 			int wsize = MultiByteToWideChar(CP_UTF8, 0, data, size, NULL, 0);
 			LPWSTR wstr = (LPWSTR) malloc((wsize+1)*sizeof(WCHAR));
 			if (wstr != NULL) {
@@ -560,7 +560,7 @@ int TstrToBytes(LPCTSTR tstr, int tlen, char *data, int dsize, BTC_CODE code)
 			}
 			MultiByteToWideChar(CP_ACP, 0, tstr, tlen, buf, buf_len);
 #endif
-			// Win95�ł�CP_UTF8���g���Ȃ����l�����Ȃ�
+			// Win95ではCP_UTF8が使えないが考慮しない
 			ret_size = WideCharToMultiByte(CP_UTF8, 0, buf, buf_len, data, dsize, NULL, NULL);
 #ifndef UNICODE
 			free(buf);
@@ -616,13 +616,13 @@ BOOL CTimeStampSaver::Push(LPCTSTR szFile)
 {
 	BOOL ret = FALSE;
 
-	//�^�C���X�^���v��ۑ�
+	//タイムスタンプを保存
 	HANDLE hFile = CreateFile(
 						szFile,
 						GENERIC_READ,
 						FILE_SHARE_READ|FILE_SHARE_WRITE,
 						NULL,
-						OPEN_EXISTING,	//�t�@�C�����I�[�v�����܂��B�w��t�@�C�������݂��Ă��Ȃ��ꍇ�A�֐��͎��s���܂��B
+						OPEN_EXISTING,	//ファイルをオープンします。指定ファイルが存在していない場合、関数は失敗します。
 						FILE_ATTRIBUTE_NORMAL,
 						NULL);
 	if(hFile != INVALID_HANDLE_VALUE)
@@ -639,7 +639,7 @@ BOOL CTimeStampSaver::Pop(LPCTSTR szFile)
 {
 	if(!m_bTimeStampPushed)
 	{
-		//���O��Push�����s�����ꍇ�̓^�C���X�^���v�𕜌����Ȃ�
+		//直前のPushが失敗した場合はタイムスタンプを復元しない
 		return FALSE;
 	}
 	if(szFile == NULL)
@@ -648,13 +648,13 @@ BOOL CTimeStampSaver::Pop(LPCTSTR szFile)
 	}
 	m_bTimeStampPushed = FALSE;
 
-	//�^�C���X�^���v�𕜌�
+	//タイムスタンプを復元
 	HANDLE hFile = CreateFile(
 						szFile,
 						GENERIC_READ|GENERIC_WRITE,
 						FILE_SHARE_READ|FILE_SHARE_WRITE,
 						NULL,
-						OPEN_EXISTING,	//�t�@�C�����I�[�v�����܂��B�w��t�@�C�������݂��Ă��Ȃ��ꍇ�A�֐��͎��s���܂��B
+						OPEN_EXISTING,	//ファイルをオープンします。指定ファイルが存在していない場合、関数は失敗します。
 						FILE_ATTRIBUTE_NORMAL,
 						NULL);
 	if(hFile != INVALID_HANDLE_VALUE)

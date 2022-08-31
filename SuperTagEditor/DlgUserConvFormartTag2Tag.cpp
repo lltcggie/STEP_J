@@ -1,4 +1,4 @@
-// DlgUserConvFormartTag2Tag.cpp : ƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“ ƒtƒ@ƒCƒ‹
+// DlgUserConvFormartTag2Tag.cpp : ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³ ãƒ•ã‚¡ã‚¤ãƒ«
 //
 
 #include "stdafx.h"
@@ -13,7 +13,7 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgUserConvFormartTag2Tag ƒ_ƒCƒAƒƒO
+// CDlgUserConvFormartTag2Tag ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
 
 IMPLEMENT_DYNCREATE(CDlgUserConvFormartTag2Tag, COptionPage)
 
@@ -56,7 +56,7 @@ BEGIN_MESSAGE_MAP(CDlgUserConvFormartTag2Tag, COptionPage)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgUserConvFormartTag2Tag ƒƒbƒZ[ƒW ƒnƒ“ƒhƒ‰
+// CDlgUserConvFormartTag2Tag ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒãƒ³ãƒ‰ãƒ©
 void CDlgUserConvFormartTag2Tag::OutputFormatString(const TCHAR *sText)
 {
 	m_editFormat.ReplaceSel(sText, FALSE);
@@ -123,8 +123,8 @@ BOOL CDlgUserConvFormartTag2Tag::OnInitDialog()
 	m_listFormatType.SetCurSel(m_nFormatType);
 	m_editFormat.SetWindowText(m_userFormatTag2Tag[m_nFormatType].strFormat);
 	
-	return TRUE;  // ƒRƒ“ƒgƒ[ƒ‹‚ÉƒtƒH[ƒJƒX‚ğİ’è‚µ‚È‚¢‚Æ‚«A–ß‚è’l‚Í TRUE ‚Æ‚È‚è‚Ü‚·
-	              // —áŠO: OCX ƒvƒƒpƒeƒB ƒy[ƒW‚Ì–ß‚è’l‚Í FALSE ‚Æ‚È‚è‚Ü‚·
+	return TRUE;  // ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã«ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ã‚’è¨­å®šã—ãªã„ã¨ãã€æˆ»ã‚Šå€¤ã¯ TRUE ã¨ãªã‚Šã¾ã™
+	              // ä¾‹å¤–: OCX ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ ãƒšãƒ¼ã‚¸ã®æˆ»ã‚Šå€¤ã¯ FALSE ã¨ãªã‚Šã¾ã™
 }
 
 void CDlgUserConvFormartTag2Tag::OnBtNameChange() 
@@ -133,10 +133,10 @@ void CDlgUserConvFormartTag2Tag::OnBtNameChange()
 
 	dialog.m_strName = m_userFormatTag2Tag[m_nFormatType].strName;
 	if (dialog.DoModal() == IDOK) {
-		// V‚µ‚¢–¼Ì‚É•ÏX
+		// æ–°ã—ã„åç§°ã«å¤‰æ›´
 		m_userFormatTag2Tag[m_nFormatType].strName = dialog.m_strName;
 
-		// ƒŠƒXƒgXV
+		// ãƒªã‚¹ãƒˆæ›´æ–°
 		OnSelChangeListFormatType();
 		m_listFormatType.ResetContent();
 		int i; for (i = 0; i < USER_CONV_FORMAT_MAX; i++) {
@@ -144,14 +144,14 @@ void CDlgUserConvFormartTag2Tag::OnBtNameChange()
 			strName.Format(_T("%d: %s"), i+1, m_userFormatTag2Tag[i].strName);
 			m_listFormatType.AddString(strName);
 		}
-		// ‘I‘ğ‚µ‚È‚¨‚·
+		// é¸æŠã—ãªãŠã™
 		m_listFormatType.SetCurSel(m_nFormatType);
 	}
 }
 
 void CDlgUserConvFormartTag2Tag::OnSelChangeListFormatType() 
 {
-	// Œ»İ•ÒW’†‚Ì“à—e‚ğ”½‰f‚³‚¹‚é
+	// ç¾åœ¨ç·¨é›†ä¸­ã®å†…å®¹ã‚’åæ˜ ã•ã›ã‚‹
 	m_editFormat.GetWindowText(m_userFormatTag2Tag[m_nFormatType].strFormat);
 
 	m_nFormatType = m_listFormatType.GetCurSel();

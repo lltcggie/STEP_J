@@ -1,15 +1,15 @@
-// Vqf.cpp: CVqf ƒNƒ‰ƒX‚ÌƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“
+// Vqf.cpp: CVqf ã‚¯ãƒ©ã‚¹ã®ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³
 //
 //////////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"
-#include "resource.h"		// ƒƒCƒ“ ƒVƒ“ƒ{ƒ‹
+#include "resource.h"		// ãƒ¡ã‚¤ãƒ³ ã‚·ãƒ³ãƒœãƒ«
 #include "GlobalCommand.h"
 #include "Vqf.h"
 
 
 //////////////////////////////////////////////////////////////////////
-// \’z/Á–Å
+// æ§‹ç¯‰/æ¶ˆæ»…
 //////////////////////////////////////////////////////////////////////
 
 CVqf::CVqf()
@@ -42,7 +42,7 @@ BOOL CVqf::SetField(char id1,char id2,char id3,char id4,const unsigned char *szD
 		return TRUE;
 	}
 
-	//map‚É’Ç‰Á
+	//mapã«è¿½åŠ 
 	m_fields.insert(std::pair<DWORD,CVqfTag>(id,CVqfTag()));
 	FieldMap::iterator p = m_fields.find(id);
 	if(p != m_fields.end())
@@ -51,7 +51,7 @@ BOOL CVqf::SetField(char id1,char id2,char id3,char id4,const unsigned char *szD
 		unsigned char *data = p->second.GetData();
 		if(!data)
 		{
-			//‹ó‚ÌƒtƒB[ƒ‹ƒh‚Íì‚ç‚È‚¢
+			//ç©ºã®ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã¯ä½œã‚‰ãªã„
 			m_fields.erase(id);
 		}
 	}
@@ -104,7 +104,7 @@ DWORD CVqf::GetTotalFieldSize()
 	while(p != m_fields.end())
 	{
 		DWORD len = p->second.GetSize();
-		dwSize += len + 4 + 4;/* + (len&0x1)?1:0;	//WORD‹«ŠE‡‚í‚¹*/
+		dwSize += len + 4 + 4;/* + (len&0x1)?1:0;	//WORDå¢ƒç•Œåˆã‚ã›*/
 		
 		p++;
 	}
@@ -116,13 +116,13 @@ DWORD CVqf::Load(LPCTSTR szFileName)
 	DWORD	dwWin32errorCode = ERROR_SUCCESS;
 	Release();
 
-	//ƒtƒ@ƒCƒ‹‚ğƒI[ƒvƒ“
+	//ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ã‚ªãƒ¼ãƒ—ãƒ³
 	HANDLE hFile = CreateFile(
 				szFileName,
 				GENERIC_READ,
 				FILE_SHARE_READ,
 				NULL,
-				OPEN_EXISTING,	//ƒtƒ@ƒCƒ‹‚ğƒI[ƒvƒ“‚µ‚Ü‚·Bw’èƒtƒ@ƒCƒ‹‚ª‘¶İ‚µ‚Ä‚¢‚È‚¢ê‡AŠÖ”‚Í¸”s‚µ‚Ü‚·B
+				OPEN_EXISTING,	//ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ã‚ªãƒ¼ãƒ—ãƒ³ã—ã¾ã™ã€‚æŒ‡å®šãƒ•ã‚¡ã‚¤ãƒ«ãŒå­˜åœ¨ã—ã¦ã„ãªã„å ´åˆã€é–¢æ•°ã¯å¤±æ•—ã—ã¾ã™ã€‚
 				FILE_ATTRIBUTE_NORMAL,
 				NULL);
 	if(hFile == INVALID_HANDLE_VALUE)
@@ -133,7 +133,7 @@ DWORD CVqf::Load(LPCTSTR szFileName)
 
 	DWORD dwRet;
 	char szTmp[8];
-	//VQFƒwƒbƒ_‚ğ“Ç‚İ‚Æ‚é
+	//VQFãƒ˜ãƒƒãƒ€ã‚’èª­ã¿ã¨ã‚‹
 	char head[12];
 	if(!ReadFile(hFile,&head,sizeof(head),&dwRet,NULL) || (dwRet != sizeof(head)))
 	{
@@ -141,7 +141,7 @@ DWORD CVqf::Load(LPCTSTR szFileName)
 		return -1;
 	}
 	
-	//TWIN VQƒtƒ@ƒCƒ‹‚Å‚ ‚é‚±‚Æ‚ğŠm”F
+	//TWIN VQãƒ•ã‚¡ã‚¤ãƒ«ã§ã‚ã‚‹ã“ã¨ã‚’ç¢ºèª
 	if(strncmp(head,"TWIN97012000",sizeof(head)) != 0)
 	{
 		if(strncmp(head,"TWIN00052200",sizeof(head)) != 0)
@@ -161,7 +161,7 @@ DWORD CVqf::Load(LPCTSTR szFileName)
 	
 	m_bEnable = TRUE;
 
-	//ƒwƒbƒ_ƒTƒCƒY‚ğæ“¾
+	//ãƒ˜ãƒƒãƒ€ã‚µã‚¤ã‚ºã‚’å–å¾—
 	if(!ReadFile(hFile,&szTmp,4,&dwRet,NULL) || (dwRet != 4))
 	{
 		CloseHandle(hFile);
@@ -179,7 +179,7 @@ DWORD CVqf::Load(LPCTSTR szFileName)
 	m_dwStreamSize -= lHeadSize + 12;
 
 
-	//ƒwƒbƒ_‚ğæ‚è‚Ş
+	//ãƒ˜ãƒƒãƒ€ã‚’å–ã‚Šè¾¼ã‚€
 	if(!ReadFile(hFile,HeadBuf,lHeadSize,&dwRet,NULL) || (dwRet != lHeadSize))
 	{
 		CloseHandle(hFile);
@@ -192,7 +192,7 @@ DWORD CVqf::Load(LPCTSTR szFileName)
 	{
 		if(8 > lRemainSize)
 		{
-			break;	//—pS
+			break;	//ç”¨å¿ƒ
 		}
 		char id1 = HeadBuf[lHeadSize-lRemainSize];
 		char id2 = HeadBuf[lHeadSize-lRemainSize+1];
@@ -203,17 +203,17 @@ DWORD CVqf::Load(LPCTSTR szFileName)
 		lRemainSize -= 4;
 		if(lSize > lRemainSize)
 		{
-			break;	//—pS
+			break;	//ç”¨å¿ƒ
 		}
 
-		//map‚É’Ç‰Á
+		//mapã«è¿½åŠ 
 		SetField(id1,id2,id3,id4,(const unsigned char *)&HeadBuf[lHeadSize-lRemainSize],lSize);
 
 		lRemainSize -= lSize;
 	}
 	free(HeadBuf);
 
-	//ƒTƒ“ƒvƒŠƒ“ƒOƒŒ[ƒg‚È‚Ç‚Ìî•ñ‚ğæ“¾‚·‚é
+	//ã‚µãƒ³ãƒ—ãƒªãƒ³ã‚°ãƒ¬ãƒ¼ãƒˆãªã©ã®æƒ…å ±ã‚’å–å¾—ã™ã‚‹
 	FieldMap::iterator p = m_fields.find(MakeKey('C','O','M','M'));
 	if(p != m_fields.end())
 	{
@@ -251,13 +251,13 @@ DWORD CVqf::Save(LPCTSTR szFileName)
 
 	DWORD dwTotalFrameSize = GetTotalFieldSize();
 
-	//==================Œ³ƒtƒ@ƒCƒ‹‚ğƒƒ‚ƒŠ‚É•Û‘¶==================
+	//==================å…ƒãƒ•ã‚¡ã‚¤ãƒ«ã‚’ãƒ¡ãƒ¢ãƒªã«ä¿å­˜==================
 	HANDLE hFile = CreateFile(
 				szFileName,
 				GENERIC_READ,
 				FILE_SHARE_READ,
 				NULL,
-				OPEN_EXISTING,	//w’èƒtƒ@ƒCƒ‹‚ª‘¶İ‚µ‚Ä‚¢‚È‚¢ê‡AŠÖ”‚Í¸”s‚µ‚Ü‚·B
+				OPEN_EXISTING,	//æŒ‡å®šãƒ•ã‚¡ã‚¤ãƒ«ãŒå­˜åœ¨ã—ã¦ã„ãªã„å ´åˆã€é–¢æ•°ã¯å¤±æ•—ã—ã¾ã™ã€‚
 				FILE_ATTRIBUTE_NORMAL,
 				NULL);
 	if(hFile == INVALID_HANDLE_VALUE)
@@ -268,7 +268,7 @@ DWORD CVqf::Save(LPCTSTR szFileName)
 
 	DWORD dwRet;
 	char szTmp[8];
-	//VQFƒwƒbƒ_‚ğ“Ç‚İ‚Æ‚é
+	//VQFãƒ˜ãƒƒãƒ€ã‚’èª­ã¿ã¨ã‚‹
 	char head[12];
 	if(!ReadFile(hFile,&head,sizeof(head),&dwRet,NULL) || (dwRet != sizeof(head)))
 	{
@@ -276,7 +276,7 @@ DWORD CVqf::Save(LPCTSTR szFileName)
 		return -1;
 	}
 	
-	//TWIN VQƒtƒ@ƒCƒ‹‚Å‚ ‚é‚±‚Æ‚ğŠm”F
+	//TWIN VQãƒ•ã‚¡ã‚¤ãƒ«ã§ã‚ã‚‹ã“ã¨ã‚’ç¢ºèª
 	if( (strncmp(head,"TWIN97012000",sizeof(head)) != 0) &&
 		(strncmp(head,"TWIN00052200",sizeof(head)) != 0) )
 	{
@@ -284,7 +284,7 @@ DWORD CVqf::Save(LPCTSTR szFileName)
 		return -1;
 	}
 	
-	//ƒwƒbƒ_ƒTƒCƒY‚ğæ“¾
+	//ãƒ˜ãƒƒãƒ€ã‚µã‚¤ã‚ºã‚’å–å¾—
 	if(!ReadFile(hFile,&szTmp,4,&dwRet,NULL) || (dwRet != 4))
 	{
 		CloseHandle(hFile);
@@ -294,7 +294,7 @@ DWORD CVqf::Save(LPCTSTR szFileName)
 	DWORD dwDataSize = GetFileSize(hFile,NULL);
 	dwDataSize -= lHeadSize + 16;
 
-	//ƒoƒbƒtƒ@ƒƒ‚ƒŠ‚ÌŠm•Û
+	//ãƒãƒƒãƒ•ã‚¡ãƒ¡ãƒ¢ãƒªã®ç¢ºä¿
 	char *pRawData = (char *)malloc(dwDataSize);
 	if(!pRawData)
 	{
@@ -302,7 +302,7 @@ DWORD CVqf::Save(LPCTSTR szFileName)
 		CloseHandle(hFile);
 		return dwWin32errorCode;
 	}
-	//raw data‚Ì“Ç‚İo‚µ
+	//raw dataã®èª­ã¿å‡ºã—
 	DWORD dwWritten;
 	SetFilePointer(hFile,lHeadSize+16,NULL,FILE_BEGIN);
 	if(!ReadFile(hFile,pRawData,dwDataSize,&dwWritten,NULL))
@@ -314,8 +314,8 @@ DWORD CVqf::Save(LPCTSTR szFileName)
 	}
 	CloseHandle(hFile);
 
-	//==================ƒeƒ“ƒ|ƒ‰ƒŠ‚ğì¬==================
-	//ƒeƒ“ƒ|ƒ‰ƒŠ–¼‚ğæ“¾
+	//==================ãƒ†ãƒ³ãƒãƒ©ãƒªã‚’ä½œæˆ==================
+	//ãƒ†ãƒ³ãƒãƒ©ãƒªåã‚’å–å¾—
 	TCHAR szTempPath[MAX_PATH];
 	TCHAR szTempFile[MAX_PATH];
 	lstrcpy(szTempPath,szFileName);
@@ -327,7 +327,7 @@ DWORD CVqf::Save(LPCTSTR szFileName)
 		DeleteFile(szTempFile);
 		return dwWin32errorCode;
 	}
-	//ƒtƒ@ƒCƒ‹ƒI[ƒvƒ“(w’èƒtƒ@ƒCƒ‹‚ª‚·‚Å‚É‘¶İ‚µ‚Ä‚¢‚éê‡A‚»‚Ìƒtƒ@ƒCƒ‹‚Íã‘‚«‚³‚ê‚Ü‚·B)
+	//ãƒ•ã‚¡ã‚¤ãƒ«ã‚ªãƒ¼ãƒ—ãƒ³(æŒ‡å®šãƒ•ã‚¡ã‚¤ãƒ«ãŒã™ã§ã«å­˜åœ¨ã—ã¦ã„ã‚‹å ´åˆã€ãã®ãƒ•ã‚¡ã‚¤ãƒ«ã¯ä¸Šæ›¸ãã•ã‚Œã¾ã™ã€‚)
 	hFile = CreateFile(szTempFile,GENERIC_WRITE|GENERIC_READ,FILE_SHARE_READ,NULL,CREATE_ALWAYS,FILE_ATTRIBUTE_NORMAL,NULL);
 	if(hFile == INVALID_HANDLE_VALUE)
 	{
@@ -336,7 +336,7 @@ DWORD CVqf::Save(LPCTSTR szFileName)
 		DeleteFile(szTempFile);
 		return dwWin32errorCode;
 	}
-	//‚¨‚Ü‚¶‚È‚¢
+	//ãŠã¾ã˜ãªã„
 	if(SetFilePointer(hFile,0,NULL,FILE_BEGIN) == INVALID_SET_FILE_POINTER)
 	{
 		dwWin32errorCode = GetLastError();
@@ -345,7 +345,7 @@ DWORD CVqf::Save(LPCTSTR szFileName)
 		DeleteFile(szTempFile);
 		return dwWin32errorCode;
 	}
-	//ƒwƒbƒ_—Ìˆæ‚ğƒXƒLƒbƒv
+	//ãƒ˜ãƒƒãƒ€é ˜åŸŸã‚’ã‚¹ã‚­ãƒƒãƒ—
 	if(SetFilePointer(hFile,GetTotalFieldSize() + 16,NULL,FILE_BEGIN) == INVALID_SET_FILE_POINTER)
 	{
 		dwWin32errorCode = GetLastError();
@@ -354,7 +354,7 @@ DWORD CVqf::Save(LPCTSTR szFileName)
 		DeleteFile(szTempFile);
 		return dwWin32errorCode;
 	}
-	//ˆÚ“®æ‚ÉƒRƒs[
+	//ç§»å‹•å…ˆã«ã‚³ãƒ”ãƒ¼
 	if(WriteFile(hFile,pRawData,dwDataSize,&dwWritten,NULL) == 0)
 	{
 		dwWin32errorCode = GetLastError();
@@ -366,7 +366,7 @@ DWORD CVqf::Save(LPCTSTR szFileName)
 
 	free(pRawData);
 
-	//ƒwƒbƒ_—Ìˆæ‚ğì¬
+	//ãƒ˜ãƒƒãƒ€é ˜åŸŸã‚’ä½œæˆ
 	if(SetFilePointer(hFile,0,NULL,FILE_BEGIN) == INVALID_SET_FILE_POINTER )
 	{
 		dwWin32errorCode = GetLastError();
@@ -381,7 +381,7 @@ DWORD CVqf::Save(LPCTSTR szFileName)
 		DeleteFile(szTempFile);
 		return dwWin32errorCode;
 	}
-	//(ƒwƒbƒ_ƒTƒCƒY)
+	//(ãƒ˜ãƒƒãƒ€ã‚µã‚¤ã‚º)
 	MakeBeSize(GetTotalFieldSize(),szTmp);
 	if(WriteFile(hFile,szTmp,4,&dwWritten,NULL) == 0)
 	{
@@ -390,7 +390,7 @@ DWORD CVqf::Save(LPCTSTR szFileName)
 		DeleteFile(szTempFile);
 		return dwWin32errorCode;
 	}
-	//(ƒ^ƒOî•ñ‚ğ‘‚«‚Ş)
+	//(ã‚¿ã‚°æƒ…å ±ã‚’æ›¸ãè¾¼ã‚€)
 	FieldMap::iterator p;
 	p = m_fields.begin();
 	while(p != m_fields.end())
@@ -426,7 +426,7 @@ DWORD CVqf::Save(LPCTSTR szFileName)
 	}
 	CloseHandle(hFile);
 	
-	//ƒIƒŠƒWƒiƒ‹ƒtƒ@ƒCƒ‹‚ğ‘Ş”ğ(ƒŠƒl[ƒ€)
+	//ã‚ªãƒªã‚¸ãƒŠãƒ«ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é€€é¿(ãƒªãƒãƒ¼ãƒ )
 	TCHAR szPreFile[MAX_PATH];
 	if(!GetTempFileName(szTempPath,_T("tms"),0,szPreFile))
 	{
@@ -434,7 +434,7 @@ DWORD CVqf::Save(LPCTSTR szFileName)
 		DeleteFile(szTempFile);
 		return dwWin32errorCode;
 	}
-	DeleteFile(szPreFile);//è”²‚«(^^;
+	DeleteFile(szPreFile);//æ‰‹æŠœã(^^;
 	if(!MoveFile(szFileName,szPreFile))
 	{
 		dwWin32errorCode = GetLastError();
@@ -442,7 +442,7 @@ DWORD CVqf::Save(LPCTSTR szFileName)
 		return dwWin32errorCode;
 	}
 
-	//Š®¬•i‚ğƒŠƒl[ƒ€
+	//å®Œæˆå“ã‚’ãƒªãƒãƒ¼ãƒ 
 	if(!MoveFile(szTempFile,szFileName))
 	{
 		dwWin32errorCode = GetLastError();
@@ -451,7 +451,7 @@ DWORD CVqf::Save(LPCTSTR szFileName)
 		return dwWin32errorCode;
 	}
 
-	//ƒIƒŠƒWƒiƒ‹‚ğíœ
+	//ã‚ªãƒªã‚¸ãƒŠãƒ«ã‚’å‰Šé™¤
 	DeleteFile(szPreFile);
 
 	return dwWin32errorCode;
@@ -462,8 +462,8 @@ CString CVqf::GetFormatString()
 	CString strFormat;
 	if(!m_bEnable)
 	{
-		//u•s–¾v
-		strFormat = _T("•s–¾");//.LoadString(IDS_UNKNOWN);
+		//ã€Œä¸æ˜ã€
+		strFormat = _T("ä¸æ˜");//.LoadString(IDS_UNKNOWN);
 		return strFormat;
 	}
 
@@ -479,8 +479,8 @@ CString CVqf::GetFormatString()
 CString CVqf::GetTimeString()
 {
 	CString strTime;
-	//u•s–¾v
-	strTime = _T("•s–¾"); //.LoadString(IDS_UNKNOWN);
+	//ã€Œä¸æ˜ã€
+	strTime = _T("ä¸æ˜"); //.LoadString(IDS_UNKNOWN);
 	if(!m_bEnable)
 	{
 		return strTime;

@@ -1,4 +1,4 @@
-// Info_MonkeysAudio.cpp: CInfo_MonkeysAudio ƒNƒ‰ƒX‚ÌƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“
+// Info_MonkeysAudio.cpp: CInfo_MonkeysAudio ã‚¯ãƒ©ã‚¹ã®ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³
 //
 //////////////////////////////////////////////////////////////////////
 
@@ -22,7 +22,7 @@ static const int MAC_FORMAT_FLAG_HAS_SEEK_ELEMENTS	= 16;
 static const int MAC_FORMAT_FLAG_CREATE_WAV_HEADER	= 32;
 
 //////////////////////////////////////////////////////////////////////
-// \’z/Á–Å
+// æ§‹ç¯‰/æ¶ˆæ»…
 //////////////////////////////////////////////////////////////////////
 
 CInfo_MonkeysAudio::CInfo_MonkeysAudio()
@@ -49,13 +49,13 @@ DWORD CInfo_MonkeysAudio::Load(LPCTSTR szFileName)
 	DWORD	dwWin32errorCode = ERROR_SUCCESS;
 	Release();
 
-	//ƒtƒ@ƒCƒ‹‚ğƒI[ƒvƒ“
+	//ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ã‚ªãƒ¼ãƒ—ãƒ³
 	HANDLE hFile = CreateFile(
 				szFileName,
 				GENERIC_READ,
 				FILE_SHARE_READ,
 				NULL,
-				OPEN_EXISTING,	//ƒtƒ@ƒCƒ‹‚ğƒI[ƒvƒ“‚µ‚Ü‚·Bw’èƒtƒ@ƒCƒ‹‚ª‘¶İ‚µ‚Ä‚¢‚È‚¢ê‡AŠÖ”‚Í¸”s‚µ‚Ü‚·B
+				OPEN_EXISTING,	//ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ã‚ªãƒ¼ãƒ—ãƒ³ã—ã¾ã™ã€‚æŒ‡å®šãƒ•ã‚¡ã‚¤ãƒ«ãŒå­˜åœ¨ã—ã¦ã„ãªã„å ´åˆã€é–¢æ•°ã¯å¤±æ•—ã—ã¾ã™ã€‚
 				FILE_ATTRIBUTE_NORMAL,
 				NULL);
 	if(hFile == INVALID_HANDLE_VALUE)
@@ -65,7 +65,7 @@ DWORD CInfo_MonkeysAudio::Load(LPCTSTR szFileName)
 	}
 
 	DWORD dwRet;
-	// APEƒwƒbƒ_‚Ìæ“ª4ƒoƒCƒg‚ğƒ[ƒh
+	// APEãƒ˜ãƒƒãƒ€ã®å…ˆé ­4ãƒã‚¤ãƒˆã‚’ãƒ­ãƒ¼ãƒ‰
 	APE_COMMON_HEADER header;
 	if(!ReadFile(hFile,&header,sizeof(header),&dwRet,NULL) || (dwRet != sizeof(header)))
 	{
@@ -80,7 +80,7 @@ DWORD CInfo_MonkeysAudio::Load(LPCTSTR szFileName)
 	if(header.nVersion <= 3970)
 	{
 		//
-		// v3.97‚Æ‚»‚êˆÈ‘O‚ÌŒÃ‚¢ƒwƒbƒ_‚Ì“Ç
+		// v3.97ã¨ãã‚Œä»¥å‰ã®å¤ã„ãƒ˜ãƒƒãƒ€ã®èª­è¾¼
 		//
 		if(!ReadFile(hFile,(char *)&m_apeHeaderOld,sizeof(m_apeHeaderOld),&dwRet,NULL) || (dwRet != sizeof(m_apeHeaderOld)))
 		{
@@ -96,7 +96,7 @@ DWORD CInfo_MonkeysAudio::Load(LPCTSTR szFileName)
 				return dwWin32errorCode;
 			}
 		}
-		// ƒtƒH[ƒ}ƒbƒg•¶š—ñ‚ğì¬
+		// ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆæ–‡å­—åˆ—ã‚’ä½œæˆ
 		int nBitsPerSample;
 		if(m_apeHeaderOld.nFormatFlags & MAC_FORMAT_FLAG_8_BIT)
 		{
@@ -146,7 +146,7 @@ DWORD CInfo_MonkeysAudio::Load(LPCTSTR szFileName)
 		if ((header.nVersion >= 3950)) nBlocksPerFrame = 73728 * 4;
 		int nTotalBlocks = (!m_apeHeaderOld.nTotalFrames)?0:((m_apeHeaderOld.nTotalFrames-1)*nBlocksPerFrame)+m_apeHeaderOld.nFinalFrameBlocks;
 		int msec = 0;
-		if(m_apeHeaderOld.nSampleRate)	// 0œZ–h~
+		if(m_apeHeaderOld.nSampleRate)	// 0é™¤ç®—é˜²æ­¢
 		{
 			msec = (int )((__int64 )nTotalBlocks * (__int64 )1000 / (__int64 )m_apeHeaderOld.nSampleRate);
 		}
@@ -173,7 +173,7 @@ DWORD CInfo_MonkeysAudio::Load(LPCTSTR szFileName)
 	}
 	else
 	{
-		// apeƒfƒNƒŠƒvƒ^‚Ì“Ç
+		// apeãƒ‡ã‚¯ãƒªãƒ—ã‚¿ã®èª­è¾¼
 		SetFilePointer(hFile,0,NULL,FILE_BEGIN);
 		if(!ReadFile(hFile,(char *)&m_apeDescriptor,sizeof(APE_DESCRIPTOR),&dwRet,NULL))
 		{
@@ -184,7 +184,7 @@ DWORD CInfo_MonkeysAudio::Load(LPCTSTR szFileName)
 		{
 			SetFilePointer(hFile,m_apeDescriptor.nDescriptorBytes - dwRet,NULL,FILE_CURRENT);
 		}
-		// apeƒwƒbƒ_‚Ì“Ç
+		// apeãƒ˜ãƒƒãƒ€ã®èª­è¾¼
 		if(!ReadFile(hFile,(char *)&m_apeHeader,sizeof(m_apeHeader),&dwRet,NULL))
 		{
 			CloseHandle(hFile);
@@ -194,7 +194,7 @@ DWORD CInfo_MonkeysAudio::Load(LPCTSTR szFileName)
 		{
 			SetFilePointer(hFile,m_apeDescriptor.nHeaderBytes - dwRet,NULL,FILE_CURRENT);
 		}
-		// ƒtƒH[ƒ}ƒbƒg•¶š—ñ‚ğì¬
+		// ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆæ–‡å­—åˆ—ã‚’ä½œæˆ
 		m_strAudioFormat.Format(_T("Monkey's Audio v%.2lf, %dbit, %dHz, %dch"),
 								(double )header.nVersion/1000.0,
 								m_apeHeader.nBitsPerSample,

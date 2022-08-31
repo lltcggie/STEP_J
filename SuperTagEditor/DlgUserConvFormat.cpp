@@ -1,4 +1,4 @@
-// DlgUserConvFormat.cpp : ƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“ ƒtƒ@ƒCƒ‹
+// DlgUserConvFormat.cpp : ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³ ãƒ•ã‚¡ã‚¤ãƒ«
 //
 
 #include "stdafx.h"
@@ -13,7 +13,7 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgUserConvFormat ƒ_ƒCƒAƒƒO
+// CDlgUserConvFormat ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
 
 IMPLEMENT_DYNCREATE(CDlgUserConvFormat, COptionPage)
 
@@ -59,7 +59,7 @@ BEGIN_MESSAGE_MAP(CDlgUserConvFormat, COptionPage)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgUserConvFormat ƒƒbƒZ[ƒW ƒnƒ“ƒhƒ‰
+// CDlgUserConvFormat ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒãƒ³ãƒ‰ãƒ©
 
 void CDlgUserConvFormat::OutputFormatString(const TCHAR *sText)
 {
@@ -129,10 +129,10 @@ void CDlgUserConvFormat::OnBtNameChange()
 
 	dialog.m_strName = m_userFormat[m_nFormatType].strName;
 	if (dialog.DoModal() == IDOK) {
-		// V‚µ‚¢–¼Ì‚É•ÏX
+		// æ–°ã—ã„åç§°ã«å¤‰æ›´
 		m_userFormat[m_nFormatType].strName = dialog.m_strName;
 
-		// ƒŠƒXƒgXV
+		// ãƒªã‚¹ãƒˆæ›´æ–°
 		OnSelChangeListFormatType();
 		m_listFormatType.ResetContent();
 		int i; for (i = 0; i < USER_CONV_FORMAT_MAX; i++) {
@@ -140,14 +140,14 @@ void CDlgUserConvFormat::OnBtNameChange()
 			strName.Format(_T("%d: %s"), i+1, m_userFormat[i].strName);
 			m_listFormatType.AddString(strName);
 		}
-		// ‘I‘ğ‚µ‚È‚¨‚·
+		// é¸æŠã—ãªãŠã™
 		m_listFormatType.SetCurSel(m_nFormatType);
 	}
 }
 
 void CDlgUserConvFormat::OnSelChangeListFormatType() 
 {
-	// Œ»İ•ÒW’†‚Ì“à—e‚ğ”½‰f‚³‚¹‚é
+	// ç¾åœ¨ç·¨é›†ä¸­ã®å†…å®¹ã‚’åæ˜ ã•ã›ã‚‹
 	m_editTag2File.GetWindowText(m_userFormat[m_nFormatType].strTag2File);
 	m_editFile2Tag.GetWindowText(m_userFormat[m_nFormatType].strFile2Tag);
 
@@ -172,8 +172,8 @@ BOOL CDlgUserConvFormat::OnInitDialog()
 	m_editTag2File.SetWindowText(m_userFormat[m_nFormatType].strTag2File);
 	m_editFile2Tag.SetWindowText(m_userFormat[m_nFormatType].strFile2Tag);
 
-	return TRUE;  // ƒRƒ“ƒgƒ[ƒ‹‚ÉƒtƒH[ƒJƒX‚ğİ’è‚µ‚È‚¢‚Æ‚«A–ß‚è’l‚Í TRUE ‚Æ‚È‚è‚Ü‚·
-	              // —áŠO: OCX ƒvƒƒpƒeƒB ƒy[ƒW‚Ì–ß‚è’l‚Í FALSE ‚Æ‚È‚è‚Ü‚·
+	return TRUE;  // ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã«ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ã‚’è¨­å®šã—ãªã„ã¨ãã€æˆ»ã‚Šå€¤ã¯ TRUE ã¨ãªã‚Šã¾ã™
+	              // ä¾‹å¤–: OCX ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ ãƒšãƒ¼ã‚¸ã®æˆ»ã‚Šå€¤ã¯ FALSE ã¨ãªã‚Šã¾ã™
 }
 
 void CDlgUserConvFormat::OnOK() 

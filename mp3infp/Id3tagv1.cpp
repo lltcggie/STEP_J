@@ -1,4 +1,4 @@
-// Id3tagv1.cpp: CId3tagv1 ƒNƒ‰ƒX‚ÌƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“
+// Id3tagv1.cpp: CId3tagv1 ã‚¯ãƒ©ã‚¹ã®ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³
 //
 //////////////////////////////////////////////////////////////////////
 
@@ -48,7 +48,7 @@ static const LPCTSTR szId3gnr[256]={
 	};
 
 //////////////////////////////////////////////////////////////////////
-// \’z/Á–Å
+// æ§‹ç¯‰/æ¶ˆæ»…
 //////////////////////////////////////////////////////////////////////
 
 CId3tagv1::CId3tagv1(BOOL bScmpxGenre)
@@ -160,7 +160,7 @@ DWORD CId3tagv1::Load(LPCTSTR szFileName)
 		return dwWin32errorCode;
 	}
 
-	//ID3ƒ^ƒO‚ª‚ ‚é‚Í‚¸‚ÌˆÊ’u‚Ü‚ÅSEEK
+	//ID3ã‚¿ã‚°ãŒã‚ã‚‹ã¯ãšã®ä½ç½®ã¾ã§SEEK
 	if(fseek(fp,-128,SEEK_END) != 0)
 	{
 		dwWin32errorCode = GetLastError();
@@ -168,7 +168,7 @@ DWORD CId3tagv1::Load(LPCTSTR szFileName)
 		return dwWin32errorCode;
 	}
 
-	//ID3ƒ^ƒO‚©‚Ç‚¤‚©‚ğƒ`ƒFƒbƒN
+	//ID3ã‚¿ã‚°ã‹ã©ã†ã‹ã‚’ãƒã‚§ãƒƒã‚¯
 	ID3_TAG tag;
 	fread(&tag,1,sizeof(tag),fp);
 	fclose(fp);
@@ -178,7 +178,7 @@ DWORD CId3tagv1::Load(LPCTSTR szFileName)
 	}
 	
 	m_bEnable = TRUE;
-	//î•ñ‚ÌÌæ
+	//æƒ…å ±ã®æ¡å–
 	ReadTagString(m_szTitle, tag.Title, 30);
 	ReadTagString(m_szArtist, tag.Artist, 30);
 	ReadTagString(m_szAlbum, tag.Album, 30);
@@ -268,7 +268,7 @@ DWORD CId3tagv1::Save(LPCTSTR szFileName)
 	ID3_TAG	tag;
 	char	szTagTmp[4];
 
-	//î•ñ‚Ì•Û‘¶
+	//æƒ…å ±ã®ä¿å­˜
 	memset(&tag,0x00,sizeof(tag));
 	strncpy(tag.Title,m_szTitle,strlen(m_szTitle));
 	strncpy(tag.Artist,m_szArtist,strlen(m_szArtist));
@@ -287,14 +287,14 @@ DWORD CId3tagv1::Save(LPCTSTR szFileName)
 		dwWin32errorCode = GetLastError();
 		return dwWin32errorCode;
 	}
-	//ID3ƒ^ƒO‚ª‚ ‚é‚Í‚¸‚ÌˆÊ’u‚Ü‚ÅSEEK
+	//ID3ã‚¿ã‚°ãŒã‚ã‚‹ã¯ãšã®ä½ç½®ã¾ã§SEEK
 	if(fseek(fp,-128,SEEK_END) != 0)
 	{
 		dwWin32errorCode = GetLastError();
 		fclose(fp);
 		return dwWin32errorCode;
 	}
-	//ID3ƒ^ƒO‚©‚Ç‚¤‚©‚ğƒ`ƒFƒbƒN
+	//ID3ã‚¿ã‚°ã‹ã©ã†ã‹ã‚’ãƒã‚§ãƒƒã‚¯
 	if(fread(szTagTmp,1,3,fp) < 3)
 	{
 //		dwWin32errorCode = GetLastError();//?
@@ -303,7 +303,7 @@ DWORD CId3tagv1::Save(LPCTSTR szFileName)
 	}
 	if(!IsTagValid((ID3_TAG *)szTagTmp))
 	{
-		//ID3TAG‚ªŒ©‚Â‚©‚ç‚È‚¢
+		//ID3TAGãŒè¦‹ã¤ã‹ã‚‰ãªã„
 		if(fseek(fp,0,SEEK_END))
 		{
 			dwWin32errorCode = GetLastError();
@@ -324,7 +324,7 @@ DWORD CId3tagv1::Save(LPCTSTR szFileName)
 		fclose(fp);
 		return dwWin32errorCode;
 	}
-	if(fclose(fp) == EOF)	//ƒ‰ƒCƒgƒvƒƒeƒNƒg‚Í‚±‚±‚ÅŒŸo
+	if(fclose(fp) == EOF)	//ãƒ©ã‚¤ãƒˆãƒ—ãƒ­ãƒ†ã‚¯ãƒˆã¯ã“ã“ã§æ¤œå‡º
 	{
 		dwWin32errorCode = GetLastError();
 		return dwWin32errorCode;
@@ -339,20 +339,20 @@ DWORD CId3tagv1::DelTag(LPCTSTR szFileName)
 	FILE	*fp;
 	char	szTag[4];
 
-	//ŠJ‚­
+	//é–‹ã
 	if((fp=_tfopen(szFileName,_T("r+b"))) == NULL)
 	{
 		dwWin32errorCode = GetLastError();
 		return dwWin32errorCode;
 	}
-	//ID3ƒ^ƒO‚ª‚ ‚é‚Í‚¸‚ÌˆÊ’u‚Ü‚ÅSEEK
+	//ID3ã‚¿ã‚°ãŒã‚ã‚‹ã¯ãšã®ä½ç½®ã¾ã§SEEK
 	if(fseek(fp,-128,SEEK_END) != 0)
 	{
 		dwWin32errorCode = GetLastError();
 		fclose(fp);
 		return dwWin32errorCode;
 	}
-	//ID3ƒ^ƒO‚©‚Ç‚¤‚©‚ğƒ`ƒFƒbƒN
+	//ID3ã‚¿ã‚°ã‹ã©ã†ã‹ã‚’ãƒã‚§ãƒƒã‚¯
 	if(fread(szTag,1,3,fp) < 3)
 	{
 //		dwWin32errorCode = GetLastError();
@@ -362,7 +362,7 @@ DWORD CId3tagv1::DelTag(LPCTSTR szFileName)
 	if(!IsTagValid((ID3_TAG *)szTag))
 	{
 		fclose(fp);
-		//ID3ƒ^ƒO‚ª–³‚¢‚È‚ç‚»‚ê‚àOK
+		//ID3ã‚¿ã‚°ãŒç„¡ã„ãªã‚‰ãã‚Œã‚‚OK
 		return -1;
 	}
 	if(fseek(fp,-3,SEEK_CUR))
@@ -371,7 +371,7 @@ DWORD CId3tagv1::DelTag(LPCTSTR szFileName)
 		fclose(fp);
 		return dwWin32errorCode;
 	}
-	//Ø‚è‚Â‚ß
+	//åˆ‡ã‚Šã¤ã‚
 	if(_chsize(fileno(fp),ftell(fp)) == -1)
 	{
 		dwWin32errorCode = GetLastError();
@@ -379,7 +379,7 @@ DWORD CId3tagv1::DelTag(LPCTSTR szFileName)
 		return dwWin32errorCode;
 	}
 
-	if(fclose(fp) == EOF)	//ƒ‰ƒCƒgƒvƒƒeƒNƒg‚Í‚±‚±‚ÅŒŸo
+	if(fclose(fp) == EOF)	//ãƒ©ã‚¤ãƒˆãƒ—ãƒ­ãƒ†ã‚¯ãƒˆã¯ã“ã“ã§æ¤œå‡º
 	{
 		dwWin32errorCode = GetLastError();
 		return dwWin32errorCode;
@@ -402,7 +402,7 @@ void CId3tagv1::GetId3tag(ID3_TAG *tag,BOOL bScmpxGenre)
 
 DWORD CId3tagv1::MakeTag(LPCTSTR szFileName)
 {
-	//ID3ƒ^ƒO‚ğì¬
+	//ID3ã‚¿ã‚°ã‚’ä½œæˆ
 	Release();
 	SetTitle(getFileName(szFileName));
 

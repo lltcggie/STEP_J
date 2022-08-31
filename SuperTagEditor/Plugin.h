@@ -1,4 +1,4 @@
-// Plugin.h: CPlugin クラスのインターフェイス
+// Plugin.h: CPlugin 繧ｯ繝ｩ繧ｹ縺ｮ繧､繝ｳ繧ｿ繝ｼ繝輔ぉ繧､繧ｹ
 //
 //////////////////////////////////////////////////////////////////////
 
@@ -16,7 +16,7 @@ typedef struct _STEPlugin {
 	bool bUse;
 	CString sFileName;
 	CString sPluginName;
-	CPtrArray arExtInfo;				// サポートしている拡張子情報など
+	CPtrArray arExtInfo;				// 繧ｵ繝昴�ｼ繝医＠縺ｦ縺�繧区僑蠑ｵ蟄先ュ蝣ｱ縺ｪ縺ｩ
 	UINT nOptionCommandID;
 
 	LPCTSTR (WINAPI *STEPGetToolTipText)(UINT);

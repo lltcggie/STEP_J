@@ -1,4 +1,4 @@
-// DlgDefaultValue.cpp : ƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“ ƒtƒ@ƒCƒ‹
+// DlgDefaultValue.cpp : ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³ ãƒ•ã‚¡ã‚¤ãƒ«
 //
 
 #include "stdafx.h"
@@ -12,7 +12,7 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgDefaultValue ƒvƒƒpƒeƒB ƒy[ƒW
+// CDlgDefaultValue ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ ãƒšãƒ¼ã‚¸
 
 IMPLEMENT_DYNCREATE(CDlgDefaultValue, CPropertyPage)
 
@@ -63,11 +63,11 @@ BEGIN_MESSAGE_MAP(CDlgDefaultValue, CPropertyPage)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgDefaultValue ƒƒbƒZ[ƒW ƒnƒ“ƒhƒ‰
+// CDlgDefaultValue ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒãƒ³ãƒ‰ãƒ©
 
 void CDlgDefaultValue::OnBtResetPage()
 {
-    // TODO: ‚±‚ÌˆÊ’u‚ÉƒRƒ“ƒgƒ[ƒ‹’Ê’mƒnƒ“ƒhƒ‰—p‚ÌƒR[ƒh‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
+    // TODO: ã“ã®ä½ç½®ã«ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«é€šçŸ¥ãƒãƒ³ãƒ‰ãƒ©ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
     extern const bool bOptAutoConvID3v2_default;
     extern const bool bOptAutoConvRMP_default;
     extern const int  nOptSIFieldConvType_default;
@@ -94,7 +94,7 @@ void CDlgDefaultValue::OnBtResetPage()
     m_nId3v2Version = nId3v2Version_default;
     m_nId3v2Encode = nId3v2Encode_default;
     m_nId3v2VersionNew = nId3v2VersionNew_default;
-    m_nId3v2EncodeNew = nId3v2EncodeNew_default;//by Kobarin (‰Šú’l‚ğ UTF-16 ‚É•ÏX)
+    m_nId3v2EncodeNew = nId3v2EncodeNew_default;//by Kobarin (åˆæœŸå€¤ã‚’ UTF-16 ã«å¤‰æ›´)
     UpdateData(FALSE);
 }
 
@@ -102,14 +102,14 @@ BOOL CDlgDefaultValue::OnInitDialog()
 {
     CPropertyPage::OnInitDialog();
 
-    // TODO: ‚±‚ÌˆÊ’u‚É‰Šú‰»‚Ì•â‘«ˆ—‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
-    m_cbId3v2Encode.AddString(_T("•ÏX‚µ‚È‚¢"));
+    // TODO: ã“ã®ä½ç½®ã«åˆæœŸåŒ–ã®è£œè¶³å‡¦ç†ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
+    m_cbId3v2Encode.AddString(_T("å¤‰æ›´ã—ãªã„"));
     m_cbId3v2Encode.AddString(_T("ISO-8859-1"));
     m_cbId3v2Encode.AddString(_T("UTF-16"));
     m_cbId3v2Encode.AddString(_T("UTF-8"));
     m_cbId3v2Encode.SetCurSel(m_nId3v2Encode);
 
-    m_cbId3v2Version.AddString(_T("•ÏX‚µ‚È‚¢"));
+    m_cbId3v2Version.AddString(_T("å¤‰æ›´ã—ãªã„"));
     m_cbId3v2Version.AddString(_T("v2.2"));
     m_cbId3v2Version.AddString(_T("v2.3"));
     m_cbId3v2Version.AddString(_T("v2.4"));
@@ -125,13 +125,13 @@ BOOL CDlgDefaultValue::OnInitDialog()
     m_cbId3v2VersionNew.AddString(_T("v2.4"));
     m_cbId3v2VersionNew.SetCurSel(m_nId3v2VersionNew);
 
-    return TRUE;  // ƒRƒ“ƒgƒ[ƒ‹‚ÉƒtƒH[ƒJƒX‚ğİ’è‚µ‚È‚¢‚Æ‚«A–ß‚è’l‚Í TRUE ‚Æ‚È‚è‚Ü‚·
-                  // —áŠO: OCX ƒvƒƒpƒeƒB ƒy[ƒW‚Ì–ß‚è’l‚Í FALSE ‚Æ‚È‚è‚Ü‚·
+    return TRUE;  // ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã«ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ã‚’è¨­å®šã—ãªã„ã¨ãã€æˆ»ã‚Šå€¤ã¯ TRUE ã¨ãªã‚Šã¾ã™
+                  // ä¾‹å¤–: OCX ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ ãƒšãƒ¼ã‚¸ã®æˆ»ã‚Šå€¤ã¯ FALSE ã¨ãªã‚Šã¾ã™
 }
 
 void CDlgDefaultValue::OnSelchangeComboId3v2Version()
 {
-    // TODO: ‚±‚ÌˆÊ’u‚ÉƒRƒ“ƒgƒ[ƒ‹’Ê’mƒnƒ“ƒhƒ‰—p‚ÌƒR[ƒh‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
+    // TODO: ã“ã®ä½ç½®ã«ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«é€šçŸ¥ãƒãƒ³ãƒ‰ãƒ©ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
     UpdateData();
     int nVer = m_cbId3v2Version.GetCurSel();
     int nEnc = m_cbId3v2Encode.GetCurSel();
@@ -152,7 +152,7 @@ void CDlgDefaultValue::OnSelchangeComboId3v2Version()
 
 void CDlgDefaultValue::OnSelchangeComboId3v2VersionNew()
 {
-    // TODO: ‚±‚ÌˆÊ’u‚ÉƒRƒ“ƒgƒ[ƒ‹’Ê’mƒnƒ“ƒhƒ‰—p‚ÌƒR[ƒh‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
+    // TODO: ã“ã®ä½ç½®ã«ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«é€šçŸ¥ãƒãƒ³ãƒ‰ãƒ©ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
     UpdateData();
     int nVer = m_cbId3v2VersionNew.GetCurSel();
     int nEnc = m_cbId3v2EncodeNew.GetCurSel();
@@ -174,10 +174,10 @@ void CDlgDefaultValue::OnSelchangeComboId3v2VersionNew()
 
 void CDlgDefaultValue::OnEnChangeSoftwareTag()
 {
-    // TODO: ‚±‚ê‚ª RICHEDIT ƒRƒ“ƒgƒ[ƒ‹‚Ìê‡A‚±‚ÌƒRƒ“ƒgƒ[ƒ‹‚ª
-    // ‚±‚Ì’Ê’m‚ğ‘—M‚·‚é‚É‚ÍACPropertyPage::OnInitDialog() ŠÖ”‚ğƒI[ƒo[ƒ‰ƒCƒh‚µA
-    // CRichEditCtrl().SetEventMask() ‚ğ
-    // OR ó‘Ô‚Ì ENM_CHANGE ƒtƒ‰ƒO‚ğƒ}ƒXƒN‚É“ü‚ê‚ÄŒÄ‚Ño‚·•K—v‚ª‚ ‚è‚Ü‚·B
+    // TODO: ã“ã‚ŒãŒ RICHEDIT ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã®å ´åˆã€ã“ã®ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ãŒ
+    // ã“ã®é€šçŸ¥ã‚’é€ä¿¡ã™ã‚‹ã«ã¯ã€CPropertyPage::OnInitDialog() é–¢æ•°ã‚’ã‚ªãƒ¼ãƒãƒ¼ãƒ©ã‚¤ãƒ‰ã—ã€
+    // CRichEditCtrl().SetEventMask() ã‚’
+    // OR çŠ¶æ…‹ã® ENM_CHANGE ãƒ•ãƒ©ã‚°ã‚’ãƒã‚¹ã‚¯ã«å…¥ã‚Œã¦å‘¼ã³å‡ºã™å¿…è¦ãŒã‚ã‚Šã¾ã™ã€‚
 
-    // TODO: ‚±‚±‚ÉƒRƒ“ƒgƒ[ƒ‹’Ê’mƒnƒ“ƒhƒ‰[ ƒR[ƒh‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢B
+    // TODO: ã“ã“ã«ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«é€šçŸ¥ãƒãƒ³ãƒ‰ãƒ©ãƒ¼ ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„ã€‚
 }

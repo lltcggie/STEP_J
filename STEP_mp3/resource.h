@@ -1,6 +1,6 @@
 //{{NO_DEPENDENCIES}}
-// Microsoft Visual C++ ‚Å¶¬‚³‚ê‚½ƒCƒ“ƒNƒ‹[ƒh ƒtƒ@ƒCƒ‹B
-// STEP_mp3.rc ‚ÅŽg—p
+// Microsoft Visual C++ ã§ç”Ÿæˆã•ã‚ŒãŸã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰ ãƒ•ã‚¡ã‚¤ãƒ«ã€‚
+// STEP_mp3.rc ã§ä½¿ç”¨
 //
 #define IDD_DLG_FILE_RMP_ID3V2          171
 #define IDD_DLG_DEFAUT_VALUE            180

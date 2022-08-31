@@ -1,4 +1,4 @@
-// DlgConvID3v2Version.cpp : ƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“ ƒtƒ@ƒCƒ‹
+// DlgConvID3v2Version.cpp : ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³ ãƒ•ã‚¡ã‚¤ãƒ«
 //
 
 #include "stdafx.h"
@@ -12,7 +12,7 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgConvID3v2Version ƒ_ƒCƒAƒƒO
+// CDlgConvID3v2Version ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
 
 
 CDlgConvID3v2Version::CDlgConvID3v2Version(CWnd* pParent /*=NULL*/)
@@ -47,32 +47,32 @@ BEGIN_MESSAGE_MAP(CDlgConvID3v2Version, CDialog)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgConvID3v2Version ƒƒbƒZ[ƒW ƒnƒ“ƒhƒ‰
+// CDlgConvID3v2Version ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒãƒ³ãƒ‰ãƒ©
 
 BOOL CDlgConvID3v2Version::OnInitDialog()
 {
     CDialog::OnInitDialog();
 
-    // TODO: ‚±‚ÌˆÊ’u‚É‰Šú‰»‚Ì•â‘«ˆ—‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
-    m_cbId3v2Encode.AddString(_T("•ÏX‚µ‚È‚¢"));
+    // TODO: ã“ã®ä½ç½®ã«åˆæœŸåŒ–ã®è£œè¶³å‡¦ç†ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
+    m_cbId3v2Encode.AddString(_T("å¤‰æ›´ã—ãªã„"));
     m_cbId3v2Encode.AddString(_T("ISO-8859-1"));
     m_cbId3v2Encode.AddString(_T("UTF-16"));
     m_cbId3v2Encode.AddString(_T("UTF-8"));
     m_cbId3v2Encode.SetCurSel(m_nId3v2Encode);
 
-    m_cbId3v2Version.AddString(_T("•ÏX‚µ‚È‚¢"));
+    m_cbId3v2Version.AddString(_T("å¤‰æ›´ã—ãªã„"));
     m_cbId3v2Version.AddString(_T("v2.2"));
     m_cbId3v2Version.AddString(_T("v2.3"));
     m_cbId3v2Version.AddString(_T("v2.4"));
     m_cbId3v2Version.SetCurSel(m_nId3v2Version);
 
-    return TRUE;  // ƒRƒ“ƒgƒ[ƒ‹‚ÉƒtƒH[ƒJƒX‚ğİ’è‚µ‚È‚¢‚Æ‚«A–ß‚è’l‚Í TRUE ‚Æ‚È‚è‚Ü‚·
-                  // —áŠO: OCX ƒvƒƒpƒeƒB ƒy[ƒW‚Ì–ß‚è’l‚Í FALSE ‚Æ‚È‚è‚Ü‚·
+    return TRUE;  // ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã«ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ã‚’è¨­å®šã—ãªã„ã¨ãã€æˆ»ã‚Šå€¤ã¯ TRUE ã¨ãªã‚Šã¾ã™
+                  // ä¾‹å¤–: OCX ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ ãƒšãƒ¼ã‚¸ã®æˆ»ã‚Šå€¤ã¯ FALSE ã¨ãªã‚Šã¾ã™
 }
 
 void CDlgConvID3v2Version::OnSelchangeComboId3v2Version()
 {
-    // TODO: ‚±‚ÌˆÊ’u‚ÉƒRƒ“ƒgƒ[ƒ‹’Ê’mƒnƒ“ƒhƒ‰—p‚ÌƒR[ƒh‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
+    // TODO: ã“ã®ä½ç½®ã«ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«é€šçŸ¥ãƒãƒ³ãƒ‰ãƒ©ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
     UpdateData();
     int nVer = m_cbId3v2Version.GetCurSel();
     int nEnc = m_cbId3v2Encode.GetCurSel();

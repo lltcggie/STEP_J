@@ -1,4 +1,4 @@
-// DlgFileNameChange.cpp : �C���v�������e�[�V���� �t�@�C��
+// DlgFileNameChange.cpp : インプリメンテーション ファイル
 //
 
 #include "stdafx.h"
@@ -12,7 +12,7 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgFileNameChange �_�C�A���O
+// CDlgFileNameChange ダイアログ
 
 
 CDlgFileNameChange::CDlgFileNameChange(CWnd* pParent /*=NULL*/)
@@ -49,18 +49,18 @@ BEGIN_MESSAGE_MAP(CDlgFileNameChange, CDialog)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgFileNameChange ���b�Z�[�W �n���h��
+// CDlgFileNameChange メッセージ ハンドラ
 
 void CDlgFileNameChange::OnChangeEditName() 
 {
-	// TODO: ���ꂪ RICHEDIT �R���g���[���̏ꍇ�A�R���g���[���́A lParam �}�X�N
-	// ���ł̘_���a�� ENM_CHANGE �t���O�t���� CRichEditCrtl().SetEventMask()
-	// ���b�Z�[�W���R���g���[���֑��邽�߂� CDialog::OnInitDialog() �֐����I�[�o�[
-	// ���C�h���Ȃ����肱�̒ʒm�𑗂�܂���B
+	// TODO: これが RICHEDIT コントロールの場合、コントロールは、 lParam マスク
+	// 内での論理和の ENM_CHANGE フラグ付きで CRichEditCrtl().SetEventMask()
+	// メッセージをコントロールへ送るために CDialog::OnInitDialog() 関数をオーバー
+	// ライドしない限りこの通知を送りません。
 	
-	// TODO: ���̈ʒu�ɃR���g���[���ʒm�n���h���p�̃R�[�h��ǉ����Ă�������
+	// TODO: この位置にコントロール通知ハンドラ用のコードを追加してください
 	CString strFileName;
-	m_editName.GetLine(0, strFileName.GetBuffer(m_editName.LineLength(0)*2+sizeof(DWORD)+2), m_editName.LineLength(0)*2+sizeof(DWORD)+2); /* STEP 010 �o�b�t�@�T�C�Y���₵�� *//* �Ȃ�ł������Ǝ擾����Ȃ���������̂ł���ɂQ�{�� */
+	m_editName.GetLine(0, strFileName.GetBuffer(m_editName.LineLength(0)*2+sizeof(DWORD)+2), m_editName.LineLength(0)*2+sizeof(DWORD)+2); /* STEP 010 バッファサイズ増やした *//* なんでかちゃんと取得されない環境があるのでさらに２倍に */
 	strFileName.ReleaseBuffer();
 	m_strMsg.Format(m_strMsgFormat, m_nMaxChar, strFileName.GetLength());
 	m_staticMsg.SetWindowText(m_strMsg);
@@ -70,8 +70,8 @@ BOOL CDlgFileNameChange::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 	
-	// TODO: ���̈ʒu�ɏ������̕⑫������ǉ����Ă�������
+	// TODO: この位置に初期化の補足処理を追加してください
 	OnChangeEditName();
-	return TRUE;  // �R���g���[���Ƀt�H�[�J�X��ݒ肵�Ȃ��Ƃ��A�߂�l�� TRUE �ƂȂ�܂�
-	              // ��O: OCX �v���p�e�B �y�[�W�̖߂�l�� FALSE �ƂȂ�܂�
+	return TRUE;  // コントロールにフォーカスを設定しないとき、戻り値は TRUE となります
+	              // 例外: OCX プロパティ ページの戻り値は FALSE となります
 }

@@ -1,12 +1,12 @@
-// Id3tagv2.cpp: CId3tagv2 ƒNƒ‰ƒX‚ÌƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“
+// Id3tagv2.cpp: CId3tagv2 ã‚¯ãƒ©ã‚¹ã®ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³
 //
 //////////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"
-//#include "mp3infp_res/resource.h"     // ƒƒCƒ“ ƒVƒ“ƒ{ƒ‹
+//#include "mp3infp_res/resource.h"     // ãƒ¡ã‚¤ãƒ³ ã‚·ãƒ³ãƒœãƒ«
 #include "GlobalCommand.h"
 //#include "ClassID.h"
-#ifndef ID3TAGV2_DSF_MODE   // DSF‚Å‚Í•s—v
+#ifndef ID3TAGV2_DSF_MODE   // DSFã§ã¯ä¸è¦
 #include "Id3tagv1.h"
 #endif
 #include "Id3tagv2_for_dsf.h"
@@ -90,7 +90,7 @@ static const id3_v23v22table_t id3_v23v22table[] = {
 };
 
 
-// 2004-09-24 UTF-16‚ÍƒŠƒgƒ‹ƒGƒ“ƒfƒBƒAƒ“‚Å‘‚«‚Ş
+// 2004-09-24 UTF-16ã¯ãƒªãƒˆãƒ«ã‚¨ãƒ³ãƒ‡ã‚£ã‚¢ãƒ³ã§æ›¸ãè¾¼ã‚€
 //#define UTF16_BIGENDIAN
 
 //////////////////////////////////////////////////////////////////////
@@ -100,18 +100,18 @@ DWORD CId3Frame::LoadFrame2_4(const unsigned char *pData,DWORD dwSize)
     Release();
     if(dwSize < 10)
     {
-        return 0;   //ƒtƒŒ[ƒ€ƒwƒbƒ_‚ª‚È‚¢ê‡‚ÍI—¹
+        return 0;   //ãƒ•ãƒ¬ãƒ¼ãƒ ãƒ˜ãƒƒãƒ€ãŒãªã„å ´åˆã¯çµ‚äº†
     }
     DWORD size = CId3tagv2::ExtractV2Size(&pData[4]);
     if((size+10) > dwSize)
     {
-        return 0;   //ƒwƒbƒ_ƒTƒCƒY‚ª“ü—Íƒf[ƒ^‚ğ’´‰ß‚µ‚Ä‚¢‚é
+        return 0;   //ãƒ˜ãƒƒãƒ€ã‚µã‚¤ã‚ºãŒå…¥åŠ›ãƒ‡ãƒ¼ã‚¿ã‚’è¶…éã—ã¦ã„ã‚‹
     }
     DWORD dwId;
     memcpy(&dwId,pData,sizeof(dwId));
     if(!dwId)
     {
-        return 0;   //–³Œø‚ÈƒtƒŒ[ƒ€ID
+        return 0;   //ç„¡åŠ¹ãªãƒ•ãƒ¬ãƒ¼ãƒ ID
     }
     m_dwId = dwId;
     m_wFlags = ExtractI2(&pData[8]);
@@ -123,7 +123,7 @@ DWORD CId3Frame::LoadFrame2_4(const unsigned char *pData,DWORD dwSize)
     m_data = (unsigned char *)malloc(size);
     if(!m_data)
     {
-        return 0;   //ƒƒ‚ƒŠ‚ğŠm•Û‚Å‚«‚È‚©‚Á‚½
+        return 0;   //ãƒ¡ãƒ¢ãƒªã‚’ç¢ºä¿ã§ããªã‹ã£ãŸ
     }
     m_dwSize = size;
     memcpy(m_data,&pData[10],size);
@@ -139,12 +139,12 @@ DWORD CId3Frame::LoadFrame2_3(const unsigned char *pData,DWORD dwSize)
     Release();
     if(dwSize < 10)
     {
-        return 0;   //ƒtƒŒ[ƒ€ƒwƒbƒ_‚ª‚È‚¢ê‡‚ÍI—¹
+        return 0;   //ãƒ•ãƒ¬ãƒ¼ãƒ ãƒ˜ãƒƒãƒ€ãŒãªã„å ´åˆã¯çµ‚äº†
     }
     DWORD size = ExtractI4(&pData[4]);
     if((size+10) > dwSize)
     {
-        return 0;   //ƒwƒbƒ_ƒTƒCƒY‚ª“ü—Íƒf[ƒ^‚ğ’´‰ß‚µ‚Ä‚¢‚é
+        return 0;   //ãƒ˜ãƒƒãƒ€ã‚µã‚¤ã‚ºãŒå…¥åŠ›ãƒ‡ãƒ¼ã‚¿ã‚’è¶…éã—ã¦ã„ã‚‹
     }
     DWORD dwId;
     memcpy(&dwId,pData,sizeof(dwId));
@@ -154,7 +154,7 @@ DWORD CId3Frame::LoadFrame2_3(const unsigned char *pData,DWORD dwSize)
     //  TRACE(_T("id=%s (size=%d)\n"),id,size);
     if(!dwId)
     {
-        return 0;   //–³Œø‚ÈƒtƒŒ[ƒ€ID
+        return 0;   //ç„¡åŠ¹ãªãƒ•ãƒ¬ãƒ¼ãƒ ID
     }
     m_dwId = dwId;
     WORD wFlags = ExtractI2(&pData[8]);
@@ -168,7 +168,7 @@ DWORD CId3Frame::LoadFrame2_3(const unsigned char *pData,DWORD dwSize)
     m_data = (unsigned char *)malloc(size);
     if(!m_data)
     {
-        return 0;   //ƒƒ‚ƒŠ‚ğŠm•Û‚Å‚«‚È‚©‚Á‚½
+        return 0;   //ãƒ¡ãƒ¢ãƒªã‚’ç¢ºä¿ã§ããªã‹ã£ãŸ
     }
     m_dwSize = size;
     memcpy(m_data,&pData[10],size);
@@ -180,18 +180,18 @@ DWORD CId3Frame::LoadFrame2_2(const unsigned char *pData,DWORD dwSize)
     Release();
     if(dwSize < 6)
     {
-        return 0;   //ƒtƒŒ[ƒ€ƒwƒbƒ_‚ª‚È‚¢ê‡‚ÍI—¹
+        return 0;   //ãƒ•ãƒ¬ãƒ¼ãƒ ãƒ˜ãƒƒãƒ€ãŒãªã„å ´åˆã¯çµ‚äº†
     }
     DWORD size = (((DWORD )pData[3]<<16) | ((DWORD )pData[4]<<8) | (DWORD )pData[5]);
     if((size+6) > dwSize)
     {
-        return 0;   //ƒwƒbƒ_ƒTƒCƒY‚ª“ü—Íƒf[ƒ^‚ğ’´‰ß‚µ‚Ä‚¢‚é
+        return 0;   //ãƒ˜ãƒƒãƒ€ã‚µã‚¤ã‚ºãŒå…¥åŠ›ãƒ‡ãƒ¼ã‚¿ã‚’è¶…éã—ã¦ã„ã‚‹
     }
     BYTE id[3+1];
     memcpy(&id,pData,sizeof(id));
     id[3] = '\0';
     TRACE(_T("id=%s (size=%d)\n"),id,size);
-    //v2.2‚©‚çv2.3‚ÖƒtƒŒ[ƒ€ID‚ğ•ÏŠ·
+    //v2.2ã‹ã‚‰v2.3ã¸ãƒ•ãƒ¬ãƒ¼ãƒ IDã‚’å¤‰æ›
     int i;
     for (i = 0; id3_v23v22table[i].v23 != NULL; i++) {
         if (memcmp(id, id3_v23v22table[i].v22, sizeof(id)) == 0) {
@@ -200,8 +200,8 @@ DWORD CId3Frame::LoadFrame2_2(const unsigned char *pData,DWORD dwSize)
         }
     }
     if (id3_v23v22table[i].v23 == NULL) {
-    //  memcpy(&m_dwId, "XXXX", sizeof(m_dwId));    // •s–¾
-        return 0;   //–³Œø‚ÈƒtƒŒ[ƒ€ID
+    //  memcpy(&m_dwId, "XXXX", sizeof(m_dwId));    // ä¸æ˜
+        return 0;   //ç„¡åŠ¹ãªãƒ•ãƒ¬ãƒ¼ãƒ ID
     }
     m_wFlags = 0;   //v2.2
     if (memcmp(&m_dwId, "APIC", sizeof(m_dwId)) == 0)
@@ -212,7 +212,7 @@ DWORD CId3Frame::LoadFrame2_2(const unsigned char *pData,DWORD dwSize)
     m_data = (unsigned char *)malloc(size);
     if(!m_data)
     {
-        return 0;   //ƒƒ‚ƒŠ‚ğŠm•Û‚Å‚«‚È‚©‚Á‚½
+        return 0;   //ãƒ¡ãƒ¢ãƒªã‚’ç¢ºä¿ã§ããªã‹ã£ãŸ
     }
     m_dwSize = size;
     memcpy(m_data,&pData[6],size);
@@ -242,7 +242,7 @@ DWORD CId3Frame::LoadApicFrame(const unsigned char *pData, DWORD dwSize, WORD wV
         m_data = (unsigned char *)malloc(dwSize + dwAddSize);
         if(!m_data)
         {
-            return 0;   //ƒƒ‚ƒŠ‚ğŠm•Û‚Å‚«‚È‚©‚Á‚½
+            return 0;   //ãƒ¡ãƒ¢ãƒªã‚’ç¢ºä¿ã§ããªã‹ã£ãŸ
         }
         m_data[0] = pData[0];   // text encoding
         memcpy(&m_data[1], mime, len);
@@ -254,7 +254,7 @@ DWORD CId3Frame::LoadApicFrame(const unsigned char *pData, DWORD dwSize, WORD wV
         m_data = (unsigned char *)malloc(dwSize);
         if(!m_data)
         {
-            return 0;   //ƒƒ‚ƒŠ‚ğŠm•Û‚Å‚«‚È‚©‚Á‚½
+            return 0;   //ãƒ¡ãƒ¢ãƒªã‚’ç¢ºä¿ã§ããªã‹ã£ãŸ
         }
         memcpy(m_data, pData, dwSize);
     }
@@ -297,7 +297,7 @@ bool CId3Frame::IsNumericFrame() const
 
 
 //////////////////////////////////////////////////////////////////////
-// \’z/Á–Å
+// æ§‹ç¯‰/æ¶ˆæ»…
 //////////////////////////////////////////////////////////////////////
 
 CId3tagv2::CId3tagv2()
@@ -306,9 +306,9 @@ CId3tagv2::CId3tagv2()
     m_bUnSynchronization = TRUE;
 //  m_wDefaultId3TagVersion = 0x0300;
 #ifndef ID3TAGV2_DSF_MODE
-    m_filetype = FILETYPE_MP3;  // 0:MP3/TTAŒ`®
+    m_filetype = FILETYPE_MP3;  // 0:MP3/TTAå½¢å¼
 #else
-    m_filetype = FILETYPE_DSF;  // 1:DSFŒ`®
+    m_filetype = FILETYPE_DSF;  // 1:DSFå½¢å¼
 #endif
     Release();
 }
@@ -407,7 +407,7 @@ CString CId3tagv2::GetId3String(const char szId[])
         & ~(CId3Frame::FLAG_GROUP | CId3Frame::FLAG_DATA_LEN);
     DWORD offset = 0;
     switch(szId[0]){
-    case 'T':   //ƒeƒLƒXƒgî•ñƒtƒŒ[ƒ€
+    case 'T':   //ãƒ†ã‚­ã‚¹ãƒˆæƒ…å ±ãƒ•ãƒ¬ãƒ¼ãƒ 
         memcpy(&dwId,szId,sizeof(dwId));
         pp = m_frames.equal_range(dwId);
         if(pp.first == pp.second)
@@ -422,7 +422,7 @@ CString CId3tagv2::GetId3String(const char szId[])
         offset = p->second.GetDataOffset();
         data = p->second.GetData();
         return ReadEncodedTextString(data[offset], &data[offset+1], p->second.GetSize()-offset-1, NULL);
-    case 'W':   //URLƒŠƒ“ƒNƒtƒŒ[ƒ€x
+    case 'W':   //URLãƒªãƒ³ã‚¯ãƒ•ãƒ¬ãƒ¼ãƒ x
         if(strcmp(szId,"WXXX") != 0)
         {
             break;
@@ -441,10 +441,10 @@ CString CId3tagv2::GetId3String(const char szId[])
         offset = p->second.GetDataOffset();
         data = p->second.GetData();
 
-        //à–¾•¶‚ğ“Ç‚İ”ò‚Î‚·
+        //èª¬æ˜æ–‡ã‚’èª­ã¿é£›ã°ã™
         ReadEncodedTextString(data[offset], &data[offset+1], p->second.GetSize()-offset-1, &dwReadSize);
-        //URL–{‘Ì
-        //‹KŠiã‚Íí‚É ISO-8859-1iŒİŠ·«‚Ì‚½‚ßABOM‚ª‚ ‚ê‚Î‚»‚¿‚ç‚ğ—Dæj
+        //URLæœ¬ä½“
+        //è¦æ ¼ä¸Šã¯å¸¸ã« ISO-8859-1ï¼ˆäº’æ›æ€§ã®ãŸã‚ã€BOMãŒã‚ã‚Œã°ãã¡ã‚‰ã‚’å„ªå…ˆï¼‰
         if ((p->second.GetSize()-1-dwReadSize >= 2)
                 && (data[0] == ID3V2CHARENCODING_UTF_16)
                 && ((memcmp(&data[1+dwReadSize], "\xff\xfe", 2) == 0)
@@ -468,14 +468,14 @@ CString CId3tagv2::GetId3String(const char szId[])
             offset = p->second.GetDataOffset();
             data = p->second.GetData();
 
-            // Œ¾Œê•¶š—ñ“Ç‚İ”ò‚Î‚µAà–¾•¶æ“¾
+            // è¨€èªæ–‡å­—åˆ—èª­ã¿é£›ã°ã—ã€èª¬æ˜æ–‡å–å¾—
             CString desc = ReadEncodedTextString(data[offset], &data[offset+4], p->second.GetSize()-offset-4, &dwReadSize);
             if(desc.Left(4) == _T("iTun"))
             {
-                // iTunesŒÅ—L‚ÌƒRƒƒ“ƒg‚ÍƒXƒLƒbƒv (iTunNORM, iTunSMPB, etc.)
+                // iTuneså›ºæœ‰ã®ã‚³ãƒ¡ãƒ³ãƒˆã¯ã‚¹ã‚­ãƒƒãƒ— (iTunNORM, iTunSMPB, etc.)
                 continue;
             }
-            //–{•¶
+            //æœ¬æ–‡
             return ReadEncodedTextString(data[offset], &data[offset+4+dwReadSize], p->second.GetSize()-offset-4-dwReadSize, NULL);
         }
         break;
@@ -491,10 +491,10 @@ void CId3tagv2::SetId3String(const char szId[],LPCTSTR szString,LPCTSTR szDescri
     DWORD dwId;
     memcpy(&dwId,szId,sizeof(dwId));
 
-    //Load‚µ‚½ƒtƒ@ƒCƒ‹‚ÉƒtƒŒ[ƒ€‚ª‚È‚©‚Á‚½ê‡
+    //Loadã—ãŸãƒ•ã‚¡ã‚¤ãƒ«ã«ãƒ•ãƒ¬ãƒ¼ãƒ ãŒãªã‹ã£ãŸå ´åˆ
     if((szString[0] == '\0') && (strcmp(szId,"COMM") != 0))
     {
-        m_frames.erase(dwId);   //Á‚·(‚ ‚ê‚Î)
+        m_frames.erase(dwId);   //æ¶ˆã™(ã‚ã‚Œã°)
         return;
     }
 
@@ -503,9 +503,9 @@ void CId3tagv2::SetId3String(const char szId[],LPCTSTR szString,LPCTSTR szDescri
     int i;
     CharEncoding encoding;
     switch(szId[0]){
-    case 'T':   //ƒeƒLƒXƒgî•ñƒtƒŒ[ƒ€
+    case 'T':   //ãƒ†ã‚­ã‚¹ãƒˆæƒ…å ±ãƒ•ãƒ¬ãƒ¼ãƒ 
         encoding = m_encoding;
-        //”š•¶š—ñ‚ÍISO-8859-1
+        //æ•°å­—æ–‡å­—åˆ—ã¯ISO-8859-1
         for (i = 0; numeric_frames[i] != NULL; i++) {
             if (strcmp(szId, numeric_frames[i]) == 0) {
                 encoding = ID3V2CHARENCODING_ISO_8859_1;
@@ -565,7 +565,7 @@ void CId3tagv2::SetId3String(const char szId[],LPCTSTR szString,LPCTSTR szDescri
         pp = m_frames.equal_range(dwId);
         if((pp.first == pp.second) || !(pp.first->second.GetSize()))
         {
-            //Load‚µ‚½ƒtƒ@ƒCƒ‹‚ÉƒtƒŒ[ƒ€‚ª‚È‚©‚Á‚½ê‡
+            //Loadã—ãŸãƒ•ã‚¡ã‚¤ãƒ«ã«ãƒ•ãƒ¬ãƒ¼ãƒ ãŒãªã‹ã£ãŸå ´åˆ
             CId3Frame frame;
             frame.SetId(dwId);
             frame.SetFlags(0);
@@ -581,7 +581,7 @@ void CId3tagv2::SetId3String(const char szId[],LPCTSTR szString,LPCTSTR szDescri
         }
         free(data);
         break;
-    case 'W':   //URLƒŠƒ“ƒNƒtƒŒ[ƒ€x
+    case 'W':   //URLãƒªãƒ³ã‚¯ãƒ•ãƒ¬ãƒ¼ãƒ x
         if(strcmp(szId,"WXXX") != 0)
         {
             break;
@@ -589,17 +589,17 @@ void CId3tagv2::SetId3String(const char szId[],LPCTSTR szString,LPCTSTR szDescri
         switch(m_encoding){
         case ID3V2CHARENCODING_ISO_8859_1:
         default:    // ISO-8859-1
-            data = (unsigned char *)TstrToBytesAlloc(szString, -1, &size, BTC_CODE_ANSI, 2);    //URL–{‘Ìií‚ÉISO-8859-1j
+            data = (unsigned char *)TstrToBytesAlloc(szString, -1, &size, BTC_CODE_ANSI, 2);    //URLæœ¬ä½“ï¼ˆå¸¸ã«ISO-8859-1ï¼‰
             if(!data)
             {
                 return;
             }
             data[0] = 0;    //encoding
-            data[1] = 0;    //à–¾•¶(È—ª)
+            data[1] = 0;    //èª¬æ˜æ–‡(çœç•¥)
             break;
         case ID3V2CHARENCODING_UTF_16:  // UTF-16
 #ifndef UTF16_BIGENDIAN
-            data = (unsigned char *)TstrToBytesAlloc(szString, -1, &size, BTC_CODE_ANSI, 5);    //URL–{‘Ìií‚ÉISO-8859-1j
+            data = (unsigned char *)TstrToBytesAlloc(szString, -1, &size, BTC_CODE_ANSI, 5);    //URLæœ¬ä½“ï¼ˆå¸¸ã«ISO-8859-1ï¼‰
             if(!data)
             {
                 return;
@@ -607,11 +607,11 @@ void CId3tagv2::SetId3String(const char szId[],LPCTSTR szString,LPCTSTR szDescri
             data[0] = 1;    //encoding
             data[1] = 0xff; //BOM
             data[2] = 0xfe;
-            data[3] = 0;    //à–¾•¶(È—ª)
+            data[3] = 0;    //èª¬æ˜æ–‡(çœç•¥)
             data[4] = 0;
             break;
-#else   // ƒrƒbƒNƒGƒ“ƒfƒBƒAƒ“
-            data = (unsigned char *)TstrToBytesAlloc(szString, -1, &size, BTC_CODE_ANSI, 5);    //URL–{‘Ìií‚ÉISO-8859-1j
+#else   // ãƒ“ãƒƒã‚¯ã‚¨ãƒ³ãƒ‡ã‚£ã‚¢ãƒ³
+            data = (unsigned char *)TstrToBytesAlloc(szString, -1, &size, BTC_CODE_ANSI, 5);    //URLæœ¬ä½“ï¼ˆå¸¸ã«ISO-8859-1ï¼‰
             if(!data)
             {
                 return;
@@ -619,34 +619,34 @@ void CId3tagv2::SetId3String(const char szId[],LPCTSTR szString,LPCTSTR szDescri
             data[0] = 1;    //encoding
             data[1] = 0xfe; //BOM
             data[2] = 0xff;
-            data[3] = 0;    //à–¾•¶(È—ª)
+            data[3] = 0;    //èª¬æ˜æ–‡(çœç•¥)
             data[4] = 0;
             break;
 #endif
         case ID3V2CHARENCODING_UTF_16BE:    // UTF-16BE
-            data = (unsigned char *)TstrToBytesAlloc(szString, -1, &size, BTC_CODE_ANSI, 3);    //URL–{‘Ìií‚ÉISO-8859-1j
+            data = (unsigned char *)TstrToBytesAlloc(szString, -1, &size, BTC_CODE_ANSI, 3);    //URLæœ¬ä½“ï¼ˆå¸¸ã«ISO-8859-1ï¼‰
             if(!data)
             {
                 return;
             }
             data[0] = 2;    //encoding
-            data[1] = 0;    //à–¾•¶(È—ª)
+            data[1] = 0;    //èª¬æ˜æ–‡(çœç•¥)
             data[2] = 0;
             break;
         case ID3V2CHARENCODING_UTF_8:   // UTF-8
-            data = (unsigned char *)TstrToBytesAlloc(szString, -1, &size, BTC_CODE_ANSI, 2);    //URL–{‘Ìií‚ÉISO-8859-1j
+            data = (unsigned char *)TstrToBytesAlloc(szString, -1, &size, BTC_CODE_ANSI, 2);    //URLæœ¬ä½“ï¼ˆå¸¸ã«ISO-8859-1ï¼‰
             if(!data)
             {
                 return;
             }
             data[0] = 3;    //encoding
-            data[1] = 0;    //à–¾•¶(È—ª)
+            data[1] = 0;    //èª¬æ˜æ–‡(çœç•¥)
             break;
         }
         pp = m_frames.equal_range(dwId);
         if((pp.first == pp.second) || !(pp.first->second.GetSize()))
         {
-            //Load‚µ‚½ƒtƒ@ƒCƒ‹‚ÉƒtƒŒ[ƒ€‚ª‚È‚©‚Á‚½ê‡
+            //Loadã—ãŸãƒ•ã‚¡ã‚¤ãƒ«ã«ãƒ•ãƒ¬ãƒ¼ãƒ ãŒãªã‹ã£ãŸå ´åˆ
             CId3Frame frame;
             frame.SetId(dwId);
             frame.SetFlags(0);
@@ -667,7 +667,7 @@ void CId3tagv2::SetId3String(const char szId[],LPCTSTR szString,LPCTSTR szDescri
         {
             break;
         }
-        // ƒRƒƒ“ƒgƒtƒŒ[ƒ€‚ğŒŸõ
+        // ã‚³ãƒ¡ãƒ³ãƒˆãƒ•ãƒ¬ãƒ¼ãƒ ã‚’æ¤œç´¢
         for (pp = m_frames.equal_range(dwId); pp.first != pp.second; ++pp.first)
         {
             p = pp.first;
@@ -680,20 +680,20 @@ void CId3tagv2::SetId3String(const char szId[],LPCTSTR szString,LPCTSTR szDescri
             DWORD offset = p->second.GetDataOffset();
             unsigned char *data = p->second.GetData();
 
-            // Œ¾Œê•¶š—ñ“Ç‚İ”ò‚Î‚µAà–¾•¶æ“¾
+            // è¨€èªæ–‡å­—åˆ—èª­ã¿é£›ã°ã—ã€èª¬æ˜æ–‡å–å¾—
             DWORD dwReadSize;
             CString desc = ReadEncodedTextString(data[offset], &data[offset+4], p->second.GetSize()-offset-4, &dwReadSize);
             if(desc.Left(4) == _T("iTun"))
             {
-                // iTunesŒÅ—L‚ÌƒRƒƒ“ƒg‚ÍƒXƒLƒbƒv (iTunNORM, iTunSMPB, etc.)
+                // iTuneså›ºæœ‰ã®ã‚³ãƒ¡ãƒ³ãƒˆã¯ã‚¹ã‚­ãƒƒãƒ— (iTunNORM, iTunSMPB, etc.)
                 continue;
             }
 
-            // ‘‚«Š·‚¦‘ÎÛ‚ÌƒRƒƒ“ƒgƒtƒŒ[ƒ€‚ğ”­Œ©
+            // æ›¸ãæ›ãˆå¯¾è±¡ã®ã‚³ãƒ¡ãƒ³ãƒˆãƒ•ãƒ¬ãƒ¼ãƒ ã‚’ç™ºè¦‹
 
             if(szString[0] == '\0')
             {
-                m_frames.erase(p);  //Á‚·
+                m_frames.erase(p);  //æ¶ˆã™
                 return;
             }
             break;
@@ -710,7 +710,7 @@ void CId3tagv2::SetId3String(const char szId[],LPCTSTR szString,LPCTSTR szDescri
             data[1] = 'e';  //Language (Always use English for compatibility.)
             data[2] = 'n';
             data[3] = 'g';
-            data[4] = 0;    //à–¾•¶(È—ª)
+            data[4] = 0;    //èª¬æ˜æ–‡(çœç•¥)
             break;
         case ID3V2CHARENCODING_UTF_16:  // UTF-16
 #ifndef UTF16_BIGENDIAN
@@ -725,12 +725,12 @@ void CId3tagv2::SetId3String(const char szId[],LPCTSTR szString,LPCTSTR szDescri
             data[3] = 'g';
             data[4] = 0xff; //BOM
             data[5] = 0xfe;
-            data[6] = 0;    //à–¾•¶(È—ª)
+            data[6] = 0;    //èª¬æ˜æ–‡(çœç•¥)
             data[7] = 0;
             data[8] = 0xff; //BOM
             data[9] = 0xfe;
             break;
-#else   // ƒrƒbƒOƒGƒ“ƒfƒBƒAƒ“
+#else   // ãƒ“ãƒƒã‚°ã‚¨ãƒ³ãƒ‡ã‚£ã‚¢ãƒ³
             data = (unsigned char *)TstrToBytesAlloc(szString, -1, &size, BTC_CODE_UTF16BE, 10);
             if(!data)
             {
@@ -742,7 +742,7 @@ void CId3tagv2::SetId3String(const char szId[],LPCTSTR szString,LPCTSTR szDescri
             data[3] = 'g';
             data[4] = 0xfe; //BOM
             data[5] = 0xff;
-            data[6] = 0;    //à–¾•¶(È—ª)
+            data[6] = 0;    //èª¬æ˜æ–‡(çœç•¥)
             data[7] = 0;
             data[8] = 0xfe; //BOM
             data[9] = 0xff;
@@ -758,8 +758,8 @@ void CId3tagv2::SetId3String(const char szId[],LPCTSTR szString,LPCTSTR szDescri
             data[1] = 'e';  //Language (Always use English for compatibility.)
             data[2] = 'n';
             data[3] = 'g';
-            data[4] = 0;    //à–¾•¶(È—ª)
-            data[5] = 0;    //à–¾•¶(È—ª)
+            data[4] = 0;    //èª¬æ˜æ–‡(çœç•¥)
+            data[5] = 0;    //èª¬æ˜æ–‡(çœç•¥)
             break;
         case ID3V2CHARENCODING_UTF_8:   // UTF-8
             data = (unsigned char *)TstrToBytesAlloc(szString, -1, &size, BTC_CODE_UTF8, 5);
@@ -771,7 +771,7 @@ void CId3tagv2::SetId3String(const char szId[],LPCTSTR szString,LPCTSTR szDescri
             data[1] = 'e';  //Language (Always use English for compatibility.)
             data[2] = 'n';
             data[3] = 'g';
-            data[4] = 0;    //à–¾•¶(È—ª)
+            data[4] = 0;    //èª¬æ˜æ–‡(çœç•¥)
             break;
         }
     //  pp = m_frames.equal_range(dwId);
@@ -820,7 +820,7 @@ DWORD CId3tagv2::GetTotalFrameSize()
 }
 
 #if 0
-// ‘S‚Ä‚ÌƒtƒŒ[ƒ€‚Ì•¶š—ñƒGƒ“ƒR[ƒh‚ğw’è‚·‚é
+// å…¨ã¦ã®ãƒ•ãƒ¬ãƒ¼ãƒ ã®æ–‡å­—åˆ—ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰ã‚’æŒ‡å®šã™ã‚‹
 void CId3tagv2::_SetStringEncoding(int encoding)
 {
     FrameMap::iterator p;
@@ -855,7 +855,7 @@ void CId3tagv2::_SetStringEncoding(int encoding)
 
 void CId3tagv2::v23IDtov22ID(const char *v23ID,char *v22ID)
 {
-    //v2.3‚©‚çv2.2‚ÖƒtƒŒ[ƒ€ID‚ğ•ÏŠ·
+    //v2.3ã‹ã‚‰v2.2ã¸ãƒ•ãƒ¬ãƒ¼ãƒ IDã‚’å¤‰æ›
     int i;
     for (i = 0; id3_v23v22table[i].v23 != NULL; i++) {
         if (memcmp(v23ID, id3_v23v22table[i].v23, 4) == 0) {
@@ -864,13 +864,13 @@ void CId3tagv2::v23IDtov22ID(const char *v23ID,char *v22ID)
         }
     }
     if (id3_v23v22table[i].v23 == NULL) {
-        memcpy(v22ID, "XXX", 3);    // •s–¾
+        memcpy(v22ID, "XXX", 3);    // ä¸æ˜
     }
 }
 
 CString CId3tagv2::GetYear()
 {
-    //¼—ï(‚¨‚æ‚ÑŒ“ú)
+    //è¥¿æš¦(ãŠã‚ˆã³æœˆæ—¥)
     if(m_wVer < 0x0400)
     {
         CString strYear = GetId3String("TYER");
@@ -898,7 +898,7 @@ CString CId3tagv2::GetYear()
 
 void CId3tagv2::SetYear(LPCTSTR year)
 {
-    //¼—ï(‚¨‚æ‚ÑŒ“ú)
+    //è¥¿æš¦(ãŠã‚ˆã³æœˆæ—¥)
     if(m_wVer < 0x0400)
     {
         SetId3String("TDRC",_T(""));
@@ -935,19 +935,19 @@ void CId3tagv2::SetYear(LPCTSTR year)
 
 CString CId3tagv2::GetGenre()
 {
-    //ƒWƒƒƒ“ƒ‹
+    //ã‚¸ãƒ£ãƒ³ãƒ«
     CString strGenre = GetId3String("TCON");
     int genre = -1;
-    //Å‰‚Ì()‚ğ“Ç‚İ”ò‚Î‚·ˆ—  Fix 2001-05-20
+    //æœ€åˆã®()ã‚’èª­ã¿é£›ã°ã™å‡¦ç†  Fix 2001-05-20
     while(1)
     {
         if(strGenre.GetLength() &&
-            (strGenre[0] == '(') )  //“ª‚ÉƒJƒbƒR‚ğŒŸo
+            (strGenre[0] == '(') )  //é ­ã«ã‚«ãƒƒã‚³ã‚’æ¤œå‡º
         {
             if((strGenre.GetLength() > 1) &&
                 (strGenre[1] == '(') )
             {
-                strGenre.Delete(0); //æ“ª‚Ì'('‚ğíœ
+                strGenre.Delete(0); //å…ˆé ­ã®'('ã‚’å‰Šé™¤
                 break;
             }
             int index = strGenre.Find(')');
@@ -957,14 +957,14 @@ CString CId3tagv2::GetGenre()
                     CString strGenreNum = strGenre.Mid(1, index);
                     genre = _ttoi(strGenreNum);
                 }
-                strGenre.Delete(0,index+1); //')'ˆÈ‘O‚ğíœ
+                strGenre.Delete(0,index+1); //')'ä»¥å‰ã‚’å‰Šé™¤
                 continue;   //Fix 2001-10-24
             }
         }
         break;
     }
-#ifndef ID3TAGV2_DSF_MODE   // DSF‚Å‚Í•s—v
-    //ƒWƒƒƒ“ƒ‹‚ª”Ô†‚Ì‚İ‚Åw’è‚³‚ê‚Ä‚¢‚éê‡‚ÍA•¶š—ñ‚É•ÏŠ·
+#ifndef ID3TAGV2_DSF_MODE   // DSFã§ã¯ä¸è¦
+    //ã‚¸ãƒ£ãƒ³ãƒ«ãŒç•ªå·ã®ã¿ã§æŒ‡å®šã•ã‚Œã¦ã„ã‚‹å ´åˆã¯ã€æ–‡å­—åˆ—ã«å¤‰æ›
     if ((genre >= 0) && strGenre.IsEmpty()) {
         strGenre = CId3tagv1::GenreNum2String((unsigned char)genre,FALSE);
     }
@@ -974,7 +974,7 @@ CString CId3tagv2::GetGenre()
 
 void CId3tagv2::SetGenre(LPCTSTR szGenre)
 {
-    //ƒWƒƒƒ“ƒ‹
+    //ã‚¸ãƒ£ãƒ³ãƒ«
     CString strGenre;
 /*  CId3tagv1 id3tagv1(m_bScmpxGenre);
     long genre = id3tagv1.GenreString2Num(szGenre);
@@ -984,10 +984,10 @@ void CId3tagv2::SetGenre(LPCTSTR szGenre)
     {
         strGenre.Format(_T("(%d)"),genre);
     }
-    2003-01-25 iTunes‚ªƒWƒƒƒ“ƒ‹ƒR[ƒh‚Ö‚ÌQÆ‚ğ³‚µ‚­“Ç‚ß‚È‚¢‚½‚ßAƒWƒƒƒ“ƒ‹ƒR[ƒh‚ğ“ü‚ê‚È‚¢‚æ‚¤‚ÉC³
+    2003-01-25 iTunesãŒã‚¸ãƒ£ãƒ³ãƒ«ã‚³ãƒ¼ãƒ‰ã¸ã®å‚ç…§ã‚’æ­£ã—ãèª­ã‚ãªã„ãŸã‚ã€ã‚¸ãƒ£ãƒ³ãƒ«ã‚³ãƒ¼ãƒ‰ã‚’å…¥ã‚Œãªã„ã‚ˆã†ã«ä¿®æ­£
 */
-    // 2004-05-16 "("‚Ån‚Ü‚éê‡‚Íæ“ª‚É"("‚ğ’Ç‰Á
-    if(szGenre[0] == '(')   //“ª‚ÉƒJƒbƒR‚ğŒŸo
+    // 2004-05-16 "("ã§å§‹ã¾ã‚‹å ´åˆã¯å…ˆé ­ã«"("ã‚’è¿½åŠ 
+    if(szGenre[0] == '(')   //é ­ã«ã‚«ãƒƒã‚³ã‚’æ¤œå‡º
     {
         strGenre += _T("(");
     }
@@ -1086,7 +1086,7 @@ retry:
                 GENERIC_READ,
                 FILE_SHARE_READ,
                 NULL,
-                OPEN_EXISTING,  //ƒtƒ@ƒCƒ‹‚ğƒI[ƒvƒ“‚µ‚Ü‚·Bw’èƒtƒ@ƒCƒ‹‚ª‘¶İ‚µ‚Ä‚¢‚È‚¢ê‡AŠÖ”‚Í¸”s‚µ‚Ü‚·B
+                OPEN_EXISTING,  //ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ã‚ªãƒ¼ãƒ—ãƒ³ã—ã¾ã™ã€‚æŒ‡å®šãƒ•ã‚¡ã‚¤ãƒ«ãŒå­˜åœ¨ã—ã¦ã„ãªã„å ´åˆã€é–¢æ•°ã¯å¤±æ•—ã—ã¾ã™ã€‚
                 FILE_ATTRIBUTE_NORMAL,
                 NULL);
     if(hFile == INVALID_HANDLE_VALUE)
@@ -1096,7 +1096,7 @@ retry:
     }
 
 #ifdef ID3TAGV2_DSF_MODE
-    // DSF‚Å‚ÍID3TAGV2‚ÍŒã”ö‚É‚Â‚¢‚Ä‚¢‚é‚Ì‚Å‚»‚±‚Ü‚ÅƒV[ƒN
+    // DSFã§ã¯ID3TAGV2ã¯å¾Œå°¾ã«ã¤ã„ã¦ã„ã‚‹ã®ã§ãã“ã¾ã§ã‚·ãƒ¼ã‚¯
     INT64 metapos;
     LARGE_INTEGER stDistanceToMove;
 
@@ -1109,31 +1109,31 @@ retry:
     stDistanceToMove.QuadPart = metapos;
     SetFilePointerEx(hFile, stDistanceToMove, NULL, FILE_BEGIN);
 #endif
-    //ƒtƒ@ƒCƒ‹‚ğƒI[ƒvƒ“
+    //ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ã‚ªãƒ¼ãƒ—ãƒ³
     ID3HEAD head;
     memcpy(&head,&m_head,sizeof(m_head));
-    //ID3V2ƒwƒbƒ_‚ğ“Ç‚İ‚Ş
+    //ID3V2ãƒ˜ãƒƒãƒ€ã‚’èª­ã¿è¾¼ã‚€
     if(!ReadFile(hFile,&head,sizeof(head),&dwRet,NULL) || (dwRet != sizeof(head)))
     {
         CloseHandle(hFile);
         return -1;
     }
 
-    //ID3v2‚ğŠm”F
+    //ID3v2ã‚’ç¢ºèª
     if(!IsTagValid(&head))
     {
         CloseHandle(hFile);
         return -1;
     }
 
-    //ƒo[ƒWƒ‡ƒ“
+    //ãƒãƒ¼ã‚¸ãƒ§ãƒ³
     WORD ver = (head.ver[0]<<8) | head.ver[1];
     if((ver != 0x0200) &&
         (ver != 0x0300) &&
         (ver != 0x0301) &&
         (ver != 0x0400) )
     {
-        // ID3v2.4‚æ‚è‘å‚«‚¢ƒo[ƒWƒ‡ƒ“‚ÍƒTƒ|[ƒg‚µ‚È‚¢
+        // ID3v2.4ã‚ˆã‚Šå¤§ãã„ãƒãƒ¼ã‚¸ãƒ§ãƒ³ã¯ã‚µãƒãƒ¼ãƒˆã—ãªã„
         CloseHandle(hFile);
         return -1;
     }
@@ -1143,10 +1143,10 @@ retry:
         m_wVer = 0x0400;
     }
 
-    //Id3tagƒTƒCƒY
+    //Id3tagã‚µã‚¤ã‚º
     DWORD dwId3Size = ExtractV2Size(head.size);
 
-    //‘SƒtƒŒ[ƒ€‚Ì“Ç
+    //å…¨ãƒ•ãƒ¬ãƒ¼ãƒ ã®èª­è¾¼
     unsigned char *buf = (unsigned char *)malloc(dwId3Size);
     if(!buf)
     {
@@ -1161,7 +1161,7 @@ retry:
         return -1;
     }
 
-    //”ñ“¯Šú‰»‚Ì‰ğœ
+    //éåŒæœŸåŒ–ã®è§£é™¤
     if(head.flag & HDR_FLAG_UNSYNC)
     {
         if(unsyncTag)
@@ -1177,7 +1177,7 @@ retry:
     }
 
     DWORD dwRemainSize = dwId3Size;
-    //Šg’£ƒwƒbƒ_‚ğ“Ç‚İ”ò‚Î‚·(ID3v2.2‚É‚Í‘¶İ‚µ‚È‚¢)
+    //æ‹¡å¼µãƒ˜ãƒƒãƒ€ã‚’èª­ã¿é£›ã°ã™(ID3v2.2ã«ã¯å­˜åœ¨ã—ãªã„)
     if(head.flag & HDR_FLAG_EXT_HEADER)
     {
         if(m_wVer < 0x300)
@@ -1196,7 +1196,7 @@ retry:
             dwRemainSize -= ExtractV2Size(buf);
         }
     }
-    head.flag &= ~HDR_FLAG_EXT_HEADER;  //‰ğœ
+    head.flag &= ~HDR_FLAG_EXT_HEADER;  //è§£é™¤
 
     //by Kobarin
     m_encoding = ID3V2CHARENCODING_UNSPECIFIED;//ID3V2CHARENCODING_UTF_16;
@@ -1244,11 +1244,11 @@ retry:
             else
             {
                 //by Kobarin
-                //•¡”‚Ì•¶šƒGƒ“ƒR[ƒh‚ª¬İ‚µ‚Ä‚½‚çÅŒã‚É“¾‚½ƒtƒŒ[ƒ€‚Ì
-                //•¶šƒGƒ“ƒR[ƒh‚Æ‚µ‚Ä‚¢‚½‚Ì‚ğC³
+                //è¤‡æ•°ã®æ–‡å­—ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰ãŒæ··åœ¨ã—ã¦ãŸã‚‰æœ€å¾Œã«å¾—ãŸãƒ•ãƒ¬ãƒ¼ãƒ ã®
+                //æ–‡å­—ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰ã¨ã—ã¦ã„ãŸã®ã‚’ä¿®æ­£
                 //UTF_8 > UTF_16BE > UTF_16 > ISO_8859_1
-                //‚Ì‡‚Å’l‚ªÅ‚à‘å‚«‚¢‚à‚Ì‚Æ‚·‚é
-                //‚¢‚¸‚ê‚àŒ©‚Â‚©‚ç‚È‚©‚Á‚½ê‡‚Í ISO_8859_1 ‚Æ‚·‚é
+                //ã®é †ã§å€¤ãŒæœ€ã‚‚å¤§ãã„ã‚‚ã®ã¨ã™ã‚‹
+                //ã„ãšã‚Œã‚‚è¦‹ã¤ã‹ã‚‰ãªã‹ã£ãŸå ´åˆã¯ ISO_8859_1 ã¨ã™ã‚‹
                 //m_encoding = enc;
                 if(enc > m_encoding){
                     m_encoding = enc;
@@ -1258,7 +1258,7 @@ retry:
         m_frames.insert(std::pair<DWORD,CId3Frame>(frame.GetId(),frame));
         dwRemainSize -= dwReadSize;
     }
-    //by Kobarin(•¶šƒGƒ“ƒR[ƒh‚ğ“Á’è‚Å‚«‚È‚©‚Á‚½‚çISO_8859_1‚Æ‚·‚é)
+    //by Kobarin(æ–‡å­—ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰ã‚’ç‰¹å®šã§ããªã‹ã£ãŸã‚‰ISO_8859_1ã¨ã™ã‚‹)
     if(m_encoding == ID3V2CHARENCODING_UNSPECIFIED){
         m_encoding = ID3V2CHARENCODING_ISO_8859_1;
     }
@@ -1266,7 +1266,7 @@ retry:
     free(buf);
     CloseHandle(hFile);
 
-//  if(m_wVer < 0x0300) //v2.2‚Ív2.3‚Ö•ÏŠ·‚µ‚Ä•Û‘¶‚·‚é
+//  if(m_wVer < 0x0300) //v2.2ã¯v2.3ã¸å¤‰æ›ã—ã¦ä¿å­˜ã™ã‚‹
 //  {
 //      head.ver[0] = 0x03;
 //      head.ver[1] = 0x00;
@@ -1322,7 +1322,7 @@ DWORD CId3tagv2::ConvertApicToV22(const unsigned char *v23, DWORD dwSize, unsign
 DWORD CId3tagv2::Save(LPCTSTR szFileName)
 {
 #ifdef ID3TAGV2_DSF_MODE
-    // DSF—p
+    // DSFç”¨
     DWORD   dwWin32errorCode = ERROR_SUCCESS;
     HANDLE hFile;
     BOOL bInsPadding = FALSE;
@@ -1336,23 +1336,23 @@ DWORD CId3tagv2::Save(LPCTSTR szFileName)
     }
 
 /*
-    // ƒGƒ“ƒR[ƒhw’è$2/$3‚ªg‚¦‚é‚Ì‚Ív2.4ˆÈ~
+    // ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰æŒ‡å®š$2/$3ãŒä½¿ãˆã‚‹ã®ã¯v2.4ä»¥é™
     if(m_wVer < 0x0400)
     {
         if( (m_encode != ID3V2CHARENCODE_ISO_8859_1) &&
             (m_encode != ID3V2CHARENCODE_UTF_16) )
         {
-            // ISO-8859-1‚É©“®İ’è
+            // ISO-8859-1ã«è‡ªå‹•è¨­å®š
             m_encode = ID3V2CHARENCODE_ISO_8859_1;
         }
     }
 
-    // ‘SƒtƒŒ[ƒ€‚Ì•¶š—ñƒGƒ“ƒR[ƒh‚ğİ’è
+    // å…¨ãƒ•ãƒ¬ãƒ¼ãƒ ã®æ–‡å­—åˆ—ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰ã‚’è¨­å®š
     _SetStringEncode(m_encode);
 */
 
     DWORD dwTotalFrameSize = GetTotalFrameSize();
-    //ƒtƒŒ[ƒ€î•ñ‚ğ‘‚«o‚·€”õ
+    //ãƒ•ãƒ¬ãƒ¼ãƒ æƒ…å ±ã‚’æ›¸ãå‡ºã™æº–å‚™
     unsigned char *framedata;
     if (m_wVer == 0x400 && m_bUnSynchronization)
     {
@@ -1375,7 +1375,7 @@ DWORD CId3tagv2::Save(LPCTSTR szFileName)
         CId3Frame *pFrame = &p->second;
         DWORD dwSize = pFrame->GetSize();
         DWORD id = pFrame->GetId();
-        //ƒTƒCƒY‚ª0‚Ì‚Æ‚«‚ÍƒtƒŒ[ƒ€‚ğ‘‚«‚Ü‚È‚¢
+        //ã‚µã‚¤ã‚ºãŒ0ã®ã¨ãã¯ãƒ•ãƒ¬ãƒ¼ãƒ ã‚’æ›¸ãè¾¼ã¾ãªã„
         if (p->second.GetSize() < 2)
         {
             p++;
@@ -1407,7 +1407,7 @@ DWORD CId3tagv2::Save(LPCTSTR szFileName)
                 size[0] = (dwSize >> 16) & 0xff;
                 // id3v2.2
                 char v22id[3];
-                //v2.3‚©‚çv2.2‚ÖƒtƒŒ[ƒ€ID‚ğ•ÏŠ·
+                //v2.3ã‹ã‚‰v2.2ã¸ãƒ•ãƒ¬ãƒ¼ãƒ IDã‚’å¤‰æ›
                 v23IDtov22ID((char *)&id, v22id);
                 memcpy(&framedata[dwFrameDataPtr], &v22id, sizeof(v22id));
                 dwFrameDataPtr += sizeof(v22id);
@@ -1464,7 +1464,7 @@ DWORD CId3tagv2::Save(LPCTSTR szFileName)
             WORD flagsBe = ((flags << 8) | (flags >> 8));
             unsigned char size[4];
             MakeV2Size(dwSize, size);
-            // ’·‚³§ŒÀ
+            // é•·ã•åˆ¶é™
             dwSize &= 0x0fffffff;
             // id3v2.4
             memcpy(&framedata[dwFrameDataPtr], &id, sizeof(id));
@@ -1495,10 +1495,10 @@ DWORD CId3tagv2::Save(LPCTSTR szFileName)
     }
     dwTotalFrameSize = dwFrameDataPtr;
     //	ASSERT(dwFrameDataPtr == dwTotalFrameSize);
-        //”ñ“¯Šú‰»
+        //éåŒæœŸåŒ–
     if (m_wVer == 0x400 && m_bUnSynchronization)
     {
-        //”ñ“¯Šú‰»ƒtƒ‰ƒO‚ğƒZƒbƒg
+        //éåŒæœŸåŒ–ãƒ•ãƒ©ã‚°ã‚’ã‚»ãƒƒãƒˆ
         m_head.flag |= HDR_FLAG_UNSYNC;
     }
     else if (m_bUnSynchronization)
@@ -1506,10 +1506,10 @@ DWORD CId3tagv2::Save(LPCTSTR szFileName)
         unsigned char *encData = (unsigned char *)malloc(dwTotalFrameSize * 2);
         DWORD dwEncodeSize = EncodeUnSynchronization(framedata, dwTotalFrameSize, encData);
         //		if(dwEncodeSize != dwTotalFrameSize)
-        //	2004-03-20 ƒvƒƒpƒeƒB‚É”ñ“¯Šú‰»ƒXƒCƒbƒ`‚ğ‚Â‚¯‚½‚½‚ßA”ñ“¯Šú‰»ƒtƒ‰ƒO‚Í•K‚¸—§‚Ä‚é‚±‚Æ‚É‚µ‚½
-        //	(”ñ“¯Šú‰»ON‚ª•Û‘¶‚Å‚«‚È‚¢—lq‚Íƒ†[ƒU‚©‚ç‚İ‚Ä‚¨‚©‚µ‚È“®‚«‚ÉŒ©‚¦‚é‚½‚ß)
+        //	2004-03-20 ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ã«éåŒæœŸåŒ–ã‚¹ã‚¤ãƒƒãƒã‚’ã¤ã‘ãŸãŸã‚ã€éåŒæœŸåŒ–ãƒ•ãƒ©ã‚°ã¯å¿…ãšç«‹ã¦ã‚‹ã“ã¨ã«ã—ãŸ
+        //	(éåŒæœŸåŒ–ONãŒä¿å­˜ã§ããªã„æ§˜å­ã¯ãƒ¦ãƒ¼ã‚¶ã‹ã‚‰ã¿ã¦ãŠã‹ã—ãªå‹•ãã«è¦‹ãˆã‚‹ãŸã‚)
         {
-            //”ñ“¯Šú‰»ƒtƒ‰ƒO‚ğƒZƒbƒg
+            //éåŒæœŸåŒ–ãƒ•ãƒ©ã‚°ã‚’ã‚»ãƒƒãƒˆ
             m_head.flag |= HDR_FLAG_UNSYNC;
             dwTotalFrameSize = dwEncodeSize;
         }
@@ -1518,13 +1518,13 @@ DWORD CId3tagv2::Save(LPCTSTR szFileName)
     }
     else
     {
-        //”ñ“¯Šú‰»ƒtƒ‰ƒO‚ğ‰ğœ
+        //éåŒæœŸåŒ–ãƒ•ãƒ©ã‚°ã‚’è§£é™¤
         m_head.flag &= ~HDR_FLAG_UNSYNC;
     }
     // Drop footer flag.
     m_head.flag &= ~HDR_FLAG_FOOTER;
 
-    //Id3tagƒTƒCƒY
+    //Id3tagã‚µã‚¤ã‚º
     DWORD dwId3Size = dwTotalFrameSize;
 
     hFile = CreateFile(
@@ -1532,7 +1532,7 @@ DWORD CId3tagv2::Save(LPCTSTR szFileName)
                 GENERIC_READ|GENERIC_WRITE,
                 FILE_SHARE_READ,
                 NULL,
-                OPEN_EXISTING,  //ƒtƒ@ƒCƒ‹‚ğƒI[ƒvƒ“‚µ‚Ü‚·Bw’èƒtƒ@ƒCƒ‹‚ª‘¶İ‚µ‚Ä‚¢‚È‚¢ê‡AŠÖ”‚Í¸”s‚µ‚Ü‚·B
+                OPEN_EXISTING,  //ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ã‚ªãƒ¼ãƒ—ãƒ³ã—ã¾ã™ã€‚æŒ‡å®šãƒ•ã‚¡ã‚¤ãƒ«ãŒå­˜åœ¨ã—ã¦ã„ãªã„å ´åˆã€é–¢æ•°ã¯å¤±æ•—ã—ã¾ã™ã€‚
                 FILE_ATTRIBUTE_NORMAL,
                 NULL);
     if(hFile == INVALID_HANDLE_VALUE)
@@ -1542,7 +1542,7 @@ DWORD CId3tagv2::Save(LPCTSTR szFileName)
         return dwWin32errorCode;
     }
 
-    // DSF‚Å‚ÍID3TAGV2‚ÍŒã”ö‚É‚Â‚¢‚Ä‚¢‚é‚Ì‚Å‚»‚±‚Ü‚ÅƒV[ƒN
+    // DSFã§ã¯ID3TAGV2ã¯å¾Œå°¾ã«ã¤ã„ã¦ã„ã‚‹ã®ã§ãã“ã¾ã§ã‚·ãƒ¼ã‚¯
     UINT64 metapos;
     LARGE_INTEGER stDistanceToMove;
 	LARGE_INTEGER stNewFilePointer;
@@ -1558,7 +1558,7 @@ DWORD CId3tagv2::Save(LPCTSTR szFileName)
     if(metapos > 0){
         stDistanceToMove.QuadPart = metapos;
         SetFilePointerEx(hFile, stDistanceToMove, NULL, FILE_BEGIN);
-        // ƒtƒ@ƒCƒ‹ƒTƒCƒY‚ğØ‚è‹l‚ß‚Ä¡‚ÌID3V2ƒ^ƒO‚ğ”jŠü
+        // ãƒ•ã‚¡ã‚¤ãƒ«ã‚µã‚¤ã‚ºã‚’åˆ‡ã‚Šè©°ã‚ã¦ä»Šã®ID3V2ã‚¿ã‚°ã‚’ç ´æ£„
         SetEndOfFile(hFile);
         updatemetapos = FALSE;
     } else {
@@ -1568,7 +1568,7 @@ DWORD CId3tagv2::Save(LPCTSTR szFileName)
         updatemetapos = TRUE;
     }
 
-    //ID3v2ƒwƒbƒ_‚ğ‘‚«‚Ş
+    //ID3v2ãƒ˜ãƒƒãƒ€ã‚’æ›¸ãè¾¼ã‚€
     stDistanceToMove.QuadPart = 0;
     if(SetFilePointerEx(hFile,stDistanceToMove,NULL,FILE_CURRENT) == INVALID_SET_FILE_POINTER)
     {
@@ -1584,7 +1584,7 @@ DWORD CId3tagv2::Save(LPCTSTR szFileName)
     head = m_head;
     MakeV2Size(dwId3Size,head.size);
 //  m_head = head;
-    // ’·‚³§ŒÀ
+    // é•·ã•åˆ¶é™
     dwId3Size &= 0x0fffffff;
     if(WriteFile(hFile,&head,sizeof(head),&dwWritten,NULL) == 0)
     {
@@ -1593,7 +1593,7 @@ DWORD CId3tagv2::Save(LPCTSTR szFileName)
         free(framedata);
         return dwWin32errorCode;
     }
-    //ƒtƒŒ[ƒ€î•ñ‚ğƒtƒ@ƒCƒ‹‚É‘‚«o‚·
+    //ãƒ•ãƒ¬ãƒ¼ãƒ æƒ…å ±ã‚’ãƒ•ã‚¡ã‚¤ãƒ«ã«æ›¸ãå‡ºã™
     if(!WriteFile(hFile,framedata,dwTotalFrameSize,&dwWritten,NULL))
     {
         dwWin32errorCode = GetLastError();
@@ -1603,7 +1603,7 @@ DWORD CId3tagv2::Save(LPCTSTR szFileName)
     }
     free(framedata);
 
-    // DSFƒwƒbƒ_[•ÒW
+    // DSFãƒ˜ãƒƒãƒ€ãƒ¼ç·¨é›†
     stDistanceToMove.QuadPart = 12;
     if (SetFilePointerEx(hFile, stDistanceToMove, NULL, FILE_BEGIN) == INVALID_SET_FILE_POINTER)
     {
@@ -1648,23 +1648,23 @@ DWORD CId3tagv2::Save(LPCTSTR szFileName)
     }
 
 /*
-    // ƒGƒ“ƒR[ƒhw’è$2/$3‚ªg‚¦‚é‚Ì‚Ív2.4ˆÈ~
+    // ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰æŒ‡å®š$2/$3ãŒä½¿ãˆã‚‹ã®ã¯v2.4ä»¥é™
     if(m_wVer < 0x0400)
     {
         if( (m_encoding != ID3V2CHARENCODING_ISO_8859_1) &&
             (m_encoding != ID3V2CHARENCODING_UTF_16) )
         {
-            // ISO-8859-1‚É©“®İ’è
+            // ISO-8859-1ã«è‡ªå‹•è¨­å®š
             m_encoding = ID3V2CHARENCODING_ISO_8859_1;
         }
     }
 
-    // ‘SƒtƒŒ[ƒ€‚Ì•¶š—ñƒGƒ“ƒR[ƒh‚ğİ’è
+    // å…¨ãƒ•ãƒ¬ãƒ¼ãƒ ã®æ–‡å­—åˆ—ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰ã‚’è¨­å®š
     _SetStringEncoding(m_encoding);
 */
 
     DWORD dwTotalFrameSize = GetTotalFrameSize();
-    //ƒtƒŒ[ƒ€î•ñ‚ğ‘‚«o‚·€”õ
+    //ãƒ•ãƒ¬ãƒ¼ãƒ æƒ…å ±ã‚’æ›¸ãå‡ºã™æº–å‚™
     unsigned char *framedata;
     if(m_wVer == 0x400 && m_bUnSynchronization)
     {
@@ -1687,7 +1687,7 @@ DWORD CId3tagv2::Save(LPCTSTR szFileName)
         CId3Frame *pFrame = &p->second;
         DWORD dwSize = pFrame->GetSize();
         DWORD id = pFrame->GetId();
-        //ƒTƒCƒY‚ª0‚Ì‚Æ‚«‚ÍƒtƒŒ[ƒ€‚ğ‘‚«‚Ü‚È‚¢
+        //ã‚µã‚¤ã‚ºãŒ0ã®ã¨ãã¯ãƒ•ãƒ¬ãƒ¼ãƒ ã‚’æ›¸ãè¾¼ã¾ãªã„
         if(p->second.GetSize() < 2)
         {
             p++;
@@ -1719,7 +1719,7 @@ DWORD CId3tagv2::Save(LPCTSTR szFileName)
                 size[0] = (dwSize>>16) & 0xff;
                 // id3v2.2
                 char v22id[3];
-                //v2.3‚©‚çv2.2‚ÖƒtƒŒ[ƒ€ID‚ğ•ÏŠ·
+                //v2.3ã‹ã‚‰v2.2ã¸ãƒ•ãƒ¬ãƒ¼ãƒ IDã‚’å¤‰æ›
                 v23IDtov22ID((char *)&id,v22id);
                 memcpy(&framedata[dwFrameDataPtr],&v22id,sizeof(v22id));
                 dwFrameDataPtr += sizeof(v22id);
@@ -1776,7 +1776,7 @@ DWORD CId3tagv2::Save(LPCTSTR szFileName)
             WORD flagsBe = ((flags<<8)|(flags>>8));
             unsigned char size[4];
             MakeV2Size(dwSize,size);
-            // ’·‚³§ŒÀ
+            // é•·ã•åˆ¶é™
             dwSize &= 0x0fffffff;
             // id3v2.4
             memcpy(&framedata[dwFrameDataPtr],&id,sizeof(id));
@@ -1807,10 +1807,10 @@ DWORD CId3tagv2::Save(LPCTSTR szFileName)
     }
     dwTotalFrameSize = dwFrameDataPtr;
 //  ASSERT(dwFrameDataPtr == dwTotalFrameSize);
-    //”ñ“¯Šú‰»
+    //éåŒæœŸåŒ–
     if(m_wVer == 0x400 && m_bUnSynchronization)
     {
-        //”ñ“¯Šú‰»ƒtƒ‰ƒO‚ğƒZƒbƒg
+        //éåŒæœŸåŒ–ãƒ•ãƒ©ã‚°ã‚’ã‚»ãƒƒãƒˆ
         m_head.flag |= HDR_FLAG_UNSYNC;
     }
     else if(m_bUnSynchronization)
@@ -1818,10 +1818,10 @@ DWORD CId3tagv2::Save(LPCTSTR szFileName)
         unsigned char *encData = (unsigned char *)malloc(dwTotalFrameSize*2);
         DWORD dwEncodeSize = EncodeUnSynchronization(framedata,dwTotalFrameSize,encData);
 //      if(dwEncodeSize != dwTotalFrameSize)
-//  2004-03-20 ƒvƒƒpƒeƒB‚É”ñ“¯Šú‰»ƒXƒCƒbƒ`‚ğ‚Â‚¯‚½‚½‚ßA”ñ“¯Šú‰»ƒtƒ‰ƒO‚Í•K‚¸—§‚Ä‚é‚±‚Æ‚É‚µ‚½
-//  (”ñ“¯Šú‰»ON‚ª•Û‘¶‚Å‚«‚È‚¢—lq‚Íƒ†[ƒU‚©‚ç‚İ‚Ä‚¨‚©‚µ‚È“®‚«‚ÉŒ©‚¦‚é‚½‚ß)
+//  2004-03-20 ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ã«éåŒæœŸåŒ–ã‚¹ã‚¤ãƒƒãƒã‚’ã¤ã‘ãŸãŸã‚ã€éåŒæœŸåŒ–ãƒ•ãƒ©ã‚°ã¯å¿…ãšç«‹ã¦ã‚‹ã“ã¨ã«ã—ãŸ
+//  (éåŒæœŸåŒ–ONãŒä¿å­˜ã§ããªã„æ§˜å­ã¯ãƒ¦ãƒ¼ã‚¶ã‹ã‚‰ã¿ã¦ãŠã‹ã—ãªå‹•ãã«è¦‹ãˆã‚‹ãŸã‚)
         {
-            //”ñ“¯Šú‰»ƒtƒ‰ƒO‚ğƒZƒbƒg
+            //éåŒæœŸåŒ–ãƒ•ãƒ©ã‚°ã‚’ã‚»ãƒƒãƒˆ
             m_head.flag |= HDR_FLAG_UNSYNC;
             dwTotalFrameSize = dwEncodeSize;
         }
@@ -1830,28 +1830,28 @@ DWORD CId3tagv2::Save(LPCTSTR szFileName)
     }
     else
     {
-        //”ñ“¯Šú‰»ƒtƒ‰ƒO‚ğ‰ğœ
+        //éåŒæœŸåŒ–ãƒ•ãƒ©ã‚°ã‚’è§£é™¤
         m_head.flag &= ~HDR_FLAG_UNSYNC;
     }
     // Drop footer flag.
     m_head.flag &= ~HDR_FLAG_FOOTER;
 
-    //Id3tagƒTƒCƒY
+    //Id3tagã‚µã‚¤ã‚º
     DWORD dwId3Size = ExtractV2Size(m_head.size);
 
     if(dwTotalFrameSize > dwId3Size)
     {
-        //[ƒpƒfƒBƒ“ƒO—Ìˆæ‚ğ‘}“ü]
+        //[ãƒ‘ãƒ‡ã‚£ãƒ³ã‚°é ˜åŸŸã‚’æŒ¿å…¥]
         DWORD dwPaddingSize = (ID3V2_PADDING_SIZE + dwTotalFrameSize - 1) / ID3V2_PADDING_SIZE * ID3V2_PADDING_SIZE - dwId3Size;
         dwId3Size += dwPaddingSize;
 
-        //==================Œ³ƒtƒ@ƒCƒ‹‚ğƒƒ‚ƒŠ‚É•Û‘¶==================
+        //==================å…ƒãƒ•ã‚¡ã‚¤ãƒ«ã‚’ãƒ¡ãƒ¢ãƒªã«ä¿å­˜==================
         hFile = CreateFile(
                     szFileName,
                     GENERIC_READ,
                     FILE_SHARE_READ,
                     NULL,
-                    OPEN_EXISTING,  //w’èƒtƒ@ƒCƒ‹‚ª‘¶İ‚µ‚Ä‚¢‚È‚¢ê‡AŠÖ”‚Í¸”s‚µ‚Ü‚·B
+                    OPEN_EXISTING,  //æŒ‡å®šãƒ•ã‚¡ã‚¤ãƒ«ãŒå­˜åœ¨ã—ã¦ã„ãªã„å ´åˆã€é–¢æ•°ã¯å¤±æ•—ã—ã¾ã™ã€‚
                     FILE_ATTRIBUTE_NORMAL,
                     NULL);
         if(hFile == INVALID_HANDLE_VALUE)
@@ -1862,7 +1862,7 @@ DWORD CId3tagv2::Save(LPCTSTR szFileName)
         }
 
         DWORD dwDataSize = GetFileSize(hFile,NULL);
-        //ƒoƒbƒtƒ@ƒƒ‚ƒŠ‚ÌŠm•Û
+        //ãƒãƒƒãƒ•ã‚¡ãƒ¡ãƒ¢ãƒªã®ç¢ºä¿
         char *pRawData = (char *)malloc(dwDataSize);
         if(!pRawData)
         {
@@ -1871,7 +1871,7 @@ DWORD CId3tagv2::Save(LPCTSTR szFileName)
             free(framedata);
             return dwWin32errorCode;
         }
-        //raw data‚Ì“Ç‚İo‚µ
+        //raw dataã®èª­ã¿å‡ºã—
         if(!ReadFile(hFile,pRawData,dwDataSize,&dwWritten,NULL))
         {
             dwWin32errorCode = GetLastError();
@@ -1882,8 +1882,8 @@ DWORD CId3tagv2::Save(LPCTSTR szFileName)
         }
         CloseHandle(hFile);
 
-        //==================ƒeƒ“ƒ|ƒ‰ƒŠ‚ğì¬==================
-        //ƒeƒ“ƒ|ƒ‰ƒŠ–¼‚ğæ“¾
+        //==================ãƒ†ãƒ³ãƒãƒ©ãƒªã‚’ä½œæˆ==================
+        //ãƒ†ãƒ³ãƒãƒ©ãƒªåã‚’å–å¾—
         lstrcpy(szTempPath,szFileName);
         cutFileName(szTempPath);
         if(!GetTempFileName(szTempPath,_T("tms"),0,szTempFile))
@@ -1894,7 +1894,7 @@ DWORD CId3tagv2::Save(LPCTSTR szFileName)
             free(framedata);
             return dwWin32errorCode;
         }
-        //ƒtƒ@ƒCƒ‹ƒI[ƒvƒ“(w’èƒtƒ@ƒCƒ‹‚ª‚·‚Å‚É‘¶İ‚µ‚Ä‚¢‚éê‡A‚»‚Ìƒtƒ@ƒCƒ‹‚Íã‘‚«‚³‚ê‚Ü‚·B)
+        //ãƒ•ã‚¡ã‚¤ãƒ«ã‚ªãƒ¼ãƒ—ãƒ³(æŒ‡å®šãƒ•ã‚¡ã‚¤ãƒ«ãŒã™ã§ã«å­˜åœ¨ã—ã¦ã„ã‚‹å ´åˆã€ãã®ãƒ•ã‚¡ã‚¤ãƒ«ã¯ä¸Šæ›¸ãã•ã‚Œã¾ã™ã€‚)
         hFile = CreateFile(szTempFile,GENERIC_WRITE|GENERIC_READ,FILE_SHARE_READ,NULL,CREATE_ALWAYS,FILE_ATTRIBUTE_NORMAL,NULL);
         if(hFile == INVALID_HANDLE_VALUE)
         {
@@ -1904,7 +1904,7 @@ DWORD CId3tagv2::Save(LPCTSTR szFileName)
             free(framedata);
             return dwWin32errorCode;
         }
-        //‚¨‚Ü‚¶‚È‚¢
+        //ãŠã¾ã˜ãªã„
         if(SetFilePointer(hFile,0,NULL,FILE_BEGIN) == INVALID_SET_FILE_POINTER)
         {
             dwWin32errorCode = GetLastError();
@@ -1914,7 +1914,7 @@ DWORD CId3tagv2::Save(LPCTSTR szFileName)
             free(framedata);
             return dwWin32errorCode;
         }
-        //ƒpƒfƒBƒ“ƒO—Ìˆæ‚ğƒXƒLƒbƒv
+        //ãƒ‘ãƒ‡ã‚£ãƒ³ã‚°é ˜åŸŸã‚’ã‚¹ã‚­ãƒƒãƒ—
         if(SetFilePointer(hFile,dwPaddingSize,NULL,FILE_BEGIN) == INVALID_SET_FILE_POINTER)
         {
             dwWin32errorCode = GetLastError();
@@ -1924,7 +1924,7 @@ DWORD CId3tagv2::Save(LPCTSTR szFileName)
             free(framedata);
             return dwWin32errorCode;
         }
-        //ˆÚ“®æ‚ÉƒRƒs[
+        //ç§»å‹•å…ˆã«ã‚³ãƒ”ãƒ¼
         if(WriteFile(hFile,pRawData,dwDataSize,&dwWritten,NULL) == 0)
         {
             dwWin32errorCode = GetLastError();
@@ -1941,13 +1941,13 @@ DWORD CId3tagv2::Save(LPCTSTR szFileName)
     }
     else
     {
-        //ƒtƒ@ƒCƒ‹‚ğƒI[ƒvƒ“
+        //ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ã‚ªãƒ¼ãƒ—ãƒ³
         hFile = CreateFile(
                     szFileName,
                     GENERIC_READ|GENERIC_WRITE,
                     FILE_SHARE_READ,
                     NULL,
-                    OPEN_EXISTING,  //ƒtƒ@ƒCƒ‹‚ğƒI[ƒvƒ“‚µ‚Ü‚·Bw’èƒtƒ@ƒCƒ‹‚ª‘¶İ‚µ‚Ä‚¢‚È‚¢ê‡AŠÖ”‚Í¸”s‚µ‚Ü‚·B
+                    OPEN_EXISTING,  //ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ã‚ªãƒ¼ãƒ—ãƒ³ã—ã¾ã™ã€‚æŒ‡å®šãƒ•ã‚¡ã‚¤ãƒ«ãŒå­˜åœ¨ã—ã¦ã„ãªã„å ´åˆã€é–¢æ•°ã¯å¤±æ•—ã—ã¾ã™ã€‚
                     FILE_ATTRIBUTE_NORMAL,
                     NULL);
         if(hFile == INVALID_HANDLE_VALUE)
@@ -1958,7 +1958,7 @@ DWORD CId3tagv2::Save(LPCTSTR szFileName)
         }
     }
 
-    //ID3v2ƒwƒbƒ_‚ğ‘‚«‚Ş
+    //ID3v2ãƒ˜ãƒƒãƒ€ã‚’æ›¸ãè¾¼ã‚€
     if(SetFilePointer(hFile,0,NULL,FILE_BEGIN) == INVALID_SET_FILE_POINTER)
     {
         dwWin32errorCode = GetLastError();
@@ -1972,7 +1972,7 @@ DWORD CId3tagv2::Save(LPCTSTR szFileName)
     m_head.ver[1] = (m_wVer & 0x00ff);
     memcpy(&head,&m_head,sizeof(m_head));
     MakeV2Size(dwId3Size,head.size);
-    // ’·‚³§ŒÀ
+    // é•·ã•åˆ¶é™
     dwId3Size &= 0x0fffffff;
     if(WriteFile(hFile,&head,sizeof(head),&dwWritten,NULL) == 0)
     {
@@ -1984,7 +1984,7 @@ DWORD CId3tagv2::Save(LPCTSTR szFileName)
     }
     memcpy(&m_head,&head,sizeof(head));
 
-    //ƒtƒŒ[ƒ€î•ñ‚ğƒtƒ@ƒCƒ‹‚É‘‚«o‚·
+    //ãƒ•ãƒ¬ãƒ¼ãƒ æƒ…å ±ã‚’ãƒ•ã‚¡ã‚¤ãƒ«ã«æ›¸ãå‡ºã™
     if(SetFilePointer(hFile,10,NULL,FILE_BEGIN) == INVALID_SET_FILE_POINTER)
     {
         dwWin32errorCode = GetLastError();
@@ -2006,7 +2006,7 @@ DWORD CId3tagv2::Save(LPCTSTR szFileName)
     }
     free(framedata);
 
-    //ƒpƒfƒBƒ“ƒO—Ìˆæ‚ğ0‚ÅƒpƒfƒBƒ“ƒO
+    //ãƒ‘ãƒ‡ã‚£ãƒ³ã‚°é ˜åŸŸã‚’0ã§ãƒ‘ãƒ‡ã‚£ãƒ³ã‚°
     for(DWORD i=0; i<(dwId3Size - dwTotalFrameSize); i++)
     {
         DWORD dwRet;
@@ -2027,7 +2027,7 @@ DWORD CId3tagv2::Save(LPCTSTR szFileName)
 
     if(bInsPadding)
     {
-        //ƒIƒŠƒWƒiƒ‹ƒtƒ@ƒCƒ‹‚ğ‘Ş”ğ(ƒŠƒl[ƒ€)
+        //ã‚ªãƒªã‚¸ãƒŠãƒ«ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é€€é¿(ãƒªãƒãƒ¼ãƒ )
         TCHAR szPreFile[MAX_PATH];
         if(!GetTempFileName(szTempPath,_T("tms"),0,szPreFile))
         {
@@ -2035,7 +2035,7 @@ DWORD CId3tagv2::Save(LPCTSTR szFileName)
             DeleteFile(szTempFile);
             return dwWin32errorCode;
         }
-        DeleteFile(szPreFile);//è”²‚«(^^;
+        DeleteFile(szPreFile);//æ‰‹æŠœã(^^;
         if(!MoveFile(szFileName,szPreFile))
         {
             dwWin32errorCode = GetLastError();
@@ -2043,7 +2043,7 @@ DWORD CId3tagv2::Save(LPCTSTR szFileName)
             return dwWin32errorCode;
         }
 
-        //Š®¬•i‚ğƒŠƒl[ƒ€
+        //å®Œæˆå“ã‚’ãƒªãƒãƒ¼ãƒ 
         if(!MoveFile(szTempFile,szFileName))
         {
             dwWin32errorCode = GetLastError();
@@ -2052,7 +2052,7 @@ DWORD CId3tagv2::Save(LPCTSTR szFileName)
             return dwWin32errorCode;
         }
 
-        //ƒIƒŠƒWƒiƒ‹‚ğíœ
+        //ã‚ªãƒªã‚¸ãƒŠãƒ«ã‚’å‰Šé™¤
         DeleteFile(szPreFile);
     }
 
@@ -2074,13 +2074,13 @@ DWORD CId3tagv2::DelTag(LPCTSTR szFileName)
 		return -1;
 	}
 
-	//==================Œ³ƒtƒ@ƒCƒ‹‚ğƒƒ‚ƒŠ‚É•Û‘¶==================
+	//==================å…ƒãƒ•ã‚¡ã‚¤ãƒ«ã‚’ãƒ¡ãƒ¢ãƒªã«ä¿å­˜==================
 	HANDLE hFile = CreateFile(
 							szFileName,
 							GENERIC_READ | GENERIC_WRITE,
 							FILE_SHARE_READ,
 							NULL,
-							OPEN_EXISTING,	//w’èƒtƒ@ƒCƒ‹‚ª‘¶İ‚µ‚Ä‚¢‚È‚¢ê‡AŠÖ”‚Í¸”s‚µ‚Ü‚·B
+							OPEN_EXISTING,	//æŒ‡å®šãƒ•ã‚¡ã‚¤ãƒ«ãŒå­˜åœ¨ã—ã¦ã„ãªã„å ´åˆã€é–¢æ•°ã¯å¤±æ•—ã—ã¾ã™ã€‚
 							FILE_ATTRIBUTE_NORMAL,
 							NULL);
 	if(hFile == INVALID_HANDLE_VALUE)
@@ -2089,7 +2089,7 @@ DWORD CId3tagv2::DelTag(LPCTSTR szFileName)
 		return dwWin32errorCode;
 	}
 
-	// DSF‚Å‚ÍID3TAGV2‚ÍŒã”ö‚É‚Â‚¢‚Ä‚¢‚é‚Ì‚Å‚»‚±‚Ü‚ÅƒV[ƒN
+	// DSFã§ã¯ID3TAGV2ã¯å¾Œå°¾ã«ã¤ã„ã¦ã„ã‚‹ã®ã§ãã“ã¾ã§ã‚·ãƒ¼ã‚¯
 	UINT64 metapos;
 	LARGE_INTEGER stDistanceToMove;
 	LARGE_INTEGER stNewFilePointer;
@@ -2102,20 +2102,20 @@ DWORD CId3tagv2::DelTag(LPCTSTR szFileName)
 		return -1;
 	}
 	if(metapos == 0){
-		// íœ•s—v
+		// å‰Šé™¤ä¸è¦
 		return dwWin32errorCode;
 	}
 
 	stDistanceToMove.QuadPart = metapos;
 	SetFilePointerEx(hFile, stDistanceToMove, &stNewFilePointer, FILE_BEGIN);
-	// ƒtƒ@ƒCƒ‹ƒTƒCƒY‚ğØ‚è‹l‚ß‚Ä¡‚ÌID3V2ƒ^ƒO‚ğ”jŠü
+	// ãƒ•ã‚¡ã‚¤ãƒ«ã‚µã‚¤ã‚ºã‚’åˆ‡ã‚Šè©°ã‚ã¦ä»Šã®ID3V2ã‚¿ã‚°ã‚’ç ´æ£„
 	if (SetEndOfFile(hFile) == 0) {
 		dwWin32errorCode = GetLastError();
 		CloseHandle(hFile);
 		return dwWin32errorCode;
 	}
 
-	// DSFƒwƒbƒ_[•ÒW
+	// DSFãƒ˜ãƒƒãƒ€ãƒ¼ç·¨é›†
 	stDistanceToMove.QuadPart = 12;
 	if (SetFilePointerEx(hFile, stDistanceToMove, NULL, FILE_BEGIN) == INVALID_SET_FILE_POINTER)
 	{
@@ -2156,13 +2156,13 @@ DWORD CId3tagv2::DelTag(LPCTSTR szFileName)
         return -1;
     }
 
-    //==================Œ³ƒtƒ@ƒCƒ‹‚ğƒƒ‚ƒŠ‚É•Û‘¶==================
+    //==================å…ƒãƒ•ã‚¡ã‚¤ãƒ«ã‚’ãƒ¡ãƒ¢ãƒªã«ä¿å­˜==================
     HANDLE hFile = CreateFile(
                             szFileName,
                             GENERIC_READ,
                             FILE_SHARE_READ,
                             NULL,
-                            OPEN_EXISTING,  //w’èƒtƒ@ƒCƒ‹‚ª‘¶İ‚µ‚Ä‚¢‚È‚¢ê‡AŠÖ”‚Í¸”s‚µ‚Ü‚·B
+                            OPEN_EXISTING,  //æŒ‡å®šãƒ•ã‚¡ã‚¤ãƒ«ãŒå­˜åœ¨ã—ã¦ã„ãªã„å ´åˆã€é–¢æ•°ã¯å¤±æ•—ã—ã¾ã™ã€‚
                             FILE_ATTRIBUTE_NORMAL,
                             NULL);
     if(hFile == INVALID_HANDLE_VALUE)
@@ -2180,7 +2180,7 @@ DWORD CId3tagv2::DelTag(LPCTSTR szFileName)
     dwDataSize -= dwId3v2Size;
     SetFilePointer(hFile,dwId3v2Size,NULL,FILE_BEGIN);
 
-    //ƒoƒbƒtƒ@ƒƒ‚ƒŠ‚ÌŠm•Û
+    //ãƒãƒƒãƒ•ã‚¡ãƒ¡ãƒ¢ãƒªã®ç¢ºä¿
     char *pRawData = (char *)malloc(dwDataSize);
     if(!pRawData)
     {
@@ -2188,7 +2188,7 @@ DWORD CId3tagv2::DelTag(LPCTSTR szFileName)
         CloseHandle(hFile);
         return dwWin32errorCode;
     }
-    //raw data‚Ì“Ç‚İo‚µ
+    //raw dataã®èª­ã¿å‡ºã—
     if(!ReadFile(hFile,pRawData,dwDataSize,&dwWritten,NULL))
     {
         dwWin32errorCode = GetLastError();
@@ -2198,8 +2198,8 @@ DWORD CId3tagv2::DelTag(LPCTSTR szFileName)
     }
     CloseHandle(hFile);
 
-    //==================ƒeƒ“ƒ|ƒ‰ƒŠ‚ğì¬==================
-    //ƒeƒ“ƒ|ƒ‰ƒŠ–¼‚ğæ“¾
+    //==================ãƒ†ãƒ³ãƒãƒ©ãƒªã‚’ä½œæˆ==================
+    //ãƒ†ãƒ³ãƒãƒ©ãƒªåã‚’å–å¾—
     lstrcpy(szTempPath,szFileName);
     cutFileName(szTempPath);
     if(!GetTempFileName(szTempPath,_T("tms"),0,szTempFile))
@@ -2209,7 +2209,7 @@ DWORD CId3tagv2::DelTag(LPCTSTR szFileName)
         DeleteFile(szTempFile);
         return dwWin32errorCode;
     }
-    //ƒtƒ@ƒCƒ‹ƒI[ƒvƒ“(w’èƒtƒ@ƒCƒ‹‚ª‚·‚Å‚É‘¶İ‚µ‚Ä‚¢‚éê‡A‚»‚Ìƒtƒ@ƒCƒ‹‚Íã‘‚«‚³‚ê‚Ü‚·B)
+    //ãƒ•ã‚¡ã‚¤ãƒ«ã‚ªãƒ¼ãƒ—ãƒ³(æŒ‡å®šãƒ•ã‚¡ã‚¤ãƒ«ãŒã™ã§ã«å­˜åœ¨ã—ã¦ã„ã‚‹å ´åˆã€ãã®ãƒ•ã‚¡ã‚¤ãƒ«ã¯ä¸Šæ›¸ãã•ã‚Œã¾ã™ã€‚)
     hFile = CreateFile(szTempFile,GENERIC_WRITE|GENERIC_READ,FILE_SHARE_READ,NULL,CREATE_ALWAYS,FILE_ATTRIBUTE_NORMAL,NULL);
     if(hFile == INVALID_HANDLE_VALUE)
     {
@@ -2218,7 +2218,7 @@ DWORD CId3tagv2::DelTag(LPCTSTR szFileName)
         DeleteFile(szTempFile);
         return dwWin32errorCode;
     }
-    //‚¨‚Ü‚¶‚È‚¢
+    //ãŠã¾ã˜ãªã„
     if(SetFilePointer(hFile,0,NULL,FILE_BEGIN) == INVALID_SET_FILE_POINTER)
     {
         dwWin32errorCode = GetLastError();
@@ -2227,7 +2227,7 @@ DWORD CId3tagv2::DelTag(LPCTSTR szFileName)
         DeleteFile(szTempFile);
         return dwWin32errorCode;
     }
-    //ˆÚ“®æ‚ÉƒRƒs[
+    //ç§»å‹•å…ˆã«ã‚³ãƒ”ãƒ¼
     if(WriteFile(hFile,pRawData,dwDataSize,&dwWritten,NULL) == 0)
     {
         dwWin32errorCode = GetLastError();
@@ -2238,7 +2238,7 @@ DWORD CId3tagv2::DelTag(LPCTSTR szFileName)
     free(pRawData);
     CloseHandle(hFile);
 
-    //ƒIƒŠƒWƒiƒ‹ƒtƒ@ƒCƒ‹‚ğ‘Ş”ğ(ƒŠƒl[ƒ€)
+    //ã‚ªãƒªã‚¸ãƒŠãƒ«ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é€€é¿(ãƒªãƒãƒ¼ãƒ )
     TCHAR szPreFile[MAX_PATH];
     if(!GetTempFileName(szTempPath,_T("tms"),0,szPreFile))
     {
@@ -2246,7 +2246,7 @@ DWORD CId3tagv2::DelTag(LPCTSTR szFileName)
         DeleteFile(szTempFile);
         return dwWin32errorCode;
     }
-    DeleteFile(szPreFile);//è”²‚«(^^;
+    DeleteFile(szPreFile);//æ‰‹æŠœã(^^;
     if(!MoveFile(szFileName,szPreFile))
     {
         dwWin32errorCode = GetLastError();
@@ -2254,7 +2254,7 @@ DWORD CId3tagv2::DelTag(LPCTSTR szFileName)
         return dwWin32errorCode;
     }
 
-    //Š®¬•i‚ğƒŠƒl[ƒ€
+    //å®Œæˆå“ã‚’ãƒªãƒãƒ¼ãƒ 
     if(!MoveFile(szTempFile,szFileName))
     {
         dwWin32errorCode = GetLastError();
@@ -2263,7 +2263,7 @@ DWORD CId3tagv2::DelTag(LPCTSTR szFileName)
         return dwWin32errorCode;
     }
 
-    //ƒIƒŠƒWƒiƒ‹‚ğíœ
+    //ã‚ªãƒªã‚¸ãƒŠãƒ«ã‚’å‰Šé™¤
     DeleteFile(szPreFile);
 
     Release();
@@ -2280,7 +2280,7 @@ DWORD CId3tagv2::MakeTag(LPCTSTR szFileName)
         return -1;
     }
 
-    //ƒfƒtƒHƒ‹ƒgî•ñ
+    //ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆæƒ…å ±
     CString strDefaultName = getFileName(szFileName);
     SetTitle(strDefaultName);
     SetEncoder(m_strDefaultEnc);
@@ -2298,7 +2298,7 @@ DWORD CId3tagv2::MakeTag(LPCTSTR szFileName)
 
 //by Kobarin
 void CId3tagv2::ApplyStringEncode(void)
-{//•¶šƒGƒ“ƒR[ƒh‚Ì•ÏX‚ğ”½‰f‚³‚¹‚é
+{//æ–‡å­—ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰ã®å¤‰æ›´ã‚’åæ˜ ã•ã›ã‚‹
     struct IDVALUE
     {
         char szId[5];
@@ -2315,19 +2315,19 @@ void CId3tagv2::ApplyStringEncode(void)
         DWORD dwSize = pFrame->GetSize();
         DWORD id = pFrame->GetId();
         const char *pId = (const char*)&id;
-        //–{“–‚Í "WCOM", "WCOP", "WOAF", "WOAR", "WOAS", "WORS", "WPAY", "WPUB" ‚àƒeƒLƒXƒgŒn‚¾‚ª
-        //SetId3String ‚ª–¢‘Î‰‚È‚Ì‚Å‰½‚à‚µ‚È‚¢‚Å‚¨‚­
-        if (pId[0] == 'T' || //ƒeƒLƒXƒg
-            memcmp(pId, "COMM", 4) == 0 || //ƒRƒƒ“ƒg
-            memcmp(pId, "WXXX", 4) == 0 || //URL ƒŠƒ“ƒNƒtƒŒ[ƒ€
+        //æœ¬å½“ã¯ "WCOM", "WCOP", "WOAF", "WOAR", "WOAS", "WORS", "WPAY", "WPUB" ã‚‚ãƒ†ã‚­ã‚¹ãƒˆç³»ã ãŒ
+        //SetId3String ãŒæœªå¯¾å¿œãªã®ã§ä½•ã‚‚ã—ãªã„ã§ãŠã
+        if (pId[0] == 'T' || //ãƒ†ã‚­ã‚¹ãƒˆ
+            memcmp(pId, "COMM", 4) == 0 || //ã‚³ãƒ¡ãƒ³ãƒˆ
+            memcmp(pId, "WXXX", 4) == 0 || //URL ãƒªãƒ³ã‚¯ãƒ•ãƒ¬ãƒ¼ãƒ 
             0) {
             pIdValues = (IDVALUE*)realloc(pIdValues, sizeof(IDVALUE)*(nCount + 1));
             memcpy(pIdValues[nCount].szId, pId, 4);
             pIdValues[nCount].szId[4] = 0;
             pIdValues[nCount].pszValue = _tcsdup(GetId3String(pIdValues[nCount].szId));
             nCount++;
-            //‚±‚±‚Å SetId3String ‚·‚éê‡‚Ì•›ì—p‚ª•ª‚©‚ç‚È‚¢‚Ì‚Å
-            //”O‚Ì‚½‚ßˆê——‚ğæ“¾‚µ‚Ä‚©‚çŒã‚ÅÀs‚·‚é
+            //ã“ã“ã§ SetId3String ã™ã‚‹å ´åˆã®å‰¯ä½œç”¨ãŒåˆ†ã‹ã‚‰ãªã„ã®ã§
+            //å¿µã®ãŸã‚ä¸€è¦§ã‚’å–å¾—ã—ã¦ã‹ã‚‰å¾Œã§å®Ÿè¡Œã™ã‚‹
         }
         p++;
     }

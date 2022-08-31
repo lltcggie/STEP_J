@@ -1,14 +1,14 @@
-// RiffSIF.cpp: CRiffSIF �N���X�̃C���v�������e�[�V����
+// RiffSIF.cpp: CRiffSIF クラスのインプリメンテーション
 //
 //////////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"
-#include "resource.h"		// ���C�� �V���{��
+#include "resource.h"		// メイン シンボル
 #include "GlobalCommand.h"
 #include "RiffSIF.h"
 
 //////////////////////////////////////////////////////////////////////
-// �\�z/����
+// 構築/消滅
 //////////////////////////////////////////////////////////////////////
 
 CRiffSIF::CRiffSIF()
@@ -59,15 +59,15 @@ DWORD CRiffSIF::GetTotalFieldSize()
 	{
 		CString *pStr = &p->second;
 		DWORD len = TstrToBytes(*pStr, -1, NULL, 0, BTC_CODE_ANSI);
-		dwSize += len + (len&0x1)?1:0;	//WORD���E���킹
+		dwSize += len + (len&0x1)?1:0;	//WORD境界合わせ
 		p++;
 	}
 	return dwSize;
 }
 
-//�`�����N���������܂�
-//return=TRUE�̂Ƃ��͌��������`�����N�̐擪+8�̈ʒu�ɂ��܂�
-//return=FALSE�̂Ƃ��͍ŏI�`�����N�̍Ō��+1
+//チャンクを検索します
+//return=TRUEのときは見つかったチャンクの先頭+8の位置にいます
+//return=FALSEのときは最終チャンクの最後尾+1
 BOOL CRiffSIF::FindChunk(HANDLE hFile,DWORD dwFileSize,UINT flag,FOURCC type,DWORD *pdwSize,BOOL bModify)
 {
 	FOURCC id;
@@ -152,9 +152,9 @@ BOOL CRiffSIF::FindChunk(HANDLE hFile,DWORD dwFileSize,UINT flag,FOURCC type,DWO
 		{
 			if((dwChunkHead+8+dwSize) > dwFileSize)
 			{
-				//�Ō�̃`�����N�T�C�Y���s���i�C������j
-				// ���ۂ̃t�@�C���T�C�Y�����A�`�����N�T�C�Y�̏I�[����ɂ��Ă���
-				// ���߂Ƀ`�����N�T�C�Y���t�@�C���T�C�Y���܂ŕ␳����
+				//最後のチャンクサイズが不正（修正する）
+				// 実際のファイルサイズよりも、チャンクサイズの終端が後にきている
+				// ためにチャンクサイズをファイルサイズ分まで補正する
 				dwSize -= (dwChunkHead+8+dwSize) - dwFileSize;
 				lAddressHeight = 0;
 				SetFilePointer(hFile,dwChunkHead+4,&lAddressHeight,FILE_BEGIN);
@@ -173,7 +173,7 @@ BOOL CRiffSIF::FindChunk(HANDLE hFile,DWORD dwFileSize,UINT flag,FOURCC type,DWO
 }
 
 /*
-	���ׂĂ�"INAM(SIZE)::::::"�̒���
+	すべての"INAM(SIZE)::::::"の長さ
 */
 DWORD CRiffSIF::GetInfoChunkSize()
 {
@@ -191,8 +191,8 @@ DWORD CRiffSIF::GetInfoChunkSize()
 	return dwSize;
 }
 /*
-	ret:	-1 = ���[�h���s
-			-2 = �t�@�C���T�C�Y��2G�𒴉߂��Ă���
+	ret:	-1 = ロード失敗
+			-2 = ファイルサイズが2Gを超過している
 */
 DWORD CRiffSIF::Load(LPCTSTR szFileName,char id1,char id2,char id3,char id4)
 {
@@ -210,11 +210,11 @@ DWORD CRiffSIF::Load(LPCTSTR szFileName,char id1,char id2,char id3,char id4)
 
 	Release();
 	//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-	//�t�@�C�����J��
+	//ファイルを開く
 	hFile = CreateFile(szFileName,
 					GENERIC_READ,
 					FILE_SHARE_READ,NULL,
-					OPEN_EXISTING,	//�t�@�C�����J���܂��B�w�肵���t�@�C�������݂��Ă��Ȃ��ꍇ�A���̊֐��͎��s���܂��B 
+					OPEN_EXISTING,	//ファイルを開きます。指定したファイルが存在していない場合、この関数は失敗します。 
 					FILE_ATTRIBUTE_NORMAL,
 					NULL);
 	if(hFile == INVALID_HANDLE_VALUE)
@@ -226,19 +226,19 @@ DWORD CRiffSIF::Load(LPCTSTR szFileName,char id1,char id2,char id3,char id4)
 	llFileSize = GetFileSize64(hFile);
 	if(llFileSize >= 0x80000000)
 	{
-		// 2G�𒴂���t�@�C���͓ǂݎ��Ȃ�
+		// 2Gを超えるファイルは読み取れない
 		dwWin32errorCode = -2;
 		goto exit;
 	}
 
 	//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-	//RIFF-AVI ���m�F
+	//RIFF-AVI を確認
 	if(!ReadFile(hFile,&id,sizeof(id),&dwRet,NULL))
 	{
 		dwWin32errorCode = GetLastError();
 		goto exit;
 	}
-	// ���T�C�Y
+	// 総サイズ
 	if(!ReadFile(hFile,&dwTotalSize,sizeof(dwTotalSize),&dwRet,NULL))
 	{
 		dwWin32errorCode = GetLastError();
@@ -260,20 +260,20 @@ DWORD CRiffSIF::Load(LPCTSTR szFileName,char id1,char id2,char id3,char id4)
 
 	dwPtr = SetFilePointer(hFile,0,NULL,FILE_CURRENT);
 	//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-	//data�`�����N������(������Ȃ��Ƃ���Riff�_���I�[�Ɉړ�)
+	//dataチャンクを検索(見つからないときはRiff論理終端に移動)
 	if(FindChunk(hFile,(DWORD)llFileSize,MMIO_FINDCHUNK,mmioFOURCC('d','a','t','a'),&dwSize,FALSE) && (dwSize > 8))
 	{
-		// (�`�����N�̐擪+8�ɂ���)
+		// (チャンクの先頭+8にいる)
 		m_dwStreamSize = dwSize;
 	}
 	SetFilePointer(hFile,dwPtr,NULL,FILE_BEGIN);
 	//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-	//LIST-INFO������(������Ȃ��Ƃ���Riff�_���I�[�Ɉړ��E�`�����N�T�C�Y�C���@�\�t��)
+	//LIST-INFOを検索(見つからないときはRiff論理終端に移動・チャンクサイズ修正機能付き)
 	if(FindChunk(hFile,(DWORD)llFileSize,MMIO_FINDLIST,mmioFOURCC('I','N','F','O'),&dwSize,FALSE) && (dwSize > 8))
 	{
-		// (�`�����N�̐擪+8�ɂ���)
+		// (チャンクの先頭+8にいる)
 		
-		//�S�Ă̏�����荞��
+		//全ての情報を取り込む
 		char *buf = (char *)malloc(dwSize);
 		if(buf == NULL)
 		{
@@ -292,7 +292,7 @@ DWORD CRiffSIF::Load(LPCTSTR szFileName,char id1,char id2,char id3,char id4)
 		{
 			if(dwRemainSize < 8)
 			{
-				break;	//�p�S
+				break;	//用心
 			}
 			FOURCC id =	mmioFOURCC(
 								buf[dwSize-dwRemainSize],
@@ -304,11 +304,11 @@ DWORD CRiffSIF::Load(LPCTSTR szFileName,char id1,char id2,char id3,char id4)
 			char *data = (char *)&buf[dwSize-dwRemainSize+8];
 			if(dwRemainSize < (8+size))
 			{
-				break;	//�p�S
+				break;	//用心
 			}
 			if(size>0)
 			{
-				//map�ɒǉ�
+				//mapに追加
 				if(data[size-1] == '\0')
 				{
 					m_fields.insert(std::pair<FOURCC,CString>(id,data));
@@ -325,7 +325,7 @@ DWORD CRiffSIF::Load(LPCTSTR szFileName,char id1,char id2,char id3,char id4)
 			dwRemainSize -= size + 8;
 			if(dwRemainSize & 0x01)
 			{
-				dwRemainSize--;	//���[�h���E���킹
+				dwRemainSize--;	//ワード境界合わせ
 			}
 		}
 		free(buf);
@@ -343,8 +343,8 @@ exit:
 
 
 /*
-	ret:	-1 = �X�V���s
-			-2 = �t�@�C���T�C�Y��2G�𒴉߂��Ă���
+	ret:	-1 = 更新失敗
+			-2 = ファイルサイズが2Gを超過している
 */
 DWORD CRiffSIF::Save(LPCTSTR szFileName)
 {
@@ -364,11 +364,11 @@ DWORD CRiffSIF::Save(LPCTSTR szFileName)
 	FieldMap::iterator p;
 
 	//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-	//�t�@�C�����J��
+	//ファイルを開く
 	hFile = CreateFile(szFileName,
 					GENERIC_READ|GENERIC_WRITE,
 					FILE_SHARE_READ,NULL,
-					OPEN_EXISTING,	//�t�@�C�����J���܂��B�w�肵���t�@�C�������݂��Ă��Ȃ��ꍇ�A���̊֐��͎��s���܂��B 
+					OPEN_EXISTING,	//ファイルを開きます。指定したファイルが存在していない場合、この関数は失敗します。 
 					FILE_ATTRIBUTE_NORMAL,
 					NULL);
 	if(hFile == INVALID_HANDLE_VALUE)
@@ -380,19 +380,19 @@ DWORD CRiffSIF::Save(LPCTSTR szFileName)
 	llFileSize = GetFileSize64(hFile);
 	if(llFileSize >= 0x80000000)
 	{
-		// 2G�𒴂���t�@�C���͕ҏW�ł��Ȃ�
+		// 2Gを超えるファイルは編集できない
 		dwWin32errorCode = -2;
 		goto exit;
 	}
 
 	//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-	//RIFF-AVI ���m�F
+	//RIFF-AVI を確認
 	if(!ReadFile(hFile,&id,sizeof(id),&dwRet,NULL))
 	{
 		dwWin32errorCode = GetLastError();
 		goto exit;
 	}
-	// ���T�C�Y
+	// 総サイズ
 	if(!ReadFile(hFile,&dwTotalSize,sizeof(dwTotalSize),&dwRet,NULL))
 	{
 		dwWin32errorCode = GetLastError();
@@ -413,39 +413,39 @@ DWORD CRiffSIF::Save(LPCTSTR szFileName)
 	while(1)
 	{
 		//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-		//LIST-INFO������(������Ȃ��Ƃ���Riff�_���I�[�Ɉړ��E�`�����N�T�C�Y�C���@�\�t��)
+		//LIST-INFOを検索(見つからないときはRiff論理終端に移動・チャンクサイズ修正機能付き)
 		if(FindChunk(hFile,(DWORD)llFileSize,MMIO_FINDLIST,mmioFOURCC('I','N','F','O'),&dwSize,TRUE))
 		{
-			// (�`�����N�̐擪+8�ɂ���)
+			// (チャンクの先頭+8にいる)
 
 			dwOffset = SetFilePointer(hFile,0,NULL,FILE_CURRENT);
 			if((dwOffset + dwSize) < llFileSize)
 			{
 				//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-				//LIST-INFO���Ō���ɕt���Ă��Ȃ��Ƃ��́A����LIST-INFO��JUNK�ɒu������
+				//LIST-INFOが最後尾に付いていないときは、現存LIST-INFOをJUNKに置換する
 				SetFilePointer(hFile,-12,NULL,FILE_CURRENT);
 				id = mmioFOURCC('J','U','N','K');
 				WriteFile(hFile,&id,sizeof(id),&dwRet,NULL);
 				
-				//�擪�`�����N�ɖ߂�
+				//先頭チャンクに戻る
 				SetFilePointer(hFile,12,NULL,FILE_BEGIN);
 				continue;
 			}
 			else
 			{
-				//LIST-INFO�̐擪�Ɉړ�
+				//LIST-INFOの先頭に移動
 				SetFilePointer(hFile,-12,NULL,FILE_CURRENT);
 			}
 		}
 		break;
 	}
 
-	// �t������LIST-INFO�̃T�C�Y���v�Z
+	// 付加するLIST-INFOのサイズを計算
 	dwInfoSize = GetInfoChunkSize();
 	if(dwInfoSize == 0)
 	{
 		//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-		//LIST-INFO���폜
+		//LIST-INFOを削除
 		if(!SetEndOfFile(hFile))
 		{
 			dwWin32errorCode = GetLastError();
@@ -455,7 +455,7 @@ DWORD CRiffSIF::Save(LPCTSTR szFileName)
 	dwInfoSize += 12;
 	dwListInfoHead = SetFilePointer(hFile,0,NULL,FILE_CURRENT);
 	//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-	//2G over�`�F�b�N
+	//2G overチェック
 	if((dwListInfoHead + dwInfoSize) & 0x80000000)
 	{
 		dwWin32errorCode = -2;
@@ -463,7 +463,7 @@ DWORD CRiffSIF::Save(LPCTSTR szFileName)
 	}
 
 	//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-	//�t�@�C���T�C�Y���C��(LIST-INFO���݂�)
+	//ファイルサイズを修正(LIST-INFO込みに)
 	SetFilePointer(hFile,dwInfoSize,NULL,FILE_CURRENT);
 	if(!SetEndOfFile(hFile))
 	{
@@ -472,7 +472,7 @@ DWORD CRiffSIF::Save(LPCTSTR szFileName)
 	}
 
 	//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-	//LIST-INFO���I�[�ɒǉ�
+	//LIST-INFOを終端に追加
 	SetFilePointer(hFile,-(LONG)dwInfoSize,NULL,FILE_CURRENT);
 	dwSize = dwInfoSize - 8;
 	id = FOURCC_LIST;
@@ -480,7 +480,7 @@ DWORD CRiffSIF::Save(LPCTSTR szFileName)
 	WriteFile(hFile,&id,sizeof(id),&dwRet,NULL);
 	WriteFile(hFile,&dwSize,sizeof(dwSize),&dwRet,NULL);
 	WriteFile(hFile,&type,sizeof(type),&dwRet,NULL);
-	//�S�Ẵt�B�[���h����ۑ�
+	//全てのフィールド情報を保存
 	p = m_fields.begin();
 	while(p != m_fields.end())
 	{
@@ -506,7 +506,7 @@ DWORD CRiffSIF::Save(LPCTSTR szFileName)
 	}
 
 	//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-	//RIFF-AVI �`�����N�T�C�Y���C��
+	//RIFF-AVI チャンクサイズを修正
 	dwSize = dwListInfoHead + dwInfoSize - 8;
 	SetFilePointer(hFile,4,NULL,FILE_BEGIN);
 	WriteFile(hFile,&dwSize,sizeof(dwSize),&dwRet,NULL);

@@ -9,27 +9,27 @@
 
 /*
 enum{
-    FLA_TITLE,      //ÉgÉâÉbÉNñº
-    FLA_ARTIST,     //ÉAÉãÉoÉÄñº
-    FLA_ALBUMARTIST,//Albm.ÉAÅ[ÉeÉBÉXÉg
-    FLA_ALBUM,      //ÉAÉãÉoÉÄñº
-    FLA_YEAR,       //êQçÜ
+    FLA_TITLE,      //„Éà„É©„ÉÉ„ÇØÂêç
+    FLA_ARTIST,     //„Ç¢„É´„Éê„É†Âêç
+    FLA_ALBUMARTIST,//Albm.„Ç¢„Éº„ÉÜ„Ç£„Çπ„Éà
+    FLA_ALBUM,      //„Ç¢„É´„Éê„É†Âêç
+    FLA_YEAR,       //ÂØùÂè∑
     FLA_TRACKNUMBER,//TrackNo
-    FLA_TRACKTOTAL, //Trackêî
+    FLA_TRACKTOTAL, //TrackÊï∞
     FLA_DISCNUMBER, //DiscNo
-    FLA_DISCTOTAL,  //Discêî
-    FLA_GENRE,      //ÉWÉÉÉìÉã
-    FLA_COMMENT,    //ÉRÉÅÉìÉg
-    FLA_COPYRIGHT,  //íòçÏå†
-    FLA_LYRICIST,   //çÏéåé“
-    FLA_COMPOSER,   //çÏã»é“
-    FLA_PERFORMER,  //ââëté“
-    FLA_ENCODEDBY,  //É\ÉtÉgÉEÉFÉA
+    FLA_DISCTOTAL,  //DiscÊï∞
+    FLA_GENRE,      //„Ç∏„É£„É≥„É´
+    FLA_COMMENT,    //„Ç≥„É°„É≥„Éà
+    FLA_COPYRIGHT,  //Ëëó‰ΩúÊ®©
+    FLA_LYRICIST,   //‰ΩúË©ûËÄÖ
+    FLA_COMPOSER,   //‰ΩúÊõ≤ËÄÖ
+    FLA_PERFORMER,  //ÊºîÂ•èËÄÖ
+    FLA_ENCODEDBY,  //„ÇΩ„Éï„Éà„Ç¶„Çß„Ç¢
     FLA_LAST
 };
 */
 static const char *g_field_names[] = 
-{//FLA_XXX Ç∆ÇÃëŒâûä÷åW(èáèò)Ç…íçà”
+{//FLA_XXX „Å®„ÅÆÂØæÂøúÈñ¢‰øÇ(È†ÜÂ∫è)„Å´Ê≥®ÊÑè
     "title",      //FLA_TITLE
     "artist",     //FLA_ARTIST
     "albumartist",//FLA_ALBUMARTIST
@@ -256,8 +256,8 @@ boolean Flac_Tag_Read_File_Tag (const TCHAR *filename, File_Tag *FileTag)
     vc_block = FLAC__metadata_simple_iterator_get_block(iter);
     vc = &vc_block->data.vorbis_comment;
     //by Kobarin
-    //ÉRÉsÅ[ÉAÉìÉhÉyÅ[ÉXÉgÇ™ëΩÇ¢ÇÃÇ≈ÉeÅ[ÉuÉãâª
-    //Flac_Tag_Write_File_Tag ÇÃï˚Ç≈Ç‡ìØÇ∂ÇÊÇ§Ç…èàóù
+    //„Ç≥„Éî„Éº„Ç¢„É≥„Éâ„Éö„Éº„Çπ„Éà„ÅåÂ§ö„ÅÑ„ÅÆ„Åß„ÉÜ„Éº„Éñ„É´Âåñ
+    //Flac_Tag_Write_File_Tag „ÅÆÊñπ„Åß„ÇÇÂêå„Åò„Çà„ÅÜ„Å´Âá¶ÁêÜ
 /*    struct _table{
         const char *fieldname;
         TCHAR **ppValue;
@@ -266,8 +266,8 @@ boolean Flac_Tag_Read_File_Tag (const TCHAR *filename, File_Tag *FileTag)
         {"artist", &FileTag->artist},
         {"album",  &FileTag->album},
         {"date",   &FileTag->year},
-        {"tracknumber",&FileTag->track},      //ÉIÉäÉWÉiÉãÇ∆éÊìæñ@Ç™àŸÇ»ÇÈ
-        {"tracktotal", &FileTag->track_total},//ÉIÉäÉWÉiÉãÇ∆éÊìæñ@Ç™àŸÇ»ÇÈ
+        {"tracknumber",&FileTag->track},      //„Ç™„É™„Ç∏„Éä„É´„Å®ÂèñÂæóÊ≥ï„ÅåÁï∞„Å™„Çã
+        {"tracktotal", &FileTag->track_total},//„Ç™„É™„Ç∏„Éä„É´„Å®ÂèñÂæóÊ≥ï„ÅåÁï∞„Å™„Çã
         {"genre",    &FileTag->genre},
         {"comment",  &FileTag->comment},
         {"composer", &FileTag->composer},
@@ -280,22 +280,22 @@ boolean Flac_Tag_Read_File_Tag (const TCHAR *filename, File_Tag *FileTag)
         int j;
         for(j = 0; g_field_names[j]; j++){
             int field_len = strlen(g_field_names[j]);
-            if(field->length < field_len){//í∑Ç≥Ç™àŸÇ»ÇÈ
+            if(field->length < field_len){//Èï∑„Åï„ÅåÁï∞„Å™„Çã
                 continue;
             }
             if(_strnicmp((char*)field->entry, g_field_names[j], field_len) == 0 &&
                field->entry[field_len] == '='){
-            //ëŒâûÇµÇƒÇ¢ÇÈÉtÉBÅ[ÉãÉhñº
+            //ÂØæÂøú„Åó„Å¶„ÅÑ„Çã„Éï„Ç£„Éº„É´„ÉâÂêç
                 break;
             }
         }
-        if(!g_field_names[j]){//ÉeÅ[ÉuÉãì‡Ç≈å©Ç¬Ç©ÇÁÇ»ÇØÇÍÇŒñ¢ëŒâû
+        if(!g_field_names[j]){//„ÉÜ„Éº„Éñ„É´ÂÜÖ„ÅßË¶ã„Å§„Åã„Çâ„Å™„Åë„Çå„Å∞Êú™ÂØæÂøú
             //g_print("custom %*s\n", field->length, field->entry);
             FileTag->other->Add(strndup((char*)field->entry, field->length));
         }
-        else{//ëŒâûÇµÇƒÇ¢ÇÍÇŒ FileTag->values[] Ç…ìoò^
+        else{//ÂØæÂøú„Åó„Å¶„ÅÑ„Çå„Å∞ FileTag->values[] „Å´ÁôªÈå≤
             const char *value_utf8 = strchr((const char*)field->entry, '=');
-            if(!value_utf8 || !value_utf8[1]){//íÜêgÇ™Ç»Ç¢
+            if(!value_utf8 || !value_utf8[1]){//‰∏≠Ë∫´„Åå„Å™„ÅÑ
                 continue;
             }
             value_utf8++;
@@ -303,7 +303,7 @@ boolean Flac_Tag_Read_File_Tag (const TCHAR *filename, File_Tag *FileTag)
             if(!FileTag->values[j]){
                 FileTag->values[j] = value_t;
             }
-            else{//2å¬ñ⁄à»ç~ÇÕ MULTIFIELD_SEPARATOR Ç≈òAåã
+            else{//2ÂÄãÁõÆ‰ª•Èôç„ÅØ MULTIFIELD_SEPARATOR „ÅßÈÄ£Áµê
                 int new_value_len = _tcslen(FileTag->values[j]) + 1 + 
                                     _tcslen(MULTIFIELD_SEPARATOR) + 1 +
                                     _tcslen(value_t) + 1;
@@ -318,11 +318,11 @@ boolean Flac_Tag_Read_File_Tag (const TCHAR *filename, File_Tag *FileTag)
     /*************************
      * Track and Total Track *
      *************************/
-    if(FileTag->values[FLA_TRACKNUMBER]){// "number/total" ÇÃÇÊÇ§Ç…ãÊêÿÇÁÇÍÇƒÇ¢ÇÈÇ©ämîF
+    if(FileTag->values[FLA_TRACKNUMBER]){// "number/total" „ÅÆ„Çà„ÅÜ„Å´Âå∫Âàá„Çâ„Çå„Å¶„ÅÑ„Çã„ÅãÁ¢∫Ë™ç
         TCHAR *separator = _tcschr(FileTag->values[FLA_TRACKNUMBER], _T('/'));
         if(separator){
-            *separator++ = 0;// '/' à»ëOÇÉgÉâÉbÉNî‘çÜÇ∆ÇµÇƒàµÇ§
-            if(!FileTag->values[FLA_TRACKTOTAL]){// '/' à»ç~ÇÉgÉâÉbÉNêîÇ∆ÇµÇƒàµÇ§
+            *separator++ = 0;// '/' ‰ª•Ââç„Çí„Éà„É©„ÉÉ„ÇØÁï™Âè∑„Å®„Åó„Å¶Êâ±„ÅÜ
+            if(!FileTag->values[FLA_TRACKTOTAL]){// '/' ‰ª•Èôç„Çí„Éà„É©„ÉÉ„ÇØÊï∞„Å®„Åó„Å¶Êâ±„ÅÜ
                 FileTag->values[FLA_TRACKTOTAL] = _tcsdup(separator);
             }
         }
@@ -428,8 +428,8 @@ boolean Flac_Header_Read_File_Info (const TCHAR *filename, File_Tag *FileTag)
     if (tmp_file_info.length_in_msec > 0) {
         FileTag->bitrate = 
 					8.0 * (float)(filesize) / (1000.0 * (float)tmp_file_info.total_samples / (float)tmp_file_info.sample_rate);
-					// bitrateÇ™Ç†ÇÌÇ»Ç¢Ç∆Ç´ÇÕÅA_stat.st_size Ç≈åvéZÇµÇƒÇ¢ÇÈÇ∆évÇÌÇÍÇÈ
-					// _statÇ≈ÇÕíPÇ…ÉtÉ@ÉCÉãÇÃÉTÉCÉYÇ≈Ç†ÇËÅAfilesize ÇÕÉ^ÉOï™Çî≤Ç¢ÇΩÉTÉCÉY
+					// bitrate„Åå„ÅÇ„Çè„Å™„ÅÑ„Å®„Åç„ÅØ„ÄÅ_stat.st_size „ÅßË®àÁÆó„Åó„Å¶„ÅÑ„Çã„Å®ÊÄù„Çè„Çå„Çã
+					// _stat„Åß„ÅØÂçò„Å´„Éï„Ç°„Ç§„É´„ÅÆ„Çµ„Ç§„Ç∫„Åß„ÅÇ„Çä„ÄÅfilesize „ÅØ„Çø„Ç∞ÂàÜ„ÇíÊäú„ÅÑ„Åü„Çµ„Ç§„Ç∫
 	}
     FileTag->samplerate  = tmp_file_info.sample_rate;
     FileTag->bps = tmp_file_info.bits_per_sample;
@@ -469,7 +469,7 @@ boolean Flac_Tag_Write_File_Tag (const TCHAR *filename, File_Tag *FileTag)
         return FALSE;
     }
     free(filename_utf8);
-    filename_utf8 = NULL;//îOÇÃÇΩÇﬂ
+    filename_utf8 = NULL;//Âøµ„ÅÆ„Åü„ÇÅ
 
     /* Find the VORBIS_COMMENT block */
     while ( FLAC__metadata_simple_iterator_get_block_type(iter) != FLAC__METADATA_TYPE_VORBIS_COMMENT )
@@ -493,7 +493,7 @@ boolean Flac_Tag_Write_File_Tag (const TCHAR *filename, File_Tag *FileTag)
         }
         char *value_utf8 = convert_to_utf8(value);
         int field_size = strlen(g_field_names[i]) + 
-                         strlen(value_utf8) + 1 + 1;//"=" ÇÃï™ÇæÇØ1ÉoÉCÉgó]åvÇ…ämï€
+                         strlen(value_utf8) + 1 + 1;//"=" „ÅÆÂàÜ„Å†„Åë1„Éê„Ç§„Éà‰ΩôË®à„Å´Á¢∫‰øù
 		string = (char*)malloc(field_size);
         strcpy_s(string, field_size, g_field_names[i]);
         strcat_s(string, field_size, "=");
@@ -513,7 +513,7 @@ boolean Flac_Tag_Write_File_Tag (const TCHAR *filename, File_Tag *FileTag)
 	FLAC__metadata_object_vorbiscomment_remove_entry_matching(vc_block, "title");
     if ( FileTag->title && strlen(FileTag->title) > 0 )
     {
-		string = (char*)malloc(1024+1);//Ç∑Ç◊ÇƒÇÃÉ^ÉOÇ≈ì¸óÕÇ≈Ç´ÇÈç≈ëÂ+1
+		string = (char*)malloc(1024+1);//„Åô„Åπ„Å¶„ÅÆ„Çø„Ç∞„ÅßÂÖ•Âäõ„Åß„Åç„ÇãÊúÄÂ§ß+1
         strcpy(string, "title=");
         strcat(string, FileTag->title);
         string1 = convert_to_utf8(string);
@@ -530,7 +530,7 @@ boolean Flac_Tag_Write_File_Tag (const TCHAR *filename, File_Tag *FileTag)
 	FLAC__metadata_object_vorbiscomment_remove_entry_matching(vc_block, "artist");
     if ( FileTag->artist && strlen(FileTag->artist) > 0 )
     {
-		string = (char*)malloc(1024+1);//Ç∑Ç◊ÇƒÇÃÉ^ÉOÇ≈ì¸óÕÇ≈Ç´ÇÈç≈ëÂ+1
+		string = (char*)malloc(1024+1);//„Åô„Åπ„Å¶„ÅÆ„Çø„Ç∞„ÅßÂÖ•Âäõ„Åß„Åç„ÇãÊúÄÂ§ß+1
         strcpy(string, "artist=");
         strcat(string, FileTag->artist);
         string1 = convert_to_utf8(string);
@@ -547,7 +547,7 @@ boolean Flac_Tag_Write_File_Tag (const TCHAR *filename, File_Tag *FileTag)
 	FLAC__metadata_object_vorbiscomment_remove_entry_matching(vc_block, "album");
     if ( FileTag->album && strlen(FileTag->album) > 0 )
     {
-		string = (char*)malloc(1024+1);//Ç∑Ç◊ÇƒÇÃÉ^ÉOÇ≈ì¸óÕÇ≈Ç´ÇÈç≈ëÂ+1
+		string = (char*)malloc(1024+1);//„Åô„Åπ„Å¶„ÅÆ„Çø„Ç∞„ÅßÂÖ•Âäõ„Åß„Åç„ÇãÊúÄÂ§ß+1
         strcpy(string, "album=");
         strcat(string, FileTag->album);
         string1 = convert_to_utf8(string);
@@ -564,7 +564,7 @@ boolean Flac_Tag_Write_File_Tag (const TCHAR *filename, File_Tag *FileTag)
 	FLAC__metadata_object_vorbiscomment_remove_entry_matching(vc_block, "date");
     if ( FileTag->year && strlen(FileTag->year) > 0 )
     {
-		string = (char*)malloc(1024+1);//Ç∑Ç◊ÇƒÇÃÉ^ÉOÇ≈ì¸óÕÇ≈Ç´ÇÈç≈ëÂ+1
+		string = (char*)malloc(1024+1);//„Åô„Åπ„Å¶„ÅÆ„Çø„Ç∞„ÅßÂÖ•Âäõ„Åß„Åç„ÇãÊúÄÂ§ß+1
         strcpy(string, "date=");
         strcat(string, FileTag->year);
         string1 = convert_to_utf8(string);
@@ -581,7 +581,7 @@ boolean Flac_Tag_Write_File_Tag (const TCHAR *filename, File_Tag *FileTag)
 	FLAC__metadata_object_vorbiscomment_remove_entry_matching(vc_block, "tracknumber");
     if ( FileTag->str_track /*FileTag->track*/ && strlen(FileTag->str_track) > 0)
     {
-		string = (char*)malloc(1024+1);//Ç∑Ç◊ÇƒÇÃÉ^ÉOÇ≈ì¸óÕÇ≈Ç´ÇÈç≈ëÂ+1
+		string = (char*)malloc(1024+1);//„Åô„Åπ„Å¶„ÅÆ„Çø„Ç∞„ÅßÂÖ•Âäõ„Åß„Åç„ÇãÊúÄÂ§ß+1
 		/*
         if ( FileTag->track_total && strlen(FileTag->track_total)>0 ) {
             strcpy(string, "tracknumber=");
@@ -609,7 +609,7 @@ boolean Flac_Tag_Write_File_Tag (const TCHAR *filename, File_Tag *FileTag)
 	FLAC__metadata_object_vorbiscomment_remove_entry_matching(vc_block, "genre");
     if ( FileTag->genre && strlen(FileTag->genre) > 0 )
     {
-		string = (char*)malloc(1024+1);//Ç∑Ç◊ÇƒÇÃÉ^ÉOÇ≈ì¸óÕÇ≈Ç´ÇÈç≈ëÂ+1
+		string = (char*)malloc(1024+1);//„Åô„Åπ„Å¶„ÅÆ„Çø„Ç∞„ÅßÂÖ•Âäõ„Åß„Åç„ÇãÊúÄÂ§ß+1
         strcpy(string, "genre=");
         strcat(string, FileTag->genre);
         string1 = convert_to_utf8(string);
@@ -627,7 +627,7 @@ boolean Flac_Tag_Write_File_Tag (const TCHAR *filename, File_Tag *FileTag)
 	FLAC__metadata_object_vorbiscomment_remove_entry_matching(vc_block, "comment");
     if ( FileTag->comment && strlen(FileTag->comment) > 0 )
     {
-		string = (char*)malloc(1024+1);//Ç∑Ç◊ÇƒÇÃÉ^ÉOÇ≈ì¸óÕÇ≈Ç´ÇÈç≈ëÂ+1
+		string = (char*)malloc(1024+1);//„Åô„Åπ„Å¶„ÅÆ„Çø„Ç∞„ÅßÂÖ•Âäõ„Åß„Åç„ÇãÊúÄÂ§ß+1
         strcpy(string, "comment=");
         strcat(string, FileTag->comment);
         string1 = convert_to_utf8(string);
@@ -644,7 +644,7 @@ boolean Flac_Tag_Write_File_Tag (const TCHAR *filename, File_Tag *FileTag)
 	FLAC__metadata_object_vorbiscomment_remove_entry_matching(vc_block, "composer");
     if ( FileTag->composer && strlen(FileTag->composer) > 0 )
     {
-		string = (char*)malloc(1024+1);//Ç∑Ç◊ÇƒÇÃÉ^ÉOÇ≈ì¸óÕÇ≈Ç´ÇÈç≈ëÂ+1
+		string = (char*)malloc(1024+1);//„Åô„Åπ„Å¶„ÅÆ„Çø„Ç∞„ÅßÂÖ•Âäõ„Åß„Åç„ÇãÊúÄÂ§ß+1
         strcpy(string, "composer=");
         strcat(string, FileTag->composer);
         string1 = convert_to_utf8(string);
@@ -661,7 +661,7 @@ boolean Flac_Tag_Write_File_Tag (const TCHAR *filename, File_Tag *FileTag)
 	FLAC__metadata_object_vorbiscomment_remove_entry_matching(vc_block, "performer");
     if ( FileTag->performer && strlen(FileTag->performer) > 0 )
     {
-		string = (char*)malloc(1024+1);//Ç∑Ç◊ÇƒÇÃÉ^ÉOÇ≈ì¸óÕÇ≈Ç´ÇÈç≈ëÂ+1
+		string = (char*)malloc(1024+1);//„Åô„Åπ„Å¶„ÅÆ„Çø„Ç∞„ÅßÂÖ•Âäõ„Åß„Åç„ÇãÊúÄÂ§ß+1
         strcpy(string, "performer=");
         strcat(string, FileTag->performer);
         string1 = convert_to_utf8(string);
@@ -776,7 +776,7 @@ bool WriteFileFLAC(FILE_INFO *pFile)
 	File_Tag FileTag;
 	memset(&FileTag, 0, sizeof(FileTag));
 	FileTag.other = new CPtrArray();
-	//Flac_Tag_Read_File_Tag(GetFullPath(pFile), &FileTag); // FitaTag.other Ç÷ÇÃê›íË
+	//Flac_Tag_Read_File_Tag(GetFullPath(pFile), &FileTag); // FitaTag.other „Å∏„ÅÆË®≠ÂÆö
 
 	FileTag.values[FLA_TITLE] =    (TCHAR*)GetTrackNameSI(pFile);
 	FileTag.values[FLA_ARTIST] =   (TCHAR*)GetArtistNameSI(pFile);

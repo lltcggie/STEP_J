@@ -240,24 +240,24 @@ bool LoadFileTTA(FILE_INFO *pFileMP3)
 
 	CId3tagv2 id3v2;
 	if (id3v2.Load(GetFullPath(pFileMP3)) == ERROR_SUCCESS && id3v2.IsEnable()) {
-        SetTrackNameSI(pFileMP3, id3v2.GetTitle());     // ƒ^ƒCƒgƒ‹
-        SetArtistNameSI(pFileMP3, id3v2.GetArtist());   // ƒA[ƒeƒBƒXƒg–¼
-        SetAlbumNameSI(pFileMP3, id3v2.GetAlbum());     // ƒAƒ‹ƒoƒ€–¼
-        SetYearSI(pFileMP3, id3v2.GetYear());           // ƒŠƒŠ[ƒX
-        SetCommentSI(pFileMP3, id3v2.GetComment());     // ƒRƒƒ“ƒg
-        SetGenreSI(pFileMP3, id3v2.GetGenre());         // ƒWƒƒƒ“ƒ‹–¼
+        SetTrackNameSI(pFileMP3, id3v2.GetTitle());     // ã‚¿ã‚¤ãƒˆãƒ«
+        SetArtistNameSI(pFileMP3, id3v2.GetArtist());   // ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆå
+        SetAlbumNameSI(pFileMP3, id3v2.GetAlbum());     // ã‚¢ãƒ«ãƒãƒ å
+        SetYearSI(pFileMP3, id3v2.GetYear());           // ãƒªãƒªãƒ¼ã‚¹
+        SetCommentSI(pFileMP3, id3v2.GetComment());     // ã‚³ãƒ¡ãƒ³ãƒˆ
+        SetGenreSI(pFileMP3, id3v2.GetGenre());         // ã‚¸ãƒ£ãƒ³ãƒ«å
 
-        SetSoftwareSI(pFileMP3, id3v2.GetEncoder());        // ƒGƒ“ƒR[ƒ_
-        SetCopyrightSI(pFileMP3, id3v2.GetCopyright());     // ’˜ìŒ 
-        SetWriterSI(pFileMP3, id3v2.GetWriter());           // ìŒ
-        SetComposerSI(pFileMP3, id3v2.GetComposer());       // ì‹È
-        SetAlbumArtistSI(pFileMP3, id3v2.GetAlbumArtist()); // Albm. ƒA[ƒeƒBƒXƒg
-        SetOrigArtistSI(pFileMP3, id3v2.GetOrigArtist());   // Orig.ƒA[ƒeƒBƒXƒg
+        SetSoftwareSI(pFileMP3, id3v2.GetEncoder());        // ã‚¨ãƒ³ã‚³ãƒ¼ãƒ€
+        SetCopyrightSI(pFileMP3, id3v2.GetCopyright());     // è‘—ä½œæ¨©
+        SetWriterSI(pFileMP3, id3v2.GetWriter());           // ä½œè©
+        SetComposerSI(pFileMP3, id3v2.GetComposer());       // ä½œæ›²
+        SetAlbumArtistSI(pFileMP3, id3v2.GetAlbumArtist()); // Albm. ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆ
+        SetOrigArtistSI(pFileMP3, id3v2.GetOrigArtist());   // Orig.ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆ
         SetURLSI(pFileMP3, id3v2.GetUrl());                 // URL
-        SetEncodest(pFileMP3, id3v2.GetEncodedBy());        // ƒGƒ“ƒR[ƒh‚µ‚½l
-        SetEngineerSI(pFileMP3, id3v2.GetEngineer());       // ƒGƒ“ƒWƒjƒAio”Åj
-        {//ƒgƒ‰ƒbƒN”Ô†
-         // x/y Œ`®‚É‚È‚Á‚Ä‚¢‚ê‚Î y ‚Ì•û‚ğƒgƒ‰ƒbƒN”‚Æ‚µ‚Äˆ—
+        SetEncodest(pFileMP3, id3v2.GetEncodedBy());        // ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰ã—ãŸäºº
+        SetEngineerSI(pFileMP3, id3v2.GetEngineer());       // ã‚¨ãƒ³ã‚¸ãƒ‹ã‚¢ï¼ˆå‡ºç‰ˆï¼‰
+        {//ãƒˆãƒ©ãƒƒã‚¯ç•ªå·
+         // x/y å½¢å¼ã«ãªã£ã¦ã„ã‚Œã° y ã®æ–¹ã‚’ãƒˆãƒ©ãƒƒã‚¯æ•°ã¨ã—ã¦å‡¦ç†
             CString strTrackNo = id3v2.GetTrackNo();
             TCHAR *trk_number = strTrackNo.GetBuffer();
             TCHAR *trk_total = _tcschr(trk_number, _T('/'));
@@ -270,8 +270,8 @@ bool LoadFileTTA(FILE_INFO *pFileMP3)
             }
             strTrackNo.ReleaseBuffer();
         }
-        {//ƒfƒBƒXƒN”Ô†
-         //x/y Œ`®‚É‚È‚Á‚Ä‚¢‚ê‚Î y ‚Ì•û‚ğƒfƒBƒXƒN”‚Æ‚µ‚Äˆ—
+        {//ãƒ‡ã‚£ã‚¹ã‚¯ç•ªå·
+         //x/y å½¢å¼ã«ãªã£ã¦ã„ã‚Œã° y ã®æ–¹ã‚’ãƒ‡ã‚£ã‚¹ã‚¯æ•°ã¨ã—ã¦å‡¦ç†
             CString strDiscNo = id3v2.GetDiscNo();
             TCHAR *disc_number = strDiscNo.GetBuffer();
             TCHAR *disc_total = _tcschr(disc_number, _T('/'));
@@ -318,20 +318,20 @@ bool WriteFileTTA(FILE_INFO *pFileMP3)
 			}
 		}
 	}
-    id3v2.SetUnSynchronization(false);//í‚É”ñ“¯Šú‰»–³Œø
+    id3v2.SetUnSynchronization(false);//å¸¸ã«éåŒæœŸåŒ–ç„¡åŠ¹
     if(id3v2.GetCharEncoding() == CId3tagv2::ID3V2CHARENCODING_ISO_8859_1){
-    //•¶šƒGƒ“ƒR[ƒh‚ÍŠî–{“I‚É•ÏX‚µ‚È‚¢‚ªAISO_8859_1 ‚Ì‚Æ‚«‚Í UTF_16 ‚É•ÏX‚·‚é
+    //æ–‡å­—ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰ã¯åŸºæœ¬çš„ã«å¤‰æ›´ã—ãªã„ãŒã€ISO_8859_1 ã®ã¨ãã¯ UTF_16 ã«å¤‰æ›´ã™ã‚‹
         id3v2.SetCharEncoding(CId3tagv2::ID3V2CHARENCODING_UTF_16);
     }
 
-    id3v2.SetTitle(GetTrackNameSI(pFileMP3));           // ƒ^ƒCƒgƒ‹
-    id3v2.SetArtist(GetArtistNameSI(pFileMP3));         // ƒA[ƒeƒBƒXƒg–¼
-    id3v2.SetAlbum(GetAlbumNameSI(pFileMP3));           // ƒAƒ‹ƒoƒ€–¼
-    id3v2.SetYear(GetYearSI(pFileMP3));                 // ƒŠƒŠ[ƒX
-    id3v2.SetEncoder(GetSoftwareSI(pFileMP3));          // ƒGƒ“ƒR[ƒ_
-    {//ƒgƒ‰ƒbƒN”Ô†/ƒgƒ‰ƒbƒN”
-     //ƒgƒ‰ƒbƒN”—p‚Ì ID ‚ª ID3v2 ‚É‚Í‚È‚¢‚Ì‚Å "ƒgƒ‰ƒbƒN”Ô†/ƒgƒ‰ƒbƒN”" ‚Ì
-     //‚æ‚¤‚È•¶š—ñ‚É•ÏŠ·‚µ‚Äƒgƒ‰ƒbƒN”‚É‘‚«‚Ş
+    id3v2.SetTitle(GetTrackNameSI(pFileMP3));           // ã‚¿ã‚¤ãƒˆãƒ«
+    id3v2.SetArtist(GetArtistNameSI(pFileMP3));         // ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆå
+    id3v2.SetAlbum(GetAlbumNameSI(pFileMP3));           // ã‚¢ãƒ«ãƒãƒ å
+    id3v2.SetYear(GetYearSI(pFileMP3));                 // ãƒªãƒªãƒ¼ã‚¹
+    id3v2.SetEncoder(GetSoftwareSI(pFileMP3));          // ã‚¨ãƒ³ã‚³ãƒ¼ãƒ€
+    {//ãƒˆãƒ©ãƒƒã‚¯ç•ªå·/ãƒˆãƒ©ãƒƒã‚¯æ•°
+     //ãƒˆãƒ©ãƒƒã‚¯æ•°ç”¨ã® ID ãŒ ID3v2 ã«ã¯ãªã„ã®ã§ "ãƒˆãƒ©ãƒƒã‚¯ç•ªå·/ãƒˆãƒ©ãƒƒã‚¯æ•°" ã®
+     //ã‚ˆã†ãªæ–‡å­—åˆ—ã«å¤‰æ›ã—ã¦ãƒˆãƒ©ãƒƒã‚¯æ•°ã«æ›¸ãè¾¼ã‚€
         CString strTrackNumber = GetTrackNumberSI(pFileMP3);
         CString strTrackTotal = GetTrackTotalSI(pFileMP3);
         if (!strTrackNumber.IsEmpty() && !strTrackTotal.IsEmpty()) {
@@ -339,9 +339,9 @@ bool WriteFileTTA(FILE_INFO *pFileMP3)
         }
         id3v2.SetTrackNo(strTrackNumber);
     }
-    {//ƒfƒBƒXƒN”Ô†/ƒfƒBƒXƒN”
-     //ƒfƒBƒXƒN”—p‚Ì ID ‚ª ID3v2 ‚É‚Í‚È‚¢‚Ì‚Å "ƒfƒBƒXƒN”Ô†/ƒfƒBƒXƒN”" ‚Ì
-     //‚æ‚¤‚È•¶š—ñ‚É•ÏŠ·‚µ‚ÄƒfƒBƒXƒN”‚É‘‚«‚Ş
+    {//ãƒ‡ã‚£ã‚¹ã‚¯ç•ªå·/ãƒ‡ã‚£ã‚¹ã‚¯æ•°
+     //ãƒ‡ã‚£ã‚¹ã‚¯æ•°ç”¨ã® ID ãŒ ID3v2 ã«ã¯ãªã„ã®ã§ "ãƒ‡ã‚£ã‚¹ã‚¯ç•ªå·/ãƒ‡ã‚£ã‚¹ã‚¯æ•°" ã®
+     //ã‚ˆã†ãªæ–‡å­—åˆ—ã«å¤‰æ›ã—ã¦ãƒ‡ã‚£ã‚¹ã‚¯æ•°ã«æ›¸ãè¾¼ã‚€
         CString strDiscNumber = GetDiscNumberSI(pFileMP3);
         CString strDiscTotal = GetDiscTotalSI(pFileMP3);
         if (!strDiscNumber.IsEmpty() && !strDiscTotal.IsEmpty()) {
@@ -349,15 +349,15 @@ bool WriteFileTTA(FILE_INFO *pFileMP3)
         }
         id3v2.SetDiscNo(strDiscNumber);
     }
-    id3v2.SetComment(GetCommentSI(pFileMP3));           // ƒRƒƒ“ƒg
-    id3v2.SetCopyright(GetCopyrightSI(pFileMP3));       // ’˜ìŒ 
-    id3v2.SetWriter(GetWriterSI(pFileMP3));             // ìŒ
-    id3v2.SetComposer(GetComposerSI(pFileMP3));         // ì‹È
-    id3v2.SetAlbumArtist(GetAlbumArtistSI(pFileMP3));   // Albm. ƒA[ƒeƒBƒXƒg
-    id3v2.SetOrigArtist(GetOrigArtistSI(pFileMP3));     // Orig.ƒA[ƒeƒBƒXƒg
+    id3v2.SetComment(GetCommentSI(pFileMP3));           // ã‚³ãƒ¡ãƒ³ãƒˆ
+    id3v2.SetCopyright(GetCopyrightSI(pFileMP3));       // è‘—ä½œæ¨©
+    id3v2.SetWriter(GetWriterSI(pFileMP3));             // ä½œè©
+    id3v2.SetComposer(GetComposerSI(pFileMP3));         // ä½œæ›²
+    id3v2.SetAlbumArtist(GetAlbumArtistSI(pFileMP3));   // Albm. ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆ
+    id3v2.SetOrigArtist(GetOrigArtistSI(pFileMP3));     // Orig.ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆ
     id3v2.SetUrl(GetURLSI(pFileMP3));                   // URL
-    id3v2.SetEncodedBy(GetEncodest(pFileMP3));          // ƒGƒ“ƒR[ƒh‚µ‚½l
-    id3v2.SetEngineer(GetEngineerSI(pFileMP3));         // ƒGƒ“ƒWƒjƒAio”Åj
+    id3v2.SetEncodedBy(GetEncodest(pFileMP3));          // ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰ã—ãŸäºº
+    id3v2.SetEngineer(GetEngineerSI(pFileMP3));         // ã‚¨ãƒ³ã‚¸ãƒ‹ã‚¢ï¼ˆå‡ºç‰ˆï¼‰
     id3v2.SetGenre(GetGenreSI(pFileMP3));
 
 	if (id3v2.Save(GetFullPath(pFileMP3)) != ERROR_SUCCESS) {

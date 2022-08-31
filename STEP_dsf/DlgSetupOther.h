@@ -23,7 +23,7 @@ public:
 
 protected:
 	virtual BOOL OnInitDialog();
-	virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV ÉTÉ|Å[Ég
+	virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV „Çµ„Éù„Éº„Éà
 	afx_msg void OnSelchangeComboId3v2Version();
 	afx_msg void OnSelchangeComboId3v2VersionNew();
 

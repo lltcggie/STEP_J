@@ -1,4 +1,4 @@
-// SuperTagEditorView.h : CSuperTagEditorView ƒNƒ‰ƒX‚ÌéŒ¾‚¨‚æ‚ÑƒCƒ“ƒ^[ƒtƒFƒCƒX‚Ì’è‹`‚ğ‚µ‚Ü‚·B
+// SuperTagEditorView.h : CSuperTagEditorView ã‚¯ãƒ©ã‚¹ã®å®£è¨€ãŠã‚ˆã³ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹ã®å®šç¾©ã‚’ã—ã¾ã™ã€‚
 //
 /////////////////////////////////////////////////////////////////////////////
 
@@ -18,11 +18,11 @@ class	CSuperTagEditorDoc;
 
 class CSuperTagEditorView : public CView
 {
-protected: // ƒVƒŠƒAƒ‰ƒCƒY‹@”\‚Ì‚İ‚©‚çì¬‚µ‚Ü‚·B
+protected: // ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºæ©Ÿèƒ½ã®ã¿ã‹ã‚‰ä½œæˆã—ã¾ã™ã€‚
 	CSuperTagEditorView();
 	DECLARE_DYNCREATE(CSuperTagEditorView)
 
-// ƒAƒgƒŠƒrƒ…[ƒg
+// ã‚¢ãƒˆãƒªãƒ“ãƒ¥ãƒ¼ãƒˆ
 public:
 	CMySuperGrid	m_List;
 	CSuperTagEditorDoc* GetDocument();
@@ -44,12 +44,12 @@ public:
 					if (m_fontListView->CreateFontIndirect(&g_fontReport)) {
 						m_List.SetFont(m_fontListView, TRUE);
 						m_List.SetHeaderFont(g_fontReport);
-						// ƒJƒ‰ƒ€•‚Ì©“®’²ß
+						// ã‚«ãƒ©ãƒ å¹…ã®è‡ªå‹•èª¿ç¯€
 						if (g_bOptLoadFileAdjustColumn) m_List.AutoSizeColumns(-1);
 					}
 				}
 			}
-#if 0 //player_conrol.h ‚ÉˆÚ“®
+#if 0 //player_conrol.h ã«ç§»å‹•
 	inline	BOOL	PlayerTypeIsKbmplay(void) {
 				return((g_nOptPlayerType == PLAYER_KBMPLAY) ? TRUE : FALSE);
 			}
@@ -60,7 +60,7 @@ public:
 	bool	ExecuteWinamp();
 	bool	ExecuteLilith(void); /* WildCherry 070 */
 	void	ExecWinampCommand(int, LPARAM = 0);
-	void	ExecKbmplayCommand(int, LPARAM = 0, BOOL bPlay = FALSE);//’Ç‰Á by Kobarin
+	void	ExecKbmplayCommand(int, LPARAM = 0, BOOL bPlay = FALSE);//è¿½åŠ  by Kobarin
 	void	ExecLilithCommand(int, LPARAM = 0, BOOL bPlay = TRUE); /* WildCherry 070 */
 #endif
 	void	ExecReplace(bool);
@@ -68,30 +68,30 @@ public:
 	void	PlayFile(int);
 	bool	LoadFormatFile(LPCTSTR, CString *, CString *, CString *);
 	bool	ExecWriteList(WRITE_FORMAT *);
-	//’Ç‰Á by Kobarin
+	//è¿½åŠ  by Kobarin
 	static HDDEDATA CALLBACK DdemlCallback(UINT uType, UINT uFmt,
 										   HCONV hConv, HSZ hszTpc1, HSZ hszTpc2, 
 										   HDDEDATA hData,
 										   ULONG_PTR dwData1, ULONG_PTR dwData2);
 	void   OnDDE(TCHAR *sFileName);
-	//’Ç‰Á ‚±‚±‚Ü‚Å
+	//è¿½åŠ  ã“ã“ã¾ã§
 
-// ƒIƒyƒŒ[ƒVƒ‡ƒ“
+// ã‚ªãƒšãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³
 public:
 
-// ƒI[ƒo[ƒ‰ƒCƒh
-	// ClassWizard ‚Í‰¼‘zŠÖ”‚ÌƒI[ƒo[ƒ‰ƒCƒh‚ğ¶¬‚µ‚Ü‚·B
+// ã‚ªãƒ¼ãƒãƒ¼ãƒ©ã‚¤ãƒ‰
+	// ClassWizard ã¯ä»®æƒ³é–¢æ•°ã®ã‚ªãƒ¼ãƒãƒ¼ãƒ©ã‚¤ãƒ‰ã‚’ç”Ÿæˆã—ã¾ã™ã€‚
 	//{{AFX_VIRTUAL(CSuperTagEditorView)
 	public:
-	virtual void OnDraw(CDC* pDC);  // ‚±‚Ìƒrƒ…[‚ğ•`‰æ‚·‚éÛ‚ÉƒI[ƒo[ƒ‰ƒCƒh‚³‚ê‚Ü‚·B
+	virtual void OnDraw(CDC* pDC);  // ã“ã®ãƒ“ãƒ¥ãƒ¼ã‚’æç”»ã™ã‚‹éš›ã«ã‚ªãƒ¼ãƒãƒ¼ãƒ©ã‚¤ãƒ‰ã•ã‚Œã¾ã™ã€‚
 	virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
 	protected:
-	virtual void OnInitialUpdate(); // \’zŒã‚ÌÅ‰‚Ì‚P“x‚¾‚¯ŒÄ‚Ño‚³‚ê‚Ü‚·B
+	virtual void OnInitialUpdate(); // æ§‹ç¯‰å¾Œã®æœ€åˆã®ï¼‘åº¦ã ã‘å‘¼ã³å‡ºã•ã‚Œã¾ã™ã€‚
 	virtual void PostNcDestroy();
 	virtual BOOL OnNotify(WPARAM wParam, LPARAM lParam, LRESULT* pResult);
 	//}}AFX_VIRTUAL
 
-// ƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“
+// ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³
 public:
 	virtual ~CSuperTagEditorView();
 #ifdef _DEBUG
@@ -101,7 +101,7 @@ public:
 
 protected:
 
-// ¶¬‚³‚ê‚½ƒƒbƒZ[ƒW ƒ}ƒbƒvŠÖ”
+// ç”Ÿæˆã•ã‚ŒãŸãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒãƒƒãƒ—é–¢æ•°
 protected:
 	//{{AFX_MSG(CSuperTagEditorView)
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
@@ -374,7 +374,7 @@ private:
 	void OnUpdatePluginCommand(CCmdUI* pCmdUI);
 };
 
-#ifndef _DEBUG  // SuperTagEditorView.cpp ƒtƒ@ƒCƒ‹‚ªƒfƒoƒbƒOŠÂ‹«‚Ìg—p‚³‚ê‚Ü‚·B
+#ifndef _DEBUG  // SuperTagEditorView.cpp ãƒ•ã‚¡ã‚¤ãƒ«ãŒãƒ‡ãƒãƒƒã‚°ç’°å¢ƒã®æ™‚ä½¿ç”¨ã•ã‚Œã¾ã™ã€‚
 inline CSuperTagEditorDoc* CSuperTagEditorView::GetDocument()
    { return (CSuperTagEditorDoc*)m_pDocument; }
 #endif
@@ -382,6 +382,6 @@ inline CSuperTagEditorDoc* CSuperTagEditorView::GetDocument()
 /////////////////////////////////////////////////////////////////////////////
 
 //{{AFX_INSERT_LOCATION}}
-// Microsoft Visual C++ ‚Í‘Os‚Ì’¼‘O‚É’Ç‰Á‚ÌéŒ¾‚ğ‘}“ü‚µ‚Ü‚·B
+// Microsoft Visual C++ ã¯å‰è¡Œã®ç›´å‰ã«è¿½åŠ ã®å®£è¨€ã‚’æŒ¿å…¥ã—ã¾ã™ã€‚
 
 #endif // !defined(AFX_DMTLOGVIEWVIEW_H__D67B644C_BFAB_11D3_9459_00402641B29B__INCLUDED_)

@@ -12,50 +12,50 @@
 
 
 enum	{
-	CONV_STR_UPPER,			// ‘å•¶š‚É•ÏŠ·
-	CONV_STR_LOWER,			// ¬•¶š‚É•ÏŠ·
-	CONV_STR_HANKAKU,		// ”¼Šp‚É•ÏŠ·
-	CONV_STR_HIRA,			// ‘SŠp‚©‚È‚É•ÏŠ·
-	CONV_STR_KATA,			// ‘SŠpƒJƒi‚É•ÏŠ·
+	CONV_STR_UPPER,			// å¤§æ–‡å­—ã«å¤‰æ›
+	CONV_STR_LOWER,			// å°æ–‡å­—ã«å¤‰æ›
+	CONV_STR_HANKAKU,		// åŠè§’ã«å¤‰æ›
+	CONV_STR_HIRA,			// å…¨è§’ã‹ãªã«å¤‰æ›
+	CONV_STR_KATA,			// å…¨è§’ã‚«ãƒŠã«å¤‰æ›
 
-	CONV_STR_HAN_ALL,		// ‘SŠp => ”¼Šp(‘S‚Ä)•ÏŠ·
-	CONV_STR_HAN_KIGOU,		// ‘SŠp => ”¼Šp(‹L†)•ÏŠ·
-	CONV_STR_HAN_SUJI,		// ‘SŠp => ”¼Šp(”š)•ÏŠ·
-	CONV_STR_HAN_KATA,		// ‘SŠp => ”¼Šp(ƒJƒ^ƒJƒi)•ÏŠ·
-	CONV_STR_HAN_ALPHA,		// ‘SŠp => ”¼Šp(ƒAƒ‹ƒtƒ@ƒxƒbƒg)•ÏŠ·
-	CONV_STR_ZEN_ALL,		// ”¼Šp => ‘SŠp(‘S‚Ä)•ÏŠ·
-	CONV_STR_ZEN_KIGOU,		// ”¼Šp => ‘SŠp(‹L†)•ÏŠ·
-	CONV_STR_ZEN_SUJI,		// ”¼Šp => ‘SŠp(”š)•ÏŠ·
-	CONV_STR_ZEN_KATA,		// ”¼Šp => ‘SŠp(ƒJƒ^ƒJƒi)•ÏŠ·
-	CONV_STR_ZEN_ALPHA,		// ”¼Šp => ‘SŠp(ƒAƒ‹ƒtƒ@ƒxƒbƒg)•ÏŠ·
-	CONV_STR_TO_UPPER,		// ¬•¶š => ‘å•¶š•ÏŠ·
-	CONV_STR_TO_LOWER,		// ‘å•¶š => ¬•¶š•ÏŠ·
-	CONV_STR_FIRST_UPPER,	// ’PŒê‚Ì‚P•¶š–Ú‚Ì‚İ‘å•¶š
-	CONV_STR_HIRA2KATA,		// ‚Ğ‚ç‚ª‚È => ƒJƒ^ƒJƒi•ÏŠ·
-	CONV_STR_KATA2HIRA,		// ƒJƒ^ƒJƒi => ‚Ğ‚ç‚ª‚È•ÏŠ·
-	CONV_STR_KAN2HIRA,		// Š¿š => ‚Ğ‚ç‚ª‚È•ÏŠ·
-	CONV_STR_ROMAJI,		// ƒ[ƒ}š•ÏŠ·
-	CONV_STR_FIXED_UP_LOW,	// ‘å•¶š¬•¶šŒÅ’è•ÏŠ·
+	CONV_STR_HAN_ALL,		// å…¨è§’ => åŠè§’(å…¨ã¦)å¤‰æ›
+	CONV_STR_HAN_KIGOU,		// å…¨è§’ => åŠè§’(è¨˜å·)å¤‰æ›
+	CONV_STR_HAN_SUJI,		// å…¨è§’ => åŠè§’(æ•°å­—)å¤‰æ›
+	CONV_STR_HAN_KATA,		// å…¨è§’ => åŠè§’(ã‚«ã‚¿ã‚«ãƒŠ)å¤‰æ›
+	CONV_STR_HAN_ALPHA,		// å…¨è§’ => åŠè§’(ã‚¢ãƒ«ãƒ•ã‚¡ãƒ™ãƒƒãƒˆ)å¤‰æ›
+	CONV_STR_ZEN_ALL,		// åŠè§’ => å…¨è§’(å…¨ã¦)å¤‰æ›
+	CONV_STR_ZEN_KIGOU,		// åŠè§’ => å…¨è§’(è¨˜å·)å¤‰æ›
+	CONV_STR_ZEN_SUJI,		// åŠè§’ => å…¨è§’(æ•°å­—)å¤‰æ›
+	CONV_STR_ZEN_KATA,		// åŠè§’ => å…¨è§’(ã‚«ã‚¿ã‚«ãƒŠ)å¤‰æ›
+	CONV_STR_ZEN_ALPHA,		// åŠè§’ => å…¨è§’(ã‚¢ãƒ«ãƒ•ã‚¡ãƒ™ãƒƒãƒˆ)å¤‰æ›
+	CONV_STR_TO_UPPER,		// å°æ–‡å­— => å¤§æ–‡å­—å¤‰æ›
+	CONV_STR_TO_LOWER,		// å¤§æ–‡å­— => å°æ–‡å­—å¤‰æ›
+	CONV_STR_FIRST_UPPER,	// å˜èªã®ï¼‘æ–‡å­—ç›®ã®ã¿å¤§æ–‡å­—
+	CONV_STR_HIRA2KATA,		// ã²ã‚‰ãŒãª => ã‚«ã‚¿ã‚«ãƒŠå¤‰æ›
+	CONV_STR_KATA2HIRA,		// ã‚«ã‚¿ã‚«ãƒŠ => ã²ã‚‰ãŒãªå¤‰æ›
+	CONV_STR_KAN2HIRA,		// æ¼¢å­— => ã²ã‚‰ãŒãªå¤‰æ›
+	CONV_STR_ROMAJI,		// ãƒ­ãƒ¼ãƒå­—å¤‰æ›
+	CONV_STR_FIXED_UP_LOW,	// å¤§æ–‡å­—å°æ–‡å­—å›ºå®šå¤‰æ›
 };
 
 struct	COLUMN_STATUS	{
-	const TCHAR	*sRegKey;	// ƒŒƒWƒXƒgƒŠ[ƒL[–¼
-	BOOL	bShowFlag;		// •\¦ƒtƒ‰ƒO
-	int		nNumber;		// €–Ú‚Ì‡”Ô
-	int		nWidth;			// ƒJƒ‰ƒ€•
-	int     nWidthMax;      // Å‘åƒJƒ‰ƒ€•
-    const BOOL bDefaultShowFlag;//•\¦ƒtƒ‰ƒO‰Šú’l (by Kobarin)
-    const int nDefaultWidthMax; //Å‘åƒJƒ‰ƒ€•‰Šú’l(by Kobarin)
+	const TCHAR	*sRegKey;	// ãƒ¬ã‚¸ã‚¹ãƒˆãƒªãƒ¼ã‚­ãƒ¼å
+	BOOL	bShowFlag;		// è¡¨ç¤ºãƒ•ãƒ©ã‚°
+	int		nNumber;		// é …ç›®ã®é †ç•ª
+	int		nWidth;			// ã‚«ãƒ©ãƒ å¹…
+	int     nWidthMax;      // æœ€å¤§ã‚«ãƒ©ãƒ å¹…
+    const BOOL bDefaultShowFlag;//è¡¨ç¤ºãƒ•ãƒ©ã‚°åˆæœŸå€¤ (by Kobarin)
+    const int nDefaultWidthMax; //æœ€å¤§ã‚«ãƒ©ãƒ å¹…åˆæœŸå€¤(by Kobarin)
 	const int nFormat;		// 
 };
-extern	struct	COLUMN_STATUS	g_columnStatus[/*COLUMN_MAX*/];//STEP_api.h ‚Ì COLUMN_MAX ‚Ì’l‚ª•Ï‰»‚µ‚½‚Æ‚«AƒfƒoƒbƒO”Å‚Å“KØ‚È‰ÓŠ‚ğC³‚ª•K—v‚È‚±‚Æ‚É‹C‚Ã‚¯‚é‚æ‚¤‚É‚·‚é
+extern	struct	COLUMN_STATUS	g_columnStatus[/*COLUMN_MAX*/];//STEP_api.h ã® COLUMN_MAX ã®å€¤ãŒå¤‰åŒ–ã—ãŸã¨ãã€ãƒ‡ãƒãƒƒã‚°ç‰ˆã§é©åˆ‡ãªç®‡æ‰€ã‚’ä¿®æ­£ãŒå¿…è¦ãªã“ã¨ã«æ°—ã¥ã‘ã‚‹ã‚ˆã†ã«ã™ã‚‹
 
 struct	LIST_WRITE_STATUS	{
-	CString	strDirectory;			// ƒŠƒXƒgƒtƒ@ƒCƒ‹o—Íæ‚ÌƒfƒBƒŒƒNƒgƒŠ
-	int		nFileNumber;			// Œ»İ‚Ìƒtƒ@ƒCƒ‹”Ô†
-	int		nFileCount;				// ƒtƒ@ƒCƒ‹‘”
-	float	fTotalSize;				// ‘‡ƒTƒCƒY
-	int		nTotalTime;				// ‘‡‰‰‘tŠÔ
+	CString	strDirectory;			// ãƒªã‚¹ãƒˆãƒ•ã‚¡ã‚¤ãƒ«å‡ºåŠ›å…ˆã®ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª
+	int		nFileNumber;			// ç¾åœ¨ã®ãƒ•ã‚¡ã‚¤ãƒ«ç•ªå·
+	int		nFileCount;				// ãƒ•ã‚¡ã‚¤ãƒ«ç·æ•°
+	float	fTotalSize;				// ç·åˆã‚µã‚¤ã‚º
+	int		nTotalTime;				// ç·åˆæ¼”å¥æ™‚é–“
 };
 
 class CSuperTagEditorDoc;
@@ -221,7 +221,7 @@ public:
 			BOOL	SortTextItems(SORT_STATE *, int, int = 0, int = -1);
 			void	MultiColumnSort(SORT_STATE *, int);
 
-			// •ÏŠ·
+			// å¤‰æ›
 			bool	ConvTagInfo(int, int, const TCHAR * = NULL);
 			bool	ConvTagInfoSelected(int, const TCHAR * = NULL);
 			bool	ConvTagInfo(CTreeItem *, int, const TCHAR * = NULL, const TCHAR * = NULL /* STEP 034 */);
@@ -299,7 +299,7 @@ public:
 	BOOL OnVkReturn(void);
 	BOOL OnItemLButtonDown(LVHITTESTINFO& ht);
 	BOOL OnChangeSelect(void);
-	// ƒ`ƒFƒbƒNó‘Ô‚ª•ÏX‚³‚ê‚½
+	// ãƒã‚§ãƒƒã‚¯çŠ¶æ…‹ãŒå¤‰æ›´ã•ã‚ŒãŸ
 	void OnChangeCheck(CTreeItem *, BOOL);
 	BOOL OnItemDblClick(int);
 	int OnGetColumLimitText(int, int);

@@ -7,7 +7,7 @@
 
 static void __fastcall strtrim(TCHAR *psz)
 {
-    StrTrim(psz, _T("\r\n\t"));//”¼ŠpƒXƒy[ƒX‚ÍƒgƒŠƒ€‚µ‚È‚¢(’l‚Ég‚¦‚È‚­‚È‚é‚½‚ß)
+    StrTrim(psz, _T("\r\n\t"));//åŠè§’ã‚¹ãƒšãƒ¼ã‚¹ã¯ãƒˆãƒªãƒ ã—ãªã„(å€¤ã«ä½¿ãˆãªããªã‚‹ãŸã‚)
 }
 static BOOL __fastcall IsSection(TCHAR *pszLine,
                                  TCHAR **ppszSection);
@@ -17,9 +17,9 @@ static BOOL __fastcall IsKeyValue(TCHAR *pszLine,
 ///////////////////////////////////////////////////////////////////////////////
 static BOOL __fastcall IsSection(TCHAR *pszLine,
                                  TCHAR **ppszSection)
-{ // pszLine ‚ª
+{ // pszLine ãŒ
   // [SectionName]
-  // Œ`®‚Ìs‚È‚ç ppszSection ‚ÉƒZƒNƒVƒ‡ƒ“–¼‚ğ“ü‚ê‚Ä TRUE ‚ğ•Ô‚·
+  // å½¢å¼ã®è¡Œãªã‚‰ ppszSection ã«ã‚»ã‚¯ã‚·ãƒ§ãƒ³åã‚’å…¥ã‚Œã¦ TRUE ã‚’è¿”ã™
     if (*pszLine != _T('[')) {
         *ppszSection = NULL;
         return FALSE;
@@ -40,34 +40,34 @@ static BOOL __fastcall IsSection(TCHAR *pszLine,
 static BOOL __fastcall IsKeyValue(TCHAR *pszLine,
                                   TCHAR **ppszKey,
                                   TCHAR **ppszValue)
-{ // pszLine ‚ª
+{ // pszLine ãŒ
   // KeyName=Value
-  // Œ`®‚Ìs‚È‚ç *ppszKey ‚ÉƒL[–¼A*ppszValue ‚É’l‚ğ“ü‚ê‚Ä TRUE ‚ğ•Ô‚·
-  // ƒRƒƒ“ƒg‚ğœ‹(; ˆÈ~‚ğÌ‚Ä‚é)
+  // å½¢å¼ã®è¡Œãªã‚‰ *ppszKey ã«ã‚­ãƒ¼åã€*ppszValue ã«å€¤ã‚’å…¥ã‚Œã¦ TRUE ã‚’è¿”ã™
+  // ã‚³ãƒ¡ãƒ³ãƒˆã‚’é™¤å»(; ä»¥é™ã‚’æ¨ã¦ã‚‹)
   //TCHAR *pszComment = _tcschr(pszLine, _T(';'));
   //if (pszComment) {
   //    *pszComment = 0;
   //}
-  //ªSTEP ‚Å‚Í’l‚É ';' ‚ğg‚¤‰Â”\«‚ª‚ ‚é‚Ì‚ÅƒRƒƒ“ƒg‚Íg—p•s‰Â‚Æ‚·‚é
-  //‚«‚¿‚ñ‚Æ‚â‚é‚È‚ç "" ‚ÅŠ‡‚ç‚ê‚½”ÍˆÍ“à‚Ì ; ‚ÍƒRƒƒ“ƒg‚ÆŒ©‚È‚³‚È‚¢‚æ‚¤‚È
-  //ˆ—‚ª•K—v‚Å­‚µ–Ê“|‚È‚Ì‚ÅÈ—ª
+  //â†‘STEP ã§ã¯å€¤ã« ';' ã‚’ä½¿ã†å¯èƒ½æ€§ãŒã‚ã‚‹ã®ã§ã‚³ãƒ¡ãƒ³ãƒˆã¯ä½¿ç”¨ä¸å¯ã¨ã™ã‚‹
+  //ãã¡ã‚“ã¨ã‚„ã‚‹ãªã‚‰ "" ã§æ‹¬ã‚‰ã‚ŒãŸç¯„å›²å†…ã® ; ã¯ã‚³ãƒ¡ãƒ³ãƒˆã¨è¦‹ãªã•ãªã„ã‚ˆã†ãª
+  //å‡¦ç†ãŒå¿…è¦ã§å°‘ã—é¢å€’ãªã®ã§çœç•¥
     *ppszKey = _tcstok_s(pszLine, _T("="), ppszValue);
     if (!*ppszKey || !*ppszValue) {
         *ppszKey = *ppszValue = NULL;
         return FALSE;
     }
-    if(_tcschr(*ppszKey, _T(';'))){//ƒL[–¼‚É ; ‚ğŠÜ‚Şê‡‚ÍƒRƒƒ“ƒgs‚ÆŒ©‚È‚·
+    if(_tcschr(*ppszKey, _T(';'))){//ã‚­ãƒ¼åã« ; ã‚’å«ã‚€å ´åˆã¯ã‚³ãƒ¡ãƒ³ãƒˆè¡Œã¨è¦‹ãªã™
         *ppszKey = *ppszValue = NULL;
         return FALSE;
     }
     strtrim(*ppszKey);
     if (**ppszKey) {
-        //’l‚ª "" ‚ÅŠ‡‚ç‚ê‚Ä‚¢‚ê‚Î "" ‚ğæ‚èœ‚­
+        //å€¤ãŒ "" ã§æ‹¬ã‚‰ã‚Œã¦ã„ã‚Œã° "" ã‚’å–ã‚Šé™¤ã
         TCHAR *pszValue = *ppszValue;
         strtrim(pszValue);
         if(*pszValue == _T('\"')){
             TCHAR *last_dbl_quote = _tcsrchr(pszValue+1, _T('\"'));
-            if(last_dbl_quote && !last_dbl_quote[1]){//I’[•¶š‚ª "
+            if(last_dbl_quote && !last_dbl_quote[1]){//çµ‚ç«¯æ–‡å­—ãŒ "
                 *last_dbl_quote = 0;
             }
             strtrim(++pszValue);
@@ -81,7 +81,7 @@ static BOOL __fastcall IsKeyValue(TCHAR *pszLine,
 ///////////////////////////////////////////////////////////////////////////////
 CIniKeyValue::CIniKeyValue(const TCHAR *cszKeyName,
                            const TCHAR *cszValue)
-{ // Key ‚Æ Value ‚Íƒƒ‚ƒŠ‚ğ‹¤—L‚·‚é
+{ // Key ã¨ Value ã¯ãƒ¡ãƒ¢ãƒªã‚’å…±æœ‰ã™ã‚‹
     const size_t nKeyLen = _tcslen(cszKeyName) + 1;
     const size_t nValLen = _tcslen(cszValue) + 1;
     m_pszKey = (TCHAR*)malloc((nKeyLen + nValLen)*sizeof(TCHAR));
@@ -93,7 +93,7 @@ CIniKeyValue::CIniKeyValue(const TCHAR *cszKeyName,
 CIniKeyValue::~CIniKeyValue(void)
 {
     free(m_pszKey);
-    // free(m_pszValue);//m_pszKey ‚Æ‹¤—L‚µ‚Ä‚¢‚é‚Ì‚Å•s—v
+    // free(m_pszValue);//m_pszKey ã¨å…±æœ‰ã—ã¦ã„ã‚‹ã®ã§ä¸è¦
 }
 ///////////////////////////////////////////////////////////////////////////////
 void __fastcall CIniKeyValue::SetValue(const TCHAR *cszValue) {
@@ -281,7 +281,7 @@ void __fastcall CIniFile::Flush(void)
     int i, j;
     DWORD dwWritten;
 #ifdef _UNICODE
-    // BOM ‘‚«‚İ
+    // BOM æ›¸ãè¾¼ã¿
     WriteFile(hFile, "\xFF\xFE", 2, &dwWritten, NULL);
 #endif
     for(i = 0; i < nCount; i++){
@@ -309,8 +309,8 @@ void __fastcall CIniFile::Flush(void)
 ///////////////////////////////////////////////////////////////////////////////
 CIniSection* __fastcall CIniFile::FindSection(const TCHAR *cszSection,
                                               BOOL bCreate)
-{ // ƒZƒNƒVƒ‡ƒ“‚ğŒŸõ
-  // Œ©‚Â‚©‚ç‚È‚¢ê‡‚ÍAbCreate ‚ª TRUE ‚È‚çì‚é
+{ // ã‚»ã‚¯ã‚·ãƒ§ãƒ³ã‚’æ¤œç´¢
+  // è¦‹ã¤ã‹ã‚‰ãªã„å ´åˆã¯ã€bCreate ãŒ TRUE ãªã‚‰ä½œã‚‹
     const int nCount = m_nCount;
     int i;
     for (i = 0; i < nCount; i++) {
@@ -343,7 +343,7 @@ BOOL __fastcall CIniFile::Open(const TCHAR *cszFileName)
         FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, OPEN_EXISTING,
         FILE_ATTRIBUTE_NORMAL, NULL);
     if (hFile != INVALID_HANDLE_VALUE) {
-        const DWORD MAX_SIZE = 16 * 1024 * 1024; // 16MB ‚Ü‚Å“Ç‚İæ‚é
+        const DWORD MAX_SIZE = 16 * 1024 * 1024; // 16MB ã¾ã§èª­ã¿å–ã‚‹
         DWORD dwSizeHigh = 0;
         DWORD dwSize = GetFileSize(hFile, &dwSizeHigh);
         if (dwSizeHigh) {
@@ -368,7 +368,7 @@ BOOL __fastcall CIniFile::OpenFromBuffer(BYTE *pBuffer,
                                          DWORD dwSize)
 {
     CIniSection *pCurrentSection = NULL;
-    void  *pFree = NULL;//Œã‚Å free ‚·‚é•K—v‚ª‚ ‚éê‡‚Í ”ñNULL
+    void  *pFree = NULL;//å¾Œã§ free ã™ã‚‹å¿…è¦ãŒã‚ã‚‹å ´åˆã¯ éNULL
     TCHAR *pszLine = conv_data_to_tstr(pBuffer, dwSize, &pFree);
     TCHAR *pszNextLine;
     TCHAR *pszSection = NULL;

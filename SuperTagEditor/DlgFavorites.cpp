@@ -1,4 +1,4 @@
-// DlgFavorites.cpp : ƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“ ƒtƒ@ƒCƒ‹
+// DlgFavorites.cpp : ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³ ãƒ•ã‚¡ã‚¤ãƒ«
 //
 
 #include "stdafx.h"
@@ -15,7 +15,7 @@ static char THIS_FILE[] = __FILE__;
 extern BOOL SelectDirectory(TCHAR *sLocal, int size);
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgFavorites ƒ_ƒCƒAƒƒO
+// CDlgFavorites ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
 
 
 CDlgFavorites::CDlgFavorites(CWnd* pParent /*=NULL*/)
@@ -63,11 +63,11 @@ BEGIN_MESSAGE_MAP(CDlgFavorites, CDialog)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgFavorites ƒƒbƒZ[ƒW ƒnƒ“ƒhƒ‰
+// CDlgFavorites ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒãƒ³ãƒ‰ãƒ©
 
 void CDlgFavorites::OnBtRefFavorites1() 
 {
-	// TODO: ‚±‚ÌˆÊ’u‚ÉƒRƒ“ƒgƒ[ƒ‹’Ê’mƒnƒ“ƒhƒ‰—p‚ÌƒR[ƒh‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
+	// TODO: ã“ã®ä½ç½®ã«ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«é€šçŸ¥ãƒãƒ³ãƒ‰ãƒ©ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
 	UpdateData(TRUE);
 	OnBtRefFavorites(m_strFavirites[0]);
 	UpdateData(FALSE);
@@ -75,7 +75,7 @@ void CDlgFavorites::OnBtRefFavorites1()
 
 void CDlgFavorites::OnBtRefFavorites10() 
 {
-	// TODO: ‚±‚ÌˆÊ’u‚ÉƒRƒ“ƒgƒ[ƒ‹’Ê’mƒnƒ“ƒhƒ‰—p‚ÌƒR[ƒh‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
+	// TODO: ã“ã®ä½ç½®ã«ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«é€šçŸ¥ãƒãƒ³ãƒ‰ãƒ©ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
 	UpdateData(TRUE);
 	OnBtRefFavorites(m_strFavirites[9]);
 	UpdateData(FALSE);
@@ -83,7 +83,7 @@ void CDlgFavorites::OnBtRefFavorites10()
 
 void CDlgFavorites::OnBtRefFavorites2() 
 {
-	// TODO: ‚±‚ÌˆÊ’u‚ÉƒRƒ“ƒgƒ[ƒ‹’Ê’mƒnƒ“ƒhƒ‰—p‚ÌƒR[ƒh‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
+	// TODO: ã“ã®ä½ç½®ã«ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«é€šçŸ¥ãƒãƒ³ãƒ‰ãƒ©ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
 	UpdateData(TRUE);
 	OnBtRefFavorites(m_strFavirites[1]);
 	UpdateData(FALSE);
@@ -91,7 +91,7 @@ void CDlgFavorites::OnBtRefFavorites2()
 
 void CDlgFavorites::OnBtRefFavorites3() 
 {
-	// TODO: ‚±‚ÌˆÊ’u‚ÉƒRƒ“ƒgƒ[ƒ‹’Ê’mƒnƒ“ƒhƒ‰—p‚ÌƒR[ƒh‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
+	// TODO: ã“ã®ä½ç½®ã«ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«é€šçŸ¥ãƒãƒ³ãƒ‰ãƒ©ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
 	UpdateData(TRUE);
 	OnBtRefFavorites(m_strFavirites[2]);
 	UpdateData(FALSE);
@@ -100,7 +100,7 @@ void CDlgFavorites::OnBtRefFavorites3()
 
 void CDlgFavorites::OnBtRefFavorites4() 
 {
-	// TODO: ‚±‚ÌˆÊ’u‚ÉƒRƒ“ƒgƒ[ƒ‹’Ê’mƒnƒ“ƒhƒ‰—p‚ÌƒR[ƒh‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
+	// TODO: ã“ã®ä½ç½®ã«ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«é€šçŸ¥ãƒãƒ³ãƒ‰ãƒ©ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
 	UpdateData(TRUE);
 	OnBtRefFavorites(m_strFavirites[3]);
 	UpdateData(FALSE);
@@ -108,7 +108,7 @@ void CDlgFavorites::OnBtRefFavorites4()
 
 void CDlgFavorites::OnBtRefFavorites5() 
 {
-	// TODO: ‚±‚ÌˆÊ’u‚ÉƒRƒ“ƒgƒ[ƒ‹’Ê’mƒnƒ“ƒhƒ‰—p‚ÌƒR[ƒh‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
+	// TODO: ã“ã®ä½ç½®ã«ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«é€šçŸ¥ãƒãƒ³ãƒ‰ãƒ©ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
 	UpdateData(TRUE);
 	OnBtRefFavorites(m_strFavirites[4]);
 	UpdateData(FALSE);
@@ -116,7 +116,7 @@ void CDlgFavorites::OnBtRefFavorites5()
 
 void CDlgFavorites::OnBtRefFavorites6() 
 {
-	// TODO: ‚±‚ÌˆÊ’u‚ÉƒRƒ“ƒgƒ[ƒ‹’Ê’mƒnƒ“ƒhƒ‰—p‚ÌƒR[ƒh‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
+	// TODO: ã“ã®ä½ç½®ã«ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«é€šçŸ¥ãƒãƒ³ãƒ‰ãƒ©ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
 	UpdateData(TRUE);
 	OnBtRefFavorites(m_strFavirites[5]);
 	UpdateData(FALSE);
@@ -124,7 +124,7 @@ void CDlgFavorites::OnBtRefFavorites6()
 
 void CDlgFavorites::OnBtRefFavorites7() 
 {
-	// TODO: ‚±‚ÌˆÊ’u‚ÉƒRƒ“ƒgƒ[ƒ‹’Ê’mƒnƒ“ƒhƒ‰—p‚ÌƒR[ƒh‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
+	// TODO: ã“ã®ä½ç½®ã«ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«é€šçŸ¥ãƒãƒ³ãƒ‰ãƒ©ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
 	UpdateData(TRUE);
 	OnBtRefFavorites(m_strFavirites[6]);
 	UpdateData(FALSE);
@@ -132,7 +132,7 @@ void CDlgFavorites::OnBtRefFavorites7()
 
 void CDlgFavorites::OnBtRefFavorites8() 
 {
-	// TODO: ‚±‚ÌˆÊ’u‚ÉƒRƒ“ƒgƒ[ƒ‹’Ê’mƒnƒ“ƒhƒ‰—p‚ÌƒR[ƒh‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
+	// TODO: ã“ã®ä½ç½®ã«ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«é€šçŸ¥ãƒãƒ³ãƒ‰ãƒ©ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
 	UpdateData(TRUE);
 	OnBtRefFavorites(m_strFavirites[7]);
 	UpdateData(FALSE);
@@ -140,7 +140,7 @@ void CDlgFavorites::OnBtRefFavorites8()
 
 void CDlgFavorites::OnBtRefFavorites9() 
 {
-	// TODO: ‚±‚ÌˆÊ’u‚ÉƒRƒ“ƒgƒ[ƒ‹’Ê’mƒnƒ“ƒhƒ‰—p‚ÌƒR[ƒh‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
+	// TODO: ã“ã®ä½ç½®ã«ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«é€šçŸ¥ãƒãƒ³ãƒ‰ãƒ©ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
 	UpdateData(TRUE);
 	OnBtRefFavorites(m_strFavirites[8]);
 	UpdateData(FALSE);
@@ -148,7 +148,7 @@ void CDlgFavorites::OnBtRefFavorites9()
 
 void CDlgFavorites::OnBtRefFavorites(CString &strFavorite)
 {
-	// ƒtƒHƒ‹ƒ_‘I‘ğƒ_ƒCƒAƒƒO‚ğŠJ‚­
+	// ãƒ•ã‚©ãƒ«ãƒ€é¸æŠãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚’é–‹ã
 	TCHAR	sFolderName[_MAX_PATH] = {0};
 	_tcsncpy_s(sFolderName, strFavorite, _TRUNCATE);
 	if (SelectDirectory(sFolderName, _MAX_PATH) == TRUE) {

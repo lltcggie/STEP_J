@@ -19,28 +19,28 @@
 	((HICON)(UINT_PTR)SNDMSG((hwndCtl), STM_SETIMAGE, IMAGE_ICON, (LPARAM)(HICON)(hIcon)))
 
 void mbsncpy2(unsigned char *dst,const unsigned char *src,int c);
-//‚QƒoƒCƒg•¶š—ñ‚ÌØ‚è‚Ì‚¢‚¢•¶š”‚ğæ“¾
+//ï¼’ãƒã‚¤ãƒˆæ–‡å­—åˆ—ã®åˆ‡ã‚Šã®ã„ã„æ–‡å­—æ•°ã‚’å–å¾—
 long check2ByteLength(const char *szTag,long lLimit);
 
-//DLL‚Ìƒo[ƒWƒ‡ƒ“î•ñ‚ğæ“¾
+//DLLã®ãƒãƒ¼ã‚¸ãƒ§ãƒ³æƒ…å ±ã‚’å–å¾—
 BOOL GetDLLVersion(IN LPCTSTR szDLLFileName,
 				   IN DWORD *pdwMajor,
 				   IN DWORD *pdwMinor,
 				   IN DWORD *pdwBuildNumber1,
 				   IN DWORD *pdwBuildNumber2);
 
-  //•¶––‚ªYen‚Ì‚Æ‚«TRUE
+  //æ–‡æœ«ãŒYenã®ã¨ãTRUE
 BOOL IsTailYenSign(LPCTSTR szStr);
 
-//•¶––‚É'\\'‚ğ’Ç‰Á(Šù‚É'\\'‚Ì‚Æ‚«‚Í‰½‚à‚µ‚È‚¢)
+//æ–‡æœ«ã«'\\'ã‚’è¿½åŠ (æ—¢ã«'\\'ã®ã¨ãã¯ä½•ã‚‚ã—ãªã„)
 void AddTailYenSign(LPTSTR szStr);
 void AddTailYenSign(CString &Str);
 
-//LoadString‚ÌƒoƒO‘Îô(MSKB Q140452)
+//LoadStringã®ãƒã‚°å¯¾ç­–(MSKB Q140452)
 CString LoadResString(HINSTANCE hInstance,UINT uID);
 
 //---------------------------------------------------------------------
-//šƒrƒbƒOƒGƒ“ƒfƒBƒAƒ“->ƒŠƒgƒ‹ƒGƒ“ƒfƒBƒAƒ“‚Ì•ÏŠ·
+//â˜…ãƒ“ãƒƒã‚°ã‚¨ãƒ³ãƒ‡ã‚£ã‚¢ãƒ³->ãƒªãƒˆãƒ«ã‚¨ãƒ³ãƒ‡ã‚£ã‚¢ãƒ³ã®å¤‰æ›
 static inline DWORD ExtractI4(const unsigned char buf[4])
 {
 	return ((DWORD)buf[0] << 24) | ((DWORD)buf[1] << 16) | ((DWORD)buf[2] << 8) | (DWORD)buf[3];
@@ -58,56 +58,56 @@ CString getFileName(const CString &path);
 
 //////////////////////////////////////////////////////////////////////////////
 //getFileNameExtName
-//ƒtƒ‹ƒpƒX–¼‚©‚çƒtƒ@ƒCƒ‹–¼‚ğæ“¾‚·‚é
+//ãƒ•ãƒ«ãƒ‘ã‚¹åã‹ã‚‰ãƒ•ã‚¡ã‚¤ãƒ«åã‚’å–å¾—ã™ã‚‹
 //////////////////////////////////////////////////////////////////////////////
 /*
-ˆø”F	char *szPath	ƒtƒ@ƒCƒ‹–¼‚ğŠÜ‚ŞƒpƒX–¼‚Ö‚Ìƒ|ƒCƒ“ƒ^
+å¼•æ•°ï¼š	char *szPath	ãƒ•ã‚¡ã‚¤ãƒ«åã‚’å«ã‚€ãƒ‘ã‚¹åã¸ã®ãƒã‚¤ãƒ³ã‚¿
 
-–ß‚è’lFchar * ƒtƒ@ƒCƒ‹–¼‚Ö‚Ìƒ|ƒCƒ“ƒ^
-@@@@@@@ƒtƒ@ƒCƒ‹–¼‚ğŠÜ‚Ü‚È‚¢‚Æ‚«‚Í""‚Ö‚Ìƒ|ƒCƒ“ƒ^
-	[\],[/],[:]‚ªŒ©‚Â‚©‚ç‚È‚©‚Á‚½ê‡Aˆø”‚ğƒtƒ@ƒCƒ‹–¼‚Æ‚İ‚È‚µ‚Ä‚»‚Ì‚Ü‚Ü•Ô‚·
+æˆ»ã‚Šå€¤ï¼šchar * ãƒ•ã‚¡ã‚¤ãƒ«åã¸ã®ãƒã‚¤ãƒ³ã‚¿
+ã€€ã€€ã€€ã€€ã€€ã€€ã€€ãƒ•ã‚¡ã‚¤ãƒ«åã‚’å«ã¾ãªã„ã¨ãã¯""ã¸ã®ãƒã‚¤ãƒ³ã‚¿
+	[\],[/],[:]ãŒè¦‹ã¤ã‹ã‚‰ãªã‹ã£ãŸå ´åˆã€å¼•æ•°ã‚’ãƒ•ã‚¡ã‚¤ãƒ«åã¨ã¿ãªã—ã¦ãã®ã¾ã¾è¿”ã™
 */
 LPCTSTR getFileNameExtName(LPCTSTR szPath);
 
 //////////////////////////////////////////////////////////////////////////////
 //getExtName
-//ƒtƒ‹ƒpƒX–¼‚©‚çŠg’£q‚ğæ“¾‚·‚é
+//ãƒ•ãƒ«ãƒ‘ã‚¹åã‹ã‚‰æ‹¡å¼µå­ã‚’å–å¾—ã™ã‚‹
 //////////////////////////////////////////////////////////////////////////////
 /*
-ˆø”F	char *szPath	Šg’£q‚ğŠÜ‚ŞƒpƒX–¼‚Ö‚Ìƒ|ƒCƒ“ƒ^
+å¼•æ•°ï¼š	char *szPath	æ‹¡å¼µå­ã‚’å«ã‚€ãƒ‘ã‚¹åã¸ã®ãƒã‚¤ãƒ³ã‚¿
 
-–ß‚è’lFchar * Šg’£q‚Ö‚Ìƒ|ƒCƒ“ƒ^
-@@@@@@@Šg’£q‚ğŠÜ‚Ü‚È‚¢‚Æ‚«‚Í""‚Ö‚Ìƒ|ƒCƒ“ƒ^
+æˆ»ã‚Šå€¤ï¼šchar * æ‹¡å¼µå­ã¸ã®ãƒã‚¤ãƒ³ã‚¿
+ã€€ã€€ã€€ã€€ã€€ã€€ã€€æ‹¡å¼µå­ã‚’å«ã¾ãªã„ã¨ãã¯""ã¸ã®ãƒã‚¤ãƒ³ã‚¿
 */
 LPCTSTR getExtName(LPCTSTR szPath);
 
-//ƒVƒXƒeƒ€ƒGƒ‰[ƒƒbƒZ[ƒWƒ{ƒbƒNƒX‚ğ•\¦
+//ã‚·ã‚¹ãƒ†ãƒ ã‚¨ãƒ©ãƒ¼ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒœãƒƒã‚¯ã‚¹ã‚’è¡¨ç¤º
 void sysError(HWND hWnd,LPCTSTR mes = _T("Error"));
 void errMessageBox(HWND hWnd,DWORD dwErrorCode,LPCTSTR mes = _T("Error"));
 
 //////////////////////////////////////////////////////////////////////////////
 //cutFileName
-//ƒpƒX–¼‚©‚çƒtƒ@ƒCƒ‹–¼‚ğæ‚èœ‚­
+//ãƒ‘ã‚¹åã‹ã‚‰ãƒ•ã‚¡ã‚¤ãƒ«åã‚’å–ã‚Šé™¤ã
 //////////////////////////////////////////////////////////////////////////////
 /*
-ˆø”F	char *szPath	ƒtƒ@ƒCƒ‹–¼‚ğŠÜ‚ŞƒpƒX–¼‚Ö‚Ìƒ|ƒCƒ“ƒ^
-			iÀsŒãAƒpƒX–¼‚©‚çƒtƒ@ƒCƒ‹–¼‚ªØ‚è—£‚³‚ê‚éj
-–ß‚è’lF‚È‚µ
+å¼•æ•°ï¼š	char *szPath	ãƒ•ã‚¡ã‚¤ãƒ«åã‚’å«ã‚€ãƒ‘ã‚¹åã¸ã®ãƒã‚¤ãƒ³ã‚¿
+			ï¼ˆå®Ÿè¡Œå¾Œã€ãƒ‘ã‚¹åã‹ã‚‰ãƒ•ã‚¡ã‚¤ãƒ«åãŒåˆ‡ã‚Šé›¢ã•ã‚Œã‚‹ï¼‰
+æˆ»ã‚Šå€¤ï¼šãªã—
 */
 void cutFileName(LPTSTR szPath);
 
 //////////////////////////////////////////////////////////////////////////////
 //cutExtName
-//ƒtƒ@ƒCƒ‹–¼‚©‚çŠg’£q‚ğæ‚èœ‚­
+//ãƒ•ã‚¡ã‚¤ãƒ«åã‹ã‚‰æ‹¡å¼µå­ã‚’å–ã‚Šé™¤ã
 //////////////////////////////////////////////////////////////////////////////
 /*
-ˆø”F	char *szFileName	ƒtƒ@ƒCƒ‹–¼‚Ö‚Ìƒ|ƒCƒ“ƒ^
-			iÀsŒãAƒtƒ@ƒCƒ‹–¼‚©‚çŠg’£q‚ªØ‚è—£‚³‚ê‚éj
-–ß‚è’lF‚È‚µ
+å¼•æ•°ï¼š	char *szFileName	ãƒ•ã‚¡ã‚¤ãƒ«åã¸ã®ãƒã‚¤ãƒ³ã‚¿
+			ï¼ˆå®Ÿè¡Œå¾Œã€ãƒ•ã‚¡ã‚¤ãƒ«åã‹ã‚‰æ‹¡å¼µå­ãŒåˆ‡ã‚Šé›¢ã•ã‚Œã‚‹ï¼‰
+æˆ»ã‚Šå€¤ï¼šãªã—
 */
 void cutExtName(LPTSTR szFileName);
 
-//•¶š—ñsrc‚ğw’è•¶šc‚Ån•¶š‚²‚Æ‚É‹æØ‚é
+//æ–‡å­—åˆ—srcã‚’æŒ‡å®šæ–‡å­—cã§næ–‡å­—ã”ã¨ã«åŒºåˆ‡ã‚‹
 CString divString(LPCTSTR src,char c,int n);
 
 
@@ -119,16 +119,16 @@ enum BTC_CODE {
 	BTC_CODE_UTF8 = 3
 };
 
-// ƒoƒCƒg—ñ‚ğCString‚É•ÏŠ·‚·‚é
+// ãƒã‚¤ãƒˆåˆ—ã‚’CStringã«å¤‰æ›ã™ã‚‹
 CString BytesToCString(const char *data, int size, BTC_CODE code);
 
-// TSTR‚ğw’èƒR[ƒh‚ÌƒoƒCƒg—ñ‚É•ÏŠ·‚·‚é
+// TSTRã‚’æŒ‡å®šã‚³ãƒ¼ãƒ‰ã®ãƒã‚¤ãƒˆåˆ—ã«å¤‰æ›ã™ã‚‹
 int TstrToBytes(LPCTSTR tstr, int tlen, char *data, int dsize, BTC_CODE code);
 
-// TSTR‚ğw’èƒR[ƒh‚ÌƒoƒCƒg—ñ‚É•ÏŠ·‚·‚éiƒƒ‚ƒŠ©“®Š„‚è“–‚Äj
-// g—pŒã‚Ífree()‚Å‰ğ•ú‚·‚é‚±‚Æ
-// offset ‚ğw’è‚·‚é‚ÆA‚»‚ÌƒoƒCƒg”‚¾‚¯—]Œv‚Éƒƒ‚ƒŠ‚ğŠm•Û‚µA
-// æ“ª‚ğ‹ó‚¯‚Äƒf[ƒ^‚ğ‘‚«‚Ş
+// TSTRã‚’æŒ‡å®šã‚³ãƒ¼ãƒ‰ã®ãƒã‚¤ãƒˆåˆ—ã«å¤‰æ›ã™ã‚‹ï¼ˆãƒ¡ãƒ¢ãƒªè‡ªå‹•å‰²ã‚Šå½“ã¦ï¼‰
+// ä½¿ç”¨å¾Œã¯free()ã§è§£æ”¾ã™ã‚‹ã“ã¨
+// offset ã‚’æŒ‡å®šã™ã‚‹ã¨ã€ãã®ãƒã‚¤ãƒˆæ•°ã ã‘ä½™è¨ˆã«ãƒ¡ãƒ¢ãƒªã‚’ç¢ºä¿ã—ã€
+// å…ˆé ­ã‚’ç©ºã‘ã¦ãƒ‡ãƒ¼ã‚¿ã‚’æ›¸ãè¾¼ã‚€
 char *TstrToBytesAlloc(LPCTSTR tstr, int tlen, int *dsize, BTC_CODE code, int offset = 0);
 
 // Convert UTF-16LE <-> UTF-16BE.
@@ -166,7 +166,7 @@ static inline CString GetSizeStringM(__int64 filesize)
 	return divString(strSize,',',3);
 }
 
-// ƒ^ƒCƒ€ƒXƒ^ƒ“ƒv•Û‘¶E•œŒ³
+// ã‚¿ã‚¤ãƒ ã‚¹ã‚¿ãƒ³ãƒ—ä¿å­˜ãƒ»å¾©å…ƒ
 class CTimeStampSaver {
 public:
 	CTimeStampSaver() : m_bTimeStampPushed(FALSE) {};
@@ -175,9 +175,9 @@ public:
 	BOOL Pop(LPCTSTR szFile = NULL);
 	void Clear() {m_bTimeStampPushed = FALSE;};
 protected:
-	FILETIME	m_fileTime;	//ƒ^ƒCƒ€ƒXƒ^ƒ“ƒv•Û‘¶—p
-	FILETIME	m_createTime;	//ƒ^ƒCƒ€ƒXƒ^ƒ“ƒv•Û‘¶—p
-	BOOL		m_bTimeStampPushed;	//ƒ^ƒCƒ€ƒXƒ^ƒ“ƒv‚ª•Û‘¶‚³‚ê‚Ä‚¢‚é
+	FILETIME	m_fileTime;	//ã‚¿ã‚¤ãƒ ã‚¹ã‚¿ãƒ³ãƒ—ä¿å­˜ç”¨
+	FILETIME	m_createTime;	//ã‚¿ã‚¤ãƒ ã‚¹ã‚¿ãƒ³ãƒ—ä¿å­˜ç”¨
+	BOOL		m_bTimeStampPushed;	//ã‚¿ã‚¤ãƒ ã‚¹ã‚¿ãƒ³ãƒ—ãŒä¿å­˜ã•ã‚Œã¦ã„ã‚‹
 	CString		m_strFile;
 };
 

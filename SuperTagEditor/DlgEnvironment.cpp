@@ -1,4 +1,4 @@
-// DlgEnvironment.cpp : ƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“ ƒtƒ@ƒCƒ‹
+// DlgEnvironment.cpp : ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³ ãƒ•ã‚¡ã‚¤ãƒ«
 //
 
 #include "stdafx.h"
@@ -13,7 +13,7 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgEnvironment ƒ_ƒCƒAƒƒO
+// CDlgEnvironment ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
 IMPLEMENT_DYNCREATE(CDlgEnvironment, COptionPage)
 
 CDlgEnvironment::CDlgEnvironment() : COptionPage(CDlgEnvironment::IDD)
@@ -76,16 +76,16 @@ BEGIN_MESSAGE_MAP(CDlgEnvironment, COptionPage)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgEnvironment ƒƒbƒZ[ƒW ƒnƒ“ƒhƒ‰
+// CDlgEnvironment ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒãƒ³ãƒ‰ãƒ©
 BOOL CDlgEnvironment::OnInitDialog() 
 {
 	COptionPage::OnInitDialog();
 
-	// TODO: ‚±‚ÌˆÊ’u‚É‰Šú‰»‚Ì•â‘«ˆ—‚ð’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
+	// TODO: ã“ã®ä½ç½®ã«åˆæœŸåŒ–ã®è£œè¶³å‡¦ç†ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
 	UpdateStatus();
 
-	return TRUE;  // ƒRƒ“ƒgƒ[ƒ‹‚ÉƒtƒH[ƒJƒX‚ðÝ’è‚µ‚È‚¢‚Æ‚«A–ß‚è’l‚Í TRUE ‚Æ‚È‚è‚Ü‚·
-	              // —áŠO: OCX ƒvƒƒpƒeƒB ƒy[ƒW‚Ì–ß‚è’l‚Í FALSE ‚Æ‚È‚è‚Ü‚·
+	return TRUE;  // ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã«ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ã‚’è¨­å®šã—ãªã„ã¨ãã€æˆ»ã‚Šå€¤ã¯ TRUE ã¨ãªã‚Šã¾ã™
+	              // ä¾‹å¤–: OCX ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ ãƒšãƒ¼ã‚¸ã®æˆ»ã‚Šå€¤ã¯ FALSE ã¨ãªã‚Šã¾ã™
 }
 
 void CDlgEnvironment::UpdateStatus(void)
@@ -100,17 +100,17 @@ void CDlgEnvironment::OnChKeepTimeStamp()
 	UpdateStatus();
 }
 
-// ‰Šú’l‚É–ß‚·
+// åˆæœŸå€¤ã«æˆ»ã™
 void CDlgEnvironment::OnBtResetPage() 
 {
-	// ƒ†[ƒU[ƒCƒ“ƒ^[ƒtƒF[ƒX
+	// ãƒ¦ãƒ¼ã‚¶ãƒ¼ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹
 	((CButton *)GetDlgItem(IDC_CH_ESC_EDIT_CANCEL))->SetCheck(FALSE);
 	((CButton *)GetDlgItem(IDC_CH_ENABLE_EDIT_CURSOR_EXIT))->SetCheck(TRUE);
 	((CButton *)GetDlgItem(IDC_CH_EDIT_OK_DOWN))->SetCheck(TRUE);
 	((CButton *)GetDlgItem(IDC_CH_ENTER_BEGIN_EDIT))->SetCheck(FALSE);
 	((CButton *)GetDlgItem(IDC_CH_SHOW_ZEN_SPACE))->SetCheck(FALSE);
 
-	// ‚»‚Ì‘¼
+	// ãã®ä»–
 	((CButton *)GetDlgItem(IDC_CH_KEEP_TIME_STAMP))->SetCheck(FALSE);
 	((CButton *)GetDlgItem(IDC_CH_SYNC_CREATE_TIME))->SetCheck(FALSE);
 	((CButton *)GetDlgItem(IDC_CH_AUTO_OPEN_FOLDER))->SetCheck(FALSE);

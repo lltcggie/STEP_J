@@ -1,4 +1,4 @@
-// STEP_fla.cpp : DLL �p�̏����������̒�`���s���܂��B
+// STEP_fla.cpp : DLL 用の初期化処理の定義を行います。
 //
 
 #include "stdafx.h"
@@ -9,11 +9,11 @@
 #include "flac/format.h"
 
 #include "..\SuperTagEditor\INI\ini.h"
-//�ݒ�̓ǂݏ���
-//WritePrivateProfileString �̓t�@�C�������݂��Ȃ��ꍇ��A
-//���t�@�C���� ANSI ���� ANSI �ŕ��������������
-//�g���h���̂� STEP �{�̂� INI �ǂݏ����N���X���g����
-//UTF8/UTF16/ANSI �Ή�
+//設定の読み書き
+//WritePrivateProfileString はファイルが存在しない場合や、
+//元ファイルが ANSI だと ANSI で文字列を書き込む
+//使い辛いので STEP 本体の INI 読み書きクラスを使い回す
+//UTF8/UTF16/ANSI 対応
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -22,30 +22,30 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 //
-//	����!
+//	メモ!
 //
-//		���� DLL �� MFC DLL �ɑ΂��ē��I�Ƀ����N�����ꍇ�A
-//		MFC ���ŌĂяo����邱�� DLL ����G�N�X�|�[�g���ꂽ
-//		�ǂ̊֐����֐��̍ŏ��ɒǉ������ AFX_MANAGE_STATE 
-//		�}�N�����܂�ł��Ȃ���΂Ȃ�܂���B
+//		この DLL が MFC DLL に対して動的にリンクされる場合、
+//		MFC 内で呼び出されるこの DLL からエクスポートされた
+//		どの関数も関数の最初に追加される AFX_MANAGE_STATE 
+//		マクロを含んでいなければなりません。
 //
-//		��:
+//		例:
 //
 //		extern "C" BOOL PASCAL EXPORT ExportedFunction()
 //		{
 //			AFX_MANAGE_STATE(AfxGetStaticModuleState());
-//			// �ʏ�֐��̖{�̂͂��̈ʒu�ɂ���܂�
+//			// 通常関数の本体はこの位置にあります
 //		}
 //
-//		���̃}�N�����e�֐��Ɋ܂܂�Ă��邱�ƁAMFC ����
-//		�ǂ̌Ăяo�����D�悷�邱�Ƃ͔��ɏd�v�ł��B
-//		����͊֐����̍ŏ��̃X�e�[�g�����g�łȂ���΂�
-//		��Ȃ����Ƃ��Ӗ����܂��A�R���X�g���N�^�� MFC 
-//		DLL ���ւ̌Ăяo�����s���\��������̂ŁA�I�u
-//		�W�F�N�g�ϐ��̐錾�����O�łȂ���΂Ȃ�܂���B
+//		このマクロが各関数に含まれていること、MFC 内の
+//		どの呼び出しより優先することは非常に重要です。
+//		これは関数内の最初のステートメントでなければな
+//		らないことを意味します、コンストラクタが MFC 
+//		DLL 内への呼び出しを行う可能性があるので、オブ
+//		ジェクト変数の宣言よりも前でなければなりません。
 //
-//		�ڍׂɂ��Ă� MFC �e�N�j�J�� �m�[�g 33 �����
-//		58 ���Q�Ƃ��Ă��������B
+//		詳細については MFC テクニカル ノート 33 および
+//		58 を参照してください。
 //
 
 /////////////////////////////////////////////////////////////////////////////
@@ -53,22 +53,22 @@ static char THIS_FILE[] = __FILE__;
 
 BEGIN_MESSAGE_MAP(CSTEP_flaApp, CWinApp)
 	//{{AFX_MSG_MAP(CSTEP_flaApp)
-		// ���� - ClassWizard �͂��̈ʒu�Ƀ}�b�s���O�p�̃}�N����ǉ��܂��͍폜���܂��B
-		//        ���̈ʒu�ɐ��������R�[�h��ҏW���Ȃ��ł��������B
+		// メモ - ClassWizard はこの位置にマッピング用のマクロを追加または削除します。
+		//        この位置に生成されるコードを編集しないでください。
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// CSTEP_flaApp �̍\�z
+// CSTEP_flaApp の構築
 
 CSTEP_flaApp::CSTEP_flaApp()
 {
-	// TODO: ���̈ʒu�ɍ\�z�p�̃R�[�h��ǉ����Ă��������B
-	// ������ InitInstance �̒��̏d�v�ȏ��������������ׂċL�q���Ă��������B
+	// TODO: この位置に構築用のコードを追加してください。
+	// ここに InitInstance の中の重要な初期化処理をすべて記述してください。
 }
 
 /////////////////////////////////////////////////////////////////////////////
-// �B��� CSTEP_flaApp �I�u�W�F�N�g
+// 唯一の CSTEP_flaApp オブジェクト
 
 CSTEP_flaApp theApp;
 
@@ -84,10 +84,10 @@ STEP_API LPCTSTR WINAPI STEPGetPluginInfo(void)
 	AFX_MANAGE_STATE(AfxGetStaticModuleState());
 	strPluginInfo = _T("Version 1.00 Copyright (C) 2004-2005 haseta\r\n")
                     _T("Version 1.03 Copyright (C) 2016 Kobarin\r\n")
-                    _T("FLAC�`�����T�|�[�g���Ă��܂�\r\n")
-                    _T("�^�O�X�V�ɂ�libFLAC(");
+                    _T("FLAC形式をサポートしています\r\n")
+                    _T("タグ更新にはlibFLAC(");
 	strPluginInfo += FLAC__VERSION_STRING;
-	strPluginInfo += _T(")���g�p���Ă��܂�");
+	strPluginInfo += _T(")を使用しています");
 	return strPluginInfo;
 }
 
@@ -96,9 +96,9 @@ STEP_API bool WINAPI STEPInit(UINT pID, LPCTSTR szPluginFolder)
 	AFX_MANAGE_STATE(AfxGetStaticModuleState());
 	if (Initialize() == false)	return false;
 	nPluginID = pID;
-    //FLAC �̃t�@�C���I�[�v���֐��� utf8 ���[�h�ɂ���
+    //FLAC のファイルオープン関数を utf8 モードにする
 //    flac_set_utf8_filenames(true);
-	// INI�t�@�C���̓ǂݍ���
+	// INIファイルの読み込み
 	strINI = szPluginFolder;
 	strINI += "STEP_fla.ini";
     CIniFile iniFile(strINI);
@@ -204,8 +204,8 @@ STEP_API UINT WINAPI STEPLoad(FILE_INFO *pFileMP3, LPCTSTR szExt)
 		extern	bool LoadFileFLAC(FILE_INFO *pFile);
 		if (LoadFileFLAC(pFileMP3) == false) {
 			CString	strMsg;
-			strMsg.Format(_T("%s �̓ǂݍ��݂Ɏ��s���܂���"), GetFullPath(pFileMP3));
-			MessageBox(NULL, strMsg, _T("FLAC�t�@�C���̓ǂݍ��ݎ��s"), MB_ICONSTOP|MB_OK|MB_TOPMOST);
+			strMsg.Format(_T("%s の読み込みに失敗しました"), GetFullPath(pFileMP3));
+			MessageBox(NULL, strMsg, _T("FLACファイルの読み込み失敗"), MB_ICONSTOP|MB_OK|MB_TOPMOST);
 			return STEP_ERROR;
 		} else {
 			SetFormat(pFileMP3, nFileTypeFLAC);
@@ -225,8 +225,8 @@ STEP_API UINT WINAPI STEPSave(FILE_INFO *pFileMP3)
 		extern bool WriteFileFLAC(FILE_INFO *pFileMP3);
 		if (WriteFileFLAC(pFileMP3) == false) {
 			CString	strMsg;
-			strMsg.Format(_T("%s �̏������݂Ɏ��s���܂���"), GetFullPath(pFileMP3));
-			MessageBox(NULL, strMsg, _T("FLAC�t�@�C���̏������ݎ��s"), MB_ICONSTOP|MB_OK|MB_TOPMOST);
+			strMsg.Format(_T("%s の書き込みに失敗しました"), GetFullPath(pFileMP3));
+			MessageBox(NULL, strMsg, _T("FLACファイルの書き込み失敗"), MB_ICONSTOP|MB_OK|MB_TOPMOST);
 			return STEP_ERROR;
 		}
 		return STEP_SUCCESS;
@@ -241,12 +241,12 @@ STEP_API void WINAPI STEPShowOptionDialog(HWND hWnd)
 	CPropertySheet page;
 	dlg1.m_bGenreListSelect = bOptGenreListSelect;
 	page.AddPage(&dlg1);
-	page.SetTitle(CString(STEPGetPluginName()) + _T(" �I�v�V�����ݒ�"));
+	page.SetTitle(CString(STEPGetPluginName()) + _T(" オプション設定"));
 	if (page.DoModal() == IDOK) {
 		bOptGenreListSelect = dlg1.m_bGenreListSelect ? true : false;
         CIniFile iniFile(strINI);
 		iniFile.WriteInt(_T("FLAC"), _T("GenreListSelect"), bOptGenreListSelect);
-        iniFile.Flush();//�ۑ����s
+        iniFile.Flush();//保存実行
 	}
 }
 
@@ -255,7 +255,7 @@ STEP_API LPCTSTR WINAPI STEPGetColumnName(UINT nFormatType, COLUMNTYPE nColumn)
 	AFX_MANAGE_STATE(AfxGetStaticModuleState());
 	switch (nColumn) {
 	case COLUMN_ORIG_ARTIST:
-		return _T("���t��");
+		return _T("演奏者");
 	}
 	return NULL;
 }

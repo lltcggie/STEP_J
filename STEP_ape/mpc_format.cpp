@@ -66,7 +66,7 @@ void SetAudioFormatMpc(FILE_INFO *pFileMP3)
     int length_sec = mpc_streaminfo_get_length(&demux->si);
     TCHAR format[256];
     _sntprintf_s(format, _TRUNCATE, 
-#ifdef _UNICODE //demux->si.profile_name �͏�� ansi (%S �̂܂܂��� Ansi �ł� Unicode �ƌ��Ȃ��Ă��܂�)
+#ifdef _UNICODE //demux->si.profile_name は常に ansi (%S のままだと Ansi 版で Unicode と見なしてしまう)
                  _T("%dkbps, %dHz, %dch, Profile:%S(SV%d)"), 
 #else
                  _T("%dkbps, %dHz, %dch, Profile:%s(SV%d)"), 

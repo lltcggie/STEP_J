@@ -1,4 +1,4 @@
-﻿// STEP_dsf.cpp : DLL の初期化ルーチンを定義します。
+// STEP_dsf.cpp : DLL の初期化ルーチンを定義します。
 //
 
 #include "stdafx.h"

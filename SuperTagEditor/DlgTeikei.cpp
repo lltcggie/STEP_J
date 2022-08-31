@@ -1,4 +1,4 @@
-// DlgTeikei.cpp : �C���v�������e�[�V���� �t�@�C��
+// DlgTeikei.cpp : インプリメンテーション ファイル
 //
 
 #include "stdafx.h"
@@ -14,7 +14,7 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgTeikei �v���p�e�B �y�[�W
+// CDlgTeikei プロパティ ページ
 
 IMPLEMENT_DYNCREATE(CDlgTeikei, CPropertyPage)
 
@@ -85,23 +85,23 @@ BEGIN_MESSAGE_MAP(CDlgTeikei, CPropertyPage)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgTeikei ���b�Z�[�W �n���h��
+// CDlgTeikei メッセージ ハンドラ
 
 BOOL CDlgTeikei::OnInitDialog() 
 {
 	CPropertyPage::OnInitDialog();
 	
-	// TODO: ���̈ʒu�ɏ������̕⑫������ǉ����Ă�������
+	// TODO: この位置に初期化の補足処理を追加してください
 
-	if (m_nGroupNumber == 1) {	// ������^�u�̃^�C�g����ύX
+	if (m_nGroupNumber == 1) {	// 無理矢理タブのタイトルを変更
 		CPropertySheet *poPropSheet = (CPropertySheet *)GetParent();
 		TC_ITEM tcItem;
 		tcItem.mask = TCIF_TEXT;
-		tcItem.pszText = (LPTSTR)((LPCTSTR)_T("�O���[�v�P"));
+		tcItem.pszText = (LPTSTR)((LPCTSTR)_T("グループ１"));
 		poPropSheet->GetTabControl()->SetItem(0, &tcItem );
-		tcItem.pszText = (LPTSTR)((LPCTSTR)_T("�O���[�v�Q"));
+		tcItem.pszText = (LPTSTR)((LPCTSTR)_T("グループ２"));
 		poPropSheet->GetTabControl()->SetItem(1, &tcItem );
-		tcItem.pszText = (LPTSTR)((LPCTSTR)_T("�O���[�v�R"));
+		tcItem.pszText = (LPTSTR)((LPCTSTR)_T("グループ３"));
 		poPropSheet->GetTabControl()->SetItem(2, &tcItem );
 	}
 	m_strTeikei1 = m_teikeiInfo[0].strTeikei;
@@ -117,73 +117,73 @@ BOOL CDlgTeikei::OnInitDialog()
 
 	UpdateData(FALSE);
 
-	return TRUE;  // �R���g���[���Ƀt�H�[�J�X��ݒ肵�Ȃ��Ƃ��A�߂�l�� TRUE �ƂȂ�܂�
-	              // ��O: OCX �v���p�e�B �y�[�W�̖߂�l�� FALSE �ƂȂ�܂�
+	return TRUE;  // コントロールにフォーカスを設定しないとき、戻り値は TRUE となります
+	              // 例外: OCX プロパティ ページの戻り値は FALSE となります
 }
 
 void CDlgTeikei::OnBtDetail01() 
 {
-	// TODO: ���̈ʒu�ɃR���g���[���ʒm�n���h���p�̃R�[�h��ǉ����Ă�������
+	// TODO: この位置にコントロール通知ハンドラ用のコードを追加してください
 	OnDetail(0);
 }
 
 void CDlgTeikei::OnBtDetail02() 
 {
-	// TODO: ���̈ʒu�ɃR���g���[���ʒm�n���h���p�̃R�[�h��ǉ����Ă�������
+	// TODO: この位置にコントロール通知ハンドラ用のコードを追加してください
 	OnDetail(1);
 }
 
 void CDlgTeikei::OnBtDetail03() 
 {
-	// TODO: ���̈ʒu�ɃR���g���[���ʒm�n���h���p�̃R�[�h��ǉ����Ă�������
+	// TODO: この位置にコントロール通知ハンドラ用のコードを追加してください
 	OnDetail(2);
 }
 
 void CDlgTeikei::OnBtDetail04() 
 {
-	// TODO: ���̈ʒu�ɃR���g���[���ʒm�n���h���p�̃R�[�h��ǉ����Ă�������
+	// TODO: この位置にコントロール通知ハンドラ用のコードを追加してください
 	OnDetail(3);
 }
 
 void CDlgTeikei::OnBtDetail05() 
 {
-	// TODO: ���̈ʒu�ɃR���g���[���ʒm�n���h���p�̃R�[�h��ǉ����Ă�������
+	// TODO: この位置にコントロール通知ハンドラ用のコードを追加してください
 	OnDetail(4);
 }
 
 void CDlgTeikei::OnBtDetail06() 
 {
-	// TODO: ���̈ʒu�ɃR���g���[���ʒm�n���h���p�̃R�[�h��ǉ����Ă�������
+	// TODO: この位置にコントロール通知ハンドラ用のコードを追加してください
 	OnDetail(5);
 }
 
 void CDlgTeikei::OnBtDetail07() 
 {
-	// TODO: ���̈ʒu�ɃR���g���[���ʒm�n���h���p�̃R�[�h��ǉ����Ă�������
+	// TODO: この位置にコントロール通知ハンドラ用のコードを追加してください
 	OnDetail(6);
 }
 
 void CDlgTeikei::OnBtDetail08() 
 {
-	// TODO: ���̈ʒu�ɃR���g���[���ʒm�n���h���p�̃R�[�h��ǉ����Ă�������
+	// TODO: この位置にコントロール通知ハンドラ用のコードを追加してください
 	OnDetail(7);
 }
 
 void CDlgTeikei::OnBtDetail09() 
 {
-	// TODO: ���̈ʒu�ɃR���g���[���ʒm�n���h���p�̃R�[�h��ǉ����Ă�������
+	// TODO: この位置にコントロール通知ハンドラ用のコードを追加してください
 	OnDetail(8);
 }
 
 void CDlgTeikei::OnBtDetail10() 
 {
-	// TODO: ���̈ʒu�ɃR���g���[���ʒm�n���h���p�̃R�[�h��ǉ����Ă�������
+	// TODO: この位置にコントロール通知ハンドラ用のコードを追加してください
 	OnDetail(9);
 }
 
 void CDlgTeikei::OnOK() 
 {
-	// TODO: ���̈ʒu�ɌŗL�̏�����ǉ����邩�A�܂��͊�{�N���X���Ăяo���Ă�������
+	// TODO: この位置に固有の処理を追加するか、または基本クラスを呼び出してください
 	m_teikeiInfo[0].strTeikei = m_strTeikei1;
 	m_teikeiInfo[1].strTeikei = m_strTeikei2;
 	m_teikeiInfo[2].strTeikei = m_strTeikei3;

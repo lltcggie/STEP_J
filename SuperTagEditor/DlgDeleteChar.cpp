@@ -1,4 +1,4 @@
-// DlgDeleteChar.cpp : ƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“ ƒtƒ@ƒCƒ‹
+// DlgDeleteChar.cpp : ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³ ãƒ•ã‚¡ã‚¤ãƒ«
 //
 
 #include "stdafx.h"
@@ -12,7 +12,7 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 /////////////////////////////////////////////////////////////////////////////
-// DlgDeleteChar ƒ_ƒCƒAƒƒO
+// DlgDeleteChar ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
 
 
 DlgDeleteChar::DlgDeleteChar(CWnd* pParent /*=NULL*/)
@@ -38,9 +38,9 @@ void DlgDeleteChar::DoDataExchange(CDataExchange* pDX)
 
 BEGIN_MESSAGE_MAP(DlgDeleteChar, CDialog)
 	//{{AFX_MSG_MAP(DlgDeleteChar)
-		// ƒƒ‚ - ClassWizard ‚Í‚±‚ÌˆÊ’u‚Éƒ}ƒbƒsƒ“ƒO—p‚Ìƒ}ƒNƒ‚ð’Ç‰Á‚Ü‚½‚Ííœ‚µ‚Ü‚·B
+		// ãƒ¡ãƒ¢ - ClassWizard ã¯ã“ã®ä½ç½®ã«ãƒžãƒƒãƒ”ãƒ³ã‚°ç”¨ã®ãƒžã‚¯ãƒ­ã‚’è¿½åŠ ã¾ãŸã¯å‰Šé™¤ã—ã¾ã™ã€‚
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// DlgDeleteChar ƒƒbƒZ[ƒW ƒnƒ“ƒhƒ‰
+// DlgDeleteChar ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒãƒ³ãƒ‰ãƒ©

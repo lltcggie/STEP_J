@@ -1,4 +1,4 @@
-// CDlgPluginSetup.cpp : ƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“ ƒtƒ@ƒCƒ‹
+// CDlgPluginSetup.cpp : ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³ ãƒ•ã‚¡ã‚¤ãƒ«
 //
 
 #include "stdafx.h"
@@ -23,7 +23,7 @@ static char THIS_FILE[] = __FILE__;
 #define ListView_GetSelectedItem(listCtrl)			listCtrl.GetNextItem(-1, LVNI_ALL | LVNI_SELECTED | LVIS_FOCUSED)
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgPluginSetup ƒ_ƒCƒAƒƒO
+// CDlgPluginSetup ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
 
 
 CDlgPluginSetup::CDlgPluginSetup(CWnd* pParent /*=NULL*/)
@@ -57,13 +57,13 @@ BEGIN_MESSAGE_MAP(CDlgPluginSetup, CDialog)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgPluginSetup ƒƒbƒZ[ƒW ƒnƒ“ƒhƒ‰
+// CDlgPluginSetup ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒãƒ³ãƒ‰ãƒ©
 
 BOOL CDlgPluginSetup::OnInitDialog() 
 {
 	CDialog::OnInitDialog();
 	
-	// TODO: ‚±‚ÌˆÊ’u‚É‰Šú‰»‚Ì•â‘«ˆ—‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
+	// TODO: ã“ã®ä½ç½®ã«åˆæœŸåŒ–ã®è£œè¶³å‡¦ç†ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
 	DWORD	dwStyle;
 	dwStyle = m_listPlugin.SendMessage(LVM_GETEXTENDEDLISTVIEWSTYLE, 0, 0);
 	dwStyle |= LVS_EX_CHECKBOXES | LVS_EX_FULLROWSELECT;
@@ -72,8 +72,8 @@ BOOL CDlgPluginSetup::OnInitDialog()
 	RECT	rect;
 	m_listPlugin.GetClientRect(&rect);
 
-	m_listPlugin.InsertColumn(1, _T("ƒvƒ‰ƒOƒCƒ“"), LVCFMT_LEFT, rect.right-rect.left-16, -1);
-	m_listPlugin.DeleteAllItems();					// ƒNƒŠƒA
+	m_listPlugin.InsertColumn(1, _T("ãƒ—ãƒ©ã‚°ã‚¤ãƒ³"), LVCFMT_LEFT, rect.right-rect.left-16, -1);
+	m_listPlugin.DeleteAllItems();					// ã‚¯ãƒªã‚¢
 
 	for (int nIndex=0;nIndex<plugins.arPlugins.GetSize();nIndex++) {
 		PSTEPlugin pPlugin = (PSTEPlugin)plugins.arPlugins.GetAt(nIndex);
@@ -82,14 +82,14 @@ BOOL CDlgPluginSetup::OnInitDialog()
 		ListView_SetCheckState(m_listPlugin.GetSafeHwnd(), nIndex, pPlugin->bUse ? TRUE : FALSE);
 	}
 	
-	return TRUE;  // ƒRƒ“ƒgƒ[ƒ‹‚ÉƒtƒH[ƒJƒX‚ğİ’è‚µ‚È‚¢‚Æ‚«A–ß‚è’l‚Í TRUE ‚Æ‚È‚è‚Ü‚·
-	              // —áŠO: OCX ƒvƒƒpƒeƒB ƒy[ƒW‚Ì–ß‚è’l‚Í FALSE ‚Æ‚È‚è‚Ü‚·
+	return TRUE;  // ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã«ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ã‚’è¨­å®šã—ãªã„ã¨ãã€æˆ»ã‚Šå€¤ã¯ TRUE ã¨ãªã‚Šã¾ã™
+	              // ä¾‹å¤–: OCX ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ ãƒšãƒ¼ã‚¸ã®æˆ»ã‚Šå€¤ã¯ FALSE ã¨ãªã‚Šã¾ã™
 }
 
 void CDlgPluginSetup::OnItemchangedListPlugin(NMHDR* pNMHDR, LRESULT* pResult) 
 {
 	NM_LISTVIEW* pNMListView = (NM_LISTVIEW*)pNMHDR;
-	// TODO: ‚±‚ÌˆÊ’u‚ÉƒRƒ“ƒgƒ[ƒ‹’Ê’mƒnƒ“ƒhƒ‰—p‚ÌƒR[ƒh‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
+	// TODO: ã“ã®ä½ç½®ã«ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«é€šçŸ¥ãƒãƒ³ãƒ‰ãƒ©ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
 	int nIndex =  ListView_GetSelectedItem(m_listPlugin);
 	if (nIndex < 0) {
 		GetDlgItem(IDC_BT_SETUP)->EnableWindow(FALSE);
@@ -129,7 +129,7 @@ void CDlgPluginSetup::OnItemchangedListPlugin(NMHDR* pNMHDR, LRESULT* pResult)
 
 void CDlgPluginSetup::OnBtSetup() 
 {
-	// TODO: ‚±‚ÌˆÊ’u‚ÉƒRƒ“ƒgƒ[ƒ‹’Ê’mƒnƒ“ƒhƒ‰—p‚ÌƒR[ƒh‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
+	// TODO: ã“ã®ä½ç½®ã«ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«é€šçŸ¥ãƒãƒ³ãƒ‰ãƒ©ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
 	int nIndex =  ListView_GetSelectedItem(m_listPlugin);
 	if (nIndex < 0) return;
 
@@ -142,15 +142,15 @@ void CDlgPluginSetup::OnBtSetup()
 extern "C" STEP_API void WINAPI STEPUpdateCellInfo(void);
 void CDlgPluginSetup::OnBtInstall() 
 {
-	// TODO: ‚±‚ÌˆÊ’u‚ÉƒRƒ“ƒgƒ[ƒ‹’Ê’mƒnƒ“ƒhƒ‰—p‚ÌƒR[ƒh‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
-	TCHAR szFilter[] = _T("STEƒvƒ‰ƒOƒCƒ“ (*.ste)|*.ste|‘S‚Ä (*.*)|*.*||");
+	// TODO: ã“ã®ä½ç½®ã«ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«é€šçŸ¥ãƒãƒ³ãƒ‰ãƒ©ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
+	TCHAR szFilter[] = _T("STEãƒ—ãƒ©ã‚°ã‚¤ãƒ³ (*.ste)|*.ste|å…¨ã¦ (*.*)|*.*||");
 	CFileDialog dialog(TRUE, _T("ste"), NULL, 0, szFilter, this);
 	if (dialog.DoModal() == IDOK) {
 		CString strPluginFile = dialog.GetPathName();
 		extern PSTEPlugin STEPluginLoadFile(LPCTSTR);
 		PSTEPlugin pPlugin = STEPluginLoadFile(strPluginFile);
 		if (pPlugin == NULL) {
-			MessageBox(_T("‘I‘ğ‚³‚ê‚½ƒvƒ‰ƒOƒCƒ“‚Íg—p‚Å‚«‚Ü‚¹‚ñB"), _T("ƒvƒ‰ƒOƒCƒ“‚ÌƒCƒ“ƒXƒg[ƒ‹"), MB_ICONSTOP|MB_OK|MB_TOPMOST);
+			MessageBox(_T("é¸æŠã•ã‚ŒãŸãƒ—ãƒ©ã‚°ã‚¤ãƒ³ã¯ä½¿ç”¨ã§ãã¾ã›ã‚“ã€‚"), _T("ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ã®ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«"), MB_ICONSTOP|MB_OK|MB_TOPMOST);
 			return;
 		}
 		pPlugin->bUse = true;
@@ -165,7 +165,7 @@ void CDlgPluginSetup::OnBtInstall()
 
 void CDlgPluginSetup::OnBtUp() 
 {
-	// TODO: ‚±‚ÌˆÊ’u‚ÉƒRƒ“ƒgƒ[ƒ‹’Ê’mƒnƒ“ƒhƒ‰—p‚ÌƒR[ƒh‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
+	// TODO: ã“ã®ä½ç½®ã«ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«é€šçŸ¥ãƒãƒ³ãƒ‰ãƒ©ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
 	int nIndex =  ListView_GetSelectedItem(m_listPlugin);
 	PSTEPlugin pPlugin = (PSTEPlugin)m_listPlugin.GetItemData(nIndex);
 	nIndex--;
@@ -178,7 +178,7 @@ void CDlgPluginSetup::OnBtUp()
 
 void CDlgPluginSetup::OnBtDown() 
 {
-	// TODO: ‚±‚ÌˆÊ’u‚ÉƒRƒ“ƒgƒ[ƒ‹’Ê’mƒnƒ“ƒhƒ‰—p‚ÌƒR[ƒh‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
+	// TODO: ã“ã®ä½ç½®ã«ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«é€šçŸ¥ãƒãƒ³ãƒ‰ãƒ©ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
 	int nIndex =  ListView_GetSelectedItem(m_listPlugin);
 	PSTEPlugin pPlugin = (PSTEPlugin)m_listPlugin.GetItemData(nIndex);
 	nIndex += 2;
@@ -191,7 +191,7 @@ void CDlgPluginSetup::OnBtDown()
 
 void CDlgPluginSetup::OnOK() 
 {
-	// TODO: ‚±‚ÌˆÊ’u‚É‚»‚Ì‘¼‚ÌŒŸØ—p‚ÌƒR[ƒh‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
+	// TODO: ã“ã®ä½ç½®ã«ãã®ä»–ã®æ¤œè¨¼ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
 	CSuperTagEditorApp	*pApp = (CSuperTagEditorApp *)AfxGetApp();
 	CString strINI;
 	TCHAR   drive[_MAX_DRIVE];
@@ -210,7 +210,7 @@ void CDlgPluginSetup::OnOK()
 		PSTEPlugin pPlugin = (PSTEPlugin)m_listPlugin.GetItemData(nIndex);
 		pPlugin->bUse = ListView_GetCheckState(m_listPlugin.GetSafeHwnd(), nIndex) ? true : false;
 		strSection.Format(_T("Load%03d"), nIndex);
-		// ‘Š‘ÎƒpƒX‚É•ÏŠ·
+		// ç›¸å¯¾ãƒ‘ã‚¹ã«å¤‰æ›
 		TCHAR   pDrive[_MAX_DRIVE];
 		TCHAR   pDir[_MAX_DIR];
 		TCHAR   pFname[_MAX_FNAME];
@@ -267,7 +267,7 @@ void CDlgPluginSetup::OnOK()
 			strRelDir += pDir+nPathSeparatorIndex+1;
 			_tmakepath_s(pBuff, NULL, strRelDir, pFname, pExt);
 		} else {
-			// •ÏŠ·‚È‚µ
+			// å¤‰æ›ãªã—
 			_tmakepath_s(pBuff, pDrive, pDir, pFname, pExt);
 		}
 		IniFile.WriteStr(strSection, _T("Path"), pBuff);
@@ -279,8 +279,8 @@ void CDlgPluginSetup::OnOK()
 
 void CDlgPluginSetup::OnBtUninstall() 
 {
-	// TODO: ‚±‚ÌˆÊ’u‚ÉƒRƒ“ƒgƒ[ƒ‹’Ê’mƒnƒ“ƒhƒ‰—p‚ÌƒR[ƒh‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
-	if (MessageBox(_T("‘I‘ğ‚³‚ê‚Ä‚¢‚éƒvƒ‰ƒOƒCƒ“‚ğƒAƒ“ƒCƒ“ƒXƒg[ƒ‹‚µ‚Ü‚·‚©H\n¦ƒtƒ@ƒCƒ‹‚Ííœ‚³‚ê‚Ü‚¹‚ñB"), _T("ƒAƒ“ƒCƒ“ƒXƒg[ƒ‹"), MB_YESNO|MB_TOPMOST) == IDYES) {
+	// TODO: ã“ã®ä½ç½®ã«ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«é€šçŸ¥ãƒãƒ³ãƒ‰ãƒ©ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
+	if (MessageBox(_T("é¸æŠã•ã‚Œã¦ã„ã‚‹ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ã‚’ã‚¢ãƒ³ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã—ã¾ã™ã‹ï¼Ÿ\nâ€»ãƒ•ã‚¡ã‚¤ãƒ«ã¯å‰Šé™¤ã•ã‚Œã¾ã›ã‚“ã€‚"), _T("ã‚¢ãƒ³ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«"), MB_YESNO|MB_TOPMOST) == IDYES) {
 		int nIndex =  ListView_GetSelectedItem(m_listPlugin);
 		PSTEPlugin pPlugin = (PSTEPlugin)m_listPlugin.GetItemData(nIndex);
 		pPlugin->bUse = false;

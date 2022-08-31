@@ -1,4 +1,4 @@
-// DlgBlankAdvance.cpp : �C���v�������e�[�V���� �t�@�C��
+// DlgBlankAdvance.cpp : インプリメンテーション ファイル
 //
 
 #include "stdafx.h"
@@ -12,14 +12,14 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgBlankAdvance �v���p�e�B �y�[�W
+// CDlgBlankAdvance プロパティ ページ
 
 IMPLEMENT_DYNCREATE(CDlgBlankAdvance, COptionPage)
 
 CDlgBlankAdvance::CDlgBlankAdvance() : COptionPage(CDlgBlankAdvance::IDD)
 {
 	//{{AFX_DATA_INIT(CDlgBlankAdvance)
-		// ���� - ClassWizard �͂��̈ʒu�Ƀ����o�̏�����������ǉ����܂��B
+		// メモ - ClassWizard はこの位置にメンバの初期化処理を追加します。
 	//}}AFX_DATA_INIT
 }
 
@@ -31,16 +31,16 @@ void CDlgBlankAdvance::DoDataExchange(CDataExchange* pDX)
 {
 	COptionPage::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CDlgBlankAdvance)
-		// ���� - ClassWizard �͂��̈ʒu�Ƀ}�b�s���O�p�̃}�N����ǉ��܂��͍폜���܂��B
+		// メモ - ClassWizard はこの位置にマッピング用のマクロを追加または削除します。
 	//}}AFX_DATA_MAP
 }
 
 
 BEGIN_MESSAGE_MAP(CDlgBlankAdvance, COptionPage)
 	//{{AFX_MSG_MAP(CDlgBlankAdvance)
-		// ����: ClassWizard �͂��̈ʒu�� DDX ����� DDV �̌Ăяo���R�[�h��ǉ����܂��B
+		// メモ: ClassWizard はこの位置に DDX および DDV の呼び出しコードを追加します。
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgBlankAdvance ���b�Z�[�W �n���h��
+// CDlgBlankAdvance メッセージ ハンドラ

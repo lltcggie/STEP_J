@@ -2,7 +2,7 @@
 // 			Specification : header file for MFC DLL extension builds
 // ==========================================================================
 
-// Copyright © Dundas Software Ltd. 1997 - 1998, All Rights Reserved
+// Copyright Dundas Software Ltd. 1997 - 1998, All Rights Reserved
                           
 // //////////////////////////////////////////////////////////////////////////
 

@@ -1,5 +1,5 @@
 #define WM_SMX_IPC WM_USER
-/* SCMPX�E�B���h�E�ɉ��L�̂悤�Ȍ`���Ń��b�Z�[�W�𑗂��Ă������� */
+/* SCMPXウィンドウに下記のような形式でメッセージを送ってください */
 
 // result = SendMessage( hwnd_scmpx, WM_SMX_IPC, command_data, command );
 
@@ -9,7 +9,7 @@
 
 
 #define IPC_GETVERSION 0
-/* IPC_GETVERSION �𑗂�Ǝ��̒l��Ԃ��܂� */
+/* IPC_GETVERSION を送ると次の値を返します */
 /* Version 0.0.7e = 0x000007e0 */
 /* Version 0.0.8j = 0x00000800 */
 /* Version 0.0.9e = 0x000009e0 */
@@ -40,8 +40,8 @@
 
 
 #define IPC_PLAYFILE 100
-/* IPC_PLAYFILE �̓v���C���X�g�Ƀt�@�C����ǉ����܂� */
-/* (�g���q�� '.m3u' �̏ꍇ�̓v���C���X�g�t�@�C���Ƃ��ēǂݍ��܂�܂�) */
+/* IPC_PLAYFILE はプレイリストにファイルを追加します */
+/* (拡張子が '.m3u' の場合はプレイリストファイルとして読み込まれます) */
 
 // char file[] = "C:\\Song\\mkr.mp3";
 // for( i = 0; i <= strlen( file ); i++ )
@@ -51,7 +51,7 @@
 
 
 #define IPC_DELETE 101
-/* IPC_DELETE �̓v���C���X�g���N���A���܂� */
+/* IPC_DELETE はプレイリストをクリアします */
 
 // SendMessage( hwnd_scmpx, WM_SMX_IPC, 0, IPC_DELETE );
 
@@ -59,7 +59,7 @@
 
 
 #define IPC_STARTPLAY 102
-/* IPC_STARTPLAY �͍Đ��R�}���h���������܂� */
+/* IPC_STARTPLAY は再生コマンドを処理します */
 
 // SendMessage( hwnd_scmpx, WM_SMX_IPC, 0, IPC_STARTPLAY );
 
@@ -67,7 +67,7 @@
 
 
 #define IPC_CHDIR 103
-/* IPC_CHDIR ��SCMPX�̃J�����g�f�B���N�g����ύX���܂� */
+/* IPC_CHDIR はSCMPXのカレントディレクトリを変更します */
 
 // char dir[] = "C:\\Song";
 // for( i = 0; i <= strlen( dir ); i++ )
@@ -77,10 +77,10 @@
 
 
 #define IPC_ISPLAYING 104
-/* IPC_ISPLAYING �͉��L�̍Đ��X�e�[�^�X��Ԃ��܂� */
-/* �߂�l=0 : ��~�� */
-/* �߂�l=1 : �Đ��� */
-/* �߂�l=3 : �ꎞ��~ */
+/* IPC_ISPLAYING は下記の再生ステータスを返します */
+/* 戻り値=0 : 停止中 */
+/* 戻り値=1 : 再生中 */
+/* 戻り値=3 : 一時停止 */
 
 // status = SendMessage( hwnd_scmpx, WM_SMX_IPC, 0, IPC_ISPLAYING );
 
@@ -88,11 +88,11 @@
 
 
 #define IPC_GETOUTPUTTIME 105
-/* IPC_GETOUTPUTTIME �͍Đ����Ԃ�Ԃ��܂� */
-/* wParam=0 �ɂ���ƌ��݂̍Đ����Ԃ�ms�P�ʂŕԂ��܂� */
-/* wParam=1 �ɂ���Ɠǂݍ��܂�Ă���Ȃ̒������b�P�ʂŖ߂��Ă��܂� */
-/* �߂�l=-1 �͍Đ����Ă��Ȃ����A�G���[�ł� */
-/* ���Đ����Ԃ͎����b�P�ʂ̂��Ȃ肢��������Ȓl���߂����̂Œ��ӂ��Ă������� */
+/* IPC_GETOUTPUTTIME は再生時間を返します */
+/* wParam=0 にすると現在の再生時間をms単位で返します */
+/* wParam=1 にすると読み込まれている曲の長さが秒単位で戻ってきます */
+/* 戻り値=-1 は再生していないか、エラーです */
+/* ※再生時間は実質秒単位のかなりいいかげんな値が戻されるので注意してください */
 
 // song_pos = SendMessage( hwnd_scmpx, WM_SMX_IPC, 0, IPC_GETOUTPUTTIME );
 // song_len = SendMessage( hwnd_scmpx, WM_SMX_IPC, 1, IPC_GETOUTPUTTIME );
@@ -101,8 +101,8 @@
 
 
 #define IPC_JUMPTOTIME 106
-/* IPC_JUMPTOTIME ��ms�P�ʂōĐ����̋Ȃ̈ʒu��ύX���܂� */
-/* -1�͒�~���A1��EOF�A0���߂��Ă���Ɛ������Ӗ����܂� */
+/* IPC_JUMPTOTIME はms単位で再生中の曲の位置を変更します */
+/* -1は停止中、1はEOF、0が戻ってくると成功を意味します */
 
 // status = SendMessage( hwnd_scmpx, WM_SMX_IPC, new_song_pos, IPC_JUMPTOTIME );
 
@@ -110,18 +110,18 @@
 
 
 #define IPC_WRITEPLAYLIST 120
-/* IPC_WRITEPLAYLIST �̓v���C���X�g�������o���܂� */
-/* �W���̃v���C���X�g�͐�΃p�X�ŁA�w�肵�����X�g�ɂ͑��΃p�X�ŏ������܂�܂� */
+/* IPC_WRITEPLAYLIST はプレイリストを書き出します */
+/* 標準のプレイリストは絶対パスで、指定したリストには相対パスで書き込まれます */
 
 // char favorite[] = "C:\\mp3z\\favorite.m3u";
 // for( i = 0; i <= strlen( favorite ); i++ )
 // SendMessage( hwnd_scmpx, WM_SMX_IPC, favorite[i], IPC_WRITEPLAYLIST );
 
 /*----
-�@lParam=121�ȍ~��WinAMP 2.0(Pre2 9/2��)�Œǉ����ꂽ�t�����g�G���h�ł��B
-�@SCMPX�ł� version 0.0.9a/e ����Ή����Ă��܂��B
-�@lParam=211��WinAMP 2.04�AlParam=125,126��WinAMP 2.05�̃t�����g�G���h��
-�@SCMPX�ł͂��ꂼ�� version 1.10�A1.11 ����Ή����Ă��܂��B
+　lParam=121以降はWinAMP 2.0(Pre2 9/2版)で追加されたフロントエンドです。
+　SCMPXでは version 0.0.9a/e から対応しています。
+　lParam=211はWinAMP 2.04、lParam=125,126はWinAMP 2.05のフロントエンドで
+　SCMPXではそれぞれ version 1.10、1.11 から対応しています。
 ----*/
 
 
@@ -129,7 +129,7 @@
 
 
 #define IPC_SETPLAYLISTPOS 121
-/* �v���C���X�g�̈ʒu��ύX���܂� */
+/* プレイリストの位置を変更します */
 
 // SendMessage( hwnd_scmpx, WM_SMX_IPC, new_pl_pos, IPC_SETPLAYLISTPOS );
 
@@ -137,7 +137,7 @@
 
 
 #define IPC_SETVOLUME 122
-/* �{�����[����ύX���܂�(�l��0-255�ŁA255���ő�ł�) */
+/* ボリュームを変更します(値は0-255で、255が最大です) */
 
 // SendMessage( hwnd_scmpx, WM_SMX_IPC, new_volume, IPC_SETVOLUME );
 
@@ -145,7 +145,7 @@
 
 
 #define IPC_SETPANNING 123
-/* �p����ύX���܂�(�l��0-255�A���l�̒Ⴂ�ق��������Œ�����128�ł�) */
+/* パンを変更します(値は0-255、数値の低いほうが左よりで中央は128です) */
 
 // SendMessage( hwnd_scmpx, WM_SMX_IPC, new_pan, IPC_SETPANNING );
 
@@ -153,7 +153,7 @@
 
 
 #define IPC_GETLISTLENGTH 124
-/* �v���C���X�g�̒�����Ԃ��܂� */
+/* プレイリストの長さを返します */
 
 // SendMessage( hwnd_scmpx, WM_SMX_IPC, 0, IPC_GETLISTLENGTH );
 
@@ -161,7 +161,7 @@
 
 
 #define IPC_GETLISTPOS 125
-/* �I������Ă���v���C���X�g�ԍ���Ԃ��܂� */
+/* 選択されているプレイリスト番号を返します */
 
 // SendMessage( hwnd_scmpx, WM_SMX_IPC, 0, IPC_GETLISTPOS );
 
@@ -169,10 +169,10 @@
 
 
 #define IPC_GETINFO 126
-/* ���ݓǂݍ��܂�Ă���t�@�C���̃t�H�[�}�b�g��Ԃ��܂� */
-/* wParam=0 �̂Ƃ��̓T���v�����O���[�g */
-/* wParam=1 �̂Ƃ��̓r�b�g���[�g */
-/* wParam=2 �̂Ƃ��̓`���l���� */
+/* 現在読み込まれているファイルのフォーマットを返します */
+/* wParam=0 のときはサンプリングレート */
+/* wParam=1 のときはビットレート */
+/* wParam=2 のときはチャネル数 */
 
 // sfreq = SendMessage( hwnd_scmpx, WM_SMX_IPC, 0, IPC_GETINFO );
 // brate = SendMessage( hwnd_scmpx, WM_SMX_IPC, 1, IPC_GETINFO );
@@ -182,7 +182,7 @@
 
 
 #define IPC_GETPLAYLISTFILE 211
-/* �v���C���X�g�ɓo�^����Ă���t�@�C�����̕�����|�C���^��Ԃ��܂� */
-/* �߂�l��NULL�̏ꍇ�̓G���[�ł� */
+/* プレイリストに登録されているファイル名の文字列ポインタを返します */
+/* 戻り値がNULLの場合はエラーです */
 
 // SendMessage( hwnd_scmpx, WM_SMX_IPC, index, IPC_GETPLAYLISTFILE );

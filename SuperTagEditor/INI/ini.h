@@ -3,8 +3,8 @@
 class CIniKeyValue
 {//Key=Value
 private:
-    TCHAR *m_pszKey;  //ÉLÅ[ñº
-    TCHAR *m_pszValue;//íl
+    TCHAR *m_pszKey;  //„Ç≠„ÉºÂêç
+    TCHAR *m_pszValue;//ÂÄ§
     CIniKeyValue(void);
 public:
     const TCHAR* __fastcall GetKeyName(void)const{return m_pszKey;}
@@ -17,7 +17,7 @@ public:
 class CIniSection
 {//[Section]
 private:
-    TCHAR         *m_pszSection; //ÉZÉNÉVÉáÉìñº
+    TCHAR         *m_pszSection; //„Çª„ÇØ„Ç∑„Éß„É≥Âêç
     CIniKeyValue **m_ppKeyValues;//
     int            m_nCapacity;
     int            m_nCount;
@@ -50,7 +50,7 @@ public:
                               const TCHAR *cszKey,
                               const TCHAR *cszDefault,
                               TCHAR *pszStr,
-                              int    nSize);//ï∂éöêîíPà 
+                              int    nSize);//ÊñáÂ≠óÊï∞Âçò‰Ωç
     void  __fastcall WriteInt(const TCHAR *cszSection,
                               const TCHAR *cszKey,
                               int nValue);

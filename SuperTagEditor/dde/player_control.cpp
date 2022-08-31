@@ -11,20 +11,20 @@ static const TCHAR g_cszClassNameWinamp[] = _T("Winamp v1.x");
 //SCMPX
 static const TCHAR g_cszClassNameSCMPX[] = _T("SCMPX");
 //foobar2000
-static const TCHAR g_cszClassNameFoobar[] = _T("{97E27FAA-C0B3-4b8e-A693-ED7881E99FC1}");//ƒo[ƒWƒ‡ƒ“‚É‚æ‚Á‚Ä•Ï‚í‚é‰Â”\«‚ª‚ ‚éH
+static const TCHAR g_cszClassNameFoobar[] = _T("{97E27FAA-C0B3-4b8e-A693-ED7881E99FC1}");//ãƒãƒ¼ã‚¸ãƒ§ãƒ³ã«ã‚ˆã£ã¦å¤‰ã‚ã‚‹å¯èƒ½æ€§ãŒã‚ã‚‹ï¼Ÿ
 //Lilith/uLilith
 static const TCHAR g_cszClassNameOldLilith[] = _T("Lilith");
 static const TCHAR g_cszClassNameNewLilith[] = _T("uLilith");
-static const TCHAR g_cszServiceNameOldLilith[] = _T("LILITH_EXT_CONTROL");//‹ŒSoundPlayer Lilith(UNICODE ”ñ‘Î‰”Å)
-static const TCHAR g_cszTopicNameOldLilith[] =   _T("LILITH_EXT_CONTROL");//‹ŒSoundPlayer Lilith(UNICODE ”ñ‘Î‰”Å)
-static const TCHAR g_cszServiceNameNewLilith[] = _T("uLilithDdeControl"); //uLilith(UNICODE ‘Î‰”Å)
-static const TCHAR g_cszTopicNameNewLilith[] = _T("uLilithDdeControl"); //uLilith(UNICODE ‘Î‰”Å)
-//static const TCHAR g_cszTopicNameNewLilith[] = _T("uLilithDdeControlFixed"); //uLilith(UNICODE ‘Î‰”Å)
+static const TCHAR g_cszServiceNameOldLilith[] = _T("LILITH_EXT_CONTROL");//æ—§SoundPlayer Lilith(UNICODE éå¯¾å¿œç‰ˆ)
+static const TCHAR g_cszTopicNameOldLilith[] =   _T("LILITH_EXT_CONTROL");//æ—§SoundPlayer Lilith(UNICODE éå¯¾å¿œç‰ˆ)
+static const TCHAR g_cszServiceNameNewLilith[] = _T("uLilithDdeControl"); //uLilith(UNICODE å¯¾å¿œç‰ˆ)
+static const TCHAR g_cszTopicNameNewLilith[] = _T("uLilithDdeControl"); //uLilith(UNICODE å¯¾å¿œç‰ˆ)
+//static const TCHAR g_cszTopicNameNewLilith[] = _T("uLilithDdeControlFixed"); //uLilith(UNICODE å¯¾å¿œç‰ˆ)
 //KbMedia Player
-static const TCHAR g_cszMutexKbmplay[] = _T("KbMedia Player");    //‹N“®Ï Mutex –¼(2.80beta9ˆÈ~‚Í64bit”Å‚Å‚à—LŒø)
-static const TCHAR g_cszMutexKbmplay64[] = _T("KbMedia Player64");//64bit”Å‹N“®Ï Mutex –¼
-static const TCHAR g_cszServiceNameKbmplay[] = _T("KbMedia Player");//32bit/64bit‹¤’Ê
-static const TCHAR g_cszTopicNameKbmplay[] = _T("KbMedia Player");  //32bit/64bit‹¤’Ê
+static const TCHAR g_cszMutexKbmplay[] = _T("KbMedia Player");    //èµ·å‹•æ¸ˆ Mutex å(2.80beta9ä»¥é™ã¯64bitç‰ˆã§ã‚‚æœ‰åŠ¹)
+static const TCHAR g_cszMutexKbmplay64[] = _T("KbMedia Player64");//64bitç‰ˆèµ·å‹•æ¸ˆ Mutex å
+static const TCHAR g_cszServiceNameKbmplay[] = _T("KbMedia Player");//32bit/64bitå…±é€š
+static const TCHAR g_cszTopicNameKbmplay[] = _T("KbMedia Player");  //32bit/64bitå…±é€š
 
 static const DWORD DDE_TIMEOUT = 3000;
 ///////////////////////////////////////////////////////////////////////////////
@@ -39,44 +39,44 @@ CPlayerControl::~CPlayerControl(void)
 }
 ///////////////////////////////////////////////////////////////////////////////
 BOOL __fastcall CPlayerControl::ExecPlayer(const TCHAR *cszFileName, BOOL bClear)
-{//cszFileName ‚ğw’è‚µ‚ÄŠJ‚­
- //bClear == TRUE ‚Ìê‡‚Íi‘Î‰‚µ‚Ä‚¢‚ê‚ÎjƒvƒŒƒCƒŠƒXƒg‚ğ”jŠü‚·‚é
+{//cszFileName ã‚’æŒ‡å®šã—ã¦é–‹ã
+ //bClear == TRUE ã®å ´åˆã¯ï¼ˆå¯¾å¿œã—ã¦ã„ã‚Œã°ï¼‰ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆã‚’ç ´æ£„ã™ã‚‹
     if(!m_szPlayerPath[0]){
         return FALSE;
     }
     TCHAR szCommand[2048];
-    BOOL bExecCommand = FALSE;//Œã‚Å ExecCommand ‚ğÀs‚·‚éê‡‚Í TRUE;
+    BOOL bExecCommand = FALSE;//å¾Œã§ ExecCommand ã‚’å®Ÿè¡Œã™ã‚‹å ´åˆã¯ TRUE;
     switch(m_nPlayerType){
         case PLAYER_KBMPLAY:
-            if(bClear){//ƒŠƒXƒg‚ğ”jŠü=>’Ç‰Á=>Ä¶
+            if(bClear){//ãƒªã‚¹ãƒˆã‚’ç ´æ£„=>è¿½åŠ =>å†ç”Ÿ
                 _sntprintf_s(szCommand, _TRUNCATE, 
                              _T("\"%s\" \"%s\" /clear /a /p"), m_szPlayerPath, cszFileName);
             }
             else{
-                //ƒŠƒXƒg‚É’Ç‰Á‚µ‚È‚¢‚ÅÄ¶
+                //ãƒªã‚¹ãƒˆã«è¿½åŠ ã—ãªã„ã§å†ç”Ÿ
                 _sntprintf_s(szCommand, _TRUNCATE, 
                              _T("\"%s\" \"%s\" /na /play"), m_szPlayerPath, cszFileName);
             }
             break;
         case PLAYER_LILITH:
         case PLAYER_ULILITH:
-        	// ‹N“®‚·‚é‚¾‚¯(Œã‚Å DDE ƒRƒ}ƒ“ƒh”­s)
+        	// èµ·å‹•ã™ã‚‹ã ã‘(å¾Œã§ DDE ã‚³ãƒãƒ³ãƒ‰ç™ºè¡Œ)
             _sntprintf_s(szCommand, _TRUNCATE, 
-                         _T("\"%s\""), m_szPlayerPath);//"" ‚ÅŠ‡‚é
+                         _T("\"%s\""), m_szPlayerPath);//"" ã§æ‹¬ã‚‹
             bExecCommand = TRUE;
             break;
         case PLAYER_WINAMP:
         case PLAYER_SCMPX:
-            // ‹N“®‚·‚é‚¾‚¯(Œã‚ÅÄ¶ŠJnƒRƒ}ƒ“ƒh”­s)
+            // èµ·å‹•ã™ã‚‹ã ã‘(å¾Œã§å†ç”Ÿé–‹å§‹ã‚³ãƒãƒ³ãƒ‰ç™ºè¡Œ)
             _sntprintf_s(szCommand, _TRUNCATE, 
-                         _T("\"%s\""), m_szPlayerPath);//"" ‚ÅŠ‡‚é
+                         _T("\"%s\""), m_szPlayerPath);//"" ã§æ‹¬ã‚‹
             bExecCommand = TRUE;
             break;
         case PLAYER_FOOBAR:
         default:
-        	// ˆø”‚Éƒtƒ@ƒCƒ‹–¼‚ğ“n‚µ‚Ä‹N“®
+        	// å¼•æ•°ã«ãƒ•ã‚¡ã‚¤ãƒ«åã‚’æ¸¡ã—ã¦èµ·å‹•
             _sntprintf_s(szCommand, _TRUNCATE, 
-                         _T("\"%s\" \"%s\""), m_szPlayerPath, cszFileName);//"" ‚ÅŠ‡‚é
+                         _T("\"%s\" \"%s\""), m_szPlayerPath, cszFileName);//"" ã§æ‹¬ã‚‹
             break;
     }
     PROCESS_INFORMATION pi = {0};
@@ -98,7 +98,7 @@ BOOL __fastcall CPlayerControl::ExecPlayer(const TCHAR *cszFileName, BOOL bClear
         if(dwWaitRet != WAIT_TIMEOUT && bExecCommand){
             if(m_nPlayerType == PLAYER_LILITH ||
                m_nPlayerType == PLAYER_ULILITH){
-            //DDE §Œä‚ª‰Â”\‚É‚È‚é‚Ü‚Å‘Ò‚Â
+            //DDE åˆ¶å¾¡ãŒå¯èƒ½ã«ãªã‚‹ã¾ã§å¾…ã¤
                 DWORD dwStartTime = GetTickCount();
                 do{
                     TCHAR *pszReturn;
@@ -111,15 +111,15 @@ BOOL __fastcall CPlayerControl::ExecPlayer(const TCHAR *cszFileName, BOOL bClear
                         free(pszReturn);
                     }
                     Sleep(500);
-                }while(GetTickCount() - dwStartTime < 10000);//Å‘å‚Å10•bŠÔ‘Ò‚Â
+                }while(GetTickCount() - dwStartTime < 10000);//æœ€å¤§ã§10ç§’é–“å¾…ã¤
             }
             else{
-                Sleep(2000);//­‚µ‘Ò‚Á‚Ä‚©‚ç‚É‚·‚é
+                Sleep(2000);//å°‘ã—å¾…ã£ã¦ã‹ã‚‰ã«ã™ã‚‹
             }
-            if(bClear){//ƒŠƒXƒg‚ğ”jŠü+’Ç‰Á+‰‰‘t
+            if(bClear){//ãƒªã‚¹ãƒˆã‚’ç ´æ£„+è¿½åŠ +æ¼”å¥
                 ExecCommand(COMMAND_PLAY, cszFileName);
             }
-            else{//’Ç‰Á‚µ‚È‚¢‚ÅÄ¶
+            else{//è¿½åŠ ã—ãªã„ã§å†ç”Ÿ
                 ExecCommand(COMMAND_NOADDPLAY, cszFileName);
             }
         }
@@ -163,94 +163,94 @@ void __fastcall CPlayerControl::ExecCommand(int nCommand, const TCHAR *cszFileNa
 }
 ///////////////////////////////////////////////////////////////////////////////
 BOOL __fastcall CPlayerControl::SupportCommand(int nCommand)
-{//§Œä‘ÎÛ‚ÌƒvƒŒƒCƒ„[‚ª nCommand ‚É‘Î‰‚µ‚Ä‚¢‚ê‚Î TRUE ‚ğ•Ô‚·
+{//åˆ¶å¾¡å¯¾è±¡ã®ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒ nCommand ã«å¯¾å¿œã—ã¦ã„ã‚Œã° TRUE ã‚’è¿”ã™
 /*
     enum{
-        COMMAND_NOADDPLAY,//’Ç‰Á‚µ‚È‚¢‚ÅÄ¶(–¢‘Î‰‚Ìê‡‚Í COMMAND_PLAY ‚ğŒÄ‚Ô)
-        COMMAND_PLAY,  //Ä¶
-        COMMAND_STOP,  //’â~
-        COMMAND_NEXT,  //Ÿ‚Ì‹È
-        COMMAND_PREV,  //‘O‚Ì‹È
-        COMMAND_CLOSE, //’â~&ƒtƒ@ƒCƒ‹ƒNƒ[ƒY(Ä¶’†‚Ì‹È‚Ìƒ^ƒOXV‚ªo—ˆ‚é‚æ‚¤‚É)
-        COMMAND_CLEAR, //ƒŠƒXƒg‚ğ”jŠü
-        COMMAND_ADD,   //ƒŠƒXƒg‚É’Ç‰Á
-        COMMAND_QUIT   //ƒvƒŒƒCƒ„[I—¹
+        COMMAND_NOADDPLAY,//è¿½åŠ ã—ãªã„ã§å†ç”Ÿ(æœªå¯¾å¿œã®å ´åˆã¯ COMMAND_PLAY ã‚’å‘¼ã¶)
+        COMMAND_PLAY,  //å†ç”Ÿ
+        COMMAND_STOP,  //åœæ­¢
+        COMMAND_NEXT,  //æ¬¡ã®æ›²
+        COMMAND_PREV,  //å‰ã®æ›²
+        COMMAND_CLOSE, //åœæ­¢&ãƒ•ã‚¡ã‚¤ãƒ«ã‚¯ãƒ­ãƒ¼ã‚º(å†ç”Ÿä¸­ã®æ›²ã®ã‚¿ã‚°æ›´æ–°ãŒå‡ºæ¥ã‚‹ã‚ˆã†ã«)
+        COMMAND_CLEAR, //ãƒªã‚¹ãƒˆã‚’ç ´æ£„
+        COMMAND_ADD,   //ãƒªã‚¹ãƒˆã«è¿½åŠ 
+        COMMAND_QUIT   //ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼çµ‚äº†
     };
 */
     if(!m_szPlayerPath[0]){
         return FALSE;
     }
-    if(nCommand == COMMAND_PLAY){//‘S‚Ä‚ÌƒvƒŒƒCƒ„[‚ª•K‚¸‘Î‰
+    if(nCommand == COMMAND_PLAY){//å…¨ã¦ã®ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒå¿…ãšå¯¾å¿œ
         return TRUE;
     }
     BOOL bRet = FALSE;
     if(m_nPlayerType == PLAYER_WINAMP){
         switch(nCommand){
-            //case COMMAND_NOADDPLAY://’Ç‰Á‚µ‚È‚¢‚ÅÄ¶(–¢‘Î‰‚Ìê‡‚Í COMMAND_PLAY ‚ğŒÄ‚Ô)
-            case COMMAND_STOP:  //’â~
-            case COMMAND_NEXT:  //Ÿ‚Ì‹È
-            case COMMAND_PREV:  //‘O‚Ì‹È
-            //case COMMAND_CLOSE: //’â~&ƒtƒ@ƒCƒ‹ƒNƒ[ƒY(Ä¶’†‚Ì‹È‚Ìƒ^ƒOXV‚ªo—ˆ‚é‚æ‚¤‚É)
-            case COMMAND_CLEAR: //ƒŠƒXƒg‚ğ”jŠü
-            case COMMAND_ADD:   //ƒŠƒXƒg‚É’Ç‰Á
-            case COMMAND_QUIT:  //ƒvƒŒƒCƒ„[I—¹
+            //case COMMAND_NOADDPLAY://è¿½åŠ ã—ãªã„ã§å†ç”Ÿ(æœªå¯¾å¿œã®å ´åˆã¯ COMMAND_PLAY ã‚’å‘¼ã¶)
+            case COMMAND_STOP:  //åœæ­¢
+            case COMMAND_NEXT:  //æ¬¡ã®æ›²
+            case COMMAND_PREV:  //å‰ã®æ›²
+            //case COMMAND_CLOSE: //åœæ­¢&ãƒ•ã‚¡ã‚¤ãƒ«ã‚¯ãƒ­ãƒ¼ã‚º(å†ç”Ÿä¸­ã®æ›²ã®ã‚¿ã‚°æ›´æ–°ãŒå‡ºæ¥ã‚‹ã‚ˆã†ã«)
+            case COMMAND_CLEAR: //ãƒªã‚¹ãƒˆã‚’ç ´æ£„
+            case COMMAND_ADD:   //ãƒªã‚¹ãƒˆã«è¿½åŠ 
+            case COMMAND_QUIT:  //ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼çµ‚äº†
                 bRet = TRUE;
                 break;
         }
     }
     else if(m_nPlayerType == PLAYER_SCMPX){
         switch(nCommand){
-            //case COMMAND_NOADDPLAY://’Ç‰Á‚µ‚È‚¢‚ÅÄ¶(–¢‘Î‰‚Ìê‡‚Í COMMAND_PLAY ‚ğŒÄ‚Ô)
-            //case COMMAND_STOP:  //’â~
-            //case COMMAND_NEXT:  //Ÿ‚Ì‹È
-            //case COMMAND_PREV:  //‘O‚Ì‹È
-            //case COMMAND_CLOSE: //’â~&ƒtƒ@ƒCƒ‹ƒNƒ[ƒY(Ä¶’†‚Ì‹È‚Ìƒ^ƒOXV‚ªo—ˆ‚é‚æ‚¤‚É)
-            case COMMAND_CLEAR: //ƒŠƒXƒg‚ğ”jŠü
-            case COMMAND_ADD:   //ƒŠƒXƒg‚É’Ç‰Á
-            case COMMAND_QUIT:  //ƒvƒŒƒCƒ„[I—¹
+            //case COMMAND_NOADDPLAY://è¿½åŠ ã—ãªã„ã§å†ç”Ÿ(æœªå¯¾å¿œã®å ´åˆã¯ COMMAND_PLAY ã‚’å‘¼ã¶)
+            //case COMMAND_STOP:  //åœæ­¢
+            //case COMMAND_NEXT:  //æ¬¡ã®æ›²
+            //case COMMAND_PREV:  //å‰ã®æ›²
+            //case COMMAND_CLOSE: //åœæ­¢&ãƒ•ã‚¡ã‚¤ãƒ«ã‚¯ãƒ­ãƒ¼ã‚º(å†ç”Ÿä¸­ã®æ›²ã®ã‚¿ã‚°æ›´æ–°ãŒå‡ºæ¥ã‚‹ã‚ˆã†ã«)
+            case COMMAND_CLEAR: //ãƒªã‚¹ãƒˆã‚’ç ´æ£„
+            case COMMAND_ADD:   //ãƒªã‚¹ãƒˆã«è¿½åŠ 
+            case COMMAND_QUIT:  //ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼çµ‚äº†
                 bRet = TRUE;
                 break;
         }
     }
     else if(m_nPlayerType == PLAYER_KBMPLAY){
         switch(nCommand){
-            case COMMAND_NOADDPLAY://’Ç‰Á‚µ‚È‚¢‚ÅÄ¶(–¢‘Î‰‚Ìê‡‚Í COMMAND_PLAY ‚ğŒÄ‚Ô)
-            case COMMAND_STOP:  //’â~
-            case COMMAND_NEXT:  //Ÿ‚Ì‹È
-            case COMMAND_PREV:  //‘O‚Ì‹È
-            case COMMAND_CLOSE: //’â~&ƒtƒ@ƒCƒ‹ƒNƒ[ƒY(Ä¶’†‚Ì‹È‚Ìƒ^ƒOXV‚ªo—ˆ‚é‚æ‚¤‚É)
-            case COMMAND_CLEAR: //ƒŠƒXƒg‚ğ”jŠü
-            case COMMAND_ADD:   //ƒŠƒXƒg‚É’Ç‰Á
-            case COMMAND_QUIT:  //ƒvƒŒƒCƒ„[I—¹
-                bRet = TRUE;//‘S•”‘Î‰
+            case COMMAND_NOADDPLAY://è¿½åŠ ã—ãªã„ã§å†ç”Ÿ(æœªå¯¾å¿œã®å ´åˆã¯ COMMAND_PLAY ã‚’å‘¼ã¶)
+            case COMMAND_STOP:  //åœæ­¢
+            case COMMAND_NEXT:  //æ¬¡ã®æ›²
+            case COMMAND_PREV:  //å‰ã®æ›²
+            case COMMAND_CLOSE: //åœæ­¢&ãƒ•ã‚¡ã‚¤ãƒ«ã‚¯ãƒ­ãƒ¼ã‚º(å†ç”Ÿä¸­ã®æ›²ã®ã‚¿ã‚°æ›´æ–°ãŒå‡ºæ¥ã‚‹ã‚ˆã†ã«)
+            case COMMAND_CLEAR: //ãƒªã‚¹ãƒˆã‚’ç ´æ£„
+            case COMMAND_ADD:   //ãƒªã‚¹ãƒˆã«è¿½åŠ 
+            case COMMAND_QUIT:  //ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼çµ‚äº†
+                bRet = TRUE;//å…¨éƒ¨å¯¾å¿œ
                 break;
         }
     }
     else if(m_nPlayerType == PLAYER_LILITH ||
             m_nPlayerType == PLAYER_ULILITH){
         switch(nCommand){
-            case COMMAND_NOADDPLAY://’Ç‰Á‚µ‚È‚¢‚ÅÄ¶(–¢‘Î‰‚Ìê‡‚Í COMMAND_PLAY ‚ğŒÄ‚Ô)
-            case COMMAND_STOP:  //’â~
-            case COMMAND_NEXT:  //Ÿ‚Ì‹È
-            case COMMAND_PREV:  //‘O‚Ì‹È
-            case COMMAND_CLOSE: //’â~&ƒtƒ@ƒCƒ‹ƒNƒ[ƒY(Ä¶’†‚Ì‹È‚Ìƒ^ƒOXV‚ªo—ˆ‚é‚æ‚¤‚É)
-            case COMMAND_CLEAR: //ƒŠƒXƒg‚ğ”jŠü
-            case COMMAND_ADD:   //ƒŠƒXƒg‚É’Ç‰Á
-            case COMMAND_QUIT:  //ƒvƒŒƒCƒ„[I—¹
-                bRet = TRUE;//‘S•”‘Î‰
+            case COMMAND_NOADDPLAY://è¿½åŠ ã—ãªã„ã§å†ç”Ÿ(æœªå¯¾å¿œã®å ´åˆã¯ COMMAND_PLAY ã‚’å‘¼ã¶)
+            case COMMAND_STOP:  //åœæ­¢
+            case COMMAND_NEXT:  //æ¬¡ã®æ›²
+            case COMMAND_PREV:  //å‰ã®æ›²
+            case COMMAND_CLOSE: //åœæ­¢&ãƒ•ã‚¡ã‚¤ãƒ«ã‚¯ãƒ­ãƒ¼ã‚º(å†ç”Ÿä¸­ã®æ›²ã®ã‚¿ã‚°æ›´æ–°ãŒå‡ºæ¥ã‚‹ã‚ˆã†ã«)
+            case COMMAND_CLEAR: //ãƒªã‚¹ãƒˆã‚’ç ´æ£„
+            case COMMAND_ADD:   //ãƒªã‚¹ãƒˆã«è¿½åŠ 
+            case COMMAND_QUIT:  //ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼çµ‚äº†
+                bRet = TRUE;//å…¨éƒ¨å¯¾å¿œ
                 break;
         }
     }
     else if(m_nPlayerType == PLAYER_FOOBAR){
         switch(nCommand){
-            //case COMMAND_NOADDPLAY://’Ç‰Á‚µ‚È‚¢‚ÅÄ¶(–¢‘Î‰‚Ìê‡‚Í COMMAND_PLAY ‚ğŒÄ‚Ô)
-            case COMMAND_STOP:  //’â~
-            case COMMAND_NEXT:  //Ÿ‚Ì‹È
-            case COMMAND_PREV:  //‘O‚Ì‹È
-            //case COMMAND_CLOSE: //’â~&ƒtƒ@ƒCƒ‹ƒNƒ[ƒY(Ä¶’†‚Ì‹È‚Ìƒ^ƒOXV‚ªo—ˆ‚é‚æ‚¤‚É)
-            //case COMMAND_CLEAR: //ƒŠƒXƒg‚ğ”jŠü
-            case COMMAND_ADD:   //ƒŠƒXƒg‚É’Ç‰Á
-            case COMMAND_QUIT:  //ƒvƒŒƒCƒ„[I—¹
+            //case COMMAND_NOADDPLAY://è¿½åŠ ã—ãªã„ã§å†ç”Ÿ(æœªå¯¾å¿œã®å ´åˆã¯ COMMAND_PLAY ã‚’å‘¼ã¶)
+            case COMMAND_STOP:  //åœæ­¢
+            case COMMAND_NEXT:  //æ¬¡ã®æ›²
+            case COMMAND_PREV:  //å‰ã®æ›²
+            //case COMMAND_CLOSE: //åœæ­¢&ãƒ•ã‚¡ã‚¤ãƒ«ã‚¯ãƒ­ãƒ¼ã‚º(å†ç”Ÿä¸­ã®æ›²ã®ã‚¿ã‚°æ›´æ–°ãŒå‡ºæ¥ã‚‹ã‚ˆã†ã«)
+            //case COMMAND_CLEAR: //ãƒªã‚¹ãƒˆã‚’ç ´æ£„
+            case COMMAND_ADD:   //ãƒªã‚¹ãƒˆã«è¿½åŠ 
+            case COMMAND_QUIT:  //ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼çµ‚äº†
                 bRet = TRUE;
                 break;
         }
@@ -260,9 +260,9 @@ BOOL __fastcall CPlayerControl::SupportCommand(int nCommand)
 ///////////////////////////////////////////////////////////////////////////////
 BOOL __fastcall CPlayerControl::RequestCommand(const TCHAR *cszCommand, 
                                                TCHAR **ppszReturn)
-{//*ppszReturn ‚ÍŒÄ‚Ño‚µ‘¤‚Å free() ‚·‚é‚±‚Æ
+{//*ppszReturn ã¯å‘¼ã³å‡ºã—å´ã§ free() ã™ã‚‹ã“ã¨
     *ppszReturn = NULL;
-    if(!PlayerIsActive()){//§Œä‘ÎÛƒvƒŒƒCƒ„[‚ª–¢‹N“®
+    if(!PlayerIsActive()){//åˆ¶å¾¡å¯¾è±¡ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒæœªèµ·å‹•
         return FALSE;
     }
     if(m_nPlayerType == PLAYER_KBMPLAY){
@@ -277,14 +277,14 @@ BOOL __fastcall CPlayerControl::RequestCommand(const TCHAR *cszCommand,
 ///////////////////////////////////////////////////////////////////////////////
 BOOL __fastcall CPlayerControl::RequestCommandKbmplay(const TCHAR *cszCommand, 
                                                       TCHAR **ppszReturn)
-{//*ppszReturn ‚ÍŒÄ‚Ño‚µ‘¤‚Å free() ‚·‚é‚±‚Æ
+{//*ppszReturn ã¯å‘¼ã³å‡ºã—å´ã§ free() ã™ã‚‹ã“ã¨
     KbDDEClient client(NULL, g_cszServiceNameKbmplay, g_cszTopicNameKbmplay);
     return client.Request(ppszReturn, cszCommand, DDE_TIMEOUT, FALSE); 
 }
 ///////////////////////////////////////////////////////////////////////////////
 BOOL __fastcall CPlayerControl::RequestCommandLilith(const TCHAR *cszCommand, 
                                                TCHAR **ppszReturn)
-{//*ppszReturn ‚ÍŒÄ‚Ño‚µ‘¤‚Å free() ‚·‚é‚±‚Æ
+{//*ppszReturn ã¯å‘¼ã³å‡ºã—å´ã§ free() ã™ã‚‹ã“ã¨
     BOOL bIsNewLilith = (m_nPlayerType == PLAYER_ULILITH);
     const TCHAR *cszServiceName;
     const TCHAR *cszTopicName;
@@ -313,27 +313,27 @@ void __fastcall CPlayerControl::ExecCommandWinamp(int nCommand, const TCHAR *csz
         return;
     }
     switch(nCommand){
-    case COMMAND_NOADDPLAY://–¢‘Î‰‚È‚Ì‚Å’Ç‰Á‚µ‚ÄÄ¶‚Æ“¯“™‚Éˆµ‚¤
+    case COMMAND_NOADDPLAY://æœªå¯¾å¿œãªã®ã§è¿½åŠ ã—ã¦å†ç”Ÿã¨åŒç­‰ã«æ‰±ã†
     case COMMAND_PLAY:{
-        //ƒŠƒXƒg‚ğ”jŠü => ’Ç‰Á => Ä¶
-        SendMessage(hWndPlayer, WM_WA_IPC, 0, IPC_DELETE);//ƒŠƒXƒg‚ğ”jŠü
-        ExecCommandWinamp(COMMAND_ADD, cszFileName);      //’Ç‰Á
-        SendMessage(hWndPlayer, WM_WA_IPC, 0, IPC_STARTPLAY);//Ä¶
+        //ãƒªã‚¹ãƒˆã‚’ç ´æ£„ => è¿½åŠ  => å†ç”Ÿ
+        SendMessage(hWndPlayer, WM_WA_IPC, 0, IPC_DELETE);//ãƒªã‚¹ãƒˆã‚’ç ´æ£„
+        ExecCommandWinamp(COMMAND_ADD, cszFileName);      //è¿½åŠ 
+        SendMessage(hWndPlayer, WM_WA_IPC, 0, IPC_STARTPLAY);//å†ç”Ÿ
 		break;
     }
-    case COMMAND_STOP://’â~
+    case COMMAND_STOP://åœæ­¢
 		SendMessage(hWndPlayer, WM_COMMAND, WINAMP_BUTTON4, 0);
 		break;
-	case COMMAND_PREV://‘O‚Ì‹È
+	case COMMAND_PREV://å‰ã®æ›²
 		SendMessage(hWndPlayer, WM_COMMAND, WINAMP_BUTTON1, 0);
 		break;
-	case COMMAND_NEXT://Ÿ‚Ì‹È
+	case COMMAND_NEXT://æ¬¡ã®æ›²
 		SendMessage(hWndPlayer, WM_COMMAND, WINAMP_BUTTON5, 0);
 		break;
-    case COMMAND_CLEAR://ƒŠƒXƒg‚ğ”jŠü
+    case COMMAND_CLEAR://ãƒªã‚¹ãƒˆã‚’ç ´æ£„
         ::SendMessage(hWndPlayer, WM_WA_IPC, 0, IPC_DELETE);
         break;
-    case COMMAND_ADD://ƒŠƒXƒg‚É’Ç‰Á
+    case COMMAND_ADD://ãƒªã‚¹ãƒˆã«è¿½åŠ 
 		if (m_nPlayerType == PLAYER_WINAMP) {
 			// Winamp
             COPYDATASTRUCT cds = {0};
@@ -363,42 +363,42 @@ void __fastcall CPlayerControl::ExecCommandWinamp(int nCommand, const TCHAR *csz
 #endif
 		} 
         break;
-    case COMMAND_QUIT://I—¹
+    case COMMAND_QUIT://çµ‚äº†
         SendMessage(hWndPlayer, WM_CLOSE, NULL, NULL);
         break;
     }
 }
 ///////////////////////////////////////////////////////////////////////////////
 void __fastcall CPlayerControl::ExecCommandKbmplay(int nCommand, const TCHAR *cszFileName)
-{//KbMedia Player ‚Í‹N“®Ï‚İ‚Å‚ ‚é‚±‚Æ‚ª‘O’ñ
+{//KbMedia Player ã¯èµ·å‹•æ¸ˆã¿ã§ã‚ã‚‹ã“ã¨ãŒå‰æ
     TCHAR szCommand[2048];
     szCommand[0] = 0;
     switch (nCommand){
-    case COMMAND_NOADDPLAY://’Ç‰Á‚µ‚È‚¢‚ÅÄ¶
+    case COMMAND_NOADDPLAY://è¿½åŠ ã—ãªã„ã§å†ç”Ÿ
         _sntprintf_s(szCommand, _TRUNCATE, _T("\"%s\" /na /play"), cszFileName);
         break;       
-    case COMMAND_PLAY://ƒŠƒXƒg‚ğ”jŠü => ’Ç‰Á => Ä¶
-        _sntprintf_s(szCommand, _TRUNCATE, _T("\"%s\" /clear /a /play"), cszFileName);//ƒŠƒXƒg‚ğ”jŠü‚µ‚Ä‚©‚ç’Ç‰Á
+    case COMMAND_PLAY://ãƒªã‚¹ãƒˆã‚’ç ´æ£„ => è¿½åŠ  => å†ç”Ÿ
+        _sntprintf_s(szCommand, _TRUNCATE, _T("\"%s\" /clear /a /play"), cszFileName);//ãƒªã‚¹ãƒˆã‚’ç ´æ£„ã—ã¦ã‹ã‚‰è¿½åŠ 
         break;
-    case COMMAND_STOP:// ’â~ 
+    case COMMAND_STOP:// åœæ­¢ 
 		_tcsncpy_s(szCommand, _T("/stop"), _TRUNCATE);
 		break;
-	case COMMAND_PREV:// ‘O‚Ì‹È
+	case COMMAND_PREV:// å‰ã®æ›²
 		_tcsncpy_s(szCommand, _T("/prev"), _TRUNCATE);
 		break;
-	case COMMAND_NEXT:// Ÿ‚Ì‹È
+	case COMMAND_NEXT:// æ¬¡ã®æ›²
 		_tcsncpy_s(szCommand, _T("/next"), _TRUNCATE);
 		break;
-    case COMMAND_CLOSE://‰‰‘t’â~•ƒtƒ@ƒCƒ‹ƒNƒ[ƒY
+    case COMMAND_CLOSE://æ¼”å¥åœæ­¢ï¼†ãƒ•ã‚¡ã‚¤ãƒ«ã‚¯ãƒ­ãƒ¼ã‚º
 		_tcsncpy_s(szCommand, _T("/fileclose"), _TRUNCATE);
         break;
-    case COMMAND_CLEAR://ƒŠƒXƒg‚ğ”jŠü
+    case COMMAND_CLEAR://ãƒªã‚¹ãƒˆã‚’ç ´æ£„
 		_tcsncpy_s(szCommand, _T("/clear"), _TRUNCATE);
         break;
-    case COMMAND_ADD://’Ç‰Á(Ä¶‚Í‚µ‚È‚¢)
+    case COMMAND_ADD://è¿½åŠ (å†ç”Ÿã¯ã—ãªã„)
         _sntprintf_s(szCommand, _TRUNCATE, _T("\"%s\" /a /np"), cszFileName);
         break;
-    case COMMAND_QUIT://I—¹
+    case COMMAND_QUIT://çµ‚äº†
 		_tcsncpy_s(szCommand, _T("/quit"), _TRUNCATE);
 		break;
     }//switch(nCommand)
@@ -409,7 +409,7 @@ void __fastcall CPlayerControl::ExecCommandKbmplay(int nCommand, const TCHAR *cs
 }
 ///////////////////////////////////////////////////////////////////////////////
 void __fastcall CPlayerControl::ExecCommandLilith(int nCommand, const TCHAR *cszFileName)
-{//Lilith ‚Í‹N“®Ï‚İ‚Å‚ ‚é‚±‚Æ‚ª‘O’ñ
+{//Lilith ã¯èµ·å‹•æ¸ˆã¿ã§ã‚ã‚‹ã“ã¨ãŒå‰æ
     const TCHAR *cszTopicName;
     const TCHAR *cszServiceName;
     if(m_nPlayerType == PLAYER_ULILITH){
@@ -424,32 +424,32 @@ void __fastcall CPlayerControl::ExecCommandLilith(int nCommand, const TCHAR *csz
     TCHAR szCommand[2048];
     szCommand[0] = 0;
     switch (nCommand){
-    case COMMAND_NOADDPLAY://’Ç‰Á‚µ‚È‚¢‚ÅÄ¶
+    case COMMAND_NOADDPLAY://è¿½åŠ ã—ãªã„ã§å†ç”Ÿ
         _sntprintf_s(szCommand, _TRUNCATE, _T("/dopen \"%s\" /play"), cszFileName);
         break;
-    case COMMAND_PLAY://ƒŠƒXƒg‚ğ”jŠü => ’Ç‰Á => Ä¶
+    case COMMAND_PLAY://ãƒªã‚¹ãƒˆã‚’ç ´æ£„ => è¿½åŠ  => å†ç”Ÿ
         _sntprintf_s(szCommand, _TRUNCATE, _T("/clear /open \"%s\" /play"), cszFileName);
         break;
-    case COMMAND_STOP:// ’â~ 
+    case COMMAND_STOP:// åœæ­¢ 
         _tcsncpy_s(szCommand, _T("/stop"), _TRUNCATE);
 		break;
-	case COMMAND_PREV:// ‘O‚Ì‹È
+	case COMMAND_PREV:// å‰ã®æ›²
         _tcsncpy_s(szCommand, _T("/back"), _TRUNCATE);
 		break;
-	case COMMAND_NEXT:// Ÿ‚Ì‹È
+	case COMMAND_NEXT:// æ¬¡ã®æ›²
         _tcsncpy_s(szCommand, _T("/next"), _TRUNCATE);
 		break;
-    case COMMAND_CLOSE://‰‰‘t’â~•ƒtƒ@ƒCƒ‹ƒNƒ[ƒY
+    case COMMAND_CLOSE://æ¼”å¥åœæ­¢ï¼†ãƒ•ã‚¡ã‚¤ãƒ«ã‚¯ãƒ­ãƒ¼ã‚º
         _tcsncpy_s(szCommand, _T("/stop"), _TRUNCATE);
         break;
-    case COMMAND_CLEAR://ƒŠƒXƒg‚ğ”jŠü
+    case COMMAND_CLEAR://ãƒªã‚¹ãƒˆã‚’ç ´æ£„
         _tcsncpy_s(szCommand, _T("/clear"), _TRUNCATE);
         break;
-    case COMMAND_ADD:{//’Ç‰Á
+    case COMMAND_ADD:{//è¿½åŠ 
         _sntprintf_s(szCommand, _TRUNCATE, _T("/add \"%s\""), cszFileName);
         break;
     }
-    case COMMAND_QUIT://I—¹
+    case COMMAND_QUIT://çµ‚äº†
         _tcsncpy_s(szCommand, _T("/exit"), _TRUNCATE);
 		break;
     }//switch(nCommand)
@@ -460,35 +460,35 @@ void __fastcall CPlayerControl::ExecCommandLilith(int nCommand, const TCHAR *csz
 }
 ///////////////////////////////////////////////////////////////////////////////
 void __fastcall CPlayerControl::ExecCommandFoobar(int nCommand, const TCHAR *cszFileName)
-{//Foobar ‚Í‹N“®Ï‚İ‚Å‚ ‚é‚±‚Æ‚ª‘O’ñ
+{//Foobar ã¯èµ·å‹•æ¸ˆã¿ã§ã‚ã‚‹ã“ã¨ãŒå‰æ
     TCHAR szCommandLine[2048];
     TCHAR szCommand[2048];
     szCommand[0] = 0;
     switch (nCommand){
-    case COMMAND_NOADDPLAY://’Ç‰Á‚µ‚È‚¢‚ÅÄ¶(–¢‘Î‰‚È‚Ì‚Å COMMAND_PLAY ‚Æ“¯“™‚Éˆ—)
-    case COMMAND_PLAY://ƒŠƒXƒg‚ğ”jŠü =>’Ç‰Á=>Ä¶
-        //ƒtƒ@ƒCƒ‹–¼‚ğ“n‚µ‚Ä‹N“®‚·‚é‚¾‚¯‚Åª‚Ì‚æ‚¤‚É‚È‚é
+    case COMMAND_NOADDPLAY://è¿½åŠ ã—ãªã„ã§å†ç”Ÿ(æœªå¯¾å¿œãªã®ã§ COMMAND_PLAY ã¨åŒç­‰ã«å‡¦ç†)
+    case COMMAND_PLAY://ãƒªã‚¹ãƒˆã‚’ç ´æ£„ =>è¿½åŠ =>å†ç”Ÿ
+        //ãƒ•ã‚¡ã‚¤ãƒ«åã‚’æ¸¡ã—ã¦èµ·å‹•ã™ã‚‹ã ã‘ã§â†‘ã®ã‚ˆã†ã«ãªã‚‹
         _sntprintf_s(szCommand, _TRUNCATE, _T("\"%s\""), cszFileName);
         break;
-    case COMMAND_ADD://’Ç‰Á
+    case COMMAND_ADD://è¿½åŠ 
         _sntprintf_s(szCommand, _TRUNCATE, _T("\"%s\" /add"), cszFileName);
         break;
-    case COMMAND_STOP://’â~ 
+    case COMMAND_STOP://åœæ­¢ 
         _tcsncpy_s(szCommand, _T("/stop"), _TRUNCATE);
 		break;
-	case COMMAND_PREV://‘O‚Ì‹È
+	case COMMAND_PREV://å‰ã®æ›²
         _tcsncpy_s(szCommand, _T("/prev"), _TRUNCATE);
 		break;
-	case COMMAND_NEXT://Ÿ‚Ì‹È
+	case COMMAND_NEXT://æ¬¡ã®æ›²
         _tcsncpy_s(szCommand, _T("/next"), _TRUNCATE);
 		break;
-    case COMMAND_CLOSE://‰‰‘t’â~•ƒtƒ@ƒCƒ‹ƒNƒ[ƒY
+    case COMMAND_CLOSE://æ¼”å¥åœæ­¢ï¼†ãƒ•ã‚¡ã‚¤ãƒ«ã‚¯ãƒ­ãƒ¼ã‚º
         _tcsncpy_s(szCommand, _T("/stop"), _TRUNCATE);
         break;
-    case COMMAND_QUIT://I—¹
+    case COMMAND_QUIT://çµ‚äº†
         _tcsncpy_s(szCommand, _T("/exit"), _TRUNCATE);
 		break;
-    //case COMMAND_CLEAR://ƒŠƒXƒg‚ğ”jŠü
+    //case COMMAND_CLEAR://ãƒªã‚¹ãƒˆã‚’ç ´æ£„
     //    break;
     }//switch(nCommand)
     _sntprintf_s(szCommandLine, _TRUNCATE, 
@@ -508,19 +508,19 @@ void __fastcall CPlayerControl::ExecCommandFoobar(int nCommand, const TCHAR *csz
                      NULL,  //lpCurrentDirectory,
                      &si,
                      &pi)){
-        WaitForSingleObject(pi.hProcess, 2000);//ƒvƒƒZƒX‚ªI—¹‚·‚é‚Ü‚ÅÅ‘å2•b‘Ò‚Â
+        WaitForSingleObject(pi.hProcess, 2000);//ãƒ—ãƒ­ã‚»ã‚¹ãŒçµ‚äº†ã™ã‚‹ã¾ã§æœ€å¤§2ç§’å¾…ã¤
         CloseHandle(pi.hProcess);
         CloseHandle(pi.hThread);
         if(nCommand == COMMAND_PLAY){
-        //‘½d‹N“®‚Íƒtƒ@ƒCƒ‹–¼‚ğ“n‚µ‚Ä‚©‚çˆê’èŠÔ‚ªŒo‰ß‚µ‚È‚¢‚ÆƒŠƒXƒg‚ª
-        //”jŠü‚³‚ê‚È‚¢‚æ‚¤‚È‚Ì‚Å­‚µ‘Ò‚Âi‚Ç‚Ì’ö“x‘Ò‚Ä‚Î—Ç‚¢‚©‚Í•s–¾)
+        //å¤šé‡èµ·å‹•æ™‚ã¯ãƒ•ã‚¡ã‚¤ãƒ«åã‚’æ¸¡ã—ã¦ã‹ã‚‰ä¸€å®šæ™‚é–“ãŒçµŒéã—ãªã„ã¨ãƒªã‚¹ãƒˆãŒ
+        //ç ´æ£„ã•ã‚Œãªã„ã‚ˆã†ãªã®ã§å°‘ã—å¾…ã¤ï¼ˆã©ã®ç¨‹åº¦å¾…ã¦ã°è‰¯ã„ã‹ã¯ä¸æ˜)
             Sleep(2000);
         }
     }
 }
 ///////////////////////////////////////////////////////////////////////////////
 void __fastcall CPlayerControl::SetPlayer(const TCHAR *cszPlayerPath, int nPlayerType)
-{//§Œä‘ÎÛ‚ÌƒvƒŒƒCƒ„[‚ğİ’è
+{//åˆ¶å¾¡å¯¾è±¡ã®ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’è¨­å®š
     _tcsncpy_s(m_szPlayerPath, cszPlayerPath, _TRUNCATE);
     m_nPlayerType = nPlayerType;
     switch(m_nPlayerType){
@@ -538,7 +538,7 @@ void __fastcall CPlayerControl::SetPlayer(const TCHAR *cszPlayerPath, int nPlaye
 }
 ///////////////////////////////////////////////////////////////////////////////
 BOOL __fastcall CPlayerControl::PlayerIsActive(void)
-{//§Œä‘ÎÛ‚ÌƒvƒŒƒCƒ„[‚ª‹N“®Ï‚İ‚È‚ç TRUE ‚ğ•Ô‚·
+{//åˆ¶å¾¡å¯¾è±¡ã®ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒèµ·å‹•æ¸ˆã¿ãªã‚‰ TRUE ã‚’è¿”ã™
     BOOL bRet = FALSE;
     switch(m_nPlayerType){
         case PLAYER_WINAMP:{
@@ -568,7 +568,7 @@ BOOL __fastcall CPlayerControl::PlayerIsActive(void)
             }
             break;
         }
-        case PLAYER_FOOBAR:{//ƒo[ƒWƒ‡ƒ“‚É‚æ‚Á‚ÄƒNƒ‰ƒX–¼‚ªˆÙ‚È‚é‚©‚àH
+        case PLAYER_FOOBAR:{//ãƒãƒ¼ã‚¸ãƒ§ãƒ³ã«ã‚ˆã£ã¦ã‚¯ãƒ©ã‚¹åãŒç•°ãªã‚‹ã‹ã‚‚ï¼Ÿ
             bRet = FindWindow(g_cszClassNameFoobar, NULL) != NULL;
             break;
         }
@@ -577,9 +577,9 @@ BOOL __fastcall CPlayerControl::PlayerIsActive(void)
 }
 ///////////////////////////////////////////////////////////////////////////////
 void __fastcall CPlayerControl::Play(const TCHAR *cszFileName, BOOL bAdd)
-{//bAdd == TRUE ‚Ìê‡‚Í’Ç‰Á‚µ‚ÄÄ¶
-    if(!PlayerIsActive()){//ƒvƒŒƒCƒ„[‚ª–¢‹N“®‚È‚ç‹N“®
-        BOOL bClear = bAdd;//’Ç‰Á‚µ‚ÄÄ¶‚·‚éê‡‚ÍƒŠƒXƒg‚ğ”jŠü
+{//bAdd == TRUE ã®å ´åˆã¯è¿½åŠ ã—ã¦å†ç”Ÿ
+    if(!PlayerIsActive()){//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒæœªèµ·å‹•ãªã‚‰èµ·å‹•
+        BOOL bClear = bAdd;//è¿½åŠ ã—ã¦å†ç”Ÿã™ã‚‹å ´åˆã¯ãƒªã‚¹ãƒˆã‚’ç ´æ£„
         ExecPlayer(cszFileName, bClear);
         return;
     }
@@ -591,13 +591,13 @@ void __fastcall CPlayerControl::Play(const TCHAR *cszFileName, BOOL bAdd)
     }
 }
 ///////////////////////////////////////////////////////////////////////////////
-BOOL __fastcall CPlayerControl::GetPlayingFileName(TCHAR *pszFileName, int nSize)//nSize ‚Í•¶š”
-{//ƒvƒŒƒCƒ„[‚ªÄ¶’†‚Ìƒtƒ@ƒCƒ‹–¼‚ğ pszFileName ‚ÉŠi”[
+BOOL __fastcall CPlayerControl::GetPlayingFileName(TCHAR *pszFileName, int nSize)//nSize ã¯æ–‡å­—æ•°
+{//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒå†ç”Ÿä¸­ã®ãƒ•ã‚¡ã‚¤ãƒ«åã‚’ pszFileName ã«æ ¼ç´
     pszFileName[0] = 0;
     TCHAR *pszReturn = NULL;
-    //RequestCommandXXXX ‚ğ’¼ÚŒÄ‚Î‚È‚¢‚æ‚¤‚É‚·‚é
-    //m_szPlayerPath ‚Ì—LŒø«ƒ`ƒFƒbƒNAƒvƒŒƒCƒ„[‚Ì‹N“®Ï‚İƒ`ƒFƒbƒN“™‚ª RequestCommand “à
-    //‚Ås‚í‚ê‚é
+    //RequestCommandXXXX ã‚’ç›´æ¥å‘¼ã°ãªã„ã‚ˆã†ã«ã™ã‚‹
+    //m_szPlayerPath ã®æœ‰åŠ¹æ€§ãƒã‚§ãƒƒã‚¯ã€ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®èµ·å‹•æ¸ˆã¿ãƒã‚§ãƒƒã‚¯ç­‰ãŒ RequestCommand å†…
+    //ã§è¡Œã‚ã‚Œã‚‹
     if(m_nPlayerType == PLAYER_KBMPLAY){
         RequestCommand(_T("filename"), &pszReturn);
         if(pszReturn){
@@ -607,7 +607,7 @@ BOOL __fastcall CPlayerControl::GetPlayingFileName(TCHAR *pszFileName, int nSize
     }
     else if(m_nPlayerType == PLAYER_LILITH ||
             m_nPlayerType == PLAYER_ULILITH){
-        //filepath => filename ‚Ì‡‚Éæ“¾(ˆê”­‚Åæ“¾‚·‚é•û–@‚ª‚È‚¢)
+        //filepath => filename ã®é †ã«å–å¾—(ä¸€ç™ºã§å–å¾—ã™ã‚‹æ–¹æ³•ãŒãªã„)
         RequestCommand(_T("/fileinfo filepath"), &pszReturn);
         if(!pszReturn){
             return FALSE;

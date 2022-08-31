@@ -11,26 +11,26 @@ bool LoadAttributeFileVQF(FILE_INFO *pFileMP3)
     if(vqf.Load(GetFullPath(pFileMP3)) != ERROR_SUCCESS){
         return false;
     }
-	//ƒ^ƒCƒgƒ‹
+	//ã‚¿ã‚¤ãƒˆãƒ«
 	CString data = vqf.GetField('N','A','M','E');
 	if(data){
         SetTrackNameSI(pFileMP3, data);
     }
-	//ƒA[ƒeƒBƒXƒg
+	//ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆ
 	data = vqf.GetField('A','U','T','H');
 	if(data){
 		SetArtistNameSI(pFileMP3, data);
 	}
-	//•Û‘¶–¼
+	//ä¿å­˜å
 	//data = vqf.GetField('F','I','L','E');
 	//if(data){
 	//}
-	//’˜ìŒ 
+	//è‘—ä½œæ¨©
 	data = vqf.GetField('(','c',')',' ');
 	if(data){
 		SetCopyrightSI(pFileMP3, data);
 	}
-    //ƒRƒƒ“ƒg
+    //ã‚³ãƒ¡ãƒ³ãƒˆ
 	data = vqf.GetField('C','O','M','T');
 	if(data){
 		SetCommentSI(pFileMP3, data);
@@ -38,7 +38,7 @@ bool LoadAttributeFileVQF(FILE_INFO *pFileMP3)
     SetAudioFormat(pFileMP3, vqf.GetFormatString());
     CString strTimeString = vqf.GetTimeString();
     TCHAR *time = strTimeString.GetBuffer();
-    //szTime = "xx:xx (xxxsec) ‚Ì‚æ‚¤‚É‚È‚Á‚Ä‚¢‚é
+    //szTime = "xx:xx (xxxsec) ã®ã‚ˆã†ã«ãªã£ã¦ã„ã‚‹
     TCHAR *pszSec = _tcschr(time, _T('('));
     if(pszSec){
         pszSec++;
@@ -58,17 +58,17 @@ bool WriteAttributeFileVQF(FILE_INFO *pFileMP3)
         return false;
     }
     CString strTmp;
-    //ƒ^ƒCƒgƒ‹
+    //ã‚¿ã‚¤ãƒˆãƒ«
 	vqf.SetField('N','A','M','E', GetTrackNameSI(pFileMP3));
-    //ƒA[ƒeƒBƒXƒg
+    //ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆ
 	vqf.SetField('A','U','T','H', GetArtistNameSI(pFileMP3));
-    //•Û‘¶–¼
+    //ä¿å­˜å
 	//vqf.SetField('F','I','L','E',
     //              ???,
     //              ???);
-    //’˜ìŒ 
+    //è‘—ä½œæ¨©
 	vqf.SetField('(','c',')',' ', GetCopyrightSI(pFileMP3));
-    //ƒRƒƒ“ƒg
+    //ã‚³ãƒ¡ãƒ³ãƒˆ
 	vqf.SetField('C','O','M','T', GetCommentSI(pFileMP3));
 
     return vqf.Save(GetFullPath(pFileMP3)) == ERROR_SUCCESS;

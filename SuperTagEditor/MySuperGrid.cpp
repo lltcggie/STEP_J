@@ -1,4 +1,4 @@
-﻿// MySuperGrid.cpp : implementation file
+// MySuperGrid.cpp : implementation file
 //
 
 #include "stdafx.h"

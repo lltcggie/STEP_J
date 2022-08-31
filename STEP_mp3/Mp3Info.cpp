@@ -1,4 +1,4 @@
-// Mp3Info.cpp: CMp3Info ƒNƒ‰ƒX‚ÌƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“
+// Mp3Info.cpp: CMp3Info ã‚¯ãƒ©ã‚¹ã®ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³
 //
 //////////////////////////////////////////////////////////////////////
 
@@ -7,7 +7,7 @@
 
 #include "Mp3Info.h"
 
-// 2003-08-18 ƒtƒH[ƒ}ƒbƒg•¶š—ñ‚ª’·‚­‚È‚è‚·‚¬‚é‚½‚ßŠÈ—ª‰»
+// 2003-08-18 ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆæ–‡å­—åˆ—ãŒé•·ããªã‚Šã™ãã‚‹ãŸã‚ç°¡ç•¥åŒ–
 static const TCHAR *modes[4] = {_T("Stereo"),_T("J-Stereo"),_T("D-Channel"),_T("Mono")};
 static const int tabsel_123[][3][15] = {
 	   { {0,32,64,96,128,160,192,224,256,288,320,352,384,416,448},
@@ -24,7 +24,7 @@ static const long freqs[9] = {44100,48000,32000,22050,24000,16000,11025,12000,80
 #pragma comment(lib,"winmm.lib")
 
 //////////////////////////////////////////////////////////////////////
-// \’z/Á–Å
+// æ§‹ç¯‰/æ¶ˆæ»…
 //////////////////////////////////////////////////////////////////////
 
 CMp3Info::CMp3Info()
@@ -46,7 +46,7 @@ BOOL CMp3Info::Release()
 }
 
 //---------------------------------------------------------------------
-//šmp3ƒwƒbƒ_‚Ì‘Ã“–«‚ğŒŸ¸
+//â˜…mp3ãƒ˜ãƒƒãƒ€ã®å¦¥å½“æ€§ã‚’æ¤œæŸ»
 BOOL mp3head_check(unsigned long head)
 {
     if((head & 0xffe00000) != 0xffe00000)
@@ -67,7 +67,7 @@ BOOL CMp3Info::Load(LPCTSTR szFileName,BOOL bVbrScan)
 	static unsigned long	head;
 	unsigned char			xingTag[4+12];
 	unsigned char			id3tag[128];
-	//XING VBR ƒwƒbƒ_‚Åg—p
+	//XING VBR ãƒ˜ãƒƒãƒ€ã§ä½¿ç”¨
 	const unsigned long FRAMES_FLAG		= 0x0001;
 	const unsigned long BYTES_FLAG		= 0x0002;
 	const unsigned long TOC_FLAG		= 0x0004;
@@ -75,32 +75,32 @@ BOOL CMp3Info::Load(LPCTSTR szFileName,BOOL bVbrScan)
 
 	Release();
 
-	long lDataPtr = 0;	//mp3ƒXƒgƒŠ[ƒ€‚ÌŠJnˆÊ’u
+	long lDataPtr = 0;	//mp3ã‚¹ãƒˆãƒªãƒ¼ãƒ ã®é–‹å§‹ä½ç½®
 	ULONG dataSize = 0;
-	//RMPŒ`®‚ÌƒXƒgƒŠ[ƒ€ƒTƒCƒY‚ğæ“¾‚·‚é==========================
+	//RMPå½¢å¼ã®ã‚¹ãƒˆãƒªãƒ¼ãƒ ã‚µã‚¤ã‚ºã‚’å–å¾—ã™ã‚‹==========================
 	HMMIO hmmio = mmioOpen((LPTSTR)szFileName,NULL,MMIO_COMPAT);
 	if(hmmio)
 	{
-		//RMP3ƒtƒ@ƒCƒ‹‚ÌŠm”F
+		//RMP3ãƒ•ã‚¡ã‚¤ãƒ«ã®ç¢ºèª
 		char hdr[4];
 		LONG ret = mmioRead(hmmio,hdr,sizeof(hdr));
 		if((ret == 4) && (hdr[0] == 'R') && (hdr[1] == 'I') && (hdr[2] == 'F') && (hdr[3] == 'F'))
 		{
 			mmioSeek(hmmio,0,SEEK_SET);
-			//RMP3ƒ`ƒƒƒ“ƒN‚ÖˆÚ“®
+			//RMP3ãƒãƒ£ãƒ³ã‚¯ã¸ç§»å‹•
 			MMCKINFO	mmckOutinfoParent;
 			memset(&mmckOutinfoParent,0,sizeof(mmckOutinfoParent));
 			mmckOutinfoParent.fccType = mmioFOURCC('R','M','P','3');
 			if(mmioDescend(hmmio,&mmckOutinfoParent,NULL,MMIO_FINDRIFF) == MMSYSERR_NOERROR)
 			{
-				//dataƒ`ƒƒƒ“ƒN‚ÖˆÚ“®
+				//dataãƒãƒ£ãƒ³ã‚¯ã¸ç§»å‹•
 				MMCKINFO	mmckOutinfoSubchunk;
 				memset(&mmckOutinfoSubchunk,0,sizeof(mmckOutinfoSubchunk));
 				mmckOutinfoSubchunk.fccType = mmioFOURCC('d','a','t','a');
 				if(mmioDescend(hmmio,&mmckOutinfoSubchunk,&mmckOutinfoParent,MMIO_FINDCHUNK) == MMSYSERR_NOERROR)
 				{
 					lDataPtr = mmioSeek(hmmio,0,SEEK_CUR);
-					dataSize = mmckOutinfoSubchunk.cksize; //ƒXƒgƒŠ[ƒ€ƒTƒCƒY‚ğæ“¾
+					dataSize = mmckOutinfoSubchunk.cksize; //ã‚¹ãƒˆãƒªãƒ¼ãƒ ã‚µã‚¤ã‚ºã‚’å–å¾—
 				}
 			}
 		}
@@ -113,7 +113,7 @@ BOOL CMp3Info::Load(LPCTSTR szFileName,BOOL bVbrScan)
 				GENERIC_READ,
 				FILE_SHARE_READ,
 				NULL,
-				OPEN_EXISTING,			//w’è‚µ‚½ƒtƒ@ƒCƒ‹‚ª‘¶İ‚µ‚Ä‚¢‚È‚¢ê‡A‚±‚ÌŠÖ”‚Í¸”s‚µ‚Ü‚·B 
+				OPEN_EXISTING,			//æŒ‡å®šã—ãŸãƒ•ã‚¡ã‚¤ãƒ«ãŒå­˜åœ¨ã—ã¦ã„ãªã„å ´åˆã€ã“ã®é–¢æ•°ã¯å¤±æ•—ã—ã¾ã™ã€‚ 
 				FILE_ATTRIBUTE_NORMAL,
 				NULL);
 	if(hFile == INVALID_HANDLE_VALUE)
@@ -124,7 +124,7 @@ BOOL CMp3Info::Load(LPCTSTR szFileName,BOOL bVbrScan)
 	if(dataSize == 0)
 	{
 		dataSize = GetFileSize(hFile,NULL);
-		//id3tagƒwƒbƒ_‚ğ“Ç‚İ‚Ş
+		//id3tagãƒ˜ãƒƒãƒ€ã‚’èª­ã¿è¾¼ã‚€
 		SetFilePointer(hFile,-128,NULL,FILE_END);
 		if(!ReadFile(hFile,&id3tag,sizeof(id3tag),&dwRet,NULL))
 		{
@@ -133,11 +133,11 @@ BOOL CMp3Info::Load(LPCTSTR szFileName,BOOL bVbrScan)
 		}
 		if((dwRet == sizeof(id3tag)) && (memcmp(id3tag,"TAG",3) == 0))
 		{
-			//ID3TAG‚ÌƒTƒCƒY•ª‚ğ·‚µˆø‚­
+			//ID3TAGã®ã‚µã‚¤ã‚ºåˆ†ã‚’å·®ã—å¼•ã
 			dataSize -= 128;
 		}
 	}
-	//ID3V2ƒwƒbƒ_‚ğ“Ç‚İ‚Ş
+	//ID3V2ãƒ˜ãƒƒãƒ€ã‚’èª­ã¿è¾¼ã‚€
 	char id3v2head[10];
 	SetFilePointer(hFile,0,NULL,FILE_BEGIN);
 	if(ReadFile(hFile,&id3v2head,sizeof(id3v2head),&dwRet,NULL) &&
@@ -148,7 +148,7 @@ BOOL CMp3Info::Load(LPCTSTR szFileName,BOOL bVbrScan)
 		lDataPtr += 10;
 	}
 
-	//Mp3ƒwƒbƒ_î•ñ‚Ì“Ç‚İæ‚è
+	//Mp3ãƒ˜ãƒƒãƒ€æƒ…å ±ã®èª­ã¿å–ã‚Š
 	DWORD dwFrameCount = 0;
 	MPEGINFO mpegHead;
 	MPEGINFO *pMpegHead = &m_mpegInfo;
@@ -157,18 +157,18 @@ BOOL CMp3Info::Load(LPCTSTR szFileName,BOOL bVbrScan)
 	{
 		head=((unsigned long )hbuf[0] << 24) | ((unsigned long) hbuf[1] << 16) |
 				((unsigned long) hbuf[2] << 8) | (unsigned long) hbuf[3];
-		//mp3ƒwƒbƒ_‚Æ‚µ‚Ä‚Ì‘Ã“–«‚ğƒ`ƒFƒbƒN
+		//mp3ãƒ˜ãƒƒãƒ€ã¨ã—ã¦ã®å¦¥å½“æ€§ã‚’ãƒã‚§ãƒƒã‚¯
 		if(!mp3head_check(head))
 		{
 			//+1
 			if(SetFilePointer(hFile,-3,NULL,FILE_CURRENT) > (lDataPtr + 10 * 1024))
 			{
-				//æ“ª‚Ì10K‚¾‚¯‚ğ’²‚×‚é
+				//å…ˆé ­ã®10Kã ã‘ã‚’èª¿ã¹ã‚‹
 				break;
 			}
-			continue;//‚PƒoƒCƒg‚¸‚ç‚µ‚Ä‚à‚¤ˆê“x
+			continue;//ï¼‘ãƒã‚¤ãƒˆãšã‚‰ã—ã¦ã‚‚ã†ä¸€åº¦
 		}
-		//pMpegHead‚É–ß‚·‚Ì‚ÍÅ‰‚Ì1ƒtƒŒ[ƒ€‚¾‚¯
+		//pMpegHeadã«æˆ»ã™ã®ã¯æœ€åˆã®1ãƒ•ãƒ¬ãƒ¼ãƒ ã ã‘
 		if(dwFrameCount > 0)
 		{
 			pMpegHead = &mpegHead;
@@ -176,7 +176,7 @@ BOOL CMp3Info::Load(LPCTSTR szFileName,BOOL bVbrScan)
 		else
 		{
 			dwBeginPtr = SetFilePointer(hFile,0,NULL,FILE_CURRENT) - 4;
-			//Å‰‚ÌMP3ƒwƒbƒ_‚Ü‚Å‚Ì—]•ª‚Èƒf[ƒ^•ª‚ğƒTƒCƒY‚©‚ç·‚µˆø‚­
+			//æœ€åˆã®MP3ãƒ˜ãƒƒãƒ€ã¾ã§ã®ä½™åˆ†ãªãƒ‡ãƒ¼ã‚¿åˆ†ã‚’ã‚µã‚¤ã‚ºã‹ã‚‰å·®ã—å¼•ã
 			dataSize -= dwBeginPtr;
 		}
 
@@ -227,7 +227,7 @@ BOOL CMp3Info::Load(LPCTSTR szFileName,BOOL bVbrScan)
 			pMpegHead->framesize += pMpegHead->padding - 4;
 			break;
 		}
-		//ƒtƒŒ[ƒ€”‚Æ˜^‰¹ŠÔ‚ğŒvZ
+		//ãƒ•ãƒ¬ãƒ¼ãƒ æ•°ã¨éŒ²éŸ³æ™‚é–“ã‚’è¨ˆç®—
 		if(dwFrameCount == 0)
 		{
 			pMpegHead->size = dataSize;
@@ -235,7 +235,7 @@ BOOL CMp3Info::Load(LPCTSTR szFileName,BOOL bVbrScan)
 			if(!(pMpegHead->framesize+4))
 			{
 				CloseHandle(hFile);
-				return FALSE;//0œZ–h~
+				return FALSE;//0é™¤ç®—é˜²æ­¢
 			}
 //			_int64 i64Msec;
 			pMpegHead->flmnum = pMpegHead->size/(pMpegHead->framesize+4);
@@ -244,7 +244,7 @@ BOOL CMp3Info::Load(LPCTSTR szFileName,BOOL bVbrScan)
 			if(pMpegHead->bps == 0)
 			{
 				CloseHandle(hFile);
-				return FALSE;// 2004-02-19 0œZ–h~
+				return FALSE;// 2004-02-19 0é™¤ç®—é˜²æ­¢
 			}
 			pMpegHead->msec = pMpegHead->size * 8 / pMpegHead->bps;
 			if(pMpegHead->lsf /*pMpegHead->mpeg25*/) 
@@ -273,7 +273,7 @@ BOOL CMp3Info::Load(LPCTSTR szFileName,BOOL bVbrScan)
 					SetFilePointer(hFile,17,NULL,FILE_CURRENT);
 				}
 			}
-			//VBRƒ^ƒO‚ğ“Ç‚İæ‚é
+			//VBRã‚¿ã‚°ã‚’èª­ã¿å–ã‚‹
 			if(!ReadFile(hFile,&xingTag,sizeof(xingTag),&dwRet,NULL))
 			{
 				CloseHandle(hFile);
@@ -297,8 +297,8 @@ BOOL CMp3Info::Load(LPCTSTR szFileName,BOOL bVbrScan)
 				pMpegHead->bps = (_int64 )(pMpegHead->size*8)/(pMpegHead->msec);
 				pMpegHead->bVbr = TRUE;
 			}
-			// 2004-10-04 ’Ç‰Á
-			// VBRI Œ`®ƒ^ƒO‚ğ“Ç‚İæ‚é
+			// 2004-10-04 è¿½åŠ 
+			// VBRI å½¢å¼ã‚¿ã‚°ã‚’èª­ã¿å–ã‚‹
 			SetFilePointer(hFile,dwBeginPtr+sizeof(DWORD)*9,NULL,FILE_BEGIN);
 			VBRI vbri;
 			if(!ReadFile(hFile,&vbri,sizeof(vbri),&dwRet,NULL))
@@ -327,7 +327,7 @@ BOOL CMp3Info::Load(LPCTSTR szFileName,BOOL bVbrScan)
 			SetFilePointer(hFile,dwBeginPtr+4,NULL,FILE_BEGIN);
 		}
 		dwFrameCount++;
-		if(!m_mpegInfo.bVbr)	//VBR‚Ì‚Æ‚«‚Í‚·‚×‚Ä‚ÌƒtƒŒ[ƒ€‚ğƒXƒLƒƒƒ“
+		if(!m_mpegInfo.bVbr)	//VBRã®ã¨ãã¯ã™ã¹ã¦ã®ãƒ•ãƒ¬ãƒ¼ãƒ ã‚’ã‚¹ã‚­ãƒ£ãƒ³
 			break;
 		if(!bVbrScan)
 			break;
@@ -336,7 +336,7 @@ BOOL CMp3Info::Load(LPCTSTR szFileName,BOOL bVbrScan)
 		frameInfo.dwSize = pMpegHead->framesize;
 		m_listFrame.push_back(frameInfo);
 		if(!pMpegHead->framesize)
-			break;//–³ŒÀƒ‹[ƒv‚ğ–h~
+			break;//ç„¡é™ãƒ«ãƒ¼ãƒ—ã‚’é˜²æ­¢
 		SetFilePointer(hFile,pMpegHead->framesize,NULL,FILE_CURRENT);
 	}
 
@@ -353,7 +353,7 @@ BOOL CMp3Info::Load(LPCTSTR szFileName,BOOL bVbrScan)
 	}
 	else
 	{
-		// 2003-08-18 ƒtƒŒ[ƒ€”‚ğTime‚©‚çFormat‚ÉˆÚ“®
+		// 2003-08-18 ãƒ•ãƒ¬ãƒ¼ãƒ æ•°ã‚’Timeã‹ã‚‰Formatã«ç§»å‹•
 		m_strFormat.Format(
 			IsVbr()?_T("MPEG%s Layer%ld %ldkb/s(VBR) %ldHz %s %dframes"):_T("MPEG%s Layer%ld %ldkb/s %ldHz %s %dframes"),
 			(LPCTSTR )GetMpeg(),
