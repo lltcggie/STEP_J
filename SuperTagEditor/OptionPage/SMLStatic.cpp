@@ -55,13 +55,13 @@ void CSMLStatic::OnRButtonDblClk(UINT nFlags, CPoint point) {}
 void CSMLStatic::OnRButtonDown(UINT nFlags, CPoint point) {}
 void CSMLStatic::OnRButtonUp(UINT nFlags, CPoint point) {}
 
-BOOL CSMLStatic::OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message) 
+BOOL CSMLStatic::OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message)
 {
 	return TRUE;
 }
 
 
-BOOL CSMLStatic::PreCreateWindow(CREATESTRUCT& cs) 
+BOOL CSMLStatic::PreCreateWindow(CREATESTRUCT& cs)
 {
 	// TODO: Add your specialized code here and/or call the base class
 	cs.style |= ES_MULTILINE | WS_VISIBLE | WS_VSCROLL;
@@ -70,7 +70,7 @@ BOOL CSMLStatic::PreCreateWindow(CREATESTRUCT& cs)
 }
 
 
-int CSMLStatic::OnCreate(LPCREATESTRUCT lpCreateStruct) 
+int CSMLStatic::OnCreate(LPCREATESTRUCT lpCreateStruct)
 {
 	if (CRichEditCtrl::OnCreate(lpCreateStruct) == -1)
 		return -1;

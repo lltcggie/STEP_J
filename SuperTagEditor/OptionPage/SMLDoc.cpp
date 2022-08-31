@@ -344,7 +344,7 @@ static BOOL GetHexNibble(TCHAR ch, UCHAR *out)
 	return retval;
 }
 
-// Translate a color value or windows system color into an RGB value 
+// Translate a color value or windows system color into an RGB value
 static COLORREF ConvertColor(COLORREF defaultColor, const TCHAR *srcTxt)
 {
 	if(0 == _tcsnicmp(srcTxt, _T("COLOR_"), 6)) {

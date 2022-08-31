@@ -56,14 +56,14 @@ END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
 // COptionListBox message handlers
-void COptionListBox::MeasureItem(LPMEASUREITEMSTRUCT lpMeasureItemStruct) 
+void COptionListBox::MeasureItem(LPMEASUREITEMSTRUCT lpMeasureItemStruct)
 {
 	if(lpMeasureItemStruct->itemHeight < 18) {
 		lpMeasureItemStruct->itemHeight = 18;
 	}
 }
 
-void COptionListBox::DrawItem(LPDRAWITEMSTRUCT lpDrawItemStruct) 
+void COptionListBox::DrawItem(LPDRAWITEMSTRUCT lpDrawItemStruct)
 {
 	COptionListBoxItem *item;
 
@@ -74,18 +74,18 @@ void COptionListBox::DrawItem(LPDRAWITEMSTRUCT lpDrawItemStruct)
 
 	if ((int)lpDrawItemStruct->itemID < 0)
 	{
-		// If there are no elements in the List Box 
-		// based on whether the list box has Focus or not 
+		// If there are no elements in the List Box
+		// based on whether the list box has Focus or not
 		// draw the Focus Rect or Erase it,
-		if ((lpDrawItemStruct->itemAction & ODA_FOCUS) && 
+		if ((lpDrawItemStruct->itemAction & ODA_FOCUS) &&
 			(lpDrawItemStruct->itemState & ODS_FOCUS))
 		{
 			pDC->DrawFocusRect(&lpDrawItemStruct->rcItem);
 		}
 		else if ((lpDrawItemStruct->itemAction & ODA_FOCUS) &&
-			!(lpDrawItemStruct->itemState & ODS_FOCUS)) 
+			!(lpDrawItemStruct->itemState & ODS_FOCUS))
 		{
-			pDC->DrawFocusRect(&lpDrawItemStruct->rcItem); 
+			pDC->DrawFocusRect(&lpDrawItemStruct->rcItem);
 		}
 		return;
 	}
@@ -121,8 +121,8 @@ void COptionListBox::DrawItem(LPDRAWITEMSTRUCT lpDrawItemStruct)
 		CBrush br(::GetSysColor(COLOR_HIGHLIGHT));
 		pDC->FillRect(&rClient, &br);
 	}
-	else if (!(lpDrawItemStruct->itemState & ODS_SELECTED) && 
-		(lpDrawItemStruct->itemAction & ODA_SELECT)) 
+	else if (!(lpDrawItemStruct->itemState & ODS_SELECTED) &&
+		(lpDrawItemStruct->itemAction & ODA_SELECT))
 	{
 		CBrush br(::GetSysColor(COLOR_WINDOW));
 		pDC->FillRect(&rClient, &br);
@@ -130,15 +130,15 @@ void COptionListBox::DrawItem(LPDRAWITEMSTRUCT lpDrawItemStruct)
 
 	// If the item has focus, draw the focus rect.
 	// If the item does not have focus, erase the focus rect.
-	if ((lpDrawItemStruct->itemAction & ODA_FOCUS) && 
+	if ((lpDrawItemStruct->itemAction & ODA_FOCUS) &&
 		(lpDrawItemStruct->itemState & ODS_FOCUS))
 	{
-		pDC->DrawFocusRect(&rcItem); 
+		pDC->DrawFocusRect(&rcItem);
 	}
 	else if ((lpDrawItemStruct->itemAction & ODA_FOCUS) &&
 		!(lpDrawItemStruct->itemState & ODS_FOCUS))
 	{
-		pDC->DrawFocusRect(&rcItem); 
+		pDC->DrawFocusRect(&rcItem);
 	}
 
 	// To draw the Text set the background mode to Transparent.
@@ -170,7 +170,7 @@ void COptionListBox::DrawItem(LPDRAWITEMSTRUCT lpDrawItemStruct)
 	pDC->DrawText(strText, -1, &rText, nFormat | DT_CALCRECT);
 	pDC->DrawText(strText, -1, &rText, nFormat);
 
-	pDC->SetTextColor(crText); 
+	pDC->SetTextColor(crText);
 	pDC->SetBkMode(iBkMode);
 }
 
@@ -224,7 +224,7 @@ BOOL COptionListBox::AddItem(COptionPage *pPage, COptionPage *pGroup, int nIndex
 		SetItemData(idx, (DWORD_PTR)item);
 
 		return TRUE;
-	} 
+	}
 
 	return FALSE;
 
@@ -350,7 +350,7 @@ CWnd *COptionListBox::GetControlWnd()
 }
 
 
-void COptionListBox::OnSelectionChange() 
+void COptionListBox::OnSelectionChange()
 {
 	NotifyParentOfSelChange();
 	int curIdx;
@@ -363,7 +363,7 @@ void COptionListBox::OnSelectionChange()
 }
 
 
-void COptionListBox::DeleteItem(LPDELETEITEMSTRUCT lpDeleteItemStruct) 
+void COptionListBox::DeleteItem(LPDELETEITEMSTRUCT lpDeleteItemStruct)
 {
 	// TODO: Add your specialized code here and/or call the base class
 	COptionListBoxItem *item = (COptionListBoxItem *)GetItemData(lpDeleteItemStruct->itemID);
@@ -380,7 +380,7 @@ void COptionListBox::DeleteItem(LPDELETEITEMSTRUCT lpDeleteItemStruct)
 }
 
 
-void COptionListBox::OnLButtonDown(UINT nFlags, CPoint point) 
+void COptionListBox::OnLButtonDown(UINT nFlags, CPoint point)
 {
 	int idx;
 	int curIdx;
@@ -412,7 +412,7 @@ void COptionListBox::OnLButtonDown(UINT nFlags, CPoint point)
 	//CListBox::OnLButtonDown(nFlags, point);
 }
 
-void COptionListBox::OnLButtonUp(UINT nFlags, CPoint point) 
+void COptionListBox::OnLButtonUp(UINT nFlags, CPoint point)
 {
 	// TODO: Add your message handler code here and/or call default
 	if(this == GetCapture()) {
@@ -422,14 +422,14 @@ void COptionListBox::OnLButtonUp(UINT nFlags, CPoint point)
 	CListBox::OnLButtonUp(nFlags, point);
 }
 
-void COptionListBox::OnLButtonDblClk(UINT nFlags, CPoint point) 
+void COptionListBox::OnLButtonDblClk(UINT nFlags, CPoint point)
 {
 	// TODO: Add your message handler code here and/or call default
 	OnLButtonDown(nFlags, point);
 	//CListBox::OnLButtonDblClk(nFlags, point);
 }
 
-void COptionListBox::OnMouseMove(UINT nFlags, CPoint point) 
+void COptionListBox::OnMouseMove(UINT nFlags, CPoint point)
 {
 	// TODO: Add your message handler code here and/or call default
 
@@ -437,7 +437,7 @@ void COptionListBox::OnMouseMove(UINT nFlags, CPoint point)
 }
 
 
-void COptionListBox::OnDestroy() 
+void COptionListBox::OnDestroy()
 {
 	CListBox::OnDestroy();
 

@@ -86,7 +86,7 @@ public:
 	virtual BOOL SetSelection(COptionPage *page);
 
 	/*!
-		\brief	Retrieves the active (highlighted) page 
+		\brief	Retrieves the active (highlighted) page
 
 		Retrieves the active (highlighted) page. If no page is selected,
 		this method returns NULL.

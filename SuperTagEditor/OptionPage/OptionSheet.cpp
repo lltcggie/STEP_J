@@ -601,7 +601,7 @@ BOOL COptionSheet::Create(CWnd* pParentWnd, DWORD dwStyle, DWORD dwExStyle)
 {
 	BOOL result;
 
-	// We do not go into wizard mode here since we cannot statically save the 
+	// We do not go into wizard mode here since we cannot statically save the
 	// list control width
 	ASSERT(TRUE != IsWizardMode());
 
@@ -985,7 +985,7 @@ void COptionSheet::BuildList()
 }
 
 
-BOOL COptionSheet::OnInitDialog() 
+BOOL COptionSheet::OnInitDialog()
 {
 	BOOL		result;
 	CRect		rcClient;
@@ -1045,7 +1045,7 @@ BOOL COptionSheet::OnInitDialog()
 	SetWindowPos(&wndTop,
 				 0,
 				 0,
-				 width, 
+				 width,
 				 height,
 				 SWP_NOMOVE | SWP_NOZORDER);
 
@@ -1079,7 +1079,7 @@ BOOL COptionSheet::OnInitDialog()
 
 
 
-void COptionSheet::OnPaint() 
+void COptionSheet::OnPaint()
 {
 	CPaintDC	dc(this); // device context for painting
 
@@ -1141,7 +1141,7 @@ void COptionSheet::OnPaint()
 
 }
 
-void COptionSheet::OnSize(UINT nType, int cx, int cy) 
+void COptionSheet::OnSize(UINT nType, int cx, int cy)
 {
 	CDialog::OnSize(nType, cx, cy);
 

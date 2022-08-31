@@ -236,7 +236,7 @@ void COptionPage::GetCaption(CString &str)
 	str = m_Caption;
 }
 
-BOOL COptionPage::OnInitDialog() 
+BOOL COptionPage::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 

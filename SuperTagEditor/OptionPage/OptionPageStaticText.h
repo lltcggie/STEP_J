@@ -55,7 +55,7 @@ public:
 		Constructs a static text page.
 
 		\param	captionID	ID of the string table resource to use for the caption.
-		\param	idText		ID of the "SMLDOC" resource to be used 
+		\param	idText		ID of the "SMLDOC" resource to be used
 	*/
 	COptionPageStaticText(UINT captionID, UINT idText);
 
