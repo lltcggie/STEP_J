@@ -187,7 +187,7 @@ BOOL CDlgMoveFolder::OnInitDialog()
 
 void CDlgMoveFolder::OnOK()
 {
-	if (!::IsWindow(m_hWnd))	return;
+	if (!::IsWindow(m_hWnd)) return;
 	m_editFormat.GetWindowText(m_userFormatEx[m_nFormatType].strFormat);
 	m_userFormatEx[m_nFormatType].bCopy = m_chkCopy.GetCheck() ? true : false;
 	m_editInitPath.GetWindowText(m_userFormatEx[m_nFormatType].strInitFolder); /* STEP 022 */

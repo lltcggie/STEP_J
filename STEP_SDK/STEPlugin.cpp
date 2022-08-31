@@ -60,7 +60,7 @@ bool (WINAPI *STEPUpdateCellInfo)(void);
 bool Initialize(void)
 {
 	hLib = LoadLibrary(_T("SuperTagEditor.exe"));
-	if(hLib == NULL)	return false;
+	if(hLib == NULL) return false;
 	(FARPROC&)STEPGetCommandID = GetProcAddress(hLib, "STEPGetCommandID");
 	(FARPROC&)STEPGetMenu = GetProcAddress(hLib, "STEPGetMenu");
 	(FARPROC&)STEPAddToolBarButton = GetProcAddress(hLib, "STEPAddToolBarButton");

@@ -20,30 +20,30 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 //
-//	メモ!
+// メモ!
 //
-//		この DLL が MFC DLL に対して動的にリンクされる場合、
-//		MFC 内で呼び出されるこの DLL からエクスポートされた
-//		どの関数も関数の最初に追加される AFX_MANAGE_STATE 
-//		マクロを含んでいなければなりません。
+//   この DLL が MFC DLL に対して動的にリンクされる場合、
+//   MFC 内で呼び出されるこの DLL からエクスポートされた
+//   どの関数も関数の最初に追加される AFX_MANAGE_STATE
+//   マクロを含んでいなければなりません。
 //
-//		例:
+//   例:
 //
-//		extern "C" BOOL PASCAL EXPORT ExportedFunction()
-//		{
-//			AFX_MANAGE_STATE(AfxGetStaticModuleState());
-//			// 通常関数の本体はこの位置にあります
-//		}
+//   extern "C" BOOL PASCAL EXPORT ExportedFunction()
+//   {
+//     AFX_MANAGE_STATE(AfxGetStaticModuleState());
+//     // 通常関数の本体はこの位置にあります
+//   }
 //
-//		このマクロが各関数に含まれていること、MFC 内の
-//		どの呼び出しより優先することは非常に重要です。
-//		これは関数内の最初のステートメントでなければな
-//		らないことを意味します、コンストラクタが MFC 
-//		DLL 内への呼び出しを行う可能性があるので、オブ
-//		ジェクト変数の宣言よりも前でなければなりません。
+//   このマクロが各関数に含まれていること、MFC 内の
+//   どの呼び出しより優先することは非常に重要です。
+//   これは関数内の最初のステートメントでなければな
+//   らないことを意味します、コンストラクタが MFC 
+//   DLL 内への呼び出しを行う可能性があるので、オブ
+//   ジェクト変数の宣言よりも前でなければなりません。
 //
-//		詳細については MFC テクニカル ノート 33 および
-//		58 を参照してください。
+//   詳細については MFC テクニカル ノート 33 および
+//   58 を参照してください。
 //
 
 /////////////////////////////////////////////////////////////////////////////
@@ -96,7 +96,7 @@ STEP_API LPCTSTR WINAPI STEPGetPluginInfo(void)
 STEP_API bool WINAPI STEPInit(UINT pID, LPCTSTR szPluginFolder)
 {
 	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-	if (Initialize() == false)	return false;
+	if (Initialize() == false) return false;
 	nPluginID = pID;
 
 	// INIファイルの読み込み
@@ -148,7 +148,7 @@ STEP_API bool WINAPI STEPSupportTrackNumberSIF(UINT nFormat) {
 STEP_API CONTROLTYPE WINAPI STEPGetControlType(UINT nFormat, COLUMNTYPE nColumn, bool isEditSIF)
 {
 	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-	if (!isEditSIF)	return _NULL;
+	if (!isEditSIF) return _NULL;
 	switch (nColumn) {
 	case COLUMN_TRACK_NAME:
 	case COLUMN_ARTIST_NAME:

@@ -214,7 +214,7 @@ BOOL CDlgConvFormatEx::OnInitDialog()
 
 void CDlgConvFormatEx::OnOK() 
 {
-	if (!::IsWindow(m_hWnd))	return;
+	if (!::IsWindow(m_hWnd)) return;
 	m_editFormat.GetWindowText(m_userFormatEx[m_nFormatType].strFormat);
 	m_userFormatEx[m_nFormatType].bSpaceInitNumber = m_btSpaceInitNumber.GetCheck() ? true : false;
 	m_userFormatEx[m_nFormatType].nInitNumber = GetDlgItemInt(IDC_ED_INIT_NUMBER, NULL, FALSE);

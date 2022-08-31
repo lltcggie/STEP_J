@@ -323,7 +323,7 @@ INT_PTR CDlgEnvSheet::DoModal(int nType)
 			g_bUserConvAddMenu = pageConvTop.m_bUserConvAddMenu ? true : false;
 			g_bZenHanKigouKana = pageConvTop.m_bZenHanKigouKana ? true : false;
     		g_bAutoTilde2WaveDash = pageConvTop.m_bAutoTilde2WaveDash ? true : false;
-			
+
             // ファイル名置換
 			g_nOptCheckFileName = pageReplace.m_bFileNameReplace ? FILENAME_CONV_MULTIBYTE : FILENAME_NO_CHECK;
 			for (i = 0; i < FILENAME_REPLACE_MAX; i++) {

@@ -72,7 +72,7 @@ void CHeaderCtrlEx::DrawItem( LPDRAWITEMSTRUCT lpDrawItemStruct )
 
 		// Draw the background
 		dc.FillRect(rcLabel, &CBrush(::GetSysColor(COLOR_3DFACE)));
-	
+
 	// Labels are offset by a certain amount  
 	// This offset is related to the width of a space character
 	int offset = dc.GetTextExtent(_T(" "), 1 ).cx*2;
@@ -81,7 +81,7 @@ void CHeaderCtrlEx::DrawItem( LPDRAWITEMSTRUCT lpDrawItemStruct )
 	// Get the column text and format
 	TCHAR buf[256];
 	HD_ITEM hditem;
-	
+
 	hditem.mask = HDI_TEXT | HDI_FORMAT;
 	hditem.pszText = buf;
 	hditem.cchTextMax = 255;

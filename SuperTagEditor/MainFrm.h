@@ -15,7 +15,7 @@ class CSuperTagEditorView;
 
 class CMainFrame : public CFrameWnd
 {
-	
+
 protected: // シリアライズ機能のみから作成します。
 	CMainFrame();
 	DECLARE_DYNCREATE(CMainFrame)

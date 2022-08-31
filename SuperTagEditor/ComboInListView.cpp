@@ -21,7 +21,7 @@ extern	bool	g_bOpenEditWindow;
 /////////////////////////////////////////////////////////////////////////////
 // CComboInListView
 CComboInListView::CComboInListView(int iItem, int iSubItem, CStringList *plstItems)
-{	
+{
 	m_iItem = iItem;
 	m_iSubItem = iSubItem;
 	m_lstItems.AddTail(plstItems);
@@ -34,7 +34,7 @@ CComboInListView::~CComboInListView()
 	g_bOpenEditWindow = false;
 }
 
-BEGIN_MESSAGE_MAP(CComboInListView, CComboBox)	
+BEGIN_MESSAGE_MAP(CComboInListView, CComboBox) 
 //{{AFX_MSG_MAP(CComboInListView)
 	ON_WM_CREATE()
 	ON_WM_KILLFOCUS()
@@ -51,19 +51,19 @@ END_MESSAGE_MAP()
 
 int CComboInListView::OnCreate(LPCREATESTRUCT lpCreateStruct) 
 {
-	if (CComboBox::OnCreate(lpCreateStruct) == -1)		
-		return -1;	
-	CFont* font = GetParent()->GetFont();	
+	if (CComboBox::OnCreate(lpCreateStruct) == -1)
+		return -1;
+	CFont* font = GetParent()->GetFont();
 	SetFont(font);
 	//add the items from CStringlist
 	POSITION pos = m_lstItems.GetHeadPosition();
 	SetRedraw(FALSE);
 	while(pos != NULL) {
-		AddString((LPCTSTR)(m_lstItems.GetNext(pos)));	
+		AddString((LPCTSTR)(m_lstItems.GetNext(pos)));
 	}
 	SetRedraw(TRUE);
 	Invalidate();
-	SetFocus();	
+	SetFocus();
 	return 0;
 }
 
@@ -82,19 +82,19 @@ BOOL CComboInListView::PreTranslateMessage(MSG* pMsg)
 
 
 void CComboInListView::OnKillFocus(CWnd* pNewWnd) 
-{	
+{
 	int nIndex = GetCurSel();
 
 	CComboBox::OnKillFocus(pNewWnd);
 
-	CString str;	
+	CString str;
 	GetWindowText(str);
-	// Send Notification to parent of ListView ctrl	
+	// Send Notification to parent of ListView ctrl
 	LV_DISPINFO lvDispinfo;
 	lvDispinfo.hdr.hwndFrom = GetParent()->m_hWnd;
 	lvDispinfo.hdr.idFrom = GetDlgCtrlID();//that's us
 	lvDispinfo.hdr.code = LVN_ENDLABELEDIT;
-	lvDispinfo.item.mask = LVIF_TEXT | LVIF_PARAM;	
+	lvDispinfo.item.mask = LVIF_TEXT | LVIF_PARAM;
 	lvDispinfo.item.iItem = m_iItem;
 	lvDispinfo.item.iSubItem = m_iSubItem;
 	lvDispinfo.item.pszText = m_bVK_ESCAPE ? NULL : LPTSTR((LPCTSTR)str);
@@ -103,7 +103,7 @@ void CComboInListView::OnKillFocus(CWnd* pNewWnd)
 	if(nIndex!=CB_ERR)
 		GetParent()->GetParent()->SendMessage(WM_NOTIFY, GetParent()->GetDlgCtrlID(), (LPARAM)&lvDispinfo);
 	PostMessage(WM_CLOSE);
-	
+
 }
 
 //need to catch the VK_ESCAPE for the notification msg
@@ -111,7 +111,7 @@ void CComboInListView::OnChar(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
 	if(nChar == VK_ESCAPE || nChar == VK_RETURN) {
 		GetParent()->SetFocus();
-		return;	
+		return;
 	}
 	CComboBox::OnChar(nChar, nRepCnt, nFlags);
 }
@@ -119,7 +119,7 @@ void CComboInListView::OnChar(UINT nChar, UINT nRepCnt, UINT nFlags)
 //doing this hence we are "modaless" and need to clean up me self
 void CComboInListView::OnNcDestroy() 
 {
-	CComboBox::OnNcDestroy();		
+	CComboBox::OnNcDestroy();
 	delete this;
 }
 

@@ -106,7 +106,7 @@ static UINT indicators[] =
 CMainFrame::CMainFrame()
 {
 	// TODO: この位置にメンバの初期化処理コードを追加してください。
-	
+
 }
 
 CMainFrame::~CMainFrame()
@@ -496,11 +496,11 @@ void CMainFrame::OnToolbarDropDown(NMHDR* pnmtb_, LRESULT *plr) /* AstralCircle 
 	default:
 		return;
 	}
-	
+
 	CRect rc;
 	pWnd->SendMessage(TB_GETRECT, pnmtb->iItem, (LPARAM)&rc);
 	pWnd->ClientToScreen(&rc);
-	
+
 	pPopup->TrackPopupMenu(TPM_LEFTALIGN | TPM_LEFTBUTTON | TPM_VERTICAL, rc.left, rc.bottom, this, &rc);
 }
 
@@ -512,7 +512,7 @@ void CMainFrame::UpdateToolBar()
 void CMainFrame::OnPopupCustomize() /* WildCherry4 084 */
 {
 	// TODO: この位置にコマンド ハンドラ用のコードを追加してください
-	m_wndToolBar.Customize();	
+	m_wndToolBar.Customize();
 }
 
 void CMainFrame::OnUpdatePopupCustomize(CCmdUI* pCmdUI) /* WildCherry4 084 */

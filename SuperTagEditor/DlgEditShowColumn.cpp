@@ -13,10 +13,10 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 #ifndef ListView_SetCheckState
-#define ListView_SetCheckState(hwndLV, i, fCheck)	ListView_SetItemState(hwndLV, i, INDEXTOSTATEIMAGEMASK((fCheck)+1), LVIS_STATEIMAGEMASK)
+#define ListView_SetCheckState(hwndLV, i, fCheck) ListView_SetItemState(hwndLV, i, INDEXTOSTATEIMAGEMASK((fCheck)+1), LVIS_STATEIMAGEMASK)
 #endif
 
-#define ListView_GetSelectedItem(listCtrl)			listCtrl.GetNextItem(-1, LVNI_ALL | LVNI_SELECTED | LVIS_FOCUSED)
+#define ListView_GetSelectedItem(listCtrl) 		listCtrl.GetNextItem(-1, LVNI_ALL | LVNI_SELECTED | LVIS_FOCUSED)
 
 /////////////////////////////////////////////////////////////////////////////
 // CDlgEditShowColumn ダイアログ
@@ -173,7 +173,7 @@ void CDlgEditShowColumn::OnBtUp()
 
 void CDlgEditShowColumn::OnOK()
 {
-	if (!::IsWindow(m_hWnd))	return;
+	if (!::IsWindow(m_hWnd)) return;
 	// 編集後の状態を保存
 	int nIndex; for (nIndex = 0; nIndex < m_listColumn.GetItemCount(); nIndex++) {
 		struct COLUMN_STATUS	*Stat;

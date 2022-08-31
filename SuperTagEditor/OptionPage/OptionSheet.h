@@ -241,7 +241,7 @@ public:
 
 	/*!
 		Option Sheet initializtion parameters. 
-		
+
 	*/
 	struct OPTIONSHEETCFG {
 		DWORD	dwFlags;	//!<	Option sheet initialization flags
@@ -483,19 +483,19 @@ public:
 
 	*/
 	int GetPageIndex(COptionPage *page) const;
-	
+
 
 	/*!
 		\brief	Retrieves the number of pages in the option sheet.
-		
+
 		Call this member function to determine the number of pages currently
 		in the option sheet.
 
 		\return	The number of pages in the option sheet.
 	*/
 	int GetPageCount();
-	
-	
+
+
 	/*!
 		\brief	Retrieves a pointer to the specified page.
 
@@ -519,7 +519,7 @@ public:
 		\return	The pointer to the group corresponding to the "nPage" page parameter.
 	*/
 	COptionPage *GetPageGroup(int nPage) const;
-	
+
 
 	/*!
 		\brief	Returns the active page object.
@@ -531,8 +531,8 @@ public:
 		\return	The pointer to the active page.
 	*/
 	COptionPage* GetActivePage() const;
-	
-	
+
+
 	/*!
 		\brief	Programmatically sets the active page object.
 
@@ -543,8 +543,8 @@ public:
 				otherwise 0.
 	*/
 	BOOL SetActivePage(COptionPage *page);
-	
-	
+
+
 	/*!
 		\brief	Programmatically sets the active page object.
 
@@ -597,7 +597,7 @@ public:
 	*/
 	void SetTitle(UINT nID, UINT nStyle = 0);
 
-	
+
 	/*!
 		\brief	Sets the text for the Finish button.
 
@@ -611,7 +611,7 @@ public:
 	*/
 	void SetFinishText(LPCTSTR lpszText);
 
-	
+
 	/*!
 		\brief	Enables the wizard buttons.
 
@@ -805,7 +805,7 @@ public:
 
 	/*!
 		\brief	Adds a page to the option sheet.
-		
+
 		\param	pPage	Points to the page to be added to the option sheet.
 						Cannot be <b>NULL</b>.
 		\param	pParent	Points to the group parent.
@@ -837,7 +837,7 @@ public:
 
 	/*!
 		\brief	Adds a group to the option sheet.
-		
+
 		\param	pPage	Points to the group to be added to the option sheet.
 						Cannot be <b>NULL</b>.
 
@@ -873,7 +873,7 @@ public:
 		closed.
 	*/
 	void RemovePage(int nPage);
-	
+
 	/*!
 		\brief	Removes a page from the option sheet.
 
@@ -908,7 +908,7 @@ public:
 		\return	Nonzero if successful; otherwise zero.
 	*/
 	BOOL PressButton(int nButton);
-	
+
 	/*!
 		\brief	Terminates the option sheet.
 
@@ -928,31 +928,31 @@ protected:
 	*/
 	virtual void OnOK(void);
 
-	
+
 	/*!
 		\brief	Called by the framework when the user chooses the Apply button. 
 	*/
 	virtual void OnApply(void);
 
-	
+
 	/*!
 		\brief	Called by the framework when the user chooses the Cancel button. 
 	*/
 	virtual void OnCancel(void);
 
-	
+
 	/*!
 		\brief	Called by the framework when the user chooses the Next button. 
 	*/
 	virtual void OnNext(void);
 
-	
+
 	/*!
 		\brief	Called by the framework when the user chooses the Back button. 
 	*/
 	virtual void OnBack(void);
 
-	
+
 	/*!
 		\brief	Called by the framework when the user chooses the Finish button. 
 	*/
@@ -967,7 +967,7 @@ private:
 
 	/*!
 		\brief	Clears the option flags.
-		
+
 		\param	flags	The flags to be cleared.
 	*/
 	void ClearFlags(DWORD flags);

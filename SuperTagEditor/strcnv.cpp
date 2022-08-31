@@ -748,7 +748,7 @@ void conv_first_upper(TCHAR *_str, const TCHAR *suffixs, const TCHAR* separator 
 				}
 				bFirst = true;
 			}
-			if (*str == '\0')	break; /* STEP 026 */
+			if (*str == '\0') break; /* STEP 026 */
 			str++;
 		} else {					// 非漢字
 			if ((*str >= 'a' && *str <= 'z')
@@ -780,7 +780,7 @@ void conv_first_upper(TCHAR *_str, const TCHAR *suffixs, const TCHAR* separator 
 				bFirst = true;
 			}
 		}
-		if (*str == '\0')	break; /* STEP 026 */
+		if (*str == '\0') break; /* STEP 026 */
 		str++;
 	}
 }
@@ -861,18 +861,18 @@ void conv_fixed_upper_lower(TCHAR *_str, CStringArray& fixedWords) /* STEP 040 *
 			bConv = false;
 			current = str;
 		}
-		if (*str == '\0')	break;
-		if (bConv)	continue;
+		if (*str == '\0') break;
+		if (bConv) continue;
 		//if (_istlead(*str)) {		// 漢字
 		//	str++;
 		//}
 		//str++;
 		bool bBreak;
-		if (current == str)	{
+		if (current == str) {
 			bBreak = TRUE;
 		}
 		while(TRUE) {
-			if (*str == '\0')	break;
+			if (*str == '\0') break;
 			if (_istlead(*str)) {		// 漢字
 				int i; for (i = 0; alphaS[i]; i+=2) {
 					if ((alphaS[i] == str[0] && alphaS[i+1] == str[1])

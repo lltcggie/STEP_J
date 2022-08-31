@@ -35,7 +35,7 @@ END_MESSAGE_MAP()
 // CListEditCtrl message handlers
 
 CListEditCtrl::CListEditCtrl(int iItem, int iSubItem, CString sInitText):m_strInitText(sInitText)
-{	
+{
 	m_iItem = iItem;
 	m_iSubItem = iSubItem;
 	m_bVK_ESCAPE = 0;
@@ -47,8 +47,8 @@ CListEditCtrl::CListEditCtrl(int iItem, int iSubItem, CString sInitText):m_strIn
 
 int CListEditCtrl::OnCreate(LPCREATESTRUCT lpCreateStruct)
 {
-	if (CEdit::OnCreate(lpCreateStruct) == -1)		
-		return -1;	
+	if (CEdit::OnCreate(lpCreateStruct) == -1)
+		return -1;
 
 	CFont* font = GetParent()->GetFont();
 	SetFont(font);
@@ -78,7 +78,7 @@ BOOL CListEditCtrl::PreTranslateMessage(MSG* pMsg)
 
 
 void CListEditCtrl::OnKillFocus(CWnd* pNewWnd)
-{	
+{
 	CEdit::OnKillFocus(pNewWnd);
 
 	CString str;
@@ -89,10 +89,10 @@ void CListEditCtrl::OnKillFocus(CWnd* pNewWnd)
 		GetParent()->InvalidateRect(rect);
 	}
 
-	// Send Notification to parent of ListView ctrl	
+	// Send Notification to parent of ListView ctrl
 	LV_DISPINFO lvDispInfo;
 	lvDispInfo.hdr.hwndFrom = GetParent()->m_hWnd;
-	lvDispInfo.hdr.idFrom = GetDlgCtrlID();	
+	lvDispInfo.hdr.idFrom = GetDlgCtrlID();
 	lvDispInfo.hdr.code = LVN_ENDLABELEDIT;
 	lvDispInfo.item.mask = LVIF_TEXT;
 	lvDispInfo.item.iItem = m_iItem;
@@ -131,7 +131,7 @@ void CListEditCtrl::OnChar(UINT nChar, UINT nRepCnt, UINT nFlags)
 		}
 		// 終了
 		GetParent()->SetFocus();
-		return;	
+		return;
 	case VK_ESCAPE:
 		if (g_bOptESCEditCancel == false) {
 			// 現在、何か入力されている場合は、文字をクリアする
@@ -144,7 +144,7 @@ void CListEditCtrl::OnChar(UINT nChar, UINT nRepCnt, UINT nFlags)
 		m_bVK_ESCAPE = 1;
 		// 終了
 		GetParent()->SetFocus();
-		return;	
+		return;
 	}
 
 	CEdit::OnChar(nChar, nRepCnt, nFlags);
@@ -168,24 +168,24 @@ void CListEditCtrl::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 		ShowInputMode();
 		return;
 	}
-	
+
 	CEdit::OnKeyDown(nChar, nRepCnt, nFlags);
 }
 
 bool CListEditCtrl::CalculateSize(CRect& rect) /* BeachMonster 089 */
 {
 	// Resize edit control if needed
-	// Get text extent	
+	// Get text extent
 	CString str;
-	GetWindowText( str );	
+	GetWindowText( str );
 	CWindowDC dc(this);
 	CFont *pFont = GetParent()->GetFont();
 	CFont *pFontDC = dc.SelectObject(pFont);
 	// Get client rect
-	CRect rcParent;	
+	CRect rcParent;
 	GetClientRect(&rect);
 	GetParent()->GetClientRect(&rcParent);
-	// Transform rect to parent coordinates	
+	// Transform rect to parent coordinates
 	ClientToScreen(&rect);
 	GetParent()->ScreenToClient(&rect);
 	if (bShowScrollBar) { // スクロールバーを考慮
@@ -194,8 +194,8 @@ bool CListEditCtrl::CalculateSize(CRect& rect) /* BeachMonster 089 */
 
 	CSize size;
 	if (!(GetStyle() & ES_MULTILINE) || str.Find(_T('\n')) == -1) {
-		size = dc.GetTextExtent(str);	
-		size.cx += 5; // add some extra buffer	
+		size = dc.GetTextExtent(str);
+		size.cx += 5; // add some extra buffer
 	} else {
 		size.cy = size.cx = 0;
 		while (true) { // ホントは１行づつ処理したくないのだがDrawTextが横幅を勝手に広げて縦が足りなくなるので自分でやる
@@ -314,7 +314,7 @@ void CListEditCtrl::OnSetfocus() /* BeachMonster 089 */
 	*/
 	SetWindowPos(&CWnd::wndTopMost,0,0,0,0,SWP_NOSIZE|SWP_NOMOVE); /* BeachMonster 089 */
 	ShowInputMode();	/* STEP 017 */
-	return;	
+	return;
 }
 
 void CListEditCtrl::ShowInputMode() /* Misirlou 150 */
@@ -326,7 +326,7 @@ void CListEditCtrl::ShowInputMode() /* Misirlou 150 */
 	}
 }
 
-void CListEditCtrl::ChangeInputMode(bool bCursorExit)	/* STEP 017 */
+void CListEditCtrl::ChangeInputMode(bool bCursorExit) /* STEP 017 */
 {
 	m_bCursorExit = bCursorExit;
 	ShowInputMode();

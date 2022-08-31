@@ -515,7 +515,7 @@ int CSuperTagEditorView::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	if (CView::OnCreate(lpCreateStruct) == -1)
 		return -1;
 
-	m_List.Create(WS_CHILD | WS_VISIBLE,CRect(0,0,0,0),this,0x100);	
+	m_List.Create(WS_CHILD | WS_VISIBLE,CRect(0,0,0,0),this,0x100);
 	m_List.m_pDoc = GetDocument();
 	//m_List.InitializeGrid();
 
@@ -1412,7 +1412,7 @@ void CSuperTagEditorView::OnSelectEditDestory()
 		CArray <int, const int &> arrayList;
 		int		nCount;
 		nCount = m_List.MakeSelectFileArray(arrayList);
-		if (nCount == 0)	return; /* SeaKnows 033 */
+		if (nCount == 0) return; /* SeaKnows 033 */
 
 		CString	strMess;
 		strMess.Format(_T("選択されているファイル(%d個)を編集前の状態に戻します\n\n")
@@ -1902,7 +1902,7 @@ bool CSuperTagEditorView::LoadFormatFile(LPCTSTR sFileName, CString *strHead, CS
 		return(false);
 	}
 	END_CATCH
-	
+
 	return(true);
 }
 
@@ -2093,7 +2093,7 @@ void CSuperTagEditorView::OnDeleteChar()
 	dialog.m_nPos = 0;
 	if (dialog.DoModal() == IDOK) {
 		CWaitCursor	wait;
-		m_List.DeleteChar(dialog.m_nDelCount, dialog.m_nPos);	
+		m_List.DeleteChar(dialog.m_nDelCount, dialog.m_nPos);
 	}
 }
 
@@ -2109,7 +2109,7 @@ void CSuperTagEditorView::OnUpdateDeleteChar(CCmdUI* pCmdUI)
 	} else {
 		// 変更可能な項目か？
 		pCmdUI->Enable(m_List.IsCurrentCellEditOK() ? TRUE : FALSE);
-	}	
+	}
 }
 
 void CSuperTagEditorView::OnUpdateSetNumberAdd(CCmdUI* pCmdUI) 
@@ -2121,7 +2121,7 @@ void CSuperTagEditorView::OnUpdateSetNumberAdd(CCmdUI* pCmdUI)
 	} else {
 		// 範囲選択あり
 		pCmdUI->Enable(((m_List.GetRangeSelect())[0].y == (m_List.GetRangeSelect())[1].y) ? FALSE : TRUE);
-	}	
+	}
 }
 
 void CSuperTagEditorView::OnSetNumberAdd() 
@@ -2224,7 +2224,7 @@ BOOL CSuperTagEditorView::OnNotify(WPARAM wParam, LPARAM lParam, LRESULT* pResul
 		return TRUE;
 		break;
 	}
-	
+
 	return CView::OnNotify(wParam, lParam, pResult);
 }
 
@@ -2272,7 +2272,7 @@ void CSuperTagEditorView::OnUpdateConvFormatUser01(CCmdUI* pCmdUI) /* TyphoonSwe
 void CSuperTagEditorView::OnConvFormatUser02() /* TyphoonSwell 027 */
 {
 	// TODO: この位置にコマンド ハンドラ用のコードを追加してください
-	g_nUserConvFormatType = 1;	
+	g_nUserConvFormatType = 1;
 	CMainFrame *pMainFrm;
 	pMainFrm=((CMainFrame*)AfxGetMainWnd());
 	pMainFrm->UpdateToolBar();
@@ -2307,14 +2307,14 @@ void CSuperTagEditorView::OnConvFormatUser04()
 	g_nUserConvFormatType = 3;
 	CMainFrame *pMainFrm;
 	pMainFrm=((CMainFrame*)AfxGetMainWnd());
-	pMainFrm->UpdateToolBar();	
+	pMainFrm->UpdateToolBar();
 }
 
 void CSuperTagEditorView::OnUpdateConvFormatUser04(CCmdUI* pCmdUI) 
 {
 	// TODO: この位置に command update UI ハンドラ用のコードを追加してください
 	pCmdUI->Enable(TRUE);
-	pCmdUI->SetCheck(g_nUserConvFormatType == 3 ? TRUE : FALSE);	
+	pCmdUI->SetCheck(g_nUserConvFormatType == 3 ? TRUE : FALSE);
 }
 
 void CSuperTagEditorView::OnConvFormatUser05() 
@@ -2545,7 +2545,7 @@ void CSuperTagEditorView::OnTeikeiConfig() /* AstralCircle 041 */
 	prop.AddPage(&pageTeikei[0]);
 	prop.AddPage(&pageTeikei[1]);
 	prop.AddPage(&pageTeikei[2]);
-	
+
 	if (prop.DoModal() == IDOK) {
 		for (int k=0;k<3;k++) {
 			g_strTeikeiGroupName[k] = pageTeikei[k].m_strGroupName;
@@ -2560,7 +2560,7 @@ void CSuperTagEditorView::OnTeikeiConfig() /* AstralCircle 041 */
 void CSuperTagEditorView::OnUpdateDlgTeikei(CCmdUI* pCmdUI) 
 {
 	// TODO: この位置に command update UI ハンドラ用のコードを追加してください
-	pCmdUI->Enable(TRUE);		
+	pCmdUI->Enable(TRUE);
 }
 
 void CSuperTagEditorView::OnTeikei(int nIndex)
@@ -2636,7 +2636,7 @@ void CSuperTagEditorView::OnUpdateTeikei201(CCmdUI* pCmdUI)
 void CSuperTagEditorView::OnTeikei202() 
 {
 	// TODO: この位置にコマンド ハンドラ用のコードを追加してください
-	OnTeikei(11);	
+	OnTeikei(11);
 }
 
 void CSuperTagEditorView::OnUpdateTeikei202(CCmdUI* pCmdUI) 
@@ -2997,7 +2997,7 @@ void CSuperTagEditorView::OnDlgFavorites() /* RockDance 129 */
 void CSuperTagEditorView::OnUpdateDlgFavorites(CCmdUI* pCmdUI) /* RockDance 129 */
 {
 	// TODO: この位置に command update UI ハンドラ用のコードを追加してください
-	pCmdUI->Enable(TRUE);	
+	pCmdUI->Enable(TRUE);
 }
 
 void CSuperTagEditorView::OnFavorites() /* RockDance 129 */
@@ -3009,13 +3009,13 @@ void CSuperTagEditorView::OnFavorites() /* RockDance 129 */
 void CSuperTagEditorView::OnUpdateFavorites(CCmdUI* pCmdUI) /* RockDance 129 */
 {
 	// TODO: この位置に command update UI ハンドラ用のコードを追加してください
-	pCmdUI->Enable(TRUE);	
+	pCmdUI->Enable(TRUE);
 }
 
 void CSuperTagEditorView::OnCalcFolderTotal()  /* RockDance 128 */
 {
 	// TODO: この位置にコマンド ハンドラ用のコードを追加してください
-	m_List.CalcSum(m_List.GetSelectedItem());	
+	m_List.CalcSum(m_List.GetSelectedItem());
 }
 
 void CSuperTagEditorView::OnUpdateCalcFolderTotal(CCmdUI* pCmdUI) /* RockDance 128 */
@@ -3031,7 +3031,7 @@ void CSuperTagEditorView::OnUpdateCalcFolderTotal(CCmdUI* pCmdUI) /* RockDance 1
 		// 変更可能な項目か？
 		pCmdUI->Enable(TRUE);
 	}
-	
+
 }
 
 void CSuperTagEditorView::OnEditPasteAdd()  /* Baja 171 */
@@ -3058,7 +3058,7 @@ void CSuperTagEditorView::OnEditPasteAdd()  /* Baja 171 */
 void CSuperTagEditorView::OnUpdateEditPasteAdd(CCmdUI* pCmdUI) /* Baja 171 */
 {
 	// TODO: この位置に command update UI ハンドラ用のコードを追加してください
-	OnUpdateEditCopy(pCmdUI);	
+	OnUpdateEditCopy(pCmdUI);
 }
 
 void CSuperTagEditorView::OnEditCopyFormat01() /* FunnyCorn 175 */
@@ -3070,7 +3070,7 @@ void CSuperTagEditorView::OnEditCopyFormat01() /* FunnyCorn 175 */
 void CSuperTagEditorView::OnEditCopyFormat02() /* FunnyCorn 175 */
 {
 	// TODO: この位置にコマンド ハンドラ用のコードを追加してください
-	m_List.ClipboardCopyFormat(&g_userCopyFormat[1]);	
+	m_List.ClipboardCopyFormat(&g_userCopyFormat[1]);
 }
 
 void CSuperTagEditorView::OnEditCopyFormat03() /* FunnyCorn 175 */
@@ -3088,7 +3088,7 @@ void CSuperTagEditorView::OnEditCopyFormat04() /* FunnyCorn 175 */
 void CSuperTagEditorView::OnEditCopyFormat05() /* FunnyCorn 175 */
 {
 	// TODO: この位置にコマンド ハンドラ用のコードを追加してください
-	m_List.ClipboardCopyFormat(&g_userCopyFormat[4]);	
+	m_List.ClipboardCopyFormat(&g_userCopyFormat[4]);
 }
 
 void CSuperTagEditorView::OnUpdateEditCopyFormat(CCmdUI* pCmdUI) /* FunnyCorn 175 */
@@ -3104,7 +3104,7 @@ void CSuperTagEditorView::OnUpdateEditCopyFormat(CCmdUI* pCmdUI) /* FunnyCorn 17
 		pCmdUI->Enable(TRUE);
 		return;
 	}
-	//pCmdUI->Enable(FALSE);	
+	//pCmdUI->Enable(FALSE);
 }
 
 void CSuperTagEditorView::OnDeleteCharSpace() /* FunnyCorn 177 */
@@ -3117,7 +3117,7 @@ void CSuperTagEditorView::OnDeleteCharSpace() /* FunnyCorn 177 */
 void CSuperTagEditorView::OnUpdateDeleteCharSpace(CCmdUI* pCmdUI) /* FunnyCorn 177 */
 {
 	// TODO: この位置に command update UI ハンドラ用のコードを追加してください
-	OnUpdateDeleteChar(pCmdUI);	
+	OnUpdateDeleteChar(pCmdUI);
 }
 
 void CSuperTagEditorView::OnUpdatePluginCommand(CCmdUI* pCmdUI)
@@ -3168,7 +3168,7 @@ void CSuperTagEditorView::OnUpdateConvExSetup(CCmdUI* pCmdUI)
 void CSuperTagEditorView::OnConvUserSetup() 
 {
 	// TODO: この位置にコマンド ハンドラ用のコードを追加してください
-	OnConvFormatUser();	
+	OnConvFormatUser();
 }
 
 void CSuperTagEditorView::OnUpdateConvUserSetup(CCmdUI* pCmdUI) 
@@ -3222,7 +3222,7 @@ void CSuperTagEditorView::DoMoveFolder(UINT index)  /* STEP 022 */
 void CSuperTagEditorView::OnMoveToNext() /* STEP 014 */
 {
 	// TODO: この位置にコマンド ハンドラ用のコードを追加してください
-	m_List.MoveToNext();	
+	m_List.MoveToNext();
 }
 
 void CSuperTagEditorView::OnUpdateMoveToNext(CCmdUI* pCmdUI) /* STEP 014 */
@@ -3240,7 +3240,7 @@ void CSuperTagEditorView::OnMoveToPrevious()
 void CSuperTagEditorView::OnUpdateMoveToPrevious(CCmdUI* pCmdUI) 
 {
 	// TODO: この位置に command update UI ハンドラ用のコードを追加してください
-	pCmdUI->Enable(TRUE);	
+	pCmdUI->Enable(TRUE);
 }
 
 void CSuperTagEditorView::OnConvFormatUserT2f01() /* STEP 030 */

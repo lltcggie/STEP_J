@@ -17,7 +17,7 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 #ifndef ListView_SetCheckState
-#define ListView_SetCheckState(hwndLV, i, fCheck)	ListView_SetItemState(hwndLV, i, INDEXTOSTATEIMAGEMASK((fCheck)+1), LVIS_STATEIMAGEMASK)
+#define ListView_SetCheckState(hwndLV, i, fCheck) ListView_SetItemState(hwndLV, i, INDEXTOSTATEIMAGEMASK((fCheck)+1), LVIS_STATEIMAGEMASK)
 #endif
 
 #define ListView_GetSelectedItem(listCtrl)			listCtrl.GetNextItem(-1, LVNI_ALL | LVNI_SELECTED | LVIS_FOCUSED)
@@ -62,7 +62,7 @@ END_MESSAGE_MAP()
 BOOL CDlgPluginSetup::OnInitDialog() 
 {
 	CDialog::OnInitDialog();
-	
+
 	// TODO: この位置に初期化の補足処理を追加してください
 	DWORD	dwStyle;
 	dwStyle = m_listPlugin.SendMessage(LVM_GETEXTENDEDLISTVIEWSTYLE, 0, 0);
@@ -81,7 +81,7 @@ BOOL CDlgPluginSetup::OnInitDialog()
 		m_listPlugin.SetItemData(nIndex, (DWORD_PTR)pPlugin);
 		ListView_SetCheckState(m_listPlugin.GetSafeHwnd(), nIndex, pPlugin->bUse ? TRUE : FALSE);
 	}
-	
+
 	return TRUE;  // コントロールにフォーカスを設定しないとき、戻り値は TRUE となります
 	              // 例外: OCX プロパティ ページの戻り値は FALSE となります
 }
@@ -186,7 +186,7 @@ void CDlgPluginSetup::OnBtDown()
 	m_listPlugin.SetItemData(nIndex, (DWORD_PTR)pPlugin);
 	ListView_SetCheckState(m_listPlugin.GetSafeHwnd(), nIndex, pPlugin->bUse ? TRUE : FALSE);
 	m_listPlugin.DeleteItem(nIndex-2);
-	m_listPlugin.SetItemState(nIndex-1, LVIS_FOCUSED | LVIS_SELECTED, LVIS_FOCUSED | LVIS_SELECTED);	
+	m_listPlugin.SetItemState(nIndex-1, LVIS_FOCUSED | LVIS_SELECTED, LVIS_FOCUSED | LVIS_SELECTED);
 }
 
 void CDlgPluginSetup::OnOK() 

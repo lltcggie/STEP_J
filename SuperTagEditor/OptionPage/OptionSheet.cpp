@@ -93,7 +93,7 @@ BOOL COptionSheet::COptionList::NotifyParentOfSelChanging()
 	// TODO: Add your control notification handler code here
 	CWnd *wnd;
 	NMHDR hdr;
-	
+
 	// Get the control window
 	wnd = GetControlWnd();
 	ASSERT_KINDOF(CWnd, wnd);
@@ -609,7 +609,7 @@ BOOL COptionSheet::Create(CWnd* pParentWnd, DWORD dwStyle, DWORD dwExStyle)
 	dwStyle |= WS_POPUP;
 
 	m_DlgTemplate = CreateDlgTemplate(dwStyle, dwExStyle);
-	
+
 	result = CDialog::CreateIndirect(m_DlgTemplate, pParentWnd);
 
 	m_hDialogTemplate = NULL;
@@ -880,7 +880,7 @@ BOOL COptionSheet::CalcSpacing(CFont &buttonFont)
 	CRect		rcWindow;
 	COptionPage *page;
 	CRect		rect;
-	
+
 	GetClientRect(rcClient);
 	GetWindowRect(rcWindow);
 
@@ -1040,7 +1040,7 @@ BOOL COptionSheet::OnInitDialog()
 	if(!(m_psh.dwFlags & OSH_WIZARDFULL)) {
 		height += (PAGE_SPACING * 2);
 	}
-	
+
 	// Set the new window position
 	SetWindowPos(&wndTop,
 				 0,
@@ -1138,13 +1138,13 @@ void COptionSheet::OnPaint()
 		rcClient.InflateRect(-1, -1, -1, -1);
 		dc.Draw3dRect(rcClient, clrLite, clrDark);
 	}
-	
+
 }
 
 void COptionSheet::OnSize(UINT nType, int cx, int cy) 
 {
 	CDialog::OnSize(nType, cx, cy);
-	
+
 	// Adjust the tree control
 	if(NULL != m_ListWindow) {
 		CRect rect;
@@ -1360,7 +1360,7 @@ void COptionSheet::OnNext(void)
 	switch(result) {
 	case -1:
 		break;
-	case 0:	
+	case 0:
 		SetActivePage(++m_PageIndex);
 		break;
 	default:
@@ -1377,7 +1377,7 @@ void COptionSheet::OnNext(void)
 void COptionSheet::OnBack()
 {
 	LRESULT result;
-	
+
 	// Make sure there is a current item it has a page
 	ASSERT(NULL != m_CurrentPage);
 

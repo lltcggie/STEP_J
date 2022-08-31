@@ -90,7 +90,7 @@ END_MESSAGE_MAP()
 BOOL CDlgTeikei::OnInitDialog() 
 {
 	CPropertyPage::OnInitDialog();
-	
+
 	// TODO: この位置に初期化の補足処理を追加してください
 
 	if (m_nGroupNumber == 1) {	// 無理矢理タブのタイトルを変更
@@ -194,7 +194,7 @@ void CDlgTeikei::OnOK()
 	m_teikeiInfo[7].strTeikei = m_strTeikei8;
 	m_teikeiInfo[8].strTeikei = m_strTeikei9;
 	m_teikeiInfo[9].strTeikei = m_strTeikei10;
-	
+
 	CPropertyPage::OnOK();
 }
 

@@ -327,7 +327,7 @@ BOOL CMp3Info::Load(LPCTSTR szFileName,BOOL bVbrScan)
 			SetFilePointer(hFile,dwBeginPtr+4,NULL,FILE_BEGIN);
 		}
 		dwFrameCount++;
-		if(!m_mpegInfo.bVbr)	//VBRのときはすべてのフレームをスキャン
+		if(!m_mpegInfo.bVbr) //VBRのときはすべてのフレームをスキャン
 			break;
 		if(!bVbrScan)
 			break;

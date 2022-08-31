@@ -158,7 +158,7 @@ void AddEditMenu(HMENU hMenu) {
 extern "C" STEP_API bool WINAPI STEPInit(UINT pID, LPCTSTR szPluginFolder)
 {
 	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-	if (Initialize() == false)	return false;
+	if (Initialize() == false) return false;
 	nPluginID = pID;
 
 	// INIファイルの読み込み
@@ -301,7 +301,7 @@ STEP_API bool WINAPI STEPSupportTrackNumberSIF(UINT nFormat) {
 extern "C" STEP_API CONTROLTYPE WINAPI STEPGetControlType(UINT nFormat, COLUMNTYPE nColumn, bool isEditSIF)
 {
 	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-	if (!isEditSIF)	return _NULL;
+	if (!isEditSIF) return _NULL;
 	switch (nColumn) {
 	case COLUMN_TRACK_NAME:
 	case COLUMN_ARTIST_NAME:
@@ -1051,7 +1051,7 @@ bool WINAPI DeleteId3V2tag(FILE_INFO* pFileInfo, int nProcFlag, HWND hWnd)
 	extern bool LoadFileDSF(FILE_INFO *pFileMP3);
 	LoadFileDSF(pFileInfo);
 //	CId3tagv2	id3v2/*(USE_SCMPX_GENRE_ANIMEJ)*/;
-//	if (id3v2.Load(GetFullPath(pFileInfo))	!= ERROR_SUCCESS	// 読み込み失敗
+//	if (id3v2.Load(GetFullPath(pFileInfo)) != ERROR_SUCCESS	// 読み込み失敗
 //	||	id3v2.IsEnable() == FALSE			// ID3v2 ではない
 //	||	!TRUE/*id3v2.IsSafeVer()*/) {				// 未対応のバージョン
 //		// 読み込み失敗
@@ -1098,7 +1098,7 @@ bool WINAPI ConvID3v2Version(FILE_INFO* pFileInfo, int nProcFlag, HWND hWnd)
 	}
 	if (GetFormat(pFileInfo) != nFileTypeDSF) return true;
 	CId3tagv2	id3v2;
-	if (id3v2.Load(GetFullPath(pFileInfo))	!= ERROR_SUCCESS	// 読み込み失敗
+	if (id3v2.Load(GetFullPath(pFileInfo)) != ERROR_SUCCESS	// 読み込み失敗
 	||	id3v2.IsEnable() == FALSE			// ID3v2 ではない
 	||	!TRUE/*id3v2.IsSafeVer()*/) {				// 未対応のバージョン
 		// 読み込み失敗
@@ -1114,15 +1114,15 @@ bool WINAPI ConvID3v2Version(FILE_INFO* pFileInfo, int nProcFlag, HWND hWnd)
 		// 変更しない以外
 		switch (nId3v2VersionConv) {
 		case 1: // v2.2
-			if (id3v2.GetVer() != 0x0200)	needConv = true;
+			if (id3v2.GetVer() != 0x0200) needConv = true;
 			id3v2.SetVer(0x0200);
 			break;
 		case 2: // v2.3
-			if (id3v2.GetVer() != 0x0300)	needConv = true;
+			if (id3v2.GetVer() != 0x0300) needConv = true;
 			id3v2.SetVer(0x0300);
 			break;
 		case 3: // v2.4
-			if (id3v2.GetVer() != 0x0400)	needConv = true;
+			if (id3v2.GetVer() != 0x0400) needConv = true;
 			id3v2.SetVer(0x0400);
 			break;
 		default:
@@ -1159,11 +1159,11 @@ bool WINAPI ConvID3v2Version(FILE_INFO* pFileInfo, int nProcFlag, HWND hWnd)
 			id3v2.SetCharEncoding(CId3tagv2::ID3V2CHARENCODING_UTF_16);
 			break;
 		case 3:
-		//	if (id3v2.GetCharEncoding() != CId3tagv2::ID3V2CHARENCODING_UTF_8)	needConv = true;
+		//	if (id3v2.GetCharEncoding() != CId3tagv2::ID3V2CHARENCODING_UTF_8) needConv = true;
 			id3v2.SetCharEncoding(CId3tagv2::ID3V2CHARENCODING_UTF_8);
 			break;
 		//case 4:
-		//	if (id3v2.GetCharEncoding() != CId3tagv2::ID3V2CHARENCODING_UTF_16BE)	needConv = true;
+		//	if (id3v2.GetCharEncoding() != CId3tagv2::ID3V2CHARENCODING_UTF_16BE) needConv = true;
 		//	id3v2.SetCharEncoding(CId3tagv2::ID3V2CHARENCODING_UTF_16BE);
 		//	break;
 		default:
@@ -1174,7 +1174,7 @@ bool WINAPI ConvID3v2Version(FILE_INFO* pFileInfo, int nProcFlag, HWND hWnd)
     if (id3v2.GetUnSynchronization()) {//非同期化されてる場合はオフにする
         needConv = true;
     }
-    if (needConv == false)	return true;
+    if (needConv == false) return true;
     id3v2.SetUnSynchronization(false);//非同期化オフ
     id3v2.ApplyStringEncode();//文字エンコードの変更を反映させる
     id3v2.SetYear(szYear);//"TYER" <=> "TDRC" 変換

@@ -82,7 +82,7 @@ void DlgAddNumber::OnRadioReplace() /* Conspiracy 194 */
 BOOL DlgAddNumber::OnInitDialog() 
 {
 	CDialog::OnInitDialog();
-	
+
 	// TODO: この位置に初期化の補足処理を追加してください
 	OnRadioReplace(); /* Conspiracy 194 */
 	return TRUE;  // コントロールにフォーカスを設定しないとき、戻り値は TRUE となります

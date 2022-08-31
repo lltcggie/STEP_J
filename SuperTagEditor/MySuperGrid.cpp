@@ -5098,7 +5098,7 @@ bool CMySuperGrid::MoveFolderFormat(USER_MOVE_FODLER_FORMAT *pForm, CString strF
 		strText = StrReplace(strText, _T("%URL%")		, fileMP3->strURLSI.SpanExcluding(_T("\r"))); /* Baja 154 */
 		strText = StrReplace(strText, _T("%ENCODEST%")	, fileMP3->strEncodest.SpanExcluding(_T("\r"))); /* Baja 154 */
 		strText = StrReplace(strText, _T("%OTHER%")  	, fileMP3->strOther.SpanExcluding(_T("\r"))); /* Conspiracy 196 */
-		
+
 
 		// 制御コード（一部）をスペースに置き換え /* SeaKnows2 040 */
 		strText = StrReplace(strText, _T("\n"), _T(" "));

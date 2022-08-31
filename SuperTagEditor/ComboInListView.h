@@ -14,7 +14,7 @@ class CComboInListView : public CComboBox
 {
 // Construction
 public:
-	CComboInListView(int iItem, int iSubItem, CStringList *plstItems);	
+	CComboInListView(int iItem, int iSubItem, CStringList *plstItems);
 // Attributes
 public:
 

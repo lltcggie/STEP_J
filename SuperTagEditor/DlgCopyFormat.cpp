@@ -183,7 +183,7 @@ BOOL CDlgCopyFormat::OnInitDialog()
 
 void CDlgCopyFormat::OnOK()
 {
-	if (!::IsWindow(m_hWnd))	return;
+	if (!::IsWindow(m_hWnd)) return;
 	m_editFormat.GetWindowText(m_userFormatEx[m_nFormatType].strFormat);
 
 	COptionPage::OnOK();

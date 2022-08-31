@@ -100,7 +100,7 @@ static LPCTSTR GetString(LPCTSTR str, CString &output)
 	ASSERT('"' == *str);
 	LPCTSTR end;
 	LPCTSTR start;
-	
+
 	str++;
 	start = str;
 	end = str;
@@ -145,7 +145,7 @@ static LPCTSTR GetString(LPCTSTR str, CString &output)
 	*dst = 0;
 
 	output.ReleaseBuffer(length);
-	
+
 	/* Return a string object containing the literal */
 	return str;
 }
@@ -153,7 +153,7 @@ static LPCTSTR GetString(LPCTSTR str, CString &output)
 
 /*
 	Translate an input stream into an ID tag.
-	
+
 	Parameters:
 		src			Pointer to the input stream.
 		tagString	Where the parsed tag or string will be stored.
@@ -303,7 +303,7 @@ CString CSMLDoc::CSMLTagOptionList::GetParamTypeface(CString &defaultFace) {
 			return logFont.lfFaceName;
 
 		}
-		
+
 		return *value;
 	}
 
@@ -433,7 +433,7 @@ static COLORREF ConvertColor(COLORREF defaultColor, const TCHAR *srcTxt)
 		if('#' == *srcTxt) {
 			srcTxt++;
 		}
-		
+
 		// Process 6 hex values
 		for(i = 0; i < 6; i++) {
 			UCHAR nibble;
@@ -1079,7 +1079,7 @@ BOOL CSMLDoc::ParseSMLText(LPCTSTR src)
 
 								if(nibble1 >= 0x20 && nibble1 <= 0x7f) {
 									*(dst++) = nibble1;
-								}									
+								}
 							}
 						}
 					} else {

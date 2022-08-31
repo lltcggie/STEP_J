@@ -82,8 +82,8 @@ PSTEPlugin STEPluginLoadFile(LPCTSTR strPluginFile)
 	(FARPROC&)STEPInit = GetProcAddress(hLib, "STEPInit");
 	(FARPROC&)STEPGetAPIVersion = GetProcAddress(hLib, "STEPGetAPIVersion");
 	(FARPROC&)STEPGetPluginName = GetProcAddress(hLib, "STEPGetPluginName");
-	if (STEPInit == NULL || STEPGetAPIVersion == NULL || STEPGetPluginName == NULL)	return  NULL;
-	if ((STEPGetAPIVersion() & 0xFFFF00) > (STEP_API_VERSION & 0xFFFF00))	return NULL; /* STEP 029 */
+	if (STEPInit == NULL || STEPGetAPIVersion == NULL || STEPGetPluginName == NULL) return  NULL;
+	if ((STEPGetAPIVersion() & 0xFFFF00) > (STEP_API_VERSION & 0xFFFF00)) return NULL; /* STEP 029 */
 	PSTEPlugin pPlugin = new STEPlugin;
 	pPlugin->hLib = hLib;
 	pPlugin->sFileName = strPluginFile;
@@ -107,7 +107,7 @@ PSTEPlugin STEPluginLoadFile(LPCTSTR strPluginFile)
 	(FARPROC&)pPlugin->STEPGetPluginInfo = GetProcAddress(hLib, "STEPGetPluginInfo");
 	(FARPROC&)pPlugin->STEPInitFileSpecificInfo = GetProcAddress(hLib, "STEPInitFileSpecificInfo");
 	(FARPROC&)pPlugin->STEPOnConvSiFieldToId3tag = GetProcAddress(hLib, "STEPOnConvSiFieldToId3tag");
-	
+
 	plugins.arPlugins.Add(pPlugin);
 
 	if ((*STEPInit)(plugins.arPlugins.GetSize(), szPluginFolder) == false) {
@@ -262,7 +262,7 @@ BOOL OnUpdatePluginCommand(UINT nID) {
 		if (plugin->STEPOnUpdateCommand != NULL) {
 			if (plugin->STEPOnUpdateCommand(nID)) {
 				return true;
-			}	
+			}
 		}
 	}
 	return FALSE;
@@ -447,7 +447,7 @@ bool LoadFile(const TCHAR *sFileName, const TCHAR *sExt, FILE_MP3* pFileMP3)
 
 bool SaveFile(FILE_MP3* pFileMP3)
 {
-	if (!pFileMP3->bModifyFlag)	return true;
+	if (!pFileMP3->bModifyFlag) return true;
 	UINT result = STEP_ERROR;
 	FILE_INFO fileInfo;
 	fileInfo.pFileMP3 = pFileMP3;
@@ -537,7 +537,7 @@ void GetFileExtList(CStringArray& arExt)
 
 bool CheckFileExt(const FILE_MP3* pFileMP3, const TCHAR* ext)
 {
-	if (pFileMP3 == NULL)	return false;
+	if (pFileMP3 == NULL) return false;
 	int nIndex = plugins.GetPluginIndex(pFileMP3->nFormat);
 	if (nIndex < 0) {
 		// 対応プラグインなし
@@ -693,7 +693,7 @@ extern "C" STEP_API UINT WINAPI STEPRegisterExt(UINT nID, LPCTSTR szExt, HBITMAP
 	PSTEPlugin plugin = (PSTEPlugin)plugins.arPlugins.GetAt(nID-1);
 	UINT nFormatType = nID << 8 | (plugin->arExtInfo.GetSize());
 	arFormatType.Add(nFormatType);
-	
+
 	PSTEPExtInfo info = new STEPExtInfo;
 	info->strExt = szExt;
 	CBitmap* pBitmap = CBitmap::FromHandle(hBitmap);
@@ -757,7 +757,7 @@ extern "C" STEP_API bool WINAPI STEPIsNumeric(const TCHAR* szText) /* STEP 037 *
 extern "C" STEP_API void WINAPI STEPConvSiFieldToId3tag(FILE_INFO* pFileInfo) /* STEP 037 */
 {
 	FILE_MP3* pFileMP3 = (FILE_MP3*)pFileInfo->pFileMP3;
-	
+
 	ConvSIFieldToID3tag(pFileMP3);
 }
 

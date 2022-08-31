@@ -68,7 +68,7 @@ void CDlgFixedUpperLower::OnBtAdd()
 BOOL CDlgFixedUpperLower::OnInitDialog() 
 {
 	COptionPage::OnInitDialog();
-	
+
 	// TODO: この位置に初期化の補足処理を追加してください
 	DWORD	dwStyle;
 	dwStyle = m_listUpperLower.SendMessage(LVM_GETEXTENDEDLISTVIEWSTYLE, 0, 0);
@@ -76,7 +76,7 @@ BOOL CDlgFixedUpperLower::OnInitDialog()
 	m_listUpperLower.SendMessage(LVM_SETEXTENDEDLISTVIEWSTYLE, 0, dwStyle);
 
 	m_bModify = FALSE;
-	
+
 	RECT	rect;
 	m_listUpperLower.GetClientRect(&rect);
 	m_listUpperLower.InsertColumn(1, _T("固定単語"), LVCFMT_LEFT, rect.right-rect.left-16, -1);
@@ -98,7 +98,7 @@ void CDlgFixedUpperLower::OnChangeEditFixedWord()
 	// 内での論理和の ENM_CHANGE フラグ付きで CRichEditCrtl().SetEventMask()
 	// メッセージをコントロールへ送るために COptionPage::OnInitDialog() 関数をオーバー
 	// ライドしない限りこの通知を送りません。
-	
+
 	// TODO: この位置にコントロール通知ハンドラ用のコードを追加してください
 	CString strWord;
 	m_editFixedWord.GetWindowText(strWord);

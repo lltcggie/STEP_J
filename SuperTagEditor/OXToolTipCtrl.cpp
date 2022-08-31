@@ -4,7 +4,7 @@
 
 // Source file : OXToolTipCtrl.cpp
 
-// Copyright © Dundas Software Ltd. 1999, All Rights Reserved                      
+// Copyright ÔΩ© Dundas Software Ltd. 1999, All Rights Reserved                      
 			  
 // //////////////////////////////////////////////////////////////////////////
 
@@ -40,7 +40,7 @@ static char THIS_FILE[] = __FILE__;
 // TODO: Add message handlers (eg TTM_SETTIPBKCOLOR) and point them 
 //       to the correct functions.
 
-LPCTSTR COXToolTipCtrl::m_szArrowSpace = _T("Å@");
+LPCTSTR COXToolTipCtrl::m_szArrowSpace = _T("„ÄÄ");
 
 /////////////////////////////////////////////////////////////////////////////
 // COXToolTipCtrl construction
@@ -107,7 +107,7 @@ BEGIN_MESSAGE_MAP(COXToolTipCtrl, CWnd)
     ON_MESSAGE(WM_GETFONT, OnGetFont)
 END_MESSAGE_MAP()
 
-// --- In† :
+// --- In  :
 // --- Out :
 // --- Returns :
 // --- Effect : Draws the tooltip - called in response to a WM_PAINT message
@@ -185,7 +185,7 @@ void COXToolTipCtrl::OnPaint()
     dc.SelectObject(pOldBrush);
     dc.SelectObject(pOldFont);
 }
-// --- In† : nIDEvent - The timer event
+// --- InÔ£∞ : nIDEvent - The timer event
 // --- Out :
 // --- Returns :
 // --- Effect : Timer events are used to either Activate the tooltip after 
@@ -281,7 +281,7 @@ void COXToolTipCtrl::OnTimer(UINT_PTR nIDEvent)
     }
 }
 
-// --- In† : nFlags - unused
+// --- InÔ£∞ : nFlags - unused
 //           point -  unused
 // --- Out :
 // --- Returns :
@@ -310,7 +310,7 @@ void COXToolTipCtrl::OnLButtonDown(UINT /*nFlags*/, CPoint /*point*/)
 	//CWnd::OnLButtonDown(nFlags, point);
 }
 
-// --- In† : pOldWnd - Contains the CWnd object that loses the input focus 
+// --- InÔ£∞ : pOldWnd - Contains the CWnd object that loses the input focus 
 //                    (may be NULL). 
 // --- Out :
 // --- Returns :
@@ -329,7 +329,7 @@ int COXToolTipCtrl::OnMouseActivate(CWnd*, UINT,
 	return MA_NOACTIVATE;
 }
 
-// --- In† :
+// --- InÔ£∞ :
 // --- Out :
 // --- Returns :
 // --- Effect : Kills off any remaining timers
@@ -341,7 +341,7 @@ void COXToolTipCtrl::OnDestroy()
 	CWnd::OnDestroy();
 }
 
-// --- In† : wFlag - system-wide parameter flag (see WM_SETTINGCHANGE)
+// --- InÔ£∞ : wFlag - system-wide parameter flag (see WM_SETTINGCHANGE)
 //           lpszSection - name of changed section or registry has has changes
 // --- Out :
 // --- Returns :
@@ -350,12 +350,12 @@ void COXToolTipCtrl::OnDestroy()
 void COXToolTipCtrl::OnSettingChange(UINT uFlags, LPCTSTR lpszSection) 
 {
 	CWnd::OnSettingChange(uFlags, lpszSection);
-	
+
     if (m_bUsingSystemFont)
         SetLogFont(GetSystemToolTipFont(), TRUE);
 }
 
-// --- In† : hFont - Specifies a handle to the new font
+// --- InÔ£∞ : hFont - Specifies a handle to the new font
 // --- Out :
 // --- Returns : No return value
 // --- Effect : sets the new tooltip font
@@ -376,7 +376,7 @@ LRESULT COXToolTipCtrl::OnSetFont(WPARAM hFont, LPARAM /*lParam */)
     return result;
 }
 
-// --- In† : The parameters are not used
+// --- InÔ£∞ : The parameters are not used
 // --- Out :
 // --- Returns : The return value is a handle to the font used by the control
 // --- Effect : 
@@ -404,7 +404,7 @@ BOOL COXToolTipCtrl::Create(CWnd* pParentWnd)
         return FALSE;
 	}
 
-	
+
 	SetLogFont(GetSystemToolTipFont(), false);
 
     return TRUE;

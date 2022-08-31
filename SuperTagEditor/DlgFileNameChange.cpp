@@ -57,7 +57,7 @@ void CDlgFileNameChange::OnChangeEditName()
 	// 内での論理和の ENM_CHANGE フラグ付きで CRichEditCrtl().SetEventMask()
 	// メッセージをコントロールへ送るために CDialog::OnInitDialog() 関数をオーバー
 	// ライドしない限りこの通知を送りません。
-	
+
 	// TODO: この位置にコントロール通知ハンドラ用のコードを追加してください
 	CString strFileName;
 	m_editName.GetLine(0, strFileName.GetBuffer(m_editName.LineLength(0)*2+sizeof(DWORD)+2), m_editName.LineLength(0)*2+sizeof(DWORD)+2); /* STEP 010 バッファサイズ増やした *//* なんでかちゃんと取得されない環境があるのでさらに２倍に */
@@ -69,7 +69,7 @@ void CDlgFileNameChange::OnChangeEditName()
 BOOL CDlgFileNameChange::OnInitDialog() 
 {
 	CDialog::OnInitDialog();
-	
+
 	// TODO: この位置に初期化の補足処理を追加してください
 	OnChangeEditName();
 	return TRUE;  // コントロールにフォーカスを設定しないとき、戻り値は TRUE となります

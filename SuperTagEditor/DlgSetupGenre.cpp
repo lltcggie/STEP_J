@@ -14,7 +14,7 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 #ifndef ListView_SetCheckState
-#define ListView_SetCheckState(hwndLV, i, fCheck)	ListView_SetItemState(hwndLV, i, INDEXTOSTATEIMAGEMASK((fCheck)+1), LVIS_STATEIMAGEMASK)
+#define ListView_SetCheckState(hwndLV, i, fCheck) ListView_SetItemState(hwndLV, i, INDEXTOSTATEIMAGEMASK((fCheck)+1), LVIS_STATEIMAGEMASK)
 #endif
 
 #define ListView_GetSelectedItem(listCtrl)			listCtrl.GetNextItem(-1, LVNI_ALL | LVNI_SELECTED | LVIS_FOCUSED)
@@ -174,7 +174,7 @@ void CDlgSetupGenre::OnOK()
 {
 	// 編集後の状態を保存
 	//int nIndex; for (nIndex = 0; nIndex < m_listGenre.GetItemCount(); nIndex++) {
-	if (!::IsWindow(m_hWnd))	return;
+	if (!::IsWindow(m_hWnd)) return;
 	int nIndex; for (nIndex = 0; g_genreListSCMPX[nIndex].sName != NULL; nIndex++) {
 		GENRE_LIST	*pGenre = &g_genreListSCMPX[nIndex];
 		pGenre->bAddList = ListView_GetCheckState(m_listGenre.GetSafeHwnd(), nIndex) ? true : false;

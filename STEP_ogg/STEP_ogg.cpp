@@ -92,7 +92,7 @@ STEP_API LPCTSTR WINAPI STEPGetPluginInfo(void)
 STEP_API bool WINAPI STEPInit(UINT pID, LPCTSTR szPluginFolder)
 {
 	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-	if (Initialize() == false)	return false;
+	if (Initialize() == false) return false;
 	nPluginID = pID;
 
 	// INIファイルの読み込み
@@ -141,7 +141,7 @@ STEP_API bool WINAPI STEPSupportTrackNumberSIF(UINT nFormat) {
 STEP_API CONTROLTYPE WINAPI STEPGetControlType(UINT nFormat, COLUMNTYPE nColumn, bool isEditSIF)
 {
 	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-	if (!isEditSIF)	return _NULL;
+	if (!isEditSIF) return _NULL;
     if(nFormat == nFileTypeOPUS){//情報取得のみの対応
         return _NULL;
     }
@@ -281,5 +281,5 @@ STEP_API void WINAPI STEPShowOptionDialog(HWND hWnd)
 
 STEP_API void WINAPI STEPInitFileSpecificInfo(FILE_INFO* pFileMP3) {
 	CTag_Ogg* fileOGG = (CTag_Ogg*)GetFileSpecificInfo(pFileMP3);
-	if (fileOGG != NULL)	delete fileOGG;
+	if (fileOGG != NULL) delete fileOGG;
 }

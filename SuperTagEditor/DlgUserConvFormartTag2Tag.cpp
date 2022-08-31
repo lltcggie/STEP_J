@@ -111,7 +111,7 @@ void CDlgUserConvFormartTag2Tag::OnBtDiscNumber2()
 BOOL CDlgUserConvFormartTag2Tag::OnInitDialog() 
 {
 	COptionPage::OnInitDialog();
-	
+
 	int		i;
 	m_listFormatType.ResetContent();
 	for (i = 0; i < USER_CONV_FORMAT_TAG2TAG_MAX; i++) {
@@ -122,7 +122,7 @@ BOOL CDlgUserConvFormartTag2Tag::OnInitDialog()
 
 	m_listFormatType.SetCurSel(m_nFormatType);
 	m_editFormat.SetWindowText(m_userFormatTag2Tag[m_nFormatType].strFormat);
-	
+
 	return TRUE;  // コントロールにフォーカスを設定しないとき、戻り値は TRUE となります
 	              // 例外: OCX プロパティ ページの戻り値は FALSE となります
 }
@@ -160,7 +160,7 @@ void CDlgUserConvFormartTag2Tag::OnSelChangeListFormatType()
 
 void CDlgUserConvFormartTag2Tag::OnOK() 
 {
-	if (!::IsWindow(m_hWnd))	return;
+	if (!::IsWindow(m_hWnd)) return;
 	m_editFormat.GetWindowText(m_userFormatTag2Tag[m_nFormatType].strFormat);
 
 	COptionPage::OnOK();

@@ -232,7 +232,7 @@ void CDlgKeyConfig::UpdateKeyList(void)
 			}
 		}
 	}
-	
+
 	// 選択しなおす
 	m_listKey.SetCurSel((nOldSel >= 0 && nOldSel < i) ? nOldSel : 0);
 }
@@ -494,6 +494,6 @@ void CDlgKeyConfig::OnSelChangeListCommand()
 			}
 		}
 	}
-	
+
 	m_bExecCommandChange = false;
 }

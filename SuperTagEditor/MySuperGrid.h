@@ -280,13 +280,13 @@ public:
 // Operations
 public:
 	//HOWTO:
-	
+
 	void InitializeGrid(void);
 	void SetNewImage(int nItem);
 	CImageList *CreateDragImageEx(int nItem);
 	BOOL m_bDrag;
 	// Overrides
-	bool OnControlLButtonDown(UINT nFlags, CPoint point, LVHITTESTINFO& ht);	
+	bool OnControlLButtonDown(UINT nFlags, CPoint point, LVHITTESTINFO& ht);
 	void OnUpdateListViewItem(CTreeItem* lpItem, LV_ITEM *plvItem);
 	CItemInfo* CopyData(CItemInfo* lpSrc);
 	int GetIcon(const CTreeItem* pItem);

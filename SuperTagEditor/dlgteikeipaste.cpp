@@ -54,7 +54,7 @@ END_MESSAGE_MAP()
 BOOL CDlgTeikeiPaste::OnInitDialog() 
 {
 	CDialog::OnInitDialog();
-	
+
 	// TODO: この位置に初期化の補足処理を追加してください
 	if (!m_strTitle.IsEmpty()) {
 		SetWindowText(m_strTitle);

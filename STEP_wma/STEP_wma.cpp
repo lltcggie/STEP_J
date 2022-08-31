@@ -92,7 +92,7 @@ STEP_API LPCTSTR WINAPI STEPGetPluginInfo(void)
 STEP_API bool WINAPI STEPInit(UINT pID, LPCTSTR szPluginFolder)
 {
 	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-	if (Initialize() == false)	return false;
+	if (Initialize() == false) return false;
 	nPluginID = pID;
 
 	// INIファイルの読み込み
@@ -143,7 +143,7 @@ STEP_API bool WINAPI STEPSupportTrackNumberSIF(UINT nFormat) {
 STEP_API CONTROLTYPE WINAPI STEPGetControlType(UINT nFormat, COLUMNTYPE nColumn, bool isEditSIF)
 {
 	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-	if (!isEditSIF)	return _NULL;
+	if (!isEditSIF) return _NULL;
 	switch (nColumn) {
 	case COLUMN_TRACK_NAME:
 	case COLUMN_ARTIST_NAME:

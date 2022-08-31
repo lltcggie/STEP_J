@@ -60,7 +60,7 @@ CRegExp* CRegExp::RegComp(const TCHAR *exp)
 
 	if (exp == NULL)
 		return NULL;
-	
+
 	bCompiled = TRUE;
 
 	// First pass: determine size, legality. 
@@ -99,7 +99,7 @@ CRegExp* CRegExp::RegComp(const TCHAR *exp)
 	regmlen = 0;
 	scan = program;		// First BRANCH. 
 	if (OP(regnext(scan)) == END) 
-	{	
+	{
 		// Only one top-level choice. 
 		scan = OPERAND(scan);
 
@@ -859,7 +859,7 @@ TCHAR* CRegExp::GetReplaceString( const TCHAR* sReplaceExp )
 			no = -1;
 
 		if (no < 0) 
-		{	
+		{
 			// Ordinary character. 
 			if (c == _T('\\') && (*src == _T('\\') || *src == _T('&')))
 				c = *src++;
@@ -883,7 +883,7 @@ TCHAR* CRegExp::GetReplaceString( const TCHAR* sReplaceExp )
 
 	// Add null termination
 	buf[replacelen] = _T('\0');
-	
+
 	// Now we can create the string
 	src = (TCHAR *)sReplaceExp;
 	while ((c = *src++) != _T('\0')) 
@@ -896,7 +896,7 @@ TCHAR* CRegExp::GetReplaceString( const TCHAR* sReplaceExp )
 			no = -1;
 
 		if (no < 0) 
-		{	
+		{
 			// Ordinary character. 
 			if (c == _T('\\') && (*src == _T('\\') || *src == _T('&')))
 				c = *src++;

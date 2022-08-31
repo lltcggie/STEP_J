@@ -85,5 +85,5 @@ void COptionPageStaticText::OnSize(UINT nType, int cx, int cy)
 		m_Display.RequestResize();
 	}
 	// TODO: Add your message handler code here
-	
+
 }

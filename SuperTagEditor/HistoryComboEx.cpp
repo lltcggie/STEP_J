@@ -69,7 +69,7 @@ BOOL CHistoryComboEx::PreCreateWindow(CREATESTRUCT& cs)
 	// (unfortunately we can't turn it off)
 	if (cs.style & CBS_SORT)
 		TRACE("WARNING: Creating History combo with CBS_SORT style\n");
-	
+
 	return CComboBoxEx::PreCreateWindow(cs);
 }
 
@@ -95,24 +95,24 @@ int CHistoryComboEx::InsertItem(const COMBOBOXEXITEM *pCBItem)
 	int nRet = -1;
 
 	// don't add it already there
-	COMBOBOXEXITEM cbiTemp;	
+	COMBOBOXEXITEM cbiTemp;
 	cbiTemp = *pCBItem;
 	CString str = (CString) cbiTemp.pszText;
-	
+
 	//str.TrimLeft(" ");
 	//str.TrimRight(" ");
-	cbiTemp.pszText = (LPTSTR)(LPCTSTR) str;	
+	cbiTemp.pszText = (LPTSTR)(LPCTSTR) str;
 	cbiTemp.iItem = 0;
 	//nRet = CComboBoxEx::InsertItem(&cbiTemp);
-	
+
 	int nIndex = FindStringExact(0, cbiTemp.pszText);
-	
+
 	if (nIndex != -1/* && nIndex != 0*/)
 		DeleteString(nIndex);
 	nRet = CComboBoxEx::InsertItem(&cbiTemp);
-	
+
 	SetCurSel(nRet);
-	
+
 	return nRet;
 }
 
@@ -168,7 +168,7 @@ CString CHistoryComboEx::LoadHistory(LPCTSTR lpszSection, LPCTSTR lpszKeyPrefix,
 	if (m_bSaveRestoreLastCurrent)
 	{
 		CString sKey;
-		
+
 		if (!m_sKeyCurItem.IsEmpty())
 			sKey = m_sKeyCurItem;
 		else if (m_sKeyPrefix.IsEmpty())
@@ -209,11 +209,11 @@ CString CHistoryComboEx::LoadHistory(CRecentFileList *pListMRU, BOOL bSelectMost
 	cbiItem.iItem = 0;
 
 	for (int n = 0; n < nNumItems; n++)
-	{		
+	{
 		cbiItem.pszText = (LPTSTR) (LPCTSTR) (*pListMRU)[n];
 		CComboBoxEx::InsertItem(&cbiItem);
 	}
-	
+
 	if (bSelectMostRecent)
 		SetCurSel(0);
   
@@ -243,33 +243,33 @@ void CHistoryComboEx::SaveHistory(BOOL bAddCurrentItemtoHistory)
 		// trim it, so we items which differ only by a leading/trailing space
 		//sCurItem.TrimLeft();
 		//sCurItem.TrimRight();
-		
+
 		if (!sCurItem.IsEmpty())
 		{
 			cbiItem.pszText = (LPTSTR) (LPCTSTR) (sCurItem);
 			InsertItem(&cbiItem);
 		}
 	}
-	
+
 	// save history to info cached earlier
 	int nMax = min(GetCount(), m_nMaxHistoryItems + 1);
-	
+
 	for (int n = 0; n < nMax; n++)
 	{
 		CString sKey;
 		sKey.Format(_T("%s%d"), m_sKeyPrefix, n);
 		CString sText;
 		GetLBText(n, sText);
-		//pApp->WriteProfileString(m_sSection, sKey, sText);		
+		//pApp->WriteProfileString(m_sSection, sKey, sText);
 		pIniFile->WriteStr(m_sSection, sKey, sText);
 	}
-	
+
 	if (m_bSaveRestoreLastCurrent)
 	{
 		CString sText;
 		GetWindowText(sText);
 		CString sKey;
-		
+
 		if (!m_sKeyCurItem.IsEmpty())
 			sKey = m_sKeyCurItem;
 		else if (m_sKeyPrefix.IsEmpty())
@@ -289,7 +289,7 @@ void CHistoryComboEx::SaveHistory(BOOL bAddCurrentItemtoHistory)
 void CHistoryComboEx::ClearHistory(BOOL bDeleteRegistryEntries)
 {
 	ResetContent();
-	
+
 	if (! m_sSection.IsEmpty() && bDeleteRegistryEntries)
 	{
 		// get the actual reg key used
@@ -321,7 +321,7 @@ void CHistoryComboEx::ClearHistory(BOOL bDeleteRegistryEntries)
 			sKey = "Last";
 		else
 			sKey = m_sKeyPrefix;
-		
+
 		rk.DeleteValue(sKey);
 	}
 }

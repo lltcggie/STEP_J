@@ -30,7 +30,7 @@ public:
 	CFont	*m_fontListView;
 
 	inline	CMySuperGrid	&GetListCtrl(void) {return(m_List);}
-	inline	void	UpdateRegistory(void)	{
+	inline	void	UpdateRegistory(void) {
 				((CSuperTagEditorApp *)AfxGetApp())->WriteRegistry();
 			}
 	inline	void	ReleaseFontListView(void) {

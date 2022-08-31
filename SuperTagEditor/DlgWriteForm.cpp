@@ -135,7 +135,7 @@ void CDlgWriteForm::OnSelChangeListFormatType()
 
 void CDlgWriteForm::OnOK() 
 {
-	if (!::IsWindow(m_hWnd))	return;
+	if (!::IsWindow(m_hWnd)) return;
 	m_editFileName.GetWindowText(m_writeFormat[m_nFormatType].strFileName);
 	m_editExtName.GetWindowText(m_writeFormat[m_nFormatType].strExtName);
 	m_writeFormat[m_nFormatType].bWriteSelected	= m_btWriteSelected.GetCheck() ? true : false;

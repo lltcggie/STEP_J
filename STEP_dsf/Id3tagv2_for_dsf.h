@@ -43,7 +43,7 @@ public:
 		m_dwSize = 0;
 		m_wFlags = 0;
 	}
-	CId3Frame(const CId3Frame &obj)	//コピーコンストラクタ
+	CId3Frame(const CId3Frame &obj) //コピーコンストラクタ
 	{
 		m_data = (unsigned char *)malloc(obj.m_dwSize);
 		memcpy(m_data,obj.m_data,obj.m_dwSize);

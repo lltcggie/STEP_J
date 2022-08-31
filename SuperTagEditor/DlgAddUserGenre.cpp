@@ -51,7 +51,7 @@ END_MESSAGE_MAP()
 BOOL CDlgAddUserGenre::OnInitDialog() 
 {
 	CDialog::OnInitDialog();
-	
+
 	// TODO: この位置に初期化の補足処理を追加してください
 	DWORD	dwStyle;
 	dwStyle = m_listGenre.SendMessage(LVM_GETEXTENDEDLISTVIEWSTYLE, 0, 0);
@@ -71,7 +71,7 @@ BOOL CDlgAddUserGenre::OnInitDialog()
 		m_listGenre.InsertItem(nIndex, strText);
 		m_listGenre.SetItemData(nIndex, pGenre->byGenre);
 	}
-	
+
 	return TRUE;  // コントロールにフォーカスを設定しないとき、戻り値は TRUE となります
 	              // 例外: OCX プロパティ ページの戻り値は FALSE となります
 }
@@ -91,7 +91,7 @@ void CDlgAddUserGenre::OnBtAdd()
 	int i; for (i = 0; i < USER_GENRE_LIST_MAX; i++) {
 		USER_GENRE_LIST	*pGenre = &m_genreListUSER[i];
 		if (pGenre->bUse == true) {
-			if (pGenre->sName != m_strName)	continue;
+			if (pGenre->sName != m_strName) continue;
 		}
 		pGenre->bAddList = true;
 		pGenre->bUse = true;
@@ -132,7 +132,7 @@ void CDlgAddUserGenre::OnChangeEditName()
 	// 内での論理和の ENM_CHANGE フラグ付きで CRichEditCrtl().SetEventMask()
 	// メッセージをコントロールへ送るために CDialog::OnInitDialog() 関数をオーバー
 	// ライドしない限りこの通知を送りません。
-	
+
 	// TODO: この位置にコントロール通知ハンドラ用のコードを追加してください
 	EnableButton();
 }

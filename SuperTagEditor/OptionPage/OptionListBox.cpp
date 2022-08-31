@@ -82,7 +82,7 @@ void COptionListBox::DrawItem(LPDRAWITEMSTRUCT lpDrawItemStruct)
 		{
 			pDC->DrawFocusRect(&lpDrawItemStruct->rcItem);
 		}
-		else if ((lpDrawItemStruct->itemAction & ODA_FOCUS) &&	
+		else if ((lpDrawItemStruct->itemAction & ODA_FOCUS) &&
 			!(lpDrawItemStruct->itemState & ODS_FOCUS)) 
 		{
 			pDC->DrawFocusRect(&lpDrawItemStruct->rcItem); 
@@ -135,7 +135,7 @@ void COptionListBox::DrawItem(LPDRAWITEMSTRUCT lpDrawItemStruct)
 	{
 		pDC->DrawFocusRect(&rcItem); 
 	}
-	else if ((lpDrawItemStruct->itemAction & ODA_FOCUS) &&	
+	else if ((lpDrawItemStruct->itemAction & ODA_FOCUS) &&
 		!(lpDrawItemStruct->itemState & ODS_FOCUS))
 	{
 		pDC->DrawFocusRect(&rcItem); 
@@ -158,7 +158,7 @@ void COptionListBox::DrawItem(LPDRAWITEMSTRUCT lpDrawItemStruct)
 	UINT nFormat = DT_LEFT | DT_SINGLELINE | DT_VCENTER;
 	if (GetStyle() & LBS_USETABSTOPS)
 		nFormat |= DT_EXPANDTABS;
-	
+
 
 	// if the ImageList is Existing and there is an associated Image
 	// for the Item, draw the Image.
@@ -275,7 +275,7 @@ BOOL COptionListBox::AddPage(COptionPage *page, COptionPage *pGroupPage)
 			return FALSE;
 		}
 		ASSERT(count > 0);
-		
+
 		for(i = 0; i < count; i++) {
 
 			COptionPage *itemPage = GetItemPage(i);
@@ -386,7 +386,7 @@ void COptionListBox::OnLButtonDown(UINT nFlags, CPoint point)
 	int curIdx;
 	BOOL bResult;
 
-	
+
 	curIdx = GetCurSel();
 
 	idx = ItemFromPoint(point, bResult);
@@ -408,7 +408,7 @@ void COptionListBox::OnLButtonDown(UINT nFlags, CPoint point)
 			SetCapture();
 		}
 	}
-	
+
 	//CListBox::OnLButtonDown(nFlags, point);
 }
 
@@ -418,7 +418,7 @@ void COptionListBox::OnLButtonUp(UINT nFlags, CPoint point)
 	if(this == GetCapture()) {
 		ReleaseCapture();
 	}
-	
+
 	CListBox::OnLButtonUp(nFlags, point);
 }
 
@@ -432,7 +432,7 @@ void COptionListBox::OnLButtonDblClk(UINT nFlags, CPoint point)
 void COptionListBox::OnMouseMove(UINT nFlags, CPoint point) 
 {
 	// TODO: Add your message handler code here and/or call default
-	
+
 	//CListBox::OnMouseMove(nFlags, point);
 }
 
@@ -440,7 +440,7 @@ void COptionListBox::OnMouseMove(UINT nFlags, CPoint point)
 void COptionListBox::OnDestroy() 
 {
 	CListBox::OnDestroy();
-	
+
 	// TODO: Add your message handler code here
 	while(0 != GetCount()) {
 		int count = GetCount();
@@ -449,5 +449,5 @@ void COptionListBox::OnDestroy()
 			DeleteString(0);
 		}
 	}
-	
+
 }

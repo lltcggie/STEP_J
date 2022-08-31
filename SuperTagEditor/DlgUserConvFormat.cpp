@@ -178,7 +178,7 @@ BOOL CDlgUserConvFormat::OnInitDialog()
 
 void CDlgUserConvFormat::OnOK() 
 {
-	if (!::IsWindow(m_hWnd))	return;
+	if (!::IsWindow(m_hWnd)) return;
 	m_editTag2File.GetWindowText(m_userFormat[m_nFormatType].strTag2File);
 	m_editFile2Tag.GetWindowText(m_userFormat[m_nFormatType].strFile2Tag);
 
