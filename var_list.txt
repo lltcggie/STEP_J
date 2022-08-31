@@ -1,4 +1,4 @@
-[ヘッダ部・ボディ部・フッタ部で使用できる変数]
+[繝倥ャ繝驛ｨ繝ｻ繝懊ョ繧｣驛ｨ繝ｻ繝輔ャ繧ｿ驛ｨ縺ｧ菴ｿ逕ｨ縺ｧ縺阪ｋ螟画焚]
 %FILE_NUMBER%
 %FILE_TYPE%
 %FILE_NAME%
@@ -36,11 +36,11 @@
 %TOTAL_SEC%
 %TOTAL_SEC2%
 %TOTAL_SEC3%
-%CHANNELS%			→削除(Conspiracy)
-%BIT_RATE%			→削除(Conspiracy)
-%SAMPLING_RATE%			→削除(Conspiracy)
-%FRAMES%			→削除(Conspiracy)
-%CHANNEL_MODE%			→削除(Conspiracy)
+%CHANNELS%			竊貞炎髯､(Conspiracy)
+%BIT_RATE%			竊貞炎髯､(Conspiracy)
+%SAMPLING_RATE%			竊貞炎髯､(Conspiracy)
+%FRAMES%			竊貞炎髯､(Conspiracy)
+%CHANNEL_MODE%			竊貞炎髯､(Conspiracy)
 %FILE_NAME_SHORT%
 %PATH_NAME_SHORT%
 %FULL_PATH_SHORT%
@@ -49,7 +49,7 @@
 %OTHER%
 %FORMAT%
 
-[ヘッダ部・フッタ部で使用できる変数]
+[繝倥ャ繝驛ｨ繝ｻ繝輔ャ繧ｿ驛ｨ縺ｧ菴ｿ逕ｨ縺ｧ縺阪ｋ螟画焚]
 %FILE_COUNT%
 %TOTAL_TIME%
 %TOTAL_TIME2%

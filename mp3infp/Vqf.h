@@ -1,4 +1,4 @@
-// Vqf.h: CVqf ƒNƒ‰ƒX‚ÌƒCƒ“ƒ^[ƒtƒFƒCƒX
+// Vqf.h: CVqf ã‚¯ãƒ©ã‚¹ã®ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹
 //
 //////////////////////////////////////////////////////////////////////
 
@@ -33,11 +33,11 @@ public:
 		m_data = NULL;
 		m_dwSize = 0;
 	}
-	CVqfTag(const CVqfTag &obj)	//ƒRƒs[ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	CVqfTag(const CVqfTag &obj)	//ã‚³ãƒ”ãƒ¼ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	{
 		m_data = (unsigned char *)malloc(obj.m_dwSize+1);
 		memcpy(m_data,obj.m_data,obj.m_dwSize);
-		m_data[obj.m_dwSize] = '\0';	//C‚Ì•¶š—ñ‚Æ‚µ‚Äg‚¦‚é‚æ‚¤‚É
+		m_data[obj.m_dwSize] = '\0';	//Cã®æ–‡å­—åˆ—ã¨ã—ã¦ä½¿ãˆã‚‹ã‚ˆã†ã«
 		m_dwSize = obj.m_dwSize;
 	};
 	DWORD GetSize(){return m_dwSize;};
@@ -52,10 +52,10 @@ public:
 		m_data = (unsigned char *)malloc(size+1);
 		if(!m_data)
 		{
-			return;	//ƒƒ‚ƒŠ‚ğŠm•Û‚Å‚«‚È‚©‚Á‚½
+			return;	//ãƒ¡ãƒ¢ãƒªã‚’ç¢ºä¿ã§ããªã‹ã£ãŸ
 		}
 		memcpy(m_data,data,size);
-		m_data[size] = '\0';	//C‚Ì•¶š—ñ‚Æ‚µ‚Äg‚¦‚é‚æ‚¤‚É
+		m_data[size] = '\0';	//Cã®æ–‡å­—åˆ—ã¨ã—ã¦ä½¿ãˆã‚‹ã‚ˆã†ã«
 		m_dwSize = size;
 	};
 

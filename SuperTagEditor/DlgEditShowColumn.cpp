@@ -1,4 +1,4 @@
-// DlgEditShowColumn.cpp : ƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“ ƒtƒ@ƒCƒ‹
+// DlgEditShowColumn.cpp : ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³ ãƒ•ã‚¡ã‚¤ãƒ«
 //
 
 #include "stdafx.h"
@@ -19,14 +19,14 @@ static char THIS_FILE[] = __FILE__;
 #define ListView_GetSelectedItem(listCtrl)			listCtrl.GetNextItem(-1, LVNI_ALL | LVNI_SELECTED | LVIS_FOCUSED)
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgEditShowColumn ƒ_ƒCƒAƒƒO
+// CDlgEditShowColumn ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
 IMPLEMENT_DYNCREATE(CDlgEditShowColumn, COptionPage)
 
 
 CDlgEditShowColumn::CDlgEditShowColumn() : COptionPage(CDlgEditShowColumn::IDD)
 {
 	//{{AFX_DATA_INIT(CDlgEditShowColumn)
-		// ƒƒ‚ - ClassWizard ‚Í‚±‚ÌˆÊ’u‚Éƒ}ƒbƒsƒ“ƒO—p‚Ìƒ}ƒNƒ‚ğ’Ç‰Á‚Ü‚½‚Ííœ‚µ‚Ü‚·B
+		// ãƒ¡ãƒ¢ - ClassWizard ã¯ã“ã®ä½ç½®ã«ãƒãƒƒãƒ”ãƒ³ã‚°ç”¨ã®ãƒã‚¯ãƒ­ã‚’è¿½åŠ ã¾ãŸã¯å‰Šé™¤ã—ã¾ã™ã€‚
 	//}}AFX_DATA_INIT
 }
 
@@ -58,14 +58,14 @@ BEGIN_MESSAGE_MAP(CDlgEditShowColumn, COptionPage)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgEditShowColumn ƒƒbƒZ[ƒW ƒnƒ“ƒhƒ‰
+// CDlgEditShowColumn ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒãƒ³ãƒ‰ãƒ©
 
 BOOL CDlgEditShowColumn::OnInitDialog()
 {
 	COptionPage::OnInitDialog();
 
-	// TODO: ‚±‚ÌˆÊ’u‚É‰Šú‰»‚Ì•â‘«ˆ—‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
-	// Šg’£ƒXƒ^ƒCƒ‹‚Ìİ’èFƒ`ƒFƒbƒNƒ{ƒbƒNƒX’Ç‰ÁA‚Ps‘I‘ğ
+	// TODO: ã“ã®ä½ç½®ã«åˆæœŸåŒ–ã®è£œè¶³å‡¦ç†ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
+	// æ‹¡å¼µã‚¹ã‚¿ã‚¤ãƒ«ã®è¨­å®šï¼šãƒã‚§ãƒƒã‚¯ãƒœãƒƒã‚¯ã‚¹è¿½åŠ ã€ï¼‘è¡Œé¸æŠ
 	DWORD	dwStyle;
 	dwStyle = m_listColumn.SendMessage(LVM_GETEXTENDEDLISTVIEWSTYLE, 0, 0);
 	dwStyle |= LVS_EX_CHECKBOXES | LVS_EX_FULLROWSELECT;
@@ -74,9 +74,9 @@ BOOL CDlgEditShowColumn::OnInitDialog()
 	RECT	rect;
 	m_listColumn.GetClientRect(&rect);
 
-	m_listColumn.InsertColumn(0, _T("€–Ú–¼"), LVCFMT_LEFT, rect.right-rect.left-16-48);
-	m_listColumn.InsertColumn(1, _T("Å‘å•"), LVCFMT_LEFT, 48, 1);
-	m_listColumn.DeleteAllItems();					// ƒNƒŠƒA
+	m_listColumn.InsertColumn(0, _T("é …ç›®å"), LVCFMT_LEFT, rect.right-rect.left-16-48);
+	m_listColumn.InsertColumn(1, _T("æœ€å¤§å¹…"), LVCFMT_LEFT, 48, 1);
+	m_listColumn.DeleteAllItems();					// ã‚¯ãƒªã‚¢
 
 	bool bFoundFormat = false; /* Conspiracy 198 */
 	for (int nColumn = COLUMN_TREE_ITEM; nColumn < COLUMN_MAX; nColumn++) {
@@ -112,8 +112,8 @@ BOOL CDlgEditShowColumn::OnInitDialog()
 
 	SelChangeList();
 
-	return TRUE;  // ƒRƒ“ƒgƒ[ƒ‹‚ÉƒtƒH[ƒJƒX‚ğİ’è‚µ‚È‚¢‚Æ‚«A–ß‚è’l‚Í TRUE ‚Æ‚È‚è‚Ü‚·
-	              // —áŠO: OCX ƒvƒƒpƒeƒB ƒy[ƒW‚Ì–ß‚è’l‚Í FALSE ‚Æ‚È‚è‚Ü‚·
+	return TRUE;  // ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã«ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ã‚’è¨­å®šã—ãªã„ã¨ãã€æˆ»ã‚Šå€¤ã¯ TRUE ã¨ãªã‚Šã¾ã™
+	              // ä¾‹å¤–: OCX ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ ãƒšãƒ¼ã‚¸ã®æˆ»ã‚Šå€¤ã¯ FALSE ã¨ãªã‚Šã¾ã™
 }
 
 void CDlgEditShowColumn::SwapListItem(int nNum1, int nNum2)
@@ -139,7 +139,7 @@ void CDlgEditShowColumn::SwapListItem(int nNum1, int nNum2)
 	item2.iItem = nNum1;
 	m_listColumn.SetItem(&item2);
 
-	// Å‘å•‚à“ü‚ê‘Ö‚¦
+	// æœ€å¤§å¹…ã‚‚å…¥ã‚Œæ›¿ãˆ
 	CString	strWidth1, strWidth2;
 	strWidth1 = m_listColumn.GetItemText(nNum1, 1);
 	strWidth2 = m_listColumn.GetItemText(nNum2, 1);
@@ -153,7 +153,7 @@ void CDlgEditShowColumn::OnBtDown()
 	nIndex = ListView_GetSelectedItem(m_listColumn);
 	if (nIndex >= 1) {
 		if (nIndex < m_listColumn.GetItemCount()-1) {
-			// ƒf[ƒ^‚ğ“ü‚ê•Ï‚¦‚é
+			// ãƒ‡ãƒ¼ã‚¿ã‚’å…¥ã‚Œå¤‰ãˆã‚‹
 			SwapListItem(nIndex, nIndex+1);
 			m_listColumn.EnsureVisible(nIndex+1, FALSE);
 		}
@@ -165,7 +165,7 @@ void CDlgEditShowColumn::OnBtUp()
 	int		nIndex;
 	nIndex = ListView_GetSelectedItem(m_listColumn);
 	if (nIndex >= 1) {
-		// ƒf[ƒ^‚ğ“ü‚ê•Ï‚¦‚é
+		// ãƒ‡ãƒ¼ã‚¿ã‚’å…¥ã‚Œå¤‰ãˆã‚‹
 		SwapListItem(nIndex, nIndex-1);
 		m_listColumn.EnsureVisible(nIndex-1, FALSE);
 	}
@@ -174,7 +174,7 @@ void CDlgEditShowColumn::OnBtUp()
 void CDlgEditShowColumn::OnOK()
 {
 	if (!::IsWindow(m_hWnd))	return;
-	// •ÒWŒã‚Ìó‘Ô‚ğ•Û‘¶
+	// ç·¨é›†å¾Œã®çŠ¶æ…‹ã‚’ä¿å­˜
 	int nIndex; for (nIndex = 0; nIndex < m_listColumn.GetItemCount(); nIndex++) {
 		struct COLUMN_STATUS	*Stat;
 		Stat = &g_columnStatus[m_listColumn.GetItemData(nIndex)];
@@ -184,24 +184,24 @@ void CDlgEditShowColumn::OnOK()
 	}
 
 	if (g_columnStatus[COLUMN_FILE_NAME].bShowFlag == false) {
-		MessageBox(_T("[•\¦€–Úİ’è]‚Åƒtƒ@ƒCƒ‹–¼‚ª”ñ•\¦‚Éİ’è‚³‚ê‚Ä‚¢‚Ü‚·\n\n")
-		           _T("STE ã‚Åƒtƒ@ƒCƒ‹–¼‚ğ•ÏX‚µ‚½‚¢ê‡‚ÍAƒtƒ@ƒCƒ‹–¼‚Ì•\¦‚ğ\n")
-				   _T("—LŒø‚É‚µ‚Ä‚­‚¾‚³‚¢"),
-		           _T("Œx"), MB_ICONSTOP|MB_OK|MB_TOPMOST);
+		MessageBox(_T("[è¡¨ç¤ºé …ç›®è¨­å®š]ã§ãƒ•ã‚¡ã‚¤ãƒ«åãŒéè¡¨ç¤ºã«è¨­å®šã•ã‚Œã¦ã„ã¾ã™\n\n")
+		           _T("STE ä¸Šã§ãƒ•ã‚¡ã‚¤ãƒ«åã‚’å¤‰æ›´ã—ãŸã„å ´åˆã¯ã€ãƒ•ã‚¡ã‚¤ãƒ«åã®è¡¨ç¤ºã‚’\n")
+				   _T("æœ‰åŠ¹ã«ã—ã¦ãã ã•ã„"),
+		           _T("è­¦å‘Š"), MB_ICONSTOP|MB_OK|MB_TOPMOST);
 	}
 
 	COptionPage::OnOK();
 }
 
-// ‰Šú’l‚É–ß‚·
+// åˆæœŸå€¤ã«æˆ»ã™
 void CDlgEditShowColumn::OnBtResetPage()
 {
-	m_listColumn.DeleteAllItems();					// ƒNƒŠƒA
+	m_listColumn.DeleteAllItems();					// ã‚¯ãƒªã‚¢
 
 	//static	int		nColumnMax[] = {
 	//	0,0,0,0,0,48,48,48,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,56,128,128,128,128,128,0,128,128/* 2003.06.19 add */ /* Conspiracy 196 */ /* Fix 2010 Mimura */
 	//};
-    //MySuperGrid.cpp ‚Ì g_columnStatus ‚É€–Ú‚ğ’Ç‰Á‚µ‚Ä‚à‚±‚Ì•”•ª‚Ìˆ—‚ğ•ÏX‚µ‚È‚­‚Ä‚àÏ‚Ş‚æ‚¤‚ÉC³
+    //MySuperGrid.cpp ã® g_columnStatus ã«é …ç›®ã‚’è¿½åŠ ã—ã¦ã‚‚ã“ã®éƒ¨åˆ†ã®å‡¦ç†ã‚’å¤‰æ›´ã—ãªãã¦ã‚‚æ¸ˆã‚€ã‚ˆã†ã«ä¿®æ­£
 	for (int nType = COLUMN_TREE_ITEM; nType < COLUMN_MAX; nType++) {
 		extern	const TCHAR	***g_sNameList;
 		int		nIndex = m_listColumn.GetItemCount();
@@ -229,7 +229,7 @@ void CDlgEditShowColumn::OnItemChangedListColumn(NMHDR* pNMHDR, LRESULT* pResult
 {
 	NM_LISTVIEW* pNMListView = (NM_LISTVIEW*)pNMHDR;
 
-	// ‘I‘ğó‘Ô‚ª•ÏX‚³‚ê‚½‚©H
+	// é¸æŠçŠ¶æ…‹ãŒå¤‰æ›´ã•ã‚ŒãŸã‹ï¼Ÿ
 	UINT	uMask = LVIS_FOCUSED | LVIS_SELECTED;
 	if ((pNMListView->uOldState & uMask) != (pNMListView->uNewState & uMask)) {
 		SelChangeList();
@@ -263,12 +263,12 @@ void CDlgEditShowColumn::OnItemChangingListColumn(NMHDR* pNMHDR, LRESULT* pResul
 {
 	NM_LISTVIEW* pNMListView = (NM_LISTVIEW*)pNMHDR;
 
-	// MP3 List ‚Ìƒ`ƒFƒbƒNó‘Ô‚Í•ÏX•s‰Â
+	// MP3 List ã®ãƒã‚§ãƒƒã‚¯çŠ¶æ…‹ã¯å¤‰æ›´ä¸å¯
 	if (pNMListView->iItem == 0) {
 		BOOL bChecked = (BOOL)(((pNMListView->uNewState & LVIS_STATEIMAGEMASK)>>12)-1);
 		bChecked = (bChecked < 0) ? FALSE : TRUE;
-		if (bChecked) {								// ƒ`ƒFƒbƒN‚µ‚æ‚¤‚Æ‚µ‚Ä‚¢‚é
-			// –³Œø‰»
+		if (bChecked) {								// ãƒã‚§ãƒƒã‚¯ã—ã‚ˆã†ã¨ã—ã¦ã„ã‚‹
+			// ç„¡åŠ¹åŒ–
 			*pResult = 1;
 			return;
 		}

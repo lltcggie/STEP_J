@@ -1,4 +1,4 @@
-// DlgConvFormatEx.cpp : ƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“ ƒtƒ@ƒCƒ‹
+// DlgConvFormatEx.cpp : ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³ ãƒ•ã‚¡ã‚¤ãƒ«
 //
 
 #include "stdafx.h"
@@ -13,7 +13,7 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgConvFormatEx ƒvƒƒpƒeƒB ƒy[ƒW
+// CDlgConvFormatEx ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ ãƒšãƒ¼ã‚¸
 
 IMPLEMENT_DYNCREATE(CDlgConvFormatEx, COptionPage)
 
@@ -69,7 +69,7 @@ BEGIN_MESSAGE_MAP(CDlgConvFormatEx, COptionPage)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgConvFormatEx ƒƒbƒZ[ƒW ƒnƒ“ƒhƒ‰
+// CDlgConvFormatEx ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒãƒ³ãƒ‰ãƒ©
 
 void CDlgConvFormatEx::OutputFormatString(const TCHAR *sText)
 {
@@ -148,10 +148,10 @@ void CDlgConvFormatEx::OnBtNameChange()
 
 	dialog.m_strName = m_userFormatEx[m_nFormatType].strName;
 	if (dialog.DoModal() == IDOK) {
-		// V‚µ‚¢–¼Ì‚É•ÏX
+		// æ–°ã—ã„åç§°ã«å¤‰æ›´
 		m_userFormatEx[m_nFormatType].strName = dialog.m_strName;
 
-		// ƒŠƒXƒgXV
+		// ãƒªã‚¹ãƒˆæ›´æ–°
 		OnSelChangeListFormatType();
 		m_listFormatType.ResetContent();
 		int i; for (i = 0; i < USER_CONV_FORMAT_EX_MAX; i++) {
@@ -159,14 +159,14 @@ void CDlgConvFormatEx::OnBtNameChange()
 			strName.Format(_T("%d: %s"), i+1, m_userFormatEx[i].strName);
 			m_listFormatType.AddString(strName);
 		}
-		// ‘I‘ğ‚µ‚È‚¨‚·
+		// é¸æŠã—ãªãŠã™
 		m_listFormatType.SetCurSel(m_nFormatType);
 	}
 }
 
 void CDlgConvFormatEx::OnSelChangeListFormatType() 
 {
-	// Œ»İ•ÒW’†‚Ì“à—e‚ğ”½‰f‚³‚¹‚é
+	// ç¾åœ¨ç·¨é›†ä¸­ã®å†…å®¹ã‚’åæ˜ ã•ã›ã‚‹
 	m_editFormat.GetWindowText(m_userFormatEx[m_nFormatType].strFormat);
 	m_userFormatEx[m_nFormatType].bSpaceInitNumber = m_btSpaceInitNumber.GetCheck() ? true : false;
 	m_userFormatEx[m_nFormatType].nInitNumber = GetDlgItemInt(IDC_ED_INIT_NUMBER, NULL, FALSE);
@@ -208,8 +208,8 @@ BOOL CDlgConvFormatEx::OnInitDialog()
 	m_nAddNumber = m_userFormatEx[m_nFormatType].nAddNumber;
 	m_nMinColumn = m_userFormatEx[m_nFormatType].nColumnCount;
 
-	return TRUE;  // ƒRƒ“ƒgƒ[ƒ‹‚ÉƒtƒH[ƒJƒX‚ğİ’è‚µ‚È‚¢‚Æ‚«A–ß‚è’l‚Í TRUE ‚Æ‚È‚è‚Ü‚·
-	              // —áŠO: OCX ƒvƒƒpƒeƒB ƒy[ƒW‚Ì–ß‚è’l‚Í FALSE ‚Æ‚È‚è‚Ü‚·
+	return TRUE;  // ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã«ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ã‚’è¨­å®šã—ãªã„ã¨ãã€æˆ»ã‚Šå€¤ã¯ TRUE ã¨ãªã‚Šã¾ã™
+	              // ä¾‹å¤–: OCX ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ ãƒšãƒ¼ã‚¸ã®æˆ»ã‚Šå€¤ã¯ FALSE ã¨ãªã‚Šã¾ã™
 }
 
 void CDlgConvFormatEx::OnOK() 

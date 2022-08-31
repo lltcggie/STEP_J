@@ -1,4 +1,4 @@
-// DlgFileOverWrite.cpp : インプリメンテーション ファイル
+// DlgFileOverWrite.cpp : 繧､繝ｳ繝励Μ繝｡繝ｳ繝�繝ｼ繧ｷ繝ｧ繝ｳ 繝輔ぃ繧､繝ｫ
 //
 
 #include "stdafx.h"
@@ -12,7 +12,7 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgFileOverWrite ダイアログ
+// CDlgFileOverWrite 繝繧､繧｢繝ｭ繧ｰ
 
 
 CDlgFileOverWrite::CDlgFileOverWrite(CWnd* pParent /*=NULL*/)
@@ -47,7 +47,7 @@ BEGIN_MESSAGE_MAP(CDlgFileOverWrite, CDialog)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgFileOverWrite メッセージ ハンドラ
+// CDlgFileOverWrite 繝｡繝�繧ｻ繝ｼ繧ｸ 繝上Φ繝峨Λ
 
 void CDlgFileOverWrite::OnOK() 
 {

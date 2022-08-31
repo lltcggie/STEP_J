@@ -1,4 +1,4 @@
-// DlgSetClassification.cpp : ƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“ ƒtƒ@ƒCƒ‹
+// DlgSetClassification.cpp : ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³ ãƒ•ã‚¡ã‚¤ãƒ«
 //
 
 #include "stdafx.h"
@@ -12,7 +12,7 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgSetClassification ƒ_ƒCƒAƒƒO
+// CDlgSetClassification ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
 IMPLEMENT_DYNCREATE(CDlgSetClassification, COptionPage)
 
 
@@ -75,7 +75,7 @@ BEGIN_MESSAGE_MAP(CDlgSetClassification, COptionPage)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgSetClassification ƒƒbƒZ[ƒW ƒnƒ“ƒhƒ‰
+// CDlgSetClassification ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒãƒ³ãƒ‰ãƒ©
 void CDlgSetClassification::UpdateStatus(void)
 {
 	BOOL	bFlag = m_nClassType ? TRUE : FALSE;
@@ -96,7 +96,7 @@ void CDlgSetClassification::OnRaFileTag()
 {
 	m_nClassType = 1;
 	UpdateStatus();
-	OnSelChangeListClass();			// [‚½‚¾‚¿‚ÉXV]‚Ìƒ`ƒFƒbƒNˆ—‚ğ‚³‚¹‚é
+	OnSelChangeListClass();			// [ãŸã ã¡ã«æ›´æ–°]ã®ãƒã‚§ãƒƒã‚¯å‡¦ç†ã‚’ã•ã›ã‚‹
 }
 
 void CDlgSetClassification::OnRaFolder() 
@@ -109,7 +109,7 @@ BOOL CDlgSetClassification::OnInitDialog()
 {
 	COptionPage::OnInitDialog();
 
-	// TODO: ‚±‚ÌˆÊ’u‚É‰Šú‰»‚Ì•â‘«ˆ—‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
+	// TODO: ã“ã®ä½ç½®ã«åˆæœŸåŒ–ã®è£œè¶³å‡¦ç†ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
 	extern	const TCHAR	***g_sNameList;
 	int i; for (i = 0; g_sNameList[0][i] != NULL; i++) {
 		m_listClass1.AddString(g_sNameList[0][i]);
@@ -125,33 +125,33 @@ BOOL CDlgSetClassification::OnInitDialog()
 	m_listClass5.SetCurSel(m_nClass5);
 	UpdateStatus();
 
-	return TRUE;  // ƒRƒ“ƒgƒ[ƒ‹‚ÉƒtƒH[ƒJƒX‚ğİ’è‚µ‚È‚¢‚Æ‚«A–ß‚è’l‚Í TRUE ‚Æ‚È‚è‚Ü‚·
-	              // —áŠO: OCX ƒvƒƒpƒeƒB ƒy[ƒW‚Ì–ß‚è’l‚Í FALSE ‚Æ‚È‚è‚Ü‚·
+	return TRUE;  // ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã«ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ã‚’è¨­å®šã—ãªã„ã¨ãã€æˆ»ã‚Šå€¤ã¯ TRUE ã¨ãªã‚Šã¾ã™
+	              // ä¾‹å¤–: OCX ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ ãƒšãƒ¼ã‚¸ã®æˆ»ã‚Šå€¤ã¯ FALSE ã¨ãªã‚Šã¾ã™
 }
 
 void CDlgSetClassification::OnSelChangeListClass() 
 {
 	if (m_bFirstEdit) {
-		// Å‰‚Ì•ÒW‚É‚Í[‚½‚¾‚¿‚ÉXV]‚ğƒ`ƒFƒbƒN‚·‚é
+		// æœ€åˆã®ç·¨é›†æ™‚ã«ã¯[ãŸã ã¡ã«æ›´æ–°]ã‚’ãƒã‚§ãƒƒã‚¯ã™ã‚‹
 		m_btExecClassificasion.SetCheck(TRUE);
 		m_bFirstEdit = false;
 	}
 }
 
-// ‰Šú’l‚É–ß‚·
+// åˆæœŸå€¤ã«æˆ»ã™
 void CDlgSetClassification::OnBtResetPage() 
 {
-	// •ª—Ş•û–@
+	// åˆ†é¡æ–¹æ³•
 	((CButton *)GetDlgItem(IDC_RA_FOLDER))->SetCheck(TRUE);
 	((CButton *)GetDlgItem(IDC_RA_FILE_TAG))->SetCheck(FALSE);
 
-	// ŠK‘w
+	// éšå±¤
 	m_listClass1.SetCurSel(0);
 	m_listClass2.SetCurSel(0);
 	m_listClass3.SetCurSel(0);
 	m_listClass4.SetCurSel(0);
 	m_listClass5.SetCurSel(0);
 
-	// [‚½‚¾‚¿‚ÉXV]‚ğƒ`ƒFƒbƒN‚·‚é
+	// [ãŸã ã¡ã«æ›´æ–°]ã‚’ãƒã‚§ãƒƒã‚¯ã™ã‚‹
 	m_btExecClassificasion.SetCheck(TRUE);
 }

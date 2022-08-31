@@ -4,22 +4,22 @@
 
 #include "tak.h"
 
-//tak_deco_lib.dll ‚ðŽg—p‚µ‚Ä‰‰‘tŽžŠÔ‚ÆƒtƒH[ƒ}ƒbƒgî•ñ‚ðŽæ“¾
-//64bit”Å STEP_ape.ste ‚©‚çŒÄ‚Ño‚³‚ê‚é
-//tak_deco_lib.dll ‚Ì 64bit ”Å‚ªŒöŠJ‚³‚ê‚½‚ç•s—v‚É‚È‚é
+//tak_deco_lib.dll ã‚’ä½¿ç”¨ã—ã¦æ¼”å¥æ™‚é–“ã¨ãƒ•ã‚©ãƒ¼ãƒžãƒƒãƒˆæƒ…å ±ã‚’å–å¾—
+//64bitç‰ˆ STEP_ape.ste ã‹ã‚‰å‘¼ã³å‡ºã•ã‚Œã‚‹
+//tak_deco_lib.dll ã® 64bit ç‰ˆãŒå…¬é–‹ã•ã‚ŒãŸã‚‰ä¸è¦ã«ãªã‚‹
 //
-//ƒ\ƒŠƒ…[ƒVƒ‡ƒ“ƒvƒ‰ƒbƒgƒtƒH[ƒ€‚ª x86 ‚Ìê‡‚Íƒrƒ‹ƒh‚³‚ê‚È‚¢
-//(STEP_ape.ste Ž©g‚ÅŽæ“¾‚·‚é‚Ì‚Å)
-//ƒ\ƒŠƒ…[ƒVƒ‡ƒ“ƒvƒ‰ƒbƒgƒtƒH[ƒ€‚ª x64 ‚Ìê‡‚Í
-//‚±‚ÌƒvƒƒOƒ‰ƒ€Ž©‘Ì‚Í 32bit ‚Åƒrƒ‹ƒh‚³‚ê‚é‚æ‚¤‚ÉÝ’è‚µ‚Ä‚ ‚é
+//ã‚½ãƒªãƒ¥ãƒ¼ã‚·ãƒ§ãƒ³ãƒ—ãƒ©ãƒƒãƒˆãƒ•ã‚©ãƒ¼ãƒ ãŒ x86 ã®å ´åˆã¯ãƒ“ãƒ«ãƒ‰ã•ã‚Œãªã„
+//(STEP_ape.ste è‡ªèº«ã§å–å¾—ã™ã‚‹ã®ã§)
+//ã‚½ãƒªãƒ¥ãƒ¼ã‚·ãƒ§ãƒ³ãƒ—ãƒ©ãƒƒãƒˆãƒ•ã‚©ãƒ¼ãƒ ãŒ x64 ã®å ´åˆã¯
+//ã“ã®ãƒ—ãƒ­ã‚°ãƒ©ãƒ è‡ªä½“ã¯ 32bit ã§ãƒ“ãƒ«ãƒ‰ã•ã‚Œã‚‹ã‚ˆã†ã«è¨­å®šã—ã¦ã‚ã‚‹
 //
 //
 int WINAPI _tWinMain(HINSTANCE hInstance,
                      HINSTANCE hPrevInstance,
                      LPTSTR    lpCmdLine,
                      int       nCmdShow)
-{//ƒRƒ}ƒ“ƒhƒ‰ƒCƒ“‚Ì‘æ1ˆø”‚ÍTAKƒtƒ@ƒCƒ‹–¼
- //ƒRƒ}ƒ“ƒhƒ‰ƒCƒ“‚Ì‘æ2ˆø”‚Íî•ñ‚ðŠi”[‚·‚éƒtƒ@ƒCƒ‹ƒ}ƒbƒvƒIƒuƒWƒFƒNƒg–¼
+{//ã‚³ãƒžãƒ³ãƒ‰ãƒ©ã‚¤ãƒ³ã®ç¬¬1å¼•æ•°ã¯TAKãƒ•ã‚¡ã‚¤ãƒ«å
+ //ã‚³ãƒžãƒ³ãƒ‰ãƒ©ã‚¤ãƒ³ã®ç¬¬2å¼•æ•°ã¯æƒ…å ±ã‚’æ ¼ç´ã™ã‚‹ãƒ•ã‚¡ã‚¤ãƒ«ãƒžãƒƒãƒ—ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆå
     if(__argc < 3){
         return 0;
     }

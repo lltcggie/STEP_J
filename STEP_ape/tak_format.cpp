@@ -18,10 +18,10 @@ void SetAudioFormatTak(FILE_INFO *pFileMP3)
 extern TCHAR g_szPluginFolder[MAX_PATH];
 void SetAudioFormatTak(FILE_INFO *pFileMP3)
 {
-    TCHAR szRunTak[MAX_PATH];  //runtak.exe ‚ÌƒpƒX
-    TCHAR szFileName[MAX_PATH];//tak ƒtƒ@ƒCƒ‹–¼
-    TCHAR szObjName[256];      //ƒtƒ@ƒCƒ‹ƒ}ƒbƒvƒIƒuƒWƒFƒNƒg–¼
-    TCHAR szCmdLine[1024];     //ƒRƒ}ƒ“ƒhƒ‰ƒCƒ“
+    TCHAR szRunTak[MAX_PATH];  //runtak.exe ã®ãƒ‘ã‚¹
+    TCHAR szFileName[MAX_PATH];//tak ãƒ•ã‚¡ã‚¤ãƒ«å
+    TCHAR szObjName[256];      //ãƒ•ã‚¡ã‚¤ãƒ«ãƒãƒƒãƒ—ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆå
+    TCHAR szCmdLine[1024];     //ã‚³ãƒãƒ³ãƒ‰ãƒ©ã‚¤ãƒ³
     STARTUPINFO s = {0};
     PROCESS_INFORMATION pi = {0};
     LARGE_INTEGER li = {0};
@@ -44,9 +44,9 @@ void SetAudioFormatTak(FILE_INFO *pFileMP3)
         CloseTakFileMap(pFileMap);
         return;
     }
-    if(WaitForSingleObject(pi.hProcess, 10*1000) == WAIT_TIMEOUT){//10•b‚¾‚¯‘Ò‚Â
-        //‰½‚©ƒGƒ‰[‚ª‹N‚«‚ÄƒtƒŠ[ƒY‚µ‚Ä‚¢‚éH
-        TerminateProcess(pi.hProcess, 0);//‹­§I—¹
+    if(WaitForSingleObject(pi.hProcess, 10*1000) == WAIT_TIMEOUT){//10ç§’ã ã‘å¾…ã¤
+        //ä½•ã‹ã‚¨ãƒ©ãƒ¼ãŒèµ·ãã¦ãƒ•ãƒªãƒ¼ã‚ºã—ã¦ã„ã‚‹ï¼Ÿ
+        TerminateProcess(pi.hProcess, 0);//å¼·åˆ¶çµ‚äº†
         CloseHandle(pi.hThread);
         CloseHandle(pi.hProcess);
         CloseTakFileMap(pFileMap);

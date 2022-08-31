@@ -1,4 +1,4 @@
-﻿// DlgSetup.cpp : 実装ファイル
+// DlgSetup.cpp : 実装ファイル
 //
 
 #include "stdafx.h"

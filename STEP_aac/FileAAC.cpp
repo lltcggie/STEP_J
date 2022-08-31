@@ -52,10 +52,10 @@ bool LoadFileAAC(FILE_INFO *pFile)
         SetDiscTotalSI(pFile, _T(""));
     }
     CString strAudio = TagMp4.GetAudioInfoString();
-    //"format, length secs, kbps, Hz" ‚Ì‚æ‚¤‚É‚È‚Á‚Ä‚¢‚é
-    //—áF"MPEG4-AAC LC, 123.456 secs, 128 kbps, 44100 Hz"
-    //‰‰‘tŠÔ=length•”
-    //ƒtƒH[ƒ}ƒbƒg="format, kbps, Hz" ‚Ì‚æ‚¤‚É•ªŠ„‚µ‚Ä•\¦
+    //"format, length secs, kbps, Hz" ã®ã‚ˆã†ã«ãªã£ã¦ã„ã‚‹
+    //ä¾‹ï¼š"MPEG4-AAC LC, 123.456 secs, 128 kbps, 44100 Hz"
+    //æ¼”å¥æ™‚é–“=lengthéƒ¨
+    //ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆ="format, kbps, Hz" ã®ã‚ˆã†ã«åˆ†å‰²ã—ã¦è¡¨ç¤º
     TCHAR szAudio[256];
     TCHAR szFormat[256];
     _tcsncpy_s(szAudio, strAudio, _TRUNCATE);

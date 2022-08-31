@@ -23,7 +23,7 @@ CMySuperGrid* STEP_List;
 
 UINT nCommandID = _APS_NEXT_COMMAND_VALUE;
 UINT nFileTypeID = 1;
-CUIntArray arFormatType; // FILE_MP3.nFormat‚ÉÝ’è‚³‚ê‚é’l‚ÌƒŠƒXƒg
+CUIntArray arFormatType; // FILE_MP3.nFormatã«è¨­å®šã•ã‚Œã‚‹å€¤ã®ãƒªã‚¹ãƒˆ
 
 extern "C" {
 extern STEP_API UINT WINAPI STEPGetCommandID(void);
@@ -44,8 +44,8 @@ CPlugin plugins;
 PSTEPlugin STEPluginLoadFile(LPCTSTR strPluginFile) 
 {
 	HINSTANCE hLib;
-    TCHAR szPluginFullPath[MAX_PATH];//ƒvƒ‰ƒOƒCƒ“ƒtƒ@ƒCƒ‹–¼(ƒtƒ‹ƒpƒX)
-    TCHAR szPluginFolder[MAX_PATH];  //ƒvƒ‰ƒOƒCƒ“‚ÌƒtƒHƒ‹ƒ_(ƒtƒ‹ƒpƒX)
+    TCHAR szPluginFullPath[MAX_PATH];//ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ãƒ•ã‚¡ã‚¤ãƒ«å(ãƒ•ãƒ«ãƒ‘ã‚¹)
+    TCHAR szPluginFolder[MAX_PATH];  //ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ã®ãƒ•ã‚©ãƒ«ãƒ€(ãƒ•ãƒ«ãƒ‘ã‚¹)
 	{
 		TCHAR   szCurDir[MAX_PATH];
         TCHAR   szExePath[MAX_PATH];
@@ -54,24 +54,24 @@ PSTEPlugin STEPluginLoadFile(LPCTSTR strPluginFile)
         TCHAR   fname[_MAX_FNAME];
         TCHAR   ext[_MAX_EXT];
 
-        GetCurrentDirectory(MAX_PATH, szCurDir);//ƒJƒŒƒ“ƒgƒfƒBƒŒƒNƒgƒŠ‚ð•Û‘¶
-        GetModuleFileName(NULL, szExePath, MAX_PATH);//EXE ‚ÌƒpƒX
+        GetCurrentDirectory(MAX_PATH, szCurDir);//ã‚«ãƒ¬ãƒ³ãƒˆãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’ä¿å­˜
+        GetModuleFileName(NULL, szExePath, MAX_PATH);//EXE ã®ãƒ‘ã‚¹
 		_tsplitpath_s(szExePath, drive, _MAX_DRIVE, dir, _MAX_DIR, NULL, 0, NULL, 0);
         _tmakepath_s(szExePath, drive, dir, _T(""), _T(""));
-        //Exe ‚ÌƒtƒHƒ‹ƒ_‚ðƒJƒŒƒ“ƒgƒfƒBƒŒƒNƒgƒŠ‚ÉÝ’è
+        //Exe ã®ãƒ•ã‚©ãƒ«ãƒ€ã‚’ã‚«ãƒ¬ãƒ³ãƒˆãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã«è¨­å®š
         SetCurrentDirectory(szExePath);
-        //Exe(ƒJƒŒƒ“ƒgƒfƒBƒŒƒNƒgƒŠ) ‚©‚ç‚Ì‘Š‘ÎƒpƒX‚©‚çƒvƒ‰ƒOƒCƒ“‚Ìâ‘ÎƒpƒX‚ðŽæ“¾
+        //Exe(ã‚«ãƒ¬ãƒ³ãƒˆãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª) ã‹ã‚‰ã®ç›¸å¯¾ãƒ‘ã‚¹ã‹ã‚‰ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ã®çµ¶å¯¾ãƒ‘ã‚¹ã‚’å–å¾—
         _tfullpath(szPluginFullPath, strPluginFile, MAX_PATH);
-        //ƒvƒ‰ƒOƒCƒ“‚ÌƒtƒHƒ‹ƒ_‚ðŽæ“¾
+        //ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ã®ãƒ•ã‚©ãƒ«ãƒ€ã‚’å–å¾—
         _tsplitpath_s(szPluginFullPath, drive, dir, fname, ext);
         _tmakepath_s(szPluginFolder, drive, dir, _T(""), _T(""));
-        //ƒvƒ‰ƒOƒCƒ“‚ÌƒtƒHƒ‹ƒ_‚ðDLLŒŸõƒfƒBƒŒƒNƒgƒŠ‚ÉÝ’è
-        //(ƒvƒ‰ƒOƒCƒ“‚ÌˆË‘¶ DLL ‚ðƒvƒ‰ƒOƒCƒ“Ž©g‚Æ“¯‚¶ƒtƒHƒ‹ƒ_‚©‚ç—Dæ“I‚É
-        // ƒ[ƒh‚³‚ê‚é‚æ‚¤‚É‚·‚é‚½‚ß)
+        //ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ã®ãƒ•ã‚©ãƒ«ãƒ€ã‚’DLLæ¤œç´¢ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã«è¨­å®š
+        //(ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ã®ä¾å­˜ DLL ã‚’ãƒ—ãƒ©ã‚°ã‚¤ãƒ³è‡ªèº«ã¨åŒã˜ãƒ•ã‚©ãƒ«ãƒ€ã‹ã‚‰å„ªå…ˆçš„ã«
+        // ãƒ­ãƒ¼ãƒ‰ã•ã‚Œã‚‹ã‚ˆã†ã«ã™ã‚‹ãŸã‚)
         SetDllDirectory(szPluginFolder);
         hLib = LoadLibrary(szPluginFullPath);
-        SetDllDirectory(NULL);//DLLŒŸõƒfƒBƒŒƒNƒgƒŠ‚ðŒ³‚É–ß‚·
-        SetCurrentDirectory(szCurDir);//ƒJƒŒƒ“ƒgƒfƒBƒŒƒNƒgƒŠ‚ðŒ³‚É–ß‚·
+        SetDllDirectory(NULL);//DLLæ¤œç´¢ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’å…ƒã«æˆ»ã™
+        SetCurrentDirectory(szCurDir);//ã‚«ãƒ¬ãƒ³ãƒˆãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’å…ƒã«æˆ»ã™
         if (hLib == NULL) return NULL;
 	}
 
@@ -118,7 +118,7 @@ PSTEPlugin STEPluginLoadFile(LPCTSTR strPluginFile)
 }
 
 static void CreateDefaultPluginINI(const TCHAR *cszPath)
-{//cszPath ‚É INI ƒtƒ@ƒCƒ‹‚Í‘¶Ý‚µ‚Ä‚¢‚È‚¢‚±‚Æ‚ª‘O’ñ
+{//cszPath ã« INI ãƒ•ã‚¡ã‚¤ãƒ«ã¯å­˜åœ¨ã—ã¦ã„ãªã„ã“ã¨ãŒå‰æ
     CIniFile iniFile(cszPath);
     TCHAR   drive[_MAX_DRIVE];
 	TCHAR   dir[_MAX_DIR];
@@ -139,7 +139,7 @@ static void CreateDefaultPluginINI(const TCHAR *cszPath)
             continue;
         }
     	_tsplitpath_s(fd.cFileName, NULL, 0, NULL, 0, NULL, 0, ext, _MAX_EXT);
-        if(_tcsicmp(ext, _T(".ste")) != 0){//ƒvƒ‰ƒOƒCƒ“‚Å‚Í‚È‚¢
+        if(_tcsicmp(ext, _T(".ste")) != 0){//ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ã§ã¯ãªã„
             continue;
         }
         TCHAR szSection[MAX_PATH];
@@ -198,7 +198,7 @@ void STEPluginLoad(HWND hWnd)
 		PSTEPlugin pPlugin = STEPluginLoadFile(buff);
 		if (pPlugin == NULL) {
 			//pPlugin->bUse = false;
-			MessageBox(hWnd, CString(_T("ƒvƒ‰ƒOƒCƒ“(")) + buff + _T(")‚Ì“Ç‚Ýž‚Ý‚ÉŽ¸”s‚µ‚Ü‚µ‚½"), _T("ƒvƒ‰ƒOƒCƒ“ƒGƒ‰["), MB_ICONSTOP|MB_OK|MB_TOPMOST);
+			MessageBox(hWnd, CString(_T("ãƒ—ãƒ©ã‚°ã‚¤ãƒ³(")) + buff + _T(")ã®èª­ã¿è¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ"), _T("ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ã‚¨ãƒ©ãƒ¼"), MB_ICONSTOP|MB_OK|MB_TOPMOST);
 			continue;
 		}
 		pPlugin->bUse = IniFile.ReadInt(strSection, _T("Use"), 1) ? true : false;
@@ -272,7 +272,7 @@ void OnPluginCommand(UINT nID) {
 	int i; for ( i=0;i<plugins.arPlugins.GetSize();i++) {
 		PSTEPlugin plugin = (PSTEPlugin)plugins.arPlugins.GetAt(i);
 		if (!plugin->bUse) continue;
-		/* DlgPluginSetup ‚ÉˆÚ“®
+		/* DlgPluginSetup ã«ç§»å‹•
 		if (plugin->nOptionCommandID == nID) {
 			plugin->STEPShowOptionDialog(STEP_hWnd);
 			return;
@@ -310,7 +310,7 @@ void OnLoadMainMenu() {
 BOOL IsPluginSupportSIF(const FILE_MP3 *fileMP3) {
 	int nIndex = plugins.GetPluginIndex(fileMP3->nFormat);
 	if (nIndex < 0) {
-		// ‘Î‰žƒvƒ‰ƒOƒCƒ“‚È‚µ
+		// å¯¾å¿œãƒ—ãƒ©ã‚°ã‚¤ãƒ³ãªã—
 		return FALSE;
 	}
 	PSTEPlugin plugin = (PSTEPlugin)plugins.arPlugins.GetAt(nIndex);
@@ -324,7 +324,7 @@ BOOL IsPluginSupportSIF(const FILE_MP3 *fileMP3) {
 BOOL IsPluginSupportTrackNumberSIF(const FILE_MP3 *fileMP3) {
 	int nIndex = plugins.GetPluginIndex(fileMP3->nFormat);
 	if (nIndex < 0) {
-		// ‘Î‰žƒvƒ‰ƒOƒCƒ“‚È‚µ
+		// å¯¾å¿œãƒ—ãƒ©ã‚°ã‚¤ãƒ³ãªã—
 		return FALSE;
 	}
 	PSTEPlugin plugin = (PSTEPlugin)plugins.arPlugins.GetAt(nIndex);
@@ -338,7 +338,7 @@ BOOL IsPluginSupportTrackNumberSIF(const FILE_MP3 *fileMP3) {
 BOOL IsPluginSupportGenreSIF(const FILE_MP3 *fileMP3) {
 	int nIndex = plugins.GetPluginIndex(fileMP3->nFormat);
 	if (nIndex < 0) {
-		// ‘Î‰žƒvƒ‰ƒOƒCƒ“‚È‚µ
+		// å¯¾å¿œãƒ—ãƒ©ã‚°ã‚¤ãƒ³ãªã—
 		return FALSE;
 	}
 	PSTEPlugin plugin = (PSTEPlugin)plugins.arPlugins.GetAt(nIndex);
@@ -352,7 +352,7 @@ BOOL IsPluginSupportGenreSIF(const FILE_MP3 *fileMP3) {
 CONTROLTYPE GetControlType(UINT nFormat, COLUMNTYPE nColumn, bool isEditSIF) {
 	int nIndex = plugins.GetPluginIndex(nFormat);
 	if (nIndex < 0) {
-		// ‘Î‰žƒvƒ‰ƒOƒCƒ“‚È‚µ
+		// å¯¾å¿œãƒ—ãƒ©ã‚°ã‚¤ãƒ³ãªã—
 		return invalid;
 	}
 	PSTEPlugin plugin = (PSTEPlugin)plugins.arPlugins.GetAt(nIndex);
@@ -366,7 +366,7 @@ CONTROLTYPE GetControlType(UINT nFormat, COLUMNTYPE nColumn, bool isEditSIF) {
 int GetColumnMax(UINT nFormat, COLUMNTYPE nColumn, bool isEditSIF) {
 	int nIndex = plugins.GetPluginIndex(nFormat);
 	if (nIndex < 0) {
-		// ‘Î‰žƒvƒ‰ƒOƒCƒ“‚È‚µ
+		// å¯¾å¿œãƒ—ãƒ©ã‚°ã‚¤ãƒ³ãªã—
 		return 0;
 	}
 	PSTEPlugin plugin = (PSTEPlugin)plugins.arPlugins.GetAt(nIndex);
@@ -380,7 +380,7 @@ int GetColumnMax(UINT nFormat, COLUMNTYPE nColumn, bool isEditSIF) {
 LPCTSTR GetColumnName(UINT nFormat, COLUMNTYPE nColumn) {
 	int nIndex = plugins.GetPluginIndex(nFormat);
 	if (nIndex < 0) {
-		// ‘Î‰žƒvƒ‰ƒOƒCƒ“‚È‚µ
+		// å¯¾å¿œãƒ—ãƒ©ã‚°ã‚¤ãƒ³ãªã—
 		return 0;
 	}
 	PSTEPlugin plugin = (PSTEPlugin)plugins.arPlugins.GetAt(nIndex);
@@ -394,7 +394,7 @@ LPCTSTR GetColumnName(UINT nFormat, COLUMNTYPE nColumn) {
 bool HasOriginalColumnName(UINT nFormat) {
 	int nIndex = plugins.GetPluginIndex(nFormat);
 	if (nIndex < 0) {
-		// ‘Î‰žƒvƒ‰ƒOƒCƒ“‚È‚µ
+		// å¯¾å¿œãƒ—ãƒ©ã‚°ã‚¤ãƒ³ãªã—
 		return false;
 	}
 	PSTEPlugin plugin = (PSTEPlugin)plugins.arPlugins.GetAt(nIndex);
@@ -453,31 +453,31 @@ bool SaveFile(FILE_MP3* pFileMP3)
 	fileInfo.pFileMP3 = pFileMP3;
 	int nIndex = plugins.GetPluginIndex(pFileMP3->nFormat);
 	if (nIndex < 0) {
-		// ‘Î‰žƒvƒ‰ƒOƒCƒ“‚È‚µ
+		// å¯¾å¿œãƒ—ãƒ©ã‚°ã‚¤ãƒ³ãªã—
 		return false;
 	}
 	PSTEPlugin plugin = (PSTEPlugin)plugins.arPlugins.GetAt(nIndex);
 	if (!plugin->bUse) return false;
 	if (plugin->STEPSave != NULL) {
-        //ƒ^ƒO‚ÌXV‚ÉŽ¸”sŒãApFileMP3 ‚Ì’†g‚ª•Ï‚í‚Á‚Äê‡‚ÍXV‘O‚É–ß‚·
-        //–{—ˆ‚Íƒvƒ‰ƒOƒCƒ“‚ÌƒoƒO‚Å‚ ‚èA–{‘Ì‚Å‚â‚é‚×‚«‚±‚Æ‚Å‚Í‚È‚¢
-        FILE_MP3 file_mp3_saved = *pFileMP3;//‘‚«Š·‚¦‘O‚Ìî•ñ‚ð•Û‘¶(Ž¸”s‚µ‚½‚çXV‘O‚É–ß‚·)
+        //ã‚¿ã‚°ã®æ›´æ–°ã«å¤±æ•—å¾Œã€pFileMP3 ã®ä¸­èº«ãŒå¤‰ã‚ã£ã¦å ´åˆã¯æ›´æ–°å‰ã«æˆ»ã™
+        //æœ¬æ¥ã¯ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ã®ãƒã‚°ã§ã‚ã‚Šã€æœ¬ä½“ã§ã‚„ã‚‹ã¹ãã“ã¨ã§ã¯ãªã„
+        FILE_MP3 file_mp3_saved = *pFileMP3;//æ›¸ãæ›ãˆå‰ã®æƒ…å ±ã‚’ä¿å­˜(å¤±æ•—ã—ãŸã‚‰æ›´æ–°å‰ã«æˆ»ã™)
 		result = plugin->STEPSave(&fileInfo);
 		if (result == STEP_SUCCESS) {
 			result = CFileMP3::ConvFileName(pFileMP3) == true ? STEP_SUCCESS : STEP_ERROR;
 		}
-        else{//Ž¸”s
-            //XV‘O‚Ìó‘Ô‚É–ß‚·
-            //‚½‚¾‚µAfileSpecificInfo ‚Æ pTreeItem ‚Ì‚ÝAŠÖ”ŒÄ‚Ño‚µŒã‚É
-            //‘‚«•Ï‚í‚Á‚Ä‚¢‚½‚çŒ³‚É–ß‚³‚È‚¢(’†g‚ª•s–¾‚Ì‚½‚ß)
-            void *fileSpecificInfo = pFileMP3->fileSpecificInfo;//XVŒã‚Ì fileSpecificInfo
-            void *pTreeItem = pFileMP3->pTreeItem;              //XVŒã‚Ì pTreeItem
-            *pFileMP3 = file_mp3_saved;//XV‘O‚É–ß‚·
+        else{//å¤±æ•—
+            //æ›´æ–°å‰ã®çŠ¶æ…‹ã«æˆ»ã™
+            //ãŸã ã—ã€fileSpecificInfo ã¨ pTreeItem ã®ã¿ã€é–¢æ•°å‘¼ã³å‡ºã—å¾Œã«
+            //æ›¸ãå¤‰ã‚ã£ã¦ã„ãŸã‚‰å…ƒã«æˆ»ã•ãªã„(ä¸­èº«ãŒä¸æ˜Žã®ãŸã‚)
+            void *fileSpecificInfo = pFileMP3->fileSpecificInfo;//æ›´æ–°å¾Œã® fileSpecificInfo
+            void *pTreeItem = pFileMP3->pTreeItem;              //æ›´æ–°å¾Œã® pTreeItem
+            *pFileMP3 = file_mp3_saved;//æ›´æ–°å‰ã«æˆ»ã™
             if(pFileMP3->fileSpecificInfo != fileSpecificInfo){
-                pFileMP3->fileSpecificInfo = fileSpecificInfo;//XVŒã‚Ì fileSpecificInfo ‚ð“K—p
+                pFileMP3->fileSpecificInfo = fileSpecificInfo;//æ›´æ–°å¾Œã® fileSpecificInfo ã‚’é©ç”¨
             }
             if(pFileMP3->pTreeItem != pTreeItem){
-                pFileMP3->pTreeItem = pTreeItem;//XVŒã‚Ì pTreeItem ‚ð“K—p
+                pFileMP3->pTreeItem = pTreeItem;//æ›´æ–°å¾Œã® pTreeItem ã‚’é©ç”¨
             }
         }
 	}
@@ -486,7 +486,7 @@ bool SaveFile(FILE_MP3* pFileMP3)
 	}
 	pFileMP3->bModifyFlag = false;
     //by Kobarin
-    //ƒtƒ@ƒCƒ‹‚ðÄ“Ç‚Ýž‚Ý‚µ‚Ä•\Ž¦XV
+    //ãƒ•ã‚¡ã‚¤ãƒ«ã‚’å†èª­ã¿è¾¼ã¿ã—ã¦è¡¨ç¤ºæ›´æ–°
     CString strFullPath = pFileMP3->strFullPathName;
     const TCHAR *sExt = _tcsrchr(strFullPath, _T('.'));
     if(sExt){
@@ -501,7 +501,7 @@ int GetFileImageIndex(UINT nFormat, bool bModify)
 {
 	int nIndex = plugins.GetPluginIndex(nFormat);
 	if (nIndex < 0) {
-		// ‘Î‰žƒvƒ‰ƒOƒCƒ“‚È‚µ
+		// å¯¾å¿œãƒ—ãƒ©ã‚°ã‚¤ãƒ³ãªã—
 		return -1;
 	}
 	PSTEPlugin pPlugin = (PSTEPlugin)plugins.arPlugins.GetAt(nIndex);
@@ -540,7 +540,7 @@ bool CheckFileExt(const FILE_MP3* pFileMP3, const TCHAR* ext)
 	if (pFileMP3 == NULL)	return false;
 	int nIndex = plugins.GetPluginIndex(pFileMP3->nFormat);
 	if (nIndex < 0) {
-		// ‘Î‰žƒvƒ‰ƒOƒCƒ“‚È‚µ
+		// å¯¾å¿œãƒ—ãƒ©ã‚°ã‚¤ãƒ³ãªã—
 		return false;
 	}
 	PSTEPlugin pPlugin = (PSTEPlugin)plugins.arPlugins.GetAt(nIndex);
@@ -560,7 +560,7 @@ void InitFileSpecificInfo(FILE_MP3* pFileMP3)
 {
 	int nIndex = plugins.GetPluginIndex(pFileMP3->nFormat);
 	if (nIndex < 0) {
-		// ‘Î‰žƒvƒ‰ƒOƒCƒ“‚È‚µ
+		// å¯¾å¿œãƒ—ãƒ©ã‚°ã‚¤ãƒ³ãªã—
 		return;
 	}
 	FILE_INFO fileInfo;
@@ -582,14 +582,14 @@ void ConvSIFieldToID3tag(FILE_MP3* pFileMP3) /* STEP 037 */
 	CString		strText;
 	bool saveEditField = g_bOptEditFieldSIF;
 	int i; for (i=	COLUMN_TRACK_NAME;i<COLUMN_MAX;i++) {
-		g_bOptEditFieldSIF = TRUE; // •\Ž¦ƒtƒB[ƒ‹ƒhØ‘Ö
-		// SI/ID3v2ƒtƒB[ƒ‹ƒh‚Ì“à—e‚ðŽæ“¾
+		g_bOptEditFieldSIF = TRUE; // è¡¨ç¤ºãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰åˆ‡æ›¿
+		// SI/ID3v2ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã®å†…å®¹ã‚’å–å¾—
 		CString strTextSI = STEP_List->GetFileColumnText(pFileMP3, i);
-		g_bOptEditFieldSIF = FALSE; // •\Ž¦ƒtƒB[ƒ‹ƒhØ‘Ö
-		// ID3tagƒtƒB[ƒ‹ƒh‚Ö“ü—Í
+		g_bOptEditFieldSIF = FALSE; // è¡¨ç¤ºãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰åˆ‡æ›¿
+		// ID3tagãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã¸å…¥åŠ›
 		STEP_List->ChangeSubItemText(nIndex, g_nColumnNumberList[i], strTextSI, 0, false, "", "", true);
 	}
-	g_bOptEditFieldSIF = saveEditField; // •\Ž¦ƒtƒB[ƒ‹ƒh–ß‚·
+	g_bOptEditFieldSIF = saveEditField; // è¡¨ç¤ºãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰æˆ»ã™
 	STEP_List->UpdateFileStatus((CSuperGridCtrl::CTreeItem*)pFileMP3->pTreeItem, pFileMP3);
 }
 
@@ -597,7 +597,7 @@ void OnConvSIFieldToID3tag(FILE_MP3* pFileMP3) /* STEP 037 */
 {
 	int nIndex = plugins.GetPluginIndex(pFileMP3->nFormat);
 	if (nIndex < 0) {
-		// ‘Î‰žƒvƒ‰ƒOƒCƒ“‚È‚µ
+		// å¯¾å¿œãƒ—ãƒ©ã‚°ã‚¤ãƒ³ãªã—
 		return;
 	}
 	FILE_INFO fileInfo;
@@ -605,10 +605,10 @@ void OnConvSIFieldToID3tag(FILE_MP3* pFileMP3) /* STEP 037 */
 	PSTEPlugin pPlugin = (PSTEPlugin)plugins.arPlugins.GetAt(nIndex);
 	if (pPlugin->STEPOnConvSiFieldToId3tag != NULL) {
 		if (pPlugin->STEPOnConvSiFieldToId3tag(&fileInfo) == false) {
-			return; // –¢ƒTƒ|[ƒg or ƒvƒ‰ƒOƒCƒ“‘¤‚ÅŽÀs
+			return; // æœªã‚µãƒãƒ¼ãƒˆ or ãƒ—ãƒ©ã‚°ã‚¤ãƒ³å´ã§å®Ÿè¡Œ
 		}
 	} else {
-		return; // –¢ƒTƒ|[ƒg
+		return; // æœªã‚µãƒãƒ¼ãƒˆ
 	}
 	ConvSIFieldToID3tag(pFileMP3);
 }
@@ -765,81 +765,81 @@ extern "C" STEP_API LPCTSTR WINAPI STEPGetValue(FILE_INFO* pFileInfo, FIELDTYPE 
 {
 	FILE_MP3* pFileMP3 = (FILE_MP3*)pFileInfo->pFileMP3;
 	switch (nField) {
-	case FIELD_FULL_PATH_NAME:			// ƒtƒ@ƒCƒ‹–¼(ƒtƒ‹ƒpƒX)
+	case FIELD_FULL_PATH_NAME:			// ãƒ•ã‚¡ã‚¤ãƒ«å(ãƒ•ãƒ«ãƒ‘ã‚¹)
 		return pFileMP3->strFullPathName;
-	case FIELD_FILE_NAME:				// strFullPathName ‚Ìƒtƒ@ƒCƒ‹–¼•”•ª
+	case FIELD_FILE_NAME:				// strFullPathName ã®ãƒ•ã‚¡ã‚¤ãƒ«åéƒ¨åˆ†
 		return pFileMP3->strFileName;
-	case FIELD_FILE_PATH:				// strFullPathName ‚ÌƒpƒX•”•ª
+	case FIELD_FILE_PATH:				// strFullPathName ã®ãƒ‘ã‚¹éƒ¨åˆ†
 		return pFileMP3->strFilePath;
-	case FIELD_VISUAL_FORMAT:			// ‰f‘œƒtƒH[ƒ}ƒbƒg
+	case FIELD_VISUAL_FORMAT:			// æ˜ åƒãƒ•ã‚©ãƒ¼ãƒžãƒƒãƒˆ
 		return pFileMP3->strVisualFormat;
-	case FIELD_AUDIO_FORMAT:			// ‰¹ºƒtƒH[ƒ}ƒbƒg
+	case FIELD_AUDIO_FORMAT:			// éŸ³å£°ãƒ•ã‚©ãƒ¼ãƒžãƒƒãƒˆ
 		return pFileMP3->strAudioFormat;
-	case FIELD_TRACK_NAME:				// ƒgƒ‰ƒbƒN–¼
+	case FIELD_TRACK_NAME:				// ãƒˆãƒ©ãƒƒã‚¯å
 		return pFileMP3->strTrackName;
-	case FIELD_ARTIST_NAME:				// ƒA[ƒeƒBƒXƒg–¼
+	case FIELD_ARTIST_NAME:				// ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆå
 		return pFileMP3->strArtistName;
-	case FIELD_ALBUM_NAME:				// ƒAƒ‹ƒoƒ€–¼
+	case FIELD_ALBUM_NAME:				// ã‚¢ãƒ«ãƒãƒ å
 		return pFileMP3->strAlbumName;
-	case FIELD_COMMENT:					// ƒRƒƒ“ƒg
+	case FIELD_COMMENT:					// ã‚³ãƒ¡ãƒ³ãƒˆ
 		return pFileMP3->strComment;
-	case FIELD_YEAR:					// ƒŠƒŠ[ƒX”N†
+	case FIELD_YEAR:					// ãƒªãƒªãƒ¼ã‚¹å¹´å·
 		return pFileMP3->strYear;
-	case FIELD_TRACK_NUMBER:			// ƒgƒ‰ƒbƒN”Ô†
+	case FIELD_TRACK_NUMBER:			// ãƒˆãƒ©ãƒƒã‚¯ç•ªå·
 		return pFileMP3->strTrackNumber;
-	case FIELD_GENRE:					// ƒWƒƒƒ“ƒ‹–¼
+	case FIELD_GENRE:					// ã‚¸ãƒ£ãƒ³ãƒ«å
 		return pFileMP3->strGenre;
-	case FIELD_TRACK_NAME_SI:			// ‹È–¼
+	case FIELD_TRACK_NAME_SI:			// æ›²å
 		return pFileMP3->strTrackNameSI;
-	case FIELD_ARTIST_NAME_SI:			// ƒA[ƒeƒBƒXƒg–¼
+	case FIELD_ARTIST_NAME_SI:			// ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆå
 		return pFileMP3->strArtistNameSI;
-	case FIELD_ALBUM_NAME_SI:			// »•i–¼
+	case FIELD_ALBUM_NAME_SI:			// è£½å“å
 		return pFileMP3->strAlbumNameSI;
-	case FIELD_COMMENT_SI:				// ƒRƒƒ“ƒg•¶Žš—ñ
+	case FIELD_COMMENT_SI:				// ã‚³ãƒ¡ãƒ³ãƒˆæ–‡å­—åˆ—
 		return pFileMP3->strCommentSI;
-	case FIELD_YEAR_SI:					// ƒŠƒŠ[ƒX”N†
+	case FIELD_YEAR_SI:					// ãƒªãƒªãƒ¼ã‚¹å¹´å·
 		return pFileMP3->strYearSI;
-	case FIELD_TRACK_NUMBER_SI:			// ƒgƒ‰ƒbƒN”Ô†
+	case FIELD_TRACK_NUMBER_SI:			// ãƒˆãƒ©ãƒƒã‚¯ç•ªå·
 		return pFileMP3->strTrackNumberSI;
-	case FIELD_Disc_NUMBER_SI:			// ƒgƒ‰ƒbƒN”Ô†
+	case FIELD_Disc_NUMBER_SI:			// ãƒˆãƒ©ãƒƒã‚¯ç•ªå·
 		return pFileMP3->strDiscNumberSI;
-    case FIELD_TRACK_TOTAL_SI:          // ƒgƒ‰ƒbƒN”(by Kobarin)
+    case FIELD_TRACK_TOTAL_SI:          // ãƒˆãƒ©ãƒƒã‚¯æ•°(by Kobarin)
         return pFileMP3->strTrackTotalSI;
-    case FIELD_DISC_TOTAL_SI:           // ƒfƒBƒXƒN”(by Kobarin)
+    case FIELD_DISC_TOTAL_SI:           // ãƒ‡ã‚£ã‚¹ã‚¯æ•°(by Kobarin)
         return pFileMP3->strDiscTotalSI;
-	case FIELD_GENRE_SI:				// ƒWƒƒƒ“ƒ‹–¼
+	case FIELD_GENRE_SI:				// ã‚¸ãƒ£ãƒ³ãƒ«å
 		return pFileMP3->strGenreSI;
-	case FIELD_COPYRIGHT_SI:			// ’˜ìŒ 
+	case FIELD_COPYRIGHT_SI:			// è‘—ä½œæ¨©
 		return pFileMP3->strCopyrightSI;
-	case FIELD_ENGINEER_SI:				// ƒGƒ“ƒWƒjƒA
+	case FIELD_ENGINEER_SI:				// ã‚¨ãƒ³ã‚¸ãƒ‹ã‚¢
 		return pFileMP3->strEngineerSI;
-	case FIELD_SOURCE_SI:				// ƒ\[ƒX
+	case FIELD_SOURCE_SI:				// ã‚½ãƒ¼ã‚¹
 		return pFileMP3->strSourceSI;
-	case FIELD_SOFTWARE_SI:				// ƒ\ƒtƒgƒEƒFƒA
+	case FIELD_SOFTWARE_SI:				// ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢
 		return pFileMP3->strSoftwareSI;
-	case FIELD_KEYWORD_SI:				// ƒL[ƒ[ƒh
+	case FIELD_KEYWORD_SI:				// ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰
 		return pFileMP3->strKeywordSI;
-	case FIELD_TECHNICIAN_SI:			// ‹ZpŽÒ
+	case FIELD_TECHNICIAN_SI:			// æŠ€è¡“è€…
 		return pFileMP3->strTechnicianSI;
-	case FIELD_LYRIC_SI:				// ‰ÌŽŒ
+	case FIELD_LYRIC_SI:				// æ­Œè©ž
 		return pFileMP3->strLyricSI;
-	case FIELD_COMMISSION_SI:			// ƒRƒ~ƒbƒVƒ‡ƒ“
+	case FIELD_COMMISSION_SI:			// ã‚³ãƒŸãƒƒã‚·ãƒ§ãƒ³
 		return pFileMP3->strCommissionSI;
-	case FIELD_WRITER_SI:				// ìŽŒ
+	case FIELD_WRITER_SI:				// ä½œè©ž
 		return pFileMP3->strWriterSI;
-	case FIELD_COMPOSER_SI:				// ì‹È
+	case FIELD_COMPOSER_SI:				// ä½œæ›²
 		return pFileMP3->strComposerSI;
-	case FIELD_ALBM_ARTIST_SI:			// albm.ƒA[ƒeƒBƒXƒg
+	case FIELD_ALBM_ARTIST_SI:			// albm.ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆ
 		return pFileMP3->strAlbmArtistSI;
-	case FIELD_ORIG_ARTIST_SI:			// Orig.ƒA[ƒeƒBƒXƒg
+	case FIELD_ORIG_ARTIST_SI:			// Orig.ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆ
 		return pFileMP3->strOrigArtistSI;
 	case FIELD_URL_SI:					// URL
 		return pFileMP3->strURLSI;
-	case FIELD_ENCODEST:				// ƒGƒ“ƒR[ƒh‚µ‚½l
+	case FIELD_ENCODEST:				// ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰ã—ãŸäºº
 		return pFileMP3->strEncodest;
-	case FIELD_OTHER:					// ‚»‚Ì‘¼
+	case FIELD_OTHER:					// ãã®ä»–
 		return pFileMP3->strOther;
-	case FILED_FILE_TYPE_NAME:			// ƒtƒ@ƒCƒ‹ƒ^ƒCƒv•¶Žš—ñ
+	case FILED_FILE_TYPE_NAME:			// ãƒ•ã‚¡ã‚¤ãƒ«ã‚¿ã‚¤ãƒ—æ–‡å­—åˆ—
 		return pFileMP3->strFileTypeName;
 	}
 	return _T("");
@@ -849,37 +849,37 @@ extern "C" STEP_API void WINAPI STEPSetValue(FILE_INFO* pFileInfo, FIELDTYPE nFi
 {
 	FILE_MP3* pFileMP3 = (FILE_MP3*)pFileInfo->pFileMP3;
 	switch (nField) {
-	case FIELD_FULL_PATH_NAME:			// ƒtƒ@ƒCƒ‹–¼(ƒtƒ‹ƒpƒX)
+	case FIELD_FULL_PATH_NAME:			// ãƒ•ã‚¡ã‚¤ãƒ«å(ãƒ•ãƒ«ãƒ‘ã‚¹)
 		pFileMP3->strFullPathName = szValue;
 		break;
-	case FIELD_FILE_NAME:				// strFullPathName ‚Ìƒtƒ@ƒCƒ‹–¼•”•ª
+	case FIELD_FILE_NAME:				// strFullPathName ã®ãƒ•ã‚¡ã‚¤ãƒ«åéƒ¨åˆ†
 		pFileMP3->strFileName = szValue;
 		break;
-	case FIELD_FILE_PATH:				// strFullPathName ‚ÌƒpƒX•”•ª
+	case FIELD_FILE_PATH:				// strFullPathName ã®ãƒ‘ã‚¹éƒ¨åˆ†
 		pFileMP3->strFilePath = szValue;
 		break;
-	case FIELD_VISUAL_FORMAT:			// ‰f‘œƒtƒH[ƒ}ƒbƒg
+	case FIELD_VISUAL_FORMAT:			// æ˜ åƒãƒ•ã‚©ãƒ¼ãƒžãƒƒãƒˆ
 		pFileMP3->strVisualFormat = szValue;
 		break;
-	case FIELD_AUDIO_FORMAT:			// ‰¹ºƒtƒH[ƒ}ƒbƒg
+	case FIELD_AUDIO_FORMAT:			// éŸ³å£°ãƒ•ã‚©ãƒ¼ãƒžãƒƒãƒˆ
 		pFileMP3->strAudioFormat = szValue;
 		break;
-	case FIELD_TRACK_NAME:				// ƒgƒ‰ƒbƒN–¼
+	case FIELD_TRACK_NAME:				// ãƒˆãƒ©ãƒƒã‚¯å
 		pFileMP3->strTrackName = szValue;
 		break;
-	case FIELD_ARTIST_NAME:				// ƒA[ƒeƒBƒXƒg–¼
+	case FIELD_ARTIST_NAME:				// ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆå
 		pFileMP3->strArtistName = szValue;
 		break;
-	case FIELD_ALBUM_NAME:				// ƒAƒ‹ƒoƒ€–¼
+	case FIELD_ALBUM_NAME:				// ã‚¢ãƒ«ãƒãƒ å
 		pFileMP3->strAlbumName = szValue;
 		break;
-	case FIELD_COMMENT:					// ƒRƒƒ“ƒg
+	case FIELD_COMMENT:					// ã‚³ãƒ¡ãƒ³ãƒˆ
 		pFileMP3->strComment = szValue;
 		break;
-	case FIELD_YEAR:					// ƒŠƒŠ[ƒX”N†
+	case FIELD_YEAR:					// ãƒªãƒªãƒ¼ã‚¹å¹´å·
 		pFileMP3->strYear = szValue;
 		break;
-	case FIELD_TRACK_NUMBER:			// ƒgƒ‰ƒbƒN”Ô†
+	case FIELD_TRACK_NUMBER:			// ãƒˆãƒ©ãƒƒã‚¯ç•ªå·
 		pFileMP3->strTrackNumber = szValue;
 		if (_ttoi(szValue) == 0 || _ttoi(szValue) > 0x0ff) {
 			pFileMP3->byTrackNumber = 0x0ff;
@@ -887,85 +887,85 @@ extern "C" STEP_API void WINAPI STEPSetValue(FILE_INFO* pFileInfo, FIELDTYPE nFi
 			pFileMP3->byTrackNumber = _ttoi(szValue);
 		}
 		break;
-	case FIELD_GENRE:					// ƒWƒƒƒ“ƒ‹–¼
+	case FIELD_GENRE:					// ã‚¸ãƒ£ãƒ³ãƒ«å
 		pFileMP3->strGenre = szValue;
 		break;
-	case FIELD_TRACK_NAME_SI:			// ‹È–¼
+	case FIELD_TRACK_NAME_SI:			// æ›²å
 		pFileMP3->strTrackNameSI = szValue;
 		break;
-	case FIELD_ARTIST_NAME_SI:			// ƒA[ƒeƒBƒXƒg–¼
+	case FIELD_ARTIST_NAME_SI:			// ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆå
 		pFileMP3->strArtistNameSI = szValue;
 		break;
-	case FIELD_ALBUM_NAME_SI:			// »•i–¼
+	case FIELD_ALBUM_NAME_SI:			// è£½å“å
 		pFileMP3->strAlbumNameSI = szValue;
 		break;
-	case FIELD_COMMENT_SI:				// ƒRƒƒ“ƒg•¶Žš—ñ
+	case FIELD_COMMENT_SI:				// ã‚³ãƒ¡ãƒ³ãƒˆæ–‡å­—åˆ—
 		pFileMP3->strCommentSI = szValue;
 		break;
-	case FIELD_YEAR_SI:					// ƒŠƒŠ[ƒX”N†
+	case FIELD_YEAR_SI:					// ãƒªãƒªãƒ¼ã‚¹å¹´å·
 		pFileMP3->strYearSI = szValue;
 		break;
-	case FIELD_TRACK_NUMBER_SI:			// ƒgƒ‰ƒbƒN”Ô†
+	case FIELD_TRACK_NUMBER_SI:			// ãƒˆãƒ©ãƒƒã‚¯ç•ªå·
 		pFileMP3->strTrackNumberSI = szValue;
 		break;
-	case FIELD_TRACK_TOTAL_SI:			// ƒgƒ‰ƒbƒN”(by Kobarin)
+	case FIELD_TRACK_TOTAL_SI:			// ãƒˆãƒ©ãƒƒã‚¯æ•°(by Kobarin)
 		pFileMP3->strTrackTotalSI = szValue;
 		break;
-	case FIELD_Disc_NUMBER_SI:			// ƒfƒBƒXƒN”Ô†
+	case FIELD_Disc_NUMBER_SI:			// ãƒ‡ã‚£ã‚¹ã‚¯ç•ªå·
 		pFileMP3->strDiscNumberSI = szValue;
 		break;
-	case FIELD_DISC_TOTAL_SI:			// ƒfƒBƒXƒN”(by Kobarin)
+	case FIELD_DISC_TOTAL_SI:			// ãƒ‡ã‚£ã‚¹ã‚¯æ•°(by Kobarin)
 		pFileMP3->strDiscTotalSI = szValue;
 		break;
-	case FIELD_GENRE_SI:				// ƒWƒƒƒ“ƒ‹–¼
+	case FIELD_GENRE_SI:				// ã‚¸ãƒ£ãƒ³ãƒ«å
 		pFileMP3->strGenreSI = szValue;
 		break;
-	case FIELD_COPYRIGHT_SI:			// ’˜ìŒ 
+	case FIELD_COPYRIGHT_SI:			// è‘—ä½œæ¨©
 		pFileMP3->strCopyrightSI = szValue;
 		break;
-	case FIELD_ENGINEER_SI:				// ƒGƒ“ƒWƒjƒA
+	case FIELD_ENGINEER_SI:				// ã‚¨ãƒ³ã‚¸ãƒ‹ã‚¢
 		pFileMP3->strEngineerSI = szValue;
 		break;
-	case FIELD_SOURCE_SI:				// ƒ\[ƒX
+	case FIELD_SOURCE_SI:				// ã‚½ãƒ¼ã‚¹
 		pFileMP3->strSourceSI = szValue;
 		break;
-	case FIELD_SOFTWARE_SI:				// ƒ\ƒtƒgƒEƒFƒA
+	case FIELD_SOFTWARE_SI:				// ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢
 		pFileMP3->strSoftwareSI = szValue;
 		break;
-	case FIELD_KEYWORD_SI:				// ƒL[ƒ[ƒh
+	case FIELD_KEYWORD_SI:				// ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰
 		pFileMP3->strKeywordSI = szValue;
 		break;
-	case FIELD_TECHNICIAN_SI:			// ‹ZpŽÒ
+	case FIELD_TECHNICIAN_SI:			// æŠ€è¡“è€…
 		pFileMP3->strTechnicianSI = szValue;
 		break;
-	case FIELD_LYRIC_SI:				// ‰ÌŽŒ
+	case FIELD_LYRIC_SI:				// æ­Œè©ž
 		pFileMP3->strLyricSI = szValue;
 		break;
-	case FIELD_COMMISSION_SI:			// ƒRƒ~ƒbƒVƒ‡ƒ“
+	case FIELD_COMMISSION_SI:			// ã‚³ãƒŸãƒƒã‚·ãƒ§ãƒ³
 		pFileMP3->strCommissionSI = szValue;
 		break;
 	case FIELD_WRITER_SI:
 		pFileMP3->strWriterSI = szValue;
 		break;
-	case FIELD_COMPOSER_SI:				// ì‹È
+	case FIELD_COMPOSER_SI:				// ä½œæ›²
 		pFileMP3->strComposerSI = szValue;
 		break;
-	case FIELD_ALBM_ARTIST_SI:			// Albm.ƒA[ƒeƒBƒXƒg
+	case FIELD_ALBM_ARTIST_SI:			// Albm.ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆ
 		pFileMP3->strAlbmArtistSI = szValue;
 		break;
-	case FIELD_ORIG_ARTIST_SI:			// Orig.ƒA[ƒeƒBƒXƒg
+	case FIELD_ORIG_ARTIST_SI:			// Orig.ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆ
 		pFileMP3->strOrigArtistSI = szValue;
 		break;
 	case FIELD_URL_SI:					// URL
 		pFileMP3->strURLSI = szValue;
 		break;
-	case FIELD_ENCODEST:				// ƒGƒ“ƒR[ƒh‚µ‚½l
+	case FIELD_ENCODEST:				// ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰ã—ãŸäºº
 		pFileMP3->strEncodest = szValue;
 		break;
-	case FIELD_OTHER:					// ‚»‚Ì‘¼
+	case FIELD_OTHER:					// ãã®ä»–
 		pFileMP3->strOther = szValue;
 		break;
-	case FILED_FILE_TYPE_NAME:			// ƒtƒ@ƒCƒ‹ƒ^ƒCƒv•¶Žš—ñ
+	case FILED_FILE_TYPE_NAME:			// ãƒ•ã‚¡ã‚¤ãƒ«ã‚¿ã‚¤ãƒ—æ–‡å­—åˆ—
 		pFileMP3->strFileTypeName = szValue;
 		break;
 	}
@@ -975,11 +975,11 @@ extern "C" STEP_API bool WINAPI STEPGetBooleanValue(FILE_INFO* pFileInfo, UINT n
 {
 	FILE_MP3* pFileMP3 = (FILE_MP3*)pFileInfo->pFileMP3;
 	switch (nField) {
-	case 0:			// ŠO•”‚©‚ç•ÒW‚³‚ê‚½‚©‚Ç‚¤‚©‚Ìƒtƒ‰ƒO
+	case 0:			// å¤–éƒ¨ã‹ã‚‰ç·¨é›†ã•ã‚ŒãŸã‹ã©ã†ã‹ã®ãƒ•ãƒ©ã‚°
 		return pFileMP3->bModifyFlag;
-	case 1:			// ƒ`ƒFƒbƒNó‘Ô
+	case 1:			// ãƒã‚§ãƒƒã‚¯çŠ¶æ…‹
 		return pFileMP3->bCheckFlag;
-	case 2:			// ‰ÌŽŒƒtƒ@ƒCƒ‹‚Ì‘¶Ý
+	case 2:			// æ­Œè©žãƒ•ã‚¡ã‚¤ãƒ«ã®å­˜åœ¨
 		return pFileMP3->bExistLyricFile;
 	}
 	return false;
@@ -989,13 +989,13 @@ extern "C" STEP_API void WINAPI STEPSetBooleanValue(FILE_INFO* pFileInfo, UINT n
 {
 	FILE_MP3* pFileMP3 = (FILE_MP3*)pFileInfo->pFileMP3;
 	switch (nField) {
-	case 0:			// ŠO•”‚©‚ç•ÒW‚³‚ê‚½‚©‚Ç‚¤‚©‚Ìƒtƒ‰ƒO
+	case 0:			// å¤–éƒ¨ã‹ã‚‰ç·¨é›†ã•ã‚ŒãŸã‹ã©ã†ã‹ã®ãƒ•ãƒ©ã‚°
 		pFileMP3->bModifyFlag = bFlag;
 		break;
-	case 1:			// ƒ`ƒFƒbƒNó‘Ô
+	case 1:			// ãƒã‚§ãƒƒã‚¯çŠ¶æ…‹
 		pFileMP3->bCheckFlag = bFlag;
 		break;
-	case 2:			// ‰ÌŽŒƒtƒ@ƒCƒ‹‚Ì‘¶Ý
+	case 2:			// æ­Œè©žãƒ•ã‚¡ã‚¤ãƒ«ã®å­˜åœ¨
 		pFileMP3->bExistLyricFile = bFlag;
 		break;
 	}
@@ -1005,7 +1005,7 @@ extern "C" STEP_API long WINAPI STEPGetLongValue(FILE_INFO* pFileInfo, UINT nFie
 {
 	FILE_MP3* pFileMP3 = (FILE_MP3*)pFileInfo->pFileMP3;
 	switch (nField) {
-	case 0:			// ƒtƒ@ƒCƒ‹ƒTƒCƒY
+	case 0:			// ãƒ•ã‚¡ã‚¤ãƒ«ã‚µã‚¤ã‚º
 		return pFileMP3->lFileSize;
 	}
 	return 0;
@@ -1015,7 +1015,7 @@ extern "C" STEP_API void WINAPI STEPSetLongValue(FILE_INFO* pFileInfo, UINT nFie
 {
 	FILE_MP3* pFileMP3 = (FILE_MP3*)pFileInfo->pFileMP3;
 	switch (nField) {
-	case 0:			// ƒtƒ@ƒCƒ‹ƒTƒCƒY
+	case 0:			// ãƒ•ã‚¡ã‚¤ãƒ«ã‚µã‚¤ã‚º
 		pFileMP3->lFileSize = lValue;
 		break;
 	}
@@ -1025,13 +1025,13 @@ extern "C" STEP_API int WINAPI STEPGetIntValue(FILE_INFO* pFileInfo, UINT nField
 {
 	FILE_MP3* pFileMP3 = (FILE_MP3*)pFileInfo->pFileMP3;
 	switch (nField) {
-	case 0:			// ƒtƒ@ƒCƒ‹ƒtƒH[ƒ}ƒbƒg
+	case 0:			// ãƒ•ã‚¡ã‚¤ãƒ«ãƒ•ã‚©ãƒ¼ãƒžãƒƒãƒˆ
 		return pFileMP3->nFormat;
-	case 1:			// ‰‰‘tŽžŠÔ(’PˆÊF•b)
+	case 1:			// æ¼”å¥æ™‚é–“(å˜ä½ï¼šç§’)
 		return pFileMP3->nPlayTime;
-	case 2:			// ƒgƒ‰ƒbƒN”Ô†(”’l•ÒW—p)
+	case 2:			// ãƒˆãƒ©ãƒƒã‚¯ç•ªå·(æ•°å€¤ç·¨é›†ç”¨)
 		return pFileMP3->byTrackNumber;
-	case 3:			// ƒWƒƒƒ“ƒ‹”Ô†
+	case 3:			// ã‚¸ãƒ£ãƒ³ãƒ«ç•ªå·
 		return pFileMP3->byGenre;
 	}
 	return 0;
@@ -1041,13 +1041,13 @@ extern "C" STEP_API void WINAPI STEPSetIntValue(FILE_INFO* pFileInfo, UINT nFiel
 {
 	FILE_MP3* pFileMP3 = (FILE_MP3*)pFileInfo->pFileMP3;
 	switch (nField) {
-	case 0:			// ƒtƒ@ƒCƒ‹ƒtƒH[ƒ}ƒbƒg
+	case 0:			// ãƒ•ã‚¡ã‚¤ãƒ«ãƒ•ã‚©ãƒ¼ãƒžãƒƒãƒˆ
 		pFileMP3->nFormat = nValue;
 		break;
-	case 1:			// ‰‰‘tŽžŠÔ(’PˆÊF•b)
+	case 1:			// æ¼”å¥æ™‚é–“(å˜ä½ï¼šç§’)
 		pFileMP3->nPlayTime = nValue;
 		break;
-	case 2:			// ƒgƒ‰ƒbƒN”Ô†(”’l•ÒW—p)
+	case 2:			// ãƒˆãƒ©ãƒƒã‚¯ç•ªå·(æ•°å€¤ç·¨é›†ç”¨)
 		pFileMP3->byTrackNumber = nValue;
 		if (pFileMP3->byTrackNumber != 0 && pFileMP3->byTrackNumber < 0xff) {
 			CString strTrackNumber;
@@ -1057,7 +1057,7 @@ extern "C" STEP_API void WINAPI STEPSetIntValue(FILE_INFO* pFileInfo, UINT nFiel
 			STEPSetValue(pFileInfo, FIELD_TRACK_NUMBER, _T(""));
 		}
 		break;
-	case 3:			// ƒWƒƒƒ“ƒ‹”Ô†
+	case 3:			// ã‚¸ãƒ£ãƒ³ãƒ«ç•ªå·
 		pFileMP3->byGenre = nValue;
 		break;
 	}
@@ -1067,7 +1067,7 @@ extern "C" STEP_API void* WINAPI STEPGetVoidValue(FILE_INFO* pFileInfo, UINT nFi
 {
 	FILE_MP3* pFileMP3 = (FILE_MP3*)pFileInfo->pFileMP3;
 	switch (nField) {
-	case 0:			// ƒtƒ@ƒCƒ‹ŒÅ—Lî•ñ
+	case 0:			// ãƒ•ã‚¡ã‚¤ãƒ«å›ºæœ‰æƒ…å ±
 		return pFileMP3->fileSpecificInfo;
 	}
 	return NULL;
@@ -1077,7 +1077,7 @@ extern "C" STEP_API void WINAPI STEPSetVoidValue(FILE_INFO* pFileInfo, UINT nFie
 {
 	FILE_MP3* pFileMP3 = (FILE_MP3*)pFileInfo->pFileMP3;
 	switch (nField) {
-	case 0:			// ƒtƒ@ƒCƒ‹ŒÅ—Lî•ñ
+	case 0:			// ãƒ•ã‚¡ã‚¤ãƒ«å›ºæœ‰æƒ…å ±
 		pFileMP3->fileSpecificInfo = pInfo;
 		break;
 	}
@@ -1185,10 +1185,10 @@ extern "C" STEP_API bool WINAPI STEPFileNameChange(FILE_INFO* pFileInfo, LPCTSTR
 	fileMP3->strFileName = szNewFileName;
 	_tsplitpath_s(fileMP3->strFileName, NULL, 0, NULL, 0, fname, _MAX_FNAME, NULL, 0);
 
-	// ƒtƒ@ƒCƒ‹–¼•ÏX
+	// ãƒ•ã‚¡ã‚¤ãƒ«åå¤‰æ›´
 	CFileStatus	fileStatus;
 	bool	bKeepTimeStamp = g_bOptKeepTimeStamp;
-	// ƒ^ƒCƒ€ƒXƒ^ƒ“ƒv‚ðŽæ“¾
+	// ã‚¿ã‚¤ãƒ ã‚¹ã‚¿ãƒ³ãƒ—ã‚’å–å¾—
 	fileStatus.m_mtime = -1;
     try{
 
@@ -1202,13 +1202,13 @@ extern "C" STEP_API bool WINAPI STEPFileNameChange(FILE_INFO* pFileInfo, LPCTSTR
         bKeepTimeStamp = false;
     }
 	if (CFileMP3::ConvFileName(fileMP3) == false) {
-		// Ž¸”s‚µ‚½ê‡‚ÍAƒtƒ@ƒCƒ‹–¼‚ðŒ³‚É–ß‚·
+		// å¤±æ•—ã—ãŸå ´åˆã¯ã€ãƒ•ã‚¡ã‚¤ãƒ«åã‚’å…ƒã«æˆ»ã™
 		fileMP3->bModifyFlag = TRUE;
 		fileMP3->strFileName = strFileNameOld;
 		return false;
 	} else {
 		if (bKeepTimeStamp) {
-			// ƒtƒ@ƒCƒ‹XVŽžŠÔ‚ðÝ’è
+			// ãƒ•ã‚¡ã‚¤ãƒ«æ›´æ–°æ™‚é–“ã‚’è¨­å®š
 			fileStatus.m_mtime = fileMP3->time;
 			if (g_bOptSyncCreateTime) fileStatus.m_ctime = fileMP3->time;
 			try{

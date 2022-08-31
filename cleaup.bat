@@ -1,6 +1,6 @@
 @echo off
-echo VC++ ‚Åì‚Á‚½ƒvƒƒOƒ‰ƒ€‚Ìì‹Æƒtƒ@ƒCƒ‹ˆê®‚ğíœ‚·‚éƒoƒbƒ`ƒtƒ@ƒCƒ‹
-echo ƒoƒbƒ`ƒtƒ@ƒCƒ‹‚ğÀs‚µ‚Ü‚·
+echo VC++ ã§ä½œã£ãŸãƒ—ãƒ­ã‚°ãƒ©ãƒ ã®ä½œæ¥­ãƒ•ã‚¡ã‚¤ãƒ«ä¸€å¼ã‚’å‰Šé™¤ã™ã‚‹ãƒãƒƒãƒãƒ•ã‚¡ã‚¤ãƒ«
+echo ãƒãƒƒãƒãƒ•ã‚¡ã‚¤ãƒ«ã‚’å®Ÿè¡Œã—ã¾ã™
 pause
 
 del %~dp0*.ilk /s
@@ -25,13 +25,13 @@ del %~dp0*.suo /s
 del %~dp0*.user /s
 del %~dp0*.vc.db /s
 
-rem del %~dp0*.filters /s íœ‚µ‚Ä‚Í‚¢‚¯‚È‚¢
+rem del %~dp0*.filters /s å‰Šé™¤ã—ã¦ã¯ã„ã‘ãªã„
 
-rem ƒfƒBƒŒƒNƒgƒŠíœ
+rem ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªå‰Šé™¤
 rmdir /s %~dp0SuperTagEditor\_temp /q
 rmdir /s %~dp0SuperTagEditor\.vs /q
 rmdir /s %~dp0SuperTagEditor\ipch /q
 
-echo ƒoƒCƒiƒŠ‚ğíœ‚µ‚Ü‚·Bİ’èƒtƒ@ƒCƒ‹‚àíœ‚³‚ê‚Ü‚·B
+echo ãƒã‚¤ãƒŠãƒªã‚’å‰Šé™¤ã—ã¾ã™ã€‚è¨­å®šãƒ•ã‚¡ã‚¤ãƒ«ã‚‚å‰Šé™¤ã•ã‚Œã¾ã™ã€‚
 pause
 rmdir /s %~dp0SuperTagEditor\_bin /q

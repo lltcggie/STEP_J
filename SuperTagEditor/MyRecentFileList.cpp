@@ -1,4 +1,4 @@
-// MyRecentFileList.cpp: CMyRecentFileList ƒNƒ‰ƒX‚ÌƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“
+// MyRecentFileList.cpp: CMyRecentFileList ã‚¯ãƒ©ã‚¹ã®ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³
 //
 //////////////////////////////////////////////////////////////////////
 
@@ -13,7 +13,7 @@ static char THIS_FILE[]=__FILE__;
 #endif
 
 //////////////////////////////////////////////////////////////////////
-// \’z/Á–Å
+// æ§‹ç¯‰/æ¶ˆæ»…
 //////////////////////////////////////////////////////////////////////
 
 void CMyRecentFileList::UpdateMenu(CCmdUI* pCmdUI) /* StartInaction 053 */
@@ -100,7 +100,7 @@ void CMyRecentFileList::UpdateMenu(CCmdUI* pCmdUI) /* StartInaction 053 */
 
 void CMyRecentFileList::Add(LPCTSTR lpszPathName)
 {
-	// ƒfƒBƒŒƒNƒgƒŠˆÈŠO‚Ìê‡‚Í–³‹‚·‚é /* BeachMonster 095 */
+	// ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªä»¥å¤–ã®å ´åˆã¯ç„¡è¦–ã™ã‚‹ /* BeachMonster 095 */
 	DWORD dwAttr = GetFileAttributes(lpszPathName);
 	if (dwAttr == 0xFFFFFFFF || !(dwAttr & FILE_ATTRIBUTE_DIRECTORY)) {
 		return;
@@ -111,9 +111,9 @@ void CMyRecentFileList::Add(LPCTSTR lpszPathName)
 void CMyRecentFileList::ReadList()
 {// reads from registry or ini file
  //by Kobarin
- //CSuperTagEditorApp::m_IniFile ‚Æ“¯‚¶ƒtƒ@ƒCƒ‹‚É‘Î‚µ‚Ä•Ê‚Ìƒ‹[ƒ`ƒ“‚Å“Ç‚İ‚ñ‚Å‚à
- //CSuperTagEditorApp::m_IniFile ‘¤‚É‚Í”½‰f‚³‚ê‚È‚¢‚½‚ßA•K‚¸ CSuperTagEditorApp 
- //Œo—R‚Å“Ç‚İ‘‚«‚ğs‚¤
+ //CSuperTagEditorApp::m_IniFile ã¨åŒã˜ãƒ•ã‚¡ã‚¤ãƒ«ã«å¯¾ã—ã¦åˆ¥ã®ãƒ«ãƒ¼ãƒãƒ³ã§èª­ã¿è¾¼ã‚“ã§ã‚‚
+ //CSuperTagEditorApp::m_IniFile å´ã«ã¯åæ˜ ã•ã‚Œãªã„ãŸã‚ã€å¿…ãš CSuperTagEditorApp 
+ //çµŒç”±ã§èª­ã¿æ›¸ãã‚’è¡Œã†
 	ASSERT(m_arrNames != NULL);
 	ASSERT(!m_strSectionName.IsEmpty());
 	ASSERT(!m_strEntryFormat.IsEmpty());
@@ -133,9 +133,9 @@ void CMyRecentFileList::ReadList()
 void CMyRecentFileList::WriteList()
 {// writes to registry or ini file
  //by Kobarin
- //CSuperTagEditorApp::m_IniFile ‚Æ“¯‚¶ƒtƒ@ƒCƒ‹‚É‘Î‚µ‚Ä•Ê‚Ìƒ‹[ƒ`ƒ“‚Å“Ç‚İ‚ñ‚Å‚à
- //CSuperTagEditorApp::m_IniFile ‘¤‚É‚Í”½‰f‚³‚ê‚È‚¢‚½‚ßA•K‚¸ CSuperTagEditorApp 
- //Œo—R‚Å“Ç‚İ‘‚«‚ğs‚¤
+ //CSuperTagEditorApp::m_IniFile ã¨åŒã˜ãƒ•ã‚¡ã‚¤ãƒ«ã«å¯¾ã—ã¦åˆ¥ã®ãƒ«ãƒ¼ãƒãƒ³ã§èª­ã¿è¾¼ã‚“ã§ã‚‚
+ //CSuperTagEditorApp::m_IniFile å´ã«ã¯åæ˜ ã•ã‚Œãªã„ãŸã‚ã€å¿…ãš CSuperTagEditorApp 
+ //çµŒç”±ã§èª­ã¿æ›¸ãã‚’è¡Œã†
 	ASSERT(m_arrNames != NULL);
 	ASSERT(!m_strSectionName.IsEmpty());
 	ASSERT(!m_strEntryFormat.IsEmpty());

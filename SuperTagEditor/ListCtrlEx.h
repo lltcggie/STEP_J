@@ -48,7 +48,7 @@ protected:
 // messages with a dc. I will be glad when MicroSlop come
 // out with a version of ListCtrl that supports DCs which
 // include scroll bar and header redraw.
-class CPHk/*WMPaintHook¯•Êq‚ª’·‚·‚¬‚é‚ÆŒ¾‚í‚ê‚é‚Ì‚Å’Z‚ß‚É‚µ‚Ä‚¨‚­*/
+class CPHk/*WMPaintHookè­˜åˆ¥å­ãŒé•·ã™ãã‚‹ã¨è¨€ã‚ã‚Œã‚‹ã®ã§çŸ­ã‚ã«ã—ã¦ãŠã*/
 {
 public:
 /**

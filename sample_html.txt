@@ -1,24 +1,24 @@
 <HTML>
 
 <HEAD>
-<TITLE>MP3 List HTML o—ÍƒTƒ“ƒvƒ‹</TITLE>
+<TITLE>MP3 List HTML å‡ºåŠ›ã‚µãƒ³ãƒ—ãƒ«</TITLE>
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=shift_jis">
 </HEAD>
 
 <BODY bgcolor="#000000" text="#ffffff" link="#00ff00" alink="#00ff00" vlink="#00ff00
 ">
-<BASEFONT size="2" face="‚l‚r ƒSƒVƒbƒN">
+<BASEFONT size="2" face="ï¼­ï¼³ ã‚´ã‚·ãƒƒã‚¯">
 
 <CENTER>
 <TABLE border="1">
 	<TR>
-		<TD><NOBR>”Ô†</TD>
-		<TD><NOBR>‹È–¼</TD>
-		<TD><NOBR>‰‰‘tŽžŠÔ</TD>
-		<TD><NOBR>ƒA[ƒeƒBƒXƒg–¼</TD>
-		<TD><NOBR>ƒAƒ‹ƒoƒ€–¼</TD>
+		<TD><NOBR>ç•ªå·</TD>
+		<TD><NOBR>æ›²å</TD>
+		<TD><NOBR>æ¼”å¥æ™‚é–“</TD>
+		<TD><NOBR>ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆå</TD>
+		<TD><NOBR>ã‚¢ãƒ«ãƒãƒ å</TD>
 		<TD><NOBR>No.</TD>
-		<TD><NOBR>ƒŠƒŠ[ƒX</TD>
+		<TD><NOBR>ãƒªãƒªãƒ¼ã‚¹</TD>
 	</TR>
 [LOOP_START]
 	<TR>
@@ -44,15 +44,15 @@
 
 <TABLE border="1">
 	<TR>
-		<TD>‡Œvƒtƒ@ƒCƒ‹”</TD>
+		<TD>åˆè¨ˆãƒ•ã‚¡ã‚¤ãƒ«æ•°</TD>
 		<TD>%FILE_COUNT%</TD>
 	</TR>
 	<TR>
-		<TD>‘‡‰‰‘tŽžŠÔ</TD>
+		<TD>ç·åˆæ¼”å¥æ™‚é–“</TD>
 		<TD>%TOTAL_TIME2%</TD>
 	</TR>
 	<TR>
-		<TD>‡ŒvƒTƒCƒY</TD>
+		<TD>åˆè¨ˆã‚µã‚¤ã‚º</TD>
 		<TD>%TOTAL_SIZE%</TD>
 	</TR>
 </TABLE>

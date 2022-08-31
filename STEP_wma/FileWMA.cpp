@@ -47,7 +47,7 @@ LPCWSTR ID3TagDefs[] =
 	L"WM/Publisher",	// WMP9
 	L"WM/AlbumArtist",	// WMP9
 	L"WM/Writer",
-    L"WM/ToolName",     //ƒ\ƒtƒgƒEƒFƒA
+    L"WM/ToolName",     //ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢
 	NULL,
 } ;
 
@@ -62,7 +62,7 @@ bool LoadFileWMA(FILE_INFO *pFileMP3)
 #else
     pwszInFile = _wcsdup(GetFullPath(pFileMP3));
 #endif
-	//CoInitialize(NULL);//STEP –{‘Ì‚ªˆê“x‚¾‚¯ŒÄ‚Ô‚æ‚¤‚ÉC³
+	//CoInitialize(NULL);//STEP æœ¬ä½“ãŒä¸€åº¦ã ã‘å‘¼ã¶ã‚ˆã†ã«ä¿®æ­£
 
     IWMMetadataEditor* pEditor      = NULL;
     IWMHeaderInfo3*    pHeaderInfo  = NULL;
@@ -124,7 +124,7 @@ bool LoadFileWMA(FILE_INFO *pFileMP3)
 	SAFE_RELEASE( pHeaderInfo ) ;
 	SAFE_RELEASE( pEditor ) ;
 
-	//CoUninitialize();//STEP –{‘Ì‚ªˆê“x‚¾‚¯ŒÄ‚Ô‚æ‚¤‚ÉC³
+	//CoUninitialize();//STEP æœ¬ä½“ãŒä¸€åº¦ã ã‘å‘¼ã¶ã‚ˆã†ã«ä¿®æ­£
     free(pwszInFile);
 	pwszInFile = NULL;
 
@@ -165,7 +165,7 @@ bool WriteFileWMA(FILE_INFO *pFileMP3)
 #else
     pwszInFile = _wcsdup(GetFullPath(pFileMP3));
 #endif
-	//CoInitialize(NULL);//STEP –{‘Ì‚ªˆê“x‚¾‚¯ŒÄ‚Ô‚æ‚¤‚ÉC³
+	//CoInitialize(NULL);//STEP æœ¬ä½“ãŒä¸€åº¦ã ã‘å‘¼ã¶ã‚ˆã†ã«ä¿®æ­£
 
 	IWMMetadataEditor* pEditor      = NULL;
 #ifndef USE_WMSDK9
@@ -194,7 +194,7 @@ bool WriteFileWMA(FILE_INFO *pFileMP3)
 			TRACE( _T( "Could not QI for IWMHeaderInfo (hr=0x%08x).\n" ), hr );
 			break ;
 		}
-		// ƒ^ƒOî•ñ‚Ìo—Í
+		// ã‚¿ã‚°æƒ…å ±ã®å‡ºåŠ›
 		if (_tcslen(GetTrackNumberSI(pFileMP3)) > 0 && _ttoi(GetTrackNumberSI(pFileMP3)) > 0) {
 			WriteAttributeDWORD(pHeaderInfo, L"WM/Track", _ttoi(GetTrackNumberSI(pFileMP3)) - 1);
 			WriteAttributeDWORD(pHeaderInfo, L"WM/TrackNumber", _ttoi(GetTrackNumberSI(pFileMP3)));
@@ -234,7 +234,7 @@ bool WriteFileWMA(FILE_INFO *pFileMP3)
 	SAFE_RELEASE( pHeaderInfo ) ;
 	SAFE_RELEASE( pEditor ) ;
 
-	//CoUninitialize();//STEP –{‘Ì‚ªˆê“x‚¾‚¯ŒÄ‚Ô‚æ‚¤‚ÉC³
+	//CoUninitialize();//STEP æœ¬ä½“ãŒä¸€åº¦ã ã‘å‘¼ã¶ã‚ˆã†ã«ä¿®æ­£
     free(pwszInFile);
 
 	return(FAILED(hr) ? false : true);

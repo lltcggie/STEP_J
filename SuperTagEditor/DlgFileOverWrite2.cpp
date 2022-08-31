@@ -1,4 +1,4 @@
-// DlgFileOverWrite2.cpp : ƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“ ƒtƒ@ƒCƒ‹
+// DlgFileOverWrite2.cpp : ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³ ãƒ•ã‚¡ã‚¤ãƒ«
 //
 
 #include "stdafx.h"
@@ -13,7 +13,7 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgFileOverWrite22 ƒ_ƒCƒAƒƒO
+// CDlgFileOverWrite22 ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
 
 
 CDlgFileOverWrite2::CDlgFileOverWrite2(CWnd* pParent /*=NULL*/)
@@ -49,7 +49,7 @@ BEGIN_MESSAGE_MAP(CDlgFileOverWrite2, CDialog)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgFileOverWrite2 ƒƒbƒZ[ƒW ƒnƒ“ƒhƒ‰
+// CDlgFileOverWrite2 ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒãƒ³ãƒ‰ãƒ©
 
 void CDlgFileOverWrite2::OnOK() 
 {
@@ -80,8 +80,8 @@ void CDlgFileOverWrite2::OnBtRename()
     dialog.m_nMaxChar = g_nConfFileNameMaxChar - ext_len;
 	dialog.m_strFileName = fname;
 	dialog.m_strOrgFileName = fname;
-	//dialog.m_strMsg.Format("ƒtƒ@ƒCƒ‹–¼‚ð %d •¶ŽšˆÈ“à‚É•ÏX‚µ‚Ä‚­‚¾‚³‚¢", dialog.m_nMaxChar);
-	dialog.m_strMsgFormat = _T("ƒtƒ@ƒCƒ‹–¼‚ð %d(%d) •¶ŽšˆÈ“à‚Å•ÏX‚µ‚Ä‚­‚¾‚³‚¢");
+	//dialog.m_strMsg.Format("ãƒ•ã‚¡ã‚¤ãƒ«åã‚’ %d æ–‡å­—ä»¥å†…ã«å¤‰æ›´ã—ã¦ãã ã•ã„", dialog.m_nMaxChar);
+	dialog.m_strMsgFormat = _T("ãƒ•ã‚¡ã‚¤ãƒ«åã‚’ %d(%d) æ–‡å­—ä»¥å†…ã§å¤‰æ›´ã—ã¦ãã ã•ã„");
 	if (dialog.DoModal() == IDOK) {
 		TCHAR	sDestFile[FILENAME_MAX+1];
 		_tmakepath_s(sDestFile, drive, dir, dialog.m_strFileName, ext);

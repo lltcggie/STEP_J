@@ -1,4 +1,4 @@
-// DlgAddUserGenre.cpp : �C���v�������e�[�V���� �t�@�C��
+// DlgAddUserGenre.cpp : インプリメンテーション ファイル
 //
 
 #include "stdafx.h"
@@ -13,7 +13,7 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgAddUserGenre �_�C�A���O
+// CDlgAddUserGenre ダイアログ
 
 
 CDlgAddUserGenre::CDlgAddUserGenre(CWnd* pParent /*=NULL*/)
@@ -46,13 +46,13 @@ BEGIN_MESSAGE_MAP(CDlgAddUserGenre, CDialog)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgAddUserGenre ���b�Z�[�W �n���h��
+// CDlgAddUserGenre メッセージ ハンドラ
 
 BOOL CDlgAddUserGenre::OnInitDialog() 
 {
 	CDialog::OnInitDialog();
 	
-	// TODO: ���̈ʒu�ɏ������̕⑫������ǉ����Ă�������
+	// TODO: この位置に初期化の補足処理を追加してください
 	DWORD	dwStyle;
 	dwStyle = m_listGenre.SendMessage(LVM_GETEXTENDEDLISTVIEWSTYLE, 0, 0);
 	dwStyle |=LVS_EX_FULLROWSELECT;
@@ -61,24 +61,24 @@ BOOL CDlgAddUserGenre::OnInitDialog()
 	RECT	rect;
 	m_listGenre.GetClientRect(&rect);
 
-	m_listGenre.InsertColumn(1, _T("�W������"), LVCFMT_LEFT, rect.right-rect.left-16, -1);
-	m_listGenre.DeleteAllItems();					// �N���A
+	m_listGenre.InsertColumn(1, _T("ジャンル"), LVCFMT_LEFT, rect.right-rect.left-16, -1);
+	m_listGenre.DeleteAllItems();					// クリア
 
 	int nIndex; for (nIndex = 0; g_genreListSCMPX[nIndex].sName != NULL; nIndex++) {
 		GENRE_LIST	*pGenre = &g_genreListSCMPX[nIndex];
 		CString	strText;
-		strText.Format(_T("%3d�F%s"), pGenre->byGenre, pGenre->sName);
+		strText.Format(_T("%3d：%s"), pGenre->byGenre, pGenre->sName);
 		m_listGenre.InsertItem(nIndex, strText);
 		m_listGenre.SetItemData(nIndex, pGenre->byGenre);
 	}
 	
-	return TRUE;  // �R���g���[���Ƀt�H�[�J�X��ݒ肵�Ȃ��Ƃ��A�߂�l�� TRUE �ƂȂ�܂�
-	              // ��O: OCX �v���p�e�B �y�[�W�̖߂�l�� FALSE �ƂȂ�܂�
+	return TRUE;  // コントロールにフォーカスを設定しないとき、戻り値は TRUE となります
+	              // 例外: OCX プロパティ ページの戻り値は FALSE となります
 }
 
 void CDlgAddUserGenre::OnBtAdd() 
 {
-	// TODO: ���̈ʒu�ɃR���g���[���ʒm�n���h���p�̃R�[�h��ǉ����Ă�������
+	// TODO: この位置にコントロール通知ハンドラ用のコードを追加してください
 	UpdateData(true);
 	if (m_strName.GetLength() == 0) {
 		return;
@@ -106,7 +106,7 @@ void CDlgAddUserGenre::OnBtAdd()
 void CDlgAddUserGenre::OnItemchangedListGenre(NMHDR* pNMHDR, LRESULT* pResult) 
 {
 	NM_LISTVIEW* pNMListView = (NM_LISTVIEW*)pNMHDR;
-	// TODO: ���̈ʒu�ɃR���g���[���ʒm�n���h���p�̃R�[�h��ǉ����Ă�������
+	// TODO: この位置にコントロール通知ハンドラ用のコードを追加してください
 	EnableButton();
 
 	*pResult = 0;
@@ -128,16 +128,16 @@ void CDlgAddUserGenre::EnableButton()
 
 void CDlgAddUserGenre::OnChangeEditName() 
 {
-	// TODO: ���ꂪ RICHEDIT �R���g���[���̏ꍇ�A�R���g���[���́A lParam �}�X�N
-	// ���ł̘_���a�� ENM_CHANGE �t���O�t���� CRichEditCrtl().SetEventMask()
-	// ���b�Z�[�W���R���g���[���֑��邽�߂� CDialog::OnInitDialog() �֐����I�[�o�[
-	// ���C�h���Ȃ����肱�̒ʒm�𑗂�܂���B
+	// TODO: これが RICHEDIT コントロールの場合、コントロールは、 lParam マスク
+	// 内での論理和の ENM_CHANGE フラグ付きで CRichEditCrtl().SetEventMask()
+	// メッセージをコントロールへ送るために CDialog::OnInitDialog() 関数をオーバー
+	// ライドしない限りこの通知を送りません。
 	
-	// TODO: ���̈ʒu�ɃR���g���[���ʒm�n���h���p�̃R�[�h��ǉ����Ă�������
+	// TODO: この位置にコントロール通知ハンドラ用のコードを追加してください
 	EnableButton();
 }
 
 void CDlgAddUserGenre::OnOK() 
 {
-	// TODO: ���̈ʒu�ɂ��̑��̌��ؗp�̃R�[�h��ǉ����Ă�������
+	// TODO: この位置にその他の検証用のコードを追加してください
 }

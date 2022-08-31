@@ -83,7 +83,7 @@ void CListEditCtrl::OnKillFocus(CWnd* pNewWnd)
 
 	CString str;
 	GetWindowText(str);
-	{// —×‚ÌƒZƒ‹‚ÉƒSƒ~‚ªŽc‚ç‚È‚¢‚æ‚¤‚É /* BeachMonster 089 */
+	{// éš£ã®ã‚»ãƒ«ã«ã‚´ãƒŸãŒæ®‹ã‚‰ãªã„ã‚ˆã†ã« /* BeachMonster 089 */
 		CRect rect;
 		CalculateSize(rect);
 		GetParent()->InvalidateRect(rect);
@@ -121,7 +121,7 @@ void CListEditCtrl::OnChar(UINT nChar, UINT nRepCnt, UINT nFlags)
 		nChar = VK_DOWN;
 	case VK_TAB:
 		if (g_bOptEditOkDown) {
-			// eƒEƒBƒ“ƒhƒE‚Éƒ|ƒXƒg(ƒJ[ƒ\ƒ‹‚ðˆÚ“®‚³‚¹‚é‚½‚ß)
+			// è¦ªã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã«ãƒã‚¹ãƒˆ(ã‚«ãƒ¼ã‚½ãƒ«ã‚’ç§»å‹•ã•ã›ã‚‹ãŸã‚)
 			if (!g_bEndEditMoveRightCell) { /* BeachMonster 091 */
 				GetParent()->PostMessage(WM_KEYDOWN, nChar, 0);
 				GetParent()->PostMessage(WM_KEYUP, nChar, 0); /* Baja 165 */
@@ -129,27 +129,27 @@ void CListEditCtrl::OnChar(UINT nChar, UINT nRepCnt, UINT nFlags)
 				GetParent()->PostMessage(WM_KEYDOWN, VK_RIGHT, 0); /* BeachMonster 091 */
 			}
 		}
-		// I—¹
+		// çµ‚äº†
 		GetParent()->SetFocus();
 		return;	
 	case VK_ESCAPE:
 		if (g_bOptESCEditCancel == false) {
-			// Œ»ÝA‰½‚©“ü—Í‚³‚ê‚Ä‚¢‚éê‡‚ÍA•¶Žš‚ðƒNƒŠƒA‚·‚é
+			// ç¾åœ¨ã€ä½•ã‹å…¥åŠ›ã•ã‚Œã¦ã„ã‚‹å ´åˆã¯ã€æ–‡å­—ã‚’ã‚¯ãƒªã‚¢ã™ã‚‹
 			if (LineLength() != 0) {
 				SetWindowText(_T(""));
 				return;
 			}
 		}
-		// ‰½‚à“ü—Í‚³‚ê‚Ä‚¢‚È‚¢ó‘Ô‚Å [ESC] ‚ª‰Ÿ‚³‚ê‚½ê‡‚ÍƒLƒƒƒ“ƒZƒ‹
+		// ä½•ã‚‚å…¥åŠ›ã•ã‚Œã¦ã„ãªã„çŠ¶æ…‹ã§ [ESC] ãŒæŠ¼ã•ã‚ŒãŸå ´åˆã¯ã‚­ãƒ£ãƒ³ã‚»ãƒ«
 		m_bVK_ESCAPE = 1;
-		// I—¹
+		// çµ‚äº†
 		GetParent()->SetFocus();
 		return;	
 	}
 
 	CEdit::OnChar(nChar, nRepCnt, nFlags);
 
-	// ‚±‚±‚©‚ç‚µ‚½‚²‚Á‚»‚è•ÏX /* BeachMonster 089 */
+	// ã“ã“ã‹ã‚‰ã—ãŸã”ã£ãã‚Šå¤‰æ›´ /* BeachMonster 089 */
 	CRect rect;
 	if (CalculateSize(rect)) {
 		MoveWindow( &rect );
@@ -188,7 +188,7 @@ bool CListEditCtrl::CalculateSize(CRect& rect) /* BeachMonster 089 */
 	// Transform rect to parent coordinates	
 	ClientToScreen(&rect);
 	GetParent()->ScreenToClient(&rect);
-	if (bShowScrollBar) { // ƒXƒNƒ[ƒ‹ƒo[‚ðl—¶
+	if (bShowScrollBar) { // ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ãƒãƒ¼ã‚’è€ƒæ…®
 		rect.right += GetSystemMetrics(SM_CXVSCROLL); 
 	}
 
@@ -198,7 +198,7 @@ bool CListEditCtrl::CalculateSize(CRect& rect) /* BeachMonster 089 */
 		size.cx += 5; // add some extra buffer	
 	} else {
 		size.cy = size.cx = 0;
-		while (true) { // ƒzƒ“ƒg‚Í‚Ps‚Ã‚Âˆ—‚µ‚½‚­‚È‚¢‚Ì‚¾‚ªDrawText‚ª‰¡•‚ðŸŽè‚ÉL‚°‚Äc‚ª‘«‚è‚È‚­‚È‚é‚Ì‚ÅŽ©•ª‚Å‚â‚é
+		while (true) { // ãƒ›ãƒ³ãƒˆã¯ï¼‘è¡Œã¥ã¤å‡¦ç†ã—ãŸããªã„ã®ã ãŒDrawTextãŒæ¨ªå¹…ã‚’å‹æ‰‹ã«åºƒã’ã¦ç¸¦ãŒè¶³ã‚Šãªããªã‚‹ã®ã§è‡ªåˆ†ã§ã‚„ã‚‹
 			bool bEmpty = false;
 			int nIndex = str.Find(_T("\r"));
 			CString line = str;
@@ -250,7 +250,7 @@ bool CListEditCtrl::CalculateSize(CRect& rect) /* BeachMonster 089 */
 			if (str.IsEmpty()) {
 				break;
 			}
-			str.TrimLeft(_T("\r"));// "\r\n"‚Ì‘©‚ª“Z‚ß‚ÄTrim‚³‚ê‚È‚¢‚æ‚¤‚É‚í‚¯‚Ä‚â‚é
+			str.TrimLeft(_T("\r"));// "\r\n"ã®æŸãŒçºã‚ã¦Trimã•ã‚Œãªã„ã‚ˆã†ã«ã‚ã‘ã¦ã‚„ã‚‹
 			str.TrimLeft(_T("\n"));
 		}
 		size.cy += 5;
@@ -306,8 +306,8 @@ bool CListEditCtrl::CalculateSize(CRect& rect) /* BeachMonster 089 */
 
 void CListEditCtrl::OnSetfocus() /* BeachMonster 089 */
 {
-	// TODO: ‚±‚ÌˆÊ’u‚ÉƒRƒ“ƒgƒ[ƒ‹’Ê’mƒnƒ“ƒhƒ‰—p‚ÌƒR[ƒh‚ð’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
-	/* ES_MULTILINE ‚Ì‚Æ‚«‚É‰½ŒÌ‚©ÅŒã‚Ìs‚ª‘I‘ðó‘Ô‚É‚È‚Á‚Ä‚µ‚Ü‚¤‚Ì‚ð‰ñ”ð‚·‚é‚½‚ß */
+	// TODO: ã“ã®ä½ç½®ã«ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«é€šçŸ¥ãƒãƒ³ãƒ‰ãƒ©ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
+	/* ES_MULTILINE ã®ã¨ãã«ä½•æ•…ã‹æœ€å¾Œã®è¡ŒãŒé¸æŠžçŠ¶æ…‹ã«ãªã£ã¦ã—ã¾ã†ã®ã‚’å›žé¿ã™ã‚‹ãŸã‚ */
 	/* Misirlou 151 *//*
 	keybd_event(VK_END, 0, 0, 0);
 	keybd_event(VK_END, 0, KEYEVENTF_KEYUP, 0);
@@ -320,9 +320,9 @@ void CListEditCtrl::OnSetfocus() /* BeachMonster 089 */
 void CListEditCtrl::ShowInputMode() /* Misirlou 150 */
 {
 	if (m_bCursorExit) {
-		AfxGetMainWnd()->SendMessage(WM_USER_SET_STATUS_INPUT_MODE, 0, (LPARAM)"“ü—Í");
+		AfxGetMainWnd()->SendMessage(WM_USER_SET_STATUS_INPUT_MODE, 0, (LPARAM)"å…¥åŠ›");
 	} else {
-		AfxGetMainWnd()->SendMessage(WM_USER_SET_STATUS_INPUT_MODE, 0, (LPARAM)"•ÒW");
+		AfxGetMainWnd()->SendMessage(WM_USER_SET_STATUS_INPUT_MODE, 0, (LPARAM)"ç·¨é›†");
 	}
 }
 

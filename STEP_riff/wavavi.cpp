@@ -3,8 +3,8 @@
 #include "STEPlugin.h"
 #include "MMCommand.h"
 
-//WAV ‚Æ AVI ‚Ìƒ^ƒOî•ñ‚ğ“Ç‚İ‘‚«‚·‚é
-//Šî–{“I‚É WAV ‚à AVI ‚à“¯‚¶ˆµ‚¢
+//WAV ã¨ AVI ã®ã‚¿ã‚°æƒ…å ±ã‚’èª­ã¿æ›¸ãã™ã‚‹
+//åŸºæœ¬çš„ã« WAV ã‚‚ AVI ã‚‚åŒã˜æ‰±ã„
 bool LoadAttributeFileWAV(FILE_INFO *pFileMP3);
 bool WriteAttributeFileWAV(FILE_INFO *pFileMP3);
 
@@ -28,33 +28,33 @@ bool LoadAttributeFileWAV(FILE_INFO *pFileMP3)
     else{
         return false;
     }
-    //INAM/ISBJ ƒ^ƒCƒgƒ‹
-    //ISBJ ‚æ‚è‚à INAM ‚ğ—Dæ
+    //INAM/ISBJ ã‚¿ã‚¤ãƒˆãƒ«
+    //ISBJ ã‚ˆã‚Šã‚‚ INAM ã‚’å„ªå…ˆ
     SetTrackNameSI(pFileMP3, riff.GetField('I','N','A','M'));
     if(_tcslen(GetTrackNameSI(pFileMP3)) == 0){
         SetTrackNameSI(pFileMP3, riff.GetField('I','S','B','J'));
     }
-	//IART ƒA[ƒeƒBƒXƒg–¼
+	//IART ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆå
 	SetArtistNameSI(pFileMP3, riff.GetField('I','A','R','T'));
-	//IPRD ƒAƒ‹ƒoƒ€–¼
+	//IPRD ã‚¢ãƒ«ãƒãƒ å
 	SetAlbumNameSI(pFileMP3, riff.GetField('I','P','R','D'));
-	//ICMT ƒRƒƒ“ƒg
+	//ICMT ã‚³ãƒ¡ãƒ³ãƒˆ
 	SetCommentSI(pFileMP3, riff.GetField('I','C','M','T'));
-	//ICRD “ú•t
+	//ICRD æ—¥ä»˜
 	SetYearSI(pFileMP3, riff.GetField('I','C','R','D'));
-	//IGNR ƒWƒƒƒ“ƒ‹
+	//IGNR ã‚¸ãƒ£ãƒ³ãƒ«
 	SetGenreSI(pFileMP3, riff.GetField('I','G','N','R'));
-	//ICOP ’˜ìŒ 
+	//ICOP è‘—ä½œæ¨©
 	SetCopyrightSI(pFileMP3, riff.GetField('I','C','O','P'));
-	//IENG ƒGƒ“ƒWƒjƒA	
+	//IENG ã‚¨ãƒ³ã‚¸ãƒ‹ã‚¢	
     SetEngineerSI(pFileMP3, riff.GetField('I','E','N','G'));
-	//ISRC ƒ\[ƒX	
+	//ISRC ã‚½ãƒ¼ã‚¹	
 	SetSourceSI(pFileMP3, riff.GetField('I','S','R','C'));
-	//ISFT ƒ\ƒtƒgƒEƒFƒA
+	//ISFT ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢
 	SetSoftwareSI(pFileMP3, riff.GetField('I','S','F','T'));
-	//ITRK ƒgƒ‰ƒbƒN”Ô†
+	//ITRK ãƒˆãƒ©ãƒƒã‚¯ç•ªå·
 	SetTrackNumberSI(pFileMP3, riff.GetField('I','T','R','K'));
-    //ƒtƒH[ƒ}ƒbƒg
+    //ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆ
     CString strFormat;
     CString strTime;
     if(_tcsicmp(ext, _T(".wav")) == 0){
@@ -81,7 +81,7 @@ bool LoadAttributeFileWAV(FILE_INFO *pFileMP3)
     }
     SetAudioFormat(pFileMP3, strFormat);
     TCHAR *time = strTime.GetBuffer();
-    //szTime = "xx:xx (xxxsec) ‚Ì‚æ‚¤‚É‚È‚Á‚Ä‚¢‚é
+    //szTime = "xx:xx (xxxsec) ã®ã‚ˆã†ã«ãªã£ã¦ã„ã‚‹
     TCHAR *pszSec = _tcschr(time, _T('('));
     if(pszSec){
         pszSec++;
@@ -111,28 +111,28 @@ bool WriteAttributeFileWAV(FILE_INFO *pFileMP3)
     else{
         return false;
     }
-    //INAM ƒ^ƒCƒgƒ‹
+    //INAM ã‚¿ã‚¤ãƒˆãƒ«
 	riff.SetField('I','N','A','M', GetTrackNameSI(pFileMP3));
-	riff.SetField('I','S','B','J', _T("")); /* 2005.12.26 mp3infp‚Æ“¯—l‚É ISBJ‚ğíœ */
-	//IART ƒA[ƒeƒBƒXƒg–¼
+	riff.SetField('I','S','B','J', _T("")); /* 2005.12.26 mp3infpã¨åŒæ§˜ã« ISBJã‚’å‰Šé™¤ */
+	//IART ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆå
 	riff.SetField('I','A','R','T', GetArtistNameSI(pFileMP3));
-	//IPRD ƒAƒ‹ƒoƒ€–¼
+	//IPRD ã‚¢ãƒ«ãƒãƒ å
 	riff.SetField('I','P','R','D', GetAlbumNameSI(pFileMP3));
-	//ICMT ƒRƒƒ“ƒg
+	//ICMT ã‚³ãƒ¡ãƒ³ãƒˆ
 	riff.SetField('I','C','M','T', GetCommentSI(pFileMP3));
-	//ICRD “ú•t
+	//ICRD æ—¥ä»˜
 	riff.SetField('I','C','R','D', GetYearSI(pFileMP3));
-	//IGNR ƒWƒƒƒ“ƒ‹
+	//IGNR ã‚¸ãƒ£ãƒ³ãƒ«
 	riff.SetField('I','G','N','R', GetGenreSI(pFileMP3));
-	//ICOP ’˜ìŒ 
+	//ICOP è‘—ä½œæ¨©
 	riff.SetField('I','C','O','P', GetCopyrightSI(pFileMP3));
-	//IENG ƒGƒ“ƒWƒjƒA	
+	//IENG ã‚¨ãƒ³ã‚¸ãƒ‹ã‚¢	
 	riff.SetField('I','E','N','G', GetEngineerSI(pFileMP3));
-	//ISRC ƒ\[ƒX	
+	//ISRC ã‚½ãƒ¼ã‚¹	
 	riff.SetField('I','S','R','C', GetSourceSI(pFileMP3));
-	//ISFT ƒ\ƒtƒgƒEƒFƒA
+	//ISFT ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢
 	riff.SetField('I','S','F','T', GetSoftwareSI(pFileMP3));
-	//ITRK ƒgƒ‰ƒbƒN”Ô†
+	//ITRK ãƒˆãƒ©ãƒƒã‚¯ç•ªå·
 	riff.SetField('I','T','R','K', GetTrackNumberSI(pFileMP3));
     return riff.Save(GetFullPath(pFileMP3)) == ERROR_SUCCESS;
 }

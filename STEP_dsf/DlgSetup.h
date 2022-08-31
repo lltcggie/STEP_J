@@ -14,7 +14,7 @@ public:
 	enum { IDD = IDD_DLG_SETUP };
 
 protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV ÉTÉ|Å[Ég
+	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV „Çµ„Éù„Éº„Éà
 
 protected:
 	DECLARE_MESSAGE_MAP()

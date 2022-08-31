@@ -1,4 +1,4 @@
-// DlgFileNameMaxCheck.cpp : ƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“ ƒtƒ@ƒCƒ‹
+// DlgFileNameMaxCheck.cpp : ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³ ãƒ•ã‚¡ã‚¤ãƒ«
 //
 
 #include "stdafx.h"
@@ -12,7 +12,7 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgFileNameMaxCheck ƒ_ƒCƒAƒƒO
+// CDlgFileNameMaxCheck ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
 
 
 CDlgFileNameMaxCheck::CDlgFileNameMaxCheck(CWnd* pParent /*=NULL*/)
@@ -46,11 +46,11 @@ BEGIN_MESSAGE_MAP(CDlgFileNameMaxCheck, CDialog)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgFileNameMaxCheck ƒƒbƒZ[ƒW ƒnƒ“ƒhƒ‰
+// CDlgFileNameMaxCheck ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒãƒ³ãƒ‰ãƒ©
 
 void CDlgFileNameMaxCheck::OnChFilenameMaxCheck() /* SeaKnows 036 */
 {
-	// TODO: ‚±‚ÌˆÊ’u‚ÉƒRƒ“ƒgƒ[ƒ‹’Ê’mƒnƒ“ƒhƒ‰—p‚ÌƒR[ƒh‚ð’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
+	// TODO: ã“ã®ä½ç½®ã«ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«é€šçŸ¥ãƒãƒ³ãƒ‰ãƒ©ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
 	UpdateData(TRUE);
 	if (m_bFileNameMaxCheck) {
 		m_checkFileNameMaxCellColor.EnableWindow(TRUE);

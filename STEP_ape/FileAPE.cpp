@@ -44,7 +44,7 @@ void SetAudioFormatApe(FILE_INFO *pFileMP3)
 
     SetAudioFormat(pFileMP3, strAudioFormat);
     TCHAR *time = strTimeString.GetBuffer();
-    //szTime = "xx:xx (xxxsec) �̂悤�ɂȂ��Ă���
+    //szTime = "xx:xx (xxxsec) のようになっている
     TCHAR *pszSec = _tcschr(time, _T('('));
     if(pszSec){
         pszSec++;

@@ -30,7 +30,7 @@ extern bool ID3v1IsEmpty(FILE_INFO *pFileMP3);
 
 bool ConvExt(FILE_INFO* pFileMP3)
 {
-    // Šg’£q‚Ì•ÏX
+    // æ‹¡å¼µå­ã®å¤‰æ›´
     UINT nFormat = GetFormat(pFileMP3);
     if (bOptChangeFileExt) {
         TCHAR   fname[_MAX_FNAME];
@@ -38,10 +38,10 @@ bool ConvExt(FILE_INFO* pFileMP3)
         CString strNewFileName = GetFileName(pFileMP3);
 
         if (nFormat == nFileTypeMP3 || nFormat == nFileTypeMP3V1 || nFormat == nFileTypeMP3V11 || nFormat == nFileTypeID3V2) {
-            // MP3 Œ`®‚É•ÏŠ·
+            // MP3 å½¢å¼ã«å¤‰æ›
             strNewFileName.Format(_T("%s%s"), fname, _T(".mp3"));
         } else if (nFormat == nFileTypeRMP) {
-            // RIFF MP3 Œ`®‚É•ÏŠ·
+            // RIFF MP3 å½¢å¼ã«å¤‰æ›
             strNewFileName.Format(_T("%s%s"), fname, _T(".rmp"));
         }
         if (STEPFileNameChange(pFileMP3, strNewFileName) == false) {
@@ -53,13 +53,13 @@ bool ConvExt(FILE_INFO* pFileMP3)
 
 bool DeleteTagID3v1(const TCHAR *sFileName, HWND hWnd)
 {
-    // ID3v1 ƒ^ƒO‚Ìæ“¾
+    // ID3v1 ã‚¿ã‚°ã®å–å¾—
     CId3tagv1   id3v1/*(USE_SCMPX_GENRE_ANIMEJ)*/;
-    if (id3v1.Load(sFileName) != ERROR_SUCCESS  // “Ç‚İ‚İ¸”s
-        ||  id3v1.IsEnable() == FALSE) {        // ID3v1 ‚Å‚Í‚È‚¢
+    if (id3v1.Load(sFileName) != ERROR_SUCCESS  // èª­ã¿è¾¼ã¿å¤±æ•—
+        ||  id3v1.IsEnable() == FALSE) {        // ID3v1 ã§ã¯ãªã„
         return false;
     }
-    // ID3v1 ƒ^ƒO‚Ìíœ
+    // ID3v1 ã‚¿ã‚°ã®å‰Šé™¤
     if (id3v1.DelTag(sFileName) != ERROR_SUCCESS) {
         return false;
     }
@@ -68,14 +68,14 @@ bool DeleteTagID3v1(const TCHAR *sFileName, HWND hWnd)
 
 bool DeleteTagID3v2(const TCHAR *sFileName, HWND hWnd)
 {
-    // ID3v2 ƒ^ƒO‚Ìæ“¾
+    // ID3v2 ã‚¿ã‚°ã®å–å¾—
     CId3tagv2   id3v2/*(USE_SCMPX_GENRE_ANIMEJ)*/;
-    if (id3v2.Load(sFileName) != ERROR_SUCCESS  // “Ç‚İ‚İ¸”s
-    ||  id3v2.IsEnable() == FALSE           // ID3v2 ‚Å‚Í‚È‚¢
-    ||  !TRUE/*id3v2.IsSafeVer()*/) {               // –¢‘Î‰‚Ìƒo[ƒWƒ‡ƒ“
+    if (id3v2.Load(sFileName) != ERROR_SUCCESS  // èª­ã¿è¾¼ã¿å¤±æ•—
+    ||  id3v2.IsEnable() == FALSE           // ID3v2 ã§ã¯ãªã„
+    ||  !TRUE/*id3v2.IsSafeVer()*/) {               // æœªå¯¾å¿œã®ãƒãƒ¼ã‚¸ãƒ§ãƒ³
         return false;
     }
-    // ID3v2 ƒ^ƒO‚Ìíœ
+    // ID3v2 ã‚¿ã‚°ã®å‰Šé™¤
     if (id3v2.DelTag(sFileName) != ERROR_SUCCESS) {
         return false;
     }
@@ -128,7 +128,7 @@ bool MakeTagID3v2(const TCHAR *sFileName, HWND hWnd)
     }
     id3v2.SetUnSynchronization(false);
     if (id3v2.MakeTag(sFileName) != ERROR_SUCCESS) {
-        // •ÏŠ·¸”s
+        // å¤‰æ›å¤±æ•—
         return(false);
     }
     return(true);
@@ -143,15 +143,15 @@ bool MakeTagSIF(const TCHAR* sFileName, HWND hWnd) {
 }
 
 bool ConvFileFormat(FILE_INFO* pFileMP3, UINT nType, HWND hWnd) {
-    // –‘O‚Éƒ^ƒO‚ğXV
+    // äº‹å‰ã«ã‚¿ã‚°ã‚’æ›´æ–°
     int nFormat = GetFormat(pFileMP3);
-    if (nType == nFileTypeMP3 || nType == nFileTypeMP3V1 || nType == nFileTypeMP3V11) { // ID3v1 ‚É•ÏŠ·
-        if (nFormat == nFileTypeRMP) { // RIFFŒ`® => ID3v1
+    if (nType == nFileTypeMP3 || nType == nFileTypeMP3V1 || nType == nFileTypeMP3V11) { // ID3v1 ã«å¤‰æ›
+        if (nFormat == nFileTypeRMP) { // RIFFå½¢å¼ => ID3v1
             if (DeleteTagSIF(GetFullPath(pFileMP3), hWnd) == false) {
-                MessageBox(hWnd, _T("ƒtƒ@ƒCƒ‹Œ`®‚Ì•ÏŠ·‚É¸”s‚µ‚Ü‚µ‚½"),  GetFullPath(pFileMP3), MB_ICONSTOP|MB_OK|MB_TOPMOST);
+                MessageBox(hWnd, _T("ãƒ•ã‚¡ã‚¤ãƒ«å½¢å¼ã®å¤‰æ›ã«å¤±æ•—ã—ã¾ã—ãŸ"),  GetFullPath(pFileMP3), MB_ICONSTOP|MB_OK|MB_TOPMOST);
                 return false;
             }
-            if(ID3v1IsEmpty(pFileMP3)){//ID3v1 ‚ª‹ó‚Ìê‡‚Í SIF ‚©‚çƒRƒs[
+            if(ID3v1IsEmpty(pFileMP3)){//ID3v1 ãŒç©ºã®å ´åˆã¯ SIF ã‹ã‚‰ã‚³ãƒ”ãƒ¼
                 ConvSIFieldToID3tag(pFileMP3);
             }
             WriteTagID3(pFileMP3);
@@ -159,50 +159,50 @@ bool ConvFileFormat(FILE_INFO* pFileMP3, UINT nType, HWND hWnd) {
         } 
         else if (nFormat == nFileTypeID3V2) { // ID3v2 => ID3v1
             if (DeleteTagID3v2(GetFullPath(pFileMP3), hWnd) == false) {
-                MessageBox(hWnd, _T("ƒtƒ@ƒCƒ‹Œ`®‚Ì•ÏŠ·‚É¸”s‚µ‚Ü‚µ‚½"),  GetFullPath(pFileMP3), MB_ICONSTOP|MB_OK|MB_TOPMOST);
+                MessageBox(hWnd, _T("ãƒ•ã‚¡ã‚¤ãƒ«å½¢å¼ã®å¤‰æ›ã«å¤±æ•—ã—ã¾ã—ãŸ"),  GetFullPath(pFileMP3), MB_ICONSTOP|MB_OK|MB_TOPMOST);
                 return false;
             }
-            if(ID3v1IsEmpty(pFileMP3)){//ID3v1 ‚ª‹ó‚Ìê‡‚Í SIF ‚©‚çƒRƒs[
+            if(ID3v1IsEmpty(pFileMP3)){//ID3v1 ãŒç©ºã®å ´åˆã¯ SIF ã‹ã‚‰ã‚³ãƒ”ãƒ¼
                 ConvSIFieldToID3tag(pFileMP3);
             }
             WriteTagID3(pFileMP3);
             STEPInitDataSIF(pFileMP3);
         } else {
-            // –¢‘Î‰‚ÌŒ`®
+            // æœªå¯¾å¿œã®å½¢å¼
             return true;
         }
-    } else if (nType == nFileTypeID3V2) { // ID3v2 ‚É•ÏŠ·
-        if (nFormat == nFileTypeMP3 || nFormat == nFileTypeMP3V1 || nFormat == nFileTypeMP3V11) { // ID3v1 => ID3v2Œ`®
+    } else if (nType == nFileTypeID3V2) { // ID3v2 ã«å¤‰æ›
+        if (nFormat == nFileTypeMP3 || nFormat == nFileTypeMP3V1 || nFormat == nFileTypeMP3V11) { // ID3v1 => ID3v2å½¢å¼
             if (MakeTagID3v2(GetFullPath(pFileMP3), hWnd) == false) {
-                STEPInitDataSIF(pFileMP3);              // SIF ‚ÌƒNƒŠƒA
-                MessageBox(hWnd, _T("ƒtƒ@ƒCƒ‹Œ`®‚Ì•ÏŠ·‚É¸”s‚µ‚Ü‚µ‚½"), GetFullPath(pFileMP3), MB_ICONSTOP|MB_OK|MB_TOPMOST);
+                STEPInitDataSIF(pFileMP3);              // SIF ã®ã‚¯ãƒªã‚¢
+                MessageBox(hWnd, _T("ãƒ•ã‚¡ã‚¤ãƒ«å½¢å¼ã®å¤‰æ›ã«å¤±æ•—ã—ã¾ã—ãŸ"), GetFullPath(pFileMP3), MB_ICONSTOP|MB_OK|MB_TOPMOST);
                 return false;
             }
             extern bool ConvID3tagToSIField(FILE_INFO *pFileMP3);
-            ConvID3tagToSIField(pFileMP3);  // ID3v1 ‚©‚ç SIF ‚ÉƒRƒs[
+            ConvID3tagToSIField(pFileMP3);  // ID3v1 ã‹ã‚‰ SIF ã«ã‚³ãƒ”ãƒ¼
             WriteTagID3v2(pFileMP3);
-            if(bOptID3v2ID3tagAutoDelete){//ID3v1 ‚ğíœ
+            if(bOptID3v2ID3tagAutoDelete){//ID3v1 ã‚’å‰Šé™¤
                 DeleteTagID3v1(GetFullPath(pFileMP3), hWnd);
                 STEPInitDataID3(pFileMP3);
             }
             else if(ID3v1IsEmpty(pFileMP3)){
                 DeleteTagID3v1(GetFullPath(pFileMP3), hWnd);
             }
-        } else if (nFormat == nFileTypeRMP) { // RIFFŒ`® => ID3v2Œ`®
-            // RIFF MP3 => (•W€MP3Œ`®) => ID3v2 •ÏŠ·
+        } else if (nFormat == nFileTypeRMP) { // RIFFå½¢å¼ => ID3v2å½¢å¼
+            // RIFF MP3 => (æ¨™æº–MP3å½¢å¼) => ID3v2 å¤‰æ›
             if (DeleteTagSIF(GetFullPath(pFileMP3), hWnd) == false) {
-                MessageBox(hWnd, _T("ƒtƒ@ƒCƒ‹Œ`®‚Ì•ÏŠ·‚É¸”s‚µ‚Ü‚µ‚½"),  GetFullPath(pFileMP3), MB_ICONSTOP|MB_OK|MB_TOPMOST);
+                MessageBox(hWnd, _T("ãƒ•ã‚¡ã‚¤ãƒ«å½¢å¼ã®å¤‰æ›ã«å¤±æ•—ã—ã¾ã—ãŸ"),  GetFullPath(pFileMP3), MB_ICONSTOP|MB_OK|MB_TOPMOST);
                 return false;
             }
             SetFormat(pFileMP3, nFileTypeMP3);
             if (MakeTagID3v2(GetFullPath(pFileMP3), hWnd) == false) {
-                STEPInitDataSIF(pFileMP3);              // SIF ‚ÌƒNƒŠƒA
-                MessageBox(hWnd, _T("ƒtƒ@ƒCƒ‹Œ`®‚Ì•ÏŠ·‚É¸”s‚µ‚Ü‚µ‚½"), GetFullPath(pFileMP3), MB_ICONSTOP|MB_OK|MB_TOPMOST);
+                STEPInitDataSIF(pFileMP3);              // SIF ã®ã‚¯ãƒªã‚¢
+                MessageBox(hWnd, _T("ãƒ•ã‚¡ã‚¤ãƒ«å½¢å¼ã®å¤‰æ›ã«å¤±æ•—ã—ã¾ã—ãŸ"), GetFullPath(pFileMP3), MB_ICONSTOP|MB_OK|MB_TOPMOST);
                 return false;
             }
             SetFormat(pFileMP3, nFileTypeID3V2);
             WriteTagID3v2(pFileMP3);
-            if(bOptID3v2ID3tagAutoDelete){//ID3v1 ‚ğíœ
+            if(bOptID3v2ID3tagAutoDelete){//ID3v1 ã‚’å‰Šé™¤
                 DeleteTagID3v1(GetFullPath(pFileMP3), hWnd);
                 STEPInitDataID3(pFileMP3);
             }
@@ -210,35 +210,35 @@ bool ConvFileFormat(FILE_INFO* pFileMP3, UINT nType, HWND hWnd) {
                 DeleteTagID3v1(GetFullPath(pFileMP3), hWnd);
             }
         } else {
-            // –¢‘Î‰‚ÌŒ`®
+            // æœªå¯¾å¿œã®å½¢å¼
             return true;
         }
-    } else if (nType == nFileTypeRMP) { // RIFFŒ`®‚É•ÏŠ·
-        if (nFormat == nFileTypeMP3 || nFormat == nFileTypeMP3V1 || nFormat == nFileTypeMP3V11) { // ID3v1 => RIFFŒ`®
+    } else if (nType == nFileTypeRMP) { // RIFFå½¢å¼ã«å¤‰æ›
+        if (nFormat == nFileTypeMP3 || nFormat == nFileTypeMP3V1 || nFormat == nFileTypeMP3V11) { // ID3v1 => RIFFå½¢å¼
             if (MakeTagSIF(GetFullPath(pFileMP3), hWnd) == FALSE) {
-                MessageBox(hWnd, _T("ƒtƒ@ƒCƒ‹Œ`®‚Ì•ÏŠ·‚É¸”s‚µ‚Ü‚µ‚½"), GetFullPath(pFileMP3), MB_ICONSTOP|MB_OK|MB_TOPMOST);
+                MessageBox(hWnd, _T("ãƒ•ã‚¡ã‚¤ãƒ«å½¢å¼ã®å¤‰æ›ã«å¤±æ•—ã—ã¾ã—ãŸ"), GetFullPath(pFileMP3), MB_ICONSTOP|MB_OK|MB_TOPMOST);
                 return false;
             }
-            ConvID3tagToSIField(pFileMP3);  // ID3v1 ‚©‚ç SIF ‚ÉƒRƒs[
+            ConvID3tagToSIField(pFileMP3);  // ID3v1 ã‹ã‚‰ SIF ã«ã‚³ãƒ”ãƒ¼
             WriteTagSIF(pFileMP3);
-        } else if (nFormat == nFileTypeID3V2) { // ID3v2Œ`® => RIFFŒ`®
-            // ID3v2 => (•W€MP3Œ`®) => RIFF MP3 •ÏŠ·
+        } else if (nFormat == nFileTypeID3V2) { // ID3v2å½¢å¼ => RIFFå½¢å¼
+            // ID3v2 => (æ¨™æº–MP3å½¢å¼) => RIFF MP3 å¤‰æ›
             if (DeleteTagID3v2(GetFullPath(pFileMP3), hWnd) == false) {
-                // •ÏŠ·¸”s
-                MessageBox(hWnd, _T("ƒtƒ@ƒCƒ‹Œ`®‚Ì•ÏŠ·‚É¸”s‚µ‚Ü‚µ‚½"), GetFullPath(pFileMP3), MB_ICONSTOP|MB_OK|MB_TOPMOST);
+                // å¤‰æ›å¤±æ•—
+                MessageBox(hWnd, _T("ãƒ•ã‚¡ã‚¤ãƒ«å½¢å¼ã®å¤‰æ›ã«å¤±æ•—ã—ã¾ã—ãŸ"), GetFullPath(pFileMP3), MB_ICONSTOP|MB_OK|MB_TOPMOST);
                 return(false);
             }
             if (MakeTagSIF(GetFullPath(pFileMP3), hWnd) == FALSE) {
-                MessageBox(hWnd, _T("ƒtƒ@ƒCƒ‹Œ`®‚Ì•ÏŠ·‚É¸”s‚µ‚Ü‚µ‚½"), GetFullPath(pFileMP3), MB_ICONSTOP|MB_OK|MB_TOPMOST);
+                MessageBox(hWnd, _T("ãƒ•ã‚¡ã‚¤ãƒ«å½¢å¼ã®å¤‰æ›ã«å¤±æ•—ã—ã¾ã—ãŸ"), GetFullPath(pFileMP3), MB_ICONSTOP|MB_OK|MB_TOPMOST);
                 return false;
             }
             WriteTagSIF(pFileMP3);
         } else {
-            // –¢‘Î‰‚ÌŒ`®
+            // æœªå¯¾å¿œã®å½¢å¼
             return true;
         }
     } else {
-        // –¢‘Î‰‚ÌŒ`®
+        // æœªå¯¾å¿œã®å½¢å¼
         return false;
     }
     SetModifyFlag(pFileMP3, false);
@@ -246,11 +246,11 @@ bool ConvFileFormat(FILE_INFO* pFileMP3, UINT nType, HWND hWnd) {
     if (LoadFileMP3(pFileMP3) == false) {
         return false;
     }
-    // Šg’£q‚Ì•ÏX
+    // æ‹¡å¼µå­ã®å¤‰æ›´
     return ConvExt(pFileMP3);
 }
 
-/**----- ƒR[ƒ‹ƒoƒbƒN -----**/
+/**----- ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯ -----**/
 bool WINAPI ConvFileFormatID3v1(FILE_INFO* pFileInfo, int nProcFlag, HWND hWnd) {
     if (nProcFlag == 3) {
         return false;
@@ -297,7 +297,7 @@ bool WINAPI DeleteId3tagv1(FILE_INFO* pFileInfo, int nProcFlag, HWND hWnd) {
     if (!TYPE_IS_SUPPORT(nFormat)) { /* 2005.09.21 */
         return true;
     }
-    // –‘O‚Éƒ^ƒO‚ğXV
+    // äº‹å‰ã«ã‚¿ã‚°ã‚’æ›´æ–°
     if (isModify(pFileInfo)) {
         if (STEPWriteTag(pFileInfo) == false) {
             return false;
@@ -308,7 +308,7 @@ bool WINAPI DeleteId3tagv1(FILE_INFO* pFileInfo, int nProcFlag, HWND hWnd) {
     STEPInitDataSIF(pFileInfo);
     extern bool LoadFileMP3(FILE_INFO *pFileMP3);
     LoadFileMP3(pFileInfo);
-    //return result;//false ‚ğ•Ô‚·‚Æ‚»‚êˆÈ~‚Ì‘I‘ğƒtƒ@ƒCƒ‹‚ğˆ—‚µ‚È‚­‚È‚é
+    //return result;//false ã‚’è¿”ã™ã¨ãã‚Œä»¥é™ã®é¸æŠãƒ•ã‚¡ã‚¤ãƒ«ã‚’å‡¦ç†ã—ãªããªã‚‹
     return true;
 }
 
@@ -320,7 +320,7 @@ bool WINAPI DeleteId3tagv2(FILE_INFO* pFileInfo, int nProcFlag, HWND hWnd) {
     if (!TYPE_IS_SUPPORT(nFormat)) { /* 2005.09.21 */
         return true;
     }
-    // –‘O‚Éƒ^ƒO‚ğXV
+    // äº‹å‰ã«ã‚¿ã‚°ã‚’æ›´æ–°
     if (isModify(pFileInfo)) {
         if (STEPWriteTag(pFileInfo) == false) {
             return false;
@@ -331,7 +331,7 @@ bool WINAPI DeleteId3tagv2(FILE_INFO* pFileInfo, int nProcFlag, HWND hWnd) {
     STEPInitDataSIF(pFileInfo);
     extern bool LoadFileMP3(FILE_INFO *pFileMP3);
     LoadFileMP3(pFileInfo);
-    //return result;//false ‚ğ•Ô‚·‚Æ‚»‚êˆÈ~‚Ì‘I‘ğƒtƒ@ƒCƒ‹‚ğˆ—‚µ‚È‚­‚È‚é
+    //return result;//false ã‚’è¿”ã™ã¨ãã‚Œä»¥é™ã®é¸æŠãƒ•ã‚¡ã‚¤ãƒ«ã‚’å‡¦ç†ã—ãªããªã‚‹
     return true;
 }
 
@@ -340,14 +340,14 @@ bool WINAPI ConvID3v2Version(FILE_INFO* pFileInfo, int nProcFlag, HWND hWnd)
     if (nProcFlag == 3) {
         return false;
     }
-    if(!ConvFileFormat(pFileInfo, nFileTypeID3V2, hWnd)){//ID3v2 ‚É•ÏŠ·
+    if(!ConvFileFormat(pFileInfo, nFileTypeID3V2, hWnd)){//ID3v2 ã«å¤‰æ›
         return false;
     }
     int nFormat = GetFormat(pFileInfo);
     if (!TYPE_IS_SUPPORT(nFormat)) { /* 2005.09.21 */
         return true;
     }
-    // –‘O‚Éƒ^ƒO‚ğXV
+    // äº‹å‰ã«ã‚¿ã‚°ã‚’æ›´æ–°
     if (isModify(pFileInfo)) {
         if (STEPWriteTag(pFileInfo) == false) {
             return false;
@@ -355,10 +355,10 @@ bool WINAPI ConvID3v2Version(FILE_INFO* pFileInfo, int nProcFlag, HWND hWnd)
     }
     if (GetFormat(pFileInfo) != nFileTypeID3V2) return true;
     CId3tagv2   id3v2;
-    if (id3v2.Load(GetFullPath(pFileInfo))  != ERROR_SUCCESS    // “Ç‚İ‚İ¸”s
-    ||  id3v2.IsEnable() == FALSE           // ID3v2 ‚Å‚Í‚È‚¢
-    ||  !TRUE/*id3v2.IsSafeVer()*/) {       // –¢‘Î‰‚Ìƒo[ƒWƒ‡ƒ“
-        // “Ç‚İ‚İ¸”s
+    if (id3v2.Load(GetFullPath(pFileInfo))  != ERROR_SUCCESS    // èª­ã¿è¾¼ã¿å¤±æ•—
+    ||  id3v2.IsEnable() == FALSE           // ID3v2 ã§ã¯ãªã„
+    ||  !TRUE/*id3v2.IsSafeVer()*/) {       // æœªå¯¾å¿œã®ãƒãƒ¼ã‚¸ãƒ§ãƒ³
+        // èª­ã¿è¾¼ã¿å¤±æ•—
         return false;
     }
     CString szYear = id3v2.GetYear();//
@@ -367,7 +367,7 @@ bool WINAPI ConvID3v2Version(FILE_INFO* pFileInfo, int nProcFlag, HWND hWnd)
     extern bool bOptUnSyncConv;
     bool needConv = false;
     if (nId3v2VersionConv != 0) {
-        // •ÏX‚µ‚È‚¢ˆÈŠO
+        // å¤‰æ›´ã—ãªã„ä»¥å¤–
         switch (nId3v2VersionConv) {
         case 1: // v2.2
             if (id3v2.GetVer() != 0x0200)   needConv = true;
@@ -385,9 +385,9 @@ bool WINAPI ConvID3v2Version(FILE_INFO* pFileInfo, int nProcFlag, HWND hWnd)
             break;
         }
     }
-    //‚â‚â‚±‚µ‰ß‚¬cB
-    if(nId3v2EncodeConv == 0){//•¶šƒGƒ“ƒR[ƒh‚ğ•ÏX‚µ‚È‚¢
-        //id3v2.4ˆÈŠO‚É•ÏX‚ÅA•ÏX‘O‚ª UTF8 ‚Ìê‡‚Í UTF16 ‚É•ÏŠ·
+    //ã‚„ã‚„ã“ã—éãâ€¦ã€‚
+    if(nId3v2EncodeConv == 0){//æ–‡å­—ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰ã‚’å¤‰æ›´ã—ãªã„
+        //id3v2.4ä»¥å¤–ã«å¤‰æ›´ã§ã€å¤‰æ›´å‰ãŒ UTF8 ã®å ´åˆã¯ UTF16 ã«å¤‰æ›
         if(id3v2.GetCharEncoding() == CId3tagv2::ID3V2CHARENCODING_UTF_8){
             if(id3v2.GetVer() != 0x0400){
                 nId3v2EncodeConv = 2;
@@ -395,15 +395,15 @@ bool WINAPI ConvID3v2Version(FILE_INFO* pFileInfo, int nProcFlag, HWND hWnd)
         }
     }
     else if(nId3v2EncodeConv == 3){//UTF8
-        //id3v2.4ˆÈŠO‚É•ÏX‚Ìê‡‚Í UTF16 ‚É•ÏŠ·
+        //id3v2.4ä»¥å¤–ã«å¤‰æ›´ã®å ´åˆã¯ UTF16 ã«å¤‰æ›
         if(id3v2.GetVer() != 0x0400){
             nId3v2EncodeConv = 2;
         }
     }
     if (nId3v2EncodeConv != 0) {
-        //GetCharEncoding() ‚Ì–ß‚è’l‚Í•K‚¸‚µ‚à‘S‚Ä‚ÌƒtƒŒ[ƒ€‚É‘Î‚µ‚Ä‚Ì‚à‚Ì‚Å‚Í‚È‚­
-        //ÀÛ‚ÍƒtƒŒ[ƒ€‚²‚Æ‚É•¶šƒGƒ“ƒR[ƒh‚ªˆÙ‚È‚é
-        //‚±‚±‚Å‚Í‚È‚é‚×‚­‘S‚Ä‚ÌƒtƒŒ[ƒ€‚É‘Î‚µ‚Äw’è‚µ‚½•¶šƒGƒ“ƒR[ƒh‚É•ÏŠ·‚·‚é
+        //GetCharEncoding() ã®æˆ»ã‚Šå€¤ã¯å¿…ãšã—ã‚‚å…¨ã¦ã®ãƒ•ãƒ¬ãƒ¼ãƒ ã«å¯¾ã—ã¦ã®ã‚‚ã®ã§ã¯ãªã
+        //å®Ÿéš›ã¯ãƒ•ãƒ¬ãƒ¼ãƒ ã”ã¨ã«æ–‡å­—ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰ãŒç•°ãªã‚‹
+        //ã“ã“ã§ã¯ãªã‚‹ã¹ãå…¨ã¦ã®ãƒ•ãƒ¬ãƒ¼ãƒ ã«å¯¾ã—ã¦æŒ‡å®šã—ãŸæ–‡å­—ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰ã«å¤‰æ›ã™ã‚‹
         needConv = true;
         switch (nId3v2EncodeConv) {
         case 1:
@@ -432,15 +432,15 @@ bool WINAPI ConvID3v2Version(FILE_INFO* pFileInfo, int nProcFlag, HWND hWnd)
     }
     if (needConv == false)  return true;
     id3v2.SetUnSynchronization(bOptUnSyncConv);
-    id3v2.ApplyStringEncode();//•¶šƒGƒ“ƒR[ƒh‚Ì•ÏX‚ğ”½‰f‚³‚¹‚é
-    id3v2.SetYear(szYear);//"TYER" <=> "TDRC" •ÏŠ·
+    id3v2.ApplyStringEncode();//æ–‡å­—ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰ã®å¤‰æ›´ã‚’åæ˜ ã•ã›ã‚‹
+    id3v2.SetYear(szYear);//"TYER" <=> "TDRC" å¤‰æ›
     bool result = id3v2.Save(GetFullPath(pFileInfo)) == ERROR_SUCCESS ? true : false;
     if (result) {
         extern bool LoadFileMP3(FILE_INFO *pFileMP3);
         if (LoadFileMP3(pFileInfo) == false) {
             return false;
         }
-        // Šg’£q‚Ì•ÏX
+        // æ‹¡å¼µå­ã®å¤‰æ›´
         return ConvExt(pFileInfo);
     }
     return result;

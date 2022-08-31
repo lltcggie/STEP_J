@@ -4,7 +4,7 @@
 #if _MSC_VER > 1000
 #pragma once
 #endif // _MSC_VER > 1000
-// DlgEnvSheet.h : �w�b�_�[ �t�@�C��
+// DlgEnvSheet.h : ヘッダー ファイル
 //
 
 #include "OptionPage/OptionSheet.h"
@@ -18,34 +18,34 @@ class CDlgEnvSheet : public COptionSheet/*CPropertySheet*/
 {
 	DECLARE_DYNAMIC(CDlgEnvSheet)
 
-// �R���X�g���N�V����
+// コンストラクション
 public:
 	CDlgEnvSheet(UINT nIDCaption, CWnd* pParentWnd = NULL, UINT iSelectPage = 0);
 	CDlgEnvSheet(LPCTSTR pszCaption, CWnd* pParentWnd = NULL, UINT iSelectPage = 0);
 
-// �A�g���r���[�g
+// アトリビュート
 public:
 	CSuperTagEditorDoc	*m_pDoc;
 
-// �I�y���[�V����
+// オペレーション
 public:
 	enum	{ENV_NORMAL = 1, ENV_CONV = 2, ENV_ADVANCED = 4, ENV_ALL = 7};
 	INT_PTR	DoModal(int);
 
-// �I�[�o�[���C�h
-	// ClassWizard �͉��z�֐��̃I�[�o�[���C�h�𐶐����܂��B
+// オーバーライド
+	// ClassWizard は仮想関数のオーバーライドを生成します。
 	//{{AFX_VIRTUAL(CDlgEnvSheet)
 	public:
 	//}}AFX_VIRTUAL
 
-// �C���v�������e�[�V����
+// インプリメンテーション
 public:
 	virtual ~CDlgEnvSheet();
 
-	// �������ꂽ���b�Z�[�W �}�b�v�֐�
+	// 生成されたメッセージ マップ関数
 protected:
 	//{{AFX_MSG(CDlgEnvSheet)
-		// ���� - ClassWizard �͂��̈ʒu�Ƀ����o�֐���ǉ��܂��͍폜���܂��B
+		// メモ - ClassWizard はこの位置にメンバ関数を追加または削除します。
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };
@@ -53,6 +53,6 @@ protected:
 /////////////////////////////////////////////////////////////////////////////
 
 //{{AFX_INSERT_LOCATION}}
-// Microsoft Visual C++ �͑O�s�̒��O�ɒǉ��̐錾��}�����܂��B
+// Microsoft Visual C++ は前行の直前に追加の宣言を挿入します。
 
 #endif // !defined(AFX_DLGDEFINESHEET_H__2C765F2A_BD1E_11D3_9459_00402641B29B__INCLUDED_)

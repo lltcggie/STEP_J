@@ -10,7 +10,7 @@ bool ConvFileFormat(FILE_INFO* pFileMP3, UINT nType, HWND hWnd);
 bool WINAPI ConvFileFormatID3v1(FILE_INFO* pFileInfo, int nProcFlag, HWND hWnd);
 bool WINAPI ConvFileFormatRMP(FILE_INFO* pFileInfo, int nProcFlag, HWND hWnd);
 
-//bool WINAPI ConvFileFormatID3v2(FILE_INFO* pFileInfo, int nProcFlag, HWND hWnd);//ConvID3v2Version Ç∆ìùçá
+//bool WINAPI ConvFileFormatID3v2(FILE_INFO* pFileInfo, int nProcFlag, HWND hWnd);//ConvID3v2Version „Å®Áµ±Âêà
 bool WINAPI DeleteId3tagv1(FILE_INFO* pFileInfo, int nProcFlag, HWND hWnd);
 bool WINAPI DeleteId3tagv2(FILE_INFO* pFileInfo, int nProcFlag, HWND hWnd);
 bool WINAPI ConvID3v2Version(FILE_INFO* pFileInfo, int nProcFlag, HWND hWnd);

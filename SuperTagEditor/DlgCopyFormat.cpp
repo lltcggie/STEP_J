@@ -1,4 +1,4 @@
-// DlgCopyFormat.cpp : ƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“ ƒtƒ@ƒCƒ‹
+// DlgCopyFormat.cpp : ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³ ãƒ•ã‚¡ã‚¤ãƒ«
 //
 
 #include "stdafx.h"
@@ -13,7 +13,7 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgCopyFormat ƒ_ƒCƒAƒƒO
+// CDlgCopyFormat ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
 
 
 CDlgCopyFormat::CDlgCopyFormat(CWnd* pParent /*=NULL*/)
@@ -57,11 +57,11 @@ BEGIN_MESSAGE_MAP(CDlgCopyFormat, COptionPage)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgCopyFormat ƒƒbƒZ[ƒW ƒnƒ“ƒhƒ‰
+// CDlgCopyFormat ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒãƒ³ãƒ‰ãƒ©
 void CDlgCopyFormat::OnSelChangeListFormatType() 
 {
-	// TODO: ‚±‚ÌˆÊ’u‚ÉƒRƒ“ƒgƒ[ƒ‹’Ê’mƒnƒ“ƒhƒ‰—p‚ÌƒR[ƒh‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
-	// Œ»İ•ÒW’†‚Ì“à—e‚ğ”½‰f‚³‚¹‚é
+	// TODO: ã“ã®ä½ç½®ã«ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«é€šçŸ¥ãƒãƒ³ãƒ‰ãƒ©ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
+	// ç¾åœ¨ç·¨é›†ä¸­ã®å†…å®¹ã‚’åæ˜ ã•ã›ã‚‹
 	m_editFormat.GetWindowText(m_userFormatEx[m_nFormatType].strFormat);
 
 	m_nFormatType = m_listFormatType.GetCurSel();
@@ -145,10 +145,10 @@ void CDlgCopyFormat::OnBtNameChange()
 
 	dialog.m_strName = m_userFormatEx[m_nFormatType].strName;
 	if (dialog.DoModal() == IDOK) {
-		// V‚µ‚¢–¼Ì‚É•ÏX
+		// æ–°ã—ã„åç§°ã«å¤‰æ›´
 		m_userFormatEx[m_nFormatType].strName = dialog.m_strName;
 
-		// ƒŠƒXƒgXV
+		// ãƒªã‚¹ãƒˆæ›´æ–°
 		OnSelChangeListFormatType();
 		m_listFormatType.ResetContent();
 		int i; for (i = 0; i < USER_MOVE_FODLER_FORMAT_MAX; i++) {
@@ -156,14 +156,14 @@ void CDlgCopyFormat::OnBtNameChange()
 			strName.Format(_T("%d: %s"), i+1, m_userFormatEx[i].strName);
 			m_listFormatType.AddString(strName);
 		}
-		// ‘I‘ğ‚µ‚È‚¨‚·
+		// é¸æŠã—ãªãŠã™
 		m_listFormatType.SetCurSel(m_nFormatType);
 	}
 }
 
 BOOL CDlgCopyFormat::OnInitDialog() 
 {
-	// TODO: ‚±‚ÌˆÊ’u‚É‰Šú‰»‚Ì•â‘«ˆ—‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
+	// TODO: ã“ã®ä½ç½®ã«åˆæœŸåŒ–ã®è£œè¶³å‡¦ç†ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
 	COptionPage::OnInitDialog();
 
 	int		i;
@@ -177,8 +177,8 @@ BOOL CDlgCopyFormat::OnInitDialog()
 	m_listFormatType.SetCurSel(m_nFormatType);
 	m_editFormat.SetWindowText(m_userFormatEx[m_nFormatType].strFormat);
 
-	return TRUE;  // ƒRƒ“ƒgƒ[ƒ‹‚ÉƒtƒH[ƒJƒX‚ğİ’è‚µ‚È‚¢‚Æ‚«A–ß‚è’l‚Í TRUE ‚Æ‚È‚è‚Ü‚·
-	              // —áŠO: OCX ƒvƒƒpƒeƒB ƒy[ƒW‚Ì–ß‚è’l‚Í FALSE ‚Æ‚È‚è‚Ü‚·
+	return TRUE;  // ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã«ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ã‚’è¨­å®šã—ãªã„ã¨ãã€æˆ»ã‚Šå€¤ã¯ TRUE ã¨ãªã‚Šã¾ã™
+	              // ä¾‹å¤–: OCX ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ ãƒšãƒ¼ã‚¸ã®æˆ»ã‚Šå€¤ã¯ FALSE ã¨ãªã‚Šã¾ã™
 }
 
 void CDlgCopyFormat::OnOK()

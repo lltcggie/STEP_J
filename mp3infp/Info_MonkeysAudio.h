@@ -1,4 +1,4 @@
-// Info_MonkeysAudio.h: CInfo_MonkeysAudio ƒNƒ‰ƒX‚ÌƒCƒ“ƒ^[ƒtƒFƒCƒX
+// Info_MonkeysAudio.h: CInfo_MonkeysAudio ã‚¯ãƒ©ã‚¹ã®ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹
 //
 //////////////////////////////////////////////////////////////////////
 
@@ -54,28 +54,28 @@ private:
 	typedef struct _APE_COMMON_HEADER
 	{
 		char cID[4];							// "MAC "
-		unsigned short	nVersion;				// ƒo[ƒWƒ‡ƒ“”Ô† * 1000 (3.81 = 3810)
+		unsigned short	nVersion;				// ãƒãƒ¼ã‚¸ãƒ§ãƒ³ç•ªå· * 1000 (3.81 = 3810)
 	}APE_COMMON_HEADER;
 
-	// v3.97 ‚Æ‚»‚êˆÈ‘O—p
+	// v3.97 ã¨ãã‚Œä»¥å‰ç”¨
 	typedef struct _APE_HEADER_OLD
 	{
 //		char cID[4];							// "MAC "
-//		unsigned short	nVersion;				// ƒo[ƒWƒ‡ƒ“”Ô† * 1000 (3.81 = 3810)
-		unsigned short	nCompressionLevel;		// ˆ³kƒŒƒxƒ‹
-		unsigned short	nFormatFlags;			// ƒtƒH[ƒ}ƒbƒgƒtƒ‰ƒO
-		unsigned short	nChannels;				// ƒ`ƒƒƒ“ƒlƒ‹” (1 or 2)
-		unsigned int	nSampleRate;			// ƒTƒ“ƒvƒ‹ƒŒ[ƒg (‚½‚¢‚ª‚¢44100)
-		unsigned int	nHeaderBytes;			// MACƒwƒbƒ_‚É‘±‚­WAVƒwƒbƒ_‚ÌƒTƒCƒY
-		unsigned int	nTerminatingBytes;		// rawƒf[ƒ^‚ÌƒTƒCƒY (Šg’£ƒf[ƒ^)
-		unsigned int	nTotalFrames;			// ƒtƒ@ƒCƒ‹‚Ì‘ƒtƒŒ[ƒ€”
-		unsigned int	nFinalFrameBlocks;		// ÅIƒtƒŒ[ƒ€‚É‚¨‚¯‚éƒTƒ“ƒvƒ‹”
+//		unsigned short	nVersion;				// ãƒãƒ¼ã‚¸ãƒ§ãƒ³ç•ªå· * 1000 (3.81 = 3810)
+		unsigned short	nCompressionLevel;		// åœ§ç¸®ãƒ¬ãƒ™ãƒ«
+		unsigned short	nFormatFlags;			// ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆãƒ•ãƒ©ã‚°
+		unsigned short	nChannels;				// ãƒãƒ£ãƒ³ãƒãƒ«æ•° (1 or 2)
+		unsigned int	nSampleRate;			// ã‚µãƒ³ãƒ—ãƒ«ãƒ¬ãƒ¼ãƒˆ (ãŸã„ãŒã„44100)
+		unsigned int	nHeaderBytes;			// MACãƒ˜ãƒƒãƒ€ã«ç¶šãWAVãƒ˜ãƒƒãƒ€ã®ã‚µã‚¤ã‚º
+		unsigned int	nTerminatingBytes;		// rawãƒ‡ãƒ¼ã‚¿ã®ã‚µã‚¤ã‚º (æ‹¡å¼µãƒ‡ãƒ¼ã‚¿)
+		unsigned int	nTotalFrames;			// ãƒ•ã‚¡ã‚¤ãƒ«ã®ç·ãƒ•ãƒ¬ãƒ¼ãƒ æ•°
+		unsigned int	nFinalFrameBlocks;		// æœ€çµ‚ãƒ•ãƒ¬ãƒ¼ãƒ ã«ãŠã‘ã‚‹ã‚µãƒ³ãƒ—ãƒ«æ•°
 	}APE_HEADER_OLD;
 
 	typedef struct _APE_DESCRIPTOR
 	{
 		char cID[4];							// "MAC "
-		unsigned short	nVersion;				// ƒo[ƒWƒ‡ƒ“”Ô† * 1000 (3.81 = 3810)
+		unsigned short	nVersion;				// ãƒãƒ¼ã‚¸ãƒ§ãƒ³ç•ªå· * 1000 (3.81 = 3810)
 		short dummy;
 		unsigned int	nDescriptorBytes;		// 
 		unsigned int	nHeaderBytes;			// 
@@ -89,14 +89,14 @@ private:
 
 	typedef struct _APE_HEADER
 	{
-		unsigned short	nCompressionLevel;		// ˆ³kƒŒƒxƒ‹
-		unsigned short	nFormatFlags;			// ƒtƒH[ƒ}ƒbƒgƒtƒ‰ƒO
-		unsigned int	nBlocksPerFrame;		// 1ƒtƒŒ[ƒ€“–‚½‚è‚ÌƒTƒ“ƒvƒ‹”
-		unsigned int	nFinalFrameBlocks;		// ÅIƒtƒŒ[ƒ€‚É‚¨‚¯‚éƒTƒ“ƒvƒ‹”
-		unsigned int	nTotalFrames;			// ‘ƒtƒŒ[ƒ€”
-		unsigned short	nBitsPerSample;			// 1ƒTƒ“ƒvƒ‹‚Ìƒrƒbƒg” (‚½‚¢‚Ä‚¢16)
-		unsigned short	nChannels;				// ƒ`ƒƒƒlƒ‹” (1 or 2)
-		unsigned int	nSampleRate;			// ƒTƒ“ƒvƒ‹ƒŒ[ƒg (‚½‚¢‚Ä‚¢ 44100)
+		unsigned short	nCompressionLevel;		// åœ§ç¸®ãƒ¬ãƒ™ãƒ«
+		unsigned short	nFormatFlags;			// ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆãƒ•ãƒ©ã‚°
+		unsigned int	nBlocksPerFrame;		// 1ãƒ•ãƒ¬ãƒ¼ãƒ å½“ãŸã‚Šã®ã‚µãƒ³ãƒ—ãƒ«æ•°
+		unsigned int	nFinalFrameBlocks;		// æœ€çµ‚ãƒ•ãƒ¬ãƒ¼ãƒ ã«ãŠã‘ã‚‹ã‚µãƒ³ãƒ—ãƒ«æ•°
+		unsigned int	nTotalFrames;			// ç·ãƒ•ãƒ¬ãƒ¼ãƒ æ•°
+		unsigned short	nBitsPerSample;			// 1ã‚µãƒ³ãƒ—ãƒ«ã®ãƒ“ãƒƒãƒˆæ•° (ãŸã„ã¦ã„16)
+		unsigned short	nChannels;				// ãƒãƒ£ãƒãƒ«æ•° (1 or 2)
+		unsigned int	nSampleRate;			// ã‚µãƒ³ãƒ—ãƒ«ãƒ¬ãƒ¼ãƒˆ (ãŸã„ã¦ã„ 44100)
 	}APE_HEADER;
 
 #pragma pack()

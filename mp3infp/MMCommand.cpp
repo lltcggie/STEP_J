@@ -3,7 +3,7 @@
 //#include "wa_ipc.h"
 //#include "ipc_pe.h"
 //#include "winampcmd.h"
-#include "resource.h"		// ƒƒCƒ“ ƒVƒ“ƒ{ƒ‹
+#include "resource.h"		// ãƒ¡ã‚¤ãƒ³ ã‚·ãƒ³ãƒœãƒ«
 #include "GlobalCommand.h"
 
 #include <Mmsystem.h>
@@ -30,7 +30,7 @@ typedef struct _VIDEO_CODEC_TYPE{
 }VIDEO_CODEC_TYPE;
 
 /*
-	ƒR[ƒfƒbƒNî•ñ‚Í"^‹ó”g“®Œ¤"(http://www.kurohane.net/)‚Ì•‰H‚³‚ñ’ñ‹Ÿ‚µ‚Ä‚¢‚½‚¾‚«‚Ü‚µ‚½B2002-09-16
+	ã‚³ãƒ¼ãƒ‡ãƒƒã‚¯æƒ…å ±ã¯"çœŸç©ºæ³¢å‹•ç ”"(http://www.kurohane.net/)ã®é»’ç¾½ã•ã‚“æä¾›ã—ã¦ã„ãŸã ãã¾ã—ãŸã€‚2002-09-16
 */
 
 AUDIO_CODEC_TYPE audio_codecs[] =
@@ -86,7 +86,7 @@ AUDIO_CODEC_TYPE audio_codecs[] =
 		{0x0045,_T("SHARP G.726")},
 		{0x004f,_T("Ogg Vorbis(mode1)")},
 		{0x0050,_T("MPEG-1 layer 1, 2")},
-	//‘I‘ğ	{0x0050,_T("Ogg Vorbis(mode2)")},
+	//é¸æŠ	{0x0050,_T("Ogg Vorbis(mode2)")},
 		{0x0051,_T("Ogg Vorbis(mode3)")},
 		{0x0052,_T("RT24")},
 		{0x0053,_T("PAC")},
@@ -103,9 +103,9 @@ AUDIO_CODEC_TYPE audio_codecs[] =
 		{0x0069,_T("Voxware Byte Aligned")},
 		{0x006f,_T("Ogg Vorbis(mode1+)")},
 		{0x0070,_T("Ogg Vorbis(mode2+)")},
-	//‘I‘ğ		{0x0070,_T("Voxware AC8")},
+	//é¸æŠ		{0x0070,_T("Voxware AC8")},
 		{0x0071,_T("Ogg Vorbis(mode3+)")},
-	//‘I‘ğ		{0x0071,_T("Voxware AC10")},
+	//é¸æŠ		{0x0071,_T("Voxware AC10")},
 		{0x0072,_T("Voxware AC16")},
 		{0x0073,_T("Voxware AC20")},
 		{0x0074,_T("Voxware MetaVoice")},
@@ -230,7 +230,7 @@ VIDEO_CODEC_TYPE divx_vers[] =
 		{"DivX501b484",_T("DivX 5.0.2")},
 		{"DivX501b487",_T("DivX 5.0.2")},
 		{"DivX503b688",_T("DivX 5.0.3 Beta")},
-		{"DivX503b696",_T("DivX 5.0.3 Beta")},	// 2004-07-21 (©M‚È‚µ)
+		{"DivX503b696",_T("DivX 5.0.3 Beta")},	// 2004-07-21 (è‡ªä¿¡ãªã—)
 		{"DivX503b740",_T("DivX 5.0.3")},
 		{"DivX503b795",_T("DivX 5.0.4 Beta1-2")},
 		{"DivX503b804",_T("DivX 5.0.4 Beta3")},
@@ -350,12 +350,12 @@ VIDEO_CODEC_TYPE xvid_vers[] =
 
 VIDEO_CODEC_TYPE video_codecs[] =
 	{
-		//”ñˆ³k
+		//éåœ§ç¸®
 		{"DIB ",_T("NoCompress(DIB)")},
 		{"RGB ",_T("NoCompress(RGB)")},
 		{"BGR ",_T("NoCompress(RGB32)")},
 		{"RAW ",_T("NoCompress(RAW)")},
-		//ˆ³k
+		//åœ§ç¸®
 		{"3IV0",_T("3ivx Delta 1.0-3.5(3IV0)")},
 		{"3IV1",_T("3ivx Delta 1.0-3.5(3IV1)")},
 		{"3IV2",_T("3ivx Delta 4.0")},
@@ -425,7 +425,7 @@ VIDEO_CODEC_TYPE video_codecs[] =
 		{"DCL5",_T("Data Connection Media Conferencing Codec")},
 		{"DIVA",_T("DivA MPEG-4")},
 
-		{"DIVX",_T("DivX4")},	// biCommpress ‚ğŒ©‚ÄDivx5 or Divx4‚ğŠm’è
+		{"DIVX",_T("DivX4")},	// biCommpress ã‚’è¦‹ã¦Divx5 or Divx4ã‚’ç¢ºå®š
 		{"DIV1",_T("Microsoft MPEG4-V1")},
 		{"DIV2",_T("Microsoft MPEG4-V1/V2")},
 		{"DIV3",_T("DivX ;-) MPEG-4 Video Codec (low motion)")},
@@ -656,7 +656,7 @@ VIDEO_CODEC_TYPE video_codecs[] =
 		{"PIMJ",_T("Pegasus Imaging Lossless JPEG(PIMJ)")},
 		{"PIXL",_T("Pinnacle Video XL")},
 		{"PJPG",_T("PA MJPEG (PJPG)")},
-		{"PNG1",_T("CorePNG v8")},	// 2004-01-21 ’Ç‰Á BBS4900
+		{"PNG1",_T("CorePNG v8")},	// 2004-01-21 è¿½åŠ  BBS4900
 		{"PVEZ",_T("Horizons Technology PowerEZ")},
 		{"PVMM",_T("PacketVideo Corporation MPEG-4")},
 		{"PVWV",_T("Pegasus Wavelet Compression(PVWV)")},
@@ -844,12 +844,12 @@ VIDEO_CODEC_TYPE video_codecs[] =
 		{"ZPEG",_T("Metheus Video Zipper")},
 		{"ZYGO",_T("ZyGo ZyGoVideo")},
 		{"ZYYY",_T("?(ZYYY)")},
-//		{" ",_T("–³ˆ³k")}
+//		{" ",_T("ç„¡åœ§ç¸®")}
 	};
 
-//ƒ`ƒƒƒ“ƒN‚ğŒŸõ‚µ‚Ü‚·
-//return=TRUE‚Ì‚Æ‚«‚ÍŒ©‚Â‚©‚Á‚½ƒ`ƒƒƒ“ƒN‚Ìæ“ª+8‚ÌˆÊ’u‚É‚¢‚Ü‚·
-//return=FALSE‚Ì‚Æ‚«‚ÍÅIƒ`ƒƒƒ“ƒN‚ÌÅŒã”ö+1
+//ãƒãƒ£ãƒ³ã‚¯ã‚’æ¤œç´¢ã—ã¾ã™
+//return=TRUEã®ã¨ãã¯è¦‹ã¤ã‹ã£ãŸãƒãƒ£ãƒ³ã‚¯ã®å…ˆé ­+8ã®ä½ç½®ã«ã„ã¾ã™
+//return=FALSEã®ã¨ãã¯æœ€çµ‚ãƒãƒ£ãƒ³ã‚¯ã®æœ€å¾Œå°¾+1
 BOOL findChunk(HANDLE hFile,__int64 llFileSize,UINT flag,FOURCC type,DWORD *pdwSize)
 {
 	FOURCC id;
@@ -889,7 +889,7 @@ BOOL findChunk(HANDLE hFile,__int64 llFileSize,UINT flag,FOURCC type,DWORD *pdwS
 				SetFilePointer64(hFile,llChunkHead,FILE_BEGIN);
 				return FALSE;
 			}
-			// ÅŒã‚ÌRiffƒ`ƒƒƒ“ƒNˆÊ’u‚ğ•Û‘¶
+			// æœ€å¾Œã®Riffãƒãƒ£ãƒ³ã‚¯ä½ç½®ã‚’ä¿å­˜
 			*pdwSize -= sizeof(fType);
 			if(flag != MMIO_FINDRIFF)
 			{
@@ -897,7 +897,7 @@ BOOL findChunk(HANDLE hFile,__int64 llFileSize,UINT flag,FOURCC type,DWORD *pdwS
 			}
 			if(fType == type)
 			{
-				// pdwSize‚Ì•â³(‚ ‚è‚¦‚È‚¢’l‚ğ•Ô‚³‚È‚¢‚æ‚¤‚É)
+				// pdwSizeã®è£œæ­£(ã‚ã‚Šãˆãªã„å€¤ã‚’è¿”ã•ãªã„ã‚ˆã†ã«)
 				__int64 ptr = llChunkHead + 12;
 				if((llFileSize - ptr) < *pdwSize)
 				{
@@ -920,7 +920,7 @@ BOOL findChunk(HANDLE hFile,__int64 llFileSize,UINT flag,FOURCC type,DWORD *pdwS
 			}
 			if(fType == type)
 			{
-				// pdwSize‚Ì•â³(‚ ‚è‚¦‚È‚¢’l‚ğ•Ô‚³‚È‚¢‚æ‚¤‚É)
+				// pdwSizeã®è£œæ­£(ã‚ã‚Šãˆãªã„å€¤ã‚’è¿”ã•ãªã„ã‚ˆã†ã«)
 				__int64 ptr = llChunkHead + 12;
 				if((llFileSize - ptr) < *pdwSize)
 				{
@@ -934,7 +934,7 @@ BOOL findChunk(HANDLE hFile,__int64 llFileSize,UINT flag,FOURCC type,DWORD *pdwS
 			fType = 0x20202020;
 			if(id == type)
 			{
-				// pdwSize‚Ì•â³(‚ ‚è‚¦‚È‚¢’l‚ğ•Ô‚³‚È‚¢‚æ‚¤‚É)
+				// pdwSizeã®è£œæ­£(ã‚ã‚Šãˆãªã„å€¤ã‚’è¿”ã•ãªã„ã‚ˆã†ã«)
 				__int64 ptr = llChunkHead + 8;
 				if((llFileSize - ptr) < *pdwSize)
 				{
@@ -965,7 +965,7 @@ BOOL findChunk2(HANDLE hFile,__int64 llFileSize,DWORD *pdwSize)
 	// 2G = 2147483648
 	// 4G = 4294967296
 
-	for(int i=0; i<100; i++)	// 2003-08-04 ƒtƒ@ƒCƒ‹‚Ìæ“ª•”•ª‚É–³‚©‚Á‚½‚ç‚ ‚«‚ç‚ß‚é(”j‘¹ƒtƒ@ƒCƒ‹‚ÌƒtƒŠ[ƒY‘Îô
+	for(int i=0; i<100; i++)	// 2003-08-04 ãƒ•ã‚¡ã‚¤ãƒ«ã®å…ˆé ­éƒ¨åˆ†ã«ç„¡ã‹ã£ãŸã‚‰ã‚ãã‚‰ã‚ã‚‹(ç ´æãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ•ãƒªãƒ¼ã‚ºå¯¾ç­–
 //	while(1)
 	{
 		__int64 llChunkHead = SetFilePointer64(hFile,0,FILE_CURRENT);
@@ -994,7 +994,7 @@ BOOL findChunk2(HANDLE hFile,__int64 llFileSize,DWORD *pdwSize)
 			fType = 0x20202020;
 			if((id == mmioFOURCC('0','0','d','b')) || (id == mmioFOURCC('0','0','d','c')))
 			{
-				// pdwSize‚Ì•â³(‚ ‚è‚¦‚È‚¢’l‚ğ•Ô‚³‚È‚¢‚æ‚¤‚É)
+				// pdwSizeã®è£œæ­£(ã‚ã‚Šãˆãªã„å€¤ã‚’è¿”ã•ãªã„ã‚ˆã†ã«)
 				__int64 ptr = llChunkHead + 8;
 				if((llFileSize - ptr) < *pdwSize)
 				{
@@ -1213,17 +1213,17 @@ void GetAviFormat(IN LPCTSTR szFileName,
 	DWORD dwSec;
 
 	bAvi2 = FALSE;
-	//u‚È‚µv
-    strAuidoFormat = L"‚È‚µ";//.LoadString(IDS_NO_AUDIO_STREAM);
-	//u‚È‚µv
-	strVideoFormat = L"‚È‚µ";//.LoadString(IDS_NO_VIDEO_STREAM);
+	//ã€Œãªã—ã€
+    strAuidoFormat = L"ãªã—";//.LoadString(IDS_NO_AUDIO_STREAM);
+	//ã€Œãªã—ã€
+	strVideoFormat = L"ãªã—";//.LoadString(IDS_NO_VIDEO_STREAM);
 	
 	//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-	//ƒtƒ@ƒCƒ‹‚ğŠJ‚­
+	//ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ã
 	hFile = CreateFile(szFileName,
 					GENERIC_READ,
 					FILE_SHARE_READ,NULL,
-					OPEN_EXISTING,	//ƒtƒ@ƒCƒ‹‚ğŠJ‚«‚Ü‚·Bw’è‚µ‚½ƒtƒ@ƒCƒ‹‚ª‘¶İ‚µ‚Ä‚¢‚È‚¢ê‡A‚±‚ÌŠÖ”‚Í¸”s‚µ‚Ü‚·B 
+					OPEN_EXISTING,	//ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ãã¾ã™ã€‚æŒ‡å®šã—ãŸãƒ•ã‚¡ã‚¤ãƒ«ãŒå­˜åœ¨ã—ã¦ã„ãªã„å ´åˆã€ã“ã®é–¢æ•°ã¯å¤±æ•—ã—ã¾ã™ã€‚ 
 					FILE_ATTRIBUTE_NORMAL,
 					NULL);
 	if(hFile == INVALID_HANDLE_VALUE)
@@ -1234,12 +1234,12 @@ void GetAviFormat(IN LPCTSTR szFileName,
 	llFileSize = GetFileSize64(hFile);
 
 	//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-	//RIFF-AVI ‚ğŠm”F
+	//RIFF-AVI ã‚’ç¢ºèª
 	if(!ReadFile(hFile,&id,sizeof(id),&dwRet,NULL))
 	{
 		goto exit;
 	}
-	// ‘ƒTƒCƒY
+	// ç·ã‚µã‚¤ã‚º
 	if(!ReadFile(hFile,&dwRiffAviSize,sizeof(dwRiffAviSize),&dwRet,NULL))
 	{
 		goto exit;
@@ -1255,7 +1255,7 @@ void GetAviFormat(IN LPCTSTR szFileName,
 	}
 
 	//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-	// LIST-hdrl‚ğŒŸõ
+	// LIST-hdrlã‚’æ¤œç´¢
 	if(!findChunk(hFile,dwRiffAviSize+8,MMIO_FINDLIST,mmioFOURCC('h','d','r','l'),&dwSize))
 	{
 		goto exit;
@@ -1264,7 +1264,7 @@ void GetAviFormat(IN LPCTSTR szFileName,
 	dwChunkSize = dwSize;
 	
 	//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-	// LIST-avih‚ğŒŸõ
+	// LIST-avihã‚’æ¤œç´¢
 	if(!findChunk(hFile,llPtr+dwChunkSize,MMIO_FINDLIST,mmioFOURCC('a','v','i','h'),&dwSize))
 	{
 		goto exit;
@@ -1276,7 +1276,7 @@ void GetAviFormat(IN LPCTSTR szFileName,
 	{
 		goto exit;
 	}
-	//0œZ–h~
+	//0é™¤ç®—é˜²æ­¢
 	if(AVIHeader.dwMicroSecPerFrame == 0)
 	{
 		AVIHeader.dwMicroSecPerFrame = -1;
@@ -1285,16 +1285,16 @@ void GetAviFormat(IN LPCTSTR szFileName,
 	while(1)
 	{
 		//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-		// LIST-strl‚ğŒŸõ
+		// LIST-strlã‚’æ¤œç´¢
 		if(!findChunk(hFile,llPtr+dwChunkSize,MMIO_FINDLIST,mmioFOURCC('s','t','r','l'),&dwSize))
 		{
-			break;	// while(1)‚©‚ç”²‚¯‚é
+			break;	// while(1)ã‹ã‚‰æŠœã‘ã‚‹
 		}
 		__int64 llPtrStrl = SetFilePointer64(hFile,0,FILE_CURRENT);
 		DWORD dwStrlSize = dwSize;
 		
 		//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-		// LIST-strh‚ğŒŸõ
+		// LIST-strhã‚’æ¤œç´¢
 		if(!findChunk(hFile,llPtrStrl+dwStrlSize,MMIO_FINDCHUNK,mmioFOURCC('s','t','r','h'),&dwSize))
 		{
 			goto exit;
@@ -1309,7 +1309,7 @@ void GetAviFormat(IN LPCTSTR szFileName,
 		
 		SetFilePointer64(hFile,llPtrStrl,FILE_BEGIN);
 		//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-		// LIST-strf‚ğŒŸõ
+		// LIST-strfã‚’æ¤œç´¢
 		if(!findChunk(hFile,llPtrStrl+dwStrlSize,MMIO_FINDCHUNK,mmioFOURCC('s','t','r','f'),&dwSize))
 		{
 			goto exit;
@@ -1325,8 +1325,8 @@ void GetAviFormat(IN LPCTSTR szFileName,
 				goto exit;
 			}
 			CString strFormatName;
-//			//u•s–¾v
-			strFormatName = L"•s–¾";//.LoadString(IDS_UNKNOWN);
+//			//ã€Œä¸æ˜ã€
+			strFormatName = L"ä¸æ˜";//.LoadString(IDS_UNKNOWN);
 			findAudioCodecName(iAviCodecFind,strFormatName,wfx.wFormatTag,((WAVEFORMATEXTENSIBLE *)&wfx)->SubFormat);
 			if(wfx.wBitsPerSample)
 			{
@@ -1356,8 +1356,8 @@ void GetAviFormat(IN LPCTSTR szFileName,
 			{
 				goto exit;
 			}
-			//u•s–¾v
-			strVideoFormat = L"•s–¾";//.LoadString(IDS_UNKNOWN);
+			//ã€Œä¸æ˜ã€
+			strVideoFormat = L"ä¸æ˜";//.LoadString(IDS_UNKNOWN);
 			streamHeader.fccHandler = (
 							(toupper((streamHeader.fccHandler & 0xff000000) >> 24) << 24) |
 							(toupper((streamHeader.fccHandler & 0x00ff0000) >> 16) << 16) |
@@ -1370,15 +1370,15 @@ void GetAviFormat(IN LPCTSTR szFileName,
 	}
 	
 	/////////////////////////////////////////////////////////////
-	// OpenDML”»•Ê
+	// OpenDMLåˆ¤åˆ¥
 	
 	SetFilePointer64(hFile,llPtr,FILE_BEGIN);
 	//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-	// LIST-odml‚ğŒŸõ
+	// LIST-odmlã‚’æ¤œç´¢
 	if(findChunk(hFile,llPtr+dwChunkSize,MMIO_FINDLIST,mmioFOURCC('o','d','m','l'),&dwSize))
 	{
 		bAvi2 = TRUE;
-		// dmlh‚ğŒŸõ
+		// dmlhã‚’æ¤œç´¢
 		__int64 llodmlPtr = SetFilePointer64(hFile,0,FILE_CURRENT);
 		if(findChunk(hFile,llodmlPtr+dwSize,MMIO_FINDCHUNK,mmioFOURCC('d','m','l','h'),&dwSize))
 		{
@@ -1400,19 +1400,19 @@ void GetAviFormat(IN LPCTSTR szFileName,
 					dwSec);
 	
 	/////////////////////////////////////////////////////////////
-	// Divx5‚Ìƒo[ƒWƒ‡ƒ“‚ğ‹æ•Ê‚·‚éˆ—
+	// Divx5ã®ãƒãƒ¼ã‚¸ãƒ§ãƒ³ã‚’åŒºåˆ¥ã™ã‚‹å‡¦ç†
 	if(strVideoFormat.Compare(_T("DivX5")) == 0)
 	{
 		SetFilePointer64(hFile,llPtr,FILE_BEGIN);
 		//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-		// LIST-movi‚ğŒŸõ
+		// LIST-moviã‚’æ¤œç´¢
 		if(!findChunk(hFile,dwRiffAviSize+8,MMIO_FINDLIST,mmioFOURCC('m','o','v','i'),&dwSize))
 		{
 			goto exit;
 		}
 		__int64 llPtrMovi = SetFilePointer64(hFile,0,FILE_CURRENT);
 		//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-		// 00dbƒ`ƒƒƒ“ƒN‚ğŒŸõ
+		// 00dbãƒãƒ£ãƒ³ã‚¯ã‚’æ¤œç´¢
 		DWORD dwMoviSize = dwSize;
 		CString strDivx5Version;
 		CString strDivxVerEtc;
@@ -1424,7 +1424,7 @@ void GetAviFormat(IN LPCTSTR szFileName,
 				break;
 			}
 			__int64 ptr = SetFilePointer64(hFile,0,FILE_CURRENT) + 8;
-			// æ“ª‚Ì0x30ƒoƒCƒg“Ç‚İæ‚é
+			// å…ˆé ­ã®0x30ãƒã‚¤ãƒˆèª­ã¿å–ã‚‹
 			char tmp[0x30];
 			memset(tmp,0,sizeof(tmp));
 			if(!ReadFile(hFile,&tmp,sizeof(tmp),&dwRet,NULL))
@@ -1433,7 +1433,7 @@ void GetAviFormat(IN LPCTSTR szFileName,
 			}
 			SetFilePointer64(hFile,ptr,FILE_BEGIN);
 
-			// divxƒo[ƒWƒ‡ƒ“î•ñ‚ğŒŸõ‚·‚é
+			// divxãƒãƒ¼ã‚¸ãƒ§ãƒ³æƒ…å ±ã‚’æ¤œç´¢ã™ã‚‹
 			for(int ver=0; ver<sizeof_array(divx_vers); ver++)
 			{
 				for(DWORD tmpPtr=0; tmpPtr<(sizeof(tmp)-strlen(divx_vers[ver].type)); tmpPtr++)
@@ -1483,19 +1483,19 @@ void GetAviFormat(IN LPCTSTR szFileName,
 	}
 
 	/////////////////////////////////////////////////////////////
-	// XviD‚Ìƒo[ƒWƒ‡ƒ“‚ğ‹æ•Ê‚·‚éˆ—
+	// XviDã®ãƒãƒ¼ã‚¸ãƒ§ãƒ³ã‚’åŒºåˆ¥ã™ã‚‹å‡¦ç†
 	if(strVideoFormat.Compare(_T("XviD MPEG4")) == 0)
 	{
 		SetFilePointer64(hFile,llPtr,FILE_BEGIN);
 		//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-		// LIST-movi‚ğŒŸõ
+		// LIST-moviã‚’æ¤œç´¢
 		if(!findChunk(hFile,dwRiffAviSize+8,MMIO_FINDLIST,mmioFOURCC('m','o','v','i'),&dwSize))
 		{
 			goto exit;
 		}
 		__int64 llPtrMovi = SetFilePointer64(hFile,0,FILE_CURRENT);
 		//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-		// 00dbƒ`ƒƒƒ“ƒN‚ğŒŸõ
+		// 00dbãƒãƒ£ãƒ³ã‚¯ã‚’æ¤œç´¢
 		DWORD dwMoviSize = dwSize;
 		CString strDivx5Version;
 		CString strDivxVerEtc;
@@ -1507,7 +1507,7 @@ void GetAviFormat(IN LPCTSTR szFileName,
 				break;
 			}
 			__int64 ptr = SetFilePointer64(hFile,0,FILE_CURRENT) + 8;
-			// æ“ª‚Ì0x30ƒoƒCƒg“Ç‚İæ‚é
+			// å…ˆé ­ã®0x30ãƒã‚¤ãƒˆèª­ã¿å–ã‚‹
 			char tmp[0x30];
 			memset(tmp,0,sizeof(tmp));
 			if(!ReadFile(hFile,&tmp,sizeof(tmp),&dwRet,NULL))
@@ -1516,7 +1516,7 @@ void GetAviFormat(IN LPCTSTR szFileName,
 			}
 			SetFilePointer64(hFile,ptr,FILE_BEGIN);
 
-			// divxƒo[ƒWƒ‡ƒ“î•ñ‚ğŒŸõ‚·‚é
+			// divxãƒãƒ¼ã‚¸ãƒ§ãƒ³æƒ…å ±ã‚’æ¤œç´¢ã™ã‚‹
 			for(int ver=0; ver<sizeof_array(xvid_vers); ver++)
 			{
 				for(DWORD tmpPtr=0; tmpPtr<(sizeof(tmp)-strlen(xvid_vers[ver].type)); tmpPtr++)
@@ -1579,18 +1579,18 @@ void GetWaveAudioFormat(IN LPCTSTR szFileName,
 					OUT CString &strTime,
 					int iWaveCodecFind)
 {
-	//‰Šú’l
-	//u•s–¾v
-	strFormat = L"•s–¾";//.LoadString(IDS_UNKNOWN);
-	//u•s–¾v
-	strTime = L"•s–¾";//.LoadString(IDS_UNKNOWN);
+	//åˆæœŸå€¤
+	//ã€Œä¸æ˜ã€
+	strFormat = L"ä¸æ˜";//.LoadString(IDS_UNKNOWN);
+	//ã€Œä¸æ˜ã€
+	strTime = L"ä¸æ˜";//.LoadString(IDS_UNKNOWN);
 	
 	HMMIO hmmio = mmioOpen(const_cast<LPTSTR>(szFileName),NULL,MMIO_COMPAT);
 	if(!hmmio)
 	{
 		return;
 	}
-	//WAVEƒ`ƒƒƒ“ƒN‚ÖˆÚ“®
+	//WAVEãƒãƒ£ãƒ³ã‚¯ã¸ç§»å‹•
 	MMCKINFO	mmckOutinfoParent;
 	memset(&mmckOutinfoParent,0,sizeof(mmckOutinfoParent));
 	mmckOutinfoParent.fccType = mmioFOURCC('W','A','V','E');
@@ -1599,7 +1599,7 @@ void GetWaveAudioFormat(IN LPCTSTR szFileName,
 		mmioClose(hmmio,0);
 		return;
 	}
-	//fmt ƒ`ƒƒƒ“ƒN‚ÖˆÚ“®
+	//fmt ãƒãƒ£ãƒ³ã‚¯ã¸ç§»å‹•
 	MMCKINFO	mmckOutinfoSubchunk;
 	memset(&mmckOutinfoSubchunk,0,sizeof(mmckOutinfoSubchunk));
 	mmckOutinfoSubchunk.ckid = mmioFOURCC('f','m','t',' ');
@@ -1618,7 +1618,7 @@ void GetWaveAudioFormat(IN LPCTSTR szFileName,
 	}
 	memset(pwfx,0,mmckOutinfoSubchunk.cksize);
 	
-	//WAVEFORMAT‚ğƒŠ[ƒh
+	//WAVEFORMATã‚’ãƒªãƒ¼ãƒ‰
 	if(mmioRead(hmmio,(HPSTR)pwfx,mmckOutinfoSubchunk.cksize) == -1)
 	{
 		free(pwfx);
@@ -1628,8 +1628,8 @@ void GetWaveAudioFormat(IN LPCTSTR szFileName,
 	mmioClose(hmmio,0);
 	
 	CString format;
-	//u•s–¾v
-	format = L"•s–¾";//.LoadString(IDS_UNKNOWN);
+	//ã€Œä¸æ˜ã€
+	format = L"ä¸æ˜";//.LoadString(IDS_UNKNOWN);
 	findAudioCodecName(iWaveCodecFind,format,pwfx->wFormatTag,((WAVEFORMATEXTENSIBLE *)pwfx)->SubFormat);
 
 	if(pwfx->wFormatTag == WAVE_FORMAT_EXTENSIBLE)
@@ -1689,7 +1689,7 @@ void PlayWinamp(HWND hWnd,LPCTSTR szPlayFile)
 	DWORD_PTR dwRet;
 	if(hwndWinamp)
 	{
-		//Winampê—pÄ¶ƒRƒ}ƒ“ƒh
+		//Winampå°‚ç”¨å†ç”Ÿã‚³ãƒãƒ³ãƒ‰
 		COPYDATASTRUCT cds;
 
 #ifdef UNICODE
@@ -1793,9 +1793,9 @@ void Ffw5Winamp()
 	}
 }
 
-// 1 = Ä¶’†
-// 3 = ˆê’â~’†
-// 0 = ’â~’†
+// 1 = å†ç”Ÿä¸­
+// 3 = ä¸€æ™‚åœæ­¢ä¸­
+// 0 = åœæ­¢ä¸­
 int IsPlayingWinamp(LPCTSTR szFileName)
 {
 	HWND hwndWinamp = FindWindow(WINAMP_CLASS,NULL);
@@ -1811,10 +1811,10 @@ int IsPlayingWinamp(LPCTSTR szFileName)
 		{
 			if(szFileName)
 			{
-				// •ÒW’†‚Ìƒtƒ@ƒCƒ‹‚ğÄ¶’†?
+				// ç·¨é›†ä¸­ã®ãƒ•ã‚¡ã‚¤ãƒ«ã‚’å†ç”Ÿä¸­?
 				DWORD	iNowPlayNum=0;
 				DWORD	iAllPlayNum=0;
-				//ƒvƒŒƒCƒŠƒXƒg‚ÆƒJƒŒƒ“ƒgs‚ğæ“¾
+				//ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆã¨ã‚«ãƒ¬ãƒ³ãƒˆè¡Œã‚’å–å¾—
 				if(!SendMessageTimeout(hwndWinamp,WM_WA_IPC,0,IPC_WRITEPLAYLIST,SMTO_ABORTIFHUNG,1000,&iNowPlayNum))
 				{
 					return 0;
@@ -1824,7 +1824,7 @@ int IsPlayingWinamp(LPCTSTR szFileName)
 					return 0;
 				}
 				
-				//ƒvƒŒƒCƒŠƒXƒg‚©‚çmp3ƒtƒ@ƒCƒ‹‚Ìƒtƒ‹ƒpƒX‚ğæ“¾‚·‚é
+				//ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆã‹ã‚‰mp3ãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ•ãƒ«ãƒ‘ã‚¹ã‚’å–å¾—ã™ã‚‹
 				LPTSTR szWinampPl;
 				if(!SendMessageTimeout(hwndWinamp,WM_WA_IPC,0,IPC_GETINIDIRECTORY,SMTO_ABORTIFHUNG,1000,(DWORD *)&szWinampPl))
 				{

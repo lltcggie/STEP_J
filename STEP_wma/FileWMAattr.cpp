@@ -73,19 +73,19 @@ void SetAttribute(LPCWSTR pwszName, WMT_ATTR_DATATYPE type, BYTE* pValue, DWORD 
 		CString strPrev;
 		if (false) { /* Conspiracy 198 */
 //		if (strcmp(strName, "Duration") == 0) {
-//			// ‰‰‘tŠÔ
+//			// æ¼”å¥æ™‚é–“
 //			pFileMP3->nPlayTime = (int)((*((QWORD *)pValue) / (QWORD)10000000));
 //		} else if (strcmp(strName, "Bitrate") == 0) {
-//			// ƒrƒbƒgƒŒ[ƒg
+//			// ãƒ“ãƒƒãƒˆãƒ¬ãƒ¼ãƒˆ
 //			pFileMP3->nBitRate = atoi(strData) / 1000;
 		} else if (_tcsicmp(strName, _T("WM/Track")) == 0) {
-			// ƒgƒ‰ƒbƒN”Ô†
+			// ãƒˆãƒ©ãƒƒã‚¯ç•ªå·
 			//SetBTrackNumber(pFileMP3, (BYTE)atoi(strData) + 1);
 			CString strTrack;
 			strTrack.Format(_T("%d"), _ttoi(strData) + 1);
 			SetTrackNumberSI(pFileMP3, strTrack);
 		} else if (_tcsicmp(strName, _T("WM/TrackNumber")) == 0) {
-			// ƒgƒ‰ƒbƒN”Ô†
+			// ãƒˆãƒ©ãƒƒã‚¯ç•ªå·
 			if (_ttoi(strData) == 0) {
 				//SetBTrackNumber(pFileMP3, (BYTE)0xFF);
 				SetTrackNumberSI(pFileMP3, _T(""));
@@ -96,47 +96,47 @@ void SetAttribute(LPCWSTR pwszName, WMT_ATTR_DATATYPE type, BYTE* pValue, DWORD 
 				SetTrackNumberSI(pFileMP3, strTrack);
 			}
 		} else if (_tcsicmp(strName, _T("WM/PartOfSet")) == 0) {
-			// ƒfƒBƒXƒN”Ô†
+			// ãƒ‡ã‚£ã‚¹ã‚¯ç•ªå·
 			CString strDisc;
 			strDisc.Format(_T("%d"), _ttoi(strData));
 			SetDiscNumberSI(pFileMP3, strDisc);
 		}  else if (_tcsicmp(strName, _T("WM/Year")) == 0) {
-			// ƒŠƒŠ[ƒX
+			// ãƒªãƒªãƒ¼ã‚¹
 			if (bAppend) {
 				strPrev = GetYearSI(pFileMP3);
 				strData = strPrev + _T(";") + strData;
 			}
 			SetYearSI(pFileMP3, strData);
 		} else if (_tcsicmp(strName, _T("WM/AlbumTitle")) == 0) {
-			// ƒAƒ‹ƒoƒ€
+			// ã‚¢ãƒ«ãƒãƒ 
 			if (bAppend) {
 				strPrev = GetAlbumNameSI(pFileMP3);
 				strData = strPrev + _T(";") + strData;
 			}
 			SetAlbumNameSI(pFileMP3,  strData);
 		} else if (_tcsicmp(strName, _T("Author")) == 0) {
-			// ƒA[ƒeƒBƒXƒg
+			// ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆ
 			if (bAppend) {
 				strPrev = GetArtistNameSI(pFileMP3);
 				strData = strPrev + _T(";") + strData;
 			}
 			SetArtistNameSI(pFileMP3, strData);
 		} else if (_tcsicmp(strName, _T("Title")) == 0) {
-			// ƒ^ƒCƒgƒ‹
+			// ã‚¿ã‚¤ãƒˆãƒ«
 			if (bAppend) {
 				strPrev = GetTrackNameSI(pFileMP3);
 				strData = strPrev + _T(";") + strData;
 			}
 			SetTrackNameSI(pFileMP3, strData);
 		} else if (_tcsicmp(strName, _T("Description")) == 0) {
-			// ƒRƒƒ“ƒg
+			// ã‚³ãƒ¡ãƒ³ãƒˆ
 			if (bAppend) {
 				strPrev = GetCommentSI(pFileMP3);
 				strData = strPrev + _T(";") + strData;
 			}
 			SetCommentSI(pFileMP3, strData);
 		} else if (_tcsicmp(strName, _T("WM/Genre")) == 0) {
-			// ƒWƒƒƒ“ƒ‹
+			// ã‚¸ãƒ£ãƒ³ãƒ«
 			if (bAppend) {
 				strPrev = GetGenreSI(pFileMP3);
 				strData = strPrev + _T(";") + strData;
@@ -144,7 +144,7 @@ void SetAttribute(LPCWSTR pwszName, WMT_ATTR_DATATYPE type, BYTE* pValue, DWORD 
 			SetGenreSI(pFileMP3, strData);
 			//SetBGenre(pFileMP3, STEPGetGenreCode(strData));
 		} else if (_tcsicmp(strName, _T("WM/GenreID")) == 0) {
-			// ƒWƒƒƒ“ƒ‹
+			// ã‚¸ãƒ£ãƒ³ãƒ«
 			if (bAppend) {
 				strPrev = GetGenreSI(pFileMP3);
 				strData = strPrev + _T(";") + strData;
@@ -170,7 +170,7 @@ void SetAttribute(LPCWSTR pwszName, WMT_ATTR_DATATYPE type, BYTE* pValue, DWORD 
 			}
 			SetOther(pFileMP3, strData);
 		} else if (_tcsicmp(strName, _T("Is_Protected")) == 0) {
-			// DRM ‚ª—LŒø‚Èƒf[ƒ^
+			// DRM ãŒæœ‰åŠ¹ãªãƒ‡ãƒ¼ã‚¿
 			*pIsProtected = (_ttoi(strData) == 1) ? TRUE : FALSE;
 		} else if (_tcsicmp(strName, _T("WM/OriginalArtist")) == 0) {
 			if (bAppend) {

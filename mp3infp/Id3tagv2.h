@@ -1,4 +1,4 @@
-// Id3tagv2.h: CId3tagv2 ƒNƒ‰ƒX‚ÌƒCƒ“ƒ^[ƒtƒFƒCƒX
+// Id3tagv2.h: CId3tagv2 ã‚¯ãƒ©ã‚¹ã®ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹
 //
 //////////////////////////////////////////////////////////////////////
 
@@ -34,7 +34,7 @@ public:
 		m_dwSize = 0;
 		m_wFlags = 0;
 	}
-	CId3Frame(const CId3Frame &obj)	//ƒRƒs[ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	CId3Frame(const CId3Frame &obj)	//ã‚³ãƒ”ãƒ¼ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	{
 		m_data = (unsigned char *)malloc(obj.m_dwSize);
 		memcpy(m_data,obj.m_data,obj.m_dwSize);
@@ -62,7 +62,7 @@ public:
 		m_data = (unsigned char *)malloc(size);
 		if(!m_data)
 		{
-			return;	//ƒƒ‚ƒŠ‚ğŠm•Û‚Å‚«‚È‚©‚Á‚½
+			return;	//ãƒ¡ãƒ¢ãƒªã‚’ç¢ºä¿ã§ããªã‹ã£ãŸ
 		}
 		memcpy(m_data,data,size);
 		m_dwSize = size;
@@ -87,7 +87,7 @@ public:
 private:
 	DWORD LoadApicFrame(const unsigned char *pData, DWORD dwSize, WORD wVer);
 
-	void operator=(const CId3Frame &){};	// ‘ã“ü‰‰Zq
+	void operator=(const CId3Frame &){};	// ä»£å…¥æ¼”ç®—å­
 
 	unsigned char	*m_data;
 	DWORD	m_dwId;
@@ -134,13 +134,13 @@ public:
 	};
 	void SetCharEncoding(CharEncoding encoding)
 	{
-		// ƒGƒ“ƒR[ƒhw’è$2/$3‚ªg‚¦‚é‚Ì‚Ív2.4ˆÈ~
+		// ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰æŒ‡å®š$2/$3ãŒä½¿ãˆã‚‹ã®ã¯v2.4ä»¥é™
 		if(m_wVer < 0x0400)
 		{
 			if(	(encoding != ID3V2CHARENCODING_ISO_8859_1) &&
 				(encoding != ID3V2CHARENCODING_UTF_16) )
 			{
-				// UTF-16‚É©“®İ’è
+				// UTF-16ã«è‡ªå‹•è¨­å®š
 				encoding = ID3V2CHARENCODING_UTF_16;
 			}
 		}
@@ -214,18 +214,18 @@ private:
 	static DWORD ConvertApicToV22(const unsigned char *v23, DWORD dwSize, unsigned char *v22);
 
 	void Release();
-	BOOL m_bEnable;					//ID3v2‚ª–³‚¢ê‡‚ÍFALSE
-	CharEncoding m_encoding;		// •¶šƒGƒ“ƒR[ƒhƒ^ƒCƒv (0=ISO-8859-1/1=UTF-16/2=UTF-16BE/3=UTF-8)
-	BOOL m_bUnSynchronization;		//”ñ“¯Šú‰»‚·‚é
+	BOOL m_bEnable;					//ID3v2ãŒç„¡ã„å ´åˆã¯FALSE
+	CharEncoding m_encoding;		// æ–‡å­—ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰ã‚¿ã‚¤ãƒ— (0=ISO-8859-1/1=UTF-16/2=UTF-16BE/3=UTF-8)
+	BOOL m_bUnSynchronization;		//éåŒæœŸåŒ–ã™ã‚‹
 	ID3HEAD m_head;
 	WORD m_wVer;
 	typedef std::multimap<DWORD,CId3Frame> FrameMap;
 	FrameMap m_frames;
-	CString m_strDefaultEnc;		//TENC‚ÌƒfƒtƒHƒ‹ƒg’l
-//	WORD m_wDefaultId3TagVersion;	// ID3V2‚Ì‰Šú’l(V‹Kì¬‚É‚±‚Ìƒo[ƒWƒ‡ƒ“‚Æ‚È‚é)
+	CString m_strDefaultEnc;		//TENCã®ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆå€¤
+//	WORD m_wDefaultId3TagVersion;	// ID3V2ã®åˆæœŸå€¤(æ–°è¦ä½œæˆæ™‚ã«ã“ã®ãƒãƒ¼ã‚¸ãƒ§ãƒ³ã¨ãªã‚‹)
 public:
     //by Kobarin
-    //SetEncode ‚ÌŒ‹‰Ê‚ğ”½‰f‚³‚¹‚é
+    //SetEncode ã®çµæœã‚’åæ˜ ã•ã›ã‚‹
     void ApplyStringEncode(void);
 };
 

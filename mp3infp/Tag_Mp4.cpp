@@ -1,4 +1,4 @@
-// Tag_Mp4.cpp: CTag_Mp4 ÉNÉâÉXÇÃÉCÉìÉvÉäÉÅÉìÉeÅ[ÉVÉáÉì
+// Tag_Mp4.cpp: CTag_Mp4 „ÇØ„É©„Çπ„ÅÆ„Ç§„É≥„Éó„É™„É°„É≥„ÉÜ„Éº„Ç∑„Éß„É≥
 //
 //////////////////////////////////////////////////////////////////////
 
@@ -17,7 +17,7 @@ static char THIS_FILE[]=__FILE__;
 #endif
 
 //////////////////////////////////////////////////////////////////////
-// ç\íz/è¡ñ≈
+// ÊßãÁØâ/Ê∂àÊªÖ
 //////////////////////////////////////////////////////////////////////
 
 CTag_Mp4::CTag_Mp4()
@@ -58,7 +58,7 @@ void CTag_Mp4::ClearMetadata()
 	m_iMetadata_Compilation = -1;
 	m_strMetadata_Comment = _T("");
 	m_strMetadata_Tool = _T("");
-    m_strMetadata_Copyright = _T("");//í«â¡ by Kobarin
+    m_strMetadata_Copyright = _T("");//ËøΩÂä† by Kobarin
 }
 
 static CString _CnvMetadata(const char *utf8val)
@@ -318,10 +318,10 @@ DWORD CTag_Mp4::Load(LPCTSTR szFileName)
 			m_strMetadata_Tool = _CnvMetadata(tags->encodingTool);
 		}
 
-        if (tags->copyright)//í«â¡ by Kobarin
+        if (tags->copyright)//ËøΩÂä† by Kobarin
         {
             m_strMetadata_Copyright = _CnvMetadata(tags->copyright);
-        }//Ç±Ç±Ç‹Ç≈
+        }//„Åì„Åì„Åæ„Åß
         
         MP4TagsFree(tags);
 	}
@@ -600,7 +600,7 @@ DWORD CTag_Mp4::Save(LPCTSTR szFileName)
 
 		SetTagString(tags, m_strMetadata_Comment, MP4TagsSetComments);
 		SetTagString(tags, m_strMetadata_Tool, MP4TagsSetEncodingTool);
-        SetTagString(tags, m_strMetadata_Copyright, MP4TagsSetCopyright);//í«â¡ by Kobarin
+        SetTagString(tags, m_strMetadata_Copyright, MP4TagsSetCopyright);//ËøΩÂä† by Kobarin
 
 		MP4TagsStore(tags, mp4file);
 		MP4TagsFree(tags);

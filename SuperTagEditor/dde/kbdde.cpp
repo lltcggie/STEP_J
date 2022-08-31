@@ -101,26 +101,26 @@ KbDDEClient::~KbDDEClient(void)
 }
 ///////////////////////////////////////////////////////////////////////////////
 HDDEDATA KbDDEClient::ClientTransaction(
-            LPBYTE pData,       // ƒT[ƒo[‚É“n‚·ƒf[ƒ^‚Ìæ“ªƒoƒCƒg‚Ìƒ|ƒCƒ“ƒ^
-            DWORD cbData,       // ƒf[ƒ^‚Ì’·‚³
-        //    HCONV hConv,        // ’ÊMƒnƒ“ƒhƒ‹
-            HSZ hszItem,        // ƒf[ƒ^€–Ú‚Ìƒnƒ“ƒhƒ‹
-            UINT wFmt,          // ƒNƒŠƒbƒvƒ{[ƒhƒtƒH[ƒ}ƒbƒg
-            UINT wType,         // ƒgƒ‰ƒ“ƒUƒNƒVƒ‡ƒ“ƒ^ƒCƒv
-            DWORD dwTimeout,    // ‘Ò‚¿ŠÔ
-            LPDWORD pdwResult   // ƒgƒ‰ƒ“ƒUƒNƒVƒ‡ƒ“‚ÌŒ‹‰Ê‚Ö‚Ìƒ|ƒCƒ“ƒ^
+            LPBYTE pData,       // ã‚µãƒ¼ãƒãƒ¼ã«æ¸¡ã™ãƒ‡ãƒ¼ã‚¿ã®å…ˆé ­ãƒã‚¤ãƒˆã®ãƒã‚¤ãƒ³ã‚¿
+            DWORD cbData,       // ãƒ‡ãƒ¼ã‚¿ã®é•·ã•
+        //    HCONV hConv,        // é€šä¿¡ãƒãƒ³ãƒ‰ãƒ«
+            HSZ hszItem,        // ãƒ‡ãƒ¼ã‚¿é …ç›®ã®ãƒãƒ³ãƒ‰ãƒ«
+            UINT wFmt,          // ã‚¯ãƒªãƒƒãƒ—ãƒœãƒ¼ãƒ‰ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆ
+            UINT wType,         // ãƒˆãƒ©ãƒ³ã‚¶ã‚¯ã‚·ãƒ§ãƒ³ã‚¿ã‚¤ãƒ—
+            DWORD dwTimeout,    // å¾…ã¡æ™‚é–“
+            LPDWORD pdwResult   // ãƒˆãƒ©ãƒ³ã‚¶ã‚¯ã‚·ãƒ§ãƒ³ã®çµæœã¸ã®ãƒã‚¤ãƒ³ã‚¿
         )
 {
     if(!m_hConv)return NULL;
     return DdeClientTransaction(
-            pData,       // ƒT[ƒo[‚É“n‚·ƒf[ƒ^‚Ìæ“ªƒoƒCƒg‚Ìƒ|ƒCƒ“ƒ^
-            cbData,      // ƒf[ƒ^‚Ì’·‚³
-            m_hConv,     // ’ÊMƒnƒ“ƒhƒ‹
-            hszItem,     // ƒf[ƒ^€–Ú‚Ìƒnƒ“ƒhƒ‹
-            wFmt,        // ƒNƒŠƒbƒvƒ{[ƒhƒtƒH[ƒ}ƒbƒg
-            wType,       // ƒgƒ‰ƒ“ƒUƒNƒVƒ‡ƒ“ƒ^ƒCƒv
-            dwTimeout,   // ‘Ò‚¿ŠÔ
-            pdwResult    // ƒgƒ‰ƒ“ƒUƒNƒVƒ‡ƒ“‚ÌŒ‹‰Ê‚Ö‚Ìƒ|ƒCƒ“ƒ^
+            pData,       // ã‚µãƒ¼ãƒãƒ¼ã«æ¸¡ã™ãƒ‡ãƒ¼ã‚¿ã®å…ˆé ­ãƒã‚¤ãƒˆã®ãƒã‚¤ãƒ³ã‚¿
+            cbData,      // ãƒ‡ãƒ¼ã‚¿ã®é•·ã•
+            m_hConv,     // é€šä¿¡ãƒãƒ³ãƒ‰ãƒ«
+            hszItem,     // ãƒ‡ãƒ¼ã‚¿é …ç›®ã®ãƒãƒ³ãƒ‰ãƒ«
+            wFmt,        // ã‚¯ãƒªãƒƒãƒ—ãƒœãƒ¼ãƒ‰ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆ
+            wType,       // ãƒˆãƒ©ãƒ³ã‚¶ã‚¯ã‚·ãƒ§ãƒ³ã‚¿ã‚¤ãƒ—
+            dwTimeout,   // å¾…ã¡æ™‚é–“
+            pdwResult    // ãƒˆãƒ©ãƒ³ã‚¶ã‚¯ã‚·ãƒ§ãƒ³ã®çµæœã¸ã®ãƒã‚¤ãƒ³ã‚¿
            );
 }
 ///////////////////////////////////////////////////////////////////////////////
@@ -143,7 +143,7 @@ bool __fastcall KbDDEClient::Execute(LPCTSTR cszCommand, DWORD dwTimeOut)
             NULL,
             NULL,/*CF_TEXT,*/
             XTYP_EXECUTE,
-            dwTimeOut,//‘Ò‹@ŠÔ
+            dwTimeOut,//å¾…æ©Ÿæ™‚é–“
             NULL);
 
     free(pszTopic);
@@ -159,10 +159,10 @@ bool __fastcall KbDDEClient::Request(TCHAR** ppszReturn,
                                      const TCHAR *cszCommand,
                                      DWORD dwWait,
                                      BOOL bCfTextAsUnicode)
-{//XTYP_REQUEST ƒRƒ}ƒ“ƒh‚ğ”­s‚·‚é
- //–ß‚è’l‚ğ *ppszReturn ‚ÉŠi”[
- //bCfTextAsUnicode == TRUE ‚Ìê‡ACF_TEXT ‚Å—v‹‚µ‚½‚Æ‚«‚Ì
- //–ß‚è’l‚ğ ANSI ‚Å‚Í‚È‚­ UNICODE ‚Æ‚µ‚Äˆ—(uLilith ‘Îô)
+{//XTYP_REQUEST ã‚³ãƒãƒ³ãƒ‰ã‚’ç™ºè¡Œã™ã‚‹
+ //æˆ»ã‚Šå€¤ã‚’ *ppszReturn ã«æ ¼ç´
+ //bCfTextAsUnicode == TRUE ã®å ´åˆã€CF_TEXT ã§è¦æ±‚ã—ãŸã¨ãã®
+ //æˆ»ã‚Šå€¤ã‚’ ANSI ã§ã¯ãªã UNICODE ã¨ã—ã¦å‡¦ç†(uLilith å¯¾ç­–)
     if (!ppszReturn) {
         return false;
     }
@@ -189,13 +189,13 @@ bool __fastcall KbDDEClient::Request(TCHAR** ppszReturn,
         *ppszReturn = pszReturn;
         return true;
     }
-    //CF_TEXT ‚ÅÄæ“¾‚ğ‚İ‚é
-    //CF_TEXT ‚Å‚àÀÛ‚Ìƒf[ƒ^‚Í UNICODE ‚Ìê‡‚Æ ANSI ‚Ìê‡‚Æ‚ª‚ ‚èA
-    //‚Ç‚¿‚ç‚É‚È‚é‚©‚ÍƒT[ƒo[‚É‚æ‚èˆÙ‚È‚é
-    //uLilith ‚Í CF_UNICODETEXT ‚¾‚Æ¸”sACF_TEXT ‚¾‚Æ UNICODE
-    //Lilith ‚Í CF_UNICODETEXT ‚¾‚Æ¸”sACF_TEXT ‚¾‚Æ ANSI
-    //KbMedia Player v2.80 ˆÈ~‚Í CF_UNICODETEXT ‚¾‚Æ UNICODEACF_TEXT ‚¾‚Æ ANSI
-    //KbMedia Player v2.6x ‚Í CF_UNICODETEXT ‚¾‚Æ¸”sACF_TEXT ‚¾‚Æ ANSI
+    //CF_TEXT ã§å†å–å¾—ã‚’è©¦ã¿ã‚‹
+    //CF_TEXT ã§ã‚‚å®Ÿéš›ã®ãƒ‡ãƒ¼ã‚¿ã¯ UNICODE ã®å ´åˆã¨ ANSI ã®å ´åˆã¨ãŒã‚ã‚Šã€
+    //ã©ã¡ã‚‰ã«ãªã‚‹ã‹ã¯ã‚µãƒ¼ãƒãƒ¼ã«ã‚ˆã‚Šç•°ãªã‚‹
+    //uLilith ã¯ CF_UNICODETEXT ã ã¨å¤±æ•—ã€CF_TEXT ã ã¨ UNICODE
+    //Lilith ã¯ CF_UNICODETEXT ã ã¨å¤±æ•—ã€CF_TEXT ã ã¨ ANSI
+    //KbMedia Player v2.80 ä»¥é™ã¯ CF_UNICODETEXT ã ã¨ UNICODEã€CF_TEXT ã ã¨ ANSI
+    //KbMedia Player v2.6x ã¯ CF_UNICODETEXT ã ã¨å¤±æ•—ã€CF_TEXT ã ã¨ ANSI
     hRet = DdeClientTransaction(NULL, 0, m_hConv, hszItem,
                                 CF_TEXT, XTYP_REQUEST, dwWait, NULL);
 #else
@@ -210,11 +210,11 @@ bool __fastcall KbDDEClient::Request(TCHAR** ppszReturn,
         pszReturn[nSize] = pszReturn[nSize+1] = pszReturn[nSize+2];
         DdeFreeStringHandle(m_ddeInst, hszItem);
         DdeFreeDataHandle(hRet);
-        if(bCfTextAsUnicode){//pszReturn ‚ğ UNICODE ‚Æ‚µ‚Äˆµ‚¤(uLilith‘Îô)
+        if(bCfTextAsUnicode){//pszReturn ã‚’ UNICODE ã¨ã—ã¦æ‰±ã†(uLilithå¯¾ç­–)
 #ifdef _UNICODE
             *ppszReturn = (WCHAR*)pszReturn;
 #else
-            //pszReturn ‚ğ ANSI ‚É•ÏŠ·(pszReturn ‚ğ‚»‚Ì‚Ü‚Üg‚¤‚Ì‚Å‚Í‚È‚¢(‚â‚â‚±‚µ‚¢)
+            //pszReturn ã‚’ ANSI ã«å¤‰æ›(pszReturn ã‚’ãã®ã¾ã¾ä½¿ã†ã®ã§ã¯ãªã„(ã‚„ã‚„ã“ã—ã„)
             int lenReturnA = WideCharToMultiByte(CP_ACP, 0, (WCHAR*)pszReturn, -1, 0, 0, NULL, NULL);
             CHAR *pszReturnA = (CHAR*)malloc(lenReturnA);
             WideCharToMultiByte(CP_ACP, 0, (WCHAR*)pszReturn, -1, pszReturnA, lenReturnA, NULL, NULL);
@@ -224,7 +224,7 @@ bool __fastcall KbDDEClient::Request(TCHAR** ppszReturn,
         }
         else{
 #ifdef _UNICODE
-            //pszReturn ‚ğ UNICODE ‚É•ÏŠ·
+            //pszReturn ã‚’ UNICODE ã«å¤‰æ›
             int lenReturnW = MultiByteToWideChar(CP_ACP, 0, pszReturn, -1, 0, 0);
             WCHAR *pszReturnW = (WCHAR*)malloc(lenReturnW*sizeof(WCHAR));
             MultiByteToWideChar(CP_ACP, 0, (CHAR*)pszReturn, -1, pszReturnW, lenReturnW);

@@ -1,4 +1,4 @@
-﻿// STEP_dsf.h : STEP_dsf DLL のメイン ヘッダー ファイル
+// STEP_dsf.h : STEP_dsf DLL のメイン ヘッダー ファイル
 //
 
 #pragma once
@@ -34,7 +34,7 @@ typedef struct
 	ULONG	uiFormatID;					// Format ID(0:DSD raw)
 	ULONG	ulChannelType;				// Channelタイプ
 	ULONG	ulChannelNum;				// Channel数
-	ULONG	ulSamplingFrequency;		// サンプリング周波数(Hz) 2822400, 5644800,･･･
+	ULONG	ulSamplingFrequency;		// サンプリング周波数(Hz) 2822400, 5644800,・・・
 	ULONG	ulBitsPerSample;			// Bits Per Sample(1 or 8)
 	UINT64	uiSampleCount;				// Sample count ※1chのサンプリング周波数 × n秒
 	ULONG	ulBlockSizePerChannel;		// Block size per channel(4096)

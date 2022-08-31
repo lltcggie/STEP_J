@@ -9,22 +9,22 @@
 #include "flac/all.h"
 
 enum{
-    FLA_TITLE,      //ƒgƒ‰ƒbƒN–¼
-    FLA_ARTIST,     //ƒAƒ‹ƒoƒ€–¼
-    FLA_ALBUMARTIST,//Albm.ƒA[ƒeƒBƒXƒg
-    FLA_ALBUM,      //ƒAƒ‹ƒoƒ€–¼
-    FLA_YEAR,       //Q†
+    FLA_TITLE,      //ãƒˆãƒ©ãƒƒã‚¯å
+    FLA_ARTIST,     //ã‚¢ãƒ«ãƒãƒ å
+    FLA_ALBUMARTIST,//Albm.ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆ
+    FLA_ALBUM,      //ã‚¢ãƒ«ãƒãƒ å
+    FLA_YEAR,       //å¯å·
     FLA_TRACKNUMBER,//TrackNo
-    FLA_TRACKTOTAL, //Track”
+    FLA_TRACKTOTAL, //Trackæ•°
     FLA_DISCNUMBER, //DiscNo
-    FLA_DISCTOTAL,  //Disc”
-    FLA_GENRE,      //ƒWƒƒƒ“ƒ‹
-    FLA_COMMENT,    //ƒRƒƒ“ƒg
-    FLA_COPYRIGHT,  //’˜ìŒ 
-    FLA_LYRICIST,   //ìŽŒŽÒ
-    FLA_COMPOSER,   //ì‹ÈŽÒ
-    FLA_PERFORMER,  //‰‰‘tŽÒ
-    FLA_ENCODEDBY,  //ƒ\ƒtƒgƒEƒFƒA
+    FLA_DISCTOTAL,  //Discæ•°
+    FLA_GENRE,      //ã‚¸ãƒ£ãƒ³ãƒ«
+    FLA_COMMENT,    //ã‚³ãƒ¡ãƒ³ãƒˆ
+    FLA_COPYRIGHT,  //è‘—ä½œæ¨©
+    FLA_LYRICIST,   //ä½œè©žè€…
+    FLA_COMPOSER,   //ä½œæ›²è€…
+    FLA_PERFORMER,  //æ¼”å¥è€…
+    FLA_ENCODEDBY,  //ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢
     FLA_LAST
 };
 

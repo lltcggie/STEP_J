@@ -1,4 +1,4 @@
-﻿// DlgConv.cpp : インプリメンテーション ファイル
+// DlgConv.cpp : インプリメンテーション ファイル
 //
 
 #include "stdafx.h"

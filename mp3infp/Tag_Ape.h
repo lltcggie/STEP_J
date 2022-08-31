@@ -1,4 +1,4 @@
-// Tag_Ape.h: CTag_Ape ƒNƒ‰ƒX‚ÌƒCƒ“ƒ^[ƒtƒFƒCƒX
+// Tag_Ape.h: CTag_Ape ã‚¯ãƒ©ã‚¹ã®ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹
 //
 //////////////////////////////////////////////////////////////////////
 
@@ -17,8 +17,8 @@
 
 /*
 Memo:
-ID3tag->Ape tag‚Ì‡‚Åƒ[ƒh‚·‚é
-ƒZ[ƒu‚·‚é‚ÆApe tag‚Ì‚İ‚ª‘‚«‚Ü‚ê‚é
+ID3tag->Ape tagã®é †ã§ãƒ­ãƒ¼ãƒ‰ã™ã‚‹
+ã‚»ãƒ¼ãƒ–ã™ã‚‹ã¨Ape tagã®ã¿ãŒæ›¸ãè¾¼ã¾ã‚Œã‚‹
 */
 
 class CTag_Ape  
@@ -28,11 +28,11 @@ public:
 	typedef struct _APE_TAG_FOOTER
 	{
 		char id[8];		// "APETAGEX"
-		int version;		// ƒ^ƒOƒo[ƒWƒ‡ƒ“
-		int size;			// ‚±‚Ìƒtƒbƒ^‚ğŠÜ‚Şƒ^ƒOƒTƒCƒY
-		int fields;			// ƒ^ƒO‚ÉŠÜ‚Ü‚ê‚éƒtƒB[ƒ‹ƒh”
-		int flags;			// ƒtƒ‰ƒO
-		char reserved[8];	// —\–ñ
+		int version;		// ã‚¿ã‚°ãƒãƒ¼ã‚¸ãƒ§ãƒ³
+		int size;			// ã“ã®ãƒ•ãƒƒã‚¿ã‚’å«ã‚€ã‚¿ã‚°ã‚µã‚¤ã‚º
+		int fields;			// ã‚¿ã‚°ã«å«ã¾ã‚Œã‚‹ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰æ•°
+		int flags;			// ãƒ•ãƒ©ã‚°
+		char reserved[8];	// äºˆç´„
 	}APE_TAG_FOOTER;
 #pragma pack()
 
@@ -87,9 +87,9 @@ private:
 	APE_TAG_FOOTER m_footer;
 	BOOL m_bHasId3tag;
 	BOOL m_bHasApetag;
-	BOOL m_bScmpxGenre;		//SCMPXŠg’£ƒWƒƒƒ“ƒ‹‚ğg—p‚·‚é
+	BOOL m_bScmpxGenre;		//SCMPXæ‹¡å¼µã‚¸ãƒ£ãƒ³ãƒ«ã‚’ä½¿ç”¨ã™ã‚‹
 	int m_apeVersion;
-	BOOL m_bDoNotSaveId3v1;	// ID3v1‚ğ•Û‘¶‚µ‚È‚¢
+	BOOL m_bDoNotSaveId3v1;	// ID3v1ã‚’ä¿å­˜ã—ãªã„
 
 	typedef std::map<CString,CString> CommentMap;
 	CommentMap m_comments;

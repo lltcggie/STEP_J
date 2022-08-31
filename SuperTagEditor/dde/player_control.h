@@ -1,32 +1,32 @@
 #pragma once
 
-//�v���C���[������Ǘ�
-//SuperTagEditorView.h/cpp ���番��
+//プレイヤー制御を管理
+//SuperTagEditorView.h/cpp から分離
 
 class CPlayerControl
 {
 private:
     enum{
-        COMMAND_NOADDPLAY,//�ǉ����Ȃ��ōĐ�(���Ή��̏ꍇ�� COMMAND_PLAY ���Ă�)
-        COMMAND_PLAY,   //�Đ�
-        COMMAND_STOP,   //��~
-        COMMAND_NEXT,   //���̋�
-        COMMAND_PREV,   //�O�̋�
-        COMMAND_CLOSE,  //��~&�t�@�C���N���[�Y(�Đ����̋Ȃ̃^�O�X�V���o����悤��)
-        COMMAND_CLEAR,  //���X�g��j��
-        COMMAND_ADD,    //���X�g�ɒǉ�
-        COMMAND_QUIT    //�v���C���[�I��
+        COMMAND_NOADDPLAY,//追加しないで再生(未対応の場合は COMMAND_PLAY を呼ぶ)
+        COMMAND_PLAY,   //再生
+        COMMAND_STOP,   //停止
+        COMMAND_NEXT,   //次の曲
+        COMMAND_PREV,   //前の曲
+        COMMAND_CLOSE,  //停止&ファイルクローズ(再生中の曲のタグ更新が出来るように)
+        COMMAND_CLEAR,  //リストを破棄
+        COMMAND_ADD,    //リストに追加
+        COMMAND_QUIT    //プレイヤー終了
     };
     TCHAR m_szPlayerPath[MAX_PATH];
     int   m_nPlayerType;
-    //�Ή��v���C���[�𑝂₵���ꍇ�͈ȉ��̊֐���ύX����
-    BOOL __fastcall PlayerIsActive(void);//�Ώۃv���C���[���N���ς݂Ȃ� TRUE ��Ԃ�
-    BOOL __fastcall ExecPlayer(const TCHAR *cszFileName, BOOL bClear);//�v���C���[���N������(bClear=TRUE�̏ꍇ�͋N���ナ�X�g��j��)
+    //対応プレイヤーを増やした場合は以下の関数を変更する
+    BOOL __fastcall PlayerIsActive(void);//対象プレイヤーが起動済みなら TRUE を返す
+    BOOL __fastcall ExecPlayer(const TCHAR *cszFileName, BOOL bClear);//プレイヤーを起動する(bClear=TRUEの場合は起動後リストを破棄)
     void __fastcall ExecCommand(int nCommand, const TCHAR *cszFileName);
-    BOOL __fastcall SupportCommand(int nCommand);//COMMAND_XXXX �ɑΉ����Ă���� TRUE ��Ԃ�
+    BOOL __fastcall SupportCommand(int nCommand);//COMMAND_XXXX に対応していれば TRUE を返す
     BOOL __fastcall RequestCommand(const TCHAR *cszCommand, TCHAR **ppszReturn);
-    //�����܂�
-    //�K�v�ɉ����� ExecCommandXXXX/RequestCommandXXXX ��ǉ�
+    //ここまで
+    //必要に応じて ExecCommandXXXX/RequestCommandXXXX を追加
     void __fastcall ExecCommandWinamp(int nCommand, const TCHAR *cszFileName);
     void __fastcall ExecCommandKbmplay(int nCommand, const TCHAR *cszFileName);
     void __fastcall ExecCommandLilith(int nCommand, const TCHAR *cszFileName);
@@ -56,5 +56,5 @@ public:
     void __fastcall Quit(void){ExecCommand(COMMAND_QUIT, NULL);}
     void __fastcall Clear(void){ExecCommand(COMMAND_CLEAR, NULL);}
     void __fastcall Add(const TCHAR *cszFileName){ExecCommand(COMMAND_ADD, cszFileName);}
-    BOOL __fastcall GetPlayingFileName(TCHAR *pszFileName, int nSize);//nSize �͕�����
+    BOOL __fastcall GetPlayingFileName(TCHAR *pszFileName, int nSize);//nSize は文字数
 };

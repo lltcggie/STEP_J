@@ -1,4 +1,4 @@
-// HeaderCtrlEx.cpp : �C���v�������e�[�V���� �t�@�C��
+// HeaderCtrlEx.cpp : インプリメンテーション ファイル
 //
 
 #include "stdafx.h"
@@ -26,12 +26,12 @@ CHeaderCtrlEx::~CHeaderCtrlEx()
 
 BEGIN_MESSAGE_MAP(CHeaderCtrlEx, CHeaderCtrl)
 	//{{AFX_MSG_MAP(CHeaderCtrlEx)
-		// ���� - ClassWizard �͂��̈ʒu�Ƀ}�b�s���O�p�̃}�N����ǉ��܂��͍폜���܂��B
+		// メモ - ClassWizard はこの位置にマッピング用のマクロを追加または削除します。
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// CHeaderCtrlEx ���b�Z�[�W �n���h��
+// CHeaderCtrlEx メッセージ ハンドラ
 int CHeaderCtrlEx::SetSortImage( int nCol, BOOL bAsc )
 {
     int nPrevCol = m_nSortCol;

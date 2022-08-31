@@ -1,4 +1,4 @@
-// DlgWriteForm.cpp : �C���v�������e�[�V���� �t�@�C��
+// DlgWriteForm.cpp : インプリメンテーション ファイル
 //
 
 #include "stdafx.h"
@@ -13,7 +13,7 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgWriteForm �v���p�e�B �y�[�W
+// CDlgWriteForm プロパティ ページ
 
 IMPLEMENT_DYNCREATE(CDlgWriteForm, COptionPage)
 
@@ -52,13 +52,13 @@ BEGIN_MESSAGE_MAP(CDlgWriteForm, COptionPage)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgWriteForm ���b�Z�[�W �n���h��
+// CDlgWriteForm メッセージ ハンドラ
 
 BOOL CDlgWriteForm::OnInitDialog() 
 {
 	COptionPage::OnInitDialog();
 
-	// TODO: ���̈ʒu�ɏ������̕⑫������ǉ����Ă�������
+	// TODO: この位置に初期化の補足処理を追加してください
 	int		i;
 	m_listFormatType.ResetContent();
 	for (i = 0; i < WRITE_FORMAT_MAX; i++) {
@@ -74,8 +74,8 @@ BOOL CDlgWriteForm::OnInitDialog()
 	m_btIsHtml.SetCheck(m_writeFormat[m_nFormatType].bIsHtml ? TRUE : FALSE);
 	m_btWriteHtml.SetCheck(m_writeFormat[m_nFormatType].bWriteHtml ? TRUE : FALSE); /* BeachMonster5 120 */
 
-	return TRUE;  // �R���g���[���Ƀt�H�[�J�X��ݒ肵�Ȃ��Ƃ��A�߂�l�� TRUE �ƂȂ�܂�
-	              // ��O: OCX �v���p�e�B �y�[�W�̖߂�l�� FALSE �ƂȂ�܂�
+	return TRUE;  // コントロールにフォーカスを設定しないとき、戻り値は TRUE となります
+	              // 例外: OCX プロパティ ページの戻り値は FALSE となります
 }
 
 void CDlgWriteForm::OnBtNameChange() 
@@ -84,10 +84,10 @@ void CDlgWriteForm::OnBtNameChange()
 
 	dialog.m_strName = m_writeFormat[m_nFormatType].strName;
 	if (dialog.DoModal() == IDOK) {
-		// �V�������̂ɕύX
+		// 新しい名称に変更
 		m_writeFormat[m_nFormatType].strName = dialog.m_strName;
 
-		// ���X�g�X�V
+		// リスト更新
 		OnSelChangeListFormatType();
 		m_listFormatType.ResetContent();
 		int i; for (i = 0; i < WRITE_FORMAT_MAX; i++) {
@@ -95,7 +95,7 @@ void CDlgWriteForm::OnBtNameChange()
 			strName.Format(_T("%d: %s"), i+1, m_writeFormat[i].strName);
 			m_listFormatType.AddString(strName);
 		}
-		// �I�����Ȃ���
+		// 選択しなおす
 		m_listFormatType.SetCurSel(m_nFormatType);
 	}
 }
@@ -105,8 +105,8 @@ void CDlgWriteForm::OnBtRefFile()
 	CString	strFileName;
 	m_editFileName.GetWindowText(strFileName);
 
-	// �t�@�C���I���_�C�A���O���J��
-	static	LPCTSTR	sFileFilter =	_T("�����t�@�C��(*.txt)|*.txt|") \
+	// ファイル選択ダイアログを開く
+	static	LPCTSTR	sFileFilter =	_T("書式ファイル(*.txt)|*.txt|") \
 									_T("All Files(*.*)|*.*|");
 	CFileDialog		dialog(TRUE, _T(".txt"), strFileName,
 	                       OFN_FILEMUSTEXIST | OFN_HIDEREADONLY | OFN_EXTENSIONDIFFERENT | OFN_PATHMUSTEXIST,
@@ -118,7 +118,7 @@ void CDlgWriteForm::OnBtRefFile()
 
 void CDlgWriteForm::OnSelChangeListFormatType() 
 {
-	// ���ݕҏW���̓��e�𔽉f������
+	// 現在編集中の内容を反映させる
 	m_editFileName.GetWindowText(m_writeFormat[m_nFormatType].strFileName);
 	m_editExtName.GetWindowText(m_writeFormat[m_nFormatType].strExtName);
 	m_writeFormat[m_nFormatType].bWriteSelected	= m_btWriteSelected.GetCheck() ? true : false;

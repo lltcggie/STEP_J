@@ -1,4 +1,4 @@
-// Tag_Ape.cpp: CTag_Ape ƒNƒ‰ƒX‚ÌƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“
+// Tag_Ape.cpp: CTag_Ape ã‚¯ãƒ©ã‚¹ã®ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³
 //
 //////////////////////////////////////////////////////////////////////
 
@@ -29,7 +29,7 @@ static const unsigned char SCMPX_GENRE_NULL = 247;
 static const unsigned char WINAMP_GENRE_NULL = 255;
 
 //////////////////////////////////////////////////////////////////////
-// \’z/Á–Å
+// æ§‹ç¯‰/æ¶ˆæ»…
 //////////////////////////////////////////////////////////////////////
 
 CTag_Ape::CTag_Ape(BOOL bScmpxGenre)
@@ -58,11 +58,11 @@ BOOL CTag_Ape::SetComment(LPCTSTR name,LPCTSTR value)
 {
 	m_bHasApetag = TRUE;
 	
-	// Œ»İ‚ÌƒRƒƒ“ƒg‚ğíœ
+	// ç¾åœ¨ã®ã‚³ãƒ¡ãƒ³ãƒˆã‚’å‰Šé™¤
 	CommentMap::iterator it = m_comments.begin();
 	while(it != m_comments.end())
 	{
-		// ‘å•¶š¬•¶š‚ğ‹æ•Ê‚¹‚¸‚É”äŠr
+		// å¤§æ–‡å­—å°æ–‡å­—ã‚’åŒºåˆ¥ã›ãšã«æ¯”è¼ƒ
 		if(it->first.CompareNoCase(name) == 0)
 		{
 			m_comments.erase(it->first);
@@ -74,7 +74,7 @@ BOOL CTag_Ape::SetComment(LPCTSTR name,LPCTSTR value)
 
 	if(value[0] == '\0')
 	{
-		return TRUE;	// ‹ó‚ÍƒZƒbƒg‚µ‚È‚¢
+		return TRUE;	// ç©ºã¯ã‚»ãƒƒãƒˆã—ãªã„
 	}
 	m_comments.insert(std::pair<CString,CString>(name,CString(value)));
 	
@@ -88,7 +88,7 @@ BOOL CTag_Ape::GetComment(LPCTSTR name,CString &strValue)
 	CommentMap::iterator it = m_comments.begin();
 	while(it != m_comments.end())
 	{
-		// ‘å•¶š¬•¶š‚ğ‹æ•Ê‚¹‚¸‚É”äŠr
+		// å¤§æ–‡å­—å°æ–‡å­—ã‚’åŒºåˆ¥ã›ãšã«æ¯”è¼ƒ
 		if(it->first.CompareNoCase(name) == 0)
 		{
 			strValue = it->second;
@@ -102,7 +102,7 @@ BOOL CTag_Ape::GetComment(LPCTSTR name,CString &strValue)
 
 /*void CTag_Ape::GetCommentNames(CStringArray &strArray)
 {
-	//nameƒŠƒXƒg‚ğ•Ô‚·
+	//nameãƒªã‚¹ãƒˆã‚’è¿”ã™
 	CommentMap::iterator it = m_comments.begin();
 	
 	while(it != m_comments.end())
@@ -118,13 +118,13 @@ DWORD CTag_Ape::_LoadId3Tag(LPCTSTR szFileName)
 	DWORD dwWin32errorCode = ERROR_SUCCESS;
 	
 	m_bHasId3tag = FALSE;
-	//ƒtƒ@ƒCƒ‹‚ğƒI[ƒvƒ“
+	//ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ã‚ªãƒ¼ãƒ—ãƒ³
 	HANDLE hFile = CreateFile(
 				szFileName,
 				GENERIC_READ,
 				FILE_SHARE_READ,
 				NULL,
-				OPEN_EXISTING,	//ƒtƒ@ƒCƒ‹‚ğƒI[ƒvƒ“‚µ‚Ü‚·Bw’èƒtƒ@ƒCƒ‹‚ª‘¶İ‚µ‚Ä‚¢‚È‚¢ê‡AŠÖ”‚Í¸”s‚µ‚Ü‚·B
+				OPEN_EXISTING,	//ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ã‚ªãƒ¼ãƒ—ãƒ³ã—ã¾ã™ã€‚æŒ‡å®šãƒ•ã‚¡ã‚¤ãƒ«ãŒå­˜åœ¨ã—ã¦ã„ãªã„å ´åˆã€é–¢æ•°ã¯å¤±æ•—ã—ã¾ã™ã€‚
 				FILE_ATTRIBUTE_NORMAL,
 				NULL);
 	if(hFile == INVALID_HANDLE_VALUE)
@@ -133,7 +133,7 @@ DWORD CTag_Ape::_LoadId3Tag(LPCTSTR szFileName)
 		return dwWin32errorCode;
 	}
 	
-	// ID3TAG‚ğ’T‚·
+	// ID3TAGã‚’æ¢ã™
 	SetFilePointer(hFile,-(int)sizeof(ID3_TAG),NULL,FILE_END);
 	if(!ReadFile(hFile,&m_id3tag,sizeof(m_id3tag),&dwRet,NULL) || (dwRet != sizeof(m_id3tag)))
 	{
@@ -142,7 +142,7 @@ DWORD CTag_Ape::_LoadId3Tag(LPCTSTR szFileName)
 		return dwWin32errorCode;
 	}
 
-	// ID3TAG‚Ì³“–«‚ğƒ`ƒFƒbƒN
+	// ID3TAGã®æ­£å½“æ€§ã‚’ãƒã‚§ãƒƒã‚¯
 	m_bHasId3tag = CId3tagv1::IsTagValid(&m_id3tag);
 
 	CloseHandle(hFile);
@@ -154,7 +154,7 @@ DWORD CTag_Ape::_LoadApeTagV1(HANDLE hFile)
 	DWORD dwRet;
 	DWORD dwWin32errorCode = ERROR_SUCCESS;
 
-	// ID3TAG‚ğ’T‚·
+	// ID3TAGã‚’æ¢ã™
 	SetFilePointer(hFile,-(int)sizeof(ID3_TAG),NULL,FILE_END);
 	if(!ReadFile(hFile,&m_id3tag,sizeof(m_id3tag),&dwRet,NULL) || (dwRet != sizeof(m_id3tag)))
 	{
@@ -163,32 +163,32 @@ DWORD CTag_Ape::_LoadApeTagV1(HANDLE hFile)
 		return dwWin32errorCode;
 	}
 
-	// ID3TAG‚Ì³“–«‚ğƒ`ƒFƒbƒN
+	// ID3TAGã®æ­£å½“æ€§ã‚’ãƒã‚§ãƒƒã‚¯
 	BOOL bId3v1 = CId3tagv1::IsTagValid(&m_id3tag);
 	
 	DWORD rawFieldBytes = m_footer.size - sizeof(APE_TAG_FOOTER);
 	char *pRawTag = (char *)malloc(rawFieldBytes);
-	// ƒwƒbƒ_‚Ìæ“ª‚ÉˆÚ“®
+	// ãƒ˜ãƒƒãƒ€ã®å…ˆé ­ã«ç§»å‹•
 	SetFilePointer(hFile,-m_footer.size-(bId3v1?128:0),NULL,FILE_END);
-	// ƒwƒbƒ_‚ğƒoƒbƒtƒ@‚Éæ‚è‚Ş
+	// ãƒ˜ãƒƒãƒ€ã‚’ãƒãƒƒãƒ•ã‚¡ã«å–ã‚Šè¾¼ã‚€
 	if(!ReadFile(hFile,pRawTag,rawFieldBytes,&dwRet,NULL) || (dwRet != rawFieldBytes))
 	{
 		dwWin32errorCode = GetLastError();
 		CloseHandle(hFile);
 		return dwWin32errorCode;
 	}
-	// ŠeƒtƒB[ƒ‹ƒh‚Ìæ‚è‚İ
+	// å„ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã®å–ã‚Šè¾¼ã¿
 	DWORD rawTagOffset = 0;
 	for(int i=0; i<m_footer.fields; i++)
 	{
 		if(rawFieldBytes < 4+4+1)
 		{
-			// ƒoƒbƒtƒ@ƒI[ƒo[ƒtƒ[
+			// ãƒãƒƒãƒ•ã‚¡ã‚ªãƒ¼ãƒãƒ¼ãƒ•ãƒ­ãƒ¼
 			free(pRawTag);
 			CloseHandle(hFile);
 			return -1;
 		}
-		// ƒtƒB[ƒ‹ƒhƒTƒCƒY
+		// ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã‚µã‚¤ã‚º
 		DWORD fieldValueSize = *(DWORD *)&pRawTag[rawTagOffset];
 		if(fieldValueSize > rawFieldBytes)
 		{
@@ -197,18 +197,18 @@ DWORD CTag_Ape::_LoadApeTagV1(HANDLE hFile)
 			return -1;
 		}
 		rawTagOffset += 4;
-		// ƒtƒB[ƒ‹ƒhƒtƒ‰ƒO
+		// ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ãƒ•ãƒ©ã‚°
 		int fieldFlags = *(int *)&pRawTag[rawTagOffset];
 		rawTagOffset += 4;
-		// ƒtƒB[ƒ‹ƒh–¼
+		// ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰å
 		char nameBuffer[256];
 		strncpy(nameBuffer,&pRawTag[rawTagOffset],min(sizeof(nameBuffer)-1,rawFieldBytes-rawTagOffset));
 		nameBuffer[255] = '\0';
 		rawTagOffset += strlen(nameBuffer) + 1;
-		// ’l
+		// å€¤
 		if(rawFieldBytes < rawTagOffset)
 		{
-			// ƒoƒbƒtƒ@ƒI[ƒo[ƒtƒ[
+			// ãƒãƒƒãƒ•ã‚¡ã‚ªãƒ¼ãƒãƒ¼ãƒ•ãƒ­ãƒ¼
 			free(pRawTag);
 			CloseHandle(hFile);
 			return -1;
@@ -217,7 +217,7 @@ DWORD CTag_Ape::_LoadApeTagV1(HANDLE hFile)
 		memcpy(pFieldBuffer,&pRawTag[rawTagOffset],fieldValueSize);
 		pFieldBuffer[fieldValueSize] = '\0';
 		rawTagOffset += fieldValueSize;
-		// S-JIS‚Æ‰¼’è‚µ‚Äˆ—‚·‚é
+		// S-JISã¨ä»®å®šã—ã¦å‡¦ç†ã™ã‚‹
 		SetComment(CString(nameBuffer),CString(pFieldBuffer));
 		TRACE(_T("APE:%s:%s\n"),nameBuffer,pFieldBuffer);
 		free(pFieldBuffer);
@@ -260,7 +260,7 @@ DWORD CTag_Ape::_LoadApeTagV2(HANDLE hFile)
 	DWORD dwRet;
 	DWORD dwWin32errorCode = ERROR_SUCCESS;
 	
-	// ID3TAG‚ğ’T‚·
+	// ID3TAGã‚’æ¢ã™
 	SetFilePointer(hFile,-(int)sizeof(ID3_TAG),NULL,FILE_END);
 	if(!ReadFile(hFile,&m_id3tag,sizeof(m_id3tag),&dwRet,NULL) || (dwRet != sizeof(m_id3tag)))
 	{
@@ -269,32 +269,32 @@ DWORD CTag_Ape::_LoadApeTagV2(HANDLE hFile)
 		return dwWin32errorCode;
 	}
 
-	// ID3TAG‚Ì³“–«‚ğƒ`ƒFƒbƒN
+	// ID3TAGã®æ­£å½“æ€§ã‚’ãƒã‚§ãƒƒã‚¯
 	BOOL bId3v1 = CId3tagv1::IsTagValid(&m_id3tag);
 	
 	DWORD rawFieldBytes = m_footer.size - ((m_footer.flags&APE_FLAG_TAG_HAS_HEADER)?sizeof(APE_TAG_FOOTER):0);
 	char *pRawTag = (char *)malloc(rawFieldBytes);
-	// ƒwƒbƒ_‚Ìæ“ª‚ÉˆÚ“®
+	// ãƒ˜ãƒƒãƒ€ã®å…ˆé ­ã«ç§»å‹•
 	SetFilePointer(hFile,-m_footer.size-(bId3v1?128:0),NULL,FILE_END);
-	// ƒwƒbƒ_‚ğƒoƒbƒtƒ@‚Éæ‚è‚Ş
+	// ãƒ˜ãƒƒãƒ€ã‚’ãƒãƒƒãƒ•ã‚¡ã«å–ã‚Šè¾¼ã‚€
 	if(!ReadFile(hFile,pRawTag,rawFieldBytes,&dwRet,NULL) || (dwRet != rawFieldBytes))
 	{
 		dwWin32errorCode = GetLastError();
 		CloseHandle(hFile);
 		return dwWin32errorCode;
 	}
-	// ŠeƒtƒB[ƒ‹ƒh‚Ìæ‚è‚İ
+	// å„ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã®å–ã‚Šè¾¼ã¿
 	DWORD rawTagOffset = 0;
 	for(int i=0; i<m_footer.fields; i++)
 	{
 		if(rawFieldBytes < 4+4+1)
 		{
-			// ƒoƒbƒtƒ@ƒI[ƒo[ƒtƒ[
+			// ãƒãƒƒãƒ•ã‚¡ã‚ªãƒ¼ãƒãƒ¼ãƒ•ãƒ­ãƒ¼
 			free(pRawTag);
 			CloseHandle(hFile);
 			return -1;
 		}
-		// ƒtƒB[ƒ‹ƒhƒTƒCƒY
+		// ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã‚µã‚¤ã‚º
 		DWORD fieldValueSize = *(DWORD *)&pRawTag[rawTagOffset];
 		if(fieldValueSize > rawFieldBytes)
 		{
@@ -303,24 +303,24 @@ DWORD CTag_Ape::_LoadApeTagV2(HANDLE hFile)
 			return -1;
 		}
 		rawTagOffset += 4;
-		// ƒtƒB[ƒ‹ƒhƒtƒ‰ƒO
+		// ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ãƒ•ãƒ©ã‚°
 		int fieldFlags = *(int *)&pRawTag[rawTagOffset];
 		rawTagOffset += 4;
-		// ƒtƒB[ƒ‹ƒh–¼
+		// ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰å
 		char nameBuffer[256];
 		strncpy(nameBuffer,&pRawTag[rawTagOffset],min(sizeof(nameBuffer)-1,rawFieldBytes-rawTagOffset));
 		nameBuffer[255] = '\0';
 		rawTagOffset += strlen(nameBuffer) + 1;
 		if((fieldFlags & APE_FLAG_TEXTINFO_MASK) != APE_FLAG_TEXTINFO_UTF8)
 		{
-			// UTF8•¶š—ñ‚Å‚È‚¢‚Æ‚«‚ÍƒXƒLƒbƒv
+			// UTF8æ–‡å­—åˆ—ã§ãªã„ã¨ãã¯ã‚¹ã‚­ãƒƒãƒ—
 			rawTagOffset += fieldValueSize;
 			continue;
 		}
-		// ’l
+		// å€¤
 		if(rawFieldBytes < rawTagOffset)
 		{
-			// ƒoƒbƒtƒ@ƒI[ƒo[ƒtƒ[
+			// ãƒãƒƒãƒ•ã‚¡ã‚ªãƒ¼ãƒãƒ¼ãƒ•ãƒ­ãƒ¼
 			free(pRawTag);
 			CloseHandle(hFile);
 			return -1;
@@ -360,13 +360,13 @@ DWORD CTag_Ape::Load(LPCTSTR szFileName)
 	TRACE(_T("CTag_Ape::Load(%s)\n"),szFileName);
 	Release();
 
-	//ƒtƒ@ƒCƒ‹‚ğƒI[ƒvƒ“
+	//ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ã‚ªãƒ¼ãƒ—ãƒ³
 	HANDLE hFile = CreateFile(
 				szFileName,
 				GENERIC_READ,
 				FILE_SHARE_READ,
 				NULL,
-				OPEN_EXISTING,	//ƒtƒ@ƒCƒ‹‚ğƒI[ƒvƒ“‚µ‚Ü‚·Bw’èƒtƒ@ƒCƒ‹‚ª‘¶İ‚µ‚Ä‚¢‚È‚¢ê‡AŠÖ”‚Í¸”s‚µ‚Ü‚·B
+				OPEN_EXISTING,	//ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ã‚ªãƒ¼ãƒ—ãƒ³ã—ã¾ã™ã€‚æŒ‡å®šãƒ•ã‚¡ã‚¤ãƒ«ãŒå­˜åœ¨ã—ã¦ã„ãªã„å ´åˆã€é–¢æ•°ã¯å¤±æ•—ã—ã¾ã™ã€‚
 				FILE_ATTRIBUTE_NORMAL,
 				NULL);
 	if(hFile == INVALID_HANDLE_VALUE)
@@ -376,7 +376,7 @@ DWORD CTag_Ape::Load(LPCTSTR szFileName)
 	}
 
 	DWORD dwRet;
-	// ID3TAG‚ğ’T‚·
+	// ID3TAGã‚’æ¢ã™
 	SetFilePointer(hFile,-(int)sizeof(ID3_TAG),NULL,FILE_END);
 	if(!ReadFile(hFile,&m_id3tag,sizeof(m_id3tag),&dwRet,NULL) || (dwRet != sizeof(m_id3tag)))
 	{
@@ -386,22 +386,22 @@ DWORD CTag_Ape::Load(LPCTSTR szFileName)
 	}
 
 	BOOL bId3v1 = FALSE;
-	// ID3TAG‚Ì³“–«‚ğƒ`ƒFƒbƒN
+	// ID3TAGã®æ­£å½“æ€§ã‚’ãƒã‚§ãƒƒã‚¯
 	if(CId3tagv1::IsTagValid(&m_id3tag))
 	{
 		bId3v1 = TRUE;
 	}
 	
-	// apeƒtƒbƒ^‚ğ’T‚·
+	// apeãƒ•ãƒƒã‚¿ã‚’æ¢ã™
 	SetFilePointer(hFile,-(int)sizeof(APE_TAG_FOOTER)-(bId3v1?128:0),NULL,FILE_END);
 
-	// APE_TAG_FOOTER‚ğ“Ç‚İ‚Æ‚é
+	// APE_TAG_FOOTERã‚’èª­ã¿ã¨ã‚‹
 	if(!ReadFile(hFile,&m_footer,sizeof(m_footer),&dwRet,NULL) || (dwRet != sizeof(m_footer)))
 	{
 		CloseHandle(hFile);
 		return dwWin32errorCode;
 	}
-	// APE_TAG_FOOTER‚Ì³“–«‚ğƒ`ƒFƒbƒN
+	// APE_TAG_FOOTERã®æ­£å½“æ€§ã‚’ãƒã‚§ãƒƒã‚¯
 	if(IsTagValid(&m_footer))
 	{
 		m_bHasApetag = TRUE;
@@ -418,7 +418,7 @@ DWORD CTag_Ape::Load(LPCTSTR szFileName)
 
 	CloseHandle(hFile);
 	
-	// ID3tag‚ğ“Ç‚İ‚Ş
+	// ID3tagã‚’èª­ã¿è¾¼ã‚€
 	dwWin32errorCode = _LoadId3Tag(szFileName);
 
 	return dwWin32errorCode;
@@ -442,7 +442,7 @@ DWORD CTag_Ape::_SaveId3TagV1(LPCTSTR szFileName)
 		return dwWin32errorCode;
 	}
 
-	//ƒtƒ@ƒCƒ‹‚ÌI’[‚Ü‚Å‚Ü‚ÅSEEK
+	//ãƒ•ã‚¡ã‚¤ãƒ«ã®çµ‚ç«¯ã¾ã§ã¾ã§SEEK
 	SetFilePointer(hFile,0,NULL,FILE_END);
 	if(WriteFile(hFile,&m_id3tag,128,&dwWritten,NULL) == 0)
 	{
@@ -461,19 +461,19 @@ DWORD CTag_Ape::_SaveId3TagV1(LPCTSTR szFileName)
 	return ERROR_SUCCESS;
 }
 
-// id3V1‚Í‚ ‚ç‚©‚¶‚ßœ‹‚µ‚Ä‚¨‚­‚±‚Æ
+// id3V1ã¯ã‚ã‚‰ã‹ã˜ã‚é™¤å»ã—ã¦ãŠãã“ã¨
 DWORD CTag_Ape::_SaveApeTagV2(LPCTSTR szFileName)
 {
 	DWORD	dwWin32errorCode = ERROR_SUCCESS;
 	DWORD dwRet;
 
-	//ƒtƒ@ƒCƒ‹‚ğƒI[ƒvƒ“
+	//ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ã‚ªãƒ¼ãƒ—ãƒ³
 	HANDLE hFile = CreateFile(
 				szFileName,
 				GENERIC_READ|GENERIC_WRITE,
 				FILE_SHARE_READ,
 				NULL,
-				OPEN_EXISTING,	//ƒtƒ@ƒCƒ‹‚ğƒI[ƒvƒ“‚µ‚Ü‚·Bw’èƒtƒ@ƒCƒ‹‚ª‘¶İ‚µ‚Ä‚¢‚È‚¢ê‡AŠÖ”‚Í¸”s‚µ‚Ü‚·B
+				OPEN_EXISTING,	//ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ã‚ªãƒ¼ãƒ—ãƒ³ã—ã¾ã™ã€‚æŒ‡å®šãƒ•ã‚¡ã‚¤ãƒ«ãŒå­˜åœ¨ã—ã¦ã„ãªã„å ´åˆã€é–¢æ•°ã¯å¤±æ•—ã—ã¾ã™ã€‚
 				FILE_ATTRIBUTE_NORMAL,
 				NULL);
 	if(hFile == INVALID_HANDLE_VALUE)
@@ -483,7 +483,7 @@ DWORD CTag_Ape::_SaveApeTagV2(LPCTSTR szFileName)
 	}
 
 	CommentMap::iterator it = m_comments.begin();
-	// ApeTag header ‚ğ\’z
+	// ApeTag header ã‚’æ§‹ç¯‰
 	APE_TAG_FOOTER header;
 	memset(&header,0,sizeof(header));
 	memcpy(header.id,"APETAGEX",8);
@@ -492,7 +492,7 @@ DWORD CTag_Ape::_SaveApeTagV2(LPCTSTR szFileName)
 	header.fields = m_comments.size();
 	header.flags =	APE_FLAG_TAG_HAS_HEADER | APE_FLAG_THIS_IS_THE_HEADER;
 
-	// ApeTag footer ‚ğ\’z
+	// ApeTag footer ã‚’æ§‹ç¯‰
 	APE_TAG_FOOTER footer;
 	memset(&footer,0,sizeof(footer));
 	memcpy(footer.id,"APETAGEX",8);
@@ -501,7 +501,7 @@ DWORD CTag_Ape::_SaveApeTagV2(LPCTSTR szFileName)
 	footer.fields = m_comments.size();
 	footer.flags =	APE_FLAG_TAG_HAS_HEADER;
 
-	// ƒtƒ@ƒCƒ‹ÅŒã”ö‚ÉˆÚ“®
+	// ãƒ•ã‚¡ã‚¤ãƒ«æœ€å¾Œå°¾ã«ç§»å‹•
 	SetFilePointer(hFile,0,NULL,FILE_END);
 	DWORD dwHeaderPtr = SetFilePointer(hFile,0,NULL,FILE_CURRENT);
 	WriteFile(hFile,&header,sizeof(header),&dwRet,NULL);
@@ -540,13 +540,13 @@ DWORD CTag_Ape::_SaveApeTagV2(LPCTSTR szFileName)
 	}
 
 	WriteFile(hFile,&footer,sizeof(footer),&dwRet,NULL);
-	// ƒwƒbƒ_‚ğŠm’è
+	// ãƒ˜ãƒƒãƒ€ã‚’ç¢ºå®š
 	DWORD dwFooterPtr = SetFilePointer(hFile,0,NULL,FILE_CURRENT);
 	SetFilePointer(hFile,dwHeaderPtr,NULL,FILE_BEGIN);
 	WriteFile(hFile,&header,sizeof(header),&dwRet,NULL);
 	SetFilePointer(hFile,dwFooterPtr,NULL,FILE_BEGIN);
 
-	// ’·‚³‚ğŠm’è
+	// é•·ã•ã‚’ç¢ºå®š
 	if(!SetEndOfFile(hFile))
 	{
 		dwWin32errorCode = GetLastError();
@@ -562,14 +562,14 @@ DWORD CTag_Ape::Save(LPCTSTR szFileName)
 {
 	DWORD	dwWin32errorCode = ERROR_SUCCESS;
 
-	// ID3v1‚ğƒoƒbƒNƒAƒbƒv
+	// ID3v1ã‚’ãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—
 	dwWin32errorCode = _LoadId3Tag(szFileName);
 	if(dwWin32errorCode != ERROR_SUCCESS)
 	{
 		return dwWin32errorCode;
 	}
 
-	// ID3v1/APE Tag‚ğÁ‹
+	// ID3v1/APE Tagã‚’æ¶ˆå»
 	dwWin32errorCode = _DelTag(szFileName);
 	if(dwWin32errorCode != ERROR_SUCCESS)
 	{
@@ -577,14 +577,14 @@ DWORD CTag_Ape::Save(LPCTSTR szFileName)
 	}
 	m_bHasApetag = FALSE;
 
-	// Apeƒ^ƒO‚ğ•Û‘¶
+	// Apeã‚¿ã‚°ã‚’ä¿å­˜
 	dwWin32errorCode = _SaveApeTagV2(szFileName);
 	if(dwWin32errorCode != ERROR_SUCCESS)
 	{
 		return dwWin32errorCode;
 	}
 	
-	// Id3v1ƒ^ƒO‚ğ•Û‘¶
+	// Id3v1ã‚¿ã‚°ã‚’ä¿å­˜
 	if(m_bHasId3tag && !m_bDoNotSaveId3v1)
 	{
 		dwWin32errorCode = _SaveId3TagV1(szFileName);
@@ -595,7 +595,7 @@ DWORD CTag_Ape::Save(LPCTSTR szFileName)
 
 DWORD CTag_Ape::DelTag(LPCTSTR szFileName)
 {
-	// ID3v1‚ğƒoƒbƒNƒAƒbƒv
+	// ID3v1ã‚’ãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—
 	DWORD dwWin32errorCode = _LoadId3Tag(szFileName);
 	if(dwWin32errorCode != ERROR_SUCCESS)
 	{
@@ -603,7 +603,7 @@ DWORD CTag_Ape::DelTag(LPCTSTR szFileName)
 	}
 
 	m_comments.clear();
-	// ID3v1/APE Tag‚ğÁ‹
+	// ID3v1/APE Tagã‚’æ¶ˆå»
 	dwWin32errorCode = _DelTag(szFileName);
 	if(dwWin32errorCode != ERROR_SUCCESS)
 	{
@@ -611,7 +611,7 @@ DWORD CTag_Ape::DelTag(LPCTSTR szFileName)
 	}
 	m_bHasApetag = FALSE;
 
-	// Id3v1ƒ^ƒO‚ğ•œŒ³
+	// Id3v1ã‚¿ã‚°ã‚’å¾©å…ƒ
 	if(m_bHasId3tag && !m_bDoNotSaveId3v1)
 	{
 		_SaveId3TagV1(szFileName);
@@ -640,17 +640,17 @@ DWORD CTag_Ape::_DelTag(LPCTSTR szFileName)
 	}
 
 	DWORD dwRet;
-	// ID3TAG‚ğ’T‚·
+	// ID3TAGã‚’æ¢ã™
 	ID3_TAG id3tag;
 	SetFilePointer(hFile,-(int)sizeof(ID3_TAG),NULL,FILE_END);
 	if(ReadFile(hFile,&id3tag,sizeof(id3tag),&dwRet,NULL) && (dwRet == sizeof(id3tag)))
 	{
-		// ID3TAG‚Ì³“–«‚ğƒ`ƒFƒbƒN
+		// ID3TAGã®æ­£å½“æ€§ã‚’ãƒã‚§ãƒƒã‚¯
 		if(CId3tagv1::IsTagValid(&id3tag))
 		{
-			// ID3tag‚ğƒJƒbƒg
+			// ID3tagã‚’ã‚«ãƒƒãƒˆ
 			SetFilePointer(hFile,-128,NULL,FILE_END);
-			// ’·‚³‚ğŠm’è
+			// é•·ã•ã‚’ç¢ºå®š
 			if(!SetEndOfFile(hFile))
 			{
 				dwWin32errorCode = GetLastError();
@@ -660,17 +660,17 @@ DWORD CTag_Ape::_DelTag(LPCTSTR szFileName)
 		}
 	}
 
-	// ƒtƒbƒ^‚ğ’T‚·
+	// ãƒ•ãƒƒã‚¿ã‚’æ¢ã™
 	APE_TAG_FOOTER footer;
 	SetFilePointer(hFile,-(int)sizeof(APE_TAG_FOOTER),NULL,FILE_END);
 
-	// APE_TAG_FOOTER‚ğ“Ç‚İ‚Æ‚é
+	// APE_TAG_FOOTERã‚’èª­ã¿ã¨ã‚‹
 	if(ReadFile(hFile,&footer,sizeof(footer),&dwRet,NULL) && (dwRet == sizeof(footer)))
 	{
-		// APE_TAG_FOOTER‚Ì³“–«‚ğƒ`ƒFƒbƒN
+		// APE_TAG_FOOTERã®æ­£å½“æ€§ã‚’ãƒã‚§ãƒƒã‚¯
 		if(strncmp(m_footer.id,"APETAGEX",8) == 0)
 		{
-			// ApeTag‚ğƒJƒbƒg
+			// ApeTagã‚’ã‚«ãƒƒãƒˆ
 			if(m_footer.version < 2000)
 			{
 				SetFilePointer(hFile,-footer.size,NULL,FILE_END);
@@ -679,7 +679,7 @@ DWORD CTag_Ape::_DelTag(LPCTSTR szFileName)
 			{
 				SetFilePointer(hFile,-footer.size-((m_footer.flags&APE_FLAG_TAG_HAS_HEADER)?sizeof(APE_TAG_FOOTER):0),NULL,FILE_END);
 			}
-			// ’·‚³‚ğŠm’è
+			// é•·ã•ã‚’ç¢ºå®š
 			if(!SetEndOfFile(hFile))
 			{
 				dwWin32errorCode = GetLastError();
@@ -696,14 +696,14 @@ DWORD CTag_Ape::_DelTag(LPCTSTR szFileName)
 
 DWORD CTag_Ape::MakeTag(LPCTSTR szFileName)
 {
-	// ID3v1‚ğƒoƒbƒNƒAƒbƒv
+	// ID3v1ã‚’ãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—
 	DWORD dwWin32errorCode = _LoadId3Tag(szFileName);
 	if(dwWin32errorCode != ERROR_SUCCESS)
 	{
 		return dwWin32errorCode;
 	}
 
-	// Œ»‘¶ƒ^ƒO‚ğíœ
+	// ç¾å­˜ã‚¿ã‚°ã‚’å‰Šé™¤
 	m_comments.clear();
 	dwWin32errorCode = _DelTag(szFileName);
 	if(dwWin32errorCode != ERROR_SUCCESS)
@@ -711,7 +711,7 @@ DWORD CTag_Ape::MakeTag(LPCTSTR szFileName)
 		return dwWin32errorCode;
 	}
 
-	// Apeƒ^ƒO‚ğ•Û‘¶
+	// Apeã‚¿ã‚°ã‚’ä¿å­˜
 	CString strDefaultName = getFileName(szFileName);
 	
 	SetComment(CTag_Ape::APE_TAG_FIELD_TITLE,strDefaultName);
@@ -722,7 +722,7 @@ DWORD CTag_Ape::MakeTag(LPCTSTR szFileName)
 		return dwWin32errorCode;
 	}
 
-	// Id3v1ƒ^ƒO‚ğ•œŒ³
+	// Id3v1ã‚¿ã‚°ã‚’å¾©å…ƒ
 	if(m_bHasId3tag && !m_bDoNotSaveId3v1)
 	{
 		dwWin32errorCode = _SaveId3TagV1(szFileName);

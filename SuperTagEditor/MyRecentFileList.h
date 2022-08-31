@@ -1,4 +1,4 @@
-// MyRecentFileList.h: CMyRecentFileList ƒNƒ‰ƒX‚ÌƒCƒ“ƒ^[ƒtƒFƒCƒX
+// MyRecentFileList.h: CMyRecentFileList ã‚¯ãƒ©ã‚¹ã®ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹
 //
 //////////////////////////////////////////////////////////////////////
 
@@ -17,8 +17,8 @@ public:
 	void Add(LPCTSTR lpszPathName);
     CMyRecentFileList(UINT nStart, LPCTSTR lpszSection, LPCTSTR lpszEntryFormat, int nSize, int nMaxDispLen = AFX_ABBREV_FILENAME_LEN) : CRecentFileList(nStart, lpszSection,lpszEntryFormat, nSize, nMaxDispLen) {}
     virtual void UpdateMenu(CCmdUI* pCmdUI);
-	virtual void ReadList(); //by Kobarin(MFC ‚ÌƒfƒtƒHƒ‹ƒgƒƒ\ƒbƒh‚Íg‚í‚È‚¢)
-    virtual void WriteList();//by Kobarin(MFC ‚ÌƒfƒtƒHƒ‹ƒgƒƒ\ƒbƒh‚Íg‚í‚È‚¢)
+	virtual void ReadList(); //by Kobarin(MFC ã®ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆãƒ¡ã‚½ãƒƒãƒ‰ã¯ä½¿ã‚ãªã„)
+    virtual void WriteList();//by Kobarin(MFC ã®ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆãƒ¡ã‚½ãƒƒãƒ‰ã¯ä½¿ã‚ãªã„)
 };
 
 #endif // !defined(AFX_MYRECENTFILELIST_H__90D1B982_45B6_4E03_87C4_A6030A469961__INCLUDED_)

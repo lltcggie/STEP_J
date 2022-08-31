@@ -1,4 +1,4 @@
-﻿#include "stdafx.h"
+#include "stdafx.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -32,41 +32,41 @@ unsigned short han2zen(int c, DWORD flag)
 	int		i;
 	static const unsigned char *s1 = (const unsigned char *)
 		/* 0123456789ABCDEF		        ０１２３４５６７８９ＡＢＣＤＥＦ */
-		  "   ,. :;?!ﾞﾟ   "		/* 212X:　　、。，．・：；？！゛゜´｀¨ */
-		  /* STEP 016 *///" ､｡,.･:;?!ﾞﾟ   "		/* 212X:　　、。，．・：；？！゛゜´｀¨ */
-		  /* BeachMonster 102 *///"^~_         ｰ- /"	/* 213X:＾￣＿ヽヾゝゞ〃仝々〆〇ー―‐／ */
-		  /* Baja 169 *///"^~_          - /"	/* 213X:＾￣＿ヽヾゝゞ〃仝々〆〇ー―‐／ */
-		  "^~_            /"	/* 213X:＾￣＿ヽヾゝゞ〃仝々〆〇ー―‐／ */
-		  "   |  `\' \"()  []"	/* 214X:＼～∥｜…‥‘’“”（）〔〕［］ */
-		  "{}          +-   "	/* 215X:｛｝〈〉《》「」『』【】＋－±×7F */
-		  /* STEP 016 *///"{}    ｢｣    +-   "	/* 215X:｛｝〈〉《》「」『』【】＋－±×7F */
-		  " = <>          \\"	/* 216X:÷＝≠＜＞≦≧∞∴♂♀°′″℃￥ */
-		  "$  %#&*@        ";	/* 217X:＄￠￡％＃＆＊＠§☆★○●◎◇   */
+		  "   ,. :;?!゛゜   "		/* 212X:　　、。，．・：；？！゛゜´｀¨ */
+		  /* STEP 016 *///" 、。,.・:;?!゛゜   "		/* 212X:　　、。，．・：；？！゛゜´｀¨ */
+		  /* BeachMonster 102 *///"^~_         ー- /"	/* 213X:＾‾＿ヽヾゝゞ〃仝々〆〇ー—‐／ */
+		  /* Baja 169 *///"^~_          - /"	/* 213X:＾‾＿ヽヾゝゞ〃仝々〆〇ー—‐／ */
+		  "^~_            /"	/* 213X:＾‾＿ヽヾゝゞ〃仝々〆〇ー—‐／ */
+		  "   |  `\' \"()  []"	/* 214X:＼～‖｜…‥‘’“”（）〔〕［］ */
+		  "{}          +-   "	/* 215X:｛｝〈〉《》「」『』【】＋−±×7F */
+		  /* STEP 016 *///"{}    「」    +-   "	/* 215X:｛｝〈〉《》「」『』【】＋−±×7F */
+		  " = <>          \\"	/* 216X:÷＝≠＜＞≦≧∞∴♂♀°′″℃¥ */
+		  "$  %#&*@        ";	/* 217X:＄¢£％＃＆＊＠§☆★○●◎◇   */
 	static const unsigned char *s2 = (const unsigned char *)
 		/* 0123456789ABCDEF		        ０１２３４５６７８９ＡＢＣＤＥＦ */
-		  "ｧｱｨｲｩｳｪｴｫｵｶﾞｷﾞｸ"		/* 252X:　ァアィイゥウェエォオカガキギク */
-		  "ﾞｹﾞｺﾞｻﾞｼﾞｽﾞｾﾞｿﾞﾀ"	/* 253X:グケゲコゴサザシジスズセゼソゾタ */
-		  "ﾞﾁﾞｯﾂﾞﾃﾞﾄﾞﾅﾆﾇﾈﾉﾊ"	/* 254X:ダチヂッツヅテデトドナニヌネノハ */
-		  "ﾞﾟﾋﾞﾟﾌﾞﾟﾍﾞﾟﾎﾞﾟﾏﾐ "	/* 255X:バパヒビピフブプヘベペホボポマミ7F */
-		  "ﾑﾒﾓｬﾔｭﾕｮﾖﾗﾘﾙﾚﾛ ﾜ"	/* 256X:ムメモャヤュユョヨラリルレロヮワ */
-		  "  ｦﾝ";				/* 257X:ヰヱヲンヴヵヶ */
+		  "ァアィイゥウェエォオガギク"		/* 252X:　ァアィイゥウェエォオカガキギク */
+		  "゛ゲゴザジズゼゾタ"	/* 253X:グケゲコゴサザシジスズセゼソゾタ */
+		  "゛ヂッヅデドナニヌネノハ"	/* 254X:ダチヂッツヅテデトドナニヌネノハ */
+		  "゛゜ビ゜ブ゜ベ゜ボ゜マミ "	/* 255X:バパヒビピフブプヘベペホボポマミ7F */
+		  "ムメモャヤュユョヨラリルレロ ワ"	/* 256X:ムメモャヤュユョヨラリルレロヮワ */
+		  "  ヲン";				/* 257X:ヰヱヲンヴヵヶ */
 	static const unsigned char *s3 = (const unsigned char *) /* BeachMonster 102 */
 		/* 0123456789ABCDEF		        ０１２３４５６７８９ＡＢＣＤＥＦ */
 		  "                "	/* 212X:　　、。，．・：；？！゛゜´｀¨ */
-		  "            ｰ   "	/* 213X:＾￣＿ヽヾゝゞ〃仝々〆〇ー―‐／ */
-		  "                "	/* 214X:＼～∥｜…‥‘’“”（）〔〕［］ */
-		  "                "	/* 215X:｛｝〈〉《》「」『』【】＋－±×7F */
-		  "                "	/* 216X:÷＝≠＜＞≦≧∞∴♂♀°′″℃￥ */
-		  "                ";	/* 217X:＄￠￡％＃＆＊＠§☆★○●◎◇   */
+		  "            ー   "	/* 213X:＾‾＿ヽヾゝゞ〃仝々〆〇ー—‐／ */
+		  "                "	/* 214X:＼～‖｜…‥‘’“”（）〔〕［］ */
+		  "                "	/* 215X:｛｝〈〉《》「」『』【】＋−±×7F */
+		  "                "	/* 216X:÷＝≠＜＞≦≧∞∴♂♀°′″℃¥ */
+		  "                ";	/* 217X:＄¢£％＃＆＊＠§☆★○●◎◇   */
 		 ;
 	static const unsigned char *s4 = (const unsigned char *) /* STEP 016 */
 		/* 0123456789ABCDEF		        ０１２３４５６７８９ＡＢＣＤＥＦ */
-		  "  ､｡  ･         "	/* 212X:　　、。，．・：；？！゛゜´｀¨ */
-		  "                "	/* 213X:＾￣＿ヽヾゝゞ〃仝々〆〇ー―‐／ */
-		  "                "	/* 214X:＼～∥｜…‥‘’“”（）〔〕［］ */
-		  "      ｢｣        "	/* 215X:｛｝〈〉《》「」『』【】＋－±×7F */
-		  "                "	/* 216X:÷＝≠＜＞≦≧∞∴♂♀°′″℃￥ */
-		  "                ";	/* 217X:＄￠￡％＃＆＊＠§☆★○●◎◇   */
+		  "  、。  ・         "	/* 212X:　　、。，．・：；？！゛゜´｀¨ */
+		  "                "	/* 213X:＾‾＿ヽヾゝゞ〃仝々〆〇ー—‐／ */
+		  "                "	/* 214X:＼～‖｜…‥‘’“”（）〔〕［］ */
+		  "      「」        "	/* 215X:｛｝〈〉《》「」『』【】＋−±×7F */
+		  "                "	/* 216X:÷＝≠＜＞≦≧∞∴♂♀°′″℃¥ */
+		  "                ";	/* 217X:＄¢£％＃＆＊＠§☆★○●◎◇   */
 		 ;
 	if (flag & CONV_KIGOU) {
 		for (i = 0; s1[i]; i++) if (c == s1[i]) return(0x8140U+i);	// 記号
@@ -118,17 +118,17 @@ int conv_han2zens(TCHAR *_zen, int han_size, const TCHAR *_han, DWORD flag)
 			unsigned int	x;
 			static const unsigned char *s1 = (const unsigned char *)
 			/* 0123456789ABCDEF		        ０１２３４５６７８９ＡＢＣＤＥＦ */
-			             "ｶ ｷ ｸ"	/* 252X:　ァアィイゥウェエォオカガキギク */
-			  " ｹ ｺ ｻ ｼ ｽ ｾ ｿ ﾀ"	/* 253X:グケゲコゴサザシジスズセゼソゾタ */
-			  " ﾁ ｯﾂ ﾃ ﾄ ﾅﾆﾇﾈﾉﾊ"	/* 254X:ダチヂッツヅテデトドナニヌネノハ */
-			  "  ﾋ  ﾌ  ﾍ  ﾎ";		/* 255X:バパヒビピフブプヘベペホボポ     */
+			             "カ キ ク"	/* 252X:　ァアィイゥウェエォオカガキギク */
+			  " ケ コ サ シ ス セ ソ タ"	/* 253X:グケゲコゴサザシジスズセゼソゾタ */
+			  " チ ッツ テ ト ナニヌネノハ"	/* 254X:ダチヂッツヅテデトドナニヌネノハ */
+			  "  ヒ  フ  ヘ  ホ";		/* 255X:バパヒビピフブプヘベペホボポ     */
 			static const unsigned char *s2 = (const unsigned char *)
 			/* 0123456789ABCDEF		        ０１２３４５６７８９ＡＢＣＤＥＦ */
-			                 "ﾊ"	/* 254X:                              ハ */
-			  "  ﾋ  ﾌ  ﾍ  ﾎ";		/* 255X:バパヒビピフブプヘベペホボポ     */
+			                 "ハ"	/* 254X:                              ハ */
+			  "  ヒ  フ  ヘ  ホ";		/* 255X:バパヒビピフブプヘベペホボポ     */
 
-			// [ｳﾞ] => [ヴ] の変換
-			if (han[i] == (unsigned char)'ｳ' && han[i+1] == (unsigned char)'ﾞ') {
+			// [ヴ] => [ヴ] の変換
+			if (han[i] == (unsigned char)'ウ' && han[i+1] == (unsigned char)'゛') {
 				zen[pzen] = 0x83U;
 				pzen++;
 				i++;
@@ -138,7 +138,7 @@ int conv_han2zens(TCHAR *_zen, int han_size, const TCHAR *_han, DWORD flag)
 
 			// 濁音の変換
 			for (x = 0; s1[x]; x++) {
-				if (han[i] == s1[x] && han[i+1] == (unsigned char)'ﾞ') {
+				if (han[i] == s1[x] && han[i+1] == (unsigned char)'゛') {
 					zen[pzen] = 0x83U;
 					pzen++;
 					i++;
@@ -149,7 +149,7 @@ int conv_han2zens(TCHAR *_zen, int han_size, const TCHAR *_han, DWORD flag)
 
 			// 半濁音の変換
 			for (x = 0; s2[x]; x++) {
-				if (han[i] == s2[x] && han[i+1] == (unsigned char)'ﾟ') {
+				if (han[i] == s2[x] && han[i+1] == (unsigned char)'゜') {
 					// 半濁音
 					zen[pzen] = 0x83U;
 					pzen++;
@@ -182,15 +182,15 @@ unsigned short zen2han(unsigned short c, DWORD flag)
 	if (c <= 0x100) return(c);				// 非漢字
 	if (flag & CONV_ALPHA) {
 		if (c == 0x8140U) return(' ');			// 空白
-		if (c >= 0x8260U && c <= 0x8279U) {		// Ａ－Ｚ
+		if (c >= 0x8260U && c <= 0x8279U) {		// Ａ−Ｚ
 			return('A' + (c - 0x8260U));
 		}
-		if (c >= 0x8281U && c <= 0x829AU) {		// ａ－ｚ
+		if (c >= 0x8281U && c <= 0x829AU) {		// ａ−ｚ
 			return('a' + (c - 0x8281U));
 		}
 	}
 	if (flag & CONV_SUJI) {
-		if (c >= 0x824FU && c <= 0x8258U) {		// ０－９
+		if (c >= 0x824FU && c <= 0x8258U) {		// ０−９
 			return('0' + (c - 0x824FU));
 		}
 	}
@@ -199,16 +199,16 @@ unsigned short zen2han(unsigned short c, DWORD flag)
 	if (flag & CONV_KIGOU) {
 		// なんで"～"を"-"にしてるのか覚えてないので削除 041018
 		static const unsigned char *han = (const unsigned char *)
-			",.:;?!ﾞﾟ^~_-/|`\'\"()[]{}+-=<>\\$%#&*@"; /* BeachMonster 102 *//* STEP 016 */
+			",.:;?!゛゜^~_-/|`\'\"()[]{}+-=<>\\$%#&*@"; /* BeachMonster 102 *//* STEP 016 */
 		static const unsigned char *zen = (const unsigned char *)
-			"，．：；？！゛゜＾￣＿－／｜｀’”（）［］｛｝＋－＝＜＞￥＄％＃＆＊＠\0"; /* BeachMonster 102 *//* STEP 016 */
+			"，．：；？！゛゜＾‾＿−／｜｀’”（）［］｛｝＋−＝＜＞¥＄％＃＆＊＠\0"; /* BeachMonster 102 *//* STEP 016 */
 		for (i = 0; zen[i+1]; i+=2) {
 			if (c == ((zen[i] << 8) | zen[i+1])) return(han[i/2]);
 		}
 		extern bool g_bZenHanKigouKana; /* STEP 016 */
 		if (!g_bZenHanKigouKana) { /* STEP 016 */
 			static const unsigned char *han2 = (const unsigned char *)
-				"･､｡｢｣";
+				"・、。「」";
 			static const unsigned char *zen2 = (const unsigned char *)
 				"・、。「」\0";
 			for (i = 0; zen2[i+1]; i+=2) {
@@ -218,7 +218,7 @@ unsigned short zen2han(unsigned short c, DWORD flag)
 	}
 	if (flag & CONV_KATA) {
 		static const unsigned char *han = (const unsigned char *)
-			"ｧｱｨｲｩｳｪｴｫｵｶｷｸｹｺｻｼｽｾｿﾀﾁｯﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓｬﾔｭﾕｮﾖﾗﾘﾙﾚﾛﾜｦﾝｰ";
+			"ァアィイゥウェエォオカキクケコサシスセソタチッツテトナニヌネノハヒフヘホマミムメモャヤュユョヨラリルレロワヲンー";
 		static const unsigned char *kata = (const unsigned char *)
 			"ァアィイゥウェエォオカキクケコサシスセソタチッツテトナニヌネノ"
 			"ハヒフヘホマミムメモャヤュユョヨラリルレロワヲンー\0";
@@ -229,7 +229,7 @@ unsigned short zen2han(unsigned short c, DWORD flag)
 		extern bool g_bZenHanKigouKana; /* STEP 016 */
 		if (g_bZenHanKigouKana) { /* STEP 016 */
 			static const unsigned char *han2 = (const unsigned char *)
-				"･､｡｢｣";
+				"・、。「」";
 			static const unsigned char *kata2 = (const unsigned char *)
 				"・、。「」\0";
 			for (i = 0; kata2[i+1]; i+=2) {
@@ -272,10 +272,10 @@ int conv_zen2hans(TCHAR *_han, int han_size, const TCHAR *_zen, DWORD flag)
 				if ((zen[i] == k1[j] && zen[i+1] == k1[j+1])	// カタカナ
 				||  (zen[i] == h1[j] && zen[i+1] == h1[j+1])) {	// ひらがな
 #endif
-					static const unsigned char *h = (const unsigned char *)"ｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾊﾋﾌﾍﾎｳ";
+					static const unsigned char *h = (const unsigned char *)"カキクケコサシスセソタチツテトハヒフヘホウ";
 					han[phan] = h[j/2];
 					phan++;
-					han[phan] = (unsigned char)'ﾞ';
+					han[phan] = (unsigned char)'゛';
 					i++;
 					goto cont;
 				}
@@ -289,10 +289,10 @@ int conv_zen2hans(TCHAR *_han, int han_size, const TCHAR *_zen, DWORD flag)
 				if ((zen[i] == k2[j] && zen[i+1] == k2[j+1])	// カタカナ
 				||  (zen[i] == h2[j] && zen[i+1] == h2[j+1])) {	// ひらがな
 #endif
-					static const unsigned char *h = (const unsigned char *)"ﾊﾋﾌﾍﾎ";
+					static const unsigned char *h = (const unsigned char *)"ハヒフヘホ";
 					han[phan] = h[j/2];
 					phan++;
-					han[phan] = (unsigned char)'ﾟ';
+					han[phan] = (unsigned char)'゜';
 					i++;
 					goto cont;
 				}
@@ -322,34 +322,34 @@ cont:	;
 
 static const WCHAR kigou_han[] = 
     //012345678901234 5 678901234567 8901234567890
-    L",.:;?!ﾞﾟ^~_-/|`\'\"()[]{}+-=<>\\$%#&*@ ";//･､｡｢｣ ";
+    L",.:;?!゛゜^~_-/|`\'\"()[]{}+-=<>\\$%#&*@ ";//・、。「」 ";
 static const WCHAR kigou_zen[] = 
     //0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0(最後は全角スペース)
-    L"，．：；？！゛゜＾￣＿－／｜｀’”（）［］｛｝＋－＝＜＞￥＄％＃＆＊＠　";//・、。「」　";
+    L"，．：；？！゛゜＾‾＿−／｜｀’”（）［］｛｝＋−＝＜＞¥＄％＃＆＊＠　";//・、。「」　";
 /*
 static const WCHAR kigou_kana_han[] = //、。「」・をカタカナとして扱う
     //012
-    L"､｡･";
+    L"、。・";
 static const WCHAR kigou_kana_zen[] = //、。「」・をカタカナとして扱う
     //0 1 2
     L"、。・";
 */
 static const WCHAR kata_han[] = 
-    L"ｧｱｨｲｩｳｪｴｫｵｶｷｸｹｺｻｼｽｾｿﾀﾁｯﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓｬﾔｭﾕｮﾖﾗﾘﾙﾚﾛﾜｦﾝｰ";
+    L"ァアィイゥウェエォオカキクケコサシスセソタチッツテトナニヌネノハヒフヘホマミムメモャヤュユョヨラリルレロワヲンー";
 static const WCHAR kata_zen[] = 
     L"ァアィイゥウェエォオカキクケコサシスセソタチッツテトナニヌネノ"
 	L"ハヒフヘホマミムメモャヤュユョヨラリルレロワヲンー";
 static const WCHAR kata_dakuon_han[] = 
-    L"ｳｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾊﾋﾌﾍﾎ";
+    L"ウカキクケコサシスセソタチツテトハヒフヘホ";
 static const WCHAR kata_dakuon_zen[] = 
     L"ヴガギグゲゴザジズゼゾダジヅデドバビブベボ";
 static const WCHAR kata_handakuon_han[] = 
-    L"ﾊﾋﾌﾍﾎ";
+    L"ハヒフヘホ";
 static const WCHAR kata_handakuon_zen[] = 
     L"パピプペポ";
 
 //全角・半角変換で、。「」をカタカナとして扱う(g_bZenHanKigouKana == true のとき使う)
-static const WCHAR kata_han2[] = L"･､｡｢｣";
+static const WCHAR kata_han2[] = L"・、。「」";
 static const WCHAR kata_zen2[] = L"・、。「」";
 
 int conv_han2zens(TCHAR *zen, int zen_size, const TCHAR *han, DWORD flag, bool bZenHanKigouKana)
@@ -404,11 +404,11 @@ int conv_han2zens(TCHAR *zen, int zen_size, const TCHAR *han, DWORD flag, bool b
 	if(flag & CONV_KATA) {
         for(i = 0; dst[i]; i++){
             bool bDakuon = false;//濁音/半濁音の場合 true
-            if(dst[i+1] == L'ﾟ'){//半濁音
+            if(dst[i+1] == L'゜'){//半濁音
                 for(j = 0; kata_handakuon_han[j]; j++){
                     if(dst[i] == kata_handakuon_han[j]){
                         dst[i] = kata_handakuon_zen[j];
-                        //ﾟを除去
+                        //゜を除去
                         memmove(&dst[i+1], &dst[i+2], (len-i)*sizeof(WCHAR));
                         len--;
                         break;
@@ -419,11 +419,11 @@ int conv_han2zens(TCHAR *zen, int zen_size, const TCHAR *han, DWORD flag, bool b
                 }
                 bDakuon = true;
             }
-            else if(dst[i+1] == L'ﾞ'){//濁音
+            else if(dst[i+1] == L'゛'){//濁音
                 for(j = 0; kata_dakuon_han[j]; j++){
                     if(dst[i] == kata_dakuon_han[j]){
                         dst[i] = kata_dakuon_zen[j];
-                        //ﾞを除去
+                        //゛を除去
                         memmove(&dst[i+1], &dst[i+2], (len-i)*sizeof(WCHAR));
                         len--;
                         break;
@@ -439,7 +439,7 @@ int conv_han2zens(TCHAR *zen, int zen_size, const TCHAR *han, DWORD flag, bool b
                     dst[i] = kata_zen[j];
                     if(bDakuon){
                     //濁音/半濁音をつけるべきでない半角カナの場合は濁音/半濁音を除去
-                    //ｱﾞ => ア (オリジナルの方だとアガになる)
+                    //ア゛ => ア (オリジナルの方だとアガになる)
                         memmove(&dst[i+1], &dst[i+2], (len-i)*sizeof(WCHAR));
                         len--;
                     }
@@ -515,9 +515,9 @@ int conv_zen2hans(TCHAR *han, int han_size, const TCHAR *zen, DWORD flag, bool b
                     if(i + 1 >= han_size){
                         break;
                     }
-                    //ﾟを付加
+                    //゜を付加
                     memmove(&dst[i+2], &dst[i+1], (len-i)*sizeof(WCHAR));
-                    dst[i+1] = L'ﾟ';
+                    dst[i+1] = L'゜';
                     len++;
                     break;
                 }
@@ -532,9 +532,9 @@ int conv_zen2hans(TCHAR *han, int han_size, const TCHAR *zen, DWORD flag, bool b
                     if(i + 1 >= han_size){
                         break;
                     }
-                    //ﾞを付加
+                    //゛を付加
                     memmove(&dst[i+2], &dst[i+1], (len-i)*sizeof(WCHAR));
-                    dst[i+1] = L'ﾞ';
+                    dst[i+1] = L'゛';
                     len++;
                     break;
                 }
@@ -788,13 +788,13 @@ void conv_first_upper(TCHAR *_str, const TCHAR *suffixs, const TCHAR* separator 
 bool isKigou(char ch) {
 	static const unsigned char *s1 = (const unsigned char *)
 		/* 0123456789ABCDEF		        ０１２３４５６７８９ＡＢＣＤＥＦ */
-		  "   ,. :;?!ﾞﾟ   "		/* 212X:　　、。，．・：；？！゛゜´｀¨ */
-		  "^~_            /"	/* 213X:＾￣＿ヽヾゝゞ〃仝々〆〇ー―‐／ */
-		  "   |  `\' \"()  []"	/* 214X:＼～∥｜…‥‘’“”（）〔〕［］ */
-		  "{}          +-   "	/* 215X:｛｝〈〉《》「」『』【】＋－±×7F */
-		  /* STEP 016 *///"{}    ｢｣    +-   "	/* 215X:｛｝〈〉《》「」『』【】＋－±×7F */
-		  " = <>          \\"	/* 216X:÷＝≠＜＞≦≧∞∴♂♀°′″℃￥ */
-		  "$  %#&*@        ";	/* 217X:＄￠￡％＃＆＊＠§☆★○●◎◇   */
+		  "   ,. :;?!゛゜   "		/* 212X:　　、。，．・：；？！゛゜´｀¨ */
+		  "^~_            /"	/* 213X:＾‾＿ヽヾゝゞ〃仝々〆〇ー—‐／ */
+		  "   |  `\' \"()  []"	/* 214X:＼～‖｜…‥‘’“”（）〔〕［］ */
+		  "{}          +-   "	/* 215X:｛｝〈〉《》「」『』【】＋−±×7F */
+		  /* STEP 016 *///"{}    「」    +-   "	/* 215X:｛｝〈〉《》「」『』【】＋−±×7F */
+		  " = <>          \\"	/* 216X:÷＝≠＜＞≦≧∞∴♂♀°′″℃¥ */
+		  "$  %#&*@        ";	/* 217X:＄¢£％＃＆＊＠§☆★○●◎◇   */
 	for (int i=0;s1[i]!='\0';i++) {
 		if (ch == s1[i]) {
 			return true;
@@ -917,7 +917,7 @@ void conv_fixed_upper_lower(TCHAR *_str, CStringArray& fixedWords) /* STEP 040 *
 //オリジナルは英数字と'を除くほとんどの文字?
 static const WCHAR word_delimiters[] = //単語の区切り文字(' を除くほとんどの記号)
     L" !\"#$%&()=-~^\\|@`[{+;*:}]<,>.?/_\r\n\t"
-    L"　！￥”＃＄＆（）＝－～＾｜＠‘「｛＋；＊：｝」＜，＞．？／";
+    L"　！¥”＃＄＆（）＝−～＾｜＠‘「｛＋；＊：｝」＜，＞．？／";
 
 static WCHAR* wcstok_internal(WCHAR *pszStr, const WCHAR *cszDelimiters, WCHAR **ppszNext, WCHAR *pDelimiter)
 {//C ランタイム関数の _wcstok と大体同じ(conv_first_upper/conv_fixed_upper_lower 用)

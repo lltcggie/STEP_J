@@ -1,4 +1,4 @@
-// DlgFixedUpperLower.cpp : ƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“ ƒtƒ@ƒCƒ‹
+// DlgFixedUpperLower.cpp : ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³ ãƒ•ã‚¡ã‚¤ãƒ«
 //
 
 #include "stdafx.h"
@@ -12,7 +12,7 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgFixedUpperLower ƒvƒƒpƒeƒB ƒy[ƒW
+// CDlgFixedUpperLower ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ ãƒšãƒ¼ã‚¸
 
 IMPLEMENT_DYNCREATE(CDlgFixedUpperLower, COptionPage)
 
@@ -50,11 +50,11 @@ BEGIN_MESSAGE_MAP(CDlgFixedUpperLower, COptionPage)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgFixedUpperLower ƒƒbƒZ[ƒW ƒnƒ“ƒhƒ‰
+// CDlgFixedUpperLower ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒãƒ³ãƒ‰ãƒ©
 
 void CDlgFixedUpperLower::OnBtAdd() 
 {
-	// TODO: ‚±‚ÌˆÊ’u‚ÉƒRƒ“ƒgƒ[ƒ‹’Ê’mƒnƒ“ƒhƒ‰—p‚ÌƒR[ƒh‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
+	// TODO: ã“ã®ä½ç½®ã«ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«é€šçŸ¥ãƒãƒ³ãƒ‰ãƒ©ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
 	UpdateData(TRUE);
 	m_listUpperLower.InsertItem(m_listUpperLower.GetItemCount(), m_strFixedWord);
 	m_arFixedWords.Add(m_strFixedWord);
@@ -69,7 +69,7 @@ BOOL CDlgFixedUpperLower::OnInitDialog()
 {
 	COptionPage::OnInitDialog();
 	
-	// TODO: ‚±‚ÌˆÊ’u‚É‰Šú‰»‚Ì•â‘«ˆ—‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
+	// TODO: ã“ã®ä½ç½®ã«åˆæœŸåŒ–ã®è£œè¶³å‡¦ç†ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
 	DWORD	dwStyle;
 	dwStyle = m_listUpperLower.SendMessage(LVM_GETEXTENDEDLISTVIEWSTYLE, 0, 0);
 	dwStyle |=LVS_EX_FULLROWSELECT;
@@ -79,8 +79,8 @@ BOOL CDlgFixedUpperLower::OnInitDialog()
 	
 	RECT	rect;
 	m_listUpperLower.GetClientRect(&rect);
-	m_listUpperLower.InsertColumn(1, _T("ŒÅ’è’PŒê"), LVCFMT_LEFT, rect.right-rect.left-16, -1);
-	m_listUpperLower.DeleteAllItems();					// ƒNƒŠƒA
+	m_listUpperLower.InsertColumn(1, _T("å›ºå®šå˜èª"), LVCFMT_LEFT, rect.right-rect.left-16, -1);
+	m_listUpperLower.DeleteAllItems();					// ã‚¯ãƒªã‚¢
 	for (int i=0;i<m_arFixedWords.GetSize();i++) {
 		m_listUpperLower.InsertItem(i, m_arFixedWords.GetAt(i));
 	}
@@ -88,18 +88,18 @@ BOOL CDlgFixedUpperLower::OnInitDialog()
 	m_buttonAdd.EnableWindow(FALSE);
 	EnableButton();
 
-	return TRUE;  // ƒRƒ“ƒgƒ[ƒ‹‚ÉƒtƒH[ƒJƒX‚ğİ’è‚µ‚È‚¢‚Æ‚«A–ß‚è’l‚Í TRUE ‚Æ‚È‚è‚Ü‚·
-	              // —áŠO: OCX ƒvƒƒpƒeƒB ƒy[ƒW‚Ì–ß‚è’l‚Í FALSE ‚Æ‚È‚è‚Ü‚·
+	return TRUE;  // ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã«ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ã‚’è¨­å®šã—ãªã„ã¨ãã€æˆ»ã‚Šå€¤ã¯ TRUE ã¨ãªã‚Šã¾ã™
+	              // ä¾‹å¤–: OCX ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ ãƒšãƒ¼ã‚¸ã®æˆ»ã‚Šå€¤ã¯ FALSE ã¨ãªã‚Šã¾ã™
 }
 
 void CDlgFixedUpperLower::OnChangeEditFixedWord() 
 {
-	// TODO: ‚±‚ê‚ª RICHEDIT ƒRƒ“ƒgƒ[ƒ‹‚Ìê‡AƒRƒ“ƒgƒ[ƒ‹‚ÍA lParam ƒ}ƒXƒN
-	// “à‚Å‚Ì˜_—˜a‚Ì ENM_CHANGE ƒtƒ‰ƒO•t‚«‚Å CRichEditCrtl().SetEventMask()
-	// ƒƒbƒZ[ƒW‚ğƒRƒ“ƒgƒ[ƒ‹‚Ö‘—‚é‚½‚ß‚É COptionPage::OnInitDialog() ŠÖ”‚ğƒI[ƒo[
-	// ƒ‰ƒCƒh‚µ‚È‚¢ŒÀ‚è‚±‚Ì’Ê’m‚ğ‘—‚è‚Ü‚¹‚ñB
+	// TODO: ã“ã‚ŒãŒ RICHEDIT ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã®å ´åˆã€ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã¯ã€ lParam ãƒã‚¹ã‚¯
+	// å†…ã§ã®è«–ç†å’Œã® ENM_CHANGE ãƒ•ãƒ©ã‚°ä»˜ãã§ CRichEditCrtl().SetEventMask()
+	// ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã¸é€ã‚‹ãŸã‚ã« COptionPage::OnInitDialog() é–¢æ•°ã‚’ã‚ªãƒ¼ãƒãƒ¼
+	// ãƒ©ã‚¤ãƒ‰ã—ãªã„é™ã‚Šã“ã®é€šçŸ¥ã‚’é€ã‚Šã¾ã›ã‚“ã€‚
 	
-	// TODO: ‚±‚ÌˆÊ’u‚ÉƒRƒ“ƒgƒ[ƒ‹’Ê’mƒnƒ“ƒhƒ‰—p‚ÌƒR[ƒh‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
+	// TODO: ã“ã®ä½ç½®ã«ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«é€šçŸ¥ãƒãƒ³ãƒ‰ãƒ©ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
 	CString strWord;
 	m_editFixedWord.GetWindowText(strWord);
 	if (strWord.IsEmpty()) {
@@ -121,7 +121,7 @@ void CDlgFixedUpperLower::EnableButton()
 void CDlgFixedUpperLower::OnItemchangedListUpperLower(NMHDR* pNMHDR, LRESULT* pResult) 
 {
 	NM_LISTVIEW* pNMListView = (NM_LISTVIEW*)pNMHDR;
-	// TODO: ‚±‚ÌˆÊ’u‚ÉƒRƒ“ƒgƒ[ƒ‹’Ê’mƒnƒ“ƒhƒ‰—p‚ÌƒR[ƒh‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
+	// TODO: ã“ã®ä½ç½®ã«ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«é€šçŸ¥ãƒãƒ³ãƒ‰ãƒ©ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
 	EnableButton();
 
 	*pResult = 0;
@@ -129,7 +129,7 @@ void CDlgFixedUpperLower::OnItemchangedListUpperLower(NMHDR* pNMHDR, LRESULT* pR
 
 void CDlgFixedUpperLower::OnBtDelete() 
 {
-	// TODO: ‚±‚ÌˆÊ’u‚ÉƒRƒ“ƒgƒ[ƒ‹’Ê’mƒnƒ“ƒhƒ‰—p‚ÌƒR[ƒh‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
+	// TODO: ã“ã®ä½ç½®ã«ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«é€šçŸ¥ãƒãƒ³ãƒ‰ãƒ©ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
 	POSITION pos = m_listUpperLower.GetFirstSelectedItemPosition();
 	if (pos == NULL) {
 		return;

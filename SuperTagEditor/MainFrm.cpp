@@ -1,4 +1,4 @@
-// MainFrm.cpp : CMainFrame ƒNƒ‰ƒX‚Ì“®ì‚Ì’è‹`‚ğs‚¢‚Ü‚·B
+// MainFrm.cpp : CMainFrame ã‚¯ãƒ©ã‚¹ã®å‹•ä½œã®å®šç¾©ã‚’è¡Œã„ã¾ã™ã€‚
 //
 
 #include "stdafx.h"
@@ -42,55 +42,55 @@ END_MESSAGE_MAP()
 #endif
 CToolBarInfo CMainFrame::mainToolBar[] =
 {
-	{{0, ID_FILE_NEW  , TBSTATE_ENABLED, TBSTYLE_BUTTON,    _RESERVED_PARAM, 0, 0}, _T("ƒŠƒXƒg‚ğƒNƒŠƒA")     },
-	{{1, ID_OPEN_FOLDER , TBSTATE_ENABLED, TBSTYLE_BUTTON | TBSTYLE_DROPDOWN /* StartInaction 053 */,_RESERVED_PARAM, 0, 1}, _T("ƒtƒHƒ‹ƒ_‚ğŠJ‚­")   },
-	{{2, ID_SAVE_ALL_TAG , TBSTATE_ENABLED, TBSTYLE_BUTTON, _RESERVED_PARAM, 0, 2}, _T("ƒ^ƒOî•ñ‚ğXV")    },
-	{{3, ID_SELECT_EDIT_DESTORY  , TBSTATE_ENABLED, TBSTYLE_BUTTON,_RESERVED_PARAM, 0, 3}, _T("•ÒW‘O‚Ìó‘Ô‚É–ß‚·") },
+	{{0, ID_FILE_NEW  , TBSTATE_ENABLED, TBSTYLE_BUTTON,    _RESERVED_PARAM, 0, 0}, _T("ãƒªã‚¹ãƒˆã‚’ã‚¯ãƒªã‚¢")     },
+	{{1, ID_OPEN_FOLDER , TBSTATE_ENABLED, TBSTYLE_BUTTON | TBSTYLE_DROPDOWN /* StartInaction 053 */,_RESERVED_PARAM, 0, 1}, _T("ãƒ•ã‚©ãƒ«ãƒ€ã‚’é–‹ã")   },
+	{{2, ID_SAVE_ALL_TAG , TBSTATE_ENABLED, TBSTYLE_BUTTON, _RESERVED_PARAM, 0, 2}, _T("ã‚¿ã‚°æƒ…å ±ã‚’æ›´æ–°")    },
+	{{3, ID_SELECT_EDIT_DESTORY  , TBSTATE_ENABLED, TBSTYLE_BUTTON,_RESERVED_PARAM, 0, 3}, _T("ç·¨é›†å‰ã®çŠ¶æ…‹ã«æˆ»ã™") },
 	{{0, ID_SEPARATOR , TBSTATE_ENABLED, TBSTYLE_SEP, _RESERVED_PARAM,0, 4}, _T("")        },
-	{{4, ID_EDIT_CUT , TBSTATE_ENABLED, TBSTYLE_BUTTON, _RESERVED_PARAM,0, 5}, _T("Ø‚èæ‚è")    },
-	{{5, ID_EDIT_COPY, TBSTATE_ENABLED, TBSTYLE_BUTTON, _RESERVED_PARAM,0, 6}, _T("ƒRƒs[")   },
-	{{6, ID_EDIT_PASTE, TBSTATE_ENABLED, TBSTYLE_BUTTON, _RESERVED_PARAM,0, 7}, _T("“\‚è•t‚¯")   },
+	{{4, ID_EDIT_CUT , TBSTATE_ENABLED, TBSTYLE_BUTTON, _RESERVED_PARAM,0, 5}, _T("åˆ‡ã‚Šå–ã‚Š")    },
+	{{5, ID_EDIT_COPY, TBSTATE_ENABLED, TBSTYLE_BUTTON, _RESERVED_PARAM,0, 6}, _T("ã‚³ãƒ”ãƒ¼")   },
+	{{6, ID_EDIT_PASTE, TBSTATE_ENABLED, TBSTYLE_BUTTON, _RESERVED_PARAM,0, 7}, _T("è²¼ã‚Šä»˜ã‘")   },
 	{{0, ID_SEPARATOR , TBSTATE_ENABLED, TBSTYLE_SEP, _RESERVED_PARAM,0, 8}, _T("")        },
-	{{7, ID_CELL_COPY_DOWN , TBSTATE_ENABLED, TBSTYLE_BUTTON, _RESERVED_PARAM,0, 9}, _T("‰º•ûŒü‚ÖƒRƒs[")},
+	{{7, ID_CELL_COPY_DOWN , TBSTATE_ENABLED, TBSTYLE_BUTTON, _RESERVED_PARAM,0, 9}, _T("ä¸‹æ–¹å‘ã¸ã‚³ãƒ”ãƒ¼")},
 	{{0, ID_SEPARATOR , TBSTATE_ENABLED, TBSTYLE_SEP, _RESERVED_PARAM,0, 10}, _T("")        },
-	{{8, ID_EDIT_TD3_TAG , TBSTATE_ENABLED, TBSTYLE_CHECK, _RESERVED_PARAM,0, 11}, _T("ID3 tag‚ğ•\¦^•ÒW")},
-	{{9, ID_EDIT_FIELD_SI , TBSTATE_ENABLED, TBSTYLE_CHECK, _RESERVED_PARAM,0, 12}, _T("SIƒtƒB[ƒ‹ƒh‚ğ•\¦^•ÒW")},
+	{{8, ID_EDIT_TD3_TAG , TBSTATE_ENABLED, TBSTYLE_CHECK, _RESERVED_PARAM,0, 11}, _T("ID3 tagã‚’è¡¨ç¤ºï¼ç·¨é›†")},
+	{{9, ID_EDIT_FIELD_SI , TBSTATE_ENABLED, TBSTYLE_CHECK, _RESERVED_PARAM,0, 12}, _T("SIãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã‚’è¡¨ç¤ºï¼ç·¨é›†")},
 	{{0, ID_SEPARATOR , TBSTATE_ENABLED, TBSTYLE_SEP, _RESERVED_PARAM,0, 13}, _T("")        },
-	{{10, ID_WINAMP_PLAY_PREV , TBSTATE_ENABLED, TBSTYLE_BUTTON, _RESERVED_PARAM, 0, 14}, _T("‘O‚Ì‹È‚Ö")},
-	{{11, ID_WINAMP_PLAY , TBSTATE_ENABLED, TBSTYLE_BUTTON,_RESERVED_PARAM, 0, 15}, _T("Ä¶")},
-	{{12, ID_WINAMP_STOP , TBSTATE_ENABLED, TBSTYLE_BUTTON, _RESERVED_PARAM,0, 16}, _T("’â~")},
-	{{13, ID_WINAMP_PLAY_NEXT , TBSTATE_ENABLED, TBSTYLE_BUTTON, _RESERVED_PARAM,0, 17}, _T("Ÿ‚Ì‹È‚Ö")},
+	{{10, ID_WINAMP_PLAY_PREV , TBSTATE_ENABLED, TBSTYLE_BUTTON, _RESERVED_PARAM, 0, 14}, _T("å‰ã®æ›²ã¸")},
+	{{11, ID_WINAMP_PLAY , TBSTATE_ENABLED, TBSTYLE_BUTTON,_RESERVED_PARAM, 0, 15}, _T("å†ç”Ÿ")},
+	{{12, ID_WINAMP_STOP , TBSTATE_ENABLED, TBSTYLE_BUTTON, _RESERVED_PARAM,0, 16}, _T("åœæ­¢")},
+	{{13, ID_WINAMP_PLAY_NEXT , TBSTATE_ENABLED, TBSTYLE_BUTTON, _RESERVED_PARAM,0, 17}, _T("æ¬¡ã®æ›²ã¸")},
 	{{0, ID_SEPARATOR , TBSTATE_ENABLED, TBSTYLE_SEP, _RESERVED_PARAM,0, 18}, _T("")        },
-	{{14, ID_DLG_ENVIRONMENT , TBSTATE_ENABLED, TBSTYLE_BUTTON, _RESERVED_PARAM,0, 19}, _T("ƒIƒvƒVƒ‡ƒ“")},
-	{{15, ID_APP_ABOUT , TBSTATE_ENABLED, TBSTYLE_BUTTON, _RESERVED_PARAM,0, 20}, _T("ƒo[ƒWƒ‡ƒ“î•ñ")},
+	{{14, ID_DLG_ENVIRONMENT , TBSTATE_ENABLED, TBSTYLE_BUTTON, _RESERVED_PARAM,0, 19}, _T("ã‚ªãƒ—ã‚·ãƒ§ãƒ³")},
+	{{15, ID_APP_ABOUT , TBSTATE_ENABLED, TBSTYLE_BUTTON, _RESERVED_PARAM,0, 20}, _T("ãƒãƒ¼ã‚¸ãƒ§ãƒ³æƒ…å ±")},
 	{{0, ID_SEPARATOR , TBSTATE_ENABLED, TBSTYLE_SEP, _RESERVED_PARAM,0, 21}, _T("")        },
-	{{16, ID_CONV_FORMAT_USER , TBSTATE_ENABLED, TBSTYLE_BUTTON | TBSTYLE_DROPDOWN, _RESERVED_PARAM,0, 22}, _T("ƒ†[ƒU‘®Ø‘Ö")},
-	{{17, ID_SET_NUMBER , TBSTATE_ENABLED, TBSTYLE_BUTTON,_RESERVED_PARAM, 0, 23}, _T("‰º•ûŒü‚Ö˜A”Ô")},
-	{{18, ID_SET_NUMBER_ADD , TBSTATE_ENABLED, TBSTYLE_BUTTON,_RESERVED_PARAM, 0, 24}, _T("‰º•ûŒü‚Ö˜A”Ô‚ğ’Ç‰Á")},
-	{{19, ID_SELECT_TREE_COLUM , TBSTATE_ENABLED, TBSTYLE_BUTTON,_RESERVED_PARAM, 0, 25}, _T("ƒcƒŠ[”z‰º‚ÌƒZƒ‹ˆêŠ‡‘I‘ğ")},
-	{{20, ID_TEIKEI_TOOL , TBSTATE_ENABLED, TBSTYLE_BUTTON | TBSTYLE_DROPDOWN,_RESERVED_PARAM, 0, 26}, _T("’èŒ^•¶“\‚è•t‚¯")},
-	{{21, ID_CHECK_FILENAME_MAX , TBSTATE_ENABLED, TBSTYLE_BUTTON,_RESERVED_PARAM, 0, 27}, _T("ƒtƒ@ƒCƒ‹–¼‚Ì’·‚³‚ğƒ`ƒFƒbƒN")},
-	{{22, ID_SELECT_DELETE_LIST , TBSTATE_ENABLED, TBSTYLE_BUTTON,_RESERVED_PARAM, 0, 28}, _T("ƒŠƒXƒg‚©‚çíœ")},
-	{{23, ID_DELETE_CHAR , TBSTATE_ENABLED, TBSTYLE_BUTTON,_RESERVED_PARAM, 0, 29}, _T("æ“ª/––”ö‚Ì‚•¶š‚ğíœ")},
-	{{24, ID_UNIFY_CHAR , TBSTATE_ENABLED, TBSTYLE_BUTTON,_RESERVED_PARAM, 0, 30}, _T("•¶ší‚Ì“ˆê")},
-	{{25, ID_END_EDIT_RIGHT , TBSTATE_ENABLED, TBSTYLE_CHECK,_RESERVED_PARAM, 0, 31}, _T("€–Ú•ÏXŒã‚ÉƒJ[ƒ\ƒ‹‚ğ‰E‚ÉˆÚ“®")}, /* BeachMonster 091 */
-	{{26, ID_FAVORITES_FOLDER , TBSTATE_ENABLED, TBSTYLE_BUTTON | TBSTYLE_DROPDOWN,_RESERVED_PARAM, 0, 32}, _T("‚¨‹C‚É“ü‚è‚ÌƒtƒHƒ‹ƒ_")}, /* RockDance 129 */
-	{{27, ID_CALC_FOLDER_TOTAL , TBSTATE_ENABLED, TBSTYLE_BUTTON,_RESERVED_PARAM, 0, 33}, _T("‡Œv‚ÌZo")}, /* RockDance 128 */
-	{{28, ID_EDIT_PASTE_ADD , TBSTATE_ENABLED, TBSTYLE_BUTTON,_RESERVED_PARAM, 0, 34}, _T("’Ç‰Á‚Å“\‚è•t‚¯")}, /* Baja 171 */
-	{{29, ID_DELETE_CHAR_SPACE , TBSTATE_ENABLED, TBSTYLE_BUTTON,_RESERVED_PARAM, 0, 35}, _T("æ“ª/––”ö‚Ì‹ó”’•¶š‚ğíœ")}, /* Rumble 192 */
-	{{30, ID_SELECT_TREE_FILE , TBSTATE_ENABLED, TBSTYLE_BUTTON,_RESERVED_PARAM, 0, 36}, _T("ƒcƒŠ[”z‰º‚Ìƒtƒ@ƒCƒ‹ˆêŠ‡‘I‘ğ")}, /* STEP 013 */
-	{{31, ID_MOVE_TO_PARENT , TBSTATE_ENABLED, TBSTYLE_BUTTON,_RESERVED_PARAM, 0, 37}, _T("ƒJ[ƒ\ƒ‹‚ğeƒcƒŠ[‚ÖˆÚ“®")}, /* STEP 014 */
-//	{{32, ID_MOVE_TO_PREVIOUS , TBSTATE_ENABLED, TBSTYLE_BUTTON,_RESERVED_PARAM, 0, 38}, _T("ƒJ[ƒ\ƒ‹ˆÊ’u‚ğˆê‚Âã‚ÌƒcƒŠ[‚ÖˆÚ“®")}, /* STEP 014 */
-//	{{33, ID_MOVE_TO_NEXT , TBSTATE_ENABLED, TBSTYLE_BUTTON,_RESERVED_PARAM, 0, 39}, _T("ƒJ[ƒ\ƒ‹ˆÊ’u‚ğˆê‚Â‰º‚ÌƒcƒŠ[‚ÖˆÚ“®")}, /* STEP 014 */
-	{{32, ID_DLG_SETUP_PLUGIN , TBSTATE_ENABLED, TBSTYLE_BUTTON,_RESERVED_PARAM, 0, 38}, _T("ƒvƒ‰ƒOƒCƒ“ƒIƒvƒVƒ‡ƒ“")}, /* STEP 039*/
+	{{16, ID_CONV_FORMAT_USER , TBSTATE_ENABLED, TBSTYLE_BUTTON | TBSTYLE_DROPDOWN, _RESERVED_PARAM,0, 22}, _T("ãƒ¦ãƒ¼ã‚¶æ›¸å¼åˆ‡æ›¿")},
+	{{17, ID_SET_NUMBER , TBSTATE_ENABLED, TBSTYLE_BUTTON,_RESERVED_PARAM, 0, 23}, _T("ä¸‹æ–¹å‘ã¸é€£ç•ª")},
+	{{18, ID_SET_NUMBER_ADD , TBSTATE_ENABLED, TBSTYLE_BUTTON,_RESERVED_PARAM, 0, 24}, _T("ä¸‹æ–¹å‘ã¸é€£ç•ªã‚’è¿½åŠ ")},
+	{{19, ID_SELECT_TREE_COLUM , TBSTATE_ENABLED, TBSTYLE_BUTTON,_RESERVED_PARAM, 0, 25}, _T("ãƒ„ãƒªãƒ¼é…ä¸‹ã®ã‚»ãƒ«ä¸€æ‹¬é¸æŠ")},
+	{{20, ID_TEIKEI_TOOL , TBSTATE_ENABLED, TBSTYLE_BUTTON | TBSTYLE_DROPDOWN,_RESERVED_PARAM, 0, 26}, _T("å®šå‹æ–‡è²¼ã‚Šä»˜ã‘")},
+	{{21, ID_CHECK_FILENAME_MAX , TBSTATE_ENABLED, TBSTYLE_BUTTON,_RESERVED_PARAM, 0, 27}, _T("ãƒ•ã‚¡ã‚¤ãƒ«åã®é•·ã•ã‚’ãƒã‚§ãƒƒã‚¯")},
+	{{22, ID_SELECT_DELETE_LIST , TBSTATE_ENABLED, TBSTYLE_BUTTON,_RESERVED_PARAM, 0, 28}, _T("ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤")},
+	{{23, ID_DELETE_CHAR , TBSTATE_ENABLED, TBSTYLE_BUTTON,_RESERVED_PARAM, 0, 29}, _T("å…ˆé ­/æœ«å°¾ã®ï½æ–‡å­—ã‚’å‰Šé™¤")},
+	{{24, ID_UNIFY_CHAR , TBSTATE_ENABLED, TBSTYLE_BUTTON,_RESERVED_PARAM, 0, 30}, _T("æ–‡å­—ç¨®ã®çµ±ä¸€")},
+	{{25, ID_END_EDIT_RIGHT , TBSTATE_ENABLED, TBSTYLE_CHECK,_RESERVED_PARAM, 0, 31}, _T("é …ç›®å¤‰æ›´å¾Œã«ã‚«ãƒ¼ã‚½ãƒ«ã‚’å³ã«ç§»å‹•")}, /* BeachMonster 091 */
+	{{26, ID_FAVORITES_FOLDER , TBSTATE_ENABLED, TBSTYLE_BUTTON | TBSTYLE_DROPDOWN,_RESERVED_PARAM, 0, 32}, _T("ãŠæ°—ã«å…¥ã‚Šã®ãƒ•ã‚©ãƒ«ãƒ€")}, /* RockDance 129 */
+	{{27, ID_CALC_FOLDER_TOTAL , TBSTATE_ENABLED, TBSTYLE_BUTTON,_RESERVED_PARAM, 0, 33}, _T("åˆè¨ˆã®ç®—å‡º")}, /* RockDance 128 */
+	{{28, ID_EDIT_PASTE_ADD , TBSTATE_ENABLED, TBSTYLE_BUTTON,_RESERVED_PARAM, 0, 34}, _T("è¿½åŠ ã§è²¼ã‚Šä»˜ã‘")}, /* Baja 171 */
+	{{29, ID_DELETE_CHAR_SPACE , TBSTATE_ENABLED, TBSTYLE_BUTTON,_RESERVED_PARAM, 0, 35}, _T("å…ˆé ­/æœ«å°¾ã®ç©ºç™½æ–‡å­—ã‚’å‰Šé™¤")}, /* Rumble 192 */
+	{{30, ID_SELECT_TREE_FILE , TBSTATE_ENABLED, TBSTYLE_BUTTON,_RESERVED_PARAM, 0, 36}, _T("ãƒ„ãƒªãƒ¼é…ä¸‹ã®ãƒ•ã‚¡ã‚¤ãƒ«ä¸€æ‹¬é¸æŠ")}, /* STEP 013 */
+	{{31, ID_MOVE_TO_PARENT , TBSTATE_ENABLED, TBSTYLE_BUTTON,_RESERVED_PARAM, 0, 37}, _T("ã‚«ãƒ¼ã‚½ãƒ«ã‚’è¦ªãƒ„ãƒªãƒ¼ã¸ç§»å‹•")}, /* STEP 014 */
+//	{{32, ID_MOVE_TO_PREVIOUS , TBSTATE_ENABLED, TBSTYLE_BUTTON,_RESERVED_PARAM, 0, 38}, _T("ã‚«ãƒ¼ã‚½ãƒ«ä½ç½®ã‚’ä¸€ã¤ä¸Šã®ãƒ„ãƒªãƒ¼ã¸ç§»å‹•")}, /* STEP 014 */
+//	{{33, ID_MOVE_TO_NEXT , TBSTATE_ENABLED, TBSTYLE_BUTTON,_RESERVED_PARAM, 0, 39}, _T("ã‚«ãƒ¼ã‚½ãƒ«ä½ç½®ã‚’ä¸€ã¤ä¸‹ã®ãƒ„ãƒªãƒ¼ã¸ç§»å‹•")}, /* STEP 014 */
+	{{32, ID_DLG_SETUP_PLUGIN , TBSTATE_ENABLED, TBSTYLE_BUTTON,_RESERVED_PARAM, 0, 38}, _T("ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ã‚ªãƒ—ã‚·ãƒ§ãƒ³")}, /* STEP 039*/
 	/**
-	 y’ˆÓzƒRƒ}ƒ“ƒh‚ğ’Ç‰Á‚µ‚½ê‡‚ÍA_APS_NEXT_COMMAND_VALUE‚ªXV‚³‚ê‚é‚Ì‚ÅSTEP_api.cpp‚ğƒŠƒRƒ“ƒpƒCƒ‹‚·‚é‚±‚Æ
+	 ã€æ³¨æ„ã€‘ã‚³ãƒãƒ³ãƒ‰ã‚’è¿½åŠ ã—ãŸå ´åˆã¯ã€_APS_NEXT_COMMAND_VALUEãŒæ›´æ–°ã•ã‚Œã‚‹ã®ã§STEP_api.cppã‚’ãƒªã‚³ãƒ³ãƒ‘ã‚¤ãƒ«ã™ã‚‹ã“ã¨
 	 **/
 };
 
 static UINT indicators[] =
 {
-	ID_SEPARATOR,           // ƒXƒe[ƒ^ƒX ƒ‰ƒCƒ“ ƒCƒ“ƒWƒP[ƒ^
+	ID_SEPARATOR,           // ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ ãƒ©ã‚¤ãƒ³ ã‚¤ãƒ³ã‚¸ã‚±ãƒ¼ã‚¿
 	ID_INDICATOR_SIZE, /* WildCherry 072 */
 	ID_INDICATOR_LOCATION,
 	ID_INDICATOR_INPUT_MODE, /* Misirlou 150 */
@@ -101,11 +101,11 @@ static UINT indicators[] =
 };
 
 /////////////////////////////////////////////////////////////////////////////
-// CMainFrame ƒNƒ‰ƒX‚Ì\’z/Á–Å
+// CMainFrame ã‚¯ãƒ©ã‚¹ã®æ§‹ç¯‰/æ¶ˆæ»…
 
 CMainFrame::CMainFrame()
 {
-	// TODO: ‚±‚ÌˆÊ’u‚Éƒƒ“ƒo‚Ì‰Šú‰»ˆ—ƒR[ƒh‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢B
+	// TODO: ã“ã®ä½ç½®ã«ãƒ¡ãƒ³ãƒã®åˆæœŸåŒ–å‡¦ç†ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„ã€‚
 	
 }
 
@@ -126,16 +126,16 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 		!m_wndToolBar.LoadToolBar(IDR_MAINFRAME))
 	{
 		TRACE0("Failed to create toolbar\n");
-		return -1;      // ì¬‚É¸”s
+		return -1;      // ä½œæˆã«å¤±æ•—
 	}
 
 	extern CDkToolBar* STEP_wndToolBar;
 	STEP_wndToolBar = &m_wndToolBar;
 
-	// ƒ_ƒCƒAƒƒOƒo[ì¬
+	// ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ãƒãƒ¼ä½œæˆ
 //	if (!m_wndDlgBar.Create(this, IDR_MAINFRAME, CBRS_ALIGN_TOP, AFX_IDW_DIALOGBAR)) {
 //		TRACE0("Failed to create dialogbar\n");
-//		return -1;		// ì¬‚É¸”s
+//		return -1;		// ä½œæˆã«å¤±æ•—
 //	}
 
 	if (!m_wndReBar.Create(this) ||
@@ -143,22 +143,22 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 		!m_wndReBar.AddBar(&m_wndDlgBar)*/)
 	{
 		TRACE0("Failed to create rebar\n");
-		return -1;      // ì¬‚É¸”s
+		return -1;      // ä½œæˆã«å¤±æ•—
 	}
 
 	if (!m_wndStatusBar.Create(this) ||
 		!m_wndStatusBar.SetIndicators(indicators, sizeof(indicators)/sizeof(UINT)))
 	{
 		TRACE0("Failed to create status bar\n");
-		return -1;      // ì¬‚É¸”s
+		return -1;      // ä½œæˆã«å¤±æ•—
 	}
 
-	// TODO: ‚à‚µƒc[ƒ‹ ƒ`ƒbƒvƒX‚ª•K—v‚È‚¢ê‡A‚±‚±‚ğíœ‚µ‚Ä‚­‚¾‚³‚¢B
+	// TODO: ã‚‚ã—ãƒ„ãƒ¼ãƒ« ãƒãƒƒãƒ—ã‚¹ãŒå¿…è¦ãªã„å ´åˆã€ã“ã“ã‚’å‰Šé™¤ã—ã¦ãã ã•ã„ã€‚
 	m_wndToolBar.SetBarStyle(m_wndToolBar.GetBarStyle() |
 		CBRS_TOOLTIPS | CBRS_FLYBY);
 
 
-	// ƒo[ƒWƒ‡ƒ“ƒAƒbƒvŒã‚Ì‰‰ñ‹N“®ˆ—
+	// ãƒãƒ¼ã‚¸ãƒ§ãƒ³ã‚¢ãƒƒãƒ—å¾Œã®åˆå›èµ·å‹•æ™‚å‡¦ç†
 //	if (strcmp(PROG_VERSION, "0.32") == 0) {
 //		if (g_bIsVersionUp == false) {
 //			LoadBarState(_T("ToolBar"));
@@ -169,9 +169,9 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 
 	{ /* AstralCircle 041 */
         LONG lStyle = GetWindowLong(m_wndToolBar, GWL_STYLE);
-        //  TBSTYLE_FLATƒXƒ^ƒCƒ‹‚ğw’è
+        //  TBSTYLE_FLATã‚¹ã‚¿ã‚¤ãƒ«ã‚’æŒ‡å®š
         lStyle |= TBSTYLE_FLAT;
-        //  V‚µ‚¢ƒEƒBƒ“ƒhƒEƒXƒ^ƒCƒ‹‚ğİ’è
+        //  æ–°ã—ã„ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚¹ã‚¿ã‚¤ãƒ«ã‚’è¨­å®š
         SetWindowLong(m_wndToolBar, GWL_STYLE, lStyle);
 		m_wndToolBar.GetToolBarCtrl().SetExtendedStyle(TBSTYLE_EX_DRAWDDARROWS);
 		DWORD dwStyle = m_wndToolBar.GetButtonStyle(m_wndToolBar.CommandToIndex(ID_CONV_FORMAT_USER));
@@ -214,7 +214,7 @@ BOOL CMainFrame::PreCreateWindow(CREATESTRUCT& cs)
 	&&  g_rectMainWindow.left != 0
 	&&  g_rectMainWindow.bottom != 0
 	&&  g_rectMainWindow.right != 0) {
-		// ‘O‰ñ‚ÌƒEƒBƒ“ƒhƒEƒTƒCƒY‚ÅŠJ‚­
+		// å‰å›ã®ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚µã‚¤ã‚ºã§é–‹ã
 		cs.x	= g_rectMainWindow.left;
 		cs.y	= g_rectMainWindow.top;
 		cs.cx	= g_rectMainWindow.right - g_rectMainWindow.left;
@@ -225,7 +225,7 @@ BOOL CMainFrame::PreCreateWindow(CREATESTRUCT& cs)
 }
 
 /////////////////////////////////////////////////////////////////////////////
-// CMainFrame ƒNƒ‰ƒX‚Ìf’f
+// CMainFrame ã‚¯ãƒ©ã‚¹ã®è¨ºæ–­
 
 #ifdef _DEBUG
 void CMainFrame::AssertValid() const
@@ -241,12 +241,12 @@ void CMainFrame::Dump(CDumpContext& dc) const
 #endif //_DEBUG
 
 /////////////////////////////////////////////////////////////////////////////
-// CMainFrame ƒƒbƒZ[ƒW ƒnƒ“ƒhƒ‰
+// CMainFrame ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒãƒ³ãƒ‰ãƒ©
 void CMainFrame::OnMove(int x, int y) 
 {
 	CFrameWnd::OnMove(x, y);
 
-	// ƒEƒBƒ“ƒhƒE‚Ìó‘Ô‚ğ•Û‘¶
+	// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®çŠ¶æ…‹ã‚’ä¿å­˜
 	WINDOWPLACEMENT wndpl;
 	AfxGetMainWnd()->GetWindowPlacement(&wndpl);
 	if (AfxGetMainWnd()->IsZoomed() == FALSE && AfxGetMainWnd()->IsIconic() == FALSE) {
@@ -258,7 +258,7 @@ void CMainFrame::OnSize(UINT nType, int cx, int cy)
 {
 	CFrameWnd::OnSize(nType, cx, cy);
 
-	// ƒEƒBƒ“ƒhƒE‚Ìó‘Ô‚ğ•Û‘¶
+	// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®çŠ¶æ…‹ã‚’ä¿å­˜
 	WINDOWPLACEMENT wndpl;
 	AfxGetMainWnd()->GetWindowPlacement(&wndpl);
 	if (AfxGetMainWnd()->IsZoomed() == FALSE && AfxGetMainWnd()->IsIconic() == FALSE) {
@@ -289,7 +289,7 @@ void CMainFrame::OnUpdateIndicatorEnable(CCmdUI* pCmdUI)
 LRESULT CMainFrame::OnSetStatusPos(WPARAM wParam, LPARAM lParam)
 {
 	static	CString	str;
-	str.Format(_T("%dF%d"), (signed short)((lParam>>16)&0xffff), (signed short)(lParam&0xffff));
+	str.Format(_T("%dï¼š%d"), (signed short)((lParam>>16)&0xffff), (signed short)(lParam&0xffff));
 	m_wndStatusBar.SetPaneText(m_wndStatusBar.CommandToIndex(ID_INDICATOR_LOCATION), (LPCTSTR)str);
 	m_wndStatusBar.UpdateWindow();
 	return 0;
@@ -326,7 +326,7 @@ BOOL CMainFrame::PreTranslateMessage(MSG* pMsg)
 	CSuperTagEditorApp	*pApp = (CSuperTagEditorApp *)AfxGetApp();
 
 	if (pApp != NULL && pApp->GetAccelHandle() != 0) {
-		// “Æ©‚ÌƒAƒNƒZƒ‰ƒŒ[ƒ^ƒL[‚ğˆ—‚·‚é
+		// ç‹¬è‡ªã®ã‚¢ã‚¯ã‚»ãƒ©ãƒ¬ãƒ¼ã‚¿ã‚­ãƒ¼ã‚’å‡¦ç†ã™ã‚‹
 		if (TranslateAccelerator(m_hWnd, pApp->GetAccelHandle(), pMsg)) {
 			return TRUE;
 		}
@@ -359,15 +359,15 @@ void CMainFrame::OnToolbarDropDown(NMHDR* pnmtb_, LRESULT *plr) /* AstralCircle 
 			pPopup = menu.GetSubMenu(0);
 			ASSERT(pPopup);
 			CString strName;
-			strName.Format(_T("01F%s"), g_userConvFormat[0].strName);
+			strName.Format(_T("01ï¼š%s"), g_userConvFormat[0].strName);
 			pPopup->ModifyMenu((UINT)ID_CONV_FORMAT_USER_01, MF_BYCOMMAND, ID_CONV_FORMAT_USER_01, (LPCTSTR)strName);
-			strName.Format(_T("02F%s"), g_userConvFormat[1].strName);
+			strName.Format(_T("02ï¼š%s"), g_userConvFormat[1].strName);
 			pPopup->ModifyMenu((UINT)ID_CONV_FORMAT_USER_02, MF_BYCOMMAND, ID_CONV_FORMAT_USER_02, (LPCTSTR)strName);
-			strName.Format(_T("03F%s"), g_userConvFormat[2].strName);
+			strName.Format(_T("03ï¼š%s"), g_userConvFormat[2].strName);
 			pPopup->ModifyMenu((UINT)ID_CONV_FORMAT_USER_03, MF_BYCOMMAND, ID_CONV_FORMAT_USER_03, (LPCTSTR)strName);
-			strName.Format(_T("04F%s"), g_userConvFormat[3].strName); /* LastTrain 057 */
+			strName.Format(_T("04ï¼š%s"), g_userConvFormat[3].strName); /* LastTrain 057 */
 			pPopup->ModifyMenu((UINT)ID_CONV_FORMAT_USER_04, MF_BYCOMMAND, ID_CONV_FORMAT_USER_04, (LPCTSTR)strName);
-			strName.Format(_T("05F%s"), g_userConvFormat[4].strName); /* LastTrain 057 */
+			strName.Format(_T("05ï¼š%s"), g_userConvFormat[4].strName); /* LastTrain 057 */
 			pPopup->ModifyMenu((UINT)ID_CONV_FORMAT_USER_05, MF_BYCOMMAND, ID_CONV_FORMAT_USER_05, (LPCTSTR)strName);
 		}
 		break;
@@ -377,7 +377,7 @@ void CMainFrame::OnToolbarDropDown(NMHDR* pnmtb_, LRESULT *plr) /* AstralCircle 
 			pPopup = menu.GetSubMenu(0);
 			ASSERT(pPopup);
 			CString strName;
-			// ƒOƒ‹[ƒv‚P
+			// ã‚°ãƒ«ãƒ¼ãƒ—ï¼‘
 			strName.Format(_T("01: %s"), shortString(g_teikeiInfo[0].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
 			pPopup->ModifyMenu((UINT)ID_TEIKEI_01, MF_BYCOMMAND, ID_TEIKEI_01, (LPCTSTR)strName);
 			strName.Format(_T("02: %s"), shortString(g_teikeiInfo[1].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
@@ -399,7 +399,7 @@ void CMainFrame::OnToolbarDropDown(NMHDR* pnmtb_, LRESULT *plr) /* AstralCircle 
 			strName.Format(_T("10: %s"), shortString(g_teikeiInfo[9].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
 			pPopup->ModifyMenu((UINT)ID_TEIKEI_10, MF_BYCOMMAND, ID_TEIKEI_10, (LPCTSTR)strName);
 			/* FreeFall 046 */
-			// ƒOƒ‹[ƒv‚Q
+			// ã‚°ãƒ«ãƒ¼ãƒ—ï¼’
 			strName.Format(_T("01: %s"), shortString(g_teikeiInfo[10].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
 			pPopup->ModifyMenu((UINT)ID_TEIKEI_2_01, MF_BYCOMMAND, ID_TEIKEI_2_01, (LPCTSTR)strName);
 			strName.Format(_T("02: %s"), shortString(g_teikeiInfo[11].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
@@ -420,7 +420,7 @@ void CMainFrame::OnToolbarDropDown(NMHDR* pnmtb_, LRESULT *plr) /* AstralCircle 
 			pPopup->ModifyMenu((UINT)ID_TEIKEI_2_09, MF_BYCOMMAND, ID_TEIKEI_2_09, (LPCTSTR)strName);
 			strName.Format(_T("10: %s"), shortString(g_teikeiInfo[19].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
 			pPopup->ModifyMenu((UINT)ID_TEIKEI_2_10, MF_BYCOMMAND, ID_TEIKEI_2_10, (LPCTSTR)strName);
-			// ƒOƒ‹[ƒv‚R
+			// ã‚°ãƒ«ãƒ¼ãƒ—ï¼“
 			strName.Format(_T("01: %s"), shortString(g_teikeiInfo[20].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
 			pPopup->ModifyMenu((UINT)ID_TEIKEI_3_01, MF_BYCOMMAND, ID_TEIKEI_3_01, (LPCTSTR)strName);
 			strName.Format(_T("02: %s"), shortString(g_teikeiInfo[21].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
@@ -441,7 +441,7 @@ void CMainFrame::OnToolbarDropDown(NMHDR* pnmtb_, LRESULT *plr) /* AstralCircle 
 			pPopup->ModifyMenu((UINT)ID_TEIKEI_3_09, MF_BYCOMMAND, ID_TEIKEI_3_09, (LPCTSTR)strName);
 			strName.Format(_T("10: %s"), shortString(g_teikeiInfo[29].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
 			pPopup->ModifyMenu((UINT)ID_TEIKEI_3_10, MF_BYCOMMAND, ID_TEIKEI_3_10, (LPCTSTR)strName);
-			// ƒOƒ‹[ƒv–¼Ì‚ğ”½‰f
+			// ã‚°ãƒ«ãƒ¼ãƒ—åç§°ã‚’åæ˜ 
 			for (int k = 0; k < 3; k++) {
 				CMenu* pSubMenu = pPopup->GetSubMenu(0);
 				pPopup->RemoveMenu(0, MF_BYPOSITION);
@@ -458,7 +458,7 @@ void CMainFrame::OnToolbarDropDown(NMHDR* pnmtb_, LRESULT *plr) /* AstralCircle 
 			for (int j=0;j<nCount;j++) {
 				CString strTitle;
 				pPopup->GetMenuString(j, strTitle, MF_BYPOSITION);
-				if (strTitle == _T("Å‹ßg‚Á‚½ƒtƒHƒ‹ƒ_(&R)")) {
+				if (strTitle == _T("æœ€è¿‘ä½¿ã£ãŸãƒ•ã‚©ãƒ«ãƒ€(&R)")) {
 					pPopup = pPopup->GetSubMenu(j);
 					break;
 				}
@@ -471,25 +471,25 @@ void CMainFrame::OnToolbarDropDown(NMHDR* pnmtb_, LRESULT *plr) /* AstralCircle 
 			pPopup = menu.GetSubMenu(0);
 			ASSERT(pPopup);
 			CString strName;
-			strName.Format(_T("01F%s"), g_strFavorite[0]);
+			strName.Format(_T("01ï¼š%s"), g_strFavorite[0]);
 			pPopup->ModifyMenu((UINT)ID_FAVORITE_FOLDER_01, MF_BYCOMMAND, ID_FAVORITE_FOLDER_01, (LPCTSTR)strName);
-			strName.Format(_T("02F%s"), g_strFavorite[1]);
+			strName.Format(_T("02ï¼š%s"), g_strFavorite[1]);
 			pPopup->ModifyMenu((UINT)ID_FAVORITE_FOLDER_02, MF_BYCOMMAND, ID_FAVORITE_FOLDER_02, (LPCTSTR)strName);
-			strName.Format(_T("03F%s"), g_strFavorite[2]);
+			strName.Format(_T("03ï¼š%s"), g_strFavorite[2]);
 			pPopup->ModifyMenu((UINT)ID_FAVORITE_FOLDER_03, MF_BYCOMMAND, ID_FAVORITE_FOLDER_03, (LPCTSTR)strName);
-			strName.Format(_T("04F%s"), g_strFavorite[3]);
+			strName.Format(_T("04ï¼š%s"), g_strFavorite[3]);
 			pPopup->ModifyMenu((UINT)ID_FAVORITE_FOLDER_04, MF_BYCOMMAND, ID_FAVORITE_FOLDER_04, (LPCTSTR)strName);
-			strName.Format(_T("05F%s"), g_strFavorite[4]);
+			strName.Format(_T("05ï¼š%s"), g_strFavorite[4]);
 			pPopup->ModifyMenu((UINT)ID_FAVORITE_FOLDER_05, MF_BYCOMMAND, ID_FAVORITE_FOLDER_05, (LPCTSTR)strName);
-			strName.Format(_T("06F%s"), g_strFavorite[5]);
+			strName.Format(_T("06ï¼š%s"), g_strFavorite[5]);
 			pPopup->ModifyMenu((UINT)ID_FAVORITE_FOLDER_06, MF_BYCOMMAND, ID_FAVORITE_FOLDER_06, (LPCTSTR)strName);
-			strName.Format(_T("07F%s"), g_strFavorite[6]);
+			strName.Format(_T("07ï¼š%s"), g_strFavorite[6]);
 			pPopup->ModifyMenu((UINT)ID_FAVORITE_FOLDER_07, MF_BYCOMMAND, ID_FAVORITE_FOLDER_07, (LPCTSTR)strName);
-			strName.Format(_T("08F%s"), g_strFavorite[7]);
+			strName.Format(_T("08ï¼š%s"), g_strFavorite[7]);
 			pPopup->ModifyMenu((UINT)ID_FAVORITE_FOLDER_08, MF_BYCOMMAND, ID_FAVORITE_FOLDER_08, (LPCTSTR)strName);
-			strName.Format(_T("09F%s"), g_strFavorite[8]);
+			strName.Format(_T("09ï¼š%s"), g_strFavorite[8]);
 			pPopup->ModifyMenu((UINT)ID_FAVORITE_FOLDER_09, MF_BYCOMMAND, ID_FAVORITE_FOLDER_09, (LPCTSTR)strName);
-			strName.Format(_T("10F%s"), g_strFavorite[9]);
+			strName.Format(_T("10ï¼š%s"), g_strFavorite[9]);
 			pPopup->ModifyMenu((UINT)ID_FAVORITE_FOLDER_10, MF_BYCOMMAND, ID_FAVORITE_FOLDER_10, (LPCTSTR)strName);
 		}
 		break;
@@ -511,25 +511,25 @@ void CMainFrame::UpdateToolBar()
 
 void CMainFrame::OnPopupCustomize() /* WildCherry4 084 */
 {
-	// TODO: ‚±‚ÌˆÊ’u‚ÉƒRƒ}ƒ“ƒh ƒnƒ“ƒhƒ‰—p‚ÌƒR[ƒh‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
+	// TODO: ã“ã®ä½ç½®ã«ã‚³ãƒãƒ³ãƒ‰ ãƒãƒ³ãƒ‰ãƒ©ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
 	m_wndToolBar.Customize();	
 }
 
 void CMainFrame::OnUpdatePopupCustomize(CCmdUI* pCmdUI) /* WildCherry4 084 */
 {
-	// TODO: ‚±‚ÌˆÊ’u‚É command update UI ƒnƒ“ƒhƒ‰—p‚ÌƒR[ƒh‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
+	// TODO: ã“ã®ä½ç½®ã« command update UI ãƒãƒ³ãƒ‰ãƒ©ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
 	pCmdUI->Enable(TRUE);
 }
 
 BOOL CMainFrame::OnToolTipNotify( UINT id, NMHDR * pNMHDR, LRESULT * pResult )
 {
- //‚È‚º‚© ANSI ”Å‚¾‚ÆƒfƒtƒHƒ‹ƒg‚Ìƒc[ƒ‹ƒ{ƒ^ƒ“‚Å‚Í‚±‚±‚ªŒÄ‚Î‚ê‚È‚¢‚ª
- //UNICODE ”Å‚¾‚ÆŒÄ‚Î‚êA‚±‚ê‚ğˆ—‚µ‚È‚¢‚Æƒc[ƒ‹ƒ`ƒbƒv‚ª•\¦‚³‚ê‚È‚¢
+ //ãªãœã‹ ANSI ç‰ˆã ã¨ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã®ãƒ„ãƒ¼ãƒ«ãƒœã‚¿ãƒ³ã§ã¯ã“ã“ãŒå‘¼ã°ã‚Œãªã„ãŒ
+ //UNICODE ç‰ˆã ã¨å‘¼ã°ã‚Œã€ã“ã‚Œã‚’å‡¦ç†ã—ãªã„ã¨ãƒ„ãƒ¼ãƒ«ãƒãƒƒãƒ—ãŒè¡¨ç¤ºã•ã‚Œãªã„
     TOOLTIPTEXT *pTTT = (TOOLTIPTEXT *)pNMHDR;
     UINT nID =pNMHDR->idFrom;
     TCHAR szText[512];
     int ret = LoadString(pTTT->hinst, nID, szText, _countof(szText));
-    if(ret){//•\¦‚·‚é‚×‚«•¶š—ñ‚Í‰üsˆÈ~
+    if(ret){//è¡¨ç¤ºã™ã‚‹ã¹ãæ–‡å­—åˆ—ã¯æ”¹è¡Œä»¥é™
         TCHAR *pszText = _tcschr(szText, _T('\n'));
         if(pszText){
             _tcsncpy_s(pTTT->szText, pszText+1, _TRUNCATE);

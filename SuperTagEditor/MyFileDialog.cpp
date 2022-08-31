@@ -1,4 +1,4 @@
-// MyFileDialog.cpp : �C���v�������e�[�V���� �t�@�C��
+// MyFileDialog.cpp : インプリメンテーション ファイル
 //
 
 #include "stdafx.h"
@@ -28,7 +28,7 @@ CMyFileDialog::CMyFileDialog(BOOL bOpenFileDialog, LPCTSTR lpszDefExt, LPCTSTR l
 		// New OS [ Windows Vista - ]
 		custom = this->GetIFileDialogCustomize();
 		if(custom != NULL){
-			custom->AddCheckButton(IDC_CH_FILE_ADDPEND,L"�㏑���̏ꍇ�̓t�@�C���̍Ō�ɒǉ��o�͂���",false);
+			custom->AddCheckButton(IDC_CH_FILE_ADDPEND,L"上書きの場合はファイルの最後に追加出力する",false);
 		}
 		custom->Release();
 	}
@@ -38,7 +38,7 @@ CMyFileDialog::CMyFileDialog(BOOL bOpenFileDialog, LPCTSTR lpszDefExt, LPCTSTR l
 
 BEGIN_MESSAGE_MAP(CMyFileDialog, CFileDialog)
 	//{{AFX_MSG_MAP(CMyFileDialog)
-		// ���� -  ClassWizard �͂��̈ʒu�Ƀ}�b�s���O�p�̃}�N����ǉ��܂��͍폜���܂��B
+		// メモ -  ClassWizard はこの位置にマッピング用のマクロを追加または削除します。
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 

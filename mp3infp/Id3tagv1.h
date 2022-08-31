@@ -1,4 +1,4 @@
-// Id3tagv1.h: CId3tagv1 ƒNƒ‰ƒX‚ÌƒCƒ“ƒ^[ƒtƒFƒCƒX
+// Id3tagv1.h: CId3tagv1 ã‚¯ãƒ©ã‚¹ã®ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹
 //
 //////////////////////////////////////////////////////////////////////
 
@@ -71,15 +71,15 @@ private:
 	void SetString(LPSTR dest, LPCTSTR src, long len);
 	static void ReadTagString(LPSTR dest, LPCSTR src, long len);
 
-	BOOL m_bEnable;			//ID3TAG‚ª–³‚¢ê‡‚ÍFALSE
-	BOOL m_bScmpxGenre;		//SCMPXŠg’£ƒWƒƒƒ“ƒ‹‚ğg—p‚·‚é
-	char m_szTitle[30+1];	//ƒ^ƒCƒgƒ‹
-	char m_szArtist[30+1];	//ƒA[ƒeƒBƒXƒg
-	char m_szAlbum[30+1];	//ƒAƒ‹ƒoƒ€
-	char m_szYear[4+1];		//¼—ï
-	unsigned char m_cGenre;	//ƒWƒƒƒ“ƒ‹
-	char m_szComment[30+1];	//ƒRƒƒ“ƒg
-	unsigned char m_cTrackNo;//ƒgƒ‰ƒbƒN”Ô†(1`255 0=N/A)
+	BOOL m_bEnable;			//ID3TAGãŒç„¡ã„å ´åˆã¯FALSE
+	BOOL m_bScmpxGenre;		//SCMPXæ‹¡å¼µã‚¸ãƒ£ãƒ³ãƒ«ã‚’ä½¿ç”¨ã™ã‚‹
+	char m_szTitle[30+1];	//ã‚¿ã‚¤ãƒˆãƒ«
+	char m_szArtist[30+1];	//ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆ
+	char m_szAlbum[30+1];	//ã‚¢ãƒ«ãƒãƒ 
+	char m_szYear[4+1];		//è¥¿æš¦
+	unsigned char m_cGenre;	//ã‚¸ãƒ£ãƒ³ãƒ«
+	char m_szComment[30+1];	//ã‚³ãƒ¡ãƒ³ãƒˆ
+	unsigned char m_cTrackNo;//ãƒˆãƒ©ãƒƒã‚¯ç•ªå·(1ã€œ255 0=N/A)
 
 };
 

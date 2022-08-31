@@ -1,4 +1,4 @@
-// DlgReplaceWord.cpp : ƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“ ƒtƒ@ƒCƒ‹
+// DlgReplaceWord.cpp : ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³ ãƒ•ã‚¡ã‚¤ãƒ«
 //
 
 #include "stdafx.h"
@@ -15,7 +15,7 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgReplaceWord ƒ_ƒCƒAƒƒO
+// CDlgReplaceWord ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
 
 
 CDlgReplaceWord::CDlgReplaceWord(CWnd* pParent /*=NULL*/)
@@ -76,22 +76,22 @@ BEGIN_MESSAGE_MAP(CDlgReplaceWord, CDialog)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgReplaceWord ƒƒbƒZ[ƒW ƒnƒ“ƒhƒ‰
+// CDlgReplaceWord ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒãƒ³ãƒ‰ãƒ©
 
 BOOL CDlgReplaceWord::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 
-	// TODO: ‚±‚ÌˆÊ’u‚É‰Šú‰»‚Ì•â‘«ˆ—‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
+	// TODO: ã“ã®ä½ç½®ã«åˆæœŸåŒ–ã®è£œè¶³å‡¦ç†ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
 	extern	const TCHAR	***g_sNameList;
-	// m_listTargetColumn.AddString("‘S‚Ä‚Ì€–Ú");
+	// m_listTargetColumn.AddString("å…¨ã¦ã®é …ç›®");
 	for (int i = 2; g_sNameList[0][i] != NULL; i++) {
 		m_listTargetColumn.AddString(g_sNameList[0][i]);
 	}
-	/*m_listTargetColumn.AddString("(‘S€–Ú)");*/
+	/*m_listTargetColumn.AddString("(å…¨é …ç›®)");*/
 	m_listTargetColumn.SetCurSel(m_nTargetColumn);
 
-	SetWindowText(m_bModeReplace ? _T("’uŠ·") : _T("ŒŸõ"));
+	SetWindowText(m_bModeReplace ? _T("ç½®æ›") : _T("æ¤œç´¢"));
 
 	UpdateStatus();
 
@@ -109,19 +109,19 @@ BOOL CDlgReplaceWord::OnInitDialog()
 		m_listReplaceWord.LoadHistory(_T("haseta\\history"), _T("ReplaceWord"));
 		m_bAddCurrentItemtoHistory = false;
 	}
-	return TRUE;  // ƒRƒ“ƒgƒ[ƒ‹‚ÉƒtƒH[ƒJƒX‚ğİ’è‚µ‚È‚¢‚Æ‚«A–ß‚è’l‚Í TRUE ‚Æ‚È‚è‚Ü‚·
-	              // —áŠO: OCX ƒvƒƒpƒeƒB ƒy[ƒW‚Ì–ß‚è’l‚Í FALSE ‚Æ‚È‚è‚Ü‚·
+	return TRUE;  // ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã«ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ã‚’è¨­å®šã—ãªã„ã¨ãã€æˆ»ã‚Šå€¤ã¯ TRUE ã¨ãªã‚Šã¾ã™
+	              // ä¾‹å¤–: OCX ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ ãƒšãƒ¼ã‚¸ã®æˆ»ã‚Šå€¤ã¯ FALSE ã¨ãªã‚Šã¾ã™
 }
 
 void CDlgReplaceWord::UpdateStatus(void)
 {
 	BOOL	bReplace = m_bModeReplace;
 
-	/* ŒŸõˆ—‚ªs’PˆÊ‚È‚Ì‚Å’†“r”¼’[
+	/* æ¤œç´¢å‡¦ç†ãŒè¡Œå˜ä½ãªã®ã§ä¸­é€”åŠç«¯
 	if (m_nTargetColumn >= 0) {
 		CString strSelText;
 		m_listTargetColumn.GetLBText(m_nTargetColumn, strSelText);
-		if (strSelText == "(‘S€–Ú)") {
+		if (strSelText == "(å…¨é …ç›®)") {
 			m_nTargetColumn = -1;
 			UpdateData(FALSE);
 		}
@@ -135,7 +135,7 @@ void CDlgReplaceWord::UpdateStatus(void)
 		m_btCheckDiffUL.EnableWindow(FALSE);
 		m_btRegExp.EnableWindow(FALSE);
 		m_btMatchComplete.EnableWindow(FALSE);
-		bReplace = FALSE;				// ’uŠ·‚Í•s‰Â
+		bReplace = FALSE;				// ç½®æ›ã¯ä¸å¯
 	} else {
 		m_btCheckDiffUL.EnableWindow(m_bRegExp ? FALSE : TRUE);
 		m_btRegExp.EnableWindow(TRUE);
@@ -144,7 +144,7 @@ void CDlgReplaceWord::UpdateStatus(void)
 	}
 	m_btRangeSelected.EnableWindow(m_bEnableRangeSelected);
 
-	// ŒŸõ‚Ìê‡‚ÍA’uŠ·ŠÖ˜A‚Ì€–Ú‚ğg—p•s‰Â‚É‚·‚é
+	// æ¤œç´¢ã®å ´åˆã¯ã€ç½®æ›é–¢é€£ã®é …ç›®ã‚’ä½¿ç”¨ä¸å¯ã«ã™ã‚‹
 	m_stReplace.EnableWindow(bReplace);
 	m_listReplaceWord.EnableWindow(bReplace);
 	m_btReplace.EnableWindow(bReplace);
@@ -156,18 +156,18 @@ void CDlgReplaceWord::UpdateCheckWordState(void)
 	UpdateData();
 
 	CHECK_WORD_STATE	*pState = &g_chkWord[CHECK_STATE_REPLACE];
-	pState->strSearchWord	= m_strSearchWord;		// •¶š—ñ
-	pState->strReplaceWord	= m_strReplaceWord;		// •¶š—ñ
-	pState->nTargetColumn	= COLUMN_FILE_NAME + m_nTargetColumn;	// ŒŸõ‘ÎÛƒJƒ‰ƒ€
+	pState->strSearchWord	= m_strSearchWord;		// æ–‡å­—åˆ—
+	pState->strReplaceWord	= m_strReplaceWord;		// æ–‡å­—åˆ—
+	pState->nTargetColumn	= COLUMN_FILE_NAME + m_nTargetColumn;	// æ¤œç´¢å¯¾è±¡ã‚«ãƒ©ãƒ 
 	/*
 	if (m_nTargetColumn == -1) {
 		pState->nTargetColumn = -1;
 	}
 	*/
-	pState->bCheckDiffUL	= m_bCheckDiffUL;		// ‘å•¶š^¬•¶š‚Ì‹æ•Ê
-	pState->bRegExp			= m_bRegExp;			// ³‹K•\Œ»
-	pState->bRangeSelected	= m_bRangeSelected;		// ‘I‘ğ”ÍˆÍ‚Ì‚İ
-	pState->bMatchComplete	= m_bMatchComplete;		// Š®‘S‚Éˆê’v
+	pState->bCheckDiffUL	= m_bCheckDiffUL;		// å¤§æ–‡å­—ï¼å°æ–‡å­—ã®åŒºåˆ¥
+	pState->bRegExp			= m_bRegExp;			// æ­£è¦è¡¨ç¾
+	pState->bRangeSelected	= m_bRangeSelected;		// é¸æŠç¯„å›²ã®ã¿
+	pState->bMatchComplete	= m_bMatchComplete;		// å®Œå…¨ã«ä¸€è‡´
 }
 
 void CDlgReplaceWord::ExecSearch(bool bNext)
@@ -182,7 +182,7 @@ void CDlgReplaceWord::ExecSearch(bool bNext)
 			m_pList->SetRedraw(FALSE);
 #endif
 			if (pState->bRangeSelected == FALSE) {
-				// ‘Ss‘I‘ğ‰ğœ
+				// å…¨è¡Œé¸æŠè§£é™¤
 				m_pList->SelItemRange(FALSE, 0, -1);
 			}
 			m_pList->SelectAndVisibleColumn(nIndex, pState->nMatchColumn);
@@ -196,14 +196,14 @@ void CDlgReplaceWord::ExecSearch(bool bNext)
 			m_pList->SetRedraw(TRUE);
 #endif
 		} else {
-			MessageBox(_T("Œ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½"), _T("ŒŸõ¸”s"), MB_ICONSTOP|MB_OK|MB_TOPMOST);
+			MessageBox(_T("è¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã§ã—ãŸ"), _T("æ¤œç´¢å¤±æ•—"), MB_ICONSTOP|MB_OK|MB_TOPMOST);
 		}
 	}
 }
 
 void CDlgReplaceWord::OnBtSearchBefore()
 {
-	// ‘O•ûŒŸõÀs
+	// å‰æ–¹æ¤œç´¢å®Ÿè¡Œ
 	ExecSearch(false);
 
 	m_bAddCurrentItemtoHistory = true; /* BeachMonster 088 */
@@ -211,7 +211,7 @@ void CDlgReplaceWord::OnBtSearchBefore()
 
 void CDlgReplaceWord::OnBtSearchNext()
 {
-	// Œã•ûŒŸõÀs
+	// å¾Œæ–¹æ¤œç´¢å®Ÿè¡Œ
 	ExecSearch(true);
 
 	m_bAddCurrentItemtoHistory = true; /* BeachMonster 088 */
@@ -222,7 +222,7 @@ void CDlgReplaceWord::OnBtReplace()
 	CHECK_WORD_STATE	*pState = &g_chkWord[CHECK_STATE_REPLACE];
 	UpdateCheckWordState();
 
-	// ’uŠ·
+	// ç½®æ›
 	m_pList->ReplaceMatchItem(pState, false);
 
 	m_bAddCurrentItemtoHistory = true; /* BeachMonster 088 */
@@ -233,7 +233,7 @@ void CDlgReplaceWord::OnOK()
 	CHECK_WORD_STATE	*pState = &g_chkWord[CHECK_STATE_REPLACE];
 	UpdateCheckWordState();
 
-	// ‘S‚Ä’uŠ·
+	// å…¨ã¦ç½®æ›
 	m_pList->ReplaceMatchItem(pState, true);
 
 	GetWindowRect(m_rect); /* WildCherry4 086 */
@@ -264,7 +264,7 @@ void CDlgReplaceWord::OnChRangeSelected()
 
 void CDlgReplaceWord::OnCancel() /* WildCherry4 086 */
 {
-	// TODO: ‚±‚ÌˆÊ’u‚É“Á•Ê‚ÈŒãˆ—‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢B
+	// TODO: ã“ã®ä½ç½®ã«ç‰¹åˆ¥ãªå¾Œå‡¦ç†ã‚’è¿½åŠ ã—ã¦ãã ã•ã„ã€‚
 	GetWindowRect(m_rect);
 	m_listSearchWord.SaveHistory(m_bAddCurrentItemtoHistory); /* BeachMonster 088 */
 	m_listReplaceWord.SaveHistory(m_bAddCurrentItemtoHistory); /* BeachMonster 088 */

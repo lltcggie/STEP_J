@@ -1,248 +1,248 @@
-*2005.09.21�X�V
+*2005.09.21更新
 
-1.�v���O�C���ɕK���������Ȃ���΂����Ȃ��֐�
-2.�v���O�C�����^�O�̓ǂݏ������T�|�[�g����ꍇ�Ɏ������Ȃ���΂����Ȃ��֐�
-3.�v���O�C���Ɏ����ł���֐�
-4.�t�@�C�����ɍs���R�[���o�b�N�֐�
-5.�v���O�C������Ăяo����֐�(API)
-6.�^�O���̎擾�^�ݒ�API
+1.プラグインに必ず実装しなければいけない関数
+2.プラグインがタグの読み書きをサポートする場合に実装しなければいけない関数
+3.プラグインに実装できる関数
+4.ファイル毎に行うコールバック関数
+5.プラグインから呼び出せる関数(API)
+6.タグ情報の取得／設定API
 
 
-/* 1.�v���O�C���ɕK���������Ȃ���΂����Ȃ��֐� */
+/* 1.プラグインに必ず実装しなければいけない関数 */
 ----------------------------------------------------------------------------
 bool WINAPI STEPInit(UINT pID, LPCTSTR szPluginFolder)
 
-	pID		: �v���O�C���ŗLID
-	szPluginFolder	: �v���O�C�����C���X�g�[������Ă���t�H���_
+	pID		: プラグイン固有ID
+	szPluginFolder	: プラグインがインストールされているフォルダ
 
-�v���O�C�����ǂݍ��܂ꂽ����ɂP�x�����Ăяo����܂��B
-�g���q�̓o�^�⃁�j���[�ւ̒ǉ��Ȃǂɏ������������s���܂��B
-��API(STEPxxxx�֐�)���g�p����ꍇ�́A������Initialize()���Ăяo���Ă��������B
+プラグインが読み込まれた直後に１度だけ呼び出されます。
+拡張子の登録やメニューへの追加などに初期化処理を行います。
+※API(STEPxxxx関数)を使用する場合は、ここでInitialize()を呼び出してください。
 
 ----------------------------------------------------------------------------
 void WINAPI STEPFinalize(void)
 
-STE���I������Ƃ��ɌĂяo����܂��B�K�v�ɉ����ďI���������s���Ă��������B
-Initialize()���Ăяo���Ă���ꍇ�́A������Finalize()���Ăяo���Ă��������B
+STEが終了するときに呼び出されます。必要に応じて終了処理を行ってください。
+Initialize()を呼び出している場合は、ここでFinalize()を呼び出してください。
 
 ----------------------------------------------------------------------------
 UINT WINAPI STEPGetAPIVersion(void)
 
-�v���O�C�����T�|�[�g���Ă���API�o�[�W����(STEP_API_VERSION)��Ԃ��Ă��������B
+プラグインがサポートしているAPIバージョン(STEP_API_VERSION)を返してください。
 
 ----------------------------------------------------------------------------
 LPCTSTR WINAPI STEPGetPluginName(void)
 
-�v���O�C���̖��̂�Ԃ��Ă��������B
-���̖��̂̓v���O�C���ݒ�_�C�A���O�Ŏg���܂��B
+プラグインの名称を返してください。
+この名称はプラグイン設定ダイアログで使われます。
 
 ----------------------------------------------------------------------------
 LPCTSTR WINAPI STEPGetPluginInfo(void)
 
-�v���O�C���ɂ��Ă̏���Ԃ��Ă��������B
-���̏��̓v���O�C���ݒ�_�C�A���O�Ŏg���܂��B
+プラグインについての情報を返してください。
+この情報はプラグイン設定ダイアログで使われます。
 
 ----------------------------------------------------------------------------
 
-/* 2.�v���O�C�����^�O�̓ǂݏ������T�|�[�g����ꍇ�Ɏ������Ȃ���΂����Ȃ��֐� */
+/* 2.プラグインがタグの読み書きをサポートする場合に実装しなければいけない関数 */
 ----------------------------------------------------------------------------
 CONTROLTYPE WINAPI
  STEPGetControlType(UINT nFormat, COLUMNTYPE nColumn, bool isEditSIF)
 
-	nFormat		: �Ώۂ̃t�@�C���t�H�[�}�b�gID
-	nColumn		: �J����
-	isEditSIF	: SI/ID3v2�t�B�[���h�ҏW���� true
+	nFormat		: 対象のファイルフォーマットID
+	nColumn		: カラム
+	isEditSIF	: SI/ID3v2フィールド編集時は true
 
-�t�@�C���t�H�[�}�b�g���Ɍ��݂̃J�������ҏW�\���A�\�ȏꍇ�Ɏg�p����R���g���[����Ԃ��Ă��������B
+ファイルフォーマット毎に現在のカラムが編集可能か、可能な場合に使用するコントロールを返してください。
 
 ----------------------------------------------------------------------------
 UINT WINAPI
  STEPGetColumnMax(UINT nFormat, COLUMNTYPE nColumn, bool isEditSIF)
 
-	nFormat		: �Ώۂ̃t�@�C���t�H�[�}�b�gID
-	nColumn		: �J����
-	isEditSIF	: SI/ID3v2�t�B�[���h�ҏW���� true
+	nFormat		: 対象のファイルフォーマットID
+	nColumn		: カラム
+	isEditSIF	: SI/ID3v2フィールド編集時は true
 
-�t�@�C���t�H�[�}�b�g���Ɍ��݂̃J�������͍ő包����Ԃ��Ă��������B
+ファイルフォーマット毎に現在のカラム入力最大桁数を返してください。
 
 ----------------------------------------------------------------------------
 UINT WINAPI
  STEPLoad(FILE_INFO* fileInfo, LPCTSTR szExt)
 
-	fileInfo	: �^�O�����i�[���邽�߂̂���
-	szExt		: �t�@�C���̊g���q
+	fileInfo	: タグ情報を格納するためのもの
+	szExt		: ファイルの拡張子
 
-�n���ꂽ�g���q�A�t�@�C�����e�ɂ���ăv���O�C�����T�|�[�g���Ă���t�H�[�}�b�g�ł���ꍇ�� fileInfo �ɓǂݍ��񂾃^�O���Ȃǂ�ݒ肵�Ă��������B
-����ɓǂݍ��񂾏ꍇ�� STEP_SUCCESS ���G���[�̏ꍇ�� STEP_ERROR��Ԃ��Ă��������B�T�|�[�g���Ă��Ȃ��t�@�C���̏ꍇ�� STEP_UNKNOWN_FORMAT ��Ԃ��Ă��������B
+渡された拡張子、ファイル内容によってプラグインがサポートしているフォーマットである場合は fileInfo に読み込んだタグ情報などを設定してください。
+正常に読み込んだ場合は STEP_SUCCESS をエラーの場合は STEP_ERRORを返してください。サポートしていないファイルの場合は STEP_UNKNOWN_FORMAT を返してください。
 
 ----------------------------------------------------------------------------
 UINT WINAPI
  STEPSave(FILE_INFO*)
 
-	fileInfo	: �^�O��񂪕ۑ�����Ă���
+	fileInfo	: タグ情報が保存されている
 
-�^�O���ɂ��^�O�̏������݂��s���Ă��������B
-�������݂�����̏ꍇ�� STEP_SUCCESS ���G���[�̏ꍇ�� STEP_ERROR��Ԃ��Ă��������B�T�|�[�g���Ă��Ȃ��t�@�C���̏ꍇ�� STEP_UNKNOWN_FORMAT ��Ԃ��Ă��������B
-STEP_SUCCESS���Ԃ�����STE�̓t�@�C�����̕ύX�������s���܂��B
+タグ情報によりタグの書き込みを行ってください。
+書き込みが正常の場合は STEP_SUCCESS をエラーの場合は STEP_ERRORを返してください。サポートしていないファイルの場合は STEP_UNKNOWN_FORMAT を返してください。
+STEP_SUCCESSが返されるとSTEはファイル名の変更処理を行います。
 
 ----------------------------------------------------------------------------
 
-/* 3.�v���O�C���Ɏ����ł���֐� */
+/* 3.プラグインに実装できる関数 */
 ----------------------------------------------------------------------------
 LPCTSTR WINAPI
  STEPGetToolTipText(UINT nID)
 
-	nID		: �R�}���hID
+	nID		: コマンドID
 
-�c�[���o�[�ɔz�u�����{�^���ɑ΂���c�[���`�b�v�ɕ\��������e��Ԃ��Ă��������B
-�\������K�v���Ȃ��ꍇ�� NULL ��Ԃ��Ă��������B
+ツールバーに配置したボタンに対するツールチップに表示する内容を返してください。
+表示する必要がない場合は NULL を返してください。
 
 ----------------------------------------------------------------------------
 LPCTSTR WINAPI
  STEPGetStatusMessage(UINT nID)
 
-	nID		: �R�}���hID
+	nID		: コマンドID
 
-���j���[��c�[���o�[�ɔz�u�����R�}���h�ɑ΂���X�e�[�^�X���b�Z�[�W��Ԃ��Ă��������B
-���b�Z�[�W���Ȃ��ꍇ�� NULL ��Ԃ��Ă��������B
+メニューやツールバーに配置したコマンドに対するステータスメッセージを返してください。
+メッセージがない場合は NULL を返してください。
 
 ----------------------------------------------------------------------------
 bool WINAPI
  STEPOnUpdateCommand(UINT nID)
 
-	nID		: �R�}���hID
+	nID		: コマンドID
 
-�R�}���h���L������������Ԃ��Ă��������B����(false)�̏ꍇ�A�Y�����郁�j���[�E�c�[���o�[�̃{�^���͒W�F�\������܂��B
+コマンドが有効か無効かを返してください。無効(false)の場合、該当するメニュー・ツールバーのボタンは淡色表示されます。
 
 ----------------------------------------------------------------------------
 bool WINAPI
  STEPOnCommand(UINT nID, HWND hWnd)
 
-	nID		: �R�}���hID
-	hWnd		: �e�E�B���h�E
+	nID		: コマンドID
+	hWnd		: 親ウィンドウ
 
-�R�}���h�ɑ΂��鏈�����s���܂��B
-�������s�����ꍇ�� true ��Ԃ��Ă��������B
+コマンドに対する処理を行います。
+処理を行った場合は true を返してください。
 
 ----------------------------------------------------------------------------
 bool WINAPI
  STEPSupportSIF(UINT nFormat)
 
-	nFormat		: �Ώۂ̃t�@�C���t�H�[�}�b�gID
+	nFormat		: 対象のファイルフォーマットID
 
-SIF���͂��s����ꍇ�� true ��Ԃ��Ă��������B
-FILE_INFO �� Get/SetXXXSI() �ɂ��^�O���𑀍삷��ꍇ�� true�B
+SIF入力が行える場合は true を返してください。
+FILE_INFO の Get/SetXXXSI() によりタグ情報を操作する場合は true。
 
 ----------------------------------------------------------------------------
 bool WINAPI
  STEPSupportTrackNumberSIF(UINT nFormat)
 
-	nFormat		: �Ώۂ̃t�@�C���t�H�[�}�b�gID
+	nFormat		: 対象のファイルフォーマットID
 
-SIF���͎��Ƀg���b�N���ɐ����ȊO�̓��͂��s����ꍇ�� true ��Ԃ��Ă��������B
-����`�̏ꍇ�� STEPSupportSIF() ���Ăяo���܂��B
+SIF入力時にトラック№に数字以外の入力が行える場合は true を返してください。
+未定義の場合は STEPSupportSIF() を呼び出します。
 
 ----------------------------------------------------------------------------
 bool WINAPI
  STEPSupportGenreSIF(UINT nFormat)
 
-	nFormat		: �Ώۂ̃t�@�C���t�H�[�}�b�gID
+	nFormat		: 対象のファイルフォーマットID
 
-SIF���͎��Ƀ��[�U�w��W��������C�ӂ̃W������������͂ł���ꍇ�� true ��Ԃ��Ă��������B
-����`�̏ꍇ�� STEPSupportSIF() ���Ăяo���܂��B
+SIF入力時にユーザ指定ジャンルや任意のジャンル名を入力できる場合は true を返してください。
+未定義の場合は STEPSupportSIF() を呼び出します。
 
 ----------------------------------------------------------------------------
 void WINAPI
  STEPShowOptionDialog(HWND hWnd)
 
-	hWnd		: �e�E�B���h�E
+	hWnd		: 親ウィンドウ
 
-�v���O�C���ݒ�_�C�A���O��\�����Ă��������B
+プラグイン設定ダイアログを表示してください。
 
 ----------------------------------------------------------------------------
 void WINAPI
  STEPOnLoadMenu(HMENU hMenu, UINT nType)
 
-	hMenu		: ���j���[
-	nType		: ���j���[�^�C�v
+	hMenu		: メニュー
+	nType		: メニュータイプ
 				MENU_CELL_RANGE
 				MENU_FILE_EDIT_OK
 				MENU_FILE_RANGE
 				MENU_SELECT_FOLDER
 
-�R���e�L�X�g���j���[���\������钼�O�ɌĂяo����܂��B�K�v�ɉ����ă��j���[���ڂ̒ǉ������s���Ă��������B
+コンテキストメニューが表示される直前に呼び出されます。必要に応じてメニュー項目の追加等を行ってください。
 
 ----------------------------------------------------------------------------
 LPCTSTR WINAPI
  STEPGetColumnName(UINT nFormat, COLUMNTYPE nColumn)
 
-	nFormat		: �Ώۂ̃t�@�C���t�H�[�}�b�gID
-	nColumn		: �J�����^�C�v
+	nFormat		: 対象のファイルフォーマットID
+	nColumn		: カラムタイプ
 
-�w�b�_�[�ɕ\������J��������Ԃ��Ă��������B�W���̃J�������ł悢�ꍇ�� NULL ��Ԃ����������B
-�Ȃ��ASTEPHasSpecificColumnName() �� true ��Ԃ��t�H�[�}�b�g�݂̂��̊֐����Ăяo����܂��B
+ヘッダーに表示するカラム名を返してください。標準のカラム名でよい場合は NULL を返しください。
+なお、STEPHasSpecificColumnName() で true を返すフォーマットのみこの関数が呼び出されます。
 
 ----------------------------------------------------------------------------
 bool WINAPI
  STEPHasSpecificColumnName(UINT nFormat)
 
-	nFormat		: �Ώۂ̃t�@�C���t�H�[�}�b�gID
+	nFormat		: 対象のファイルフォーマットID
 
-�Ǝ��̃J���������g�p����ꍇ�� true ��Ԃ��Ă��������B
-���̏ꍇ�ASTEPGetColumnName() �ŃJ��������Ԃ��悤�ɂ���K�v������܂��B
+独自のカラム名を使用する場合は true を返してください。
+その場合、STEPGetColumnName() でカラム名を返すようにする必要があります。
 
 ----------------------------------------------------------------------------
 void WINAPI
  STEPInitFileSpecificInfo(FILE_INFO* pFileInfo)
 
-	pFileInfo	: �t�@�C�����
+	pFileInfo	: ファイル情報
 
-�t�@�C���ŗL���̏��������K�v�ȏꍇ�ɌĂяo����܂��B
-�ŗL���������Ă���ꍇ�́A�������̊J���Ȃǂ��s���Ă��������B
+ファイル固有情報の初期化が必要な場合に呼び出されます。
+固有情報をもっている場合は、メモリの開放などを行ってください。
 
 ----------------------------------------------------------------------------
 bool WINAPI
  STEPOnConvSiFieldToId3tag(FILE_INFO* pFileInfo)
 
-	pFileInfo	: �t�@�C�����
+	pFileInfo	: ファイル情報
 
-���j���[����SI/ID3v2�t�B�[���h����ID3tag�֕ϊ����I�����ꂽ�Ƃ��ɌĂяo����܂��B
-STEP�{�̑��ŕϊ����������s���Ă��悢�ꍇ�� true ��Ԃ��Ă��������B
-�v���O�C�����ŕϊ��������s���ꍇ��  false ��Ԃ��Ă��������B
+メニューからSI/ID3v2フィールドからID3tagへ変換が選択されたときに呼び出されます。
+STEP本体側で変換処理を実行してもよい場合は true を返してください。
+プラグイン側で変換処理を行う場合は  false を返してください。
 
 ----------------------------------------------------------------------------
 
-/* 4.�t�@�C�����ɍs���R�[���o�b�N�֐� */
+/* 4.ファイル毎に行うコールバック関数 */
 ----------------------------------------------------------------------------
 typedef bool WINAPI
  STEPProcessSelectedFilesCB(FILE_INFO* pFileInfo, int nProcFlag, HWND hWnd)
 
-	pFileInfo	: �t�@�C�����
-	pProcFlag	: �����t���O
-				0:�����p��(�������t�@�C���̏㏑��)
-				1:�����p��(�ȍ~�S�ď㏑��)
-				2:���̃t�@�C�����X�L�b�v
-				3:�����̒��~
-	hWnd		: �e�E�B���h�E
+	pFileInfo	: ファイル情報
+	pProcFlag	: 処理フラグ
+				0:処理継続(処理中ファイルの上書き)
+				1:処理継続(以降全て上書き)
+				2:このファイルをスキップ
+				3:処理の中止
+	hWnd		: 親ウィンドウ
 
-�t�@�C���������Ƃɏ������s���A����I�������ꍇ�� true ��Ԃ��Ă��������B
-�T�|�[�g���Ă��Ȃ��t�@�C���̏ꍇ�́A�����������s�킸�� true ��Ԃ��Ă��������B
+ファイル情報をもとに処理を行い、正常終了した場合は true を返してください。
+サポートしていないファイルの場合は、何も処理を行わずに true を返してください。
 
 ----------------------------------------------------------------------------
 
-/* 5.�v���O�C������Ăяo����֐� */
+/* 5.プラグインから呼び出せる関数 */
 ----------------------------------------------------------------------------
 STEP_API UINT
  STEPGetCommandID(void)
 
-���j���[�E�c�[���o�[�̓o�^����Ƃ��K�v�ȃR�}���hID���擾���܂��B
-����ID�́ASTEPOnCommand() �Ȃǂœn����܂��̂ŁA�擾����ID�ƈ�v����ꍇ�ɏ������s���悤�ɂ��Ă��������B
+メニュー・ツールバーの登録するとき必要なコマンドIDを取得します。
+このIDは、STEPOnCommand() などで渡されますので、取得したIDと一致する場合に処理を行うようにしてください。
 
 ----------------------------------------------------------------------------
 STEP_API HMENU
  STEPGetMenu(UINT nType)
 
-	nType		: ���j���[�^�C�v
+	nType		: メニュータイプ
 				MENU_FILE
 				MENU_EDIT
 				MENU_DISP
@@ -252,207 +252,207 @@ STEP_API HMENU
 				MENU_OPTION
 				MENU_HELP
 
-�w�肳�ꂽ���j���[�^�C�v�̃n���h�����擾���܂��B
-���̃n���h�����g�p���ă��j���[�ւ̓o�^���s���Ă��������B
-��L�ȊO�̃��j���[�ɂ��Ă� STEPOnLoadMenu() ���Q�Ƃ��Ă��������B
+指定されたメニュータイプのハンドルを取得します。
+このハンドルを使用してメニューへの登録を行ってください。
+上記以外のメニューについては STEPOnLoadMenu() を参照してください。
 
 ----------------------------------------------------------------------------
 STEP_API void
  STEPAddToolBarButton(HBITMAP hBitmap, UINT nID, char* szCommandName)
 
-	hBitmap			: �A�C�R���r�b�g�}�b�v�n���h��
-	nID				: �R�}���hID
-						STEPGetCommandID() �Ŏ擾
-	szCommandName	: �R�}���h��
-						���̃v���O�C���Əd�Ȃ�Ȃ��悤�ɒ���
+	hBitmap			: アイコンビットマップハンドル
+	nID				: コマンドID
+						STEPGetCommandID() で取得
+	szCommandName	: コマンド名
+						他のプラグインと重ならないように注意
 
-�c�[���o�[�ւ̓o�^���s���܂��B
+ツールバーへの登録を行います。
 
 ----------------------------------------------------------------------------
 STEP_API UINT
  STEPKeyAssign(UINT nID, LPCTSTR sComment, LPCTSTR szCommandName);
 
-	nID				: �R�}���hID
-	sComment		: ����
-						�I�v�V�����ݒ�̃L�[���蓖�ĂŎg�p
-	szCommandName	: �R�}���h��
+	nID				: コマンドID
+	sComment		: 説明
+						オプション設定のキー割り当てで使用
+	szCommandName	: コマンド名
 
-���j���[�E�c�[���o�[�ɓo�^�����R�}���h�ɑ΂��ăL�[���蓖�Ă��s����悤�ɂ��܂��B
+メニュー・ツールバーに登録したコマンドに対してキー割り当てを行えるようにします。
 
 ----------------------------------------------------------------------------
 STEP_API const char*
  STEPGetGenreNameSIF(BYTE byGenre)
 
-	byGenre		: �W�������ԍ�
+	byGenre		: ジャンル番号
 
-�W�������ԍ�����W�����������擾���܂��B
-���[�U�w��W�������ɂ͑Ή����Ă��܂���B
+ジャンル番号からジャンル名を取得します。
+ユーザ指定ジャンルには対応していません。
 
 ----------------------------------------------------------------------------
 STEP_API BYTE
  STEPGetGenreCode(const char* szGenre)
 
-	szGenre		: �W��������
+	szGenre		: ジャンル名
 
-�W���������ɑΉ�����W�������ԍ����擾���܂��B
+ジャンル名に対応するジャンル番号を取得します。
 
 ----------------------------------------------------------------------------
 STEP_API bool
  STEPIsUserGenre(const char* szGenre)
 
-	szGenre		: �W��������
+	szGenre		: ジャンル名
 
-�W�������������[�U�w��W�������ł���ꍇ�� true ��Ԃ��܂��B
+ジャンル名がユーザ指定ジャンルである場合は true を返します。
 
 ----------------------------------------------------------------------------
 STEP_API int
  STEPGetNumericTrackNumber(const char* szTrackNumber, char* szNumericNumber, int size)
 
-	szTrackNumber	: �g���b�N�ԍ�
-	szNumericNumber	: ���ʂ��i�[����̈�
-	size			: szNummericNumber�̃T�C�Y
+	szTrackNumber	: トラック番号
+	szNumericNumber	: 結果を格納する領域
+	size			: szNummericNumberのサイズ
 
-�g���b�N�ԍ��𐔒l�ɕϊ����܂��B�����ȊO���܂܂�Ă���ꍇ�͑O��̐������g���܂��B
-���l�������Ƃ��̎��ۂ̒�����Ԃ��܂��BszNumericNumber�̃T�C�Y������Ă��Ȃ��ꍇ�͊i�[���ꂽ
-�T�C�Y���傫���l���A��܂��B
- ex."1/10" �� "01"�A"DISC1-02" �� "02"
+トラック番号を数値に変換します。数字以外が含まれている場合は前後の数字が使われます。
+数値化したときの実際の長さを返します。szNumericNumberのサイズが足りていない場合は格納された
+サイズより大きい値が帰ります。
+ ex."1/10" → "01"、"DISC1-02" → "02"
 
 ----------------------------------------------------------------------------
 STEP_API int
  STEPGetIntegerTrackNumber(const char* szTrackNumber)
 
-	szTrackNumber	: �g���b�N�ԍ�
+	szTrackNumber	: トラック番号
 
-�g���b�N�ԍ��𐔒l�ɕϊ����܂��B�����ȊO���܂܂�Ă���ꍇ�͑O��̐������g���܂��B
- ex."1/10" �� 1�A"DISC1-02" �� 2
+トラック番号を数値に変換します。数字以外が含まれている場合は前後の数字が使われます。
+ ex."1/10" → 1、"DISC1-02" → 2
 
 ----------------------------------------------------------------------------
 STEP_API bool
  STEPIsNumeric(const char* szText)
 
-	szText	: ������
+	szText	: 文字列
 
-�����񂪂��ׂĐ����̏ꍇ�� true ��Ԃ��܂��B
+文字列がすべて数字の場合は true を返します。
 
 ----------------------------------------------------------------------------
 STEP_API void
  STEPConvSIFieldToID3tag(FILE_INFO* pFileInfo)
 
-	fileInfo	: �^�O��񂪕ۑ�����Ă���
+	fileInfo	: タグ情報が保存されている
 
-SI/ID3v2�t�B�[���h�̃^�O����ID3tag�t�B�[���h�ɃR�s�[���܂��B
+SI/ID3v2フィールドのタグ情報をID3tagフィールドにコピーします。
 
 ----------------------------------------------------------------------------
 STEP_API void
  STEPProcessSelectedFiles(LPCTSTR szTitle, STEPProcessSelectedFilesCB func)
 
-	szTitle		: �v���O���X�_�C�A���O�ɕ\������^�C�g��
-	func		: �R�[���o�b�N�֐�
+	szTitle		: プログレスダイアログに表示するタイトル
+	func		: コールバック関数
 
-���ݑI����ԂƂȂ��Ă���t�@�C���ɑ΂��Ďw�肳�ꂽ�����i�R�[���o�b�N�֐��j���s���܂��B
+現在選択状態となっているファイルに対して指定された処理（コールバック関数）を行います。
 
 ----------------------------------------------------------------------------
 STEP_API void
  STEPProcessSelectedFilesForUpdate(LPCTSTR szTitle, STEPProcessSelectedFilesCB func);
 
-	szTitle		: �v���O���X�_�C�A���O�ɕ\������^�C�g��
-	func		: �R�[���o�b�N�֐�
+	szTitle		: プログレスダイアログに表示するタイトル
+	func		: コールバック関数
 
-���ݑI����ԂƂȂ��Ă���t�@�C���ɑ΂��Ďw�肳�ꂽ�����i�R�[���o�b�N�֐��j���s���܂��B
-�t�@�C���̍X�V���s���ꍇ�͂�������g�p���Ă��������B
+現在選択状態となっているファイルに対して指定された処理（コールバック関数）を行います。
+ファイルの更新を行う場合はこちらを使用してください。
 
 ----------------------------------------------------------------------------
 STEP_API bool
  STEPIsRangeSelected(void)
 
-�͈͑I���i�Z���P�ʁj���̏ꍇ�� true ��Ԃ��܂��B
+範囲選択（セル単位）中の場合は true を返します。
 
 ----------------------------------------------------------------------------
 STEP_API int
  STEPGetSelectedCount(void)
 
-�I����Ԃɂ���t�@�C������Ԃ��܂��B
+選択状態にあるファイル数を返します。
 
 ----------------------------------------------------------------------------
 STEP_API bool
  STEPIsCurrentCellEditOK(void)
 
-�t�H�[�J�X�̂���Z�����ҏW�\�̏ꍇ�� true ��Ԃ��܂��B
+フォーカスのあるセルが編集可能の場合は true を返します。
 
 ----------------------------------------------------------------------------
 STEP_API bool
  STEPGetSelectedRange(int* sx, int* sy, int* ex, int* ey)
 
-	sx		: �J�n�J����
-	sy		: �J�n�s
-	ex		: �I���J����
-	ey		: �I���s
+	sx		: 開始カラム
+	sy		: 開始行
+	ex		: 終了カラム
+	ey		: 終了行
 
-�͈͑I������Ă���͈͂��擾���܂��B
-�͈͑I�𒆂łȂ��ꍇ�� false ��Ԃ��܂��B
+範囲選択されている範囲を取得します。
+範囲選択中でない場合は false を返します。
 
 ----------------------------------------------------------------------------
 STEP_API void
  STEPChangeSubItemText(int nItem, int nColumn, LPCTSTR szText)
 
-	nItem		: �A�C�e���ʒu�i�s�j
-	nColumn		: �J�����ʒu
-	szText		: �ύX������
+	nItem		: アイテム位置（行）
+	nColumn		: カラム位置
+	szText		: 変更文字列
 
-�w�肳�ꂽ�Z���̓��e��ύX���܂��B
+指定されたセルの内容を変更します。
 
 ----------------------------------------------------------------------------
 STEP_API void
  STEPGetFileInfo(int nItem, FILE_INFO* info)
 
-	nItem		: �A�C�e���ʒu�i�s�j
-	fileInfo	: �^�O��񂪕ۑ�����Ă���
+	nItem		: アイテム位置（行）
+	fileInfo	: タグ情報が保存されている
 
-�w�肳�ꂽ�ʒu�̃^�O�����擾���܂��B
+指定された位置のタグ情報を取得します。
 
 ----------------------------------------------------------------------------
 STEP_API void
  STEPInitDataSIF(FILE_INFO* info)
 
-	fileInfo	: �^�O��񂪕ۑ�����Ă���
+	fileInfo	: タグ情報が保存されている
 
-�w�肳�ꂽ�^�O����SI�t�B�[���h���N���A���܂��B
+指定されたタグ情報のSIフィールドをクリアします。
 
 ----------------------------------------------------------------------------
 STEP_API void
  STEPInitDataID3(FILE_INFO* info)
 
-	fileInfo	: �^�O��񂪕ۑ�����Ă���
+	fileInfo	: タグ情報が保存されている
 
-�w�肳�ꂽ�^�O����ID3�t�B�[���h���N���A���܂��B
+指定されたタグ情報のID3フィールドをクリアします。
 
 ----------------------------------------------------------------------------
 STEP_API void
  STEPInitData(FILE_INFO* info)
 
-	fileInfo	: �^�O��񂪕ۑ�����Ă���
+	fileInfo	: タグ情報が保存されている
 
-�w�肳�ꂽ�^�O�������ׂăN���A���܂��B���t����/�t�@�C�����Ȃǂ��N���A���܂��B
+指定されたタグ情報をすべてクリアします。演奏時間/ファイル名などもクリアします。
 
 ----------------------------------------------------------------------------
 STEP_API bool
  STEPWriteTag(FILE_INFO* pFileInfo)
 
-	fileInfo	: �^�O��񂪕ۑ�����Ă���
+	fileInfo	: タグ情報が保存されている
 
-�^�O�̍X�V���s���܂��B
+タグの更新を行います。
 
 ----------------------------------------------------------------------------
 STEP_API bool
  STEPUpdateCellInfo(void)
 
-�J�������E���͍ő包���Ȃǂ̏����X�V���܂��B
-�ݒ肪�ύX���ꂽ�ꍇ�ɌĂяo���܂��B
+カラム名・入力最大桁数などの情報を更新します。
+設定が変更された場合に呼び出します。
 
 ----------------------------------------------------------------------------
 
-/* 6.�^�O���̎擾�^�ݒ� */
-��FILE_INFO���̃f�[�^����ɂ͈ȉ���API���g�p���Ă��������B
+/* 6.タグ情報の取得／設定 */
+※FILE_INFO内のデータ操作には以下のAPIを使用してください。
 
 LPCTSTR GetFullPath(FILE_INFO* info)
 LPCTSTR GetFileName(FILE_INFO* info)

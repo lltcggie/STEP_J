@@ -1,4 +1,4 @@
-// DlgAddNumber.cpp : �C���v�������e�[�V���� �t�@�C��
+// DlgAddNumber.cpp : インプリメンテーション ファイル
 //
 
 #include "stdafx.h"
@@ -12,7 +12,7 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 /////////////////////////////////////////////////////////////////////////////
-// DlgAddNumber �_�C�A���O
+// DlgAddNumber ダイアログ
 
 
 DlgAddNumber::DlgAddNumber(CWnd* pParent /*=NULL*/)
@@ -59,11 +59,11 @@ BEGIN_MESSAGE_MAP(DlgAddNumber, CDialog)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// DlgAddNumber ���b�Z�[�W �n���h��
+// DlgAddNumber メッセージ ハンドラ
 
 void DlgAddNumber::OnRadioReplace() /* Conspiracy 194 */
 {
-	// TODO: ���̈ʒu�ɃR���g���[���ʒm�n���h���p�̃R�[�h��ǉ����Ă�������
+	// TODO: この位置にコントロール通知ハンドラ用のコードを追加してください
 	UpdateData();
 	CWnd* item1 = GetDlgItem(IDC_EDIT_NUMBER_SEPARATOR);
 	CWnd* item2 = GetDlgItem(IDC_EDIT_ADD_BEFORE);
@@ -83,8 +83,8 @@ BOOL DlgAddNumber::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 	
-	// TODO: ���̈ʒu�ɏ������̕⑫������ǉ����Ă�������
+	// TODO: この位置に初期化の補足処理を追加してください
 	OnRadioReplace(); /* Conspiracy 194 */
-	return TRUE;  // �R���g���[���Ƀt�H�[�J�X��ݒ肵�Ȃ��Ƃ��A�߂�l�� TRUE �ƂȂ�܂�
-	              // ��O: OCX �v���p�e�B �y�[�W�̖߂�l�� FALSE �ƂȂ�܂�
+	return TRUE;  // コントロールにフォーカスを設定しないとき、戻り値は TRUE となります
+	              // 例外: OCX プロパティ ページの戻り値は FALSE となります
 }

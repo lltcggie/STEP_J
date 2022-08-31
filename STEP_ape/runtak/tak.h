@@ -1,15 +1,15 @@
 #pragma once
 
 #ifndef _WIN64
-//32bit”Å STEP_ape.ste or 32bit”Å runtak.exe ‚Åg—p
+//32bitç‰ˆ STEP_ape.ste or 32bitç‰ˆ runtak.exe ã§ä½¿ç”¨
 void GetAudioFormatTak(const TCHAR *cszFileName, 
                        TCHAR *pszFormat, int nSize,
                        int *pTimeSec);
-//32bit”Å runtak.exe ‚Å‚Ì‚İg—p
+//32bitç‰ˆ runtak.exe ã§ã®ã¿ä½¿ç”¨
 void GetAudioFormatTakToFileMap(const TCHAR *cszFileName, 
                                 const TCHAR *cszFileMapName);
 #else
-//64bit”Å STEP_ape.ste ‚Å‚Ì‚İg—p
+//64bitç‰ˆ STEP_ape.ste ã§ã®ã¿ä½¿ç”¨
 void GetAudioFormatTakFromFileMap(void *pFileMap, 
                                   TCHAR *pszFormat, int nSize,
                                   int *pTimeSec);

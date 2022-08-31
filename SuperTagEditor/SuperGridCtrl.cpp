@@ -154,16 +154,16 @@ CEdit   *g_pEditWindow;
 
                  - changed the void CMySuperGrid::SortData() example.
                  *
-                 * Today it´s actually one year ago this code went public (good or bad you decide).
+                 * Today itå¯„ actually one year ago this code went public (good or bad you decide).
                  *
 
-    8. dec. 99   - Added Arne Schild´s improvements, see his improvements in the comment section on the website.
+    8. dec. 99   - Added Arne Schildã‚¨s improvements, see his improvements in the comment section on the website.
                     - redesign of DeleteAll()..and them some.
                     - redesign of MakeShortString.
                     - HitTestOnSign....
                  - Bug fix in DrawItem, did not use the GetData function to get the Item string or substring for drawing.
                  - UpdateData now has a default parametre(BOOL bUpdateRow), which forces the listview item to be written.
-                   this means you don´t have to call UpdateData and CListCtrl::SetItemText afterwards when doing dynamic updates.
+                   this means you donã‚¨t have to call UpdateData and CListCtrl::SetItemText afterwards when doing dynamic updates.
                  - added InvalidateItemRect(int nItem);
                  - added InvalidateItemRectPtr(CTreeItem *);
                  - added InvalidateItem..does a basic SetItemText given a CTreeItem ptr
@@ -189,7 +189,7 @@ CEdit   *g_pEditWindow;
 
 
     WHAT'S UP :
-                - NEW RELEASES can in future be found at www.codeproject.com, don´t forget to subscribe.
+                - NEW RELEASES can in future be found at www.codeproject.com, donã‚¨t forget to subscribe.
                 - Peace on earth.
                 - Atl version is still on my todo list.
                 - Better documentation ;)
@@ -277,7 +277,7 @@ int CSuperGridCtrl::OnCreate(LPCREATESTRUCT lpCreateStruct)
     if (CListCtrl::OnCreate(lpCreateStruct) == -1)
         return -1;
 
-    // ƒwƒbƒ_‚ÌƒTƒuƒNƒ‰ƒX‰»
+    // ãƒ˜ãƒƒãƒ€ã®ã‚µãƒ–ã‚¯ãƒ©ã‚¹åŒ–
 //  CHeaderCtrl *pHeader = (CHeaderCtrl *)GetHeaderCtrl();
 //  m_headerCtrl.SubclassWindow(pHeader->GetSafeHwnd());
 
@@ -334,24 +334,24 @@ void CSuperGridCtrl::DrawItem(LPDRAWITEMSTRUCT lpDrawItemStruct)
         COLORREF crBackground, crText;
 
         if (m_bMultiSelect == true && m_bMultiSelectLine == false) {
-            // ”ÍˆÍ‘I‘ğ’†‚Ìê‡
+            // ç¯„å›²é¸æŠä¸­ã®å ´åˆ
             if (GetSelectedItem() == (int)lpDrawItemStruct->itemID) {
-                // ‘I‘ğ‚³‚ê‚Ä‚¢‚és
+                // é¸æŠã•ã‚Œã¦ã„ã‚‹è¡Œ
                 crBackground = GetSysColor(COLOR_HIGHLIGHT);
                 crText = GetSysColor (COLOR_HIGHLIGHTTEXT);
             } else {
-                // ‘I‘ğ‚³‚ê‚Ä‚¢‚È‚¢s
+                // é¸æŠã•ã‚Œã¦ã„ãªã„è¡Œ
                 crBackground = GetSysColor(COLOR_WINDOW);
                 crText = GetSysColor (COLOR_WINDOWTEXT);
             }
         } else {
-            // ”ÍˆÍ‘I‘ğ’†‚Å‚Í‚È‚¢ê‡
+            // ç¯„å›²é¸æŠä¸­ã§ã¯ãªã„å ´åˆ
             if (lpDrawItemStruct->itemState & ODS_SELECTED) {
-                // ‘I‘ğ‚³‚ê‚Ä‚¢‚és
+                // é¸æŠã•ã‚Œã¦ã„ã‚‹è¡Œ
                 crBackground = GetSysColor(COLOR_HIGHLIGHT);
                 crText = GetSysColor (COLOR_HIGHLIGHTTEXT);
             } else {
-                // ‘I‘ğ‚³‚ê‚Ä‚¢‚È‚¢s
+                // é¸æŠã•ã‚Œã¦ã„ãªã„è¡Œ
                 crBackground = GetSysColor(COLOR_WINDOW);
                 crText = GetSysColor (COLOR_WINDOWTEXT);
             }
@@ -403,7 +403,7 @@ void CSuperGridCtrl::DrawItem(LPDRAWITEMSTRUCT lpDrawItemStruct)
                              CLR_DEFAULT,
                              uiFlags);
             DrawTreeItem(pDC, pSelItem, nItem, rc);
-            // ƒ‹[ƒg‚Íˆá‚¤ƒtƒHƒ“ƒg‚Å•`‰æ
+            // ãƒ«ãƒ¼ãƒˆã¯é•ã†ãƒ•ã‚©ãƒ³ãƒˆã§æç”»
             //if (ItemHasChildren(pSelItem)) {
             //  pDC->SelectObject(pOldFont);
             //  pOldFont = pDC->SelectObject(m_rootItemFont);
@@ -445,11 +445,11 @@ void CSuperGridCtrl::DrawItem(LPDRAWITEMSTRUCT lpDrawItemStruct)
             CImageList *pImageList = &g_imageCheckMark;
 
             if (pItemInfo->GetLParam() < 0) {
-                // ƒfƒBƒŒƒNƒgƒŠ‚Ìê‡
+                // ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã®å ´åˆ
                 if (pItemInfo->GetFlagExt() & CItemInfo::FLAG_EX_CHECK_GRAY) {
                     nImage = 2;
                 }
-                // ƒ‹[ƒg‚Íˆá‚¤ƒtƒHƒ“ƒg‚Å•`‰æ
+                // ãƒ«ãƒ¼ãƒˆã¯é•ã†ãƒ•ã‚©ãƒ³ãƒˆã§æç”»
                 //pDC->SelectObject(pOldFont);
                 pOldFont = pDC->SelectObject(m_rootItemFont);
             }
@@ -462,7 +462,7 @@ void CSuperGridCtrl::DrawItem(LPDRAWITEMSTRUCT lpDrawItemStruct)
             }
         }
 
-        //that´s new
+        //thatã‚¨s new
         CString strItemText = GetData(pSelItem)->GetItemText();
         //draw 1. item
         GetItemRect(nItem, rcItem, LVIR_LABEL);
@@ -503,7 +503,7 @@ void CSuperGridCtrl::DrawItem(LPDRAWITEMSTRUCT lpDrawItemStruct)
                     pDC->FillRect(rcItem, &br);
                 }
 
-                // ƒ†[ƒU[‚É‚æ‚éƒZƒ‹‚Ì”wŒi•`‰æˆ—
+                // ãƒ¦ãƒ¼ã‚¶ãƒ¼ã«ã‚ˆã‚‹ã‚»ãƒ«ã®èƒŒæ™¯æç”»å‡¦ç†
                 BOOL    bChangeTextColor;
                 bChangeTextColor = OnDrawCustomCellBG(pDC, nItem, nColumn, rcItem);
 
@@ -612,7 +612,7 @@ void CSuperGridCtrl::MeasureItem(LPMEASUREITEMSTRUCT lpMeasureItemStruct)
 
 
 //the basic rutine making the ... thing snatched it from some tedious code example from the MFC rowlist example
-//Arne Schild´ had a comment on the static const _TCHAR thing. this is now changed
+//Arne Schildã‚¨ had a comment on the static const _TCHAR thing. this is now changed
 LPCTSTR CSuperGridCtrl::MakeShortString(CDC* pDC, LPCTSTR lpszLong, int nColumnLen, int nOffset)
 {
     static const _TCHAR szThreeDots[]=_T("...");
@@ -724,14 +724,14 @@ void CSuperGridCtrl::OnKeydown(NMHDR* pNMHDR, LRESULT* pResult)
                     CItemInfo* lp = GetData(pItem);
                     CTreeItem *pPrevItem = GetTreeItem(nIndex-1);
                     CItemInfo* lpPrev = GetData(pPrevItem);
-                    if (((int)lp->GetLParam() < 0)) {// ‘I‘ğ‚³‚ê‚Ä‚¢‚é‚Ì‚ªƒtƒHƒ‹ƒ_
+                    if (((int)lp->GetLParam() < 0)) {// é¸æŠã•ã‚Œã¦ã„ã‚‹ã®ãŒãƒ•ã‚©ãƒ«ãƒ€
                         if (nIndex == 1)    break;
                         if (GetIndent(pItem) == GetIndent(pPrevItem)) {
                             pPrevItem = GetTreeItem(nIndex-2);
                             lpPrev = GetData(pPrevItem);
                         }
                         if (((int)lpPrev->GetLParam() < 0)) {
-                            // ‚P‚Âã‚ªƒtƒHƒ‹ƒ_ => ‚»‚ÌƒtƒHƒ‹ƒ_‚³‚ç‚É‚P‚Âã‚Ì––”ö‚É’u‚­
+                            // ï¼‘ã¤ä¸ŠãŒãƒ•ã‚©ãƒ«ãƒ€ => ãã®ãƒ•ã‚©ãƒ«ãƒ€ã•ã‚‰ã«ï¼‘ã¤ä¸Šã®æœ«å°¾ã«ç½®ã
                             //SetRedraw(0);
                             if (nIndex-2 > 0) {
                                 pPrevItem = GetTreeItem(nIndex-2);
@@ -761,7 +761,7 @@ void CSuperGridCtrl::OnKeydown(NMHDR* pNMHDR, LRESULT* pResult)
                         break;
                     }
                     if (((int)lpPrev->GetLParam() < 0)) {
-                        // ‚P‚Âã‚ªƒtƒHƒ‹ƒ_ => ‚»‚ÌƒtƒHƒ‹ƒ_‚³‚ç‚É‚P‚Âã‚Ì––”ö‚É’u‚­
+                        // ï¼‘ã¤ä¸ŠãŒãƒ•ã‚©ãƒ«ãƒ€ => ãã®ãƒ•ã‚©ãƒ«ãƒ€ã•ã‚‰ã«ï¼‘ã¤ä¸Šã®æœ«å°¾ã«ç½®ã
                         //SetRedraw(0);
                         if (nIndex-2 > 0) {
                             pPrevItem = GetTreeItem(nIndex-2);
@@ -813,8 +813,8 @@ void CSuperGridCtrl::OnKeydown(NMHDR* pNMHDR, LRESULT* pResult)
                     //SetRedraw(0);
                     CTreeItem *pItem = GetTreeItem(nIndex);
                     CItemInfo* lp = GetData(pItem);
-                    if (((int)lp->GetLParam() < 0)) {// ‘I‘ğ‚³‚ê‚Ä‚¢‚é‚Ì‚ªƒtƒHƒ‹ƒ_
-                        // Ÿ‚ÌƒtƒHƒ‹ƒ_‚ğ’T‚·
+                    if (((int)lp->GetLParam() < 0)) {// é¸æŠã•ã‚Œã¦ã„ã‚‹ã®ãŒãƒ•ã‚©ãƒ«ãƒ€
+                        // æ¬¡ã®ãƒ•ã‚©ãƒ«ãƒ€ã‚’æ¢ã™
                         CTreeItem *pNextItem = NULL;
                         for (int i=nIndex+1;i<GetItemCount();i++) {
                             pNextItem = GetTreeItem(i);
@@ -822,7 +822,7 @@ void CSuperGridCtrl::OnKeydown(NMHDR* pNMHDR, LRESULT* pResult)
                                 break;
                             }
                             pNextItem = NULL;
-                            // ˆÚ“®Œ³‚æ‚èƒCƒ“ƒfƒ“ƒg‚ªŒã‚ë‚É‚ ‚é‚Æ‚±‚ë‚É‚ÍˆÚ“®‚Å‚«‚È‚¢ => Ÿ‚ğ’T‚·
+                            // ç§»å‹•å…ƒã‚ˆã‚Šã‚¤ãƒ³ãƒ‡ãƒ³ãƒˆãŒå¾Œã‚ã«ã‚ã‚‹ã¨ã“ã‚ã«ã¯ç§»å‹•ã§ããªã„ => æ¬¡ã‚’æ¢ã™
                         }
                         if (pNextItem == NULL) {
                             if (GetIndent(pItem) > 2) {
@@ -867,7 +867,7 @@ void CSuperGridCtrl::OnKeydown(NMHDR* pNMHDR, LRESULT* pResult)
                     CTreeItem *pNextItem = GetTreeItem(nIndex+1);
                     CItemInfo* lpNext = GetData(pNextItem);
                     if (((int)lpNext->GetLParam() < 0)) {
-                        // ‚P‚Â‰º‚ªƒtƒHƒ‹ƒ_ => ‚»‚ÌƒtƒHƒ‹ƒ_’¼‰º‚É’u‚­
+                        // ï¼‘ã¤ä¸‹ãŒãƒ•ã‚©ãƒ«ãƒ€ => ãã®ãƒ•ã‚©ãƒ«ãƒ€ç›´ä¸‹ã«ç½®ã
                         CTreeItem* pNewItem = InsertItem(pNextItem, CopyData(lp), TRUE, INSERT_HEAD);
                         OnRefreshTreeItem(pItem, pNewItem); /* STEP 037 */
                         int nIndex = NodeToIndex(pItem);
@@ -1042,10 +1042,10 @@ void CSuperGridCtrl::OnDblclk(NMHDR* pNMHDR, LRESULT* pResult)
                         }
                     } else {
                         if (ht.iSubItem < COLUMN_MIN) {
-                            // ƒAƒCƒeƒ€‚ªƒ_ƒuƒ‹ƒNƒŠƒbƒN‚³‚ê‚½
+                            // ã‚¢ã‚¤ãƒ†ãƒ ãŒãƒ€ãƒ–ãƒ«ã‚¯ãƒªãƒƒã‚¯ã•ã‚ŒãŸ
                             OnItemDblClick(nIndex);
                         } else {
-                            // €–Ú•ÒW
+                            // é …ç›®ç·¨é›†
                             PostMessage(WM_KEYDOWN, VK_F2, NULL);
                         }
                     }
@@ -1056,7 +1056,7 @@ void CSuperGridCtrl::OnDblclk(NMHDR* pNMHDR, LRESULT* pResult)
     *pResult = 0;
 }
 
-// ƒAƒCƒeƒ€‚ªƒ_ƒuƒ‹ƒNƒŠƒbƒN‚³‚ê‚½
+// ã‚¢ã‚¤ãƒ†ãƒ ãŒãƒ€ãƒ–ãƒ«ã‚¯ãƒªãƒƒã‚¯ã•ã‚ŒãŸ
 BOOL CSuperGridCtrl::OnItemDblClick(int)
 {
     return(TRUE);
@@ -1147,7 +1147,7 @@ void CSuperGridCtrl::OnMouseMove(UINT nFlags, CPoint point)
         ht.pt = point;
         SubItemHitTest(&ht);
         if (m_CurSubItem == 0) {
-            // s‚Ì”ÍˆÍ‘I‘ğ
+            // è¡Œã®ç¯„å›²é¸æŠ
             int     sy, ey;
             if (m_posMultiSelect[0].y < ht.iItem) {
                 sy = m_posMultiSelect[0].y;
@@ -1168,21 +1168,21 @@ void CSuperGridCtrl::OnMouseMove(UINT nFlags, CPoint point)
                 }
             }
         } else {
-            // ƒZƒ‹‚Ì”ÍˆÍ‘I‘ğ
+            // ã‚»ãƒ«ã®ç¯„å›²é¸æŠ
             if (ht.iItem != m_posMultiSelect[1].y) {
-                // ‘Ss‘I‘ğ‰ğœ
+                // å…¨è¡Œé¸æŠè§£é™¤
                 SelItemRange(FALSE, 0, -1);
 
                 SetItemState(ht.iItem, LVIS_SELECTED | LVIS_FOCUSED, LVIS_SELECTED | LVIS_FOCUSED);
-                OnChangeSelect();           // ‘I‘ğ‚ª•ÏX‚³‚ê‚½‚±‚Æ‚ğ’Ê’m
+                OnChangeSelect();           // é¸æŠãŒå¤‰æ›´ã•ã‚ŒãŸã“ã¨ã‚’é€šçŸ¥
             }
             if (ht.iSubItem != m_posMultiSelect[1].x) {
-                // Œ…‚Ì‘I‘ğ•ÏX
+                // æ¡ã®é¸æŠå¤‰æ›´
                 int     nOrder = IndexToOrder(ht.iSubItem);
                 if (nOrder != -1) {
-                    // Œ…‚Ì‘I‘ğ•ÏX
+                    // æ¡ã®é¸æŠå¤‰æ›´
                     m_CurSubItem = nOrder;
-                    OnChangeSelect();       // ‘I‘ğ‚ª•ÏX‚³‚ê‚½‚±‚Æ‚ğ’Ê’m
+                    OnChangeSelect();       // é¸æŠãŒå¤‰æ›´ã•ã‚ŒãŸã“ã¨ã‚’é€šçŸ¥
                 }
             }
         }
@@ -1345,16 +1345,16 @@ void CSuperGridCtrl::OnTimer(UINT_PTR nIDEvent)
         if (m_nAutoScrollTimer < 20) m_nAutoScrollTimer = 20;
         SetTimer(2, m_nAutoScrollTimer, NULL);      //reset timer
 
-        // ƒ}ƒEƒXÀ•W‚ğæ“¾
+        // ãƒã‚¦ã‚¹åº§æ¨™ã‚’å–å¾—
         DWORD dwPos = ::GetMessagePos();
         CPoint pClient(GET_X_LPARAM(dwPos),GET_Y_LPARAM(dwPos));
         ScreenToClient(&pClient);
 
-        // ƒNƒ‰ƒCƒAƒ“ƒgƒTƒCƒY‚ğæ“¾
+        // ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã‚µã‚¤ã‚ºã‚’å–å¾—
         CRect rect;
         GetClientRect(rect);
 
-        // ã‰ºƒXƒNƒ[ƒ‹
+        // ä¸Šä¸‹ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«
         if (pClient.y < m_cyImage) {
             SendMessage(WM_VSCROLL, MAKEWPARAM(SB_LINEUP, 0), NULL);
             if (m_nAutoScrollTimer == 20) {
@@ -1367,7 +1367,7 @@ void CSuperGridCtrl::OnTimer(UINT_PTR nIDEvent)
             }
         }
 
-        // ¶‰EƒXƒNƒ[ƒ‹
+        // å·¦å³ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«
         if (pClient.x < 0) {
             SendMessage(WM_HSCROLL, MAKEWPARAM(SB_LINEUP, 0), NULL);
             SendMessage(WM_HSCROLL, MAKEWPARAM(SB_LINEUP, 0), NULL);
@@ -1387,23 +1387,23 @@ void CSuperGridCtrl::OnLButtonUp(UINT nFlags, CPoint point)
     if (m_bMouseLeft) {
         KillTimer(2);
         m_bMouseLeft = false;
-        ReleaseCapture();                   // ƒ}ƒEƒX‚ÌƒLƒƒƒvƒ`ƒƒI—¹
+        ReleaseCapture();                   // ãƒã‚¦ã‚¹ã®ã‚­ãƒ£ãƒ—ãƒãƒ£çµ‚äº†
 
         if (m_CurSubItem == 0) {
-            // ‘I‘ğ‚ª•ÏX‚³‚ê‚½‚±‚Æ‚ğ’Ê’m
+            // é¸æŠãŒå¤‰æ›´ã•ã‚ŒãŸã“ã¨ã‚’é€šçŸ¥
             OnChangeSelect(); /* WildCherry 072 */
 //          if (m_posMultiSelect[1].y >= 0) {
-//              // ‘I‘ğƒ}[ƒNXV
+//              // é¸æŠãƒãƒ¼ã‚¯æ›´æ–°
 //              SetSelectionMark(m_posMultiSelect[1].y);
 //          }
         } else {
-            // ”ÍˆÍ‘I‘ğ‚ğs‚Á‚Ä‚¢‚È‚¢ê‡‚Í‘I‘ğ‰ğœ
+            // ç¯„å›²é¸æŠã‚’è¡Œã£ã¦ã„ãªã„å ´åˆã¯é¸æŠè§£é™¤
             if (m_posMultiSelect[0].x == m_posMultiSelect[1].x
             &&  m_posMultiSelect[0].y == m_posMultiSelect[1].y) {
                 m_bMultiSelect = false; /* LastTrain 062 */
-                OnChangeSelect();       // ‘I‘ğ‚ª•ÏX‚³‚ê‚½‚±‚Æ‚ğ’Ê’m
+                OnChangeSelect();       // é¸æŠãŒå¤‰æ›´ã•ã‚ŒãŸã“ã¨ã‚’é€šçŸ¥
             } else {
-                OnMouseMove(0, point);          // ‘I‘ğ‚ğXV‚³‚¹‚é
+                OnMouseMove(0, point);          // é¸æŠã‚’æ›´æ–°ã•ã›ã‚‹
             }
         }
     }
@@ -1458,12 +1458,12 @@ void CSuperGridCtrl::OnLButtonUp(UINT nFlags, CPoint point)
 
 void CSuperGridCtrl::OnKillFocus(CWnd* pNewWnd)
 {
-    // ƒ}ƒEƒX‚ª¶ƒNƒŠƒbƒN‚³‚ê‚Ä‚¢‚éê‡‚ÍAƒ}ƒEƒX‚ÌƒLƒƒƒvƒ`ƒƒ‚ğI—¹‚·‚é
+    // ãƒã‚¦ã‚¹ãŒå·¦ã‚¯ãƒªãƒƒã‚¯ã•ã‚Œã¦ã„ã‚‹å ´åˆã¯ã€ãƒã‚¦ã‚¹ã®ã‚­ãƒ£ãƒ—ãƒãƒ£ã‚’çµ‚äº†ã™ã‚‹
     if (m_bMouseLeft) {
         KillTimer(2);
         OnLButtonUp(0, CPoint(0,0));
         m_bMouseLeft = false;
-        ReleaseCapture();                   // ƒ}ƒEƒX‚ÌƒLƒƒƒvƒ`ƒƒI—¹
+        ReleaseCapture();                   // ãƒã‚¦ã‚¹ã®ã‚­ãƒ£ãƒ—ãƒãƒ£çµ‚äº†
     }
 
     CListCtrl::OnKillFocus(pNewWnd);
@@ -1520,7 +1520,7 @@ BOOL CSuperGridCtrl::DoDragDrop(CTreeItem* pTarget, CTreeItem* pSource)
     return 1;
 }
 
-// Œ»İ‚ÌƒJ[ƒ\ƒ‹ˆÊ’u‚ÌƒZƒ‹•ÒWŠJn
+// ç¾åœ¨ã®ã‚«ãƒ¼ã‚½ãƒ«ä½ç½®ã®ã‚»ãƒ«ç·¨é›†é–‹å§‹
 bool CSuperGridCtrl::CellEditStart(void)
 {
     int iItem = GetSelectedItem();
@@ -1543,7 +1543,7 @@ bool CSuperGridCtrl::CellEditStart(void)
                     pEdit->GetWindowText(strText);
                     pEdit->SetSel(strText.GetLength(), -1);
                 } else
-                    pEdit->SetSel(pEdit->LineLength(), -1); // ƒJ[ƒ\ƒ‹‚ğs––‚ÉˆÚ“®
+                    pEdit->SetSel(pEdit->LineLength(), -1); // ã‚«ãƒ¼ã‚½ãƒ«ã‚’è¡Œæœ«ã«ç§»å‹•
             }
         }
         return(true);
@@ -1552,23 +1552,23 @@ bool CSuperGridCtrl::CellEditStart(void)
     return(false);
 }
 
-// •ÒWƒEƒBƒ“ƒhƒE‚ÌˆÊ’u‚ğ’²®‚·‚é
+// ç·¨é›†ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®ä½ç½®ã‚’èª¿æ•´ã™ã‚‹
 void CSuperGridCtrl::AdjustEditWindowPos(void)
 {
     CRect   rectNow, rect;
     int     lx, ly;
 
-    // V‚µ‚¢•ÒWƒEƒBƒ“ƒhƒE‚ÌˆÊ’u‚ğ‹‚ß‚é
+    // æ–°ã—ã„ç·¨é›†ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®ä½ç½®ã‚’æ±‚ã‚ã‚‹
     GetSubItemRect(GetSelectedItem(), GetCurSubItem(), LVIR_BOUNDS, rect);
 
-    // ˆÚ“®‘O‚Ì•ÒWƒEƒBƒ“ƒhƒE‚ÌƒEƒBƒ“ƒhƒEˆÊ’u‚ğæ“¾
+    // ç§»å‹•å‰ã®ç·¨é›†ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ä½ç½®ã‚’å–å¾—
     g_pEditWindow->GetWindowRect(&rectNow);
 
-    // •ÒWƒEƒBƒ“ƒhƒE‚ÌˆÚ“®—Ê‚ğ‹‚ß‚é
+    // ç·¨é›†ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®ç§»å‹•é‡ã‚’æ±‚ã‚ã‚‹
     lx = rect.left - rectNow.left;
     ly = rect.top - rectNow.top;
 
-    // •ÒWƒEƒBƒ“ƒhƒE‚ğV‚µ‚¢ˆÊ’u‚ÉˆÚ“®‚³‚¹‚é
+    // ç·¨é›†ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚’æ–°ã—ã„ä½ç½®ã«ç§»å‹•ã•ã›ã‚‹
     rectNow.left += lx;
     rectNow.right += lx;
     rectNow.top += ly;
@@ -1581,11 +1581,11 @@ void CSuperGridCtrl::OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar)
     if (g_pEditWindow != NULL) {
         CListCtrl::OnHScroll(nSBCode, nPos, pScrollBar);
 
-        // •ÒWƒEƒBƒ“ƒhƒE‚ÌˆÊ’u‚ğ’²®‚·‚é
+        // ç·¨é›†ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®ä½ç½®ã‚’èª¿æ•´ã™ã‚‹
         AdjustEditWindowPos();
         InvalidateItemRect(GetSelectedItem());
     } else {
-        // ƒtƒH[ƒJƒX‚ğ©ƒEƒBƒ“ƒhƒE‚É‚·‚é–‚ÅAƒGƒfƒBƒbƒg‚ğI—¹‚³‚¹‚é
+        // ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ã‚’è‡ªã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã«ã™ã‚‹äº‹ã§ã€ã‚¨ãƒ‡ã‚£ãƒƒãƒˆã‚’çµ‚äº†ã•ã›ã‚‹
         if( GetFocus() != this) SetFocus();
 
         CListCtrl::OnHScroll(nSBCode, nPos, pScrollBar);
@@ -1598,11 +1598,11 @@ void CSuperGridCtrl::OnVScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar)
     if (g_pEditWindow != NULL) {
         CListCtrl::OnVScroll(nSBCode, nPos, pScrollBar);
 
-        // •ÒWƒEƒBƒ“ƒhƒE‚ÌˆÊ’u‚ğ’²®‚·‚é
+        // ç·¨é›†ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®ä½ç½®ã‚’èª¿æ•´ã™ã‚‹
         AdjustEditWindowPos();
         InvalidateItemRect(GetSelectedItem());
     } else {
-        // ƒtƒH[ƒJƒX‚ğ©ƒEƒBƒ“ƒhƒE‚É‚·‚é–‚ÅAƒGƒfƒBƒbƒg‚ğI—¹‚³‚¹‚é
+        // ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ã‚’è‡ªã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã«ã™ã‚‹äº‹ã§ã€ã‚¨ãƒ‡ã‚£ãƒƒãƒˆã‚’çµ‚äº†ã•ã›ã‚‹
         if( GetFocus() != this) SetFocus();
 
         CListCtrl::OnVScroll(nSBCode, nPos, pScrollBar);
@@ -1615,17 +1615,17 @@ void CSuperGridCtrl::OnSize(UINT nType, int cx, int cy)
     if (g_pEditWindow != NULL) {
         CListCtrl::OnSize(nType, cx, cy);
 
-        // •ÒWƒEƒBƒ“ƒhƒE‚ÌˆÊ’u‚ğ’²®‚·‚é
+        // ç·¨é›†ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®ä½ç½®ã‚’èª¿æ•´ã™ã‚‹
         AdjustEditWindowPos();
     } else {
-        // ƒtƒH[ƒJƒX‚ğ©ƒEƒBƒ“ƒhƒE‚É‚·‚é–‚ÅAƒGƒfƒBƒbƒg‚ğI—¹‚³‚¹‚é
+        // ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ã‚’è‡ªã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã«ã™ã‚‹äº‹ã§ã€ã‚¨ãƒ‡ã‚£ãƒƒãƒˆã‚’çµ‚äº†ã•ã›ã‚‹
         if( GetFocus() != this) SetFocus();
 
         CListCtrl::OnSize(nType, cx, cy);
     }
 }
 
-// ƒ`ƒFƒbƒNƒ}[ƒN‚ğİ’è‚·‚é
+// ãƒã‚§ãƒƒã‚¯ãƒãƒ¼ã‚¯ã‚’è¨­å®šã™ã‚‹
 void CSuperGridCtrl::SetCheckEx(int nIndex, BOOL bCheck)
 {
     ASSERT(nIndex != -1);
@@ -1640,19 +1640,19 @@ void CSuperGridCtrl::SetCheckEx(CTreeItem *pItem, BOOL bCheck, BOOL bRecursive)
         CItemInfo *pInfo = GetData(pItem);
         int     nIndex = NodeToIndex(pItem);
         if (IsItemFile(pItem) == TRUE) {
-            // ƒtƒ@ƒCƒ‹‚Ìê‡
-            if (pInfo->GetCheck() == bCheck) return;        // •ÏX–³‚µ
+            // ãƒ•ã‚¡ã‚¤ãƒ«ã®å ´åˆ
+            if (pInfo->GetCheck() == bCheck) return;        // å¤‰æ›´ç„¡ã—
             if (nIndex != -1) SetCheck(nIndex, bCheck);
             pInfo->SetCheck(bCheck);
-            // ƒ`ƒFƒbƒNó‘Ô‚ª•ÏX‚³‚ê‚½
+            // ãƒã‚§ãƒƒã‚¯çŠ¶æ…‹ãŒå¤‰æ›´ã•ã‚ŒãŸ
             OnChangeCheck(pItem, bCheck);
         } else {
-            // ƒtƒHƒ‹ƒ_‚Ìê‡
+            // ãƒ•ã‚©ãƒ«ãƒ€ã®å ´åˆ
             if (nIndex != -1) SetCheck(nIndex, bCheck);
             pInfo->SetCheck(bCheck);
             pInfo->SetFlagExt(pInfo->GetFlagExt() &~ CItemInfo::FLAG_EX_CHECK_MASK);
 
-            // qƒAƒCƒeƒ€‚ğ‘S‚Äƒ`ƒFƒbƒN‚·‚é
+            // å­ã‚¢ã‚¤ãƒ†ãƒ ã‚’å…¨ã¦ãƒã‚§ãƒƒã‚¯ã™ã‚‹
             if (ItemHasChildren(pItem) == TRUE) {
                 CTreeItem *pSelItem = pItem;
                 if (ItemHasChildren(pSelItem)) {
@@ -1664,12 +1664,12 @@ void CSuperGridCtrl::SetCheckEx(CTreeItem *pItem, BOOL bCheck, BOOL bRecursive)
             }
             bCheck = TRUE;
         }
-        // Ä‹AŒÄ‚Ño‚µ‚©H
+        // å†å¸°å‘¼ã³å‡ºã—ã‹ï¼Ÿ
         if (bRecursive == FALSE) {
-            // eƒAƒCƒeƒ€‚Ìƒ`ƒFƒbƒNó‘Ô‚ğXV‚·‚é
+            // è¦ªã‚¢ã‚¤ãƒ†ãƒ ã®ãƒã‚§ãƒƒã‚¯çŠ¶æ…‹ã‚’æ›´æ–°ã™ã‚‹
             CTreeItem   *pParent = GetParentItem(pItem);
             while(pParent != NULL) {
-                // e‚Ìƒ`ƒFƒbƒNó‘Ô‚ğXV‚·‚é
+                // è¦ªã®ãƒã‚§ãƒƒã‚¯çŠ¶æ…‹ã‚’æ›´æ–°ã™ã‚‹
                 int     nIndexP = NodeToIndex(pParent);
                 if (nIndexP != -1) SetCheck(nIndexP, bCheck);
                 CItemInfo *pInfoP = GetData(pParent);
@@ -1677,26 +1677,26 @@ void CSuperGridCtrl::SetCheckEx(CTreeItem *pItem, BOOL bCheck, BOOL bRecursive)
                 pInfoP->SetFlagExt((pInfo->GetFlagExt() &~ CItemInfo::FLAG_EX_CHECK_MASK) | CItemInfo::FLAG_EX_CHECK_GRAY);
 //              InvalidateItem(pParent);
 
-                // ‚³‚ç‚Ée
+                // ã•ã‚‰ã«è¦ª
                 pParent = GetParentItem(pParent);
             }
         }
     }
 }
 
-// ƒ`ƒFƒbƒNó‘Ô‚ª•ÏX‚³‚ê‚½
+// ãƒã‚§ãƒƒã‚¯çŠ¶æ…‹ãŒå¤‰æ›´ã•ã‚ŒãŸ
 void CSuperGridCtrl::OnChangeCheck(CTreeItem *pItem, BOOL bCheck)
 {
 }
 
-// ƒXƒy[ƒX‚ª‰Ÿ‚³‚ê‚½ê‡‚Ìˆ—Fƒ`ƒFƒbƒNƒ}[ƒN•ÏX
+// ã‚¹ãƒšãƒ¼ã‚¹ãŒæŠ¼ã•ã‚ŒãŸå ´åˆã®å‡¦ç†ï¼šãƒã‚§ãƒƒã‚¯ãƒãƒ¼ã‚¯å¤‰æ›´
 void CSuperGridCtrl::OnKeyDownSpace(void)
 {
     if (GetSelectedCount() == 0) return;
     if ((GetExtendedStyle() & LVS_EX_CHECKBOXES) == 0) return;
 
     if (GetSelectedCount() == 1) {
-        // ’Pˆê‘I‘ğ
+        // å˜ä¸€é¸æŠ
         int nIndex = GetSelectedItem();
         if (nIndex != -1) {
             CTreeItem   *pItem = GetTreeItem(nIndex);
@@ -1705,25 +1705,25 @@ void CSuperGridCtrl::OnKeyDownSpace(void)
             }
         }
     } else {
-        // •¡”‘I‘ğ
+        // è¤‡æ•°é¸æŠ
         int     nIndex = -1;
         int     nCheck;
         BOOL    bFirst = TRUE;
         BOOL    bReverse = TRUE;
-        // ‘I‘ğ”ÍˆÍ‚ÅˆÙ‚È‚éƒ`ƒFƒbƒNó‘Ô‚ª‚ ‚éê‡‚É‚ÍAˆê”Ôæ“ª‚Ìó‘Ô‚É“ˆê‚·‚é
+        // é¸æŠç¯„å›²ã§ç•°ãªã‚‹ãƒã‚§ãƒƒã‚¯çŠ¶æ…‹ãŒã‚ã‚‹å ´åˆã«ã¯ã€ä¸€ç•ªå…ˆé ­ã®çŠ¶æ…‹ã«çµ±ä¸€ã™ã‚‹
         while((nIndex = GetNextItem(nIndex, LVNI_ALL | LVNI_SELECTED)) >= 0) {
             CTreeItem   *pItem = GetTreeItem(nIndex);
-            // ƒtƒ@ƒCƒ‹‚Ì‚İˆ—‚·‚é
+            // ãƒ•ã‚¡ã‚¤ãƒ«ã®ã¿å‡¦ç†ã™ã‚‹
             if (pItem != NULL && IsItemFile(pItem) == TRUE) {
                 CItemInfo *pInfo = GetData(pItem);
                 if (bFirst == TRUE) {
-                    // æ“ª‚Ìƒtƒ@ƒCƒ‹
+                    // å…ˆé ­ã®ãƒ•ã‚¡ã‚¤ãƒ«
                     nCheck = pInfo->GetCheck();
                     bFirst = FALSE;
                 } else {
-                    // ‚Q”Ô–ÚˆÈ~‚Ìƒtƒ@ƒCƒ‹
+                    // ï¼’ç•ªç›®ä»¥é™ã®ãƒ•ã‚¡ã‚¤ãƒ«
                     if (nCheck != pInfo->GetCheck()) {
-                        // ƒ`ƒFƒbƒNó‘Ô‚ªˆÙ‚È‚éê‡‚ÍAæ“ª‚Ìƒtƒ@ƒCƒ‹‚Æ“¯‚¶‚É‚·‚é
+                        // ãƒã‚§ãƒƒã‚¯çŠ¶æ…‹ãŒç•°ãªã‚‹å ´åˆã¯ã€å…ˆé ­ã®ãƒ•ã‚¡ã‚¤ãƒ«ã¨åŒã˜ã«ã™ã‚‹
                         SetCheckEx(pItem, nCheck);
                         bReverse = FALSE;
                     }
@@ -1731,11 +1731,11 @@ void CSuperGridCtrl::OnKeyDownSpace(void)
             }
         }
         if (bReverse == TRUE) {
-            // ‘I‘ğ”ÍˆÍ‚ª‘S‚Ä“¯‚¶ƒ`ƒFƒbƒNó‘Ô‚¾‚Á‚½ê‡‚ÍAƒ`ƒFƒbƒNó‘Ô‚ğ”½“]‚·‚é
+            // é¸æŠç¯„å›²ãŒå…¨ã¦åŒã˜ãƒã‚§ãƒƒã‚¯çŠ¶æ…‹ã ã£ãŸå ´åˆã¯ã€ãƒã‚§ãƒƒã‚¯çŠ¶æ…‹ã‚’åè»¢ã™ã‚‹
             nIndex = -1;
             while((nIndex = GetNextItem(nIndex, LVNI_ALL | LVNI_SELECTED)) >= 0) {
                 CTreeItem   *pItem = GetTreeItem(nIndex);
-                // ƒtƒ@ƒCƒ‹‚Ì‚İˆ—‚·‚é
+                // ãƒ•ã‚¡ã‚¤ãƒ«ã®ã¿å‡¦ç†ã™ã‚‹
                 if (pItem != NULL && IsItemFile(pItem) == TRUE) {
                     SetCheckEx(pItem, !nCheck);
                 }
@@ -1750,7 +1750,7 @@ BOOL CSuperGridCtrl::PreTranslateMessage(MSG* pMsg)
         if (GetFocus() == this) {
             if (m_CurSubItem == 0) {
                 if (pMsg->wParam == VK_SPACE) {
-                    // ƒXƒy[ƒX‚ª‰Ÿ‚³‚ê‚½ê‡‚Ìˆ—Fƒ`ƒFƒbƒNƒ}[ƒN•ÏX
+                    // ã‚¹ãƒšãƒ¼ã‚¹ãŒæŠ¼ã•ã‚ŒãŸå ´åˆã®å‡¦ç†ï¼šãƒã‚§ãƒƒã‚¯ãƒãƒ¼ã‚¯å¤‰æ›´
                     OnKeyDownSpace();
                     return(TRUE);
                 }
@@ -1759,36 +1759,36 @@ BOOL CSuperGridCtrl::PreTranslateMessage(MSG* pMsg)
             bool    bChangeSelect = true;
             if (pMsg->wParam == VK_RETURN) {
                 if (g_bOptEnterBeginEdit) {
-                    // €–Ú‚Ì•ÒWŠJn
+                    // é …ç›®ã®ç·¨é›†é–‹å§‹
                     pMsg->wParam = VK_F2;
                 } else {
-                    // «^ª‚Ì€–Ú‚ÉˆÚ“®
+                    // â†“ï¼â†‘ã®é …ç›®ã«ç§»å‹•
                     pMsg->wParam = (GetAsyncKeyState(VK_SHIFT) & 0x8000) ? VK_UP : VK_DOWN;
                 }
             } else if (pMsg->wParam == VK_TAB) {
-                // ©^¨‚Ì€–Ú‚ÉˆÚ“®
+                // â†ï¼â†’ã®é …ç›®ã«ç§»å‹•
                 pMsg->wParam = (GetAsyncKeyState(VK_SHIFT) & 0x8000) ? VK_LEFT : VK_RIGHT;
                 bChangeSelect = false;
             } else {
                 switch(pMsg->wParam) {
-                case VK_UP:             // ª
-                case VK_DOWN:           // «
-                case VK_LEFT:           // ©
-                case VK_RIGHT:          // ¨
+                case VK_UP:             // â†‘
+                case VK_DOWN:           // â†“
+                case VK_LEFT:           // â†
+                case VK_RIGHT:          // â†’
                 case VK_PRIOR:          // PageUp
                 case VK_NEXT:           // PageDown
                 case VK_END:            // End
                 case VK_HOME:           // Home
-                    // SHIFT + ƒJ[ƒ\ƒ‹(”ÍˆÍ‘I‘ğˆ—)
+                    // SHIFT + ã‚«ãƒ¼ã‚½ãƒ«(ç¯„å›²é¸æŠå‡¦ç†)
                     if (GetAsyncKeyState(VK_SHIFT) & 0x8000) {
                         if (m_bMultiSelect == false) {
-                            // ”ÍˆÍ‘I‘ğŠJnˆ—
+                            // ç¯„å›²é¸æŠé–‹å§‹å‡¦ç†
                             SelectRangeStart();
                         }
                     }
-                    // CTRL ‚Í–³‹
+                    // CTRL ã¯ç„¡è¦–
                     if (GetAsyncKeyState(VK_CONTROL) & 0x8000 && !(GetAsyncKeyState(VK_SHIFT) & 0x8000)/* STEP 001 */) {
-/* 2003.06.18 ­‚µ•ÏX */
+/* 2003.06.18 å°‘ã—å¤‰æ›´ */
 #ifdef FLICKERFREE
                         //SetRedraw(FALSE);
 #endif
@@ -1865,10 +1865,10 @@ BOOL CSuperGridCtrl::PreTranslateMessage(MSG* pMsg)
 /* 2003.06.19 end */
             case VK_LEFT:
                 if (GetSelectedItem() >= 0) {
-                    // ”ÍˆÍ‘I‘ğˆ—’†
+                    // ç¯„å›²é¸æŠå‡¦ç†ä¸­
                     if (m_bMultiSelect && GetAsyncKeyState(VK_SHIFT) & 0x8000) {
                         if (m_bMultiSelectLine == false) {
-                            // —ñ‚Ì”ÍˆÍ‘I‘ğ’†
+                            // åˆ—ã®ç¯„å›²é¸æŠä¸­
                             if (m_CurSubItem <= 1) return(TRUE);
                         }
                     }
@@ -1881,17 +1881,17 @@ BOOL CSuperGridCtrl::PreTranslateMessage(MSG* pMsg)
                         MakeColumnVisible( Header_OrderToIndex( pHeader->m_hWnd, m_CurSubItem));
                         int iItem = GetSelectedItem();
                         if( iItem != -1 ) InvalidateItemRect(iItem);
-                        if (bChangeSelect) OnChangeSelect();    // ‘I‘ğ‚ª•ÏX‚³‚ê‚½‚±‚Æ‚ğ’Ê’m
+                        if (bChangeSelect) OnChangeSelect();    // é¸æŠãŒå¤‰æ›´ã•ã‚ŒãŸã“ã¨ã‚’é€šçŸ¥
                     }
                 }
                 return TRUE;
 
             case VK_RIGHT:
                 if (GetSelectedItem() >= 0) {
-                    // ”ÍˆÍ‘I‘ğˆ—’†
+                    // ç¯„å›²é¸æŠå‡¦ç†ä¸­
                     if (m_bMultiSelect && GetAsyncKeyState(VK_SHIFT) & 0x8000) {
                         if (m_bMultiSelectLine == true) {
-                            // s‚Ì”ÍˆÍ‘I‘ğ’†
+                            // è¡Œã®ç¯„å›²é¸æŠä¸­
                             return(TRUE);
                         }
                     }
@@ -1906,7 +1906,7 @@ BOOL CSuperGridCtrl::PreTranslateMessage(MSG* pMsg)
                         MakeColumnVisible(Header_OrderToIndex( pHeader->m_hWnd, m_CurSubItem));
                         int iItem = GetSelectedItem();
                         if( iItem != -1 ) InvalidateItemRect(iItem);
-                        if (bChangeSelect) OnChangeSelect();    // ‘I‘ğ‚ª•ÏX‚³‚ê‚½‚±‚Æ‚ğ’Ê’m
+                        if (bChangeSelect) OnChangeSelect();    // é¸æŠãŒå¤‰æ›´ã•ã‚ŒãŸã“ã¨ã‚’é€šçŸ¥
                     }
                 }
                 return TRUE;
@@ -1915,7 +1915,7 @@ BOOL CSuperGridCtrl::PreTranslateMessage(MSG* pMsg)
                 {
                     BOOL bResult = OnVkReturn();
                     if(!bResult) {
-                        // Œ»İ‚ÌƒJ[ƒ\ƒ‹ˆÊ’u‚ÌƒZƒ‹•ÒWŠJn
+                        // ç¾åœ¨ã®ã‚«ãƒ¼ã‚½ãƒ«ä½ç½®ã®ã‚»ãƒ«ç·¨é›†é–‹å§‹
                         if (CellEditStart()) {
                             return(1);
                         }
@@ -1930,8 +1930,8 @@ BOOL CSuperGridCtrl::PreTranslateMessage(MSG* pMsg)
     if(pMsg->message == WM_KEYUP) {
         if (GetFocus() == this) {
             switch(pMsg->wParam) {
-            case VK_UP:             // ª
-            case VK_DOWN:           // «
+            case VK_UP:             // â†‘
+            case VK_DOWN:           // â†“
             case VK_PRIOR:          // PageUp
             case VK_NEXT:           // PageDown
             case VK_END:            // End
@@ -1946,14 +1946,14 @@ BOOL CSuperGridCtrl::PreTranslateMessage(MSG* pMsg)
                     BOOL    bResult;
                     bResult = CListCtrl::PreTranslateMessage(pMsg);
                     if (m_bMultiSelectLine == false) {
-                        // s‘I‘ğ‰ğœ
+                        // è¡Œé¸æŠè§£é™¤
                         int     iItem = GetSelectedItem();
 #ifdef FLICKERFREE
                         SelItemRange(FALSE, 0, -1);
                         SetItemState(iItem, LVIS_SELECTED | LVIS_FOCUSED, LVIS_SELECTED | LVIS_FOCUSED);
 #endif
                     }
-                    OnChangeSelect();       // ‘I‘ğ‚ª•ÏX‚³‚ê‚½‚±‚Æ‚ğ’Ê’m
+                    OnChangeSelect();       // é¸æŠãŒå¤‰æ›´ã•ã‚ŒãŸã“ã¨ã‚’é€šçŸ¥
                     return(bResult);
                 }
                 break;
@@ -2044,7 +2044,7 @@ CEdit* CSuperGridCtrl::EditLabelEx(int nItem, int nCol)
                                                 //and then edit an item,
                                                 //enter a long text so that the ES_AUTOHSCROLL comes to rescue
                                                 //yes that's look funny, ???.
-    pEdit->LimitText(OnGetColumLimitText(nItem, nCol)); // 30•¶š‚Ü‚Å
+    pEdit->LimitText(OnGetColumLimitText(nItem, nCol)); // 30æ–‡å­—ã¾ã§
     pEdit->SetFocus();
 
     return pEdit;
@@ -2178,11 +2178,11 @@ CSuperGridCtrl::CTreeItem* CSuperGridCtrl::InsertItem(CTreeItem *pParent, CItemI
 
     switch(nInsertType) {
     case INSERT_HEAD:
-        // æ“ª‚É’Ç‰Á
+        // å…ˆé ­ã«è¿½åŠ 
         pParent->m_listChild.AddHead(pItem);
         break;
     case INSERT_TAIL:
-        // ÅŒã‚É’Ç‰Á
+        // æœ€å¾Œã«è¿½åŠ 
         pParent->m_listChild.AddTail(pItem);
         break;
 #if SUPORT_DRAGDROP
@@ -2204,7 +2204,7 @@ CSuperGridCtrl::CTreeItem* CSuperGridCtrl::InsertItem(CTreeItem *pParent, CItemI
         break;
 #endif
     case INSERT_FILE:
-        // ƒtƒ@ƒCƒ‹(ƒtƒHƒ‹ƒ_‚Ì‘O‚É’Ç‰Á)
+        // ãƒ•ã‚¡ã‚¤ãƒ«(ãƒ•ã‚©ãƒ«ãƒ€ã®å‰ã«è¿½åŠ )
         {
             POSITION    pos = pParent->m_listChild.GetHeadPosition();
             bool    bAddItem = false;
@@ -2213,8 +2213,8 @@ CSuperGridCtrl::CTreeItem* CSuperGridCtrl::InsertItem(CTreeItem *pParent, CItemI
                 CTreeItem   *pTarget = (CTreeItem *)pParent->m_listChild.GetNext(pos);
                 if (pTarget != NULL) {
                     CItemInfo *pItemInfo = GetData(pTarget);
-                    if (pItemInfo->GetLParam() < 0) {       // ƒtƒHƒ‹ƒ_H
-                        // ‚±‚ÌˆÊ’u‚É‘}“ü
+                    if (pItemInfo->GetLParam() < 0) {       // ãƒ•ã‚©ãƒ«ãƒ€ï¼Ÿ
+                        // ã“ã®ä½ç½®ã«æŒ¿å…¥
                         pParent->m_listChild.InsertBefore(posTarget, pItem);
                         bAddItem = true;
                         break;
@@ -2222,18 +2222,18 @@ CSuperGridCtrl::CTreeItem* CSuperGridCtrl::InsertItem(CTreeItem *pParent, CItemI
                 }
             }
             if (bAddItem == false) {
-                // ÅŒã‚É’Ç‰Á
+                // æœ€å¾Œã«è¿½åŠ 
                 pParent->m_listChild.AddTail(pItem);
             }
         }
         break;
     case INSERT_DIRECTORY:
-        // ƒfƒBƒŒƒNƒgƒŠ(ƒtƒHƒ‹ƒ_“¯m‚Åƒ\[ƒg‚µ‚Ä’Ç‰Á)
+        // ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª(ãƒ•ã‚©ãƒ«ãƒ€åŒå£«ã§ã‚½ãƒ¼ãƒˆã—ã¦è¿½åŠ )
         {
             POSITION    pos;
             const TCHAR *sItemText = GetData(pItem)->GetItemText();
             if (sItemText == NULL || _tcslen(sItemText) == 0) {
-                // €–Ú–¼‚ª‹ó
+                // é …ç›®åãŒç©º
                 pos = NULL;
             } else {
                 pos = pParent->m_listChild.GetHeadPosition();
@@ -2245,9 +2245,9 @@ CSuperGridCtrl::CTreeItem* CSuperGridCtrl::InsertItem(CTreeItem *pParent, CItemI
                 if (pTarget != NULL) {
                     CItemInfo *pItemInfo = GetData(pTarget);
                     const TCHAR *sTargetText = pItemInfo->GetItemText();
-                    if (pItemInfo->GetLParam() < 0      // ƒtƒHƒ‹ƒ_
+                    if (pItemInfo->GetLParam() < 0      // ãƒ•ã‚©ãƒ«ãƒ€
                     &&  _tcsicmp(sTargetText, sItemText) > 0) {
-                        // ‚±‚ÌˆÊ’u‚É‘}“ü
+                        // ã“ã®ä½ç½®ã«æŒ¿å…¥
                         pParent->m_listChild.InsertBefore(posTarget, pItem);
                         bAddItem = true;
                         break;
@@ -2255,7 +2255,7 @@ CSuperGridCtrl::CTreeItem* CSuperGridCtrl::InsertItem(CTreeItem *pParent, CItemI
                 }
             }
             if (bAddItem == false) {
-                // ÅŒã‚É’Ç‰Á
+                // æœ€å¾Œã«è¿½åŠ 
                 pParent->m_listChild.AddTail(pItem);
             }
         }
@@ -2953,59 +2953,59 @@ void CSuperGridCtrl::OnLButtonDown(UINT nFlags, CPoint point)
         bSelect = HitTestOnSign(point, ht);
         if (bSelect && ht.iSubItem <= 0) {
             if (m_bMultiSelect) {
-                // ©‘O‚Ì•¡”‘I‘ğˆ—‚ğ‰ğœ
+                // è‡ªå‰ã®è¤‡æ•°é¸æŠå‡¦ç†ã‚’è§£é™¤
                 m_bMultiSelect = m_bMultiSelectLine = false;
-                // ‘I‘ğ—Ìˆæ‚ğÄ•`‰æ‚³‚¹‚é
+                // é¸æŠé ˜åŸŸã‚’å†æç”»ã•ã›ã‚‹
                 InvalidateSelectRangeItem();
             }
             m_CurSubItem = 0;
             if ((GetAsyncKeyState(VK_SHIFT  ) & 0x8000)
             ||  (GetAsyncKeyState(VK_CONTROL) & 0x8000)) {
-                // SHIFT / CTRL ‚ª‰Ÿ‚³‚ê‚Ä‚¢‚éê‡‚ÍAƒfƒtƒHƒ‹ƒgˆ—
+                // SHIFT / CTRL ãŒæŠ¼ã•ã‚Œã¦ã„ã‚‹å ´åˆã¯ã€ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆå‡¦ç†
                 CListCtrl::OnLButtonDown(nFlags, point);
-                OnChangeSelect();           // ‘I‘ğ‚ª•ÏX‚³‚ê‚½‚±‚Æ‚ğ’Ê’m /* LastTrain 062 */
+                OnChangeSelect();           // é¸æŠãŒå¤‰æ›´ã•ã‚ŒãŸã“ã¨ã‚’é€šçŸ¥ /* LastTrain 062 */
             } else {
-                // s‚ğ‘I‘ğ
+                // è¡Œã‚’é¸æŠ
                 m_posMultiSelect[0].y = m_posMultiSelect[1].y = ht.iItem;
                 m_posMultiSelect[0].x = m_posMultiSelect[1].x = 0;
                 SelectAllItems(FALSE);
                 SetItemState(ht.iItem, LVIS_SELECTED | LVIS_FOCUSED, LVIS_SELECTED | LVIS_FOCUSED);
-                SetSelectionMark(ht.iItem); // ‘I‘ğƒ}[ƒNXV
-                m_bMouseLeft = true;        // ¶ƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚½
-                OnChangeSelect();           // ‘I‘ğ‚ª•ÏX‚³‚ê‚½‚±‚Æ‚ğ’Ê’m /* LastTrain 062 */
-                SetCapture();               // ƒ}ƒEƒX‚ÌƒLƒƒƒvƒ`ƒƒŠJn
+                SetSelectionMark(ht.iItem); // é¸æŠãƒãƒ¼ã‚¯æ›´æ–°
+                m_bMouseLeft = true;        // å·¦ãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚ŒãŸ
+                OnChangeSelect();           // é¸æŠãŒå¤‰æ›´ã•ã‚ŒãŸã“ã¨ã‚’é€šçŸ¥ /* LastTrain 062 */
+                SetCapture();               // ãƒã‚¦ã‚¹ã®ã‚­ãƒ£ãƒ—ãƒãƒ£é–‹å§‹
                 m_nAutoScrollTimer = 75;
-                SetTimer(2, m_nAutoScrollTimer, NULL);  // ©“®ƒXƒNƒ[ƒ‹ˆ——p
+                SetTimer(2, m_nAutoScrollTimer, NULL);  // è‡ªå‹•ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«å‡¦ç†ç”¨
             }
             return;
         }
 
         if (bSelect && ht.iItem != -1) {
-            // ”ÍˆÍ‘I‘ğ’†‚Å‚Í‚È‚­AƒAƒNƒeƒBƒu‚ÈƒZƒ‹‚ğƒNƒŠƒbƒN‚µ‚½ê‡‚Í
-            // ‚»‚ÌƒZƒ‹‚Ì•ÒWŠJn
+            // ç¯„å›²é¸æŠä¸­ã§ã¯ãªãã€ã‚¢ã‚¯ãƒ†ã‚£ãƒ–ãªã‚»ãƒ«ã‚’ã‚¯ãƒªãƒƒã‚¯ã—ãŸå ´åˆã¯
+            // ãã®ã‚»ãƒ«ã®ç·¨é›†é–‹å§‹
             if (m_bMultiSelect == false
             &&  m_bMultiSelectLine == false
             &&  ht.iItem == GetSelectedItem()
             &&  ht.iSubItem == GetCurSubItem()) {
-                // •ÒW‚ğŠJn‚³‚¹‚é
+                // ç·¨é›†ã‚’é–‹å§‹ã•ã›ã‚‹
                 PostMessage(WM_KEYDOWN, VK_F2, NULL);
                 return;
             }
 
-            // SHIFT + ƒ}ƒEƒXƒXƒNƒŠƒbƒN(”ÍˆÍ‘I‘ğˆ—)
+            // SHIFT + ãƒã‚¦ã‚¹ã‚¹ã‚¯ãƒªãƒƒã‚¯(ç¯„å›²é¸æŠå‡¦ç†)
             if (GetAsyncKeyState(VK_SHIFT) & 0x8000) {
-                // ”ÍˆÍ‘I‘ğŠJnˆ—
+                // ç¯„å›²é¸æŠé–‹å§‹å‡¦ç†
                 SelectRangeStart();
             }
 
-            // ‘I‘ğ‚ğ‰ğœ
+            // é¸æŠã‚’è§£é™¤
             SelItemRange(FALSE, 0, -1);
 
             m_CurSubItem = IndexToOrder(ht.iSubItem);
             CHeaderCtrl *pHeader = (CHeaderCtrl *)GetHeaderCtrl();
             // Make the column fully visible.
             MakeColumnVisible(Header_OrderToIndex(pHeader->m_hWnd, m_CurSubItem));
-            // s‚ğ‘I‘ğ
+            // è¡Œã‚’é¸æŠ
             SetItemState(ht.iItem, LVIS_SELECTED | LVIS_FOCUSED , LVIS_SELECTED | LVIS_FOCUSED);
 
             bool    bCtrlOpen;
@@ -3014,23 +3014,23 @@ void CSuperGridCtrl::OnLButtonDown(UINT nFlags, CPoint point)
             InvalidateItemRect(ht.iItem);
 
             if (bCtrlOpen == false) {
-                // ƒ}ƒEƒX‚É‚æ‚é”ÍˆÍ‘I‘ğˆ—
+                // ãƒã‚¦ã‚¹ã«ã‚ˆã‚‹ç¯„å›²é¸æŠå‡¦ç†
                 if (m_bMultiSelect == true) {
-                    // Œ»İ‚Ì‘I‘ğ‚ğ‰ğœ
+                    // ç¾åœ¨ã®é¸æŠã‚’è§£é™¤
                     OnChangeSelect();
                 }
-                m_bMouseLeft = true;        // ¶ƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚½
+                m_bMouseLeft = true;        // å·¦ãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚ŒãŸ
 
-                OnChangeSelect();           // ‘I‘ğ‚ª•ÏX‚³‚ê‚½‚±‚Æ‚ğ’Ê’m
+                OnChangeSelect();           // é¸æŠãŒå¤‰æ›´ã•ã‚ŒãŸã“ã¨ã‚’é€šçŸ¥
 
-                SetCapture();               // ƒ}ƒEƒX‚ÌƒLƒƒƒvƒ`ƒƒŠJn
+                SetCapture();               // ãƒã‚¦ã‚¹ã®ã‚­ãƒ£ãƒ—ãƒãƒ£é–‹å§‹
                 m_nAutoScrollTimer = 75;
-                SetTimer(2, m_nAutoScrollTimer, NULL);  // ©“®ƒXƒNƒ[ƒ‹ˆ——p
+                SetTimer(2, m_nAutoScrollTimer, NULL);  // è‡ªå‹•ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«å‡¦ç†ç”¨
             } else {
-                OnChangeSelect();           // ‘I‘ğ‚ª•ÏX‚³‚ê‚½‚±‚Æ‚ğ’Ê’m
+                OnChangeSelect();           // é¸æŠãŒå¤‰æ›´ã•ã‚ŒãŸã“ã¨ã‚’é€šçŸ¥
             }
         } else {
-            // ‘I‘ğ‚ğ‰ğœ
+            // é¸æŠã‚’è§£é™¤
             SelItemRange(FALSE, 0, -1);
         }
     }
@@ -3073,8 +3073,8 @@ void CSuperGridCtrl::DeleteAll()
         CTreeItem * pRoot = (CTreeItem*)m_RootItems.GetNext(pos);
         if(pRoot!=NULL)
         {
-            //DeleteItem(0);//delete cur item in listview: no Sorry Arne you don´t need this
-            //HideChildren(pRoot, TRUE, 0);  no Sorry Arne you don´t need this
+            //DeleteItem(0);//delete cur item in listview: no Sorry Arne you donã‚¨t need this
+            //HideChildren(pRoot, TRUE, 0);  no Sorry Arne you donã‚¨t need this
 
             // If root, must delete from m_rootData
             if(GetParentItem(pRoot) == NULL )
@@ -3083,7 +3083,7 @@ void CSuperGridCtrl::DeleteAll()
             }
             else
                 Delete(pRoot);
-        //  InternaleUpdateTree(); no Sorry Arne you don´t need too
+        //  InternaleUpdateTree(); no Sorry Arne you donã‚¨t need too
         //  other than that, thanks.
         }
     }
@@ -3228,7 +3228,7 @@ int CSuperGridCtrl::CompareChildren(const void* p1, const void* p2)
 //              Collapse(pParent);
 //      }
 //
-//      DeleteAllItems();//this is quite okay, I don´t delete the internal state
+//      DeleteAllItems();//this is quite okay, I donã‚¨t delete the internal state
 //      //sort rootitems
 //      CTreeItem** ppSortArray = new CTreeItem*[nItems];
 //      // Fill in array with pointers to our children.
@@ -3465,7 +3465,7 @@ BOOL CSuperGridCtrl::OnItemLButtonDown(LVHITTESTINFO& ht)
 }
 
 
-// ‘I‘ğƒJ[ƒ\ƒ‹‚ª•ÏX‚³‚ê‚½
+// é¸æŠã‚«ãƒ¼ã‚½ãƒ«ãŒå¤‰æ›´ã•ã‚ŒãŸ
 BOOL CSuperGridCtrl::OnChangeSelect(void)
 {
     bool    bShift = (GetAsyncKeyState(VK_SHIFT) & 0x8000) ? true : false;
@@ -3474,7 +3474,7 @@ BOOL CSuperGridCtrl::OnChangeSelect(void)
         int     iSubItem = GetCurSubItem();
         int     sx, sy, ex, ey;
         if (m_bMultiSelect == false) {
-            // ”ÍˆÍ‘I‘ğŠJnˆ—
+            // ç¯„å›²é¸æŠé–‹å§‹å‡¦ç†
             SelectRangeStart();
             sy = ey = iItem;
             sx = ex = iSubItem;
@@ -3484,14 +3484,14 @@ BOOL CSuperGridCtrl::OnChangeSelect(void)
             m_posMultiSelect[1].x = iSubItem;
             m_posMultiSelect[1].y = iItem;
         }
-        // ‘I‘ğ—Ìˆæ‚ğÄ•`‰æ‚³‚¹‚é
+        // é¸æŠé ˜åŸŸã‚’å†æç”»ã•ã›ã‚‹
         InvalidateRangeItem(sx, sy, ex, ey);
     } else {
         if (m_bMultiSelect) {
-            // ‘I‘ğ‚ª‰ğœ‚³‚ê‚½
+            // é¸æŠãŒè§£é™¤ã•ã‚ŒãŸ
             m_bMultiSelect = m_bMultiSelectLine = false;
 
-            // ‘I‘ğ—Ìˆæ‚ğÄ•`‰æ‚³‚¹‚é
+            // é¸æŠé ˜åŸŸã‚’å†æç”»ã•ã›ã‚‹
             InvalidateSelectRangeItem();
         }
     }
@@ -3500,11 +3500,11 @@ BOOL CSuperGridCtrl::OnChangeSelect(void)
 }
 
 
-// ƒ†[ƒU[‚É‚æ‚éƒZƒ‹‚Ì”wŒi•`‰æˆ—
+// ãƒ¦ãƒ¼ã‚¶ãƒ¼ã«ã‚ˆã‚‹ã‚»ãƒ«ã®èƒŒæ™¯æç”»å‡¦ç†
 BOOL CSuperGridCtrl::OnDrawCustomCellBG(CDC *pDC, int nItem, int nColumn, RECT &rcItem)
 {
     /* SeaKnows 036 */
-    /* MySyperGrid‚ÉˆÚ“®
+    /* MySyperGridã«ç§»å‹•
     if (m_bMultiSelect) {
         int     sx, sy, ex, ey, nTemp;
         sx = m_posMultiSelect[0].x;
@@ -3524,7 +3524,7 @@ BOOL CSuperGridCtrl::OnDrawCustomCellBG(CDC *pDC, int nItem, int nColumn, RECT &
     return(FALSE);
 }
 
-// ƒJƒ‰ƒ€‚ÌÅ‘å•¶š”æ“¾ˆ—
+// ã‚«ãƒ©ãƒ ã®æœ€å¤§æ–‡å­—æ•°å–å¾—å‡¦ç†
 int CSuperGridCtrl::OnGetColumLimitText(int, int)
 {
     return(80);
@@ -3671,9 +3671,9 @@ void CSuperGridCtrl::InvalidateSelectRangeItem(void)
 
 // =============================================
 // CSuperGridCtrl::SelectRangeStart
-// ŠT—v  : ”ÍˆÍ‘I‘ğŠJnˆ—
-// ˆø”  : none
-// –ß‚è’l: none
+// æ¦‚è¦  : ç¯„å›²é¸æŠé–‹å§‹å‡¦ç†
+// å¼•æ•°  : none
+// æˆ»ã‚Šå€¤: none
 // =============================================
 void CSuperGridCtrl::SelectRangeStart(int nIndex/* STEP 008 */)
 {
@@ -3705,10 +3705,10 @@ bool CSuperGridCtrl::IsCurrentCellEditOK(void)
             CONTROLTYPE ctrlType;
             if (pInfo->GetControlType(GetCurSubItem()-1, ctrlType) == 1
             &&  ctrlType == invalid) {
-                // •ÒW•s‰Â
+                // ç·¨é›†ä¸å¯
                 return(false);
             }
-            // •ÒW‰Â”\
+            // ç·¨é›†å¯èƒ½
             return(true);
         }
     }
@@ -3740,7 +3740,7 @@ int CSuperGridCtrl::SelItemRange(BOOL bSelect, int nFirstItem, int nLastItem)
     return nItemsSelected;
 }
 
-// ‘S‚Ä‚ÌƒAƒCƒeƒ€‚Ì‘I‘ğ^‘I‘ğ‰ğœ
+// å…¨ã¦ã®ã‚¢ã‚¤ãƒ†ãƒ ã®é¸æŠï¼é¸æŠè§£é™¤
 void CSuperGridCtrl::SelectAllItems(BOOL bSelect)
 {
     LV_ITEM theItem;
@@ -3851,7 +3851,7 @@ int CSuperGridCtrl::MyDrawText(CDC* pDC, LPCTSTR lpszString, int nCount, LPRECT 
 {
     CString strText = lpszString;
     if (g_bOptShowZenSpace && (nFormat & (DT_CENTER | DT_RIGHT)) == 0/* RockDance 125 */ &&
-            ((strText.Find(_T("\r\n")) != -1 || strText.Find(_T("@")) != -1)/* Misirlou 147 */ || strText.Find(_T("\t"))/* Baja 156 */)) { /* 2003.06.26 change */
+            ((strText.Find(_T("\r\n")) != -1 || strText.Find(_T("ã€€")) != -1)/* Misirlou 147 */ || strText.Find(_T("\t"))/* Baja 156 */)) { /* 2003.06.26 change */
         COLORREF    colOrg;
         CString strChar = _T("");
         CString strNormal = _T("");
@@ -3868,7 +3868,7 @@ int CSuperGridCtrl::MyDrawText(CDC* pDC, LPCTSTR lpszString, int nCount, LPRECT 
             } else {
                 bLead = FALSE;
                 strChar += strText[i];
-                if (strChar == _T("@")) {
+                if (strChar == _T("ã€€")) {
                     pDC->DrawText(strNormal, rect, nFormat);
                     rect.left += pDC->GetTextExtent(strNormal).cx;
                     CPen pen(PS_SOLID, 1, RGB(192, 192, 192));
@@ -3887,13 +3887,13 @@ int CSuperGridCtrl::MyDrawText(CDC* pDC, LPCTSTR lpszString, int nCount, LPRECT 
                     pDC->DrawText(strNormal, rect, nFormat);
                     rect.left += pDC->GetTextExtent(strNormal).cx;
                     pDC->SetTextColor(RGB(192, 192, 192));
-                    strChar = _T("«"); /* RockDance 137 */
+                    strChar = _T("â†“"); /* RockDance 137 */
                     pDC->DrawText(strChar/* RockDance 137 */, 2, rect, nFormat);
                 } else if (strChar == _T("\t")) { /* Baja 156 */
                     pDC->DrawText(strNormal, rect, nFormat);
                     rect.left += pDC->GetTextExtent(strNormal).cx;
                     pDC->SetTextColor(RGB(192, 192, 192));
-                    strChar = _T("¨");
+                    strChar = _T("â†’");
                     pDC->DrawText(strChar, 2, rect, nFormat);
                 } else if (strChar.FindOneOf(g_sOptShowOtherChar) != -1) {
                     pDC->DrawText(strNormal, rect, nFormat);
@@ -3966,7 +3966,7 @@ void CSuperGridCtrl::UpdateWindow()
 
 CString CSuperGridCtrl::GetItemText(int nItem, int nSubItem) /* Hurricane 209 */
 {
-    /* 256•¶šˆÈãæ“¾‚Å‚«‚é‚æ‚¤‚É */
+    /* 256æ–‡å­—ä»¥ä¸Šå–å¾—ã§ãã‚‹ã‚ˆã†ã« */
     LVITEM lvi;
     memset(&lvi, 0, sizeof(LVITEM));
     lvi.iSubItem = nSubItem;

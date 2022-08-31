@@ -1,4 +1,4 @@
-// Tag_Mp4.h: CTag_Mp4 クラスのインターフェイス
+// Tag_Mp4.h: CTag_Mp4 繧ｯ繝ｩ繧ｹ縺ｮ繧､繝ｳ繧ｿ繝ｼ繝輔ぉ繧､繧ｹ
 //
 //////////////////////////////////////////////////////////////////////
 
@@ -40,7 +40,7 @@ public:
 	int GetMetadata_Compilation(){return m_iMetadata_Compilation;};
 	CString GetMetadata_Comment(){return m_strMetadata_Comment;};
 	CString GetMetadata_Tool(){return m_strMetadata_Tool;};
-    CString GetMetadata_Copyright() { return m_strMetadata_Copyright; }//追加 by Kobarin
+    CString GetMetadata_Copyright() { return m_strMetadata_Copyright; }//霑ｽ蜉 by Kobarin
 
 	void ClearMetadata();
 
@@ -60,7 +60,7 @@ public:
 	void SetMetadata_Compilation(int val){m_iMetadata_Compilation = val;};
 	void SetMetadata_Comment(LPCTSTR val){m_strMetadata_Comment = val;};
 	void SetMetadata_Tool(LPCTSTR val){m_strMetadata_Tool = val;};
-    void SetMetadata_Copyright(LPCTSTR val) { m_strMetadata_Copyright = val; }//追加 by Kobarin
+    void SetMetadata_Copyright(LPCTSTR val) { m_strMetadata_Copyright = val; }//霑ｽ蜉 by Kobarin
 
 private:
 	BOOL m_bEnable;
@@ -84,7 +84,7 @@ private:
 	int m_iMetadata_Compilation;
 	CString m_strMetadata_Comment;
 	CString m_strMetadata_Tool;
-    CString m_strMetadata_Copyright;//追加 by Kobarin
+    CString m_strMetadata_Copyright;//霑ｽ蜉 by Kobarin
 };
 
 #endif // !defined(AFX_TAG_MP4_H__3AA1F354_4166_4AB1_AD82_5003C432CAC7__INCLUDED_)

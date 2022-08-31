@@ -1,4 +1,4 @@
-// Tag_Ogg.cpp: CTag_Ogg ƒNƒ‰ƒX‚ÌƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“
+// Tag_Ogg.cpp: CTag_Ogg ã‚¯ãƒ©ã‚¹ã®ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³
 //
 //////////////////////////////////////////////////////////////////////
 
@@ -37,7 +37,7 @@
 */
 
 //////////////////////////////////////////////////////////////////////
-// \’z/Á–Å
+// æ§‹ç¯‰/æ¶ˆæ»…
 //////////////////////////////////////////////////////////////////////
 
 CTag_Ogg::CTag_Ogg()
@@ -69,7 +69,7 @@ BOOL CTag_Ogg::AddComment(LPCTSTR name,LPCTSTR value)
 
 BOOL CTag_Ogg::DelComment(LPCTSTR name,int index)
 {
-	//name‚Ì‚È‚©‚©‚çdwIndex‚Ì’l‚ğæ“¾
+	//nameã®ãªã‹ã‹ã‚‰dwIndexã®å€¤ã‚’å–å¾—
 	std::pair<CommentMap::iterator,CommentMap::iterator> itp = m_comments.equal_range(CString(name));
 	
 	int i = 0;
@@ -90,7 +90,7 @@ BOOL CTag_Ogg::DelComment(LPCTSTR name,int index)
 BOOL CTag_Ogg::GetComment(LPCTSTR name,int index,CString &strValue)
 {
 	strValue = _T("");
-	//name‚Ì‚È‚©‚©‚çdwIndex‚Ì’l‚ğæ“¾
+	//nameã®ãªã‹ã‹ã‚‰dwIndexã®å€¤ã‚’å–å¾—
 	std::pair<CommentMap::iterator,CommentMap::iterator> itp = m_comments.equal_range(CString(name));
 	
 	int i = 0;
@@ -110,7 +110,7 @@ BOOL CTag_Ogg::GetComment(LPCTSTR name,int index,CString &strValue)
 
 void CTag_Ogg::GetCommentNames(CStringArray &strArray)
 {
-	//nameƒŠƒXƒg‚ğ•Ô‚·
+	//nameãƒªã‚¹ãƒˆã‚’è¿”ã™
 	CommentMap::iterator it = m_comments.begin();
 	
 	CString strName;
@@ -130,7 +130,7 @@ DWORD CTag_Ogg::Load(LPCTSTR szFileName)
 	DWORD	dwWin32errorCode = ERROR_SUCCESS;
 	Release();
 
-	//ƒtƒ@ƒCƒ‹‚ğƒI[ƒvƒ“
+	//ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ã‚ªãƒ¼ãƒ—ãƒ³
 	FILE *fp = _tfopen(szFileName,_T("rb"));
 	if(!fp)
 	{
@@ -314,7 +314,7 @@ DWORD CTag_Ogg::Load(LPCTSTR szFileName)
 	/* OK, clean up the framer */
 	ogg_sync_clear(&oy);
 
-	//‰‰‘tŠÔ‚Ìæ“¾
+	//æ¼”å¥æ™‚é–“ã®å–å¾—
 	rewind(fp);
 	while(1)	//dummy
 	{
@@ -341,10 +341,10 @@ DWORD CTag_Ogg::Load(LPCTSTR szFileName)
 						(DWORD )ov_time_total(&ov,-1));
 		}
 
-		//ƒVƒŠƒAƒ‹”Ô†‚Ìæ“¾
+		//ã‚·ãƒªã‚¢ãƒ«ç•ªå·ã®å–å¾—
 		m_lSerial = ov_serialnumber(&ov,-1);
 
-		//•½‹ÏƒrƒbƒgƒŒ[ƒg‚Ìæ“¾
+		//å¹³å‡ãƒ“ãƒƒãƒˆãƒ¬ãƒ¼ãƒˆã®å–å¾—
 		m_lBitrate_avg = ov_bitrate(&ov,-1);
 
 		ov_clear(&ov);
@@ -420,7 +420,7 @@ DWORD CTag_Ogg::Save(LPCTSTR szFileName)
 {
 	DWORD	dwWin32errorCode = ERROR_SUCCESS;
 
-	//ƒtƒ@ƒCƒ‹‚ğƒI[ƒvƒ“
+	//ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ã‚ªãƒ¼ãƒ—ãƒ³
 	FILE *fp = _tfopen(szFileName,_T("rb"));
 	if(!fp)
 	{
@@ -428,8 +428,8 @@ DWORD CTag_Ogg::Save(LPCTSTR szFileName)
 		return dwWin32errorCode;
 	}
 
-	//==================ƒeƒ“ƒ|ƒ‰ƒŠ‚ğì¬==================
-	//ƒeƒ“ƒ|ƒ‰ƒŠ–¼‚ğæ“¾
+	//==================ãƒ†ãƒ³ãƒãƒ©ãƒªã‚’ä½œæˆ==================
+	//ãƒ†ãƒ³ãƒãƒ©ãƒªåã‚’å–å¾—
 	TCHAR szTempPath[MAX_PATH];
 	TCHAR szTempFile[MAX_PATH];
 	lstrcpy(szTempPath,szFileName);
@@ -483,7 +483,7 @@ DWORD CTag_Ogg::Save(LPCTSTR szFileName)
 			return -1;
 		}
 
-		//ƒVƒŠƒAƒ‹”Ô†‚Ìæ“¾
+		//ã‚·ãƒªã‚¢ãƒ«ç•ªå·ã®å–å¾—
 		_serial = ogg_page_serialno(&og);
 		
 		//init ogg stream
@@ -809,7 +809,7 @@ loaderr:
 
 	if(dwWin32errorCode == ERROR_SUCCESS)
 	{
-		//ƒIƒŠƒWƒiƒ‹ƒtƒ@ƒCƒ‹‚ğ‘Ş”ğ(ƒŠƒl[ƒ€)
+		//ã‚ªãƒªã‚¸ãƒŠãƒ«ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é€€é¿(ãƒªãƒãƒ¼ãƒ )
 		TCHAR szPreFile[MAX_PATH];
 		if(!GetTempFileName(szTempPath,_T("tms"),0,szPreFile))
 		{
@@ -817,7 +817,7 @@ loaderr:
 			DeleteFile(szTempFile);
 			return dwWin32errorCode;
 		}
-		DeleteFile(szPreFile);//è”²‚«(^^;
+		DeleteFile(szPreFile);//æ‰‹æŠœã(^^;
 		if(!MoveFile(szFileName,szPreFile))
 		{
 			dwWin32errorCode = GetLastError();
@@ -825,7 +825,7 @@ loaderr:
 			return dwWin32errorCode;
 		}
 
-		//Š®¬•i‚ğƒŠƒl[ƒ€
+		//å®Œæˆå“ã‚’ãƒªãƒãƒ¼ãƒ 
 		if(!MoveFile(szTempFile,szFileName))
 		{
 			dwWin32errorCode = GetLastError();
@@ -833,7 +833,7 @@ loaderr:
 			DeleteFile(szTempFile);
 			return dwWin32errorCode;
 		}
-		//ƒIƒŠƒWƒiƒ‹‚ğíœ
+		//ã‚ªãƒªã‚¸ãƒŠãƒ«ã‚’å‰Šé™¤
 		DeleteFile(szPreFile);
 	}
 	else
@@ -858,7 +858,7 @@ CString CTag_Ogg::Acp2Utf8(const char *str)
 	MultiByteToWideChar(CP_ACP,0,str,-1,wc,sizeof(wc));
 	
 	//UNICODE -> UTF8
-//2002-01-30 CPUTF8‚ªWin95”ñ‘Î‰‚È‚±‚Æ‚É‘Î‰
+//2002-01-30 CPUTF8ãŒWin95éå¯¾å¿œãªã“ã¨ã«å¯¾å¿œ
 //	WideCharToMultiByte(CP_UTF8,0,wc,-1,wc8,sizeof(wc8),NULL,NULL);
 	Ucs22Utf8(wc,wc8,sizeof(wc8));
 
@@ -875,7 +875,7 @@ CString CTag_Ogg::Utf82Acp(const char *str)
 		return "";
 	}
 	//UTF8 -> UNICODE
-//2002-01-30 CPUTF8‚ªWin95”ñ‘Î‰‚È‚±‚Æ‚É‘Î‰
+//2002-01-30 CPUTF8ãŒWin95éå¯¾å¿œãªã“ã¨ã«å¯¾å¿œ
 //	MultiByteToWideChar(CP_UTF8,0,str,-1,wc,sizeof(wc));
 	Utf82Ucs2(str,wc,sizeof(wc));
 	
@@ -885,7 +885,7 @@ CString CTag_Ogg::Utf82Acp(const char *str)
 	return CString(ansi);
 }
 
-//size=ƒoƒCƒg”(NULL•¶š‚ğŠÜ‚Ş)
+//size=ãƒã‚¤ãƒˆæ•°(NULLæ–‡å­—ã‚’å«ã‚€)
 void CTag_Ogg::Ucs22Utf8(const WCHAR *str,char *buf,int size)
 {
 	int index = 0;
@@ -924,7 +924,7 @@ void CTag_Ogg::Ucs22Utf8(const WCHAR *str,char *buf,int size)
 	buf[writePtr] = '\0';
 }
 
-//size=•¶š”(NULL•¶š‚ğŠÜ‚Ş)
+//size=æ–‡å­—æ•°(NULLæ–‡å­—ã‚’å«ã‚€)
 void CTag_Ogg::Utf82Ucs2(const char *str,WCHAR *wBuf,int size)
 {
 	int index = 0;
@@ -934,15 +934,15 @@ void CTag_Ogg::Utf82Ucs2(const char *str,WCHAR *wBuf,int size)
 		unsigned short nC = str[index++];
 		unsigned short nUcs2 = 0;
 		unsigned short nUnicode;
-		//utf-8 1ƒoƒCƒgƒR[ƒh‚Ìæ“ªƒoƒCƒg
+		//utf-8 1ãƒã‚¤ãƒˆã‚³ãƒ¼ãƒ‰ã®å…ˆé ­ãƒã‚¤ãƒˆ
 		if(!(nC & 0x80))
 		{
 			nUnicode = nC;
 		}
-		//utf-8 2ƒoƒCƒgƒR[ƒh‚Ìæ“ªƒoƒCƒg
+		//utf-8 2ãƒã‚¤ãƒˆã‚³ãƒ¼ãƒ‰ã®å…ˆé ­ãƒã‚¤ãƒˆ
 		else if((nC & 0xe0) == 0xc0)
 		{
-			/* ‘æ‚QƒoƒCƒg‚ğ“Ç‚Ş */
+			/* ç¬¬ï¼’ãƒã‚¤ãƒˆã‚’èª­ã‚€ */
 			unsigned short nC2 = str[index++];
 			if(!nC2)
 			{
@@ -950,17 +950,17 @@ void CTag_Ogg::Utf82Ucs2(const char *str,WCHAR *wBuf,int size)
 			}
 			nUnicode = (nC2 & 0x003f) | ((nC << 6) & 0x07c0);
 		}
-		//utf-8 3ƒoƒCƒgƒR[ƒh‚Ìæ“ªƒoƒCƒg
+		//utf-8 3ãƒã‚¤ãƒˆã‚³ãƒ¼ãƒ‰ã®å…ˆé ­ãƒã‚¤ãƒˆ
 		else if((nC & 0xf0) == 0xe0)
 		{
-			/* ‘æ‚QƒoƒCƒg‚ğ“Ç‚Ş */
+			/* ç¬¬ï¼’ãƒã‚¤ãƒˆã‚’èª­ã‚€ */
 			unsigned short nC2 = str[index++];
 			if(!nC2)
 			{
 				break;//eof
 			}
 			unsigned short nC3 = str[index++];
-			/* ‘æ3ƒoƒCƒg‚ğ“Ç‚Ş */
+			/* ç¬¬3ãƒã‚¤ãƒˆã‚’èª­ã‚€ */
 			if(!nC3)
 			{
 				break;//eof
@@ -968,7 +968,7 @@ void CTag_Ogg::Utf82Ucs2(const char *str,WCHAR *wBuf,int size)
 			nUnicode = (nC3 & 0x003f) | ((nC2 << 6) & 0x0fc0) | (nC << 12);
 		}
 		else
-		{//•s–¾
+		{//ä¸æ˜
 			nUnicode = 0x0100;
 		}
 		wBuf[writePtr++] = nUnicode;

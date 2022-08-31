@@ -1,65 +1,65 @@
 ========================================================================
-       MICROSOFT FOUNDATION CLASS ���C�u���� : STEP_aac
+       MICROSOFT FOUNDATION CLASS ライブラリ : STEP_aac
 ========================================================================
 
 
-AppWizard ���������� STEP_aac �ɂ́AMicrosoft Foundation Class �̊�{�I��
-�g������������Ă��܂��BDLL �쐬�̂ЂȌ^�Ƃ��Ă��g�����������B
+AppWizard が生成した STEP_aac には、Microsoft Foundation Class の基本的な
+使い方が示されています。DLL 作成のひな型としてお使いください。
 
-���̃t�@�C���ɂ� STEP_aac ���\�����Ă���e�t�@�C���̊T�v�������܂܂�Ă��܂��B
+このファイルには STEP_aac を構成している各ファイルの概要説明が含まれています。
 
 STEP_aac.dsp
-    ���̃t�@�C�� (�v���W�F�N�g �t�@�C��) �̓v���W�F�N�g ���x���̏����܂݁A
-    �V���O�� �v���W�F�N�g�܂��̓T�u �v���W�F�N�g�̃r���h�Ɏg�p����܂��B����
-    ���[�U�[�ƃv���W�F�N�g �t�@�C�� (.dsp) �����L�ł��܂����A���C�N �t�@�C��
-    �̓��[�J���ɃG�N�X�|�[�g���Ă��������B
+    このファイル (プロジェクト ファイル) はプロジェクト レベルの情報を含み、
+    シングル プロジェクトまたはサブ プロジェクトのビルドに使用されます。他の
+    ユーザーとプロジェクト ファイル (.dsp) を共有できますが、メイク ファイル
+    はローカルにエクスポートしてください。
 
 STEP_aac.h
-	���̃t�@�C���� DLL �t�@�C���̃��C�� �w�b�_�[ �t�@�C���ł��B
-	CSTEP_aacApp �A�v���P�[�V�����N���X��錾���܂��B
+	このファイルは DLL ファイルのメイン ヘッダー ファイルです。
+	CSTEP_aacApp アプリケーションクラスを宣言します。
 
 STEP_aac.cpp
-	���̃t�@�C���� CSTEP_aacApp �A�v���P�[�V�����N���X���܂ރA�v���P�[�V����
-	�̒��S�ƂȂ�\�[�X�t�@�C���ł��B
+	このファイルは CSTEP_aacApp アプリケーションクラスを含むアプリケーション
+	の中心となるソースファイルです。
 
 
 STEP_aac.rc
-    ���̃t�@�C���̓v���O�������g�p���� Microsoft Windows �̃��\�[�X��񋓂���
-    ���B���̃t�@�C���� RES �T�u�f�B���N�g���ɕۑ�����Ă���A�C�R���A�r�b�g�}
-    �b�v�A�J�[�\�����܂݂܂��B���̃t�@�C���� Microsoft Visual C++ �Œ���
-    �ҏW�\�ł��B
+    このファイルはプログラムが使用する Microsoft Windows のリソースを列挙しま
+    す。このファイルは RES サブディレクトリに保存されているアイコン、ビットマ
+    ップ、カーソルを含みます。このファイルは Microsoft Visual C++ で直接
+    編集可能です。
 
 STEP_aac.clw
-    ���̃t�@�C���� ClassWizard  �������̃N���X�̕ҏW��N���X��V�K�쐬�����
-    ���Ɏg�����������Ă��܂��B�܂����̃t�@�C���́AClassWizard �ɂ�郁�b�Z
-    �[�W �}�b�v��_�C�A���O �f�[�^ �}�b�v�̕ҏW�␶���A�v���g�^�C�v �����o��
-    ���̐����ɕK�v�ȏ��������Ă��܂��B
+    このファイルは ClassWizard  が既存のクラスの編集やクラスを新規作成すると
+    きに使う情報を持っています。またこのファイルは、ClassWizard によるメッセ
+    ージ マップやダイアログ データ マップの編集や生成、プロトタイプ メンバ関
+    数の生成に必要な情報も持っています。
 
 res\STEP_aac.rc2
-    ���̃t�@�C���� Microsoft Visual C++ �ɂ���ĕҏW����Ȃ����\�[�X���܂�ł���
-    ���B���̃t�@�C���Ƀ��\�[�X �G�f�B�^�ŕҏW����Ȃ����ׂẴ��\�[�X���L�q
-    ���Ă��������B
+    このファイルは Microsoft Visual C++ によって編集されないリソースを含んでいま
+    す。このファイルにリソース エディタで編集されないすべてのリソースを記述
+    してください。
 
 STEP_aac.def
-    ���̃t�@�C���� DLL �� Microsoft Windows ��Ŏ��s����鎞�ɕK�v�ȏ���
-    �����Ă��܂��B�Ⴆ�� DLL �̖��O������A�G�N�X�|�[�g�����֐��Ȃǂ̃p��
-    ���[�^���`���܂��B
+    このファイルは DLL が Microsoft Windows 上で実行される時に必要な情報を
+    持っています。例えば DLL の名前や説明、エクスポートされる関数などのパラ
+    メータを定義します。
 
 /////////////////////////////////////////////////////////////////////////////
-���̑��̕W���t�@�C��:
+その他の標準ファイル:
 
 StdAfx.h, StdAfx.cpp
-    �����̃t�@�C���̓v���R���p�C���σw�b�_�[ �t�@�C�� (PCH) STEP_aac.pch 
-    ��v���R���p�C���ό^�t�@�C�� StdAfx.obj ���\�z���邽�߂Ɏg����t�@�C���ł��B
+    これらのファイルはプリコンパイル済ヘッダー ファイル (PCH) STEP_aac.pch 
+    やプリコンパイル済型ファイル StdAfx.obj を構築するために使われるファイルです。
 
 Resource.h
-    ���̃t�@�C���͐V�K���\�[�X ID ���`����W���w�b�_�[ �t�@�C���ł��B
-    Microsoft Visual C++ �͂��̃t�@�C����ǂݍ��ݍX�V���܂��B
+    このファイルは新規リソース ID を定義する標準ヘッダー ファイルです。
+    Microsoft Visual C++ はこのファイルを読み込み更新します。
 
 /////////////////////////////////////////////////////////////////////////////
-���̑��̒���:
+その他の注意:
 
-"TODO:" �Ŏn�܂�R�����g�́A�\�[�X�R�[�h�̒ǉ���J�X�^�}�C�Y�̕K�v�ȏꏊ����
-���܂��B
+"TODO:" で始まるコメントは、ソースコードの追加やカスタマイズの必要な場所を示
+します。
 
 /////////////////////////////////////////////////////////////////////////////

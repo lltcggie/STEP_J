@@ -1,4 +1,4 @@
-// RMP.h: CRMP ƒNƒ‰ƒX‚ÌƒCƒ“ƒ^[ƒtƒFƒCƒX
+// RMP.h: CRMP ã‚¯ãƒ©ã‚¹ã®ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹
 //
 //////////////////////////////////////////////////////////////////////
 
@@ -67,27 +67,27 @@ public:
 	DWORD	MakeTag(LPCTSTR szFileName);
 
 private:
-	BOOL		m_bEnable;			//RIFFSIF‚ª–³‚¢ê‡‚ÍFALSE
-	BOOL		m_bHasId3tag;		//ID3TAG‚ğ‚Á‚Ä‚¢‚éê‡‚ÍTRUE
-	BOOL		m_bScmpxGenre;		//SCMPXŠg’£ƒWƒƒƒ“ƒ‹‚ğg—p‚·‚é
-	CString		m_strDefaultSft;	//ISFT‚ÌƒfƒtƒHƒ‹ƒg’l
+	BOOL		m_bEnable;			//RIFFSIFãŒç„¡ã„å ´åˆã¯FALSE
+	BOOL		m_bHasId3tag;		//ID3TAGã‚’æŒã£ã¦ã„ã‚‹å ´åˆã¯TRUE
+	BOOL		m_bScmpxGenre;		//SCMPXæ‹¡å¼µã‚¸ãƒ£ãƒ³ãƒ«ã‚’ä½¿ç”¨ã™ã‚‹
+	CString		m_strDefaultSft;	//ISFTã®ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆå€¤
 
 	CString		m_strNAM;		//INAM songname
-	CString		m_strART;		//IART ƒA[ƒeƒBƒXƒg–¼
-	CString		m_strPRD;		//IPRD ƒAƒ‹ƒoƒ€–¼
-	CString		m_strCMT;		//ICMT ƒRƒƒ“ƒg
-	CString		m_strCRD;		//ICRD “ú•t
-	CString		m_strGNR;		//IGNR ƒWƒƒƒ“ƒ‹
+	CString		m_strART;		//IART ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆå
+	CString		m_strPRD;		//IPRD ã‚¢ãƒ«ãƒãƒ å
+	CString		m_strCMT;		//ICMT ã‚³ãƒ¡ãƒ³ãƒˆ
+	CString		m_strCRD;		//ICRD æ—¥ä»˜
+	CString		m_strGNR;		//IGNR ã‚¸ãƒ£ãƒ³ãƒ«
 
-	CString		m_strCOP;		//ICOP ’˜ìŒ 
-	CString		m_strENG;		//IENG ƒGƒ“ƒWƒjƒA
-	CString		m_strSRC;		//ISRC ƒ\[ƒX
-	CString		m_strSFT;		//ISFT ƒ\ƒtƒgƒEƒFƒA
-	CString		m_strKEY;		//IKEY ƒL[ƒ[ƒh
-	CString		m_strTCH;		//ITCH ‹ZpÒ
-	CString		m_strLYC;		//ILYC ‰ÌŒ
-	CString		m_strCMS;		//ICMS ƒRƒ~ƒbƒVƒ‡ƒ“
-	CString		m_strMED;		//IMED ’†ŠÔ
+	CString		m_strCOP;		//ICOP è‘—ä½œæ¨©
+	CString		m_strENG;		//IENG ã‚¨ãƒ³ã‚¸ãƒ‹ã‚¢
+	CString		m_strSRC;		//ISRC ã‚½ãƒ¼ã‚¹
+	CString		m_strSFT;		//ISFT ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢
+	CString		m_strKEY;		//IKEY ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰
+	CString		m_strTCH;		//ITCH æŠ€è¡“è€…
+	CString		m_strLYC;		//ILYC æ­Œè©
+	CString		m_strCMS;		//ICMS ã‚³ãƒŸãƒƒã‚·ãƒ§ãƒ³
+	CString		m_strMED;		//IMED ä¸­é–“
 	CString		m_strSBJ;		//ISBJ subject
 	CString		m_strMP3;		//IMP3 mp3 info
 };

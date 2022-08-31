@@ -1,10 +1,10 @@
 // ======================================================
-// ŠT  —v    F ‚l‚o‚Rƒtƒ@ƒCƒ‹ŠÇ—ƒNƒ‰ƒX
-// ƒ^[ƒQƒbƒgF Windows95/98/NT
-// ˆ—Œn    F Visual C++ Ver 6.0
-// ì¬Ò    F MERCURY
-// ì¬“ú    F 00/01/18(‰Î)
-// ’˜ìŒ •\‹LF Copyright(C) 2000 MERCURY.
+// æ¦‚  è¦    ï¼š ï¼­ï¼°ï¼“ãƒ•ã‚¡ã‚¤ãƒ«ç®¡ç†ã‚¯ãƒ©ã‚¹
+// ã‚¿ãƒ¼ã‚²ãƒƒãƒˆï¼š Windows95/98/NT
+// å‡¦ç†ç³»    ï¼š Visual C++ Ver 6.0
+// ä½œæˆè€…    ï¼š MERCURY
+// ä½œæˆæ—¥    ï¼š 00/01/18(ç«)
+// è‘—ä½œæ¨©è¡¨è¨˜ï¼š Copyright(C) 2000 MERCURY.
 // ======================================================
 
 #ifndef __CFILEMP3_H__
@@ -12,98 +12,98 @@
 
 
 // ======================================
-// =====   ƒCƒ“ƒNƒ‹[ƒhƒtƒ@ƒCƒ‹     =====
+// =====   ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰ãƒ•ã‚¡ã‚¤ãƒ«     =====
 // ======================================
 //#include "vbmp3.h"
 #include "STEP_api.h"
 
 // ======================================
-// =====           ’è  ”           =====
+// =====           å®š  æ•°           =====
 // ======================================
 
-//#define RMP_SIF_LENGTH			2048/*LIST_SIZE VMMP3‚Ì’è‹` */	// RIFF MP3 ‚Ì SIF ‚ÌÅ‘å‚Ì’·‚³
+//#define RMP_SIF_LENGTH			2048/*LIST_SIZE VMMP3ã®å®šç¾© */	// RIFF MP3 ã® SIF ã®æœ€å¤§ã®é•·ã•
 
 // ======================================
-// =====       typedef^enum        =====
+// =====       typedefï¼enum        =====
 // ======================================
 
 
 
 // ======================================
-// =====       \‘¢‘Ì^‹¤—p‘Ì       =====
+// =====       æ§‹é€ ä½“ï¼å…±ç”¨ä½“       =====
 // ======================================
 
 struct	FILE_MP3	{
-	bool	bModifyFlag;				// ŠO•”‚©‚ç•ÒW‚³‚ê‚½‚©‚Ç‚¤‚©‚Ìƒtƒ‰ƒO
-	bool	bCheckFlag;					// ƒ`ƒFƒbƒNó‘Ô
-	LONGLONG lFileSize;					// ƒtƒ@ƒCƒ‹ƒTƒCƒY
-	CTime	time;						// XV“ú
-	CTime	timeCreate;					// ì¬“ú
-	int		nFormat;					// ƒtƒ@ƒCƒ‹ƒtƒH[ƒ}ƒbƒg(FILE_FORMAT_xxxxx)
-	CString	strFullPathName;			// ƒtƒ@ƒCƒ‹–¼(ƒtƒ‹ƒpƒX)
-	CString	strFileName;				// strFullPathName ‚Ìƒtƒ@ƒCƒ‹–¼•”•ª
-	CString	strFilePath;				// strFullPathName ‚ÌƒpƒX•”•ª
-	int		nPlayTime;					// ‰‰‘tŠÔ(’PˆÊF•b)
-	bool	bExistLyricFile;			// ‰ÌŒƒtƒ@ƒCƒ‹‚Ì‘¶İ
-///* Conspiracy 198 */	CString strBitRate;					// ƒrƒbƒgƒŒ[ƒg
-	CString strAudioFormat;				// ‰¹ºƒtƒH[ƒ}ƒbƒg
-	CString strVisualFormat;			// ‰f‘œƒtƒH[ƒ}ƒbƒg
+	bool	bModifyFlag;				// å¤–éƒ¨ã‹ã‚‰ç·¨é›†ã•ã‚ŒãŸã‹ã©ã†ã‹ã®ãƒ•ãƒ©ã‚°
+	bool	bCheckFlag;					// ãƒã‚§ãƒƒã‚¯çŠ¶æ…‹
+	LONGLONG lFileSize;					// ãƒ•ã‚¡ã‚¤ãƒ«ã‚µã‚¤ã‚º
+	CTime	time;						// æ›´æ–°æ—¥
+	CTime	timeCreate;					// ä½œæˆæ—¥
+	int		nFormat;					// ãƒ•ã‚¡ã‚¤ãƒ«ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆ(FILE_FORMAT_xxxxx)
+	CString	strFullPathName;			// ãƒ•ã‚¡ã‚¤ãƒ«å(ãƒ•ãƒ«ãƒ‘ã‚¹)
+	CString	strFileName;				// strFullPathName ã®ãƒ•ã‚¡ã‚¤ãƒ«åéƒ¨åˆ†
+	CString	strFilePath;				// strFullPathName ã®ãƒ‘ã‚¹éƒ¨åˆ†
+	int		nPlayTime;					// æ¼”å¥æ™‚é–“(å˜ä½ï¼šç§’)
+	bool	bExistLyricFile;			// æ­Œè©ãƒ•ã‚¡ã‚¤ãƒ«ã®å­˜åœ¨
+///* Conspiracy 198 */	CString strBitRate;					// ãƒ“ãƒƒãƒˆãƒ¬ãƒ¼ãƒˆ
+	CString strAudioFormat;				// éŸ³å£°ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆ
+	CString strVisualFormat;			// æ˜ åƒãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆ
 
-	// ID3 tag î•ñ
-	CString	strTrackName;				// ƒgƒ‰ƒbƒN–¼
-	CString	strArtistName;				// ƒA[ƒeƒBƒXƒg–¼
-	CString	strAlbumName;				// ƒAƒ‹ƒoƒ€–¼
-	CString	strComment;					// ƒRƒƒ“ƒg
-	CString	strYear;					// ƒŠƒŠ[ƒX”N†
-	BYTE	byTrackNumber;				// ƒgƒ‰ƒbƒN”Ô†(”’l•ÒW—p)
-	CString	strTrackNumber;				// ƒgƒ‰ƒbƒN”Ô†(•¶š—ñ•ÒW—p)
-	BYTE	byGenre;					// ƒWƒƒƒ“ƒ‹”Ô†
-	CString	strGenre;					// ƒWƒƒƒ“ƒ‹–¼
+	// ID3 tag æƒ…å ±
+	CString	strTrackName;				// ãƒˆãƒ©ãƒƒã‚¯å
+	CString	strArtistName;				// ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆå
+	CString	strAlbumName;				// ã‚¢ãƒ«ãƒãƒ å
+	CString	strComment;					// ã‚³ãƒ¡ãƒ³ãƒˆ
+	CString	strYear;					// ãƒªãƒªãƒ¼ã‚¹å¹´å·
+	BYTE	byTrackNumber;				// ãƒˆãƒ©ãƒƒã‚¯ç•ªå·(æ•°å€¤ç·¨é›†ç”¨)
+	CString	strTrackNumber;				// ãƒˆãƒ©ãƒƒã‚¯ç•ªå·(æ–‡å­—åˆ—ç·¨é›†ç”¨)
+	BYTE	byGenre;					// ã‚¸ãƒ£ãƒ³ãƒ«ç•ªå·
+	CString	strGenre;					// ã‚¸ãƒ£ãƒ³ãƒ«å
 
-	// RIFF MP3 ‚Ì SI ƒtƒB[ƒ‹ƒh(ID3v2 ‚È‚Ç‚Å‚àg‚¤)
-	CString	strTrackNameSI;				// ‹È–¼
-	CString	strArtistNameSI;			// ƒA[ƒeƒBƒXƒg–¼
-	CString	strAlbumNameSI;				// »•i–¼
-	CString	strCommentSI;				// ƒRƒƒ“ƒg•¶š—ñ
-	CString	strYearSI;					// ƒŠƒŠ[ƒX”N†
-	CString	strTrackNumberSI;			// ƒgƒ‰ƒbƒN”Ô†
-	CString	strTrackTotalSI;			// ƒgƒ‰ƒbƒN”(by Kobarin)
-	CString strDiscNumberSI;			// ƒfƒBƒXƒN”Ô†
-	CString	strDiscTotalSI;				// ƒfƒBƒXƒN”(by Kobarin)
-	CString	strGenreSI;					// ƒWƒƒƒ“ƒ‹–¼
-	CString	strCopyrightSI;				// ’˜ìŒ 
-	CString	strEngineerSI;				// ƒGƒ“ƒWƒjƒA
-	CString	strSourceSI;				// ƒ\[ƒX
-	CString	strSoftwareSI;				// ƒ\ƒtƒgƒEƒFƒA
-	CString	strKeywordSI;				// ƒL[ƒ[ƒh
-	CString	strTechnicianSI;			// ‹ZpÒ
-	CString	strLyricSI;					// ‰ÌŒ
-	CString	strCommissionSI;			// ƒRƒ~ƒbƒVƒ‡ƒ“
-	CString strWriterSI;				// ìŒ /* ADD MIMURA */
-	CString strComposerSI;				// ì‹È /* Baja 154 */
-	CString strAlbmArtistSI;			// Albm.ƒA[ƒeƒBƒXƒg /* ADD MIMURA */
-	CString strOrigArtistSI;			// Orig.ƒA[ƒeƒBƒXƒg /* Baja 154 */
+	// RIFF MP3 ã® SI ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰(ID3v2 ãªã©ã§ã‚‚ä½¿ã†)
+	CString	strTrackNameSI;				// æ›²å
+	CString	strArtistNameSI;			// ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆå
+	CString	strAlbumNameSI;				// è£½å“å
+	CString	strCommentSI;				// ã‚³ãƒ¡ãƒ³ãƒˆæ–‡å­—åˆ—
+	CString	strYearSI;					// ãƒªãƒªãƒ¼ã‚¹å¹´å·
+	CString	strTrackNumberSI;			// ãƒˆãƒ©ãƒƒã‚¯ç•ªå·
+	CString	strTrackTotalSI;			// ãƒˆãƒ©ãƒƒã‚¯æ•°(by Kobarin)
+	CString strDiscNumberSI;			// ãƒ‡ã‚£ã‚¹ã‚¯ç•ªå·
+	CString	strDiscTotalSI;				// ãƒ‡ã‚£ã‚¹ã‚¯æ•°(by Kobarin)
+	CString	strGenreSI;					// ã‚¸ãƒ£ãƒ³ãƒ«å
+	CString	strCopyrightSI;				// è‘—ä½œæ¨©
+	CString	strEngineerSI;				// ã‚¨ãƒ³ã‚¸ãƒ‹ã‚¢
+	CString	strSourceSI;				// ã‚½ãƒ¼ã‚¹
+	CString	strSoftwareSI;				// ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢
+	CString	strKeywordSI;				// ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰
+	CString	strTechnicianSI;			// æŠ€è¡“è€…
+	CString	strLyricSI;					// æ­Œè©
+	CString	strCommissionSI;			// ã‚³ãƒŸãƒƒã‚·ãƒ§ãƒ³
+	CString strWriterSI;				// ä½œè© /* ADD MIMURA */
+	CString strComposerSI;				// ä½œæ›² /* Baja 154 */
+	CString strAlbmArtistSI;			// Albm.ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆ /* ADD MIMURA */
+	CString strOrigArtistSI;			// Orig.ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆ /* Baja 154 */
 	CString strURLSI;					// URL /* Baja 154 */
-	CString strEncodest;				// ƒGƒ“ƒR[ƒh‚µ‚½l /* Baja 154 */
-	CString	strOther;					// ‚»‚Ì‘¼(OggVorbis‚Ì”ñ•W€ƒ^ƒO) /* Conspiracy 196 */
-	CString strEngineer;				// ƒGƒ“ƒWƒjƒAio”Åj/* ADD MIMURA */
+	CString strEncodest;				// ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰ã—ãŸäºº /* Baja 154 */
+	CString	strOther;					// ãã®ä»–(OggVorbisã®éæ¨™æº–ã‚¿ã‚°) /* Conspiracy 196 */
+	CString strEngineer;				// ã‚¨ãƒ³ã‚¸ãƒ‹ã‚¢ï¼ˆå‡ºç‰ˆï¼‰/* ADD MIMURA */
 
-	void*	fileSpecificInfo;			// ƒtƒ@ƒCƒ‹ŒÅ—Lî•ñ
+	void*	fileSpecificInfo;			// ãƒ•ã‚¡ã‚¤ãƒ«å›ºæœ‰æƒ…å ±
 
-	CString strFileTypeName;			// ƒtƒ@ƒCƒ‹ƒ^ƒCƒv•¶š—ñ
+	CString strFileTypeName;			// ãƒ•ã‚¡ã‚¤ãƒ«ã‚¿ã‚¤ãƒ—æ–‡å­—åˆ—
 
 	void *pTreeItem;
 };
 
-struct	GENRE_LIST	{		// ƒWƒƒƒ“ƒ‹ƒŠƒXƒg
-	bool	bAddList;		// ƒŠƒXƒg‚É’Ç‰Á‚·‚é‚©‚Ç‚¤‚©
-	BYTE	byGenre;		// ƒWƒƒƒ“ƒ‹”Ô†
-	TCHAR	*sName;			// ƒWƒƒƒ“ƒ‹–¼(NULL:ƒŠƒXƒgI’[)
+struct	GENRE_LIST	{		// ã‚¸ãƒ£ãƒ³ãƒ«ãƒªã‚¹ãƒˆ
+	bool	bAddList;		// ãƒªã‚¹ãƒˆã«è¿½åŠ ã™ã‚‹ã‹ã©ã†ã‹
+	BYTE	byGenre;		// ã‚¸ãƒ£ãƒ³ãƒ«ç•ªå·
+	TCHAR	*sName;			// ã‚¸ãƒ£ãƒ³ãƒ«å(NULL:ãƒªã‚¹ãƒˆçµ‚ç«¯)
 };
-struct	USER_GENRE_LIST	{	// ƒ†[ƒUƒWƒƒƒ“ƒ‹ƒŠƒXƒg
-	bool	bAddList;		// ƒŠƒXƒg‚É’Ç‰Á‚·‚é‚©‚Ç‚¤‚©
-	BYTE	byGenre;		// ƒWƒƒƒ“ƒ‹”Ô†
-	CString	sName;			// ƒWƒƒƒ“ƒ‹–¼
+struct	USER_GENRE_LIST	{	// ãƒ¦ãƒ¼ã‚¶ã‚¸ãƒ£ãƒ³ãƒ«ãƒªã‚¹ãƒˆ
+	bool	bAddList;		// ãƒªã‚¹ãƒˆã«è¿½åŠ ã™ã‚‹ã‹ã©ã†ã‹
+	BYTE	byGenre;		// ã‚¸ãƒ£ãƒ³ãƒ«ç•ªå·
+	CString	sName;			// ã‚¸ãƒ£ãƒ³ãƒ«å
 	bool	bUse;
 };
 extern	GENRE_LIST	g_genreListSCMPX[];
@@ -112,25 +112,25 @@ extern	USER_GENRE_LIST*	g_genreListUSER;
 
 
 // ======================================
-// =====         const •Ï”         =====
+// =====         const å¤‰æ•°         =====
 // ======================================
 
 
 
 // ======================================
-// =====        extern •Ï”         =====
+// =====        extern å¤‰æ•°         =====
 // ======================================
 
 
 
 // ======================================
-// =====        static •Ï”         =====
+// =====        static å¤‰æ•°         =====
 // ======================================
 
 
 
 // ======================================
-// =====     ŠÖ”ƒvƒƒgƒ^ƒCƒv       =====
+// =====     é–¢æ•°ãƒ—ãƒ­ãƒˆã‚¿ã‚¤ãƒ—       =====
 // ======================================
 extern	const TCHAR *GetGenreName(BYTE);
 extern	const TCHAR *GetGenreNameSIF(BYTE byGenre);
@@ -141,7 +141,7 @@ extern	bool	IsFolderName(const TCHAR *);
 
 
 // ======================================
-// =====      ƒvƒƒOƒ‰ƒ€—Ìˆæ        =====
+// =====      ãƒ—ãƒ­ã‚°ãƒ©ãƒ é ˜åŸŸ        =====
 // ======================================
 
 
@@ -156,7 +156,7 @@ public:
 	virtual	~CFileMP3();
 
 public:		// ======================================
-			// =====      public ƒƒ“ƒoŠÖ”     =====
+			// =====      public ãƒ¡ãƒ³ãƒé–¢æ•°     =====
 			// ======================================
 	static	void	InitData(FILE_MP3 *);
 	static	void	InitDataSIF(FILE_MP3 *);
@@ -181,7 +181,7 @@ public:		// ======================================
 	static	bool	ConvFileName(FILE_MP3 *);
 
 private:	// ======================================
-			// =====     private ƒƒ“ƒoŠÖ”     =====
+			// =====     private ãƒ¡ãƒ³ãƒé–¢æ•°     =====
 			// ======================================
 			void	Initialize(void);
 	static	void	DeleteLineEndSpace(TCHAR *);
@@ -199,7 +199,7 @@ private:	// ======================================
 //	static	bool	WriteTagSIF(FILE_MP3 *);
 
 protected:	// ======================================
-			// =====    protected ƒƒ“ƒoŠÖ”    =====
+			// =====    protected ãƒ¡ãƒ³ãƒé–¢æ•°    =====
 			// ======================================
 /* RockDance 133 */
 //	static	bool	ReadTagAPE(LPCSTR, FILE_MP3 *);

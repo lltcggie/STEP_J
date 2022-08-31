@@ -1,4 +1,4 @@
-// DlgEnvConf.cpp : ƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“ ƒtƒ@ƒCƒ‹
+// DlgEnvConf.cpp : ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³ ãƒ•ã‚¡ã‚¤ãƒ«
 //
 
 #include "stdafx.h"
@@ -12,7 +12,7 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgEnvConf ƒvƒƒpƒeƒB ƒy[ƒW
+// CDlgEnvConf ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ ãƒšãƒ¼ã‚¸
 
 IMPLEMENT_DYNCREATE(CDlgEnvConf, COptionPage)
 
@@ -49,9 +49,9 @@ BEGIN_MESSAGE_MAP(CDlgEnvConf, COptionPage)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgEnvConf ƒƒbƒZ[ƒW ƒnƒ“ƒhƒ‰
+// CDlgEnvConf ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒãƒ³ãƒ‰ãƒ©
 
-// ‰Šú’l‚É–ß‚·
+// åˆæœŸå€¤ã«æˆ»ã™
 void CDlgEnvConf::OnBtResetPage() 
 {
 	((CButton *)GetDlgItem(IDC_CH_CONF_DELETE_FILE))->SetCheck(TRUE);

@@ -1,9 +1,9 @@
-// RMP.cpp: CRMP ƒNƒ‰ƒX‚ÌƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“
+// RMP.cpp: CRMP ã‚¯ãƒ©ã‚¹ã®ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³
 //
 //////////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"
-#include "resource.h"		// ƒƒCƒ“ ƒVƒ“ƒ{ƒ‹
+#include "resource.h"		// ãƒ¡ã‚¤ãƒ³ ã‚·ãƒ³ãƒœãƒ«
 #include "GlobalCommand.h"
 #include "Id3tagv1.h"
 #include "RMP.h"
@@ -15,7 +15,7 @@ static const unsigned char WINAMP_GENRE_NULL = 255;
 //#pragma comment(lib,"winmm.lib")
 
 //////////////////////////////////////////////////////////////////////
-// \’z/Á–Å
+// æ§‹ç¯‰/æ¶ˆæ»…
 //////////////////////////////////////////////////////////////////////
 
 CRMP::CRMP(BOOL bScmpxGenre)
@@ -34,20 +34,20 @@ void CRMP::Release()
 	m_bEnable = FALSE;
 	m_bHasId3tag = FALSE;
 	m_strNAM = _T("");		//INAM songname
-	m_strART = _T("");		//IART ƒA[ƒeƒBƒXƒg–¼
-	m_strPRD = _T("");		//IPRD ƒAƒ‹ƒoƒ€–¼
-	m_strCMT = _T("");		//ICMT ƒRƒƒ“ƒg
-	m_strCRD = _T("");		//ICRD “ú•t
-	m_strGNR = _T("");		//IGNR ƒWƒƒƒ“ƒ‹
-	m_strCOP = _T("");		//ICOP ’˜ìŒ 
-	m_strENG = _T("");		//IENG ƒGƒ“ƒWƒjƒA
-	m_strSRC = _T("");		//ISRC ƒ\[ƒX
-	m_strSFT = _T("");		//ISFT ƒ\ƒtƒgƒEƒFƒA
-	m_strKEY = _T("");		//IKEY ƒL[ƒ[ƒh
-	m_strTCH = _T("");		//ITCH ‹ZpÒ
-	m_strLYC = _T("");		//ILYC ‰ÌŒ
-	m_strCMS = _T("");		//ICMS ƒRƒ~ƒbƒVƒ‡ƒ“
-	m_strMED = _T("");		//IMED ’†ŠÔ
+	m_strART = _T("");		//IART ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆå
+	m_strPRD = _T("");		//IPRD ã‚¢ãƒ«ãƒãƒ å
+	m_strCMT = _T("");		//ICMT ã‚³ãƒ¡ãƒ³ãƒˆ
+	m_strCRD = _T("");		//ICRD æ—¥ä»˜
+	m_strGNR = _T("");		//IGNR ã‚¸ãƒ£ãƒ³ãƒ«
+	m_strCOP = _T("");		//ICOP è‘—ä½œæ¨©
+	m_strENG = _T("");		//IENG ã‚¨ãƒ³ã‚¸ãƒ‹ã‚¢
+	m_strSRC = _T("");		//ISRC ã‚½ãƒ¼ã‚¹
+	m_strSFT = _T("");		//ISFT ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢
+	m_strKEY = _T("");		//IKEY ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰
+	m_strTCH = _T("");		//ITCH æŠ€è¡“è€…
+	m_strLYC = _T("");		//ILYC æ­Œè©
+	m_strCMS = _T("");		//ICMS ã‚³ãƒŸãƒƒã‚·ãƒ§ãƒ³
+	m_strMED = _T("");		//IMED ä¸­é–“
 	m_strSBJ = _T("");		//ISBJ subject
 	m_strMP3 = _T("");		//IMP3 mp3 info
 }
@@ -73,12 +73,12 @@ CString CRMP::ReadChunk(HMMIO hmmio,MMCKINFO mmckinfo,FOURCC id)
 		char *buf = (char *)malloc(mmckOutinfoSubchunk.cksize);
 		if (buf != NULL) {
 			mmioRead(hmmio,buf,mmckOutinfoSubchunk.cksize);
-			//2001-05-12 ILYC‘Îô
+			//2001-05-12 ILYCå¯¾ç­–
 			if( (mmckOutinfoSubchunk.cksize > 11) && 
 				(mmioFOURCC('I','L','Y','C') == id) &&
 				(strncmp(buf+1,"LYRICSBEGIN",11) == 0) )
 			{
-				buf[0] = '_';	//‚Æ‚è‚ ‚¦‚¸'_'‚ğ“ü‚ê‚Ä‚¨‚­(Œã‚Å\0‚É–ß‚·)
+				buf[0] = '_';	//ã¨ã‚Šã‚ãˆãš'_'ã‚’å…¥ã‚Œã¦ãŠã(å¾Œã§\0ã«æˆ»ã™)
 			}
 			retString = buf;
 		}
@@ -92,14 +92,14 @@ DWORD CRMP::Load(LPCTSTR szFileName)
 	DWORD	dwWin32errorCode = ERROR_SUCCESS;
 	Release();
 
-	// ƒoƒbƒtƒ@•t‚«I/O‚ğg‚Á‚Äƒtƒ@ƒCƒ‹‚ğŠJ‚­
+	// ãƒãƒƒãƒ•ã‚¡ä»˜ãI/Oã‚’ä½¿ã£ã¦ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ã
 	HMMIO hmmio = mmioOpen(const_cast<LPTSTR>(szFileName),NULL,MMIO_COMPAT);
 	if(!hmmio)
 	{
 		return -1;
 	}
 
-	//RMP3ƒtƒ@ƒCƒ‹‚ÌŠm”F
+	//RMP3ãƒ•ã‚¡ã‚¤ãƒ«ã®ç¢ºèª
 	char hdr[4];
 	LONG ret = mmioRead(hmmio,hdr,sizeof(hdr));
 	if((ret != 4) || (hdr[0] != 'R') || (hdr[1] != 'I') || (hdr[2] != 'F') || (hdr[3] != 'F'))
@@ -109,7 +109,7 @@ DWORD CRMP::Load(LPCTSTR szFileName)
 	}
 
 	mmioSeek(hmmio,0,SEEK_SET);
-	//RMP3ƒ`ƒƒƒ“ƒN‚ÖˆÚ“®
+	//RMP3ãƒãƒ£ãƒ³ã‚¯ã¸ç§»å‹•
 	MMCKINFO	mmckOutinfoParent;
 	memset(&mmckOutinfoParent,0,sizeof(mmckOutinfoParent));
 	mmckOutinfoParent.fccType = mmioFOURCC('R','M','P','3');
@@ -119,7 +119,7 @@ DWORD CRMP::Load(LPCTSTR szFileName)
 		return ERROR_SUCCESS;
 	}
 	m_bEnable = TRUE;
-	//INFOƒ`ƒƒƒ“ƒN‚ÖˆÚ“®
+	//INFOãƒãƒ£ãƒ³ã‚¯ã¸ç§»å‹•
 	MMCKINFO	mmckOutinfoSubchunk;
 	memset(&mmckOutinfoSubchunk,0,sizeof(mmckOutinfoSubchunk));
 	mmckOutinfoSubchunk.fccType = mmioFOURCC('I','N','F','O');
@@ -134,59 +134,59 @@ DWORD CRMP::Load(LPCTSTR szFileName)
 	m_strNAM = ReadChunk(hmmio,mmckOutinfoSubchunk,mmioFOURCC('I','N','A','M'));
 	mmioSeek(hmmio,lListTop,SEEK_SET);
 	
-	//IART ƒA[ƒeƒBƒXƒg–¼
+	//IART ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆå
 	m_strART = ReadChunk(hmmio,mmckOutinfoSubchunk,mmioFOURCC('I','A','R','T'));
 	mmioSeek(hmmio,lListTop,SEEK_SET);
 
-	//IPRD ƒAƒ‹ƒoƒ€–¼
+	//IPRD ã‚¢ãƒ«ãƒãƒ å
 	m_strPRD = ReadChunk(hmmio,mmckOutinfoSubchunk,mmioFOURCC('I','P','R','D'));
 	mmioSeek(hmmio,lListTop,SEEK_SET);
 
-	//ICMT ƒRƒƒ“ƒg
+	//ICMT ã‚³ãƒ¡ãƒ³ãƒˆ
 	m_strCMT = ReadChunk(hmmio,mmckOutinfoSubchunk,mmioFOURCC('I','C','M','T'));
 	mmioSeek(hmmio,lListTop,SEEK_SET);
 
-	//ICRD “ú•t
+	//ICRD æ—¥ä»˜
 	m_strCRD = ReadChunk(hmmio,mmckOutinfoSubchunk,mmioFOURCC('I','C','R','D'));
 	mmioSeek(hmmio,lListTop,SEEK_SET);
 
-	//IGNR ƒWƒƒƒ“ƒ‹
+	//IGNR ã‚¸ãƒ£ãƒ³ãƒ«
 	m_strGNR = ReadChunk(hmmio,mmckOutinfoSubchunk,mmioFOURCC('I','G','N','R'));
 	mmioSeek(hmmio,lListTop,SEEK_SET);
 
-	//ICOP ’˜ìŒ 
+	//ICOP è‘—ä½œæ¨©
 	m_strCOP = ReadChunk(hmmio,mmckOutinfoSubchunk,mmioFOURCC('I','C','O','P'));
 	mmioSeek(hmmio,lListTop,SEEK_SET);
 
-	//IENG ƒGƒ“ƒWƒjƒA
+	//IENG ã‚¨ãƒ³ã‚¸ãƒ‹ã‚¢
 	m_strENG = ReadChunk(hmmio,mmckOutinfoSubchunk,mmioFOURCC('I','E','N','G'));
 	mmioSeek(hmmio,lListTop,SEEK_SET);
 
-	//ISRC ƒ\[ƒX
+	//ISRC ã‚½ãƒ¼ã‚¹
 	m_strSRC = ReadChunk(hmmio,mmckOutinfoSubchunk,mmioFOURCC('I','S','R','C'));
 	mmioSeek(hmmio,lListTop,SEEK_SET);
 
-	//ISFT ƒ\ƒtƒgƒEƒFƒA
+	//ISFT ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢
 	m_strSFT = ReadChunk(hmmio,mmckOutinfoSubchunk,mmioFOURCC('I','S','F','T'));
 	mmioSeek(hmmio,lListTop,SEEK_SET);
 
-	//IKEY ƒL[ƒ[ƒh
+	//IKEY ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰
 	m_strKEY = ReadChunk(hmmio,mmckOutinfoSubchunk,mmioFOURCC('I','K','E','Y'));
 	mmioSeek(hmmio,lListTop,SEEK_SET);
 
-	//ITCH ‹ZpÒ
+	//ITCH æŠ€è¡“è€…
 	m_strTCH = ReadChunk(hmmio,mmckOutinfoSubchunk,mmioFOURCC('I','T','C','H'));
 	mmioSeek(hmmio,lListTop,SEEK_SET);
 
-	//ILYC ‰ÌŒ
+	//ILYC æ­Œè©
 	m_strLYC = ReadChunk(hmmio,mmckOutinfoSubchunk,mmioFOURCC('I','L','Y','C'));
 	mmioSeek(hmmio,lListTop,SEEK_SET);
 
-	//ICMS ƒRƒ~ƒbƒVƒ‡ƒ“
+	//ICMS ã‚³ãƒŸãƒƒã‚·ãƒ§ãƒ³
 	m_strCMS = ReadChunk(hmmio,mmckOutinfoSubchunk,mmioFOURCC('I','C','M','S'));
 	mmioSeek(hmmio,lListTop,SEEK_SET);
 
-	//IMED ’†ŠÔ
+	//IMED ä¸­é–“
 	m_strMED = ReadChunk(hmmio,mmckOutinfoSubchunk,mmioFOURCC('I','M','E','D'));
 	mmioSeek(hmmio,lListTop,SEEK_SET);
 
@@ -220,15 +220,15 @@ DWORD CRMP::Save(LPCTSTR szFileName)
 	DWORD		mp3Size;
 	DWORD		listSize;
 	DWORD		newSize;
-	DWORD		dwNewSize;	//—\‘z‚³‚ê‚é‘‰ÁƒTƒCƒY
+	DWORD		dwNewSize;	//äºˆæƒ³ã•ã‚Œã‚‹å¢—åŠ ã‚µã‚¤ã‚º
 	DWORD		dwOldSize;	//
 	FILE		*fp;
 	HANDLE		hFile;
 	DWORD		dwWritten;
 
-	//—\‘z‚³‚ê‚é‘‰ÁƒTƒCƒY
+	//äºˆæƒ³ã•ã‚Œã‚‹å¢—åŠ ã‚µã‚¤ã‚º
 	dwNewSize = strlen("LIST----INFO");
-	dwNewSize += TstrToBytes(m_strNAM,-1,NULL,0,BTC_CODE_ANSI)+1+4+4;//+1‚Íƒ[ƒhƒAƒ‰ƒCƒ“ƒƒ“ƒg‚ğl—¶‚µ‚Ä‚Ì”’l
+	dwNewSize += TstrToBytes(m_strNAM,-1,NULL,0,BTC_CODE_ANSI)+1+4+4;//+1ã¯ãƒ¯ãƒ¼ãƒ‰ã‚¢ãƒ©ã‚¤ãƒ³ãƒ¡ãƒ³ãƒˆã‚’è€ƒæ…®ã—ã¦ã®æ•°å€¤
 	dwNewSize += TstrToBytes(m_strART,-1,NULL,0,BTC_CODE_ANSI)+1+4+4;
 	dwNewSize += TstrToBytes(m_strPRD,-1,NULL,0,BTC_CODE_ANSI)+1+4+4;
 	dwNewSize += TstrToBytes(m_strCMT,-1,NULL,0,BTC_CODE_ANSI)+1+4+4;
@@ -253,7 +253,7 @@ DWORD CRMP::Save(LPCTSTR szFileName)
 		dwWin32errorCode = GetLastError();
 		return dwWin32errorCode;
 	}
-	//ID3TAGv1î•ñ‚Ì•Û‘¶
+	//ID3TAGv1æƒ…å ±ã®ä¿å­˜
 	CId3tagv1::ID3_TAG id3tag;
 	if(SetFilePointer(hFile,-128,NULL,FILE_END) == INVALID_SET_FILE_POINTER)
 	{
@@ -275,7 +275,7 @@ DWORD CRMP::Save(LPCTSTR szFileName)
 			}
 		}
 	}
-	//‚µ‚Éƒtƒ@ƒCƒ‹‚ğ‘å‚«‚­‚µ‚Ä‚İ‚é
+	//è©¦ã—ã«ãƒ•ã‚¡ã‚¤ãƒ«ã‚’å¤§ããã—ã¦ã¿ã‚‹
 	dwOldSize = GetFileSize(hFile,NULL);
 	if(SetFilePointer(hFile,dwNewSize,NULL,FILE_END) == INVALID_SET_FILE_POINTER)
 	{
@@ -289,7 +289,7 @@ DWORD CRMP::Save(LPCTSTR szFileName)
 		CloseHandle(hFile);
 		return dwWin32errorCode;
 	}
-	//Œ³‚É–ß‚·
+	//å…ƒã«æˆ»ã™
 	if(SetFilePointer(hFile,dwOldSize,NULL,FILE_BEGIN) == INVALID_SET_FILE_POINTER)
 	{
 		dwWin32errorCode = GetLastError();
@@ -304,13 +304,13 @@ DWORD CRMP::Save(LPCTSTR szFileName)
 	}
 	CloseHandle(hFile);
 
-	// ƒoƒbƒtƒ@•t‚«I/O‚ğg‚Á‚Äƒtƒ@ƒCƒ‹‚ğŠJ‚­
+	// ãƒãƒƒãƒ•ã‚¡ä»˜ãI/Oã‚’ä½¿ã£ã¦ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ã
 	HMMIO hmmio = mmioOpen(const_cast<LPTSTR>(szFileName),NULL,MMIO_COMPAT);
 	if(!hmmio)
 	{
 		return -1;
 	}
-	//RMP3ƒtƒ@ƒCƒ‹‚ÌŠm”F
+	//RMP3ãƒ•ã‚¡ã‚¤ãƒ«ã®ç¢ºèª
 	char hdr[4];
 	LONG ret = mmioRead(hmmio,hdr,sizeof(hdr));
 	if((ret != 4) || (hdr[0] != 'R') || (hdr[1] != 'I') || (hdr[2] != 'F') || (hdr[3] != 'F'))
@@ -320,7 +320,7 @@ DWORD CRMP::Save(LPCTSTR szFileName)
 	}
 	mmioSeek(hmmio,0,SEEK_SET);
 
-	//RMP3ƒ`ƒƒƒ“ƒN‚ÖˆÚ“®
+	//RMP3ãƒãƒ£ãƒ³ã‚¯ã¸ç§»å‹•
 	MMCKINFO mmckOutinfoParent;
 	memset(&mmckOutinfoParent,0,sizeof(mmckOutinfoParent));
 	mmckOutinfoParent.fccType = mmioFOURCC('R','M','P','3');
@@ -333,14 +333,14 @@ DWORD CRMP::Save(LPCTSTR szFileName)
 
 	MMCKINFO mmckOutinfoSubchunk;
 	memset(&mmckOutinfoSubchunk,0,sizeof(mmckOutinfoSubchunk));
-	//INFOƒ`ƒƒƒ“ƒN‚ÖˆÚ“®
+	//INFOãƒãƒ£ãƒ³ã‚¯ã¸ç§»å‹•
 	mmckOutinfoSubchunk.fccType = mmioFOURCC('I','N','F','O');
 	if(mmioDescend(hmmio,&mmckOutinfoSubchunk,&mmckOutinfoParent,MMIO_FINDLIST) != MMSYSERR_NOERROR)
 	{
 		mmioClose(hmmio,0);
 		return -1;
 	}
-//	listSize=mmckOutinfoSubchunk.cksize;//INFOƒ`ƒƒƒ“ƒNƒTƒCƒY‚ª³‚µ‚­‚È‚¢ƒf[ƒ^‚É‘Î‰
+//	listSize=mmckOutinfoSubchunk.cksize;//INFOãƒãƒ£ãƒ³ã‚¯ã‚µã‚¤ã‚ºãŒæ­£ã—ããªã„ãƒ‡ãƒ¼ã‚¿ã«å¯¾å¿œ
 	listSize = mmioSeek(hmmio,0,SEEK_CUR);
 	if(listSize == -1)
 	{
@@ -350,7 +350,7 @@ DWORD CRMP::Save(LPCTSTR szFileName)
 	listSize = dwOldSize - listSize + 4;
 	mmioClose(hmmio,0);
 
-	//Œã‚ë‚ğØ‚èæ‚é
+	//å¾Œã‚ã‚’åˆ‡ã‚Šå–ã‚‹
 	if((fp=_tfopen(szFileName,_T("r+b"))) == NULL)
 	{
 		dwWin32errorCode = GetLastError();
@@ -370,16 +370,16 @@ DWORD CRMP::Save(LPCTSTR szFileName)
 		fclose(fp);
 		return dwWin32errorCode;
 	}
-	//Ø‚è‚Â‚ß
+	//åˆ‡ã‚Šã¤ã‚
 	_chsize(fileno(fp),ftell(fp));
 	fclose(fp);
 
-	// ƒoƒbƒtƒ@•t‚«I/O‚ğg‚Á‚Äƒtƒ@ƒCƒ‹‚ğŠJ‚­
+	// ãƒãƒƒãƒ•ã‚¡ä»˜ãI/Oã‚’ä½¿ã£ã¦ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ã
 	if((hmmio = mmioOpen(const_cast<LPTSTR>(szFileName),NULL,MMIO_COMPAT | MMIO_READWRITE)) == NULL)
 	{
 		return -1;
 	}
-	//RMP3ƒtƒ@ƒCƒ‹‚ÌŠm”F
+	//RMP3ãƒ•ã‚¡ã‚¤ãƒ«ã®ç¢ºèª
 	ret = mmioRead(hmmio,hdr,sizeof(hdr));
 	if((ret != 4) || (hdr[0] != 'R') || (hdr[1] != 'I') || (hdr[2] != 'F') || (hdr[3] != 'F'))
 	{
@@ -388,7 +388,7 @@ DWORD CRMP::Save(LPCTSTR szFileName)
 	}
 	mmioSeek(hmmio,0,SEEK_SET);
 
-	//RMP3ƒ`ƒƒƒ“ƒN‚ÖˆÚ“®
+	//RMP3ãƒãƒ£ãƒ³ã‚¯ã¸ç§»å‹•
 	memset(&mmckOutinfoParent,0,sizeof(mmckOutinfoParent));
 	mmckOutinfoParent.fccType = mmioFOURCC('R','M','P','3');
 	if(mmioDescend(hmmio,&mmckOutinfoParent,NULL,MMIO_FINDRIFF) != MMSYSERR_NOERROR)
@@ -396,12 +396,12 @@ DWORD CRMP::Save(LPCTSTR szFileName)
 		mmioClose(hmmio,0);
 		return -1;
 	}
-	mmckOutinfoParent.dwFlags = MMIO_DIRTY;//ƒTƒCƒY•ÏX‰Â‚Éİ’è
+	mmckOutinfoParent.dwFlags = MMIO_DIRTY;//ã‚µã‚¤ã‚ºå¤‰æ›´å¯ã«è¨­å®š
 
-	//ƒtƒ@ƒCƒ‹I’[‚É”ò‚Ô
+	//ãƒ•ã‚¡ã‚¤ãƒ«çµ‚ç«¯ã«é£›ã¶
 	mmioSeek(hmmio,0,SEEK_END);
 
-	//INFOƒ`ƒƒƒ“ƒNì¬EˆÚ“®
+	//INFOãƒãƒ£ãƒ³ã‚¯ä½œæˆãƒ»ç§»å‹•
 	memset(&mmckOutinfoSubchunk,0,sizeof(mmckOutinfoSubchunk));
 	mmckOutinfoSubchunk.fccType = mmioFOURCC('I','N','F','O');
 	mmckOutinfoSubchunk.cksize = 0L;
@@ -410,36 +410,36 @@ DWORD CRMP::Save(LPCTSTR szFileName)
 		mmioClose(hmmio,0);
 		return -1;
 	}
-	mmckOutinfoSubchunk.dwFlags = MMIO_DIRTY;//ƒTƒCƒY•ÏX‰Â‚Éİ’è
+	mmckOutinfoSubchunk.dwFlags = MMIO_DIRTY;//ã‚µã‚¤ã‚ºå¤‰æ›´å¯ã«è¨­å®š
 	//INAM songname
 	WriteStringChunk(hmmio,mmckOutinfoSubchunk,mmioFOURCC('I','N','A','M'),m_strNAM,m_strNAM.GetLength()+1);
-	//IART ƒA[ƒeƒBƒXƒg–¼
+	//IART ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆå
 	WriteStringChunk(hmmio,mmckOutinfoSubchunk,mmioFOURCC('I','A','R','T'),m_strART,m_strART.GetLength()+1);
-	//IPRD ƒAƒ‹ƒoƒ€–¼
+	//IPRD ã‚¢ãƒ«ãƒãƒ å
 	WriteStringChunk(hmmio,mmckOutinfoSubchunk,mmioFOURCC('I','P','R','D'),m_strPRD,m_strPRD.GetLength()+1);
-	//ICMT ƒRƒƒ“ƒg
+	//ICMT ã‚³ãƒ¡ãƒ³ãƒˆ
 	WriteStringChunk(hmmio,mmckOutinfoSubchunk,mmioFOURCC('I','C','M','T'),m_strCMT,m_strCMT.GetLength()+1);
-	//ICRD “ú•t
+	//ICRD æ—¥ä»˜
 	WriteStringChunk(hmmio,mmckOutinfoSubchunk,mmioFOURCC('I','C','R','D'),m_strCRD,m_strCRD.GetLength()+1);
-	//IGNR ƒWƒƒƒ“ƒ‹
+	//IGNR ã‚¸ãƒ£ãƒ³ãƒ«
 	WriteStringChunk(hmmio,mmckOutinfoSubchunk,mmioFOURCC('I','G','N','R'),m_strGNR,m_strGNR.GetLength()+1);
-	//ICOP ’˜ìŒ 
+	//ICOP è‘—ä½œæ¨©
 	WriteStringChunk(hmmio,mmckOutinfoSubchunk,mmioFOURCC('I','C','O','P'),m_strCOP,m_strCOP.GetLength()+1);
-	//IENG ƒGƒ“ƒWƒjƒA
+	//IENG ã‚¨ãƒ³ã‚¸ãƒ‹ã‚¢
 	WriteStringChunk(hmmio,mmckOutinfoSubchunk,mmioFOURCC('I','E','N','G'),m_strENG,m_strENG.GetLength()+1);
-	//ISRC ƒ\[ƒX
+	//ISRC ã‚½ãƒ¼ã‚¹
 	WriteStringChunk(hmmio,mmckOutinfoSubchunk,mmioFOURCC('I','S','R','C'),m_strSRC,m_strSRC.GetLength()+1);
-	//ISFT ƒ\ƒtƒgƒEƒFƒA
+	//ISFT ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢
 	WriteStringChunk(hmmio,mmckOutinfoSubchunk,mmioFOURCC('I','S','F','T'),m_strSFT,m_strSFT.GetLength()+1);
-	//IKEY ƒL[ƒ[ƒh
+	//IKEY ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰
 	WriteStringChunk(hmmio,mmckOutinfoSubchunk,mmioFOURCC('I','K','E','Y'),m_strKEY,m_strKEY.GetLength()+1);
-	//ITCH ‹ZpÒ
+	//ITCH æŠ€è¡“è€…
 	WriteStringChunk(hmmio,mmckOutinfoSubchunk,mmioFOURCC('I','T','C','H'),m_strTCH,m_strTCH.GetLength()+1);
-	//ILYC ‰ÌŒ
+	//ILYC æ­Œè©
 	WriteStringChunk(hmmio,mmckOutinfoSubchunk,mmioFOURCC('I','L','Y','C'),m_strLYC,m_strLYC.GetLength()+1);
-	//ICMS ƒRƒ~ƒbƒVƒ‡ƒ“
+	//ICMS ã‚³ãƒŸãƒƒã‚·ãƒ§ãƒ³
 	WriteStringChunk(hmmio,mmckOutinfoSubchunk,mmioFOURCC('I','C','M','S'),m_strCMS,m_strCMS.GetLength()+1);
-	//IMED ’†ŠÔ
+	//IMED ä¸­é–“
 	WriteStringChunk(hmmio,mmckOutinfoSubchunk,mmioFOURCC('I','M','E','D'),m_strMED,m_strMED.GetLength()+1);
 	//ISBJ subject
 	WriteStringChunk(hmmio,mmckOutinfoSubchunk,mmioFOURCC('I','S','B','J'),m_strSBJ,m_strSBJ.GetLength()+1);
@@ -449,7 +449,7 @@ DWORD CRMP::Save(LPCTSTR szFileName)
 	if(m_bHasId3tag)
 		WriteChunk(hmmio,mmckOutinfoSubchunk,mmioFOURCC('I','I','D','3'),(const char *)&id3tag,sizeof(id3tag));
 
-	//ƒTƒCƒY‚ÌŠm’è
+	//ã‚µã‚¤ã‚ºã®ç¢ºå®š
 	if(mmioAscend(hmmio,&mmckOutinfoSubchunk,0) != MMSYSERR_NOERROR)
 	{
 		mmioClose(hmmio,0);
@@ -468,13 +468,13 @@ DWORD CRMP::Save(LPCTSTR szFileName)
 DWORD CRMP::DelTag(LPCTSTR szFileName)
 {
 	DWORD	dwWin32errorCode = ERROR_SUCCESS;
-	// ƒoƒbƒtƒ@•t‚«I/O‚ğg‚Á‚Äƒtƒ@ƒCƒ‹‚ğŠJ‚­
+	// ãƒãƒƒãƒ•ã‚¡ä»˜ãI/Oã‚’ä½¿ã£ã¦ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ã
 	HMMIO hmmio = mmioOpen(const_cast<LPTSTR>(szFileName),NULL,MMIO_COMPAT);
 	if(hmmio == NULL)
 	{
 		return -1;
 	}
-	//RMP3ƒtƒ@ƒCƒ‹‚ÌŠm”F
+	//RMP3ãƒ•ã‚¡ã‚¤ãƒ«ã®ç¢ºèª
 	char hdr[4];
 	LONG ret = mmioRead(hmmio,hdr,sizeof(hdr));
 	if((ret != 4) || (hdr[0] != 'R') || (hdr[1] != 'I') || (hdr[2] != 'F') || (hdr[3] != 'F'))
@@ -484,7 +484,7 @@ DWORD CRMP::DelTag(LPCTSTR szFileName)
 	}
 	mmioSeek(hmmio,0,SEEK_SET);
 
-	//RMP3ƒ`ƒƒƒ“ƒN‚ÖˆÚ“®
+	//RMP3ãƒãƒ£ãƒ³ã‚¯ã¸ç§»å‹•
 	MMCKINFO	mmckOutinfoParent;
 	memset(&mmckOutinfoParent,0,sizeof(mmckOutinfoParent));
 	mmckOutinfoParent.fccType = mmioFOURCC('R','M','P','3');
@@ -494,7 +494,7 @@ DWORD CRMP::DelTag(LPCTSTR szFileName)
 		return -1;
 	}
 	DWORD mp3Size = mmckOutinfoParent.cksize;
-	//dataƒ`ƒƒƒ“ƒN‚ÖˆÚ“®
+	//dataãƒãƒ£ãƒ³ã‚¯ã¸ç§»å‹•
 	MMCKINFO	mmckOutinfoSubchunk;
 	memset(&mmckOutinfoSubchunk,0,sizeof(mmckOutinfoSubchunk));
 	mmckOutinfoSubchunk.ckid = mmioFOURCC('d','a','t','a');
@@ -504,14 +504,14 @@ DWORD CRMP::DelTag(LPCTSTR szFileName)
 		return -1;
 	}
 	DWORD dataSize = mmckOutinfoSubchunk.cksize;
-	//ƒoƒbƒtƒ@ƒƒ‚ƒŠ‚ÌŠm•Û
+	//ãƒãƒƒãƒ•ã‚¡ãƒ¡ãƒ¢ãƒªã®ç¢ºä¿
 	char *pRawData = (char *)malloc(dataSize);
 	if(!pRawData)
 	{
 		mmioClose(hmmio,0);
 		return -1;
 	}
-	//raw data‚Ì“Ç‚İo‚µ
+	//raw dataã®èª­ã¿å‡ºã—
 	if(mmioRead(hmmio,pRawData,dataSize) < 1)
 	{
 		mmioClose(hmmio,0);
@@ -520,7 +520,7 @@ DWORD CRMP::DelTag(LPCTSTR szFileName)
 	}
 	mmioClose(hmmio,0);
 
-	//ID3TAGv1î•ñ‚Ì•Û‘¶
+	//ID3TAGv1æƒ…å ±ã®ä¿å­˜
 	HANDLE hFile = CreateFile(szFileName,GENERIC_WRITE|GENERIC_READ,FILE_SHARE_READ,NULL,OPEN_EXISTING,FILE_ATTRIBUTE_NORMAL,NULL);
 	if(hFile == INVALID_HANDLE_VALUE)
 	{
@@ -549,7 +549,7 @@ DWORD CRMP::DelTag(LPCTSTR szFileName)
 	}
 	CloseHandle(hFile);
 
-	//ƒeƒ“ƒ|ƒ‰ƒŠ–¼‚ğæ“¾
+	//ãƒ†ãƒ³ãƒãƒ©ãƒªåã‚’å–å¾—
 	TCHAR szTempPath[MAX_PATH];
 	lstrcpy(szTempPath,szFileName);
 	cutFileName(szTempPath);
@@ -561,7 +561,7 @@ DWORD CRMP::DelTag(LPCTSTR szFileName)
 		DeleteFile(szTempFile);
 		return dwWin32errorCode;
 	}
-	//ƒtƒ@ƒCƒ‹ƒI[ƒvƒ“(w’èƒtƒ@ƒCƒ‹‚ª‚·‚Å‚É‘¶İ‚µ‚Ä‚¢‚éê‡A‚»‚Ìƒtƒ@ƒCƒ‹‚Íã‘‚«‚³‚ê‚Ü‚·B)
+	//ãƒ•ã‚¡ã‚¤ãƒ«ã‚ªãƒ¼ãƒ—ãƒ³(æŒ‡å®šãƒ•ã‚¡ã‚¤ãƒ«ãŒã™ã§ã«å­˜åœ¨ã—ã¦ã„ã‚‹å ´åˆã€ãã®ãƒ•ã‚¡ã‚¤ãƒ«ã¯ä¸Šæ›¸ãã•ã‚Œã¾ã™ã€‚)
 	hFile = CreateFile(szTempFile,GENERIC_WRITE|GENERIC_READ,FILE_SHARE_READ,NULL,CREATE_ALWAYS,FILE_ATTRIBUTE_NORMAL,NULL);
 	if(hFile == INVALID_HANDLE_VALUE)
 	{
@@ -579,7 +579,7 @@ DWORD CRMP::DelTag(LPCTSTR szFileName)
 		return dwWin32errorCode;
 	}
 	
-	//‘‚«o‚µ(data)
+	//æ›¸ãå‡ºã—(data)
 	if(WriteFile(hFile,pRawData,dataSize,&dwWritten,NULL) == FALSE)
 	{
 		dwWin32errorCode = GetLastError();
@@ -589,7 +589,7 @@ DWORD CRMP::DelTag(LPCTSTR szFileName)
 		return dwWin32errorCode;
 	}
 	free(pRawData);
-	//‘‚«o‚µ(id3tag)
+	//æ›¸ãå‡ºã—(id3tag)
 	if(m_bHasId3tag)
 	{
 		if(WriteFile(hFile,&id3tag,sizeof(id3tag),&dwWritten,NULL) == FALSE)
@@ -607,7 +607,7 @@ DWORD CRMP::DelTag(LPCTSTR szFileName)
 		return dwWin32errorCode;
 	}
 
-	//ƒIƒŠƒWƒiƒ‹ƒtƒ@ƒCƒ‹‚ğ‘Ş”ğ(ƒŠƒl[ƒ€)
+	//ã‚ªãƒªã‚¸ãƒŠãƒ«ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é€€é¿(ãƒªãƒãƒ¼ãƒ )
 	TCHAR szPreFile[MAX_PATH];
 	if(!GetTempFileName(szTempPath,_T("tms"),0,szPreFile))
 	{
@@ -615,7 +615,7 @@ DWORD CRMP::DelTag(LPCTSTR szFileName)
 		DeleteFile(szTempFile);
 		return dwWin32errorCode;
 	}
-	DeleteFile(szPreFile);//è”²‚«(^^;
+	DeleteFile(szPreFile);//æ‰‹æŠœã(^^;
 	if(!MoveFile(szFileName,szPreFile))
 	{
 		dwWin32errorCode = GetLastError();
@@ -623,7 +623,7 @@ DWORD CRMP::DelTag(LPCTSTR szFileName)
 		return dwWin32errorCode;
 	}
 
-	//Š®¬•i‚ğƒŠƒl[ƒ€
+	//å®Œæˆå“ã‚’ãƒªãƒãƒ¼ãƒ 
 	if(!MoveFile(szTempFile,szFileName))
 	{
 		dwWin32errorCode = GetLastError();
@@ -632,7 +632,7 @@ DWORD CRMP::DelTag(LPCTSTR szFileName)
 		return dwWin32errorCode;
 	}
 
-	//ƒIƒŠƒWƒiƒ‹‚ğíœ
+	//ã‚ªãƒªã‚¸ãƒŠãƒ«ã‚’å‰Šé™¤
 	DeleteFile(szPreFile);
 
 	Release();
@@ -659,7 +659,7 @@ BOOL CRMP::WriteStringChunk(HMMIO hmmio,MMCKINFO mmckinfo,FOURCC id,LPCTSTR pStr
 BOOL CRMP::WriteChunk(HMMIO hmmio,MMCKINFO mmckinfo,FOURCC id,const char *pData,DWORD dwSize)
 {
 	if(dwSize < 2)
-		return TRUE;	//ƒTƒCƒY‚ª0‚Ìƒf[ƒ^‚Í‹L˜^‚µ‚È‚¢
+		return TRUE;	//ã‚µã‚¤ã‚ºãŒ0ã®ãƒ‡ãƒ¼ã‚¿ã¯è¨˜éŒ²ã—ãªã„
 
 	MMCKINFO	mmckOutinfoSubchunk;
 	memset(&mmckOutinfoSubchunk,0,sizeof(mmckOutinfoSubchunk));
@@ -667,14 +667,14 @@ BOOL CRMP::WriteChunk(HMMIO hmmio,MMCKINFO mmckinfo,FOURCC id,const char *pData,
 	mmckOutinfoSubchunk.cksize = 0L;
 	if(mmioCreateChunk(hmmio,&mmckOutinfoSubchunk,0) != MMSYSERR_NOERROR)
 	{
-		//¸”s
+		//å¤±æ•—
 		mmioClose(hmmio,0);
 		return FALSE;
 	}
 	else
 	{
-		mmckOutinfoSubchunk.dwFlags = MMIO_DIRTY;//ƒTƒCƒY•ÏX‰Â‚Éİ’è
-		//2001-05-12 ILYC‘Îô
+		mmckOutinfoSubchunk.dwFlags = MMIO_DIRTY;//ã‚µã‚¤ã‚ºå¤‰æ›´å¯ã«è¨­å®š
+		//2001-05-12 ILYCå¯¾ç­–
 		if( (dwSize > 11) && 
 			(mmioFOURCC('I','L','Y','C') == id) &&
 			(strncmp(pData,"_LYRICSBEGIN",12) == 0) )
@@ -684,7 +684,7 @@ BOOL CRMP::WriteChunk(HMMIO hmmio,MMCKINFO mmckinfo,FOURCC id,const char *pData,
 				mmioClose(hmmio,0);
 				return FALSE;
 			}
-			if(mmioWrite(hmmio,pData+1,dwSize-1) == -1)//æ“ª‚Ì'_'‚ğœ‚¢‚Ä
+			if(mmioWrite(hmmio,pData+1,dwSize-1) == -1)//å…ˆé ­ã®'_'ã‚’é™¤ã„ã¦
 			{
 				mmioClose(hmmio,0);
 				return FALSE;
@@ -720,7 +720,7 @@ DWORD CRMP::MakeTag(LPCTSTR szFileName)
 				GENERIC_READ,
 				FILE_SHARE_READ,
 				NULL,
-				OPEN_EXISTING,	//w’èƒtƒ@ƒCƒ‹‚ª‘¶İ‚µ‚Ä‚¢‚È‚¢ê‡AŠÖ”‚Í¸”s‚µ‚Ü‚·B
+				OPEN_EXISTING,	//æŒ‡å®šãƒ•ã‚¡ã‚¤ãƒ«ãŒå­˜åœ¨ã—ã¦ã„ãªã„å ´åˆã€é–¢æ•°ã¯å¤±æ•—ã—ã¾ã™ã€‚
 				FILE_ATTRIBUTE_NORMAL,
 				NULL);
 	if(hFile == INVALID_HANDLE_VALUE)
@@ -730,7 +730,7 @@ DWORD CRMP::MakeTag(LPCTSTR szFileName)
 	}
 
 	DWORD dwDataSize = GetFileSize(hFile,NULL);
-	//ƒoƒbƒtƒ@ƒƒ‚ƒŠ‚ÌŠm•Û
+	//ãƒãƒƒãƒ•ã‚¡ãƒ¡ãƒ¢ãƒªã®ç¢ºä¿
 	char *pRawData = (char *)malloc(dwDataSize);
 	if(!pRawData)
 	{
@@ -738,7 +738,7 @@ DWORD CRMP::MakeTag(LPCTSTR szFileName)
 		CloseHandle(hFile);
 		return dwWin32errorCode;
 	}
-	//raw data‚Ì“Ç‚İo‚µ
+	//raw dataã®èª­ã¿å‡ºã—
 	if(!ReadFile(hFile,pRawData,dwDataSize,&dwWritten,NULL))
 	{
 		dwWin32errorCode = GetLastError();
@@ -746,7 +746,7 @@ DWORD CRMP::MakeTag(LPCTSTR szFileName)
 		free(pRawData);
 		return dwWin32errorCode;
 	}
-	//ID3TAGv1î•ñ‚Ì•Û‘¶
+	//ID3TAGv1æƒ…å ±ã®ä¿å­˜
 	CId3tagv1::ID3_TAG id3tag;
 	if(SetFilePointer(hFile,-128,NULL,FILE_END) == INVALID_SET_FILE_POINTER)
 	{
@@ -769,7 +769,7 @@ DWORD CRMP::MakeTag(LPCTSTR szFileName)
 
 	CloseHandle(hFile);
 
-	//ƒeƒ“ƒ|ƒ‰ƒŠ–¼‚ğæ“¾
+	//ãƒ†ãƒ³ãƒãƒ©ãƒªåã‚’å–å¾—
 	TCHAR szTempPath[MAX_PATH];
 	lstrcpy(szTempPath,szFileName);
 	cutFileName(szTempPath);
@@ -781,7 +781,7 @@ DWORD CRMP::MakeTag(LPCTSTR szFileName)
 		DeleteFile(szTempFile);
 		return dwWin32errorCode;
 	}
-	//ƒtƒ@ƒCƒ‹ƒI[ƒvƒ“(w’èƒtƒ@ƒCƒ‹‚ª‚·‚Å‚É‘¶İ‚µ‚Ä‚¢‚éê‡A‚»‚Ìƒtƒ@ƒCƒ‹‚Íã‘‚«‚³‚ê‚Ü‚·B)
+	//ãƒ•ã‚¡ã‚¤ãƒ«ã‚ªãƒ¼ãƒ—ãƒ³(æŒ‡å®šãƒ•ã‚¡ã‚¤ãƒ«ãŒã™ã§ã«å­˜åœ¨ã—ã¦ã„ã‚‹å ´åˆã€ãã®ãƒ•ã‚¡ã‚¤ãƒ«ã¯ä¸Šæ›¸ãã•ã‚Œã¾ã™ã€‚)
 	hFile = CreateFile(szTempFile,GENERIC_WRITE|GENERIC_READ,FILE_SHARE_READ,NULL,CREATE_ALWAYS,FILE_ATTRIBUTE_NORMAL,NULL);
 	if(hFile == INVALID_HANDLE_VALUE)
 	{
@@ -800,8 +800,8 @@ DWORD CRMP::MakeTag(LPCTSTR szFileName)
 	}
 	CloseHandle(hFile);
 
-	// ƒoƒbƒtƒ@•t‚«I/O‚ğg‚Á‚Äƒeƒ“ƒ|ƒ‰ƒŠƒtƒ@ƒCƒ‹‚ğŠJ‚­(‘¼‚ÌƒvƒƒZƒX‚©‚ç‚Ì‘‹Ö~)
-	//(ƒeƒ“ƒ|ƒ‰ƒŠ‚ÉRiffŒ`®‚Ìmp3ƒtƒ@ƒCƒ‹‚ğ‘‚­)
+	// ãƒãƒƒãƒ•ã‚¡ä»˜ãI/Oã‚’ä½¿ã£ã¦ãƒ†ãƒ³ãƒãƒ©ãƒªãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ã(ä»–ã®ãƒ—ãƒ­ã‚»ã‚¹ã‹ã‚‰ã®æ›¸è¾¼ç¦æ­¢)
+	//(ãƒ†ãƒ³ãƒãƒ©ãƒªã«Riffå½¢å¼ã®mp3ãƒ•ã‚¡ã‚¤ãƒ«ã‚’æ›¸ã)
 	HMMIO hmmio = mmioOpen(szTempFile,NULL,MMIO_CREATE | MMIO_WRITE | MMIO_ALLOCBUF | MMIO_DENYWRITE);
 	if(!hmmio)
 	{
@@ -810,7 +810,7 @@ DWORD CRMP::MakeTag(LPCTSTR szFileName)
 		return -1;
 	}
 
-	//RMP3ƒ`ƒƒƒ“ƒN‚ğì¬
+	//RMP3ãƒãƒ£ãƒ³ã‚¯ã‚’ä½œæˆ
 	MMCKINFO	mmckOutinfoParent;
 	memset(&mmckOutinfoParent,0,sizeof(mmckOutinfoParent));
 	mmckOutinfoParent.fccType = mmioFOURCC('R','M','P','3');
@@ -822,8 +822,8 @@ DWORD CRMP::MakeTag(LPCTSTR szFileName)
 		DeleteFile(szTempFile);
 		return -1;
 	}
-	mmckOutinfoParent.dwFlags = MMIO_DIRTY;//ƒTƒCƒY•ÏX‰Â‚Éİ’è
-	//dataƒ`ƒƒƒ“ƒN‚ğì¬
+	mmckOutinfoParent.dwFlags = MMIO_DIRTY;//ã‚µã‚¤ã‚ºå¤‰æ›´å¯ã«è¨­å®š
+	//dataãƒãƒ£ãƒ³ã‚¯ã‚’ä½œæˆ
 	MMCKINFO	mmckOutinfoSubchunk;
 	memset(&mmckOutinfoSubchunk,0,sizeof(mmckOutinfoSubchunk));
 	mmckOutinfoSubchunk.ckid = mmioFOURCC('d','a','t','a');
@@ -835,8 +835,8 @@ DWORD CRMP::MakeTag(LPCTSTR szFileName)
 		DeleteFile(szTempFile);
 		return -1;
 	}
-	mmckOutinfoSubchunk.dwFlags = MMIO_DIRTY;//ƒTƒCƒY•ÏX‰Â‚Éİ’è
-	//dataƒ`ƒƒƒ“ƒN‚Ö‘‚«‚İ
+	mmckOutinfoSubchunk.dwFlags = MMIO_DIRTY;//ã‚µã‚¤ã‚ºå¤‰æ›´å¯ã«è¨­å®š
+	//dataãƒãƒ£ãƒ³ã‚¯ã¸æ›¸ãè¾¼ã¿
 	if(mmioWrite(hmmio,pRawData,dwDataSize) == -1)
 	{
 		free(pRawData);
@@ -845,14 +845,14 @@ DWORD CRMP::MakeTag(LPCTSTR szFileName)
 		return -1;
 	}
 	free(pRawData);
-	//dataƒ`ƒƒƒ“ƒN‚ğŠm’è
+	//dataãƒãƒ£ãƒ³ã‚¯ã‚’ç¢ºå®š
 	if(mmioAscend(hmmio,&mmckOutinfoSubchunk,0) != MMSYSERR_NOERROR)
 	{
 		mmioClose(hmmio,0);
 		DeleteFile(szTempFile);
 		return -1;
 	}
-	//INFOƒ`ƒƒƒ“ƒNì¬EˆÚ“®
+	//INFOãƒãƒ£ãƒ³ã‚¯ä½œæˆãƒ»ç§»å‹•
 	memset(&mmckOutinfoSubchunk,0,sizeof(mmckOutinfoSubchunk));
 	mmckOutinfoSubchunk.fccType = mmioFOURCC('I','N','F','O');
 	mmckOutinfoSubchunk.cksize = 0L;
@@ -867,37 +867,37 @@ DWORD CRMP::MakeTag(LPCTSTR szFileName)
 	//INAM songname
 	if(m_strNAM.IsEmpty())
 	{
-		//ƒfƒtƒHƒ‹ƒg‹È–¼(ƒtƒ@ƒCƒ‹–¼)
+		//ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆæ›²å(ãƒ•ã‚¡ã‚¤ãƒ«å)
 		m_strNAM = getFileName((CString)szFileName);
 	}
 	WriteStringChunk(hmmio,mmckOutinfoSubchunk,mmioFOURCC('I','N','A','M'),m_strNAM,m_strNAM.GetLength()+1);
-	//IART ƒA[ƒeƒBƒXƒg–¼
+	//IART ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆå
 	WriteStringChunk(hmmio,mmckOutinfoSubchunk,mmioFOURCC('I','A','R','T'),m_strART,m_strART.GetLength()+1);
-	//IPRD ƒAƒ‹ƒoƒ€–¼
+	//IPRD ã‚¢ãƒ«ãƒãƒ å
 	WriteStringChunk(hmmio,mmckOutinfoSubchunk,mmioFOURCC('I','P','R','D'),m_strPRD,m_strPRD.GetLength()+1);
-	//ICMT ƒRƒƒ“ƒg
+	//ICMT ã‚³ãƒ¡ãƒ³ãƒˆ
 	WriteStringChunk(hmmio,mmckOutinfoSubchunk,mmioFOURCC('I','C','M','T'),m_strCMT,m_strCMT.GetLength()+1);
-	//ICRD “ú•t
+	//ICRD æ—¥ä»˜
 	WriteStringChunk(hmmio,mmckOutinfoSubchunk,mmioFOURCC('I','C','R','D'),m_strCRD,m_strCRD.GetLength()+1);
-	//IGNR ƒWƒƒƒ“ƒ‹
+	//IGNR ã‚¸ãƒ£ãƒ³ãƒ«
 	WriteStringChunk(hmmio,mmckOutinfoSubchunk,mmioFOURCC('I','G','N','R'),m_strGNR,m_strGNR.GetLength()+1);
-	//ICOP ’˜ìŒ 
+	//ICOP è‘—ä½œæ¨©
 	WriteStringChunk(hmmio,mmckOutinfoSubchunk,mmioFOURCC('I','C','O','P'),m_strCOP,m_strCOP.GetLength()+1);
-	//IENG ƒGƒ“ƒWƒjƒA
+	//IENG ã‚¨ãƒ³ã‚¸ãƒ‹ã‚¢
 	WriteStringChunk(hmmio,mmckOutinfoSubchunk,mmioFOURCC('I','E','N','G'),m_strENG,m_strENG.GetLength()+1);
-	//ISRC ƒ\[ƒX
+	//ISRC ã‚½ãƒ¼ã‚¹
 	WriteStringChunk(hmmio,mmckOutinfoSubchunk,mmioFOURCC('I','S','R','C'),m_strSRC,m_strSRC.GetLength()+1);
-	//ISFT ƒ\ƒtƒgƒEƒFƒA
+	//ISFT ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢
 	WriteStringChunk(hmmio,mmckOutinfoSubchunk,mmioFOURCC('I','S','F','T'),m_strSFT,m_strSFT.GetLength()+1);
-	//IKEY ƒL[ƒ[ƒh
+	//IKEY ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰
 	WriteStringChunk(hmmio,mmckOutinfoSubchunk,mmioFOURCC('I','K','E','Y'),m_strKEY,m_strKEY.GetLength()+1);
-	//ITCH ‹ZpÒ
+	//ITCH æŠ€è¡“è€…
 	WriteStringChunk(hmmio,mmckOutinfoSubchunk,mmioFOURCC('I','T','C','H'),m_strTCH,m_strTCH.GetLength()+1);
-	//ILYC ‰ÌŒ
+	//ILYC æ­Œè©
 	WriteStringChunk(hmmio,mmckOutinfoSubchunk,mmioFOURCC('I','L','Y','C'),m_strLYC,m_strLYC.GetLength()+1);
-	//ICMS ƒRƒ~ƒbƒVƒ‡ƒ“
+	//ICMS ã‚³ãƒŸãƒƒã‚·ãƒ§ãƒ³
 	WriteStringChunk(hmmio,mmckOutinfoSubchunk,mmioFOURCC('I','C','M','S'),m_strCMS,m_strCMS.GetLength()+1);
-	//IMED ’†ŠÔ
+	//IMED ä¸­é–“
 	WriteStringChunk(hmmio,mmckOutinfoSubchunk,mmioFOURCC('I','M','E','D'),m_strMED,m_strMED.GetLength()+1);
 	//ISBJ subject
 	WriteStringChunk(hmmio,mmckOutinfoSubchunk,mmioFOURCC('I','S','B','J'),m_strSBJ,m_strSBJ.GetLength()+1);
@@ -907,7 +907,7 @@ DWORD CRMP::MakeTag(LPCTSTR szFileName)
 	if(m_bHasId3tag)
 		WriteChunk(hmmio,mmckOutinfoSubchunk,mmioFOURCC('I','I','D','3'),(const char *)&id3tag,sizeof(id3tag));
 
-	//ƒTƒCƒY‚Ì‘‚«‚İ
+	//ã‚µã‚¤ã‚ºã®æ›¸ãè¾¼ã¿
 	if(mmioAscend(hmmio,&mmckOutinfoSubchunk,0) != MMSYSERR_NOERROR)
 	{
 		mmioClose(hmmio,0);
@@ -922,12 +922,12 @@ DWORD CRMP::MakeTag(LPCTSTR szFileName)
 	}
 
 	if(mmioClose(hmmio,0))
-	{	//ì»¸”s‚µ‚½‚Æ‚«
+	{	//ä½œè£½å¤±æ•—ã—ãŸã¨ã
 		DeleteFile(szTempFile);
 		return -1;
 	}
 
-	//ƒIƒŠƒWƒiƒ‹ƒtƒ@ƒCƒ‹‚ğ‘Ş”ğ(ƒŠƒl[ƒ€)
+	//ã‚ªãƒªã‚¸ãƒŠãƒ«ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é€€é¿(ãƒªãƒãƒ¼ãƒ )
 	TCHAR szPreFile[MAX_PATH];
 	if(!GetTempFileName(szTempPath,_T("tms"),0,szPreFile))
 	{
@@ -935,7 +935,7 @@ DWORD CRMP::MakeTag(LPCTSTR szFileName)
 		DeleteFile(szTempFile);
 		return dwWin32errorCode;
 	}
-	DeleteFile(szPreFile);//è”²‚«(^^;
+	DeleteFile(szPreFile);//æ‰‹æŠœã(^^;
 	if(!MoveFile(szFileName,szPreFile))
 	{
 		dwWin32errorCode = GetLastError();
@@ -943,7 +943,7 @@ DWORD CRMP::MakeTag(LPCTSTR szFileName)
 		return dwWin32errorCode;
 	}
 
-	//Š®¬•i‚ğƒŠƒl[ƒ€
+	//å®Œæˆå“ã‚’ãƒªãƒãƒ¼ãƒ 
 	if(!MoveFile(szTempFile,szFileName))
 	{
 		dwWin32errorCode = GetLastError();
@@ -952,7 +952,7 @@ DWORD CRMP::MakeTag(LPCTSTR szFileName)
 		return dwWin32errorCode;
 	}
 
-	//ƒIƒŠƒWƒiƒ‹‚ğíœ
+	//ã‚ªãƒªã‚¸ãƒŠãƒ«ã‚’å‰Šé™¤
 	DeleteFile(szPreFile);
 
 	m_bEnable = TRUE;

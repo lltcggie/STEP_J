@@ -1,4 +1,4 @@
-// SuperTagEditorDoc.h : CSuperTagEditorDoc ƒNƒ‰ƒX‚ÌéŒ¾‚¨‚æ‚ÑƒCƒ“ƒ^[ƒtƒFƒCƒX‚Ì’è‹`‚ğ‚µ‚Ü‚·B
+// SuperTagEditorDoc.h : CSuperTagEditorDoc ã‚¯ãƒ©ã‚¹ã®å®£è¨€ãŠã‚ˆã³ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹ã®å®šç¾©ã‚’ã—ã¾ã™ã€‚
 //
 /////////////////////////////////////////////////////////////////////////////
 
@@ -17,22 +17,22 @@
 
 //#include "Registry.h"
 
-struct FILE_STATE	{					// ƒtƒ@ƒCƒ‹î•ñ
-	CString	strFullPathName;			// ƒtƒ‹ƒpƒX–¼
-	CSuperGridCtrl::CTreeItem *pParent;	// e‚ÌƒAƒCƒeƒ€
+struct FILE_STATE	{					// ãƒ•ã‚¡ã‚¤ãƒ«æƒ…å ±
+	CString	strFullPathName;			// ãƒ•ãƒ«ãƒ‘ã‚¹å
+	CSuperGridCtrl::CTreeItem *pParent;	// è¦ªã®ã‚¢ã‚¤ãƒ†ãƒ 
 };
 
 class CDlgCommonProgress;
 
 class CSuperTagEditorDoc : public CDocument
 {
-protected: // ƒVƒŠƒAƒ‰ƒCƒY‹@”\‚Ì‚İ‚©‚çì¬‚µ‚Ü‚·B
+protected: // ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºæ©Ÿèƒ½ã®ã¿ã‹ã‚‰ä½œæˆã—ã¾ã™ã€‚
 	CSuperTagEditorDoc();
 	DECLARE_DYNCREATE(CSuperTagEditorDoc)
 
 
 public:		// ======================================
-			// =====      public ƒƒ“ƒoŠÖ”     =====
+			// =====      public ãƒ¡ãƒ³ãƒé–¢æ•°     =====
 			// ======================================
 	FILE_MP3	*GetListMP3(int nIndex) {return(&m_arrayFiles[nIndex]);}
 	int			GetIndexFromListMP3(FILE_MP3* pFileMP3) { /* STEP 037 */
@@ -61,7 +61,7 @@ public:		// ======================================
 				if (bRedraw) UpdateAllViews(NULL);
 			}
 	inline	void ExecClassification(void) {
-				// •ª—Ş•\¦XV
+				// åˆ†é¡è¡¨ç¤ºæ›´æ–°
 				OnExecClassification();
 			}
 
@@ -77,14 +77,14 @@ public:		// ======================================
 	void	ClearRequestFiles(void);
 	void	OpenFolder(const TCHAR *);
 	bool	CheckFileAttribute(FILE_MP3 *);
-	//’Ç‰Á by Kobarin
-	//ƒ^ƒO‚ğXV’†‚©‚Ç‚¤‚©
+	//è¿½åŠ  by Kobarin
+	//ã‚¿ã‚°ã‚’æ›´æ–°ä¸­ã‹ã©ã†ã‹
 	bool	IsTagUpdating(void){return m_TagUpdatingCount != 0;}
 
 private:	// ======================================
-			// =====     private ƒƒ“ƒoŠÖ”     =====
+			// =====     private ãƒ¡ãƒ³ãƒé–¢æ•°     =====
 			// ======================================
-			//TCHAR	*m_sTargetFile;				// ŒŸõˆ—FŒ»İ‚Ìƒtƒ@ƒCƒ‹
+			//TCHAR	*m_sTargetFile;				// æ¤œç´¢å‡¦ç†ï¼šç¾åœ¨ã®ãƒ•ã‚¡ã‚¤ãƒ«
 			CArray <FILE_MP3, const FILE_MP3 &>	m_arrayFiles;
 			CArray <FILE_STATE, const FILE_STATE &>	m_arrayRequestFiles;
 			int		m_nArrayFileCount;
@@ -93,7 +93,7 @@ private:	// ======================================
 			CDlgCommonProgress	*m_dlgLoadProgress;
 
 	inline	void	InitGridList(void) {
-				// ƒOƒŠƒbƒh‚ğ‰Šú‰»
+				// ã‚°ãƒªãƒƒãƒ‰ã‚’åˆæœŸåŒ–
 				CMySuperGrid	&listCtrl = GetListCtrl();
 				listCtrl.DeleteAllEx();
 			}
@@ -125,25 +125,25 @@ private:	// ======================================
 	CTime	GetFileTime(const TCHAR *);
 	BOOL	SelectDirectory(TCHAR *sLocal, int size);
 
-	//’Ç‰Á by Kobarin
-	//StartLoadFile/EndLoadFile ‚Í“¯‚¶‰ñ”ŒÄ‚Ño‚³‚È‚¯‚ê‚Î‚È‚ç‚È‚¢
-	//‚æ‚¤‚Éd—l•ÏX
+	//è¿½åŠ  by Kobarin
+	//StartLoadFile/EndLoadFile ã¯åŒã˜å›æ•°å‘¼ã³å‡ºã•ãªã‘ã‚Œã°ãªã‚‰ãªã„
+	//ã‚ˆã†ã«ä»•æ§˜å¤‰æ›´
 	int		m_StartLoadFileCount;
-	int		m_TagUpdatingCount;//ƒ^ƒOî•ñ‚ğXV’†
+	int		m_TagUpdatingCount;//ã‚¿ã‚°æƒ…å ±ã‚’æ›´æ–°ä¸­
 	bool	m_bInitialized; /* StartInaction2 055 */
 
 protected:	// ======================================
-			// =====    protected ƒƒ“ƒoŠÖ”    =====
+			// =====    protected ãƒ¡ãƒ³ãƒé–¢æ•°    =====
 			// ======================================
 
-// ƒAƒgƒŠƒrƒ…[ƒg
+// ã‚¢ãƒˆãƒªãƒ“ãƒ¥ãƒ¼ãƒˆ
 public:
 
-// ƒIƒyƒŒ[ƒVƒ‡ƒ“
+// ã‚ªãƒšãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³
 public:
 
-//ƒI[ƒo[ƒ‰ƒCƒh
-	// ClassWizard ‚Í‰¼‘zŠÖ”‚ÌƒI[ƒo[ƒ‰ƒCƒh‚ğ¶¬‚µ‚Ü‚·B
+//ã‚ªãƒ¼ãƒãƒ¼ãƒ©ã‚¤ãƒ‰
+	// ClassWizard ã¯ä»®æƒ³é–¢æ•°ã®ã‚ªãƒ¼ãƒãƒ¼ãƒ©ã‚¤ãƒ‰ã‚’ç”Ÿæˆã—ã¾ã™ã€‚
 	//{{AFX_VIRTUAL(CSuperTagEditorDoc)
 	public:
 	virtual BOOL OnNewDocument();
@@ -152,7 +152,7 @@ public:
 	virtual BOOL OnOpenDocument(LPCTSTR lpszPathName);
 	//}}AFX_VIRTUAL
 
-// ƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“
+// ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³
 public:
 	void SaveAllTag(BOOL bSaveOnly);
 	virtual ~CSuperTagEditorDoc();
@@ -163,7 +163,7 @@ public:
 
 protected:
 
-// ¶¬‚³‚ê‚½ƒƒbƒZ[ƒW ƒ}ƒbƒvŠÖ”
+// ç”Ÿæˆã•ã‚ŒãŸãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒãƒƒãƒ—é–¢æ•°
 protected:
 	//{{AFX_MSG(CSuperTagEditorDoc)
 	afx_msg void OnUpdateOpenFolder(CCmdUI* pCmdUI);
@@ -190,6 +190,6 @@ protected:
 /////////////////////////////////////////////////////////////////////////////
 
 //{{AFX_INSERT_LOCATION}}
-// Microsoft Visual C++ ‚Í‘Os‚Ì’¼‘O‚É’Ç‰Á‚ÌéŒ¾‚ğ‘}“ü‚µ‚Ü‚·B
+// Microsoft Visual C++ ã¯å‰è¡Œã®ç›´å‰ã«è¿½åŠ ã®å®£è¨€ã‚’æŒ¿å…¥ã—ã¾ã™ã€‚
 
 #endif // !defined(AFX_DMTLOGVIEWDOC_H__D67B644A_BFAB_11D3_9459_00402641B29B__INCLUDED_)

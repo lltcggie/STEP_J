@@ -1,4 +1,4 @@
-// MyFileDialogPlaylist.cpp : �C���v�������e�[�V���� �t�@�C��
+// MyFileDialogPlaylist.cpp : インプリメンテーション ファイル
 //
 
 #include "stdafx.h"
@@ -28,7 +28,7 @@ CMyFileDialogPlaylist::CMyFileDialogPlaylist(BOOL bOpenFileDialog, LPCTSTR lpszD
 		// New OS [ Windows Vista - ]
 		custom = this->GetIFileDialogCustomize();
 		if(custom != NULL){
-			custom->AddCheckButton(IDC_CH_SHOW_LOAD_PLAYLIST,L"�v���C���X�g���͐ݒ�_�C�A���O��\������",false);
+			custom->AddCheckButton(IDC_CH_SHOW_LOAD_PLAYLIST,L"プレイリスト入力設定ダイアログを表示する",false);
 			custom->Release();
 		}
 	}
@@ -39,7 +39,7 @@ CMyFileDialogPlaylist::CMyFileDialogPlaylist(BOOL bOpenFileDialog, LPCTSTR lpszD
 
 BEGIN_MESSAGE_MAP(CMyFileDialogPlaylist, CFileDialog)
 	//{{AFX_MSG_MAP(CMyFileDialogPlaylist)
-		// ���� -  ClassWizard �͂��̈ʒu�Ƀ}�b�s���O�p�̃}�N����ǉ��܂��͍폜���܂��B
+		// メモ -  ClassWizard はこの位置にマッピング用のマクロを追加または削除します。
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 

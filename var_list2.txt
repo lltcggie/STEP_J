@@ -1,19 +1,19 @@
-[Šg’£•ÏŠ·‘Ž®‚ÅŽg—p‚Å‚«‚é•Ï”]
+[æ‹¡å¼µå¤‰æ›æ›¸å¼ã§ä½¿ç”¨ã§ãã‚‹å¤‰æ•°]
 %FILE_NAME%
 %TRACK_NAME%
 %ALBUM_NAME%
 %ARTIST_NAME%
 %TRACK_NUMBER%
-%TRACK_NUMBER2%    ¦2Œ…‚Åo—Í (1 => 01)
-%TRACK_NUMBER3%    ¦3Œ…‚Åo—Í (1 => 001)
-%DISC_NUMBER%      ¦–{‰ÆSTEP/STEP_M ‚Å‚Í %DISK_NUMBER% ‚¾‚Á‚½‚Ì‚ðŽd—l•ÏX
-%DISC_NUMBER2%     ¦2Œ…‚Åo—Í (1 => 01)
-%DISC_NUMBER3%     ¦3Œ…‚Åo—Í (1 => 001)
+%TRACK_NUMBER2%    â€»2æ¡ã§å‡ºåŠ› (1 => 01)
+%TRACK_NUMBER3%    â€»3æ¡ã§å‡ºåŠ› (1 => 001)
+%DISC_NUMBER%      â€»æœ¬å®¶STEP/STEP_M ã§ã¯ %DISK_NUMBER% ã ã£ãŸã®ã‚’ä»•æ§˜å¤‰æ›´
+%DISC_NUMBER2%     â€»2æ¡ã§å‡ºåŠ› (1 => 01)
+%DISC_NUMBER3%     â€»3æ¡ã§å‡ºåŠ› (1 => 001)
 %RELEASE_YEAR%
-%COMMENT%               ¦‚Ps–Ú‚Ì‚Ý
+%COMMENT%               â€»ï¼‘è¡Œç›®ã®ã¿
 %GENRE%
-%NUMBER%           ¦˜A”Ô
-%NUMBER2%          ¦“rØ‚ê‚½‚ç‰ÁŽZ
+%NUMBER%           â€»é€£ç•ª
+%NUMBER2%          â€»é€”åˆ‡ã‚ŒãŸã‚‰åŠ ç®—
 %STRING%
 %COPYRIGHT%
 %ENGINEER%
@@ -32,18 +32,18 @@
 %OTHER%
 %FOLDER_FILE_COUNT%
 
-[ƒ†[ƒU•ÏŠ·‘Ž®‚ÅŽg—p‚Å‚«‚é•Ï”]
+[ãƒ¦ãƒ¼ã‚¶å¤‰æ›æ›¸å¼ã§ä½¿ç”¨ã§ãã‚‹å¤‰æ•°]
 %TRACK_NAME%
 %ALBUM_NAME%
 %ARTIST_NAME%
 %TRACK_NUMBER%
-%TRACK_NUMBER2%    ¦2Œ…‚Åo—Í (1 => 01)
-%TRACK_NUMBER3%    ¦3Œ…‚Åo—Í (1 => 001)
-%DISC_NUMBER%      ¦–{‰ÆSTEP/STEP_M ‚Å‚Í %DISK_NUMBER% ‚¾‚Á‚½‚Ì‚ðŽd—l•ÏX
-%DISC_NUMBER2%     ¦2Œ…‚Åo—Í (1 => 01)
-%DISC_NUMBER3%     ¦3Œ…‚Åo—Í (1 => 001)
+%TRACK_NUMBER2%    â€»2æ¡ã§å‡ºåŠ› (1 => 01)
+%TRACK_NUMBER3%    â€»3æ¡ã§å‡ºåŠ› (1 => 001)
+%DISC_NUMBER%      â€»æœ¬å®¶STEP/STEP_M ã§ã¯ %DISK_NUMBER% ã ã£ãŸã®ã‚’ä»•æ§˜å¤‰æ›´
+%DISC_NUMBER2%     â€»2æ¡ã§å‡ºåŠ› (1 => 01)
+%DISC_NUMBER3%     â€»3æ¡ã§å‡ºåŠ› (1 => 001)
 %RELEASE_YEAR%
-%COMMENT%          ¦‚Ps–Ú‚Ì‚Ý
+%COMMENT%          â€»ï¼‘è¡Œç›®ã®ã¿
 %GENRE%
 %COPYRIGHT%
 %ENGINEER%
@@ -60,21 +60,21 @@
 %URL%
 %ENCODEST%
 %OTHER%
-%SKIP%             ¦ ƒtƒ@ƒCƒ‹–¼¨ƒ^ƒOî•ñ‚Ì‚Ý
+%SKIP%             â€» ãƒ•ã‚¡ã‚¤ãƒ«åâ†’ã‚¿ã‚°æƒ…å ±ã®ã¿
 
-[‘Ž®ƒRƒs[‚ÅŽg—p‚Å‚«‚é•Ï”]
+[æ›¸å¼ã‚³ãƒ”ãƒ¼ã§ä½¿ç”¨ã§ãã‚‹å¤‰æ•°]
 %FILE_NAME%
 %TRACK_NAME%
 %ALBUM_NAME%
 %ARTIST_NAME%
 %TRACK_NUMBER%
-%TRACK_NUMBER2%    ¦2Œ…‚Åo—Í (1 => 01)
-%TRACK_NUMBER3%    ¦3Œ…‚Åo—Í (1 => 001)
-%DISC_NUMBER%      ¦–{‰ÆSTEP/STEP_M ‚Å‚Í %DISK_NUMBER% ‚¾‚Á‚½‚Ì‚ðŽd—l•ÏX
-%DISC_NUMBER2%     ¦2Œ…‚Åo—Í (1 => 01)
-%DISC_NUMBER3%     ¦3Œ…‚Åo—Í (1 => 001)
+%TRACK_NUMBER2%    â€»2æ¡ã§å‡ºåŠ› (1 => 01)
+%TRACK_NUMBER3%    â€»3æ¡ã§å‡ºåŠ› (1 => 001)
+%DISC_NUMBER%      â€»æœ¬å®¶STEP/STEP_M ã§ã¯ %DISK_NUMBER% ã ã£ãŸã®ã‚’ä»•æ§˜å¤‰æ›´
+%DISC_NUMBER2%     â€»2æ¡ã§å‡ºåŠ› (1 => 01)
+%DISC_NUMBER3%     â€»3æ¡ã§å‡ºåŠ› (1 => 001)
 %RELEASE_YEAR%
-%COMMENT%          ¦‚Ps–Ú‚Ì‚Ý
+%COMMENT%          â€»ï¼‘è¡Œç›®ã®ã¿
 %GENRE%
 %STRING%
 %TOTAL_SEC%
@@ -82,18 +82,18 @@
 %TOTAL_SEC3%
 %FORMAT%
 
-[ˆÚ“®æƒtƒHƒ‹ƒ_‘Ž®•ÏŠ·‚ÅŽg—p‚Å‚«‚é•Ï”]
+[ç§»å‹•å…ˆãƒ•ã‚©ãƒ«ãƒ€æ›¸å¼å¤‰æ›ã§ä½¿ç”¨ã§ãã‚‹å¤‰æ•°]
 %FILE_NAME%
 %TRACK_NAME%
 %ALBUM_NAME%
 %ARTIST_NAME%
 %TRACK_NUMBER%
-%TRACK_NUMBER2%    ¦2Œ…‚Åo—Í (1 => 01)
-%TRACK_NUMBER3%    ¦3Œ…‚Åo—Í (1 => 001)
-%DISC_NUMBER%      ¦–{‰ÆSTEP/STEP_M ‚Å‚Í %DISK_NUMBER% ‚¾‚Á‚½‚Ì‚ðŽd—l•ÏX
-%DISC_NUMBER2%     ¦2Œ…‚Åo—Í (1 => 01)
-%DISC_NUMBER3%     ¦3Œ…‚Åo—Í (1 => 001)
+%TRACK_NUMBER2%    â€»2æ¡ã§å‡ºåŠ› (1 => 01)
+%TRACK_NUMBER3%    â€»3æ¡ã§å‡ºåŠ› (1 => 001)
+%DISC_NUMBER%      â€»æœ¬å®¶STEP/STEP_M ã§ã¯ %DISK_NUMBER% ã ã£ãŸã®ã‚’ä»•æ§˜å¤‰æ›´
+%DISC_NUMBER2%     â€»2æ¡ã§å‡ºåŠ› (1 => 01)
+%DISC_NUMBER3%     â€»3æ¡ã§å‡ºåŠ› (1 => 001)
 %RELEASE_YEAR%
-%COMMENT%          ¦‚Ps–Ú‚Ì‚Ý
+%COMMENT%          â€»ï¼‘è¡Œç›®ã®ã¿
 %GENRE%
 %STRING%
