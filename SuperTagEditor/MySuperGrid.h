@@ -212,7 +212,7 @@ public:
 			bool	CellCopyDown(void);
 			bool	CellClear(int, int);
 			bool	CellClearSelected(void);
-			bool	SetFillNumber(int, int, bool = false/* Conspiracy 194 */);
+			bool	SetFillNumber(int, int, bool = false); /* Conspiracy 194 */
 			void	ChangeSubItemText(int, int, const TCHAR *);
 			void	CellStateControl(int);
 
@@ -224,7 +224,7 @@ public:
 			// 変換
 			bool	ConvTagInfo(int, int, const TCHAR * = NULL);
 			bool	ConvTagInfoSelected(int, const TCHAR * = NULL);
-			bool	ConvTagInfo(CTreeItem *, int, const TCHAR * = NULL, const TCHAR * = NULL /* STEP 034 */);
+			bool	ConvTagInfo(CTreeItem *, int, const TCHAR * = NULL, const TCHAR * = NULL); /* STEP 034 */
 			bool	ConvUserFormatEx(USER_CONV_FORMAT_EX *);
 			bool	ConvString(int);
 			CString	ReplaceFileName(const FILE_MP3 *, CString);
@@ -236,9 +236,9 @@ public:
 			bool	WriteTreePlayList(const TCHAR *);
 			bool	WriteTreePlayList(const TCHAR *, CTreeItem *, CString &);
 
-			bool	WriteFormatFile(const TCHAR *, const CString &, const CString &, const CString &, bool, bool, bool, bool/* BeachMonster5 120 */);
-			bool	WriteFormatFileBody(CFile &, CTreeItem *, const CString &, bool, LIST_WRITE_STATUS *, bool/* BeachMonster5 120 */);
-			bool	WriteFormatFileFoot(CFile &, const CString &, bool, LIST_WRITE_STATUS *, bool/* BeachMonster5 120 */);
+			bool	WriteFormatFile(const TCHAR *, const CString &, const CString &, const CString &, bool, bool, bool, bool); /* BeachMonster5 120 */
+			bool	WriteFormatFileBody(CFile &, CTreeItem *, const CString &, bool, LIST_WRITE_STATUS *, bool); /* BeachMonster5 120 */
+			bool	WriteFormatFileFoot(CFile &, const CString &, bool, LIST_WRITE_STATUS *, bool); /* BeachMonster5 120 */
 			CString	WriteFormatFileHeader(CFile &file, CTreeItem *pItem, const CString &strHead, bool bIsHtml, LIST_WRITE_STATUS *pStatus, bool bWriteHtml); /* Rumble 190 */
 
 			CString	GetFileColumnText(const FILE_MP3 *, int);
@@ -326,9 +326,9 @@ public:
 	bool ProcessSelectedFilesForUpdate(LPCTSTR szProgressBarTitle, STEPProcessSelectedFilesCB* callback);
 	bool DeleteCharSpace(int nPos=0);
 	void ClipboardCopyFormat(USER_COPY_FORMAT_FORMAT *pForm);
-	void ChangeSubItemText(int iItem, int iSubItem, const TCHAR *sUpdateText, int nPos, bool bAddSpace, const CString& strAddFront, const CString& strAddBack/* FunnyCorn 187 */, bool bUpdateInternal = FALSE/* STEP 037 */);
-	void PasteString(TCHAR *sBuffer, int nPastePos, bool bText/* RockDance 124 */, bool bAddSpace/* Baja 171 */, const CString& strAddFront, const CString& strAddBack/* FunnyCorn 187 */);
-	bool ClipboardPaste(int nPastePos, bool bAddSpace, const CString& strAddFront, const CString& strAddBack/* FunnyCorn 187 */);
+	void ChangeSubItemText(int iItem, int iSubItem, const TCHAR *sUpdateText, int nPos, bool bAddSpace, const CString& strAddFront, const CString& strAddBack, bool bUpdateInternal = FALSE); /* FunnyCorn 187, STEP 037 */
+	void PasteString(TCHAR *sBuffer, int nPastePos, bool bText, bool bAddSpace, const CString& strAddFront, const CString& strAddBack); /* RockDance 124, Baja 171, FunnyCorn 187 */
+	bool ClipboardPaste(int nPastePos, bool bAddSpace, const CString& strAddFront, const CString& strAddBack); /* FunnyCorn 187 */
 	void OnUpdateTotal();
 	void OnRefreshTreeItem(CTreeItem* pOldItem, CTreeItem* pNewItem);
 	int  GetFolderFileCount(CTreeItem* pTop, CTreeItem* pTotalParent, int fileCount);
@@ -344,7 +344,7 @@ public:
 	void SetHeaderFont(LOGFONT logFont);
 	void UpdateParentAtDeleteItem(UINT nIndex, FILE_MP3 *fileMP3);
 	bool MoveFolderFormat(USER_MOVE_FODLER_FORMAT *pForm, CString strFolder, bool isCopy);
-	bool AddFillNumber(int nStart, int nStep, int nWidth, CString strBefore/* Conspiracy 194 */, CString strAfter/* Conspiracy 194 */, int nPos, bool bSpaceInitNumber/* Conspiracy 194 */);
+	bool AddFillNumber(int nStart, int nStep, int nWidth, CString strBefore, CString strAfter, int nPos, bool bSpaceInitNumber); /* Conspiracy 194 *//* Conspiracy 194 *//* Conspiracy 194 */
 	bool DeleteChar(int nCount, int nPos);
 	virtual ~CMySuperGrid();
 

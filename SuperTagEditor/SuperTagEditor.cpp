@@ -1272,7 +1272,7 @@ void CSuperTagEditorApp::ReadRegistry(void)
             } else {
                 strSectionName.Format(_T("%s%d-%d"), sSectionTeikei, k, i);
             }
-            g_teikeiInfo[i+k*10].strTeikei/* STEP 035 */ = m_IniFile.ReadStr(sSectionOption, strSectionName, _T(""), buf, _countof(buf));
+            g_teikeiInfo[i+k*10].strTeikei = m_IniFile.ReadStr(sSectionOption, strSectionName, _T(""), buf, _countof(buf)); /* STEP 035 */
             /* STEP 035 */
             if (k == 0) {
                 strSectionName.Format(_T("%s%d"), sSectionTeikeiPaste, i);
@@ -1722,7 +1722,7 @@ void CSuperTagEditorApp::WriteRegistry(void)
             } else {
                 strSectionName.Format(_T("%s%d-%d"), sSectionTeikei, k, i);
             }
-            m_IniFile.WriteStr(sSectionOption, strSectionName, g_teikeiInfo[i+k*10].strTeikei/* STEP 035 */);
+            m_IniFile.WriteStr(sSectionOption, strSectionName, g_teikeiInfo[i+k*10].strTeikei); /* STEP 035 */
             /* STEP 035 */
             if (k == 0) {
                 strSectionName.Format(_T("%s%d"), sSectionTeikeiPaste, i);
@@ -2014,7 +2014,7 @@ void CSuperTagEditorApp::UpdateAccelerator(int nTableMax)
     // アクセラレータテーブルの解放
     DestroyAccelerator();
 
-    CMainFrame/* STEP 030 */    *pMainWnd = (CMainFrame*)/* STEP 030 */AfxGetMainWnd();
+    CMainFrame/* STEP 030 */    *pMainWnd = (CMainFrame*)AfxGetMainWnd(); /* STEP 030 */
     CMenu   *pMenu = pMainWnd ? pMainWnd->GetMenu() : NULL;
 
     /* STEP 030 */
@@ -2177,94 +2177,94 @@ void CSuperTagEditorApp::UpdateAccelerator(int nTableMax)
                     strName.Format(_T("05：%s"), g_userConvFormat[4].strName);
                     break;
                 case ID_TEIKEI_01: /* SeaKnows 030 */
-                    strName.Format(_T("01: %s"), shortString(g_teikeiInfo[0].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
+                    strName.Format(_T("01: %s"), shortString(g_teikeiInfo[0].strTeikei, TEIKEI_MENU_STRING_MAX));/* STEP 035, FreeFall 051 */
                     break;
                 case ID_TEIKEI_02: /* SeaKnows 030 */
-                    strName.Format(_T("02: %s"), shortString(g_teikeiInfo[1].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
+                    strName.Format(_T("02: %s"), shortString(g_teikeiInfo[1].strTeikei, TEIKEI_MENU_STRING_MAX));/* STEP 035, FreeFall 051 */
                     break;
                 case ID_TEIKEI_03: /* SeaKnows 030 */
-                    strName.Format(_T("03: %s"), shortString(g_teikeiInfo[2].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
+                    strName.Format(_T("03: %s"), shortString(g_teikeiInfo[2].strTeikei, TEIKEI_MENU_STRING_MAX));/* STEP 035, FreeFall 051 */
                     break;
                 case ID_TEIKEI_04: /* SeaKnows 030 */
-                    strName.Format(_T("04: %s"), shortString(g_teikeiInfo[3].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
+                    strName.Format(_T("04: %s"), shortString(g_teikeiInfo[3].strTeikei, TEIKEI_MENU_STRING_MAX));/* STEP 035, FreeFall 051 */
                     break;
                 case ID_TEIKEI_05: /* SeaKnows 030 */
-                    strName.Format(_T("05: %s"), shortString(g_teikeiInfo[4].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
+                    strName.Format(_T("05: %s"), shortString(g_teikeiInfo[4].strTeikei, TEIKEI_MENU_STRING_MAX));/* STEP 035, FreeFall 051 */
                     break;
                 case ID_TEIKEI_06: /* SeaKnows 030 */
-                    strName.Format(_T("06: %s"), shortString(g_teikeiInfo[5].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
+                    strName.Format(_T("06: %s"), shortString(g_teikeiInfo[5].strTeikei, TEIKEI_MENU_STRING_MAX));/* STEP 035, FreeFall 051 */
                     break;
                 case ID_TEIKEI_07: /* SeaKnows 030 */
-                    strName.Format(_T("07: %s"), shortString(g_teikeiInfo[6].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
+                    strName.Format(_T("07: %s"), shortString(g_teikeiInfo[6].strTeikei, TEIKEI_MENU_STRING_MAX));/* STEP 035, FreeFall 051 */
                     break;
                 case ID_TEIKEI_08: /* SeaKnows 030 */
-                    strName.Format(_T("08: %s"), shortString(g_teikeiInfo[7].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
+                    strName.Format(_T("08: %s"), shortString(g_teikeiInfo[7].strTeikei, TEIKEI_MENU_STRING_MAX));/* STEP 035, FreeFall 051 */
                     break;
                 case ID_TEIKEI_09: /* SeaKnows 030 */
-                    strName.Format(_T("09: %s"), shortString(g_teikeiInfo[8].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
+                    strName.Format(_T("09: %s"), shortString(g_teikeiInfo[8].strTeikei, TEIKEI_MENU_STRING_MAX));/* STEP 035, FreeFall 051 */
                     break;
                 case ID_TEIKEI_10: /* SeaKnows 030 */
-                    strName.Format(_T("10: %s"), shortString(g_teikeiInfo[9].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
+                    strName.Format(_T("10: %s"), shortString(g_teikeiInfo[9].strTeikei, TEIKEI_MENU_STRING_MAX));/* STEP 035, FreeFall 051 */
                     break;
                 case ID_TEIKEI_2_01: /* FreeFall 046 */
-                    strName.Format(_T("01: %s"), shortString(g_teikeiInfo[10].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
+                    strName.Format(_T("01: %s"), shortString(g_teikeiInfo[10].strTeikei, TEIKEI_MENU_STRING_MAX));/* STEP 035, FreeFall 051 */
                     break;
                 case ID_TEIKEI_2_02: /* FreeFall 046 */
-                    strName.Format(_T("02: %s"), shortString(g_teikeiInfo[11].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
+                    strName.Format(_T("02: %s"), shortString(g_teikeiInfo[11].strTeikei, TEIKEI_MENU_STRING_MAX));/* STEP 035, FreeFall 051 */
                     break;
                 case ID_TEIKEI_2_03: /* FreeFall 046 */
-                    strName.Format(_T("03: %s"), shortString(g_teikeiInfo[12].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
+                    strName.Format(_T("03: %s"), shortString(g_teikeiInfo[12].strTeikei, TEIKEI_MENU_STRING_MAX));/* STEP 035, FreeFall 051 */
                     break;
                 case ID_TEIKEI_2_04: /* FreeFall 046 */
-                    strName.Format(_T("04: %s"), shortString(g_teikeiInfo[13].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
+                    strName.Format(_T("04: %s"), shortString(g_teikeiInfo[13].strTeikei, TEIKEI_MENU_STRING_MAX));/* STEP 035, FreeFall 051 */
                     break;
                 case ID_TEIKEI_2_05: /* FreeFall 046 */
-                    strName.Format(_T("05: %s"), shortString(g_teikeiInfo[14].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
+                    strName.Format(_T("05: %s"), shortString(g_teikeiInfo[14].strTeikei, TEIKEI_MENU_STRING_MAX));/* STEP 035, FreeFall 051 */
                     break;
                 case ID_TEIKEI_2_06: /* FreeFall 046 */
-                    strName.Format(_T("06: %s"), shortString(g_teikeiInfo[15].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
+                    strName.Format(_T("06: %s"), shortString(g_teikeiInfo[15].strTeikei, TEIKEI_MENU_STRING_MAX));/* STEP 035, FreeFall 051 */
                     break;
                 case ID_TEIKEI_2_07: /* FreeFall 046 */
-                    strName.Format(_T("07: %s"), shortString(g_teikeiInfo[16].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
+                    strName.Format(_T("07: %s"), shortString(g_teikeiInfo[16].strTeikei, TEIKEI_MENU_STRING_MAX));/* STEP 035, FreeFall 051 */
                     break;
                 case ID_TEIKEI_2_08: /* FreeFall 046 */
-                    strName.Format(_T("08: %s"), shortString(g_teikeiInfo[17].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
+                    strName.Format(_T("08: %s"), shortString(g_teikeiInfo[17].strTeikei, TEIKEI_MENU_STRING_MAX));/* STEP 035, FreeFall 051 */
                     break;
                 case ID_TEIKEI_2_09: /* FreeFall 046 */
-                    strName.Format(_T("09: %s"), shortString(g_teikeiInfo[18].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
+                    strName.Format(_T("09: %s"), shortString(g_teikeiInfo[18].strTeikei, TEIKEI_MENU_STRING_MAX));/* STEP 035, FreeFall 051 */
                     break;
                 case ID_TEIKEI_2_10: /* FreeFall 046 */
-                    strName.Format(_T("10: %s"), shortString(g_teikeiInfo[19].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
+                    strName.Format(_T("10: %s"), shortString(g_teikeiInfo[19].strTeikei, TEIKEI_MENU_STRING_MAX));/* STEP 035, FreeFall 051 */
                     break;
                 case ID_TEIKEI_3_01: /* FreeFall 046 */
-                    strName.Format(_T("01: %s"), shortString(g_teikeiInfo[20].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
+                    strName.Format(_T("01: %s"), shortString(g_teikeiInfo[20].strTeikei, TEIKEI_MENU_STRING_MAX));/* STEP 035, FreeFall 051 */
                     break;
                 case ID_TEIKEI_3_02: /* FreeFall 046 */
-                    strName.Format(_T("02: %s"), shortString(g_teikeiInfo[21].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
+                    strName.Format(_T("02: %s"), shortString(g_teikeiInfo[21].strTeikei, TEIKEI_MENU_STRING_MAX));/* STEP 035, FreeFall 051 */
                     break;
                 case ID_TEIKEI_3_03: /* FreeFall 046 */
-                    strName.Format(_T("03: %s"), shortString(g_teikeiInfo[22].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
+                    strName.Format(_T("03: %s"), shortString(g_teikeiInfo[22].strTeikei, TEIKEI_MENU_STRING_MAX));/* STEP 035, FreeFall 051 */
                     break;
                 case ID_TEIKEI_3_04: /* FreeFall 046 */
-                    strName.Format(_T("04: %s"), shortString(g_teikeiInfo[23].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
+                    strName.Format(_T("04: %s"), shortString(g_teikeiInfo[23].strTeikei, TEIKEI_MENU_STRING_MAX));/* STEP 035, FreeFall 051 */
                     break;
                 case ID_TEIKEI_3_05: /* FreeFall 046 */
-                    strName.Format(_T("05: %s"), shortString(g_teikeiInfo[24].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
+                    strName.Format(_T("05: %s"), shortString(g_teikeiInfo[24].strTeikei, TEIKEI_MENU_STRING_MAX));/* STEP 035, FreeFall 051 */
                     break;
                 case ID_TEIKEI_3_06: /* FreeFall 046 */
-                    strName.Format(_T("06: %s"), shortString(g_teikeiInfo[25].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
+                    strName.Format(_T("06: %s"), shortString(g_teikeiInfo[25].strTeikei, TEIKEI_MENU_STRING_MAX));/* STEP 035, FreeFall 051 */
                     break;
                 case ID_TEIKEI_3_07: /* FreeFall 046 */
-                    strName.Format(_T("07: %s"), shortString(g_teikeiInfo[26].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
+                    strName.Format(_T("07: %s"), shortString(g_teikeiInfo[26].strTeikei, TEIKEI_MENU_STRING_MAX));/* STEP 035, FreeFall 051 */
                     break;
                 case ID_TEIKEI_3_08: /* FreeFall 046 */
-                    strName.Format(_T("08: %s"), shortString(g_teikeiInfo[27].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
+                    strName.Format(_T("08: %s"), shortString(g_teikeiInfo[27].strTeikei, TEIKEI_MENU_STRING_MAX));/* STEP 035, FreeFall 051 */
                     break;
                 case ID_TEIKEI_3_09: /* FreeFall 046 */
-                    strName.Format(_T("09: %s"), shortString(g_teikeiInfo[28].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
+                    strName.Format(_T("09: %s"), shortString(g_teikeiInfo[28].strTeikei, TEIKEI_MENU_STRING_MAX));/* STEP 035, FreeFall 051 */
                     break;
                 case ID_TEIKEI_3_10: /* FreeFall 046 */
-                    strName.Format(_T("10: %s"), shortString(g_teikeiInfo[29].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
+                    strName.Format(_T("10: %s"), shortString(g_teikeiInfo[29].strTeikei, TEIKEI_MENU_STRING_MAX));/* STEP 035, FreeFall 051 */
                     break;
                 case ID_FAVORITE_FOLDER_01: /* RockDance 129 */
                     strName.Format(_T("&1 %s"), shortFavorite(g_strFavorite[0]));

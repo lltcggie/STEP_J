@@ -62,7 +62,7 @@ public:
             controlType = edit;//default;
             return 0;
         }
-        return (controlType == edit || controlType == multiedit/* BeachMonster 089 */ || controlType == multieditreadonly) ? 0 : 1;
+        return (controlType == edit || controlType == multiedit || controlType == multieditreadonly) ? 0 : 1; /* BeachMonster 089 */
     }
 
     void SetListData(int iSubItem, CStringList *strInitArr)

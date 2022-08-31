@@ -3675,10 +3675,10 @@ void CSuperGridCtrl::InvalidateSelectRangeItem(void)
 // 引数  : none
 // 戻り値: none
 // =============================================
-void CSuperGridCtrl::SelectRangeStart(int nIndex/* STEP 008 */)
+void CSuperGridCtrl::SelectRangeStart(int nIndex) /* STEP 008 */
 {
     if (m_bMultiSelect == false) {
-        int     iItem = nIndex == -1 ? GetSelectedItem() : nIndex /* STEP 008 */;
+        int     iItem = nIndex == -1 ? GetSelectedItem() : nIndex; /* STEP 008 */
         int     iSubItem = GetCurSubItem();
         m_posMultiSelect[0].x = iSubItem;
         m_posMultiSelect[0].y = iItem;
@@ -3850,8 +3850,8 @@ void CSuperGridCtrl::PreSubclassWindow()
 int CSuperGridCtrl::MyDrawText(CDC* pDC, LPCTSTR lpszString, int nCount, LPRECT lpRect, UINT nFormat) /* BeachMonster 107 */
 {
     CString strText = lpszString;
-    if (g_bOptShowZenSpace && (nFormat & (DT_CENTER | DT_RIGHT)) == 0/* RockDance 125 */ &&
-            ((strText.Find(_T("\r\n")) != -1 || strText.Find(_T("　")) != -1)/* Misirlou 147 */ || strText.Find(_T("\t"))/* Baja 156 */)) { /* 2003.06.26 change */
+    if (g_bOptShowZenSpace && (nFormat & (DT_CENTER | DT_RIGHT)) == 0 &&
+            ((strText.Find(_T("\r\n")) != -1 || strText.Find(_T("　")) != -1) || strText.Find(_T("\t")))) { /* RockDance 125 *//* Misirlou 147 *//* Baja 156 *//* 2003.06.26 change */
         COLORREF    colOrg;
         CString strChar = _T("");
         CString strNormal = _T("");
@@ -3888,7 +3888,7 @@ int CSuperGridCtrl::MyDrawText(CDC* pDC, LPCTSTR lpszString, int nCount, LPRECT 
                     rect.left += pDC->GetTextExtent(strNormal).cx;
                     pDC->SetTextColor(RGB(192, 192, 192));
                     strChar = _T("↓"); /* RockDance 137 */
-                    pDC->DrawText(strChar/* RockDance 137 */, 2, rect, nFormat);
+                    pDC->DrawText(strChar, 2, rect, nFormat); /* RockDance 137 */
                 } else if (strChar == _T("\t")) { /* Baja 156 */
                     pDC->DrawText(strNormal, rect, nFormat);
                     rect.left += pDC->GetTextExtent(strNormal).cx;

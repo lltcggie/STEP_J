@@ -552,7 +552,7 @@ bool CSuperTagEditorDoc::SearchFileReent(const TCHAR *sDir, CSuperGridCtrl::CTre
                 if ((data.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) != 0) {
                     if (_tcscmp(data.cFileName, _T(".") ) != 0      // カレントディレクトリ以外
                     &&  _tcscmp(data.cFileName, _T("..")) != 0      // 親ディレクトリ以外
-                    && (data.dwFileAttributes & FILE_ATTRIBUTE_HIDDEN) == 0/* STEP 032 */) { // 隠しフォルダ以外
+                    && (data.dwFileAttributes & FILE_ATTRIBUTE_HIDDEN) == 0) { // 隠しフォルダ以外 /* STEP 032 */
                         // ディレクトリ付きファイル名作成
                         _tcsncpy_s(sCurFile, MAX_PATH, sDir, _TRUNCATE);
                         _tcsncat_s(sCurFile, MAX_PATH, data.cFileName, _TRUNCATE);

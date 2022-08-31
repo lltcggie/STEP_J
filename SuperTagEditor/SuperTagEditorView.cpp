@@ -1074,7 +1074,7 @@ void CSuperTagEditorView::OnLoadPlaylist()
 	// ファイル選択ダイアログを開く
 	static TCHAR sFileFilter[] = _T("PlayList(*.m3u;*.m3u8)|*.m3u;*.m3u8|") \
                                  _T("All Files(*.*)|*.*|");
-	CMyFileDialogPlaylist/* RockDance 126 */		dialog(TRUE, sDefaultExt, g_strCurrentPlayList,
+	CMyFileDialogPlaylist		dialog(TRUE, sDefaultExt, g_strCurrentPlayList, /* RockDance 126 */
 	                       OFN_FILEMUSTEXIST | OFN_HIDEREADONLY | OFN_EXTENSIONDIFFERENT | OFN_PATHMUSTEXIST,
 	                       sFileFilter, NULL);
 	dialog.m_bShowLoadPlaylistDlg = g_bShowLoadPlaylistDlg; /* RockDance 126 */
@@ -1247,7 +1247,7 @@ void CSuperTagEditorView::OnSelectDeleteList()
 	CSuperTagEditorDoc* pDoc = GetDocument();
 	ASSERT_VALID(pDoc);
 
-	if (m_List.GetSelectedCount() == 1 && m_List.GetSelectFileName() == NULL && FALSE/* SeaKnows 033 */) {
+	if (m_List.GetSelectedCount() == 1 && m_List.GetSelectFileName() == NULL && FALSE) { /* SeaKnows 033 */
 		// フォルダの単一選択
 	} else {
 		// ファイルの単一選択／複数選択
@@ -1299,7 +1299,7 @@ void CSuperTagEditorView::OnSelectDeleteFile()
 	CSuperTagEditorDoc* pDoc = GetDocument();
 	ASSERT_VALID(pDoc);
 
-	if (m_List.GetSelectedCount() == 1 && m_List.GetSelectFileName() == NULL && FALSE/* SeaKnows 033 */) {
+	if (m_List.GetSelectedCount() == 1 && m_List.GetSelectFileName() == NULL && FALSE) { /* SeaKnows 033 */
 		// フォルダの単一選択
 	} else {
 		// ファイルの単一選択／複数選択
@@ -1312,7 +1312,8 @@ void CSuperTagEditorView::OnSelectDeleteFile()
 		strMess.Format(_T("選択されているファイル(%d個)を削除します\n\n")
 		               _T("実行してもよろしいですか？"), nCount);
 		if (g_bConfDeleteFile == false || MessageBox(strMess, _T("ファイルの削除"), MB_YESNO|MB_TOPMOST) == IDYES) {
-			/* WildCherry4 082 *//*
+			/* WildCherry4 082 */
+			/*
 			// 削除ファイルのリストを作成
 			CString	strFileList;
 			// インデックスがずれるので、後ろから削除していく
@@ -1403,7 +1404,7 @@ void CSuperTagEditorView::OnSelectEditDestory()
 	CSuperTagEditorDoc* pDoc = GetDocument();
 	ASSERT_VALID(pDoc);
 
-	if (m_List.GetSelectedCount() == 1 && m_List.GetSelectFileName() == NULL && FALSE/* SeaKnows 033 */) {
+	if (m_List.GetSelectedCount() == 1 && m_List.GetSelectFileName() == NULL && FALSE) { /* SeaKnows 033 */
 		// フォルダの単一選択
 	} else {
 		// ファイルの単一選択／複数選択
@@ -2138,7 +2139,7 @@ void CSuperTagEditorView::OnSetNumberAdd()
 	if (dialog.DoModal() == IDOK) {
 		CWaitCursor	wait;
 		if (dialog.m_nAddPosition != 2) { /* Conspiracy 194 */
-			m_List.AddFillNumber(dialog.m_nInitNumber/* Conspiracy 194 */, dialog.m_nAddNumber/* Conspiracy 194 */, dialog.m_nWidth, dialog.m_strSeparator, "" /* Conspiracy 194 */, dialog.m_nAddPosition, dialog.m_bSpaceInitNumber ? true : false/* Conspiracy 194 */);
+			m_List.AddFillNumber(dialog.m_nInitNumber, dialog.m_nAddNumber, dialog.m_nWidth, dialog.m_strSeparator, "", dialog.m_nAddPosition, dialog.m_bSpaceInitNumber ? true : false); /* Conspiracy 194 */
 			g_strAddNumberSep = dialog.m_strSeparator; /* Baja 159 */
 		} else { /* Conspiracy 194 */
 			// 置き換えの時
@@ -2199,7 +2200,7 @@ void CSuperTagEditorView::OnMoveFolder05()
 BOOL CSuperTagEditorView::SelectDirectory(TCHAR *sLocal, int size, bool bCopy)
 {
 	bool	bResult;
-	CSHBrowseForFolder	browse(true, /*g_bEnableMoveFolderCopy*/bCopy /* WildCherry 064 */);
+	CSHBrowseForFolder	browse(true, /*g_bEnableMoveFolderCopy*/bCopy); /* WildCherry 064 */
 	browse.SetCheckBoxTitle(_T("コピーする"));
 	bResult = browse.Exec(sLocal, size);
 	g_bEnableMoveFolderCopy = browse.GetSearchSubDirState();
@@ -2892,7 +2893,7 @@ void CSuperTagEditorView::OnUnifyChar() /* StartInaction 054 */
 			m_List.ConvString(CONV_STR_HIRA2KATA);
 			break;
 		}
-		switch (g_nUnifyKigou /* BeachMonster 103 */) { // 記号
+		switch (g_nUnifyKigou) { // 記号 /* BeachMonster 103 */
 		case 1:// 全角
 			m_List.ConvString(CONV_STR_ZEN_KIGOU);
 			break;
@@ -3047,7 +3048,7 @@ void CSuperTagEditorView::OnEditPasteAdd()  /* Baja 171 */
 			dlgTeikei.m_strBack = _T("");
 		}
 		m_List.ClipboardPaste(dlgTeikei.m_nTeikeiPaste, dlgTeikei.m_bAddSpace ? true : false,
-			dlgTeikei.m_strFront, dlgTeikei.m_strBack/* FunnyCorn 187 */);
+			dlgTeikei.m_strFront, dlgTeikei.m_strBack); /* FunnyCorn 187 */
 #ifndef FLICKERFREE
 		GetDocument()->UpdateAllViews(NULL);
 #endif

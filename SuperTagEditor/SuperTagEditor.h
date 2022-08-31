@@ -321,7 +321,7 @@ extern  LOGFONT     g_fontReport;           // フォント
 
 extern  FILENAME_REPLACE    g_fileNameReplace[FILENAME_REPLACE_MAX];
 
-extern  FILENAME_REPLACE    g_userFileNameReplace[USER_FILENAME_REPLACE_MAX];   /* FreeFall 050 */
+extern  FILENAME_REPLACE    g_userFileNameReplace[USER_FILENAME_REPLACE_MAX]; /* FreeFall 050 */
 
 
 extern  KEY_CONFIG *SearchKeyConfigID(WORD);

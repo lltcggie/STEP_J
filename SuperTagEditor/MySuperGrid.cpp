@@ -1305,7 +1305,7 @@ BOOL CMySuperGrid::OnChangeSelect(void)
 				}
 			}
 		}
-		strText.Format(_T("%dファイル/%.2fMB/%d:%02d"), nCount, dSize / 1024 / 1024, dPlayTime / 60, dPlayTime % 60 /* BeachMonster5 123 */);
+		strText.Format(_T("%dファイル/%.2fMB/%d:%02d"), nCount, dSize / 1024 / 1024, dPlayTime / 60, dPlayTime % 60); /* BeachMonster5 123 */
 		AfxGetMainWnd()->SendMessage(WM_USER_SET_STATUS_SIZE, 0, (LPARAM)strText.GetBuffer(0));
 	}
 	return(CSuperGridCtrl::OnChangeSelect());
@@ -1989,7 +1989,7 @@ void CMySuperGrid::PasteString(TCHAR *sBuffer)
 #endif
 }
 
-void CMySuperGrid::PasteString(TCHAR *sBuffer, int nPastePos, bool bText/* RockDance 124 */)	/* FreeFall 052 */
+void CMySuperGrid::PasteString(TCHAR *sBuffer, int nPastePos, bool bText) /* FreeFall 052, RockDance 124 */
 {
 	PasteString(sBuffer, nPastePos, false, false, _T(""), _T(""));
 }
