@@ -310,8 +310,8 @@ void CDkToolBar::OnToolBarGetButtonInfo(NMHDR *notify, LRESULT *result)
     // else there is no button for this index
     else
     {
-        if ((tbStruct->iItem - NButtons()) < pluginToolBarInfo.GetSize()) {
-            CPluginToolBarInfo* lpButton = (CPluginToolBarInfo*)pluginToolBarInfo.GetAt(tbStruct->iItem - NButtons());
+        if ((static_cast<long long>(tbStruct->iItem) - NButtons()) < pluginToolBarInfo.GetSize()) {
+            CPluginToolBarInfo* lpButton = (CPluginToolBarInfo*)pluginToolBarInfo.GetAt(static_cast<INT_PTR>(tbStruct->iItem) - NButtons());
             tbStruct->tbButton = lpButton->tbButton;
             extern bool OnToolTipNotify(UINT nID, LPTSTR& szText);
             LPTSTR szText = NULL;

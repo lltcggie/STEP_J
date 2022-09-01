@@ -2032,7 +2032,7 @@ void   CSuperTagEditorView::OnDDE(TCHAR *sFileName)
     //（KbDDEClient::Execute の仕様）
     int nLen = _tcslen(sFileName);
     TCHAR *tmpFileName = new TCHAR[nLen + 1 - 2];//" 2つ分だけ小さくて良い
-    _tcsncpy_s(tmpFileName, nLen + 1 - 2, sFileName+1, _TRUNCATE);
+    _tcsncpy_s(tmpFileName, static_cast<rsize_t>(nLen) + 1 - 2, sFileName + 1, _TRUNCATE);
     //MessageBox(tmpFileName, sFileName, MB_OK);
     int		nFileCount = 1;
 

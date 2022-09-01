@@ -1939,13 +1939,13 @@ bool CMySuperGrid::ClipboardCopy(void)
 	LPTSTR pBuffer;
 	HGLOBAL hMem, hMem2/* RockDance 124 */;
     const int buf_len = strBuffer.GetLength();
-	hMem = GlobalAlloc(GHND|GMEM_DDESHARE, (buf_len+1)*sizeof(TCHAR));
+	hMem = GlobalAlloc(GHND | GMEM_DDESHARE, (static_cast<unsigned long long>(buf_len) + 1) * sizeof(TCHAR));
 	pBuffer = (LPTSTR)GlobalLock(hMem);
-	_tcsncpy_s(pBuffer, buf_len+1, strBuffer, _TRUNCATE);
+	_tcsncpy_s(pBuffer, static_cast<rsize_t>(buf_len) + 1, strBuffer, _TRUNCATE);
 	GlobalUnlock(hMem);
 	/* RockDance 124 */
 	const int buf_text_len = strBufferText.GetLength();
-    hMem2 = GlobalAlloc(GHND/*|GMEM_DDESHARE*/, (buf_text_len+1)*sizeof(TCHAR));
+	hMem2 = GlobalAlloc(GHND/*|GMEM_DDESHARE*/, (static_cast<unsigned long long>(buf_text_len) + 1) * sizeof(TCHAR));
 	pBuffer = (LPTSTR)GlobalLock(hMem2);
 	_tcsncpy_s(pBuffer, buf_text_len+1, strBufferText, _TRUNCATE);
 	GlobalUnlock(hMem2);
@@ -2160,8 +2160,8 @@ int CMySuperGrid::CompFunc(CString &str1, CString &str2, int nColum, bool bSortA
 		CString strComp1 = str1; /* FunnyCorn 179 */
 		CString strComp2 = str2; /* FunnyCorn 179 */
 		if (g_bOptSortIgnoreKataHira) { /* FunnyCorn 179 */
-			_tcscpy_s(buffer1, buf1_len + 1, str1);
-			_tcscpy_s(buffer2, buf2_len + 1, str2);
+			_tcscpy_s(buffer1, static_cast<rsize_t>(buf1_len) + 1, str1);
+			_tcscpy_s(buffer2, static_cast<rsize_t>(buf2_len) + 1, str2);
 			conv_hira2kata(buffer1);
 			conv_hira2kata(buffer2);
 			conv_kata_erase_dakuon(buffer1);
@@ -2173,8 +2173,8 @@ int CMySuperGrid::CompFunc(CString &str1, CString &str2, int nColum, bool bSortA
 			conv_zen2hans(buffer1, buf1_len+1, strComp1, CONV_ALL, g_bZenHanKigouKana);
 			conv_zen2hans(buffer2, buf2_len+1, strComp2, CONV_ALL, g_bZenHanKigouKana);
 		} else {
-			_tcscpy_s(buffer1, buf1_len+1, str1);
-			_tcscpy_s(buffer2, buf2_len+1, str2);
+			_tcscpy_s(buffer1, static_cast<rsize_t>(buf1_len) + 1, str1);
+			_tcscpy_s(buffer2, static_cast<rsize_t>(buf2_len) + 1, str2);
 		}
 		if (FALSE && g_bOptSortIgnoreKataHira) { /* FunnyCorn 179 */
 			strComp1 = buffer1;
@@ -4560,7 +4560,7 @@ bool CMySuperGrid::WriteFormatFile(const TCHAR *sFileName, const CString &strHea
                 file.Seek(0, CFile::begin);
                 file.Write("\xFF\xFE", 2);//BOM
                 file.Write(str_utf16, len_utf16*sizeof(WCHAR));
-                file.SetLength((1 + len_utf16)*sizeof(WCHAR));//1==BOM
+				file.SetLength((1 + static_cast<unsigned long long>(len_utf16)) * sizeof(WCHAR));//1==BOM
                 if(pFree){
                     free(pFree);
                 }
@@ -5719,7 +5719,7 @@ void CMySuperGrid::SelectTreeColumn() /* TyphoonSwell 025 */
 	if (nCount == 0) return;
 	SelectRangeStart(nIndex /* STEP 008 */);
 	m_posMultiSelect[0].y = nIndex;
-	m_posMultiSelect[1].y = arrayList[nCount-1];
+	m_posMultiSelect[1].y = arrayList[static_cast<INT_PTR>(nCount) - 1];
 	if (m_posMultiSelect[0].x == 0) { /* SeaKnows 035 */
 		SelItemRange(TRUE, m_posMultiSelect[0].y+1, m_posMultiSelect[1].y);
 		OnChangeSelect(); /* WildCherry 072 */
@@ -6392,7 +6392,7 @@ void CMySuperGrid::ChangeSubItemText(int iItem, int iSubItem, const TCHAR *sUpda
 			if (nLimit < (int)_tcslen(sText)) {
 				// 文字数を最大文字数に収まるように調整
 				TCHAR*	sBuffer = new TCHAR[nLimit+1];
-				_tcsncpy_s(sBuffer, nLimit + 1, sText, _TRUNCATE);
+				_tcsncpy_s(sBuffer, static_cast<rsize_t>(nLimit) + 1, sText, _TRUNCATE);
 				strText = sBuffer;
 				delete [] sBuffer;
 			} else {
@@ -6925,9 +6925,9 @@ void CMySuperGrid::ClipboardCopyFormat(USER_COPY_FORMAT_FORMAT *pForm) /* FunnyC
 	LPTSTR pBuffer;
 	HGLOBAL hMem;
     int len = strClipboard.GetLength();
-	hMem = GlobalAlloc(GHND|GMEM_DDESHARE, (len+1)*sizeof(TCHAR));
+	hMem = GlobalAlloc(GHND | GMEM_DDESHARE, (static_cast<unsigned long long>(len) + 1) * sizeof(TCHAR));
 	pBuffer = (LPTSTR)GlobalLock(hMem);
-	_tcsncpy_s(pBuffer, len+1, strClipboard, _TRUNCATE);
+	_tcsncpy_s(pBuffer, static_cast<rsize_t>(len) + 1, strClipboard, _TRUNCATE);
 	GlobalUnlock(hMem);
 
 	// クリップボードを開いてコピー

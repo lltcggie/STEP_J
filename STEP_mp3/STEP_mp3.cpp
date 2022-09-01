@@ -613,7 +613,7 @@ void StringCopyN(TCHAR *sDest, const TCHAR *sSrc, int nLen)
         }   
     }
 #else
-    CHAR *str_ansi = (CHAR*)malloc(nLen+1);
+    CHAR* str_ansi = (CHAR*)malloc(static_cast<size_t>(nLen) + 1);
     //nLen によってマルチバイトの２バイト目で切れる場合、
     //切れる文字(マルチバイト1文字目)に 0 が入らない
     ZeroMemory(str_ansi, nLen+1);//↑なのでメモリをゼロクリアしておく(どこで切れるか分からないので)
@@ -994,7 +994,7 @@ static void COPY_FIELD(FILE_INFO *pFileMP3, FIELDTYPE fieldType, const CString& 
 {// コピー対象のフィールドかどうかをチェックして、必要な場合だけコピーします
  //UNIOCDE 版では len が文字数で単純な長さ比較ではうまくいかないので、
  //StringCopyN で ANSI 換算 での len 文字コピーした場合の文字列で必要か否かを判断する
-    TCHAR *sBuffer = (TCHAR*)malloc((len+1)*sizeof(TCHAR));
+    TCHAR* sBuffer = (TCHAR*)malloc((static_cast<unsigned long long>(len) + 1) * sizeof(TCHAR));
     StringCopyN(sBuffer, strSIF, len);//長さ len までコピー
     if (nOptSIFieldConvType == SIF_CONV_ALL_FIELD || //常にコピー
         _tcscmp(sBuffer, strSIF) == 0) {             //長さ len までコピーしたものと同じならコピー

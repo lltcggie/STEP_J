@@ -560,7 +560,7 @@ int CRegExp::RegFind(const TCHAR *str)
             int len = GetFindLen();
 			sFoundText = new TCHAR[len+1];
 			sFoundText[len] = _T('\0');
-			_tcsncpy_s(sFoundText, len + 1, string, _TRUNCATE);
+			_tcsncpy_s(sFoundText, static_cast<rsize_t>(len) + 1, string, _TRUNCATE);
 			return 0;
 		}
 		//String not found
@@ -580,7 +580,7 @@ int CRegExp::RegFind(const TCHAR *str)
 				int len = GetFindLen()+1;
                 sFoundText = new TCHAR[len+1];
 				sFoundText[len] = _T('\0');
-				_tcsncpy_s(sFoundText, len + 1, s, _TRUNCATE);
+				_tcsncpy_s(sFoundText, static_cast<rsize_t>(len) + 1, s, _TRUNCATE);
 
 				return nPos;
 			}
@@ -599,7 +599,7 @@ int CRegExp::RegFind(const TCHAR *str)
 		int len = GetFindLen();
         sFoundText = new TCHAR[len+1];
 		sFoundText[len] = _T('\0');
-		_tcsncpy_s(sFoundText, len + 1, s, _TRUNCATE);
+		_tcsncpy_s(sFoundText, static_cast<rsize_t>(len) + 1, s, _TRUNCATE);
 
 		return nPos;
 	}

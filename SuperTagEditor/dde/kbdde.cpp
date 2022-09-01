@@ -181,7 +181,7 @@ bool __fastcall KbDDEClient::Request(TCHAR** ppszReturn,
                                 XTYP_REQUEST, dwWait, NULL);
     if (hRet) {
         int nSize = DdeGetData(hRet, NULL, 0, 0);
-        WCHAR *pszReturn = (WCHAR*)malloc(nSize + 2);
+        WCHAR* pszReturn = (WCHAR*)malloc(static_cast<size_t>(nSize) + 2);
         DdeGetData(hRet, (BYTE*)pszReturn, nSize, 0);
         pszReturn[nSize/sizeof(WCHAR)] = 0;
         DdeFreeStringHandle(m_ddeInst, hszItem);
@@ -205,7 +205,7 @@ bool __fastcall KbDDEClient::Request(TCHAR** ppszReturn,
 #endif
     if (hRet) {
         int nSize = DdeGetData(hRet, NULL, 0, 0);
-        CHAR *pszReturn = (CHAR*)malloc(nSize+3);
+        CHAR* pszReturn = (CHAR*)malloc(static_cast<size_t>(nSize) + 3);
         DdeGetData(hRet, (BYTE*)pszReturn, nSize, 0);
         pszReturn[nSize] = pszReturn[nSize+1] = pszReturn[nSize+2];
         DdeFreeStringHandle(m_ddeInst, hszItem);
