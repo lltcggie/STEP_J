@@ -53,7 +53,7 @@ public:
 
 protected:  // コントロール バー用メンバ
 	CStatusBar  m_wndStatusBar;
-	CDkToolBar/*CToolBar AstralCircle 041 */   m_wndToolBar;
+	CDkToolBar  m_wndToolBar; /*CToolBar AstralCircle 041 */
 	static CToolBarInfo	 mainToolBar[]; /* AstralCircle 041 */
 	CReBar      m_wndReBar;
 	CDialogBar  m_wndDlgBar;

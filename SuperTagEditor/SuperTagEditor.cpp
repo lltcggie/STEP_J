@@ -2014,7 +2014,7 @@ void CSuperTagEditorApp::UpdateAccelerator(int nTableMax)
     // アクセラレータテーブルの解放
     DestroyAccelerator();
 
-    CMainFrame/* STEP 030 */    *pMainWnd = (CMainFrame*)AfxGetMainWnd(); /* STEP 030 */
+    CMainFrame *pMainWnd = (CMainFrame*)AfxGetMainWnd(); /* STEP 030 *//* STEP 030 */
     CMenu   *pMenu = pMainWnd ? pMainWnd->GetMenu() : NULL;
 
     /* STEP 030 */

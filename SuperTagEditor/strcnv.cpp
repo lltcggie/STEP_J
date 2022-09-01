@@ -581,9 +581,9 @@ static const TCHAR hira[] = //(const unsigned char *)
 #endif
 
 static const TCHAR alphaS[] = //(const unsigned char *)
-	_T("ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ’０１２３４５６７８９") /* STEP 026 */;
+	_T("ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ’０１２３４５６７８９"); /* STEP 026 */
 static const TCHAR alphaL[] = //(const unsigned char *)
-	_T("ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ’０１２３４５６７８９") /* STEP 026 */;
+	_T("ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ’０１２３４５６７８９"); /* STEP 026 */
 
 static const TCHAR kata_dakuon[] = //(const unsigned char *) /* FunnyCorn 179 */
 	_T("ァアィイゥウェエォオカカキキククケケココササシシススセセソソ")

@@ -406,7 +406,7 @@ void CDlgKeyConfig::UpdateCommandList(void)
 				strName.Format(_T("09: %s"), shortString(g_teikeiInfo[28].strTeikei, TEIKEI_MENU_STRING_MAX)); /* STEP 035, FreeFall 051 */
 				break;
 			case ID_TEIKEI_3_10: /* Nightmare */
-				strName.Format(_T("10: %s"), shortString(g_teikeiInfo[29].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX));
+				strName.Format(_T("10: %s"), shortString(g_teikeiInfo[29].strTeikei, TEIKEI_MENU_STRING_MAX)); /* STEP 035 */
 				break;
 			}
 			nIndex = m_listCommand.AddString(strName);

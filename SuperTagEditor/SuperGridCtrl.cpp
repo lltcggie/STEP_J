@@ -1434,7 +1434,7 @@ void CSuperGridCtrl::OnLButtonUp(UINT nFlags, CPoint point)
                 if(DoDragDrop(pTarget, pSource))
                 {
                     UINT uflag = LVIS_SELECTED | LVIS_FOCUSED;
-                    SetItemState(m_nDragTarget+1/* SUPORT_DRAGDROP */, uflag, uflag);
+                    SetItemState(m_nDragTarget+1, uflag, uflag); /* SUPORT_DRAGDROP */
                     m_nDragItem=-1;
                     //delete source
                     int nIndex = NodeToIndex(pSource);
