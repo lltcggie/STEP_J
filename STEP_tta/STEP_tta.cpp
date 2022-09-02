@@ -202,8 +202,8 @@ STEP_API UINT WINAPI STEPGetColumnMax(UINT nFormat, COLUMNTYPE nColumn, bool isE
         case COLUMN_TRACK_NAME:
         case COLUMN_ALBUM_NAME:
         case COLUMN_ARTIST_NAME:
-        case COLUMN_COMMENT:   
-        case COLUMN_YEAR:    
+        case COLUMN_COMMENT:
+        case COLUMN_YEAR:
         case COLUMN_COPYRIGHT:
         case COLUMN_WRITER:
         case COLUMN_COMPOSER:

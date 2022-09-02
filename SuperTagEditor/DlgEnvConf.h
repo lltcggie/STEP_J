@@ -13,38 +13,38 @@
 
 class CDlgEnvConf : public COptionPage
 {
-	DECLARE_DYNCREATE(CDlgEnvConf)
+    DECLARE_DYNCREATE(CDlgEnvConf)
 
 // コンストラクション
 public:
-	CDlgEnvConf();
-	~CDlgEnvConf();
+    CDlgEnvConf();
+    ~CDlgEnvConf();
 
 // ダイアログ データ
-	//{{AFX_DATA(CDlgEnvConf)
-	enum { IDD = IDD_DLG_ENV_CONF };
-	BOOL	m_bConfDeleteFile;
-	BOOL	m_bConfDeleteList;
-	BOOL	m_bConfEditModify;
-	BOOL	m_bConfFolderSync;
-	//}}AFX_DATA
+    //{{AFX_DATA(CDlgEnvConf)
+    enum { IDD = IDD_DLG_ENV_CONF };
+    BOOL    m_bConfDeleteFile;
+    BOOL    m_bConfDeleteList;
+    BOOL    m_bConfEditModify;
+    BOOL    m_bConfFolderSync;
+    //}}AFX_DATA
 
 
 // オーバーライド
-	// ClassWizard は仮想関数のオーバーライドを生成します。
+    // ClassWizard は仮想関数のオーバーライドを生成します。
 
-	//{{AFX_VIRTUAL(CDlgEnvConf)
-	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV サポート
-	//}}AFX_VIRTUAL
+    //{{AFX_VIRTUAL(CDlgEnvConf)
+    protected:
+    virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV サポート
+    //}}AFX_VIRTUAL
 
 // インプリメンテーション
 protected:
-	// 生成されたメッセージ マップ関数
-	//{{AFX_MSG(CDlgEnvConf)
-	afx_msg void OnBtResetPage();
-	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
+    // 生成されたメッセージ マップ関数
+    //{{AFX_MSG(CDlgEnvConf)
+    afx_msg void OnBtResetPage();
+    //}}AFX_MSG
+    DECLARE_MESSAGE_MAP()
 
 };
 

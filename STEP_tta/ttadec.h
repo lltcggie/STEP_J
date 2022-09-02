@@ -1,7 +1,7 @@
 /*
  * ttadec.h
  *
- * Description:	 TTAv1 decoder definitions
+ * Description:     TTAv1 decoder definitions
  * Developed by: Alexander Djourik <ald@true-audio.com>
  *               Pavel Zhilin <pzh@true-audio.com>
  *
@@ -33,52 +33,52 @@
 
 #pragma pack(1)
 
-#define	TTA_VERSION		"3.0"
-#define TTA_LEVEL		1
-#define TTA1_SIGN		0x31415454
-#define FRAME_TIME		1.04489795918367346939
+#define TTA_VERSION     "3.0"
+#define TTA_LEVEL       1
+#define TTA1_SIGN       0x31415454
+#define FRAME_TIME      1.04489795918367346939
 
 // return codes
-#define OPEN_ERROR		1		// Can't open file
-#define FORMAT_ERROR	2		// Unknown TTA format version
-#define PLAYER_ERROR	3		// Not supported file format
-#define FILE_ERROR		4		// File is corrupted
-#define READ_ERROR		5		// Can't read from file
-#define WRITE_ERROR		6		// Can't write to file
-#define MEMORY_ERROR	7		// Memory allocation error
-#define THREAD_ERROR	8		// Error killing thread
+#define OPEN_ERROR      1        // Can't open file
+#define FORMAT_ERROR    2        // Unknown TTA format version
+#define PLAYER_ERROR    3        // Not supported file format
+#define FILE_ERROR      4        // File is corrupted
+#define READ_ERROR      5        // Can't read from file
+#define WRITE_ERROR     6        // Can't write to file
+#define MEMORY_ERROR    7        // Memory allocation error
+#define THREAD_ERROR    8        // Error killing thread
 
-#define ISO_BUFFER_SIZE	(1024*1024)
-#define FRAME_TIME		1.04489795918367346939
-#define SEEK_STEP		(int)(FRAME_TIME * 1000)
-#define MAX_BSIZE		4
-#define MAX_BPS			(MAX_BSIZE*8)
-#define MAX_NCH			8
-#define MAX_ORDER		8
-#define BUFFER_LENGTH	576
-#define BUFFER_SIZE		(BUFFER_LENGTH*MAX_BSIZE*MAX_NCH)
-#define OUT_BPS			24
+#define ISO_BUFFER_SIZE (1024*1024)
+#define FRAME_TIME      1.04489795918367346939
+#define SEEK_STEP       (int)(FRAME_TIME * 1000)
+#define MAX_BSIZE       4
+#define MAX_BPS         (MAX_BSIZE*8)
+#define MAX_NCH         8
+#define MAX_ORDER       8
+#define BUFFER_LENGTH   576
+#define BUFFER_SIZE     (BUFFER_LENGTH*MAX_BSIZE*MAX_NCH)
+#define OUT_BPS         24
 
-#define WAVE_FORMAT_PCM	1
+#define WAVE_FORMAT_PCM 1
 #define WAVE_FORMAT_EXTENSIBLE 0xFFFE
 
 typedef struct {
-	HANDLE			HFILE;		// file handle
-	unsigned short	NCH;		// number of channels
-	unsigned short	BPS;		// bits per sample
-	unsigned short	BSIZE;		// byte size
-	unsigned short	FORMAT;		// audio format
-	unsigned long	SAMPLERATE;	// samplerate (sps)
-	unsigned long	DATALENGTH;	// data length in samples
-	unsigned long	FRAMELEN;	// frame length
-	unsigned long	LENGTH;		// playback time (sec)
-	unsigned long	FILESIZE;	// file size (byte)
-	float			COMPRESS;	// compression ratio
-	unsigned long	BITRATE;	// bitrate (kbps)
-	unsigned long	STATE;		// return code
-	TCHAR           filename[MAX_PATH];
-	id3v1_data		id3v1;
-	id3v2_data		id3v2;
+    HANDLE          HFILE;      // file handle
+    unsigned short  NCH;        // number of channels
+    unsigned short  BPS;        // bits per sample
+    unsigned short  BSIZE;      // byte size
+    unsigned short  FORMAT;     // audio format
+    unsigned long   SAMPLERATE; // samplerate (sps)
+    unsigned long   DATALENGTH; // data length in samples
+    unsigned long   FRAMELEN;   // frame length
+    unsigned long   LENGTH;     // playback time (sec)
+    unsigned long   FILESIZE;   // file size (byte)
+    float           COMPRESS;   // compression ratio
+    unsigned long   BITRATE;    // bitrate (kbps)
+    unsigned long   STATE;      // return code
+    TCHAR           filename[MAX_PATH];
+    id3v1_data      id3v1;
+    id3v2_data      id3v2;
 } tta_info;
 
 typedef struct {
@@ -92,26 +92,26 @@ typedef struct {
 } tta_hdr;
 
 typedef struct {
-	unsigned long k0;
-	unsigned long k1;
-	unsigned long sum0;
-	unsigned long sum1;
+    unsigned long k0;
+    unsigned long k1;
+    unsigned long sum0;
+    unsigned long sum1;
 } adapt;
 
 typedef struct {
-	long shift;
-	long round;
-	long error;
-	long mutex;
-	long qm[MAX_ORDER+1];
-	long dx[MAX_ORDER+1];
-	long dl[MAX_ORDER+1];
+    long shift;
+    long round;
+    long error;
+    long mutex;
+    long qm[MAX_ORDER+1];
+    long dx[MAX_ORDER+1];
+    long dl[MAX_ORDER+1];
 } fltst;
 
 typedef struct {
-	fltst fst;
-	adapt rice;
-	long last;
+    fltst fst;
+    adapt rice;
+    long last;
 } decoder;
 
 #endif /* TTADEC_H_ */

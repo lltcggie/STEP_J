@@ -14,7 +14,7 @@ class CComboInListView : public CComboBox
 {
 // Construction
 public:
-	CComboInListView(int iItem, int iSubItem, CStringList *plstItems);
+    CComboInListView(int iItem, int iSubItem, CStringList *plstItems);
 // Attributes
 public:
 
@@ -22,31 +22,31 @@ public:
 public:
 
 // Overrides
-	// ClassWizard generated virtual function overrides
-	//{{AFX_VIRTUAL(CComboInListView)
-	public:
-		virtual BOOL PreTranslateMessage(MSG* pMsg);
-	//}}AFX_VIRTUAL
+    // ClassWizard generated virtual function overrides
+    //{{AFX_VIRTUAL(CComboInListView)
+    public:
+        virtual BOOL PreTranslateMessage(MSG* pMsg);
+    //}}AFX_VIRTUAL
 
 // Implementation
 public:
-	virtual ~CComboInListView();
+    virtual ~CComboInListView();
 private:
-	int 	m_iItem;
-	int 	m_iSubItem;
-	CStringList m_lstItems;
-	BOOL	m_bVK_ESCAPE;
-	// Generated message map functions
+    int     m_iItem;
+    int     m_iSubItem;
+    CStringList m_lstItems;
+    BOOL    m_bVK_ESCAPE;
+    // Generated message map functions
 protected:
-	//{{AFX_MSG(CComboInListView)
-	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
-	afx_msg void OnKillFocus(CWnd* pNewWnd);
-	afx_msg void OnChar(UINT nChar, UINT nRepCnt, UINT nFlags);
-	afx_msg void OnNcDestroy();
-	afx_msg void OnCloseup();
-	afx_msg void OnSize(UINT nType, int cx, int cy);
-	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
+    //{{AFX_MSG(CComboInListView)
+    afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
+    afx_msg void OnKillFocus(CWnd* pNewWnd);
+    afx_msg void OnChar(UINT nChar, UINT nRepCnt, UINT nFlags);
+    afx_msg void OnNcDestroy();
+    afx_msg void OnCloseup();
+    afx_msg void OnSize(UINT nType, int cx, int cy);
+    //}}AFX_MSG
+    DECLARE_MESSAGE_MAP()
 };
 
 /////////////////////////////////////////////////////////////////////////////

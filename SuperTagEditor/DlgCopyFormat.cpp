@@ -17,176 +17,176 @@ static char THIS_FILE[] = __FILE__;
 
 
 CDlgCopyFormat::CDlgCopyFormat(CWnd* pParent /*=NULL*/)
-	: COptionPage(CDlgCopyFormat::IDD)
+    : COptionPage(CDlgCopyFormat::IDD)
 {
-	//{{AFX_DATA_INIT(CDlgCopyFormat)
-	m_nFormatType = -1;
-	//}}AFX_DATA_INIT
+    //{{AFX_DATA_INIT(CDlgCopyFormat)
+    m_nFormatType = -1;
+    //}}AFX_DATA_INIT
 }
 
 
 void CDlgCopyFormat::DoDataExchange(CDataExchange* pDX)
 {
-	COptionPage::DoDataExchange(pDX);
-	//{{AFX_DATA_MAP(CDlgCopyFormat)
-	DDX_Control(pDX, IDC_LIST_FORMAT_TYPE, m_listFormatType);
-	DDX_Control(pDX, IDC_EDIT_FORMAT, m_editFormat);
-	DDX_CBIndex(pDX, IDC_LIST_FORMAT_TYPE, m_nFormatType);
-	//}}AFX_DATA_MAP
+    COptionPage::DoDataExchange(pDX);
+    //{{AFX_DATA_MAP(CDlgCopyFormat)
+    DDX_Control(pDX, IDC_LIST_FORMAT_TYPE, m_listFormatType);
+    DDX_Control(pDX, IDC_EDIT_FORMAT, m_editFormat);
+    DDX_CBIndex(pDX, IDC_LIST_FORMAT_TYPE, m_nFormatType);
+    //}}AFX_DATA_MAP
 }
 
 
 BEGIN_MESSAGE_MAP(CDlgCopyFormat, COptionPage)
-	//{{AFX_MSG_MAP(CDlgCopyFormat)
-	ON_CBN_SELCHANGE(IDC_LIST_FORMAT_TYPE, OnSelChangeListFormatType)
-	ON_BN_CLICKED(IDC_BT_ALBUM_NAME, OnBtAlbumName)
-	ON_BN_CLICKED(IDC_BT_ARTIST_NAME, OnBtArtistName)
-	ON_BN_CLICKED(IDC_BT_COMMENT, OnBtComment)
-	ON_BN_CLICKED(IDC_BT_FILE_NAME, OnBtFileName)
-	ON_BN_CLICKED(IDC_BT_FIX_STRING, OnBtFixString)
-	ON_BN_CLICKED(IDC_BT_NAME_CHANGE, OnBtNameChange)
-	ON_BN_CLICKED(IDC_BT_NUMBER, OnBtNumber)
-	ON_BN_CLICKED(IDC_BT_NUMBER2, OnBtNumber2)
-	ON_BN_CLICKED(IDC_BT_RELEASE_YEAR, OnBtReleaseYear)
-	ON_BN_CLICKED(IDC_BT_TRACK_NAME, OnBtTrackName)
-	ON_BN_CLICKED(IDC_BT_TRACK_NUMBER, OnBtTrackNumber)
-	ON_BN_CLICKED(IDC_BT_TRACK_NUMBER2, OnBtTrackNumber2)
-	ON_BN_CLICKED(IDC_BT_DISC_NUMBER, OnBtDiscNumber)
+    //{{AFX_MSG_MAP(CDlgCopyFormat)
+    ON_CBN_SELCHANGE(IDC_LIST_FORMAT_TYPE, OnSelChangeListFormatType)
+    ON_BN_CLICKED(IDC_BT_ALBUM_NAME, OnBtAlbumName)
+    ON_BN_CLICKED(IDC_BT_ARTIST_NAME, OnBtArtistName)
+    ON_BN_CLICKED(IDC_BT_COMMENT, OnBtComment)
+    ON_BN_CLICKED(IDC_BT_FILE_NAME, OnBtFileName)
+    ON_BN_CLICKED(IDC_BT_FIX_STRING, OnBtFixString)
+    ON_BN_CLICKED(IDC_BT_NAME_CHANGE, OnBtNameChange)
+    ON_BN_CLICKED(IDC_BT_NUMBER, OnBtNumber)
+    ON_BN_CLICKED(IDC_BT_NUMBER2, OnBtNumber2)
+    ON_BN_CLICKED(IDC_BT_RELEASE_YEAR, OnBtReleaseYear)
+    ON_BN_CLICKED(IDC_BT_TRACK_NAME, OnBtTrackName)
+    ON_BN_CLICKED(IDC_BT_TRACK_NUMBER, OnBtTrackNumber)
+    ON_BN_CLICKED(IDC_BT_TRACK_NUMBER2, OnBtTrackNumber2)
+    ON_BN_CLICKED(IDC_BT_DISC_NUMBER, OnBtDiscNumber)
     ON_BN_CLICKED(IDC_BT_DISC_NUMBER2, OnBtDiscNumber2)
-	//}}AFX_MSG_MAP
+    //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
 // CDlgCopyFormat メッセージ ハンドラ
-void CDlgCopyFormat::OnSelChangeListFormatType() 
+void CDlgCopyFormat::OnSelChangeListFormatType()
 {
-	// TODO: この位置にコントロール通知ハンドラ用のコードを追加してください
-	// 現在編集中の内容を反映させる
-	m_editFormat.GetWindowText(m_userFormatEx[m_nFormatType].strFormat);
+    // TODO: この位置にコントロール通知ハンドラ用のコードを追加してください
+    // 現在編集中の内容を反映させる
+    m_editFormat.GetWindowText(m_userFormatEx[m_nFormatType].strFormat);
 
-	m_nFormatType = m_listFormatType.GetCurSel();
-	m_editFormat.SetWindowText(m_userFormatEx[m_nFormatType].strFormat);
+    m_nFormatType = m_listFormatType.GetCurSel();
+    m_editFormat.SetWindowText(m_userFormatEx[m_nFormatType].strFormat);
 }
 
 void CDlgCopyFormat::OutputFormatString(const TCHAR *sText)
 {
-	m_editFormat.ReplaceSel(sText, FALSE);
-	m_editFormat.SetFocus();
+    m_editFormat.ReplaceSel(sText, FALSE);
+    m_editFormat.SetFocus();
 }
 
-void CDlgCopyFormat::OnBtAlbumName() 
+void CDlgCopyFormat::OnBtAlbumName()
 {
-	OutputFormatString(_T("%ALBUM_NAME%"));
+    OutputFormatString(_T("%ALBUM_NAME%"));
 }
 
-void CDlgCopyFormat::OnBtArtistName() 
+void CDlgCopyFormat::OnBtArtistName()
 {
-	OutputFormatString(_T("%ARTIST_NAME%"));
+    OutputFormatString(_T("%ARTIST_NAME%"));
 }
 
-void CDlgCopyFormat::OnBtComment() 
+void CDlgCopyFormat::OnBtComment()
 {
-	OutputFormatString(_T("%COMMENT%"));
+    OutputFormatString(_T("%COMMENT%"));
 }
 
-void CDlgCopyFormat::OnBtFileName() 
+void CDlgCopyFormat::OnBtFileName()
 {
-	OutputFormatString(_T("%FILE_NAME%"));
+    OutputFormatString(_T("%FILE_NAME%"));
 }
 
-void CDlgCopyFormat::OnBtFixString() 
+void CDlgCopyFormat::OnBtFixString()
 {
-	OutputFormatString(_T("%STRING%"));
+    OutputFormatString(_T("%STRING%"));
 }
 
-void CDlgCopyFormat::OnBtNumber() 
+void CDlgCopyFormat::OnBtNumber()
 {
-	OutputFormatString(_T("%NUMBER%"));
+    OutputFormatString(_T("%NUMBER%"));
 }
 
-void CDlgCopyFormat::OnBtNumber2() 
+void CDlgCopyFormat::OnBtNumber2()
 {
-	OutputFormatString(_T("%NUMBER2%"));
+    OutputFormatString(_T("%NUMBER2%"));
 }
 
-void CDlgCopyFormat::OnBtReleaseYear() 
+void CDlgCopyFormat::OnBtReleaseYear()
 {
-	OutputFormatString(_T("%RELEASE_YEAR%"));
+    OutputFormatString(_T("%RELEASE_YEAR%"));
 }
 
-void CDlgCopyFormat::OnBtTrackName() 
+void CDlgCopyFormat::OnBtTrackName()
 {
-	OutputFormatString(_T("%TRACK_NAME%"));
+    OutputFormatString(_T("%TRACK_NAME%"));
 }
 
-void CDlgCopyFormat::OnBtTrackNumber() 
+void CDlgCopyFormat::OnBtTrackNumber()
 {
-	OutputFormatString(_T("%TRACK_NUMBER%"));
+    OutputFormatString(_T("%TRACK_NUMBER%"));
 }
 
-void CDlgCopyFormat::OnBtTrackNumber2() 
+void CDlgCopyFormat::OnBtTrackNumber2()
 {
-	OutputFormatString(_T("%TRACK_NUMBER2%"));
+    OutputFormatString(_T("%TRACK_NUMBER2%"));
 }
 
-void CDlgCopyFormat::OnBtDiscNumber() 
+void CDlgCopyFormat::OnBtDiscNumber()
 {
-	OutputFormatString(_T("%DISC_NUMBER%"));
+    OutputFormatString(_T("%DISC_NUMBER%"));
 }
 
 void CDlgCopyFormat::OnBtDiscNumber2()
 {
-	OutputFormatString(_T("%DISC_NUMBER2%"));
+    OutputFormatString(_T("%DISC_NUMBER2%"));
 }
 
-void CDlgCopyFormat::OnBtNameChange() 
+void CDlgCopyFormat::OnBtNameChange()
 {
-	CDlgNameChange	dialog;
+    CDlgNameChange    dialog;
 
-	dialog.m_strName = m_userFormatEx[m_nFormatType].strName;
-	if (dialog.DoModal() == IDOK) {
-		// 新しい名称に変更
-		m_userFormatEx[m_nFormatType].strName = dialog.m_strName;
+    dialog.m_strName = m_userFormatEx[m_nFormatType].strName;
+    if (dialog.DoModal() == IDOK) {
+        // 新しい名称に変更
+        m_userFormatEx[m_nFormatType].strName = dialog.m_strName;
 
-		// リスト更新
-		OnSelChangeListFormatType();
-		m_listFormatType.ResetContent();
-		int i; for (i = 0; i < USER_MOVE_FODLER_FORMAT_MAX; i++) {
-			CString	strName;
-			strName.Format(_T("%d: %s"), i+1, m_userFormatEx[i].strName);
-			m_listFormatType.AddString(strName);
-		}
-		// 選択しなおす
-		m_listFormatType.SetCurSel(m_nFormatType);
-	}
+        // リスト更新
+        OnSelChangeListFormatType();
+        m_listFormatType.ResetContent();
+        int i; for (i = 0; i < USER_MOVE_FODLER_FORMAT_MAX; i++) {
+            CString strName;
+            strName.Format(_T("%d: %s"), i+1, m_userFormatEx[i].strName);
+            m_listFormatType.AddString(strName);
+        }
+        // 選択しなおす
+        m_listFormatType.SetCurSel(m_nFormatType);
+    }
 }
 
-BOOL CDlgCopyFormat::OnInitDialog() 
+BOOL CDlgCopyFormat::OnInitDialog()
 {
-	// TODO: この位置に初期化の補足処理を追加してください
-	COptionPage::OnInitDialog();
+    // TODO: この位置に初期化の補足処理を追加してください
+    COptionPage::OnInitDialog();
 
-	int		i;
-	m_listFormatType.ResetContent();
-	for (i = 0; i < USER_COPY_FORMAT_FORMAT_MAX; i++) {
-		CString	strName;
-		strName.Format(_T("%d: %s"), i+1, m_userFormatEx[i].strName);
-		m_listFormatType.AddString(strName);
-	}
+    int     i;
+    m_listFormatType.ResetContent();
+    for (i = 0; i < USER_COPY_FORMAT_FORMAT_MAX; i++) {
+        CString strName;
+        strName.Format(_T("%d: %s"), i+1, m_userFormatEx[i].strName);
+        m_listFormatType.AddString(strName);
+    }
 
-	m_listFormatType.SetCurSel(m_nFormatType);
-	m_editFormat.SetWindowText(m_userFormatEx[m_nFormatType].strFormat);
+    m_listFormatType.SetCurSel(m_nFormatType);
+    m_editFormat.SetWindowText(m_userFormatEx[m_nFormatType].strFormat);
 
-	return TRUE;  // コントロールにフォーカスを設定しないとき、戻り値は TRUE となります
-	              // 例外: OCX プロパティ ページの戻り値は FALSE となります
+    return TRUE;  // コントロールにフォーカスを設定しないとき、戻り値は TRUE となります
+                  // 例外: OCX プロパティ ページの戻り値は FALSE となります
 }
 
 void CDlgCopyFormat::OnOK()
 {
-	if (!::IsWindow(m_hWnd)) return;
-	m_editFormat.GetWindowText(m_userFormatEx[m_nFormatType].strFormat);
+    if (!::IsWindow(m_hWnd)) return;
+    m_editFormat.GetWindowText(m_userFormatEx[m_nFormatType].strFormat);
 
-	COptionPage::OnOK();
+    COptionPage::OnOK();
 
 }
 

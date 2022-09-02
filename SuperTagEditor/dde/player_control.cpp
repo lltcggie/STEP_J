@@ -60,7 +60,7 @@ BOOL __fastcall CPlayerControl::ExecPlayer(const TCHAR *cszFileName, BOOL bClear
             break;
         case PLAYER_LILITH:
         case PLAYER_ULILITH:
-        	// 起動するだけ(後で DDE コマンド発行)
+            // 起動するだけ(後で DDE コマンド発行)
             _sntprintf_s(szCommand, _TRUNCATE, 
                          _T("\"%s\""), m_szPlayerPath);//"" で括る
             bExecCommand = TRUE;
@@ -74,7 +74,7 @@ BOOL __fastcall CPlayerControl::ExecPlayer(const TCHAR *cszFileName, BOOL bClear
             break;
         case PLAYER_FOOBAR:
         default:
-        	// 引数にファイル名を渡して起動
+            // 引数にファイル名を渡して起動
             _sntprintf_s(szCommand, _TRUNCATE, 
                          _T("\"%s\" \"%s\""), m_szPlayerPath, cszFileName);//"" で括る
             break;
@@ -302,7 +302,7 @@ BOOL __fastcall CPlayerControl::RequestCommandLilith(const TCHAR *cszCommand,
 ///////////////////////////////////////////////////////////////////////////////
 void __fastcall CPlayerControl::ExecCommandWinamp(int nCommand, const TCHAR *cszFileName)
 {
-	HWND hWndPlayer = NULL;
+    HWND hWndPlayer = NULL;
     if(m_nPlayerType == PLAYER_WINAMP){
         hWndPlayer = FindWindow(g_cszClassNameWinamp, NULL);
     }
@@ -319,23 +319,23 @@ void __fastcall CPlayerControl::ExecCommandWinamp(int nCommand, const TCHAR *csz
         SendMessage(hWndPlayer, WM_WA_IPC, 0, IPC_DELETE);//リストを破棄
         ExecCommandWinamp(COMMAND_ADD, cszFileName);      //追加
         SendMessage(hWndPlayer, WM_WA_IPC, 0, IPC_STARTPLAY);//再生
-		break;
+        break;
     }
     case COMMAND_STOP://停止
-		SendMessage(hWndPlayer, WM_COMMAND, WINAMP_BUTTON4, 0);
-		break;
-	case COMMAND_PREV://前の曲
-		SendMessage(hWndPlayer, WM_COMMAND, WINAMP_BUTTON1, 0);
-		break;
-	case COMMAND_NEXT://次の曲
-		SendMessage(hWndPlayer, WM_COMMAND, WINAMP_BUTTON5, 0);
-		break;
+        SendMessage(hWndPlayer, WM_COMMAND, WINAMP_BUTTON4, 0);
+        break;
+    case COMMAND_PREV://前の曲
+        SendMessage(hWndPlayer, WM_COMMAND, WINAMP_BUTTON1, 0);
+        break;
+    case COMMAND_NEXT://次の曲
+        SendMessage(hWndPlayer, WM_COMMAND, WINAMP_BUTTON5, 0);
+        break;
     case COMMAND_CLEAR://リストを破棄
         ::SendMessage(hWndPlayer, WM_WA_IPC, 0, IPC_DELETE);
         break;
     case COMMAND_ADD://リストに追加
-		if (m_nPlayerType == PLAYER_WINAMP) {
-			// Winamp
+        if (m_nPlayerType == PLAYER_WINAMP) {
+            // Winamp
             COPYDATASTRUCT cds = {0};
 #ifdef _UNICODE
             cds.dwData = IPC_PLAYFILEW;
@@ -344,24 +344,24 @@ void __fastcall CPlayerControl::ExecCommandWinamp(int nCommand, const TCHAR *csz
 #endif
             cds.lpData = _tcsdup(cszFileName);
             cds.cbData = (_tcslen(cszFileName) + 1) * sizeof(TCHAR);
-			::SendMessage(hWndPlayer, WM_COPYDATA, NULL, (LPARAM)&cds);
+            ::SendMessage(hWndPlayer, WM_COPYDATA, NULL, (LPARAM)&cds);
             free(cds.lpData);
-		} else {
-			// SCMPX
+        } else {
+            // SCMPX
 #ifdef _UNICODE
             char *str_ansi = conv_utf16_to_ansi(cszFileName);
 #else
             const char *str_ansi = cszFileName;
 #endif
             int len_ansi = strlen(str_ansi) + 1;
-			int i; 
+            int i; 
             for (i = 0; i < len_ansi; i++) {
-				SendMessage(hWndPlayer, WM_WA_IPC, str_ansi[i], IPC_PLAYFILE);
-			}
+                SendMessage(hWndPlayer, WM_WA_IPC, str_ansi[i], IPC_PLAYFILE);
+            }
 #ifdef _UNICODE
             free(str_ansi);
 #endif
-		} 
+        } 
         break;
     case COMMAND_QUIT://終了
         SendMessage(hWndPlayer, WM_CLOSE, NULL, NULL);
@@ -381,26 +381,26 @@ void __fastcall CPlayerControl::ExecCommandKbmplay(int nCommand, const TCHAR *cs
         _sntprintf_s(szCommand, _TRUNCATE, _T("\"%s\" /clear /a /play"), cszFileName);//リストを破棄してから追加
         break;
     case COMMAND_STOP:// 停止 
-		_tcsncpy_s(szCommand, _T("/stop"), _TRUNCATE);
-		break;
-	case COMMAND_PREV:// 前の曲
-		_tcsncpy_s(szCommand, _T("/prev"), _TRUNCATE);
-		break;
-	case COMMAND_NEXT:// 次の曲
-		_tcsncpy_s(szCommand, _T("/next"), _TRUNCATE);
-		break;
+        _tcsncpy_s(szCommand, _T("/stop"), _TRUNCATE);
+        break;
+    case COMMAND_PREV:// 前の曲
+        _tcsncpy_s(szCommand, _T("/prev"), _TRUNCATE);
+        break;
+    case COMMAND_NEXT:// 次の曲
+        _tcsncpy_s(szCommand, _T("/next"), _TRUNCATE);
+        break;
     case COMMAND_CLOSE://演奏停止＆ファイルクローズ
-		_tcsncpy_s(szCommand, _T("/fileclose"), _TRUNCATE);
+        _tcsncpy_s(szCommand, _T("/fileclose"), _TRUNCATE);
         break;
     case COMMAND_CLEAR://リストを破棄
-		_tcsncpy_s(szCommand, _T("/clear"), _TRUNCATE);
+        _tcsncpy_s(szCommand, _T("/clear"), _TRUNCATE);
         break;
     case COMMAND_ADD://追加(再生はしない)
         _sntprintf_s(szCommand, _TRUNCATE, _T("\"%s\" /a /np"), cszFileName);
         break;
     case COMMAND_QUIT://終了
-		_tcsncpy_s(szCommand, _T("/quit"), _TRUNCATE);
-		break;
+        _tcsncpy_s(szCommand, _T("/quit"), _TRUNCATE);
+        break;
     }//switch(nCommand)
     if(szCommand[0]){
         KbDDEClient client(NULL, g_cszServiceNameKbmplay, g_cszTopicNameKbmplay);
@@ -432,13 +432,13 @@ void __fastcall CPlayerControl::ExecCommandLilith(int nCommand, const TCHAR *csz
         break;
     case COMMAND_STOP:// 停止 
         _tcsncpy_s(szCommand, _T("/stop"), _TRUNCATE);
-		break;
-	case COMMAND_PREV:// 前の曲
+        break;
+    case COMMAND_PREV:// 前の曲
         _tcsncpy_s(szCommand, _T("/back"), _TRUNCATE);
-		break;
-	case COMMAND_NEXT:// 次の曲
+        break;
+    case COMMAND_NEXT:// 次の曲
         _tcsncpy_s(szCommand, _T("/next"), _TRUNCATE);
-		break;
+        break;
     case COMMAND_CLOSE://演奏停止＆ファイルクローズ
         _tcsncpy_s(szCommand, _T("/stop"), _TRUNCATE);
         break;
@@ -451,7 +451,7 @@ void __fastcall CPlayerControl::ExecCommandLilith(int nCommand, const TCHAR *csz
     }
     case COMMAND_QUIT://終了
         _tcsncpy_s(szCommand, _T("/exit"), _TRUNCATE);
-		break;
+        break;
     }//switch(nCommand)
     if(szCommand[0]){
         KbDDEClient client(NULL, cszServiceName, cszTopicName);
@@ -475,19 +475,19 @@ void __fastcall CPlayerControl::ExecCommandFoobar(int nCommand, const TCHAR *csz
         break;
     case COMMAND_STOP://停止 
         _tcsncpy_s(szCommand, _T("/stop"), _TRUNCATE);
-		break;
-	case COMMAND_PREV://前の曲
+        break;
+    case COMMAND_PREV://前の曲
         _tcsncpy_s(szCommand, _T("/prev"), _TRUNCATE);
-		break;
-	case COMMAND_NEXT://次の曲
+        break;
+    case COMMAND_NEXT://次の曲
         _tcsncpy_s(szCommand, _T("/next"), _TRUNCATE);
-		break;
+        break;
     case COMMAND_CLOSE://演奏停止＆ファイルクローズ
         _tcsncpy_s(szCommand, _T("/stop"), _TRUNCATE);
         break;
     case COMMAND_QUIT://終了
         _tcsncpy_s(szCommand, _T("/exit"), _TRUNCATE);
-		break;
+        break;
     //case COMMAND_CLEAR://リストを破棄
     //    break;
     }//switch(nCommand)

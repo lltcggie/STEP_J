@@ -14,10 +14,10 @@
 class CMyRecentFileList : public CRecentFileList /* StartInaction 053 */
 {
 public:
-	void Add(LPCTSTR lpszPathName);
+    void Add(LPCTSTR lpszPathName);
     CMyRecentFileList(UINT nStart, LPCTSTR lpszSection, LPCTSTR lpszEntryFormat, int nSize, int nMaxDispLen = AFX_ABBREV_FILENAME_LEN) : CRecentFileList(nStart, lpszSection,lpszEntryFormat, nSize, nMaxDispLen) {}
     virtual void UpdateMenu(CCmdUI* pCmdUI);
-	virtual void ReadList(); //by Kobarin(MFC のデフォルトメソッドは使わない)
+    virtual void ReadList(); //by Kobarin(MFC のデフォルトメソッドは使わない)
     virtual void WriteList();//by Kobarin(MFC のデフォルトメソッドは使わない)
 };
 

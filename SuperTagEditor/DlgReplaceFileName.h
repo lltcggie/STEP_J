@@ -13,49 +13,49 @@
 
 class CDlgReplaceFileName : public COptionPage
 {
-	DECLARE_DYNCREATE(CDlgReplaceFileName)
+    DECLARE_DYNCREATE(CDlgReplaceFileName)
 
 // コンストラクション
 public:
-	CDlgReplaceFileName();
-	~CDlgReplaceFileName();
+    CDlgReplaceFileName();
+    ~CDlgReplaceFileName();
 
 // ダイアログ データ
-	//{{AFX_DATA(CDlgReplaceFileName)
-	enum { IDD = IDD_DLG_REPLACE_FILENAME };
-	CString	m_strBefore[FILENAME_REPLACE_MAX];
-	CString	m_strAfter[FILENAME_REPLACE_MAX];
-	CString	m_strUserBefore[USER_FILENAME_REPLACE_MAX];
-	CString	m_strUserAfter[USER_FILENAME_REPLACE_MAX];
-	int	 m_nExtChange;
-	BOOL	m_bFileNameReplace;
-	//}}AFX_DATA
+    //{{AFX_DATA(CDlgReplaceFileName)
+    enum { IDD = IDD_DLG_REPLACE_FILENAME };
+    CString m_strBefore[FILENAME_REPLACE_MAX];
+    CString m_strAfter[FILENAME_REPLACE_MAX];
+    CString m_strUserBefore[USER_FILENAME_REPLACE_MAX];
+    CString m_strUserAfter[USER_FILENAME_REPLACE_MAX];
+    int     m_nExtChange;
+    BOOL    m_bFileNameReplace;
+    //}}AFX_DATA
 
-	UINT m_nFileUnifyAlpha;
-	UINT m_nFileUnifyHiraKata;
-	UINT m_nFileUnifyKata;
-	UINT m_nFileUnifyKigou;
-	UINT m_nFileUnifySuji;
-	UINT m_nFileUnifyUpLow;
+    UINT m_nFileUnifyAlpha;
+    UINT m_nFileUnifyHiraKata;
+    UINT m_nFileUnifyKata;
+    UINT m_nFileUnifyKigou;
+    UINT m_nFileUnifySuji;
+    UINT m_nFileUnifyUpLow;
 
 // オーバーライド
-	// ClassWizard は仮想関数のオーバーライドを生成します。
-	//{{AFX_VIRTUAL(CDlgReplaceFileName)
-	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV サポート
-	//}}AFX_VIRTUAL
+    // ClassWizard は仮想関数のオーバーライドを生成します。
+    //{{AFX_VIRTUAL(CDlgReplaceFileName)
+    protected:
+    virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV サポート
+    //}}AFX_VIRTUAL
 
 // インプリメンテーション
 protected:
 
-	// 生成されたメッセージ マップ関数
-	//{{AFX_MSG(CDlgReplaceFileName)
-	virtual BOOL OnInitDialog();
-	afx_msg void OnChFilenameMultiByte();
-	afx_msg void OnBtFileNameUnify();
-	afx_msg void OnBtResetPage();
-	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
+    // 生成されたメッセージ マップ関数
+    //{{AFX_MSG(CDlgReplaceFileName)
+    virtual BOOL OnInitDialog();
+    afx_msg void OnChFilenameMultiByte();
+    afx_msg void OnBtFileNameUnify();
+    afx_msg void OnBtResetPage();
+    //}}AFX_MSG
+    DECLARE_MESSAGE_MAP()
 };
 
 //{{AFX_INSERT_LOCATION}}

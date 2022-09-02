@@ -16,7 +16,7 @@ static char THIS_FILE[] = __FILE__;
 
 CHeaderCtrlEx::CHeaderCtrlEx()
 {
-	m_nSortCol = -1;
+    m_nSortCol = -1;
 }
 
 CHeaderCtrlEx::~CHeaderCtrlEx()
@@ -25,9 +25,9 @@ CHeaderCtrlEx::~CHeaderCtrlEx()
 
 
 BEGIN_MESSAGE_MAP(CHeaderCtrlEx, CHeaderCtrl)
-	//{{AFX_MSG_MAP(CHeaderCtrlEx)
-		// メモ - ClassWizard はこの位置にマッピング用のマクロを追加または削除します。
-	//}}AFX_MSG_MAP
+    //{{AFX_MSG_MAP(CHeaderCtrlEx)
+        // メモ - ClassWizard はこの位置にマッピング用のマクロを追加または削除します。
+    //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -54,108 +54,108 @@ int CHeaderCtrlEx::SetSortImage( int nCol, BOOL bAsc )
 
 void CHeaderCtrlEx::DrawItem( LPDRAWITEMSTRUCT lpDrawItemStruct )
 {
-	CDC dc;
+    CDC dc;
 
-	dc.Attach( lpDrawItemStruct->hDC );
+    dc.Attach( lpDrawItemStruct->hDC );
 
-	// Get the column rect
-	CRect rcLabel( lpDrawItemStruct->rcItem );
+    // Get the column rect
+    CRect rcLabel( lpDrawItemStruct->rcItem );
 
-	// Save DC
-	int nSavedDC = dc.SaveDC();
+    // Save DC
+    int nSavedDC = dc.SaveDC();
 
-	// Set clipping region to limit drawing within column
-	CRgn rgn;
-	rgn.CreateRectRgnIndirect( &rcLabel );
-	dc.SelectObject( &rgn );
-	rgn.DeleteObject();
+    // Set clipping region to limit drawing within column
+    CRgn rgn;
+    rgn.CreateRectRgnIndirect( &rcLabel );
+    dc.SelectObject( &rgn );
+    rgn.DeleteObject();
 
-		// Draw the background
-		dc.FillRect(rcLabel, &CBrush(::GetSysColor(COLOR_3DFACE)));
+        // Draw the background
+        dc.FillRect(rcLabel, &CBrush(::GetSysColor(COLOR_3DFACE)));
 
-	// Labels are offset by a certain amount  
-	// This offset is related to the width of a space character
-	int offset = dc.GetTextExtent(_T(" "), 1 ).cx*2;
+    // Labels are offset by a certain amount
+    // This offset is related to the width of a space character
+    int offset = dc.GetTextExtent(_T(" "), 1 ).cx*2;
 
 
-	// Get the column text and format
-	TCHAR buf[256];
-	HD_ITEM hditem;
+    // Get the column text and format
+    TCHAR buf[256];
+    HD_ITEM hditem;
 
-	hditem.mask = HDI_TEXT | HDI_FORMAT;
-	hditem.pszText = buf;
-	hditem.cchTextMax = 255;
+    hditem.mask = HDI_TEXT | HDI_FORMAT;
+    hditem.pszText = buf;
+    hditem.cchTextMax = 255;
 
-	GetItem( lpDrawItemStruct->itemID, &hditem );
+    GetItem( lpDrawItemStruct->itemID, &hditem );
 
-	// Determine format for drawing column label
-	UINT uFormat = DT_SINGLELINE | DT_NOPREFIX | DT_NOCLIP 
-						| DT_VCENTER | DT_END_ELLIPSIS ;
+    // Determine format for drawing column label
+    UINT uFormat = DT_SINGLELINE | DT_NOPREFIX | DT_NOCLIP
+                        | DT_VCENTER | DT_END_ELLIPSIS ;
 
-	if( hditem.fmt & HDF_CENTER)
-		uFormat |= DT_CENTER;
-	else if( hditem.fmt & HDF_RIGHT)
-		uFormat |= DT_RIGHT;
-	else
-		uFormat |= DT_LEFT;
+    if( hditem.fmt & HDF_CENTER)
+        uFormat |= DT_CENTER;
+    else if( hditem.fmt & HDF_RIGHT)
+        uFormat |= DT_RIGHT;
+    else
+        uFormat |= DT_LEFT;
 
-	// Adjust the rect if the mouse button is pressed on it
-	if( lpDrawItemStruct->itemState == ODS_SELECTED )
-	{
-		rcLabel.left++;
-		rcLabel.top += 2;
-		rcLabel.right++;
-	}
+    // Adjust the rect if the mouse button is pressed on it
+    if( lpDrawItemStruct->itemState == ODS_SELECTED )
+    {
+        rcLabel.left++;
+        rcLabel.top += 2;
+        rcLabel.right++;
+    }
 
-	// Adjust the rect further if Sort arrow is to be displayed
-	if( lpDrawItemStruct->itemID == (UINT)m_nSortCol )
-	{
-		rcLabel.right -= 3 * offset;
-	}
+    // Adjust the rect further if Sort arrow is to be displayed
+    if( lpDrawItemStruct->itemID == (UINT)m_nSortCol )
+    {
+        rcLabel.right -= 3 * offset;
+    }
 
-	rcLabel.left += offset;
-	rcLabel.right -= offset;
+    rcLabel.left += offset;
+    rcLabel.right -= offset;
 
-	// Draw column label
+    // Draw column label
     if( rcLabel.left <rcLabel.right ) dc.DrawText(buf,-1,rcLabel, uFormat); // Draw the Sort arrow if( lpDrawItemStruct->itemID == (UINT)m_nSortCol )
-	{
-		CRect rcIcon( lpDrawItemStruct->rcItem );
+    {
+        CRect rcIcon( lpDrawItemStruct->rcItem );
 
-		// Set up pens to use for drawing the triangle
-		CPen penLight(PS_SOLID, 1, GetSysColor(COLOR_3DHILIGHT));
-		CPen penShadow(PS_SOLID, 1, GetSysColor(COLOR_3DSHADOW));
-		CPen *pOldPen = dc.SelectObject( &penLight );
+        // Set up pens to use for drawing the triangle
+        CPen penLight(PS_SOLID, 1, GetSysColor(COLOR_3DHILIGHT));
+        CPen penShadow(PS_SOLID, 1, GetSysColor(COLOR_3DSHADOW));
+        CPen *pOldPen = dc.SelectObject( &penLight );
 
-		if( m_bSortAsc )
-		{
-			// Draw triangle pointing upwards
-			dc.MoveTo( rcIcon.right - 2*offset, offset-1);
-			dc.LineTo( rcIcon.right - 3*offset/2, rcIcon.bottom - offset );
-			dc.LineTo( rcIcon.right - 5*offset/2-2, rcIcon.bottom - offset );
-			dc.MoveTo( rcIcon.right - 5*offset/2-1, rcIcon.bottom - offset-1 );
+        if( m_bSortAsc )
+        {
+            // Draw triangle pointing upwards
+            dc.MoveTo( rcIcon.right - 2*offset, offset-1);
+            dc.LineTo( rcIcon.right - 3*offset/2, rcIcon.bottom - offset );
+            dc.LineTo( rcIcon.right - 5*offset/2-2, rcIcon.bottom - offset );
+            dc.MoveTo( rcIcon.right - 5*offset/2-1, rcIcon.bottom - offset-1 );
 
-			dc.SelectObject( &penShadow );
-			dc.LineTo( rcIcon.right - 2*offset, offset-2);
-		}
-		else
-		{
-			// Draw triangle pointing downwords
-			dc.MoveTo( rcIcon.right - 3*offset/2, offset-1);
-			dc.LineTo( rcIcon.right - 2*offset-1, rcIcon.bottom - offset + 1 );
-			dc.MoveTo( rcIcon.right - 2*offset-1, rcIcon.bottom - offset );
+            dc.SelectObject( &penShadow );
+            dc.LineTo( rcIcon.right - 2*offset, offset-2);
+        }
+        else
+        {
+            // Draw triangle pointing downwords
+            dc.MoveTo( rcIcon.right - 3*offset/2, offset-1);
+            dc.LineTo( rcIcon.right - 2*offset-1, rcIcon.bottom - offset + 1 );
+            dc.MoveTo( rcIcon.right - 2*offset-1, rcIcon.bottom - offset );
 
-			dc.SelectObject( &penShadow );
-			dc.LineTo( rcIcon.right - 5*offset/2-1, offset -1 );
-			dc.LineTo( rcIcon.right - 3*offset/2, offset -1);
-		}
+            dc.SelectObject( &penShadow );
+            dc.LineTo( rcIcon.right - 5*offset/2-1, offset -1 );
+            dc.LineTo( rcIcon.right - 3*offset/2, offset -1);
+        }
 
-		// Restore the pen
-		dc.SelectObject( pOldPen );
-	}
+        // Restore the pen
+        dc.SelectObject( pOldPen );
+    }
 
-	// Restore dc
-	dc.RestoreDC( nSavedDC );
+    // Restore dc
+    dc.RestoreDC( nSavedDC );
 
-	// Detach the dc before returning
-	dc.Detach();
+    // Detach the dc before returning
+    dc.Detach();
 }

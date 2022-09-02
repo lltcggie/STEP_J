@@ -91,7 +91,7 @@ bool        g_bPlayListClearCheck;
 bool        g_bPlayListAddList;
 bool        g_bPlayListFileCheck;
 
-/* STEP 035 *///CString     g_strTeikei[10+20]; /* SeaKnows 030 *//* FreeFall 046 */
+/* STEP 035 *///CString  g_strTeikei[10+20]; /* SeaKnows 030 *//* FreeFall 046 */
 CString     g_strTeikeiGroupName[3];    /* FreeFall 046 */
 bool        g_bValidFolderSelect;   /* SeaKnows 033 */
 bool        g_bValidDupExec;    /* FreeFall 045 */
@@ -152,7 +152,7 @@ FILENAME_REPLACE    g_userFileNameReplace[USER_FILENAME_REPLACE_MAX];   /* FreeF
 const TCHAR *g_sRepTable[FILENAME_REPLACE_MAX][2] = {
     {_T("\""), _T("”")}, {_T("*") , _T("＊")}, {_T(",") , _T("，")}, {_T("/") , _T("／")},
     {_T(":") , _T("：")}, {_T(";") , _T("；")}, {_T("<") , _T("＜")}, {_T(">") , _T("＞")},
-    {_T("?") , _T("？")}, {_T("\\"), _T("¥")}, {_T("|") , _T("｜")}, {_T(" ") , _T(" ")},
+    {_T("?") , _T("？")}, {_T("\\"), _T("￥")}, {_T("|") , _T("｜")}, {_T(" ") , _T(" ")},
 };
 
 CStringArray g_arFixedWords; /* STEP 040 */
@@ -394,26 +394,26 @@ static TCHAR    *g_sKeyName[] = {
     _T("RBUTTON"),      // 02   マウスの右ボタン
     _T("CANCEL"),       // 03   コントロール ブレーク処理に使用
     _T("MBUTTON"),      // 04   マウスの中央ボタン (3つボタンのマウス)
-    _T(""),_T(""),_T(""),       // 05〜07   未定義
+    _T(""),_T(""),_T(""),       // 05～07   未定義
     _T("BS"),           // 08   BackSpaceキー
     _T("Tab"),          // 09   Tabキー
-    _T(""),_T(""),          // 0A、 0B   未定義
+    _T(""),_T(""),          // 0A､ 0B   未定義
     _T("CLEAR"),        // 0C   Clearキー
     _T("Enter"),        // 0D   Enterキー
-    _T(""),_T(""),          // 0E、 0F   未定義
+    _T(""),_T(""),          // 0E､ 0F   未定義
     _T("Shift"),        // 10   Shiftキー
     _T("Ctrl"),         // 11   Ctrlキー
     _T("Alt"),          // 12   Altキー
     _T("PAUSE"),        // 13   Pauseキー
     _T("CAPITAL"),      // 14   Caps Lockキー
     _T("KANA"),         // 15   英数カナキー
-    _T(""),_T(""),_T(""),       // 16〜18   漢字システム用に予約
+    _T(""),_T(""),_T(""),       // 16～18   漢字システム用に予約
     _T("KANJI"),        // 19   漢字システム用に予約
     _T(""),             // 1A   未定義
     _T("ESC"),          // 1B   Escキー
     _T("CONVERT"),      // 1C   漢字システム用に予約
     _T("NOCONVERT"),    // 1D   漢字システム用に予約
-    _T(""),_T(""),          // 1E、 1F   漢字システム用に予約
+    _T(""),_T(""),          // 1E､ 1F   漢字システム用に予約
     _T("Space"),        // 20   Spaceキー
     _T("PageUp"),       // 21   Page Upキー
     _T("PageDown"),     // 22   Page Downキー
@@ -440,7 +440,7 @@ static TCHAR    *g_sKeyName[] = {
     _T("7"),            // 37   7キー
     _T("8"),            // 38   8キー
     _T("9"),            // 39   9キー
-    _T(""),_T(""),_T(""),_T(""),_T(""),_T(""),_T(""),   // 3A〜40   未定義
+    _T(""),_T(""),_T(""),_T(""),_T(""),_T(""),_T(""),   // 3A～40   未定義
     _T("A"),            // 41   Aキー
     _T("B"),            // 42   Bキー
     _T("C"),            // 43   Cキー
@@ -467,7 +467,7 @@ static TCHAR    *g_sKeyName[] = {
     _T("X"),            // 58   Xキー
     _T("Y"),            // 59   Yキー
     _T("Z"),            // 5A   Zキー
-    _T(""),_T(""),_T(""),_T(""),_T(""), // 5B〜5F   未定義
+    _T(""),_T(""),_T(""),_T(""),_T(""), // 5B～5F   未定義
     _T("NUM0"),         // 60   テンキーの0キー
     _T("NUM1"),         // 61   テンキーの1キー
     _T("NUM2"),         // 62   テンキーの2キー
@@ -481,7 +481,7 @@ static TCHAR    *g_sKeyName[] = {
     _T("[*]"),          // 6A   テンキーの*キー
     _T("[+]"),          // 6B   テンキーの+キー
     _T("SEPARATOR"),    // 6C   Separatorキー
-    _T("[-]"),          // 6D   テンキーの−キー
+    _T("[-]"),          // 6D   テンキーの－キー
     _T("[.]"),          // 6E   テンキーの.キー
     _T("[/]"),          // 6F   テンキーの/キー
     _T("F1"),           // 70   F1キー
@@ -508,7 +508,7 @@ static TCHAR    *g_sKeyName[] = {
     _T("F22"),          // 85H  F22キー
     _T("F23"),          // 86H  F23キー
     _T("F24"),          // 87H  F24キー
-    _T(""),_T(""),_T(""),_T(""),_T(""),_T(""),_T(""),_T(""),    // 88〜8F   未定義
+    _T(""),_T(""),_T(""),_T(""),_T(""),_T(""),_T(""),_T(""),    // 88～8F   未定義
     _T("NUMLOCK"),      // 90   Num Lockキー
     _T("SCROLL"),       // 91   Scroll Lockキー
 };
@@ -746,7 +746,7 @@ BOOL CSuperTagEditorApp::InitInstance()
 #endif
 #endif
     if(!hDll){//インストールされていない
-        MessageBox(NULL, 
+        MessageBox(NULL,
                    _T("VS2022 ランタイムがインストールされていません。\n")
                    _T("STEP_J の動作には VS2022 ランタイムのインストールが必要です。\n")
                    _T("既にインストール済みなのにこのダイアログが表示される場合はランタイムの\r\n")
@@ -1492,11 +1492,11 @@ void CSuperTagEditorApp::ReadRegistry(void)
         CString     strSectionName;
         strSectionName = "haseta";
         g_bFirstUpperIgnoreWord = m_IniFile.ReadInt(strSectionName, sKeyFirstUpperIgnoreWord, 0) ? true : false;
-        g_strFirstUpperIgnoreWords = m_IniFile.ReadStr(sSectionOption, 
-                                                       sKeyFirstUpperIgnoreWords, 
-                                                       _T("a,an,and,at,by,for,in,into,of,on,or,the,to,with"), 
+        g_strFirstUpperIgnoreWords = m_IniFile.ReadStr(sSectionOption,
+                                                       sKeyFirstUpperIgnoreWords,
+                                                       _T("a,an,and,at,by,for,in,into,of,on,or,the,to,with"),
                                                        buf, _countof(buf));
-        g_strFirstUpperSentenceSeparator = m_IniFile.ReadStr(sSectionOption, 
+        g_strFirstUpperSentenceSeparator = m_IniFile.ReadStr(sSectionOption,
                                                        sKeyFirstUpperSentenceSeparator, _T("."), buf, _countof(buf));
         g_bUserConvAddMenu = m_IniFile.ReadInt(strSectionName, sKeyUserConvAddMenu, 0) ? true : false;
         g_bZenHanKigouKana = m_IniFile.ReadInt(strSectionName, sKeyZenHanKigouKana, 0) ? true : false;
@@ -2468,7 +2468,7 @@ void CSuperTagEditorApp::GetWinampPath(void)
 // ジャンルリストの設定をレジストリから読みこむ
 void CSuperTagEditorApp::ReadGenreList(void)
 {
-    int nIndex; 
+    int nIndex;
     for (nIndex = 0; g_genreListSCMPX[nIndex].sName != NULL; nIndex++) {
         GENRE_LIST  *pGenre = &g_genreListSCMPX[nIndex];
         CString strName;
@@ -2476,7 +2476,7 @@ void CSuperTagEditorApp::ReadGenreList(void)
         pGenre->bAddList = m_IniFile.ReadInt(sSectionGenreList, strName, 1) ? true : false;
     }
     TCHAR buf[2048];
-    int i; 
+    int i;
     for (i = 0; i < USER_GENRE_LIST_MAX; i++) {
         CString     strSectionName;
         strSectionName.Format(_T("haseta\\%s\\%d"), sSectionUserGenreList, i);
@@ -2495,7 +2495,7 @@ void CSuperTagEditorApp::ReadGenreList(void)
 // ジャンルリストの設定をレジストリに書き出す
 void CSuperTagEditorApp::WriteGenreList(void)
 {
-    int nIndex; 
+    int nIndex;
     for (nIndex = 0; g_genreListSCMPX[nIndex].sName != NULL; nIndex++) {
         GENRE_LIST  *pGenre = &g_genreListSCMPX[nIndex];
         CString strName;

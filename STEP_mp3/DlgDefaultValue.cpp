@@ -80,7 +80,7 @@ void CDlgDefaultValue::OnBtResetPage()
     extern const bool bOptID3v2ID3tagAutoDelete_default;
     extern const TCHAR strOptSoftwareTag_default[];
     extern const bool bOptUnSync_default;
-    extern const int  nId3v2Encode_default; 
+    extern const int  nId3v2Encode_default;
     extern const int  nId3v2Version_default;
     extern const int  nId3v2EncodeNew_default;
     extern const int  nId3v2VersionNew_default;

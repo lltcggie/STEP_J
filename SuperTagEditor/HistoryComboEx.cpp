@@ -1,22 +1,22 @@
 /*********************************************************************************************/
-// File:	HistoryComboEx.h
+// File:    HistoryComboEx.h
 // Version: 1.0
 // Created: 22. 10. 2001
 //
-// This class is based of CHistoryCombo from Paul S. Vicherky and it enables you to load and 
+// This class is based of CHistoryCombo from Paul S. Vicherky and it enables you to load and
 // save the items of an ComboBoxEx.
 //
 // The modifications are maded by: Nabil Hussein
-// E-mail:						   unc@index.com.jo
+// E-mail:                           unc@index.com.jo
 /*********************************************************************************************/
 
 ////////////////////////////////////////////////////////////////////////////
-// File:	HistoryCombo.cpp
-// Version:	1.0.0.0
-// Created:	12-Apr-2001
+// File:    HistoryCombo.cpp
+// Version:    1.0.0.0
+// Created:    12-Apr-2001
 //
-// Author:	Paul S. Vickery
-// E-mail:	paul@vickeryhome.freeserve.co.uk
+// Author:    Paul S. Vickery
+// E-mail:    paul@vickeryhome.freeserve.co.uk
 //
 // Implementation of CHistoryCombo which incorporates functionality to help
 // with Loading and Saving of history in a combo box
@@ -25,7 +25,7 @@
 // you continue to acknowledge me as the original author in this source code,
 // or any code derived from it.
 //
-// If you use this code, or use it as a base for your own code, it would be 
+// If you use this code, or use it as a base for your own code, it would be
 // nice to hear from you simply so I know it's not been a waste of time!
 //
 // Copyright (c) 2001 Paul S. Vickery
@@ -55,28 +55,28 @@ static char THIS_FILE[] = __FILE__;
 
 CHistoryComboEx::CHistoryComboEx()
 {
-	m_nMaxHistoryItems = MAX_HISTORY_ITEMS;
-	m_bSaveRestoreLastCurrent = TRUE;
+    m_nMaxHistoryItems = MAX_HISTORY_ITEMS;
+    m_bSaveRestoreLastCurrent = TRUE;
 }
 
 CHistoryComboEx::~CHistoryComboEx()
 {
 }
 
-BOOL CHistoryComboEx::PreCreateWindow(CREATESTRUCT& cs) 
+BOOL CHistoryComboEx::PreCreateWindow(CREATESTRUCT& cs)
 {
-	// warn if creating with CBS_SORT style
-	// (unfortunately we can't turn it off)
-	if (cs.style & CBS_SORT)
-		TRACE("WARNING: Creating History combo with CBS_SORT style\n");
+    // warn if creating with CBS_SORT style
+    // (unfortunately we can't turn it off)
+    if (cs.style & CBS_SORT)
+        TRACE("WARNING: Creating History combo with CBS_SORT style\n");
 
-	return CComboBoxEx::PreCreateWindow(cs);
+    return CComboBoxEx::PreCreateWindow(cs);
 }
 
 BEGIN_MESSAGE_MAP(CHistoryComboEx, CComboBoxEx)
-	//{{AFX_MSG_MAP(CHistoryComboEx)
-		// NOTE - the ClassWizard will add and remove mapping macros here.
-	//}}AFX_MSG_MAP
+    //{{AFX_MSG_MAP(CHistoryComboEx)
+        // NOTE - the ClassWizard will add and remove mapping macros here.
+    //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -88,106 +88,106 @@ END_MESSAGE_MAP()
 // also makes sure number of items in the list doesn't exceed the maximum allowed
 int CHistoryComboEx::InsertItem(const COMBOBOXEXITEM *pCBItem)
 {
-	// if it's not set up as a history combo then call base class
-	if (m_sSection.IsEmpty() || m_sKeyPrefix.IsEmpty())
-		return CComboBoxEx::InsertItem(pCBItem);
+    // if it's not set up as a history combo then call base class
+    if (m_sSection.IsEmpty() || m_sKeyPrefix.IsEmpty())
+        return CComboBoxEx::InsertItem(pCBItem);
 
-	int nRet = -1;
+    int nRet = -1;
 
-	// don't add it already there
-	COMBOBOXEXITEM cbiTemp;
-	cbiTemp = *pCBItem;
-	CString str = (CString) cbiTemp.pszText;
+    // don't add it already there
+    COMBOBOXEXITEM cbiTemp;
+    cbiTemp = *pCBItem;
+    CString str = (CString) cbiTemp.pszText;
 
-	//str.TrimLeft(" ");
-	//str.TrimRight(" ");
-	cbiTemp.pszText = (LPTSTR)(LPCTSTR) str;
-	cbiTemp.iItem = 0;
-	//nRet = CComboBoxEx::InsertItem(&cbiTemp);
+    //str.TrimLeft(" ");
+    //str.TrimRight(" ");
+    cbiTemp.pszText = (LPTSTR)(LPCTSTR) str;
+    cbiTemp.iItem = 0;
+    //nRet = CComboBoxEx::InsertItem(&cbiTemp);
 
-	int nIndex = FindStringExact(0, cbiTemp.pszText);
+    int nIndex = FindStringExact(0, cbiTemp.pszText);
 
-	if (nIndex != -1/* && nIndex != 0*/)
-		DeleteString(nIndex);
-	nRet = CComboBoxEx::InsertItem(&cbiTemp);
+    if (nIndex != -1/* && nIndex != 0*/)
+        DeleteString(nIndex);
+    nRet = CComboBoxEx::InsertItem(&cbiTemp);
 
-	SetCurSel(nRet);
+    SetCurSel(nRet);
 
-	return nRet;
+    return nRet;
 }
 
 // This version enables you to send a CString value only.
 int CHistoryComboEx::InsertItem(CString strItem)
 {
-	COMBOBOXEXITEM pCBItem;
+    COMBOBOXEXITEM pCBItem;
 
-	pCBItem.mask = CBEIF_TEXT;
-	pCBItem.iItem = 0;
-	pCBItem.pszText = (LPTSTR)(LPCTSTR)strItem;
+    pCBItem.mask = CBEIF_TEXT;
+    pCBItem.iItem = 0;
+    pCBItem.pszText = (LPTSTR)(LPCTSTR)strItem;
 
-	return InsertItem (&pCBItem);
+    return InsertItem (&pCBItem);
 }
 
-// loads the history from the specified profile area, and returns the 
+// loads the history from the specified profile area, and returns the
 // text selected
 // the profile area is kept so that in doesn't need to specified again
 // when saving the history
 CString CHistoryComboEx::LoadHistory(LPCTSTR lpszSection, LPCTSTR lpszKeyPrefix, BOOL bSaveRestoreLastCurrent, LPCTSTR lpszKeyCurItem)
 {
-	if (lpszSection == NULL || lpszKeyPrefix == NULL || *lpszSection == 0)
-		return _T("");
+    if (lpszSection == NULL || lpszKeyPrefix == NULL || *lpszSection == 0)
+        return _T("");
 
-	COMBOBOXEXITEM cbiItem;
-	cbiItem.mask = CBEIF_TEXT;
-	cbiItem.iItem = 0;
+    COMBOBOXEXITEM cbiItem;
+    cbiItem.mask = CBEIF_TEXT;
+    cbiItem.iItem = 0;
 
-	m_sSection = lpszSection;
-	m_sKeyPrefix = lpszKeyPrefix;
-	m_sKeyCurItem = lpszKeyCurItem == NULL ? _T("") : lpszKeyCurItem;
-	m_bSaveRestoreLastCurrent = bSaveRestoreLastCurrent;
-	//CWinApp* pApp = AfxGetApp();
+    m_sSection = lpszSection;
+    m_sKeyPrefix = lpszKeyPrefix;
+    m_sKeyCurItem = lpszKeyCurItem == NULL ? _T("") : lpszKeyCurItem;
+    m_bSaveRestoreLastCurrent = bSaveRestoreLastCurrent;
+    //CWinApp* pApp = AfxGetApp();
 
-	int n = 0;
-	CString sText;
+    int n = 0;
+    CString sText;
 
-	CIniFile *pIniFile = ((CSuperTagEditorApp*)AfxGetApp())->GetIniFile();
+    CIniFile *pIniFile = ((CSuperTagEditorApp*)AfxGetApp())->GetIniFile();
     TCHAR buf[2048];
-	do
-	{
-		CString sKey;
-		sKey.Format(_T("%s%d"), m_sKeyPrefix, n++);
-		sText = pIniFile->ReadStr(m_sSection, sKey, NULL, buf, _countof(buf));
-		cbiItem.pszText = (LPTSTR) (LPCTSTR) sText;
-    
-		if (!sText.IsEmpty()) {
-			CComboBoxEx::InsertItem(&cbiItem);
-			cbiItem.iItem++;
-		}
-	} while (!sText.IsEmpty());
-  
-	if (m_bSaveRestoreLastCurrent)
-	{
-		CString sKey;
+    do
+    {
+        CString sKey;
+        sKey.Format(_T("%s%d"), m_sKeyPrefix, n++);
+        sText = pIniFile->ReadStr(m_sSection, sKey, NULL, buf, _countof(buf));
+        cbiItem.pszText = (LPTSTR) (LPCTSTR) sText;
 
-		if (!m_sKeyCurItem.IsEmpty())
-			sKey = m_sKeyCurItem;
-		else if (m_sKeyPrefix.IsEmpty())
-			sKey = _T("Last");
-		else
-			sKey = m_sKeyPrefix;
-    
-		sText = pIniFile->ReadStr(m_sSection, sKey, NULL, buf, _countof(buf));
-    
-		if (!sText.IsEmpty())
-		{
-			int nIndex = FindStringExact(-1, sText);
-			if (nIndex != -1)
-				SetCurSel(nIndex);
-      		else if (GetStyle() & CBS_DROPDOWN)
-				SetWindowText(sText);
-		}
-	}
-	return sText;
+        if (!sText.IsEmpty()) {
+            CComboBoxEx::InsertItem(&cbiItem);
+            cbiItem.iItem++;
+        }
+    } while (!sText.IsEmpty());
+
+    if (m_bSaveRestoreLastCurrent)
+    {
+        CString sKey;
+
+        if (!m_sKeyCurItem.IsEmpty())
+            sKey = m_sKeyCurItem;
+        else if (m_sKeyPrefix.IsEmpty())
+            sKey = _T("Last");
+        else
+            sKey = m_sKeyPrefix;
+
+        sText = pIniFile->ReadStr(m_sSection, sKey, NULL, buf, _countof(buf));
+
+        if (!sText.IsEmpty())
+        {
+            int nIndex = FindStringExact(-1, sText);
+            if (nIndex != -1)
+                SetCurSel(nIndex);
+              else if (GetStyle() & CBS_DROPDOWN)
+                SetWindowText(sText);
+        }
+    }
+    return sText;
 }
 
 // loads the history from the specified MRU list, and populates the combo list
@@ -200,27 +200,27 @@ CString CHistoryComboEx::LoadHistory(LPCTSTR lpszSection, LPCTSTR lpszKeyPrefix,
 
 CString CHistoryComboEx::LoadHistory(CRecentFileList *pListMRU, BOOL bSelectMostRecent)
 {
-	if (pListMRU == NULL)
-		return "";
+    if (pListMRU == NULL)
+        return "";
 
-	int nNumItems = pListMRU->GetSize();
-	COMBOBOXEXITEM cbiItem;
-	cbiItem.mask = CBEIF_TEXT;
-	cbiItem.iItem = 0;
+    int nNumItems = pListMRU->GetSize();
+    COMBOBOXEXITEM cbiItem;
+    cbiItem.mask = CBEIF_TEXT;
+    cbiItem.iItem = 0;
 
-	for (int n = 0; n < nNumItems; n++)
-	{
-		cbiItem.pszText = (LPTSTR) (LPCTSTR) (*pListMRU)[n];
-		CComboBoxEx::InsertItem(&cbiItem);
-	}
+    for (int n = 0; n < nNumItems; n++)
+    {
+        cbiItem.pszText = (LPTSTR) (LPCTSTR) (*pListMRU)[n];
+        CComboBoxEx::InsertItem(&cbiItem);
+    }
 
-	if (bSelectMostRecent)
-		SetCurSel(0);
-  
-	CString sText;
-  	GetWindowText(sText);
-  
-	return sText;
+    if (bSelectMostRecent)
+        SetCurSel(0);
+
+    CString sText;
+        GetWindowText(sText);
+
+    return sText;
 }
 
 // saves the history to the profile specified when calling LoadHistory
@@ -228,58 +228,58 @@ CString CHistoryComboEx::LoadHistory(CRecentFileList *pListMRU, BOOL bSelectMost
 // this function does nothing
 void CHistoryComboEx::SaveHistory(BOOL bAddCurrentItemtoHistory)
 {
-	COMBOBOXEXITEM cbiItem;
-	cbiItem.mask = CBEIF_TEXT;
-	cbiItem.iItem = 0;
+    COMBOBOXEXITEM cbiItem;
+    cbiItem.mask = CBEIF_TEXT;
+    cbiItem.iItem = 0;
 
-	if (m_sSection.IsEmpty())
-		return;
+    if (m_sSection.IsEmpty())
+        return;
 
-  	CIniFile *pIniFile = ((CSuperTagEditorApp*)AfxGetApp())->GetIniFile();
-	if (bAddCurrentItemtoHistory)
-	{
-		CString sCurItem;
-		GetWindowText(sCurItem);
-		// trim it, so we items which differ only by a leading/trailing space
-		//sCurItem.TrimLeft();
-		//sCurItem.TrimRight();
+    CIniFile *pIniFile = ((CSuperTagEditorApp*)AfxGetApp())->GetIniFile();
+    if (bAddCurrentItemtoHistory)
+    {
+        CString sCurItem;
+        GetWindowText(sCurItem);
+        // trim it, so we items which differ only by a leading/trailing space
+        //sCurItem.TrimLeft();
+        //sCurItem.TrimRight();
 
-		if (!sCurItem.IsEmpty())
-		{
-			cbiItem.pszText = (LPTSTR) (LPCTSTR) (sCurItem);
-			InsertItem(&cbiItem);
-		}
-	}
+        if (!sCurItem.IsEmpty())
+        {
+            cbiItem.pszText = (LPTSTR) (LPCTSTR) (sCurItem);
+            InsertItem(&cbiItem);
+        }
+    }
 
-	// save history to info cached earlier
-	int nMax = min(GetCount(), m_nMaxHistoryItems + 1);
+    // save history to info cached earlier
+    int nMax = min(GetCount(), m_nMaxHistoryItems + 1);
 
-	for (int n = 0; n < nMax; n++)
-	{
-		CString sKey;
-		sKey.Format(_T("%s%d"), m_sKeyPrefix, n);
-		CString sText;
-		GetLBText(n, sText);
-		//pApp->WriteProfileString(m_sSection, sKey, sText);
-		pIniFile->WriteStr(m_sSection, sKey, sText);
-	}
+    for (int n = 0; n < nMax; n++)
+    {
+        CString sKey;
+        sKey.Format(_T("%s%d"), m_sKeyPrefix, n);
+        CString sText;
+        GetLBText(n, sText);
+        //pApp->WriteProfileString(m_sSection, sKey, sText);
+        pIniFile->WriteStr(m_sSection, sKey, sText);
+    }
 
-	if (m_bSaveRestoreLastCurrent)
-	{
-		CString sText;
-		GetWindowText(sText);
-		CString sKey;
+    if (m_bSaveRestoreLastCurrent)
+    {
+        CString sText;
+        GetWindowText(sText);
+        CString sKey;
 
-		if (!m_sKeyCurItem.IsEmpty())
-			sKey = m_sKeyCurItem;
-		else if (m_sKeyPrefix.IsEmpty())
-			sKey = _T("Last");
-		else
-			sKey = m_sKeyPrefix;
-    
-		//pApp->WriteProfileString(m_sSection, sKey, sText);
-		pIniFile->WriteStr(m_sSection, sKey, sText);
-	}
+        if (!m_sKeyCurItem.IsEmpty())
+            sKey = m_sKeyCurItem;
+        else if (m_sKeyPrefix.IsEmpty())
+            sKey = _T("Last");
+        else
+            sKey = m_sKeyPrefix;
+
+        //pApp->WriteProfileString(m_sSection, sKey, sText);
+        pIniFile->WriteStr(m_sSection, sKey, sText);
+    }
     pIniFile->Flush();
 }
 
@@ -288,40 +288,40 @@ void CHistoryComboEx::SaveHistory(BOOL bAddCurrentItemtoHistory)
 // a CRecentFileList, then registry entries will not be deleted
 void CHistoryComboEx::ClearHistory(BOOL bDeleteRegistryEntries)
 {
-	ResetContent();
+    ResetContent();
 
-	if (! m_sSection.IsEmpty() && bDeleteRegistryEntries)
-	{
-		// get the actual reg key used
-		CWinApp* pApp = AfxGetApp();
-		CRegKey rk;
-		CString sKey = "SOFTWARE\\";
-    
-		if (pApp->m_pszRegistryKey == NULL || pApp->m_pszAppName == NULL)
-			return;
-    
-		sKey += pApp->m_pszRegistryKey + CString("\\");    
-		sKey += pApp->m_pszAppName + CString("\\");
-		sKey += m_sSection;
-		if (rk.Open(HKEY_CURRENT_USER, sKey) != ERROR_SUCCESS)
-			return;
-    
-		// delete actual values
-		int nMax = m_nMaxHistoryItems + 1;
-    
-		for (int n = 0; n < nMax; n++)
-		{
-			sKey.Format(_T("%s%d"), m_sKeyPrefix, n);
-			rk.DeleteValue(sKey);
-		}
-    
-		if (!m_sKeyCurItem.IsEmpty())
-			sKey = m_sKeyCurItem;
-		else if (m_sKeyPrefix.IsEmpty())
-			sKey = "Last";
-		else
-			sKey = m_sKeyPrefix;
+    if (! m_sSection.IsEmpty() && bDeleteRegistryEntries)
+    {
+        // get the actual reg key used
+        CWinApp* pApp = AfxGetApp();
+        CRegKey rk;
+        CString sKey = "SOFTWARE\\";
 
-		rk.DeleteValue(sKey);
-	}
+        if (pApp->m_pszRegistryKey == NULL || pApp->m_pszAppName == NULL)
+            return;
+
+        sKey += pApp->m_pszRegistryKey + CString("\\");
+        sKey += pApp->m_pszAppName + CString("\\");
+        sKey += m_sSection;
+        if (rk.Open(HKEY_CURRENT_USER, sKey) != ERROR_SUCCESS)
+            return;
+
+        // delete actual values
+        int nMax = m_nMaxHistoryItems + 1;
+
+        for (int n = 0; n < nMax; n++)
+        {
+            sKey.Format(_T("%s%d"), m_sKeyPrefix, n);
+            rk.DeleteValue(sKey);
+        }
+
+        if (!m_sKeyCurItem.IsEmpty())
+            sKey = m_sKeyCurItem;
+        else if (m_sKeyPrefix.IsEmpty())
+            sKey = "Last";
+        else
+            sKey = m_sKeyPrefix;
+
+        rk.DeleteValue(sKey);
+    }
 }

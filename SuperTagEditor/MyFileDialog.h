@@ -12,25 +12,25 @@
 
 class CMyFileDialog : public CFileDialog
 {
-	DECLARE_DYNAMIC(CMyFileDialog)
+    DECLARE_DYNAMIC(CMyFileDialog)
 
 public:
-	CMyFileDialog(BOOL bOpenFileDialog, // TRUE ならば FileOpen、 FALSE ならば FileSaveAs
-		LPCTSTR lpszDefExt = NULL,
-		LPCTSTR lpszFileName = NULL,
-		DWORD dwFlags = OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT | OFN_EXPLORER,
-		LPCTSTR lpszFilter = NULL,
-		CWnd* pParentWnd = NULL);
+    CMyFileDialog(BOOL bOpenFileDialog, // TRUE ならば FileOpen、 FALSE ならば FileSaveAs
+        LPCTSTR lpszDefExt = NULL,
+        LPCTSTR lpszFileName = NULL,
+        DWORD dwFlags = OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT | OFN_EXPLORER,
+        LPCTSTR lpszFilter = NULL,
+        CWnd* pParentWnd = NULL);
 
-	BOOL	m_bIsWriteAppend;
-	IFileDialogCustomize* custom;
+    BOOL    m_bIsWriteAppend;
+    IFileDialogCustomize* custom;
 
 protected:
-	//{{AFX_MSG(CMyFileDialog)
-		// メモ - ClassWizard はこの位置にメンバ関数を追加または削除します。
-	virtual BOOL OnFileNameOK( );
-	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
+    //{{AFX_MSG(CMyFileDialog)
+        // メモ - ClassWizard はこの位置にメンバ関数を追加または削除します。
+    virtual BOOL OnFileNameOK( );
+    //}}AFX_MSG
+    DECLARE_MESSAGE_MAP()
 };
 
 //{{AFX_INSERT_LOCATION}}

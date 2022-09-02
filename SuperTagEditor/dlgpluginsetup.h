@@ -14,38 +14,38 @@ class CDlgPluginSetup : public CDialog
 {
 // コンストラクション
 public:
-	CDlgPluginSetup(CWnd* pParent = NULL);   // 標準のコンストラクタ
+    CDlgPluginSetup(CWnd* pParent = NULL);   // 標準のコンストラクタ
 
 // ダイアログ データ
-	//{{AFX_DATA(CDlgPluginSetup)
-	enum { IDD = IDD_DLG_SETUP_PLUGIN };
-	CListCtrl	m_listPlugin;
-	CString	m_strPluginInfo;
-	//}}AFX_DATA
+    //{{AFX_DATA(CDlgPluginSetup)
+    enum { IDD = IDD_DLG_SETUP_PLUGIN };
+    CListCtrl    m_listPlugin;
+    CString m_strPluginInfo;
+    //}}AFX_DATA
 
 
 // オーバーライド
-	// ClassWizard は仮想関数のオーバーライドを生成します。
-	//{{AFX_VIRTUAL(CDlgPluginSetup)
-	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV サポート
-	//}}AFX_VIRTUAL
+    // ClassWizard は仮想関数のオーバーライドを生成します。
+    //{{AFX_VIRTUAL(CDlgPluginSetup)
+    protected:
+    virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV サポート
+    //}}AFX_VIRTUAL
 
 // インプリメンテーション
 protected:
 
-	// 生成されたメッセージ マップ関数
-	//{{AFX_MSG(CDlgPluginSetup)
-	virtual BOOL OnInitDialog();
-	afx_msg void OnItemchangedListPlugin(NMHDR* pNMHDR, LRESULT* pResult);
-	afx_msg void OnBtSetup();
-	afx_msg void OnBtInstall();
-	afx_msg void OnBtUp();
-	afx_msg void OnBtDown();
-	virtual void OnOK();
-	afx_msg void OnBtUninstall();
-	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
+    // 生成されたメッセージ マップ関数
+    //{{AFX_MSG(CDlgPluginSetup)
+    virtual BOOL OnInitDialog();
+    afx_msg void OnItemchangedListPlugin(NMHDR* pNMHDR, LRESULT* pResult);
+    afx_msg void OnBtSetup();
+    afx_msg void OnBtInstall();
+    afx_msg void OnBtUp();
+    afx_msg void OnBtDown();
+    virtual void OnOK();
+    afx_msg void OnBtUninstall();
+    //}}AFX_MSG
+    DECLARE_MESSAGE_MAP()
 };
 
 //{{AFX_INSERT_LOCATION}}

@@ -5,23 +5,23 @@
 
 class CDlgSetup : public CPropertyPage
 {
-	DECLARE_DYNAMIC(CDlgSetup)
+    DECLARE_DYNAMIC(CDlgSetup)
 
 public:
-	CDlgSetup();
-	virtual ~CDlgSetup();
+    CDlgSetup();
+    virtual ~CDlgSetup();
 
-	enum { IDD = IDD_DLG_SETUP };
-
-protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV サポート
+    enum { IDD = IDD_DLG_SETUP };
 
 protected:
-	DECLARE_MESSAGE_MAP()
+    virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV サポート
+
+protected:
+    DECLARE_MESSAGE_MAP()
 public:
-	BOOL m_bGenreListSelect;
-	int m_ddxnFormatType;
-	afx_msg void OnBnClickedBtResetPage();
+    BOOL m_bGenreListSelect;
+    int m_ddxnFormatType;
+    afx_msg void OnBnClickedBtResetPage();
 };
 
 

@@ -13,61 +13,61 @@
 
 class CDlgConvFormatEx : public COptionPage
 {
-	DECLARE_DYNCREATE(CDlgConvFormatEx)
+    DECLARE_DYNCREATE(CDlgConvFormatEx)
 
 // コンストラクション
 public:
-	CDlgConvFormatEx();
-	~CDlgConvFormatEx();
+    CDlgConvFormatEx();
+    ~CDlgConvFormatEx();
 
 // ダイアログ データ
-	//{{AFX_DATA(CDlgConvFormatEx)
-	enum { IDD = IDD_DLG_CONV_FORMAT_EX };
-	CButton	m_btSpaceInitNumber;
-	CComboBox	m_listFormatType;
-	CEdit	m_editFormat;
-	int		m_nAddNumber;
-	int		m_nInitNumber;
-	UINT	m_nMinColumn;
-	int		m_nFormatType;
-	//}}AFX_DATA
+    //{{AFX_DATA(CDlgConvFormatEx)
+    enum { IDD = IDD_DLG_CONV_FORMAT_EX };
+    CButton m_btSpaceInitNumber;
+    CComboBox    m_listFormatType;
+    CEdit   m_editFormat;
+    int     m_nAddNumber;
+    int     m_nInitNumber;
+    UINT    m_nMinColumn;
+    int     m_nFormatType;
+    //}}AFX_DATA
 
-	USER_CONV_FORMAT_EX	m_userFormatEx[USER_CONV_FORMAT_EX_MAX];
+    USER_CONV_FORMAT_EX    m_userFormatEx[USER_CONV_FORMAT_EX_MAX];
 
-	int		m_nOutputFormatType;
-	void	OutputFormatString(const TCHAR *);
+    int     m_nOutputFormatType;
+    void    OutputFormatString(const TCHAR *);
 
 // オーバーライド
-	// ClassWizard は仮想関数のオーバーライドを生成します。
+    // ClassWizard は仮想関数のオーバーライドを生成します。
 
-	//{{AFX_VIRTUAL(CDlgConvFormatEx)
-	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV サポート
-	//}}AFX_VIRTUAL
+    //{{AFX_VIRTUAL(CDlgConvFormatEx)
+    protected:
+    virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV サポート
+    //}}AFX_VIRTUAL
 
 // インプリメンテーション
 protected:
-	// 生成されたメッセージ マップ関数
-	//{{AFX_MSG(CDlgConvFormatEx)
-	afx_msg void OnBtAlbumName();
-	afx_msg void OnBtArtistName();
-	afx_msg void OnBtComment();
-	afx_msg void OnBtFileName();
-	afx_msg void OnBtFixString();
-	afx_msg void OnBtNumber();
-	afx_msg void OnBtNumber2();
-	afx_msg void OnBtReleaseYear();
-	afx_msg void OnBtTrackName();
-	afx_msg void OnBtTrackNumber();
-	afx_msg void OnBtTrackNumber2();
-	afx_msg void OnBtDiscNumber();
-	afx_msg void OnBtDiscNumber2();
-	afx_msg void OnBtNameChange();
-	afx_msg void OnSelChangeListFormatType();
-	virtual BOOL OnInitDialog();
-	virtual void OnOK();
-	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
+    // 生成されたメッセージ マップ関数
+    //{{AFX_MSG(CDlgConvFormatEx)
+    afx_msg void OnBtAlbumName();
+    afx_msg void OnBtArtistName();
+    afx_msg void OnBtComment();
+    afx_msg void OnBtFileName();
+    afx_msg void OnBtFixString();
+    afx_msg void OnBtNumber();
+    afx_msg void OnBtNumber2();
+    afx_msg void OnBtReleaseYear();
+    afx_msg void OnBtTrackName();
+    afx_msg void OnBtTrackNumber();
+    afx_msg void OnBtTrackNumber2();
+    afx_msg void OnBtDiscNumber();
+    afx_msg void OnBtDiscNumber2();
+    afx_msg void OnBtNameChange();
+    afx_msg void OnSelChangeListFormatType();
+    virtual BOOL OnInitDialog();
+    virtual void OnOK();
+    //}}AFX_MSG
+    DECLARE_MESSAGE_MAP()
 
 public:
 };

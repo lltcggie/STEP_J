@@ -68,14 +68,14 @@ bool LoadFileAAC(FILE_INFO *pFile)
         SetPlayTime(pFile, dSec);
         TCHAR *kbps = _tcschr(length, _T(','));
         if(kbps){
-           _tcsncat_s(szFormat, kbps, _TRUNCATE);
+            _tcsncat_s(szFormat, kbps, _TRUNCATE);
         }
     }
     else{
         _tcsncpy_s(szFormat, szAudio, _TRUNCATE);
     }
     SetAudioFormat(pFile, szFormat);
-	return true;
+    return true;
 }
 
 bool WriteFileAAC(FILE_INFO *pFile)
@@ -113,5 +113,5 @@ bool WriteFileAAC(FILE_INFO *pFile)
     TagMp4.SetMetadata_Disc2(disctotal);
 
     TagMp4.Save(GetFullPath(pFile));
-	return true;
+    return true;
 }

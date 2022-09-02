@@ -13,37 +13,37 @@
 
 class CDlgEnvPlayer : public COptionPage
 {
-	DECLARE_DYNCREATE(CDlgEnvPlayer)
+    DECLARE_DYNCREATE(CDlgEnvPlayer)
 
 // コンストラクション
 public:
-	CDlgEnvPlayer();
-	~CDlgEnvPlayer();
+    CDlgEnvPlayer();
+    ~CDlgEnvPlayer();
 
 // ダイアログ データ
-	//{{AFX_DATA(CDlgEnvPlayer)
-	enum { IDD = IDD_DLG_ENV_PLAYER };
-	int		m_nPlayerType;
-	CString	m_strWinAmpPath;
-	//}}AFX_DATA
+    //{{AFX_DATA(CDlgEnvPlayer)
+    enum { IDD = IDD_DLG_ENV_PLAYER };
+    int     m_nPlayerType;
+    CString m_strWinAmpPath;
+    //}}AFX_DATA
 
 
 // オーバーライド
-	// ClassWizard は仮想関数のオーバーライドを生成します。
+    // ClassWizard は仮想関数のオーバーライドを生成します。
 
-	//{{AFX_VIRTUAL(CDlgEnvPlayer)
-	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV サポート
-	//}}AFX_VIRTUAL
+    //{{AFX_VIRTUAL(CDlgEnvPlayer)
+    protected:
+    virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV サポート
+    //}}AFX_VIRTUAL
 
 // インプリメンテーション
 protected:
-	// 生成されたメッセージ マップ関数
-	//{{AFX_MSG(CDlgEnvPlayer)
-	virtual BOOL OnInitDialog();
-	afx_msg void OnBtRefWinamp();
-	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
+    // 生成されたメッセージ マップ関数
+    //{{AFX_MSG(CDlgEnvPlayer)
+    virtual BOOL OnInitDialog();
+    afx_msg void OnBtRefWinamp();
+    //}}AFX_MSG
+    DECLARE_MESSAGE_MAP()
 
 public:
 };

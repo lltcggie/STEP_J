@@ -12,64 +12,64 @@
 
 class CDlgTeikei : public CPropertyPage
 {
-	DECLARE_DYNCREATE(CDlgTeikei)
+    DECLARE_DYNCREATE(CDlgTeikei)
 
 // コンストラクション
 public:
-	CDlgTeikei();
-	~CDlgTeikei();
+    CDlgTeikei();
+    ~CDlgTeikei();
 
 // ダイアログ データ
-	//{{AFX_DATA(CDlgTeikei)
-	enum { IDD = IDD_DIALOG_TEIKEI };
-	CString	m_strTeikei1;
-	CString	m_strTeikei10;
-	CString	m_strTeikei2;
-	CString	m_strTeikei3;
-	CString	m_strTeikei4;
-	CString	m_strTeikei5;
-	CString	m_strTeikei6;
-	CString	m_strTeikei7;
-	CString	m_strTeikei8;
-	CString	m_strTeikei9;
-	CString	m_strGroupName;
-	//}}AFX_DATA
+    //{{AFX_DATA(CDlgTeikei)
+    enum { IDD = IDD_DIALOG_TEIKEI };
+    CString m_strTeikei1;
+    CString m_strTeikei10;
+    CString m_strTeikei2;
+    CString m_strTeikei3;
+    CString m_strTeikei4;
+    CString m_strTeikei5;
+    CString m_strTeikei6;
+    CString m_strTeikei7;
+    CString m_strTeikei8;
+    CString m_strTeikei9;
+    CString m_strGroupName;
+    //}}AFX_DATA
 
-	TEIKEI_INFO m_teikeiInfo[10];
+    TEIKEI_INFO m_teikeiInfo[10];
 
 
 // オーバーライド
-	// ClassWizard は仮想関数のオーバーライドを生成します。
+    // ClassWizard は仮想関数のオーバーライドを生成します。
 
-	//{{AFX_VIRTUAL(CDlgTeikei)
-	public:
-	virtual void OnOK();
-	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV サポート
-	//}}AFX_VIRTUAL
+    //{{AFX_VIRTUAL(CDlgTeikei)
+    public:
+    virtual void OnOK();
+    protected:
+    virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV サポート
+    //}}AFX_VIRTUAL
 
 // インプリメンテーション
 protected:
-	// 生成されたメッセージ マップ関数
-	//{{AFX_MSG(CDlgTeikei)
-	virtual BOOL OnInitDialog();
-	afx_msg void OnBtDetail01();
-	afx_msg void OnBtDetail10();
-	afx_msg void OnBtDetail02();
-	afx_msg void OnBtDetail03();
-	afx_msg void OnBtDetail04();
-	afx_msg void OnBtDetail05();
-	afx_msg void OnBtDetail06();
-	afx_msg void OnBtDetail07();
-	afx_msg void OnBtDetail08();
-	afx_msg void OnBtDetail09();
-	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
+    // 生成されたメッセージ マップ関数
+    //{{AFX_MSG(CDlgTeikei)
+    virtual BOOL OnInitDialog();
+    afx_msg void OnBtDetail01();
+    afx_msg void OnBtDetail10();
+    afx_msg void OnBtDetail02();
+    afx_msg void OnBtDetail03();
+    afx_msg void OnBtDetail04();
+    afx_msg void OnBtDetail05();
+    afx_msg void OnBtDetail06();
+    afx_msg void OnBtDetail07();
+    afx_msg void OnBtDetail08();
+    afx_msg void OnBtDetail09();
+    //}}AFX_MSG
+    DECLARE_MESSAGE_MAP()
 
 public:
-	BYTE m_nGroupNumber;
+    BYTE m_nGroupNumber;
 private:
-	void OnDetail(int nIndex);
+    void OnDetail(int nIndex);
 };
 
 //{{AFX_INSERT_LOCATION}}

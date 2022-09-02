@@ -1477,7 +1477,7 @@ DWORD CId3tagv2::Save(LPCTSTR szFileName)
                 {
                     dwSize = dwEncodeSize;
                     MakeV2Size(dwSize, size);
-                    flagsBe |= CId3Frame::FLAG_UNSYNC << 8;	// unsync
+                    flagsBe |= CId3Frame::FLAG_UNSYNC << 8; // unsync
                 }
             }
             else
@@ -1494,7 +1494,7 @@ DWORD CId3tagv2::Save(LPCTSTR szFileName)
         p++;
     }
     dwTotalFrameSize = dwFrameDataPtr;
-    //	ASSERT(dwFrameDataPtr == dwTotalFrameSize);
+    //  ASSERT(dwFrameDataPtr == dwTotalFrameSize);
         //非同期化
     if (m_wVer == 0x400 && m_bUnSynchronization)
     {
@@ -1505,9 +1505,9 @@ DWORD CId3tagv2::Save(LPCTSTR szFileName)
     {
         unsigned char *encData = (unsigned char *)malloc(dwTotalFrameSize * 2);
         DWORD dwEncodeSize = EncodeUnSynchronization(framedata, dwTotalFrameSize, encData);
-        //		if(dwEncodeSize != dwTotalFrameSize)
-        //	2004-03-20 プロパティに非同期化スイッチをつけたため、非同期化フラグは必ず立てることにした
-        //	(非同期化ONが保存できない様子はユーザからみておかしな動きに見えるため)
+        //        if(dwEncodeSize != dwTotalFrameSize)
+        //    2004-03-20 プロパティに非同期化スイッチをつけたため、非同期化フラグは必ず立てることにした
+        //    (非同期化ONが保存できない様子はユーザからみておかしな動きに見えるため)
         {
             //非同期化フラグをセット
             m_head.flag |= HDR_FLAG_UNSYNC;
@@ -1545,7 +1545,7 @@ DWORD CId3tagv2::Save(LPCTSTR szFileName)
     // DSFではID3TAGV2は後尾についているのでそこまでシーク
     UINT64 metapos;
     LARGE_INTEGER stDistanceToMove;
-	LARGE_INTEGER stNewFilePointer;
+    LARGE_INTEGER stNewFilePointer;
     DWORD dwRet;
     BOOL updatemetapos;
 
@@ -1562,8 +1562,8 @@ DWORD CId3tagv2::Save(LPCTSTR szFileName)
         SetEndOfFile(hFile);
         updatemetapos = FALSE;
     } else {
-		stDistanceToMove.QuadPart = 0;
-		SetFilePointerEx(hFile, stDistanceToMove, &stNewFilePointer, FILE_END);
+        stDistanceToMove.QuadPart = 0;
+        SetFilePointerEx(hFile, stDistanceToMove, &stNewFilePointer, FILE_END);
         metapos = stNewFilePointer.QuadPart;
         updatemetapos = TRUE;
     }
@@ -2063,88 +2063,88 @@ DWORD CId3tagv2::Save(LPCTSTR szFileName)
 DWORD CId3tagv2::DelTag(LPCTSTR szFileName)
 {
 #ifdef ID3TAGV2_DSF_MODE
-	DWORD	dwWin32errorCode = ERROR_SUCCESS;
-	DWORD	dwWritten = 0;
+    DWORD    dwWin32errorCode = ERROR_SUCCESS;
+    DWORD    dwWritten = 0;
 
-	TCHAR szTempPath[MAX_PATH];
-	TCHAR szTempFile[MAX_PATH];
+    TCHAR szTempPath[MAX_PATH];
+    TCHAR szTempFile[MAX_PATH];
 
-	if(!m_bEnable)
-	{
-		return -1;
-	}
+    if(!m_bEnable)
+    {
+        return -1;
+    }
 
-	//==================元ファイルをメモリに保存==================
-	HANDLE hFile = CreateFile(
-							szFileName,
-							GENERIC_READ | GENERIC_WRITE,
-							FILE_SHARE_READ,
-							NULL,
-							OPEN_EXISTING,	//指定ファイルが存在していない場合、関数は失敗します。
-							FILE_ATTRIBUTE_NORMAL,
-							NULL);
-	if(hFile == INVALID_HANDLE_VALUE)
-	{
-		dwWin32errorCode = GetLastError();
-		return dwWin32errorCode;
-	}
+    //==================元ファイルをメモリに保存==================
+    HANDLE hFile = CreateFile(
+                            szFileName,
+                            GENERIC_READ | GENERIC_WRITE,
+                            FILE_SHARE_READ,
+                            NULL,
+                            OPEN_EXISTING,    //指定ファイルが存在していない場合、関数は失敗します。
+                            FILE_ATTRIBUTE_NORMAL,
+                            NULL);
+    if(hFile == INVALID_HANDLE_VALUE)
+    {
+        dwWin32errorCode = GetLastError();
+        return dwWin32errorCode;
+    }
 
-	// DSFではID3TAGV2は後尾についているのでそこまでシーク
-	UINT64 metapos;
-	LARGE_INTEGER stDistanceToMove;
-	LARGE_INTEGER stNewFilePointer;
-	DWORD dwRet;
+    // DSFではID3TAGV2は後尾についているのでそこまでシーク
+    UINT64 metapos;
+    LARGE_INTEGER stDistanceToMove;
+    LARGE_INTEGER stNewFilePointer;
+    DWORD dwRet;
 
-	stDistanceToMove.QuadPart = 20;
-	SetFilePointerEx(hFile, stDistanceToMove, NULL, FILE_BEGIN);
-	if(!ReadFile(hFile,&metapos,sizeof(metapos),&dwRet,NULL) || (dwRet != sizeof(metapos))){
-		CloseHandle(hFile);
-		return -1;
-	}
-	if(metapos == 0){
-		// 削除不要
-		return dwWin32errorCode;
-	}
+    stDistanceToMove.QuadPart = 20;
+    SetFilePointerEx(hFile, stDistanceToMove, NULL, FILE_BEGIN);
+    if(!ReadFile(hFile,&metapos,sizeof(metapos),&dwRet,NULL) || (dwRet != sizeof(metapos))){
+        CloseHandle(hFile);
+        return -1;
+    }
+    if(metapos == 0){
+        // 削除不要
+        return dwWin32errorCode;
+    }
 
-	stDistanceToMove.QuadPart = metapos;
-	SetFilePointerEx(hFile, stDistanceToMove, &stNewFilePointer, FILE_BEGIN);
-	// ファイルサイズを切り詰めて今のID3V2タグを破棄
-	if (SetEndOfFile(hFile) == 0) {
-		dwWin32errorCode = GetLastError();
-		CloseHandle(hFile);
-		return dwWin32errorCode;
-	}
+    stDistanceToMove.QuadPart = metapos;
+    SetFilePointerEx(hFile, stDistanceToMove, &stNewFilePointer, FILE_BEGIN);
+    // ファイルサイズを切り詰めて今のID3V2タグを破棄
+    if (SetEndOfFile(hFile) == 0) {
+        dwWin32errorCode = GetLastError();
+        CloseHandle(hFile);
+        return dwWin32errorCode;
+    }
 
-	// DSFヘッダー編集
-	stDistanceToMove.QuadPart = 12;
-	if (SetFilePointerEx(hFile, stDistanceToMove, NULL, FILE_BEGIN) == INVALID_SET_FILE_POINTER)
-	{
-		dwWin32errorCode = GetLastError();
-		CloseHandle(hFile);
-		return dwWin32errorCode;
-	}
+    // DSFヘッダー編集
+    stDistanceToMove.QuadPart = 12;
+    if (SetFilePointerEx(hFile, stDistanceToMove, NULL, FILE_BEGIN) == INVALID_SET_FILE_POINTER)
+    {
+        dwWin32errorCode = GetLastError();
+        CloseHandle(hFile);
+        return dwWin32errorCode;
+    }
 
-	GetFileSizeEx(hFile, &stDistanceToMove);
+    GetFileSizeEx(hFile, &stDistanceToMove);
 
-	unsigned __int64 binary = 0;
+    unsigned __int64 binary = 0;
 
-	binary = stDistanceToMove.QuadPart;
-	if(!WriteFile(hFile,&binary, 8, &dwWritten, NULL)){
-		dwWin32errorCode = GetLastError();
-		CloseHandle(hFile);
-		return dwWin32errorCode;
-	}
+    binary = stDistanceToMove.QuadPart;
+    if(!WriteFile(hFile,&binary, 8, &dwWritten, NULL)){
+        dwWin32errorCode = GetLastError();
+        CloseHandle(hFile);
+        return dwWin32errorCode;
+    }
 
-	binary = 0;
-	if(!WriteFile(hFile,&binary, 8, &dwWritten, NULL)){
-		dwWin32errorCode = GetLastError();
-		CloseHandle(hFile);
-		return dwWin32errorCode;
-	}
+    binary = 0;
+    if(!WriteFile(hFile,&binary, 8, &dwWritten, NULL)){
+        dwWin32errorCode = GetLastError();
+        CloseHandle(hFile);
+        return dwWin32errorCode;
+    }
 
-	CloseHandle(hFile);
+    CloseHandle(hFile);
 
-	return dwWin32errorCode;
+    return dwWin32errorCode;
 #else
     DWORD   dwWin32errorCode = ERROR_SUCCESS;
     DWORD   dwWritten = 0;

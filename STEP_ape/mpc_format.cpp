@@ -55,7 +55,7 @@ void SetAudioFormatMpc(FILE_INFO *pFileMP3)
     reader.get_size = mpc_get_size;
     reader.canseek = mpc_canseek;
     reader.data = fp;
-	mpc_demux *demux = mpc_demux_init(&reader);
+    mpc_demux *demux = mpc_demux_init(&reader);
     if(!demux){
         fclose(fp);
         return;
@@ -65,11 +65,11 @@ void SetAudioFormatMpc(FILE_INFO *pFileMP3)
     int ch = demux->si.channels;
     int length_sec = mpc_streaminfo_get_length(&demux->si);
     TCHAR format[256];
-    _sntprintf_s(format, _TRUNCATE, 
+    _sntprintf_s(format, _TRUNCATE,
 #ifdef _UNICODE //demux->si.profile_name は常に ansi (%S のままだと Ansi 版で Unicode と見なしてしまう)
-                 _T("%dkbps, %dHz, %dch, Profile:%S(SV%d)"), 
+                 _T("%dkbps, %dHz, %dch, Profile:%S(SV%d)"),
 #else
-                 _T("%dkbps, %dHz, %dch, Profile:%s(SV%d)"), 
+                 _T("%dkbps, %dHz, %dch, Profile:%s(SV%d)"),
 #endif
                  average_bitrate/1000, sample_rate, ch, demux->si.profile_name, demux->si.stream_version);
     SetAudioFormat(pFileMP3, format);

@@ -11,12 +11,12 @@
 IMPLEMENT_DYNAMIC(CDlgSetupOther, CPropertyPage)
 
 CDlgSetupOther::CDlgSetupOther()
-	: CPropertyPage(CDlgSetupOther::IDD)
+    : CPropertyPage(CDlgSetupOther::IDD)
 {
-	m_nId3v2Encode = -1;
-	m_nId3v2Version = -1;
-	m_nId3v2VersionNew = -1;
-	m_nId3v2EncodeNew = -1;
+    m_nId3v2Encode = -1;
+    m_nId3v2Version = -1;
+    m_nId3v2VersionNew = -1;
+    m_nId3v2EncodeNew = -1;
 }
 
 CDlgSetupOther::~CDlgSetupOther()
@@ -25,19 +25,19 @@ CDlgSetupOther::~CDlgSetupOther()
 
 void CDlgSetupOther::DoDataExchange(CDataExchange* pDX)
 {
-	CPropertyPage::DoDataExchange(pDX);
-	DDX_Control(pDX, IDC_COMBO_ID3V2_ENCODE_NEW, m_cbId3v2EncodeNew);
-	DDX_Control(pDX, IDC_COMBO_ID3V2_VERSION_NEW, m_cbId3v2VersionNew);
-	DDX_Control(pDX, IDC_COMBO_ID3V2_ENCODE, m_cbId3v2Encode);
-	DDX_Control(pDX, IDC_COMBO_ID3V2_VERSION, m_cbId3v2Version);
-	DDX_CBIndex(pDX, IDC_COMBO_ID3V2_ENCODE, m_nId3v2Encode);
-	DDX_CBIndex(pDX, IDC_COMBO_ID3V2_VERSION, m_nId3v2Version);
-	DDX_CBIndex(pDX, IDC_COMBO_ID3V2_VERSION_NEW, m_nId3v2VersionNew);
-	DDX_CBIndex(pDX, IDC_COMBO_ID3V2_ENCODE_NEW, m_nId3v2EncodeNew);
+    CPropertyPage::DoDataExchange(pDX);
+    DDX_Control(pDX, IDC_COMBO_ID3V2_ENCODE_NEW, m_cbId3v2EncodeNew);
+    DDX_Control(pDX, IDC_COMBO_ID3V2_VERSION_NEW, m_cbId3v2VersionNew);
+    DDX_Control(pDX, IDC_COMBO_ID3V2_ENCODE, m_cbId3v2Encode);
+    DDX_Control(pDX, IDC_COMBO_ID3V2_VERSION, m_cbId3v2Version);
+    DDX_CBIndex(pDX, IDC_COMBO_ID3V2_ENCODE, m_nId3v2Encode);
+    DDX_CBIndex(pDX, IDC_COMBO_ID3V2_VERSION, m_nId3v2Version);
+    DDX_CBIndex(pDX, IDC_COMBO_ID3V2_VERSION_NEW, m_nId3v2VersionNew);
+    DDX_CBIndex(pDX, IDC_COMBO_ID3V2_ENCODE_NEW, m_nId3v2EncodeNew);
 }
 
 BEGIN_MESSAGE_MAP(CDlgSetupOther, CPropertyPage)
-	ON_BN_CLICKED(IDC_BT_RESET_PAGE, &CDlgSetupOther::OnBnClickedBtResetPage)
+    ON_BN_CLICKED(IDC_BT_RESET_PAGE, &CDlgSetupOther::OnBnClickedBtResetPage)
     ON_CBN_SELCHANGE(IDC_COMBO_ID3V2_VERSION, OnSelchangeComboId3v2Version)
     ON_CBN_SELCHANGE(IDC_COMBO_ID3V2_ENCODE, OnSelchangeComboId3v2Version)
     ON_CBN_SELCHANGE(IDC_COMBO_ID3V2_VERSION_NEW, OnSelchangeComboId3v2VersionNew)
@@ -78,22 +78,22 @@ BOOL CDlgSetupOther::OnInitDialog()
 // CDlgSetupOther メッセージ ハンドラー
 void CDlgSetupOther::OnBnClickedBtResetPage()
 {
-	// TODO: ここにコントロール通知ハンドラー コードを追加します。
-	extern const int  nId3v2Encode_default; 
-	extern const int  nId3v2Version_default;
-	extern const int  nId3v2EncodeNew_default;
-	extern const int  nId3v2VersionNew_default;
+    // TODO: ここにコントロール通知ハンドラー コードを追加します。
+    extern const int  nId3v2Encode_default;
+    extern const int  nId3v2Version_default;
+    extern const int  nId3v2EncodeNew_default;
+    extern const int  nId3v2VersionNew_default;
 
-	m_cbId3v2Version.SetCurSel(nId3v2Version_default);
-	m_cbId3v2Encode.SetCurSel(nId3v2Encode_default);
-	m_cbId3v2VersionNew.SetCurSel(nId3v2VersionNew_default);
-	m_cbId3v2EncodeNew.SetCurSel(nId3v2EncodeNew_default);
-	m_nId3v2Version = nId3v2Version_default;
-	m_nId3v2Encode = nId3v2Encode_default;
-	m_nId3v2VersionNew = nId3v2VersionNew_default;
-	m_nId3v2EncodeNew = nId3v2EncodeNew_default;//by Kobarin (初期値を UTF-16 に変更)
+    m_cbId3v2Version.SetCurSel(nId3v2Version_default);
+    m_cbId3v2Encode.SetCurSel(nId3v2Encode_default);
+    m_cbId3v2VersionNew.SetCurSel(nId3v2VersionNew_default);
+    m_cbId3v2EncodeNew.SetCurSel(nId3v2EncodeNew_default);
+    m_nId3v2Version = nId3v2Version_default;
+    m_nId3v2Encode = nId3v2Encode_default;
+    m_nId3v2VersionNew = nId3v2VersionNew_default;
+    m_nId3v2EncodeNew = nId3v2EncodeNew_default;//by Kobarin (初期値を UTF-16 に変更)
 
-	UpdateData(FALSE);
+    UpdateData(FALSE);
 }
 
 void CDlgSetupOther::OnSelchangeComboId3v2Version()

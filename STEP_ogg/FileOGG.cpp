@@ -115,7 +115,7 @@ bool LoadFileOGG(FILE_INFO *pFileMP3)
         SetOther(pFileMP3, strDisp);
     }
 #endif
-	SetAudioFormat(pFileMP3, fileOGG->GetAudioFormatString());
+    SetAudioFormat(pFileMP3, fileOGG->GetAudioFormatString());
     CString strTimeString = fileOGG->GetTimeString();
     TCHAR *time = strTimeString.GetBuffer();
     //szTime = "xx:xx (xxxsec) のようになっている
@@ -257,7 +257,7 @@ bool LoadFileOPUS(FILE_INFO *pFileMP3)
         const int ch = opusHead->channel_count;
         TCHAR format[256];
         _sntprintf_s(format, _TRUNCATE,
-                     _T("OggOpus, %dkbps, %dHz(input), %dch"), 
+                     _T("OggOpus, %dkbps, %dHz(input), %dch"),
                      bitrate/1000, samplerate, ch);
         SetAudioFormat(pFileMP3, format);
     }
@@ -265,7 +265,7 @@ bool LoadFileOPUS(FILE_INFO *pFileMP3)
     int nTimeSec = qwTotalSample / 48000;//
     SetPlayTime(pFileMP3, nTimeSec);
     op_free(pOpusFile);
-    
+
     return true;
 }
 bool WriteFileOPUS(FILE_INFO *pFileMP3)

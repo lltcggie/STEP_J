@@ -13,45 +13,45 @@
 
 class CDlgFolderSync : public COptionPage
 {
-	DECLARE_DYNCREATE(CDlgFolderSync)
+    DECLARE_DYNCREATE(CDlgFolderSync)
 
 // コンストラクション
 public:
-	CDlgFolderSync();
-	~CDlgFolderSync();
+    CDlgFolderSync();
+    ~CDlgFolderSync();
 
 // ダイアログ データ
-	//{{AFX_DATA(CDlgFolderSync)
-	enum { IDD = IDD_DLG_FOLDER_SYNC };
-	CEdit	m_editRootFolder;
-	BOOL	m_bEnableFolderSync;
-	CString	m_strRootFolder;
-	BOOL	m_bMoveLyricsFile;
-	BOOL	m_bDeleteFolder;
-	BOOL	m_bSelectAlways;
-	//}}AFX_DATA
+    //{{AFX_DATA(CDlgFolderSync)
+    enum { IDD = IDD_DLG_FOLDER_SYNC };
+    CEdit   m_editRootFolder;
+    BOOL    m_bEnableFolderSync;
+    CString m_strRootFolder;
+    BOOL    m_bMoveLyricsFile;
+    BOOL    m_bDeleteFolder;
+    BOOL    m_bSelectAlways;
+    //}}AFX_DATA
 
-	void	UpdateStatus(void);
+    void    UpdateStatus(void);
 
 
 // オーバーライド
-	// ClassWizard は仮想関数のオーバーライドを生成します。
+    // ClassWizard は仮想関数のオーバーライドを生成します。
 
-	//{{AFX_VIRTUAL(CDlgFolderSync)
-	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV サポート
-	//}}AFX_VIRTUAL
+    //{{AFX_VIRTUAL(CDlgFolderSync)
+    protected:
+    virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV サポート
+    //}}AFX_VIRTUAL
 
 // インプリメンテーション
 protected:
-	// 生成されたメッセージ マップ関数
-	//{{AFX_MSG(CDlgFolderSync)
-	virtual BOOL OnInitDialog();
-	afx_msg void OnChEnableFolderSync();
-	afx_msg void OnBtRefRoot();
-	afx_msg void OnBtResetPage();
-	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
+    // 生成されたメッセージ マップ関数
+    //{{AFX_MSG(CDlgFolderSync)
+    virtual BOOL OnInitDialog();
+    afx_msg void OnChEnableFolderSync();
+    afx_msg void OnBtRefRoot();
+    afx_msg void OnBtResetPage();
+    //}}AFX_MSG
+    DECLARE_MESSAGE_MAP()
 
 };
 

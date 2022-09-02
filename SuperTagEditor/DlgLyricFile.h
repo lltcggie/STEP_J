@@ -13,47 +13,47 @@
 
 class CDlgLyricFile : public COptionPage
 {
-	DECLARE_DYNCREATE(CDlgLyricFile)
+    DECLARE_DYNCREATE(CDlgLyricFile)
 
 // コンストラクション
 public:
-	CDlgLyricFile();
-	~CDlgLyricFile();
+    CDlgLyricFile();
+    ~CDlgLyricFile();
 
 // ダイアログ データ
-	//{{AFX_DATA(CDlgLyricFile)
-	enum { IDD = IDD_DLG_LYRIC };
-	CButton	m_btSearchLyricsSubDir;
-	CEdit	m_editLyricsPath;
-	CButton	m_btSetLyricsDir;
-	CButton	m_btRefLyrics;
-	BOOL	m_bChangeTextFile;
-	CString	m_strLyricsPath;
-	BOOL	m_bSetLyricsDir;
-	BOOL	m_bSearchLyricsSubDir;
-	//}}AFX_DATA
+    //{{AFX_DATA(CDlgLyricFile)
+    enum { IDD = IDD_DLG_LYRIC };
+    CButton m_btSearchLyricsSubDir;
+    CEdit   m_editLyricsPath;
+    CButton m_btSetLyricsDir;
+    CButton m_btRefLyrics;
+    BOOL    m_bChangeTextFile;
+    CString m_strLyricsPath;
+    BOOL    m_bSetLyricsDir;
+    BOOL    m_bSearchLyricsSubDir;
+    //}}AFX_DATA
 
-	void	UpdateStatus(void);
+    void    UpdateStatus(void);
 
 // オーバーライド
-	// ClassWizard は仮想関数のオーバーライドを生成します。
+    // ClassWizard は仮想関数のオーバーライドを生成します。
 
-	//{{AFX_VIRTUAL(CDlgLyricFile)
-	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV サポート
-	//}}AFX_VIRTUAL
+    //{{AFX_VIRTUAL(CDlgLyricFile)
+    protected:
+    virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV サポート
+    //}}AFX_VIRTUAL
 
 // インプリメンテーション
 protected:
-	// 生成されたメッセージ マップ関数
-	//{{AFX_MSG(CDlgLyricFile)
-	afx_msg void OnBtRefLyrics();
-	afx_msg void OnChSetLyricsDir();
-	afx_msg void OnChChangeTextFilename();
-	virtual BOOL OnInitDialog();
-	afx_msg void OnBtResetPage();
-	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
+    // 生成されたメッセージ マップ関数
+    //{{AFX_MSG(CDlgLyricFile)
+    afx_msg void OnBtRefLyrics();
+    afx_msg void OnChSetLyricsDir();
+    afx_msg void OnChChangeTextFilename();
+    virtual BOOL OnInitDialog();
+    afx_msg void OnBtResetPage();
+    //}}AFX_MSG
+    DECLARE_MESSAGE_MAP()
 
 };
 

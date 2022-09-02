@@ -1041,12 +1041,12 @@ typedef struct
 ** pass wParam as null then it will return a HWND embedWindow(embedWindowState *);
 */
 
-#define IPC_SKINWINDOW	534
+#define IPC_SKINWINDOW  534
 
 typedef struct __SKINWINDOWPARAM 
 {
-	HWND hwndToSkin;
-	GUID windowGuid;
+    HWND hwndToSkin;
+    GUID windowGuid;
 } SKINWINDOWPARAM;
 
 
@@ -1410,7 +1410,7 @@ class IVideoOutput
     virtual void showStatusMsg(const char *text) {UNREFERENCED_PARAMETER(text);  }
     virtual int get_latency() { return 0; }
     virtual void notifyBufferState(int bufferstate) { UNREFERENCED_PARAMETER(bufferstate); } /* 0-255*/
-	virtual INT_PTR extended(INT_PTR param1, INT_PTR param2, INT_PTR param3) { UNREFERENCED_PARAMETER(param1); UNREFERENCED_PARAMETER(param2); UNREFERENCED_PARAMETER(param3); return 0; } // Dispatchable, eat this!
+    virtual INT_PTR extended(INT_PTR param1, INT_PTR param2, INT_PTR param3) { UNREFERENCED_PARAMETER(param1); UNREFERENCED_PARAMETER(param2); UNREFERENCED_PARAMETER(param3); return 0; } // Dispatchable, eat this!
 };
 
 class ITrackSelector 

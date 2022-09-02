@@ -22,14 +22,14 @@ public:
     int  SetPos(int nPos);
     int  OffsetPos(int nPos);
     int  StepIt();
-	void EnableCancelButton(BOOL);
-    BOOL IsCanceled(void){return m_bCanceled;}//追加 by Kobarin    
+    void EnableCancelButton(BOOL);
+    BOOL IsCanceled(void){return m_bCanceled;}//追加 by Kobarin
     void SetCanceled(BOOL bCanceled){m_bCanceled = bCanceled;}//追加 by Kobarin
-        
+
 // ダイアログ データ
     //{{AFX_DATA(CDlgCommonProgress)
     enum { IDD = CG_IDD_PROGRESS };
-    CProgressCtrl	m_Progress;
+    CProgressCtrl    m_Progress;
     //}}AFX_DATA
 
 // オーバーライド
@@ -43,7 +43,7 @@ public:
 
 // インプリメンテーション
 protected:
-	UINT m_nCaptionID;
+    UINT m_nCaptionID;
     int m_nLower;
     int m_nUpper;
     int m_nStep;
@@ -53,7 +53,7 @@ protected:
     void ReEnableParent();
 
     virtual void OnCancel();
-    virtual void OnOK() {}; 
+    virtual void OnOK() {};
     void UpdatePercent(int nCurrent);
     void PumpMessages();
 

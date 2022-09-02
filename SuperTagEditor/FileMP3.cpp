@@ -827,7 +827,7 @@ bool CFileMP3::WriteTag(FILE_MP3 *fileMP3, bool bKeepTimeStamp)
 // 概要  : ファイル検索：検索処理
 // 引数  : sDir         = 検索するディレクトリ
 //       : sTargetName  = 検索するファイル名
-// 戻り値: CString      = 発見したファイルのフルパス(IsEmpty():未発見)
+// 戻り値: CString   = 発見したファイルのフルパス(IsEmpty():未発見)
 // =============================================
 CString CFileMP3::SearchFileReent(const TCHAR *sDir, const TCHAR *sTargetName)
 {
@@ -880,7 +880,7 @@ CString CFileMP3::SearchFileReent(const TCHAR *sDir, const TCHAR *sTargetName)
 //  概要  : 歌詞ファイルの検索
 //        : 優先順位：MP3と同じフォルダ→歌詞フォルダ→歌詞フォルダのサブディレクトリ
 //  引数  : fileMP3     = ファイル情報
-//  戻り値: CString     = 歌詞ファイル名(見つからなかった場合は空)
+//  戻り値: CString  = 歌詞ファイル名(見つからなかった場合は空)
 // =============================================
 CString CFileMP3::SearchLyricsFile(FILE_MP3 *fileMP3)
 {

@@ -358,7 +358,7 @@ bool CSuperTagEditorDoc::LoadPlayList(const TCHAR *sPlayList)
         _tsplitpath_s(sPlayList, drive, _MAX_DRIVE, dir, _MAX_DIR, NULL, 0, ext, _MAX_EXT);
         int nUtf8 = _tcsicmp(ext, _T(".m3u8")) == 0;
         if (file.Open(sPlayList, CFile::modeRead)) {
-/*          CString     strLine;
+/*          CString  strLine;
             CArchive    ar(&file, CArchive::load);
             while(ar.ReadString(strLine)) {
                 if (strLine.GetLength() >= 3) {
@@ -794,11 +794,11 @@ BOOL CSuperTagEditorDoc::OnOpenDocument(LPCTSTR lpszPathName)
             if (IsFolderName(sFileName) == false) {
                 _tcsncat_s(sFileName, _T("\\"), _TRUNCATE);
             }
-            bool bEnableSearchSubDir = g_bEnableSearchSubDir; // TyphoonSwell 026 
+            bool bEnableSearchSubDir = g_bEnableSearchSubDir; // TyphoonSwell 026
             if (g_bOptDropSearchSubFolder) {
                 g_bEnableSearchSubDir = true;
             }
-            // WildCherry2 078 
+            // WildCherry2 078
             //SearchFileReent(sFileName);
             OpenFolder(sFileName);
             g_bEnableSearchSubDir = bEnableSearchSubDir;
@@ -905,7 +905,7 @@ void CSuperTagEditorDoc::OnExecClassification()
 #include "DlgFileOverWrite.h"
 bool CSuperTagEditorDoc::CheckFileAttribute(FILE_MP3 *fileMP3)
 {
-    extern  int     g_nWriteTagProcFlag;
+    extern int     g_nWriteTagProcFlag;
     if (g_nWriteTagProcFlag == 3) {
         return(false);                      // 以降中止
     }
@@ -976,7 +976,7 @@ void CSuperTagEditorDoc::OnUpdateDlgSetupPlugin(CCmdUI* pCmdUI)
 void CSuperTagEditorDoc::SaveAllTag(BOOL bSaveOnly)
 {
     m_bSaveAllTagResult = true;
-    extern  int     g_nWriteTagProcFlag;
+    extern int     g_nWriteTagProcFlag;
 
     // プログレスバー表示
     StartLoadFile(_T("タグ情報を更新中..."));

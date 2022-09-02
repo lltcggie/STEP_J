@@ -64,7 +64,7 @@
 //機能の存在意義が分からず、不具合があった場合に致命的になるため STEP_K では無効にします。
 //開発の後を引き継ぐ人でこの機能を有効にしたい場合はコメントアウトして下さい。
 //同期処理の動作確認は不十分なので、有効にする場合は注意して下さい。
-#define DISABLE_FOLDER_SYNC 
+#define DISABLE_FOLDER_SYNC
 
 enum    {
     FILENAME_NO_CHECK,              // チェックしない
@@ -321,7 +321,7 @@ extern  LOGFONT     g_fontReport;           // フォント
 
 extern  FILENAME_REPLACE    g_fileNameReplace[FILENAME_REPLACE_MAX];
 
-extern  FILENAME_REPLACE    g_userFileNameReplace[USER_FILENAME_REPLACE_MAX]; /* FreeFall 050 */
+extern  FILENAME_REPLACE    g_userFileNameReplace[USER_FILENAME_REPLACE_MAX];   /* FreeFall 050 */
 
 
 extern  KEY_CONFIG *SearchKeyConfigID(WORD);

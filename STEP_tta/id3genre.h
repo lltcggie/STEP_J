@@ -1,6 +1,6 @@
 /* ID3v1 names with Winamp extensions */
 
-#define GENRES	148
+#define GENRES  148
 
 char *genre[] = {
   /*   0 */  "Blues",

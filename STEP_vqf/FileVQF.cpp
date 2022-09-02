@@ -11,30 +11,30 @@ bool LoadAttributeFileVQF(FILE_INFO *pFileMP3)
     if(vqf.Load(GetFullPath(pFileMP3)) != ERROR_SUCCESS){
         return false;
     }
-	//タイトル
-	CString data = vqf.GetField('N','A','M','E');
-	if(data){
+    //タイトル
+    CString data = vqf.GetField('N','A','M','E');
+    if(data){
         SetTrackNameSI(pFileMP3, data);
     }
-	//アーティスト
-	data = vqf.GetField('A','U','T','H');
-	if(data){
-		SetArtistNameSI(pFileMP3, data);
-	}
-	//保存名
-	//data = vqf.GetField('F','I','L','E');
-	//if(data){
-	//}
-	//著作権
-	data = vqf.GetField('(','c',')',' ');
-	if(data){
-		SetCopyrightSI(pFileMP3, data);
-	}
+    //アーティスト
+    data = vqf.GetField('A','U','T','H');
+    if(data){
+        SetArtistNameSI(pFileMP3, data);
+    }
+    //保存名
+    //data = vqf.GetField('F','I','L','E');
+    //if(data){
+    //}
+    //著作権
+    data = vqf.GetField('(','c',')',' ');
+    if(data){
+        SetCopyrightSI(pFileMP3, data);
+    }
     //コメント
-	data = vqf.GetField('C','O','M','T');
-	if(data){
-		SetCommentSI(pFileMP3, data);
-	}
+    data = vqf.GetField('C','O','M','T');
+    if(data){
+        SetCommentSI(pFileMP3, data);
+    }
     SetAudioFormat(pFileMP3, vqf.GetFormatString());
     CString strTimeString = vqf.GetTimeString();
     TCHAR *time = strTimeString.GetBuffer();
@@ -59,17 +59,17 @@ bool WriteAttributeFileVQF(FILE_INFO *pFileMP3)
     }
     CString strTmp;
     //タイトル
-	vqf.SetField('N','A','M','E', GetTrackNameSI(pFileMP3));
+    vqf.SetField('N','A','M','E', GetTrackNameSI(pFileMP3));
     //アーティスト
-	vqf.SetField('A','U','T','H', GetArtistNameSI(pFileMP3));
+    vqf.SetField('A','U','T','H', GetArtistNameSI(pFileMP3));
     //保存名
-	//vqf.SetField('F','I','L','E',
+    //vqf.SetField('F','I','L','E',
     //              ???,
     //              ???);
     //著作権
-	vqf.SetField('(','c',')',' ', GetCopyrightSI(pFileMP3));
+    vqf.SetField('(','c',')',' ', GetCopyrightSI(pFileMP3));
     //コメント
-	vqf.SetField('C','O','M','T', GetCommentSI(pFileMP3));
+    vqf.SetField('C','O','M','T', GetCommentSI(pFileMP3));
 
     return vqf.Save(GetFullPath(pFileMP3)) == ERROR_SUCCESS;
 }

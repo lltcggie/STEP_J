@@ -1,9 +1,9 @@
 // ==========================================================================
-// 			Specification : header file for MFC DLL extension builds
+//             Specification : header file for MFC DLL extension builds
 // ==========================================================================
 
-// Copyright Dundas Software Ltd. 1997 - 1998, All Rights Reserved
-                          
+// Copyright © Dundas Software Ltd. 1997 - 1998, All Rights Reserved
+
 // //////////////////////////////////////////////////////////////////////////
 
 #if !defined(OX_CLASS_DECL) || !defined(OX_API_DECL) && !defined(OX_DATA_DECL)
@@ -26,36 +26,36 @@
 
 // When including UTB classes into a MFC Extension DLL
 #ifdef _BUILD_UTB_INTO_EXTDLL
-	#ifndef OX_CLASS_DECL
-		#define OX_CLASS_DECL		AFX_CLASS_EXPORT
-	#endif
-	#ifndef OX_API_DECL
-		#define OX_API_DECL			AFX_API_EXPORT
-	#endif
-	#ifndef OX_DATA_DECL
-		#define OX_DATA_DECL		AFX_DATA_EXPORT
-	#endif
+    #ifndef OX_CLASS_DECL
+        #define OX_CLASS_DECL       AFX_CLASS_EXPORT
+    #endif
+    #ifndef OX_API_DECL
+        #define OX_API_DECL         AFX_API_EXPORT
+    #endif
+    #ifndef OX_DATA_DECL
+        #define OX_DATA_DECL        AFX_DATA_EXPORT
+    #endif
 #elif defined(_LINK_TO_UTB_IN_EXTDLL)
-// When linking to extension DLL that includes UTB classes 
-	#ifndef OX_CLASS_DECL
-		#define OX_CLASS_DECL		AFX_CLASS_IMPORT
-	#endif
-	#ifndef OX_API_DECL
-		#define OX_API_DECL			AFX_API_IMPORT
-	#endif
-	#ifndef OX_DATA_DECL
-		#define OX_DATA_DECL		AFX_DATA_IMPORT
-	#endif
+// When linking to extension DLL that includes UTB classes
+    #ifndef OX_CLASS_DECL
+        #define OX_CLASS_DECL       AFX_CLASS_IMPORT
+    #endif
+    #ifndef OX_API_DECL
+        #define OX_API_DECL         AFX_API_IMPORT
+    #endif
+    #ifndef OX_DATA_DECL
+        #define OX_DATA_DECL        AFX_DATA_IMPORT
+    #endif
 #else
-	#ifndef OX_CLASS_DECL
-		#define OX_CLASS_DECL
-	#endif
-	#ifndef OX_API_DECL
-		#define OX_API_DECL    
-	#endif
-	#ifndef OX_DATA_DECL
-		#define OX_DATA_DECL    
-	#endif
+    #ifndef OX_CLASS_DECL
+        #define OX_CLASS_DECL
+    #endif
+    #ifndef OX_API_DECL
+        #define OX_API_DECL
+    #endif
+    #ifndef OX_DATA_DECL
+        #define OX_DATA_DECL
+    #endif
 #endif
 
-#endif	//	!defined(OX_CLASS_DECL) || !defined(OX_API_DECL) && !defined(OX_DATA_DECL)
+#endif    //    !defined(OX_CLASS_DECL) || !defined(OX_API_DECL) && !defined(OX_DATA_DECL)

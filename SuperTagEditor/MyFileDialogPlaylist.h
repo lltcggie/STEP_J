@@ -12,25 +12,25 @@
 
 class CMyFileDialogPlaylist : public CFileDialog
 {
-	DECLARE_DYNAMIC(CMyFileDialogPlaylist)
+    DECLARE_DYNAMIC(CMyFileDialogPlaylist)
 
 public:
-	BOOL OnFileNameOK();
-	void OnInitDone();
-	IFileDialogCustomize* custom;
-	BOOL m_bShowLoadPlaylistDlg;
-	CMyFileDialogPlaylist(BOOL bOpenFileDialog, // TRUE ならば FileOpen、 FALSE ならば FileSaveAs
-		LPCTSTR lpszDefExt = NULL,
-		LPCTSTR lpszFileName = NULL,
-		DWORD dwFlags = OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT,
-		LPCTSTR lpszFilter = NULL,
-		CWnd* pParentWnd = NULL);
+    BOOL OnFileNameOK();
+    void OnInitDone();
+    IFileDialogCustomize* custom;
+    BOOL m_bShowLoadPlaylistDlg;
+    CMyFileDialogPlaylist(BOOL bOpenFileDialog, // TRUE ならば FileOpen、 FALSE ならば FileSaveAs
+        LPCTSTR lpszDefExt = NULL,
+        LPCTSTR lpszFileName = NULL,
+        DWORD dwFlags = OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT,
+        LPCTSTR lpszFilter = NULL,
+        CWnd* pParentWnd = NULL);
 
 protected:
-	//{{AFX_MSG(CMyFileDialogPlaylist)
-		// メモ - ClassWizard はこの位置にメンバ関数を追加または削除します。
-	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
+    //{{AFX_MSG(CMyFileDialogPlaylist)
+        // メモ - ClassWizard はこの位置にメンバ関数を追加または削除します。
+    //}}AFX_MSG
+    DECLARE_MESSAGE_MAP()
 };
 
 //{{AFX_INSERT_LOCATION}}

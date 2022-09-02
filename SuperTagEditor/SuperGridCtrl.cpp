@@ -154,16 +154,16 @@ CEdit   *g_pEditWindow;
 
                  - changed the void CMySuperGrid::SortData() example.
                  *
-                 * Today it寄 actually one year ago this code went public (good or bad you decide).
+                 * Today it's actually one year ago this code went public (good or bad you decide).
                  *
 
-    8. dec. 99   - Added Arne Schildエs improvements, see his improvements in the comment section on the website.
+    8. dec. 99   - Added Arne Schild's improvements, see his improvements in the comment section on the website.
                     - redesign of DeleteAll()..and them some.
                     - redesign of MakeShortString.
                     - HitTestOnSign....
                  - Bug fix in DrawItem, did not use the GetData function to get the Item string or substring for drawing.
                  - UpdateData now has a default parametre(BOOL bUpdateRow), which forces the listview item to be written.
-                   this means you donエt have to call UpdateData and CListCtrl::SetItemText afterwards when doing dynamic updates.
+                   this means you don't have to call UpdateData and CListCtrl::SetItemText afterwards when doing dynamic updates.
                  - added InvalidateItemRect(int nItem);
                  - added InvalidateItemRectPtr(CTreeItem *);
                  - added InvalidateItem..does a basic SetItemText given a CTreeItem ptr
@@ -189,7 +189,7 @@ CEdit   *g_pEditWindow;
 
 
     WHAT'S UP :
-                - NEW RELEASES can in future be found at www.codeproject.com, donエt forget to subscribe.
+                - NEW RELEASES can in future be found at www.codeproject.com, don't forget to subscribe.
                 - Peace on earth.
                 - Atl version is still on my todo list.
                 - Better documentation ;)
@@ -441,7 +441,7 @@ void CSuperGridCtrl::DrawItem(LPDRAWITEMSTRUCT lpDrawItemStruct)
         if (nStateImageMask)
         {
             int nImage = (nStateImageMask>>12) - 1;
-            extern  CImageList  g_imageCheckMark;
+            extern CImageList  g_imageCheckMark;
             CImageList *pImageList = &g_imageCheckMark;
 
             if (pItemInfo->GetLParam() < 0) {
@@ -462,7 +462,7 @@ void CSuperGridCtrl::DrawItem(LPDRAWITEMSTRUCT lpDrawItemStruct)
             }
         }
 
-        //thatエs new
+        //that's new
         CString strItemText = GetData(pSelItem)->GetItemText();
         //draw 1. item
         GetItemRect(nItem, rcItem, LVIR_LABEL);
@@ -612,7 +612,7 @@ void CSuperGridCtrl::MeasureItem(LPMEASUREITEMSTRUCT lpMeasureItemStruct)
 
 
 //the basic rutine making the ... thing snatched it from some tedious code example from the MFC rowlist example
-//Arne Schildエ had a comment on the static const _TCHAR thing. this is now changed
+//Arne Schild' had a comment on the static const _TCHAR thing. this is now changed
 LPCTSTR CSuperGridCtrl::MakeShortString(CDC* pDC, LPCTSTR lpszLong, int nColumnLen, int nOffset)
 {
     static const _TCHAR szThreeDots[]=_T("...");
@@ -1985,7 +1985,7 @@ CEdit* CSuperGridCtrl::EditLabelEx(int nItem, int nCol)
     rect.left += offset;
     rect.right = rect.left + GetColumnWidth(nCol);
     if(rect.right > rcClient.right)
-       rect.right = rcClient.right;
+        rect.right = rcClient.right;
 
     // Get Column alignment
     LV_COLUMN lvcol;
@@ -2263,7 +2263,7 @@ CSuperGridCtrl::CTreeItem* CSuperGridCtrl::InsertItem(CTreeItem *pParent, CItemI
     }
 
     if (!bUpdate) {
-         Hide(pParent, TRUE);
+        Hide(pParent, TRUE);
     } else {
         //calc listview index for the new node
         int nIndex = NodeToIndex(pItem);
@@ -2399,11 +2399,11 @@ CSuperGridCtrl::CTreeItem*  CSuperGridCtrl::InsertRootItem(CItemInfo * lpInfo)
     int nSize = lp->GetItemCount();
     int i; for(i=0; i < nSize;i++)
     {
-       CString str = lp->GetSubItem(i);
-       lvItem.mask = LVIF_TEXT;
-       lvItem.iSubItem = i+1;
-       lvItem.pszText = str.GetBuffer(1);
-       SetItem(&lvItem);
+        CString str = lp->GetSubItem(i);
+        lvItem.mask = LVIF_TEXT;
+        lvItem.iSubItem = i+1;
+        lvItem.pszText = str.GetBuffer(1);
+        SetItem(&lvItem);
     }
     m_RootItems.AddTail(pRoot);
     return pRoot;
@@ -3055,7 +3055,7 @@ void CSuperGridCtrl::OnUpdateListViewItem(CTreeItem* lpItem, LV_ITEM *plvItem)
             lp->SetItemText(str);
         else //subitem data
             lp->SetSubItemText(plvItem->iSubItem-1, str);
-       UpdateData(lpItem, lp); // do not use bUpdateRow here, hence we only update a specific item or subitem..not all of them
+        UpdateData(lpItem, lp); // do not use bUpdateRow here, hence we only update a specific item or subitem..not all of them
     }
     SetItemText(plvItem->iItem, plvItem->iSubItem, plvItem->pszText);
 
@@ -3073,8 +3073,8 @@ void CSuperGridCtrl::DeleteAll()
         CTreeItem * pRoot = (CTreeItem*)m_RootItems.GetNext(pos);
         if(pRoot!=NULL)
         {
-            //DeleteItem(0);//delete cur item in listview: no Sorry Arne you donエt need this
-            //HideChildren(pRoot, TRUE, 0);  no Sorry Arne you donエt need this
+            //DeleteItem(0);//delete cur item in listview: no Sorry Arne you don't need this
+            //HideChildren(pRoot, TRUE, 0);  no Sorry Arne you don't need this
 
             // If root, must delete from m_rootData
             if(GetParentItem(pRoot) == NULL )
@@ -3083,7 +3083,7 @@ void CSuperGridCtrl::DeleteAll()
             }
             else
                 Delete(pRoot);
-        //  InternaleUpdateTree(); no Sorry Arne you donエt need too
+        //  InternaleUpdateTree(); no Sorry Arne you don't need too
         //  other than that, thanks.
         }
     }
@@ -3228,7 +3228,7 @@ int CSuperGridCtrl::CompareChildren(const void* p1, const void* p2)
 //              Collapse(pParent);
 //      }
 //
-//      DeleteAllItems();//this is quite okay, I donエt delete the internal state
+//      DeleteAllItems();//this is quite okay, I don't delete the internal state
 //      //sort rootitems
 //      CTreeItem** ppSortArray = new CTreeItem*[nItems];
 //      // Fill in array with pointers to our children.

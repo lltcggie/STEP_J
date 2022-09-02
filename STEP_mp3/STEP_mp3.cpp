@@ -610,7 +610,7 @@ void StringCopyN(TCHAR *sDest, const TCHAR *sSrc, int nLen)
         }
         else{
             i++;
-        }   
+        }
     }
 #else
     CHAR *str_ansi = (CHAR*)malloc(nLen+1);
@@ -633,7 +633,7 @@ void StringCopyN(TCHAR *sDest, const TCHAR *sSrc, int nLen)
         }
         else{
             i++;
-        }   
+        }
     }
     MultiByteToWideChar(CP_ACP, 0, str_ansi, -1, sDest, nLen);
     free(str_ansi);
@@ -837,7 +837,7 @@ bool LoadFileMP3(FILE_INFO *pFileMP3)
     fread(Head, 1, 4, fp);
     fclose(fp);
     ReadTagID3(strFileName, pFileMP3);
-    
+
     if (memcmp(Head, "ID3", 3) == 0) {
         // === ID3v2 形式ファイル ===
         if (bOptAutoConvID3v2/*bOptID3v2ID3tagAutoWrite*/) {
@@ -990,7 +990,7 @@ bool ConvID3tagToSIField(FILE_INFO *pFileMP3)
     return true;
 }
 
-static void COPY_FIELD(FILE_INFO *pFileMP3, FIELDTYPE fieldType, const CString& strSIF, int len) 
+static void COPY_FIELD(FILE_INFO *pFileMP3, FIELDTYPE fieldType, const CString& strSIF, int len)
 {// コピー対象のフィールドかどうかをチェックして、必要な場合だけコピーします
  //UNIOCDE 版では len が文字数で単純な長さ比較ではうまくいかないので、
  //StringCopyN で ANSI 換算 での len 文字コピーした場合の文字列で必要か否かを判断する
@@ -998,8 +998,8 @@ static void COPY_FIELD(FILE_INFO *pFileMP3, FIELDTYPE fieldType, const CString& 
     StringCopyN(sBuffer, strSIF, len);//長さ len までコピー
     if (nOptSIFieldConvType == SIF_CONV_ALL_FIELD || //常にコピー
         _tcscmp(sBuffer, strSIF) == 0) {             //長さ len までコピーしたものと同じならコピー
-        SetValue(pFileMP3, fieldType, sBuffer);        
-    }          
+        SetValue(pFileMP3, fieldType, sBuffer);
+    }
     free(sBuffer);
 }
 
@@ -1112,8 +1112,8 @@ bool WriteTagID3v2(FILE_INFO *pFileMP3)
 
 #ifdef _UNICODE
     if(nId3v2Encode == 0 && //「ID3v2 の保存形式」-「文字エンコード」-「変更しない」
-       id3v2.GetCharEncoding() == CId3tagv2::ID3V2CHARENCODING_ISO_8859_1 && //更新前が ISO_8859_1
-       bAutoISO8859_1toUtf16){
+        id3v2.GetCharEncoding() == CId3tagv2::ID3V2CHARENCODING_ISO_8859_1 && //更新前が ISO_8859_1
+        bAutoISO8859_1toUtf16){
     //by Kobarin
     //変更しない設定でも、更新前の文字エンコードが ISO_8859_1 の場合は更新後の方で UNICODE 固有
     //の文字を使用しているかどうかをチェックし、使用している場合は UTF16 で書き込む
@@ -1380,13 +1380,13 @@ STEP_API UINT WINAPI STEPSave(FILE_INFO *pFileMP3)
     UINT nFormat = GetFormat(pFileMP3);
 
     CString strTrack = GetTrackNameSI(pFileMP3);
-    
+
     if (nFormat == nFileTypeMP3 || nFormat == nFileTypeMP3V1 || nFormat == nFileTypeMP3V11) {
         // MP3 => ID3v2 自動フォーマット変換処理
         copySIField(pFileMP3);
         if (MakeTagID3v2(GetFullPath(pFileMP3), NULL) == false){
             return STEP_ERROR;
-        } 
+        }
         else {
             nFormat = nFileTypeID3V2;
             SetFormat(pFileMP3, nFileTypeID3V2);
@@ -1498,7 +1498,7 @@ STEP_API void WINAPI STEPShowOptionDialog(HWND hWnd)
         iniFile.WriteInt(_T("OTHER"), _T("ID3v2Version"), nId3v2Version);
         iniFile.WriteInt(_T("OTHER"), _T("ID3v2CharEncodeNew"), nId3v2EncodeNew);
         iniFile.WriteInt(_T("OTHER"), _T("ID3v2VersionNew"), nId3v2VersionNew);
-        
+
         iniFile.Flush();//保存実行(デストラクタで Flush は呼ばれない)
 
         STEPUpdateCellInfo();
