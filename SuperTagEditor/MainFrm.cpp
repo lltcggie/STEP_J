@@ -359,15 +359,15 @@ void CMainFrame::OnToolbarDropDown(NMHDR* pnmtb_, LRESULT *plr) /* AstralCircle 
             pPopup = menu.GetSubMenu(0);
             ASSERT(pPopup);
             CString strName;
-            strName.Format(_T("01：%s"), g_userConvFormat[0].strName);
+            strName.Format(_T("01：%s"), (LPCWSTR)g_userConvFormat[0].strName);
             pPopup->ModifyMenu((UINT)ID_CONV_FORMAT_USER_01, MF_BYCOMMAND, ID_CONV_FORMAT_USER_01, (LPCTSTR)strName);
-            strName.Format(_T("02：%s"), g_userConvFormat[1].strName);
+            strName.Format(_T("02：%s"), (LPCWSTR)g_userConvFormat[1].strName);
             pPopup->ModifyMenu((UINT)ID_CONV_FORMAT_USER_02, MF_BYCOMMAND, ID_CONV_FORMAT_USER_02, (LPCTSTR)strName);
-            strName.Format(_T("03：%s"), g_userConvFormat[2].strName);
+            strName.Format(_T("03：%s"), (LPCWSTR)g_userConvFormat[2].strName);
             pPopup->ModifyMenu((UINT)ID_CONV_FORMAT_USER_03, MF_BYCOMMAND, ID_CONV_FORMAT_USER_03, (LPCTSTR)strName);
-            strName.Format(_T("04：%s"), g_userConvFormat[3].strName); /* LastTrain 057 */
+            strName.Format(_T("04：%s"), (LPCWSTR)g_userConvFormat[3].strName); /* LastTrain 057 */
             pPopup->ModifyMenu((UINT)ID_CONV_FORMAT_USER_04, MF_BYCOMMAND, ID_CONV_FORMAT_USER_04, (LPCTSTR)strName);
-            strName.Format(_T("05：%s"), g_userConvFormat[4].strName); /* LastTrain 057 */
+            strName.Format(_T("05：%s"), (LPCWSTR)g_userConvFormat[4].strName); /* LastTrain 057 */
             pPopup->ModifyMenu((UINT)ID_CONV_FORMAT_USER_05, MF_BYCOMMAND, ID_CONV_FORMAT_USER_05, (LPCTSTR)strName);
         }
         break;
@@ -378,68 +378,68 @@ void CMainFrame::OnToolbarDropDown(NMHDR* pnmtb_, LRESULT *plr) /* AstralCircle 
             ASSERT(pPopup);
             CString strName;
             // グループ１
-            strName.Format(_T("01: %s"), shortString(g_teikeiInfo[0].strTeikei, TEIKEI_MENU_STRING_MAX)); /* STEP 035, FreeFall 051 */
+            strName.Format(_T("01: %s"), (LPCWSTR)(shortString(g_teikeiInfo[0].strTeikei, TEIKEI_MENU_STRING_MAX))); /* STEP 035, FreeFall 051 */
             pPopup->ModifyMenu((UINT)ID_TEIKEI_01, MF_BYCOMMAND, ID_TEIKEI_01, (LPCTSTR)strName);
-            strName.Format(_T("02: %s"), shortString(g_teikeiInfo[1].strTeikei, TEIKEI_MENU_STRING_MAX)); /* STEP 035, FreeFall 051 */
+            strName.Format(_T("02: %s"), (LPCWSTR)(shortString(g_teikeiInfo[1].strTeikei, TEIKEI_MENU_STRING_MAX))); /* STEP 035, FreeFall 051 */
             pPopup->ModifyMenu((UINT)ID_TEIKEI_02, MF_BYCOMMAND, ID_TEIKEI_02, (LPCTSTR)strName);
-            strName.Format(_T("03: %s"), shortString(g_teikeiInfo[2].strTeikei, TEIKEI_MENU_STRING_MAX)); /* STEP 035, FreeFall 051 */
+            strName.Format(_T("03: %s"), (LPCWSTR)(shortString(g_teikeiInfo[2].strTeikei, TEIKEI_MENU_STRING_MAX))); /* STEP 035, FreeFall 051 */
             pPopup->ModifyMenu((UINT)ID_TEIKEI_03, MF_BYCOMMAND, ID_TEIKEI_03, (LPCTSTR)strName);
-            strName.Format(_T("04: %s"), shortString(g_teikeiInfo[3].strTeikei, TEIKEI_MENU_STRING_MAX)); /* STEP 035, FreeFall 051 */
+            strName.Format(_T("04: %s"), (LPCWSTR)(shortString(g_teikeiInfo[3].strTeikei, TEIKEI_MENU_STRING_MAX))); /* STEP 035, FreeFall 051 */
             pPopup->ModifyMenu((UINT)ID_TEIKEI_04, MF_BYCOMMAND, ID_TEIKEI_04, (LPCTSTR)strName);
-            strName.Format(_T("05: %s"), shortString(g_teikeiInfo[4].strTeikei, TEIKEI_MENU_STRING_MAX)); /* STEP 035, FreeFall 051 */
+            strName.Format(_T("05: %s"), (LPCWSTR)(shortString(g_teikeiInfo[4].strTeikei, TEIKEI_MENU_STRING_MAX))); /* STEP 035, FreeFall 051 */
             pPopup->ModifyMenu((UINT)ID_TEIKEI_05, MF_BYCOMMAND, ID_TEIKEI_05, (LPCTSTR)strName);
-            strName.Format(_T("06: %s"), shortString(g_teikeiInfo[5].strTeikei, TEIKEI_MENU_STRING_MAX)); /* STEP 035, FreeFall 051 */
+            strName.Format(_T("06: %s"), (LPCWSTR)(shortString(g_teikeiInfo[5].strTeikei, TEIKEI_MENU_STRING_MAX))); /* STEP 035, FreeFall 051 */
             pPopup->ModifyMenu((UINT)ID_TEIKEI_06, MF_BYCOMMAND, ID_TEIKEI_06, (LPCTSTR)strName);
-            strName.Format(_T("07: %s"), shortString(g_teikeiInfo[6].strTeikei, TEIKEI_MENU_STRING_MAX)); /* STEP 035, FreeFall 051 */
+            strName.Format(_T("07: %s"), (LPCWSTR)(shortString(g_teikeiInfo[6].strTeikei, TEIKEI_MENU_STRING_MAX))); /* STEP 035, FreeFall 051 */
             pPopup->ModifyMenu((UINT)ID_TEIKEI_07, MF_BYCOMMAND, ID_TEIKEI_07, (LPCTSTR)strName);
-            strName.Format(_T("08: %s"), shortString(g_teikeiInfo[7].strTeikei, TEIKEI_MENU_STRING_MAX)); /* STEP 035, FreeFall 051 */
+            strName.Format(_T("08: %s"), (LPCWSTR)(shortString(g_teikeiInfo[7].strTeikei, TEIKEI_MENU_STRING_MAX))); /* STEP 035, FreeFall 051 */
             pPopup->ModifyMenu((UINT)ID_TEIKEI_08, MF_BYCOMMAND, ID_TEIKEI_08, (LPCTSTR)strName);
-            strName.Format(_T("09: %s"), shortString(g_teikeiInfo[8].strTeikei, TEIKEI_MENU_STRING_MAX)); /* STEP 035, FreeFall 051 */
+            strName.Format(_T("09: %s"), (LPCWSTR)(shortString(g_teikeiInfo[8].strTeikei, TEIKEI_MENU_STRING_MAX))); /* STEP 035, FreeFall 051 */
             pPopup->ModifyMenu((UINT)ID_TEIKEI_09, MF_BYCOMMAND, ID_TEIKEI_09, (LPCTSTR)strName);
-            strName.Format(_T("10: %s"), shortString(g_teikeiInfo[9].strTeikei, TEIKEI_MENU_STRING_MAX)); /* STEP 035, FreeFall 051 */
+            strName.Format(_T("10: %s"), (LPCWSTR)(shortString(g_teikeiInfo[9].strTeikei, TEIKEI_MENU_STRING_MAX))); /* STEP 035, FreeFall 051 */
             pPopup->ModifyMenu((UINT)ID_TEIKEI_10, MF_BYCOMMAND, ID_TEIKEI_10, (LPCTSTR)strName);
             /* FreeFall 046 */
             // グループ２
-            strName.Format(_T("01: %s"), shortString(g_teikeiInfo[10].strTeikei, TEIKEI_MENU_STRING_MAX)); /* STEP 035, FreeFall 051 */
+            strName.Format(_T("01: %s"), (LPCWSTR)(shortString(g_teikeiInfo[10].strTeikei, TEIKEI_MENU_STRING_MAX))); /* STEP 035, FreeFall 051 */
             pPopup->ModifyMenu((UINT)ID_TEIKEI_2_01, MF_BYCOMMAND, ID_TEIKEI_2_01, (LPCTSTR)strName);
-            strName.Format(_T("02: %s"), shortString(g_teikeiInfo[11].strTeikei, TEIKEI_MENU_STRING_MAX)); /* STEP 035, FreeFall 051 */
+            strName.Format(_T("02: %s"), (LPCWSTR)(shortString(g_teikeiInfo[11].strTeikei, TEIKEI_MENU_STRING_MAX))); /* STEP 035, FreeFall 051 */
             pPopup->ModifyMenu((UINT)ID_TEIKEI_2_02, MF_BYCOMMAND, ID_TEIKEI_2_02, (LPCTSTR)strName);
-            strName.Format(_T("03: %s"), shortString(g_teikeiInfo[12].strTeikei, TEIKEI_MENU_STRING_MAX)); /* STEP 035, FreeFall 051 */
+            strName.Format(_T("03: %s"), (LPCWSTR)(shortString(g_teikeiInfo[12].strTeikei, TEIKEI_MENU_STRING_MAX))); /* STEP 035, FreeFall 051 */
             pPopup->ModifyMenu((UINT)ID_TEIKEI_2_03, MF_BYCOMMAND, ID_TEIKEI_2_03, (LPCTSTR)strName);
-            strName.Format(_T("04: %s"), shortString(g_teikeiInfo[13].strTeikei, TEIKEI_MENU_STRING_MAX)); /* STEP 035, FreeFall 051 */
+            strName.Format(_T("04: %s"), (LPCWSTR)(shortString(g_teikeiInfo[13].strTeikei, TEIKEI_MENU_STRING_MAX))); /* STEP 035, FreeFall 051 */
             pPopup->ModifyMenu((UINT)ID_TEIKEI_2_04, MF_BYCOMMAND, ID_TEIKEI_2_04, (LPCTSTR)strName);
-            strName.Format(_T("05: %s"), shortString(g_teikeiInfo[14].strTeikei, TEIKEI_MENU_STRING_MAX)); /* STEP 035, FreeFall 051 */
+            strName.Format(_T("05: %s"), (LPCWSTR)(shortString(g_teikeiInfo[14].strTeikei, TEIKEI_MENU_STRING_MAX))); /* STEP 035, FreeFall 051 */
             pPopup->ModifyMenu((UINT)ID_TEIKEI_2_05, MF_BYCOMMAND, ID_TEIKEI_2_05, (LPCTSTR)strName);
-            strName.Format(_T("06: %s"), shortString(g_teikeiInfo[15].strTeikei, TEIKEI_MENU_STRING_MAX)); /* STEP 035, FreeFall 051 */
+            strName.Format(_T("06: %s"), (LPCWSTR)(shortString(g_teikeiInfo[15].strTeikei, TEIKEI_MENU_STRING_MAX))); /* STEP 035, FreeFall 051 */
             pPopup->ModifyMenu((UINT)ID_TEIKEI_2_06, MF_BYCOMMAND, ID_TEIKEI_2_06, (LPCTSTR)strName);
-            strName.Format(_T("07: %s"), shortString(g_teikeiInfo[16].strTeikei, TEIKEI_MENU_STRING_MAX)); /* STEP 035, FreeFall 051 */
+            strName.Format(_T("07: %s"), (LPCWSTR)(shortString(g_teikeiInfo[16].strTeikei, TEIKEI_MENU_STRING_MAX))); /* STEP 035, FreeFall 051 */
             pPopup->ModifyMenu((UINT)ID_TEIKEI_2_07, MF_BYCOMMAND, ID_TEIKEI_2_07, (LPCTSTR)strName);
-            strName.Format(_T("08: %s"), shortString(g_teikeiInfo[17].strTeikei, TEIKEI_MENU_STRING_MAX)); /* STEP 035, FreeFall 051 */
+            strName.Format(_T("08: %s"), (LPCWSTR)(shortString(g_teikeiInfo[17].strTeikei, TEIKEI_MENU_STRING_MAX))); /* STEP 035, FreeFall 051 */
             pPopup->ModifyMenu((UINT)ID_TEIKEI_2_08, MF_BYCOMMAND, ID_TEIKEI_2_08, (LPCTSTR)strName);
-            strName.Format(_T("09: %s"), shortString(g_teikeiInfo[18].strTeikei, TEIKEI_MENU_STRING_MAX)); /* STEP 035, FreeFall 051 */
+            strName.Format(_T("09: %s"), (LPCWSTR)(shortString(g_teikeiInfo[18].strTeikei, TEIKEI_MENU_STRING_MAX))); /* STEP 035, FreeFall 051 */
             pPopup->ModifyMenu((UINT)ID_TEIKEI_2_09, MF_BYCOMMAND, ID_TEIKEI_2_09, (LPCTSTR)strName);
-            strName.Format(_T("10: %s"), shortString(g_teikeiInfo[19].strTeikei, TEIKEI_MENU_STRING_MAX)); /* STEP 035, FreeFall 051 */
+            strName.Format(_T("10: %s"), (LPCWSTR)(shortString(g_teikeiInfo[19].strTeikei, TEIKEI_MENU_STRING_MAX))); /* STEP 035, FreeFall 051 */
             pPopup->ModifyMenu((UINT)ID_TEIKEI_2_10, MF_BYCOMMAND, ID_TEIKEI_2_10, (LPCTSTR)strName);
             // グループ３
-            strName.Format(_T("01: %s"), shortString(g_teikeiInfo[20].strTeikei, TEIKEI_MENU_STRING_MAX)); /* STEP 035, FreeFall 051 */
+            strName.Format(_T("01: %s"), (LPCWSTR)(shortString(g_teikeiInfo[20].strTeikei, TEIKEI_MENU_STRING_MAX))); /* STEP 035, FreeFall 051 */
             pPopup->ModifyMenu((UINT)ID_TEIKEI_3_01, MF_BYCOMMAND, ID_TEIKEI_3_01, (LPCTSTR)strName);
-            strName.Format(_T("02: %s"), shortString(g_teikeiInfo[21].strTeikei, TEIKEI_MENU_STRING_MAX)); /* STEP 035, FreeFall 051 */
+            strName.Format(_T("02: %s"), (LPCWSTR)(shortString(g_teikeiInfo[21].strTeikei, TEIKEI_MENU_STRING_MAX))); /* STEP 035, FreeFall 051 */
             pPopup->ModifyMenu((UINT)ID_TEIKEI_3_02, MF_BYCOMMAND, ID_TEIKEI_3_02, (LPCTSTR)strName);
-            strName.Format(_T("03: %s"), shortString(g_teikeiInfo[22].strTeikei, TEIKEI_MENU_STRING_MAX)); /* STEP 035, FreeFall 051 */
+            strName.Format(_T("03: %s"), (LPCWSTR)(shortString(g_teikeiInfo[22].strTeikei, TEIKEI_MENU_STRING_MAX))); /* STEP 035, FreeFall 051 */
             pPopup->ModifyMenu((UINT)ID_TEIKEI_3_03, MF_BYCOMMAND, ID_TEIKEI_3_03, (LPCTSTR)strName);
-            strName.Format(_T("04: %s"), shortString(g_teikeiInfo[23].strTeikei, TEIKEI_MENU_STRING_MAX)); /* STEP 035, FreeFall 051 */
+            strName.Format(_T("04: %s"), (LPCWSTR)(shortString(g_teikeiInfo[23].strTeikei, TEIKEI_MENU_STRING_MAX))); /* STEP 035, FreeFall 051 */
             pPopup->ModifyMenu((UINT)ID_TEIKEI_3_04, MF_BYCOMMAND, ID_TEIKEI_3_04, (LPCTSTR)strName);
-            strName.Format(_T("05: %s"), shortString(g_teikeiInfo[24].strTeikei, TEIKEI_MENU_STRING_MAX)); /* STEP 035, FreeFall 051 */
+            strName.Format(_T("05: %s"), (LPCWSTR)(shortString(g_teikeiInfo[24].strTeikei, TEIKEI_MENU_STRING_MAX))); /* STEP 035, FreeFall 051 */
             pPopup->ModifyMenu((UINT)ID_TEIKEI_3_05, MF_BYCOMMAND, ID_TEIKEI_3_05, (LPCTSTR)strName);
-            strName.Format(_T("06: %s"), shortString(g_teikeiInfo[25].strTeikei, TEIKEI_MENU_STRING_MAX)); /* STEP 035, FreeFall 051 */
+            strName.Format(_T("06: %s"), (LPCWSTR)(shortString(g_teikeiInfo[25].strTeikei, TEIKEI_MENU_STRING_MAX))); /* STEP 035, FreeFall 051 */
             pPopup->ModifyMenu((UINT)ID_TEIKEI_3_06, MF_BYCOMMAND, ID_TEIKEI_3_06, (LPCTSTR)strName);
-            strName.Format(_T("07: %s"), shortString(g_teikeiInfo[26].strTeikei, TEIKEI_MENU_STRING_MAX)); /* STEP 035, FreeFall 051 */
+            strName.Format(_T("07: %s"), (LPCWSTR)(shortString(g_teikeiInfo[26].strTeikei, TEIKEI_MENU_STRING_MAX))); /* STEP 035, FreeFall 051 */
             pPopup->ModifyMenu((UINT)ID_TEIKEI_3_07, MF_BYCOMMAND, ID_TEIKEI_3_07, (LPCTSTR)strName);
-            strName.Format(_T("08: %s"), shortString(g_teikeiInfo[27].strTeikei, TEIKEI_MENU_STRING_MAX)); /* STEP 035, FreeFall 051 */
+            strName.Format(_T("08: %s"), (LPCWSTR)(shortString(g_teikeiInfo[27].strTeikei, TEIKEI_MENU_STRING_MAX))); /* STEP 035, FreeFall 051 */
             pPopup->ModifyMenu((UINT)ID_TEIKEI_3_08, MF_BYCOMMAND, ID_TEIKEI_3_08, (LPCTSTR)strName);
-            strName.Format(_T("09: %s"), shortString(g_teikeiInfo[28].strTeikei, TEIKEI_MENU_STRING_MAX)); /* STEP 035, FreeFall 051 */
+            strName.Format(_T("09: %s"), (LPCWSTR)(shortString(g_teikeiInfo[28].strTeikei, TEIKEI_MENU_STRING_MAX))); /* STEP 035, FreeFall 051 */
             pPopup->ModifyMenu((UINT)ID_TEIKEI_3_09, MF_BYCOMMAND, ID_TEIKEI_3_09, (LPCTSTR)strName);
-            strName.Format(_T("10: %s"), shortString(g_teikeiInfo[29].strTeikei, TEIKEI_MENU_STRING_MAX)); /* STEP 035, FreeFall 051 */
+            strName.Format(_T("10: %s"), (LPCWSTR)(shortString(g_teikeiInfo[29].strTeikei, TEIKEI_MENU_STRING_MAX))); /* STEP 035, FreeFall 051 */
             pPopup->ModifyMenu((UINT)ID_TEIKEI_3_10, MF_BYCOMMAND, ID_TEIKEI_3_10, (LPCTSTR)strName);
             // グループ名称を反映
             for (int k = 0; k < 3; k++) {
@@ -471,25 +471,25 @@ void CMainFrame::OnToolbarDropDown(NMHDR* pnmtb_, LRESULT *plr) /* AstralCircle 
             pPopup = menu.GetSubMenu(0);
             ASSERT(pPopup);
             CString strName;
-            strName.Format(_T("01：%s"), g_strFavorite[0]);
+            strName.Format(_T("01：%s"), (LPCWSTR)g_strFavorite[0]);
             pPopup->ModifyMenu((UINT)ID_FAVORITE_FOLDER_01, MF_BYCOMMAND, ID_FAVORITE_FOLDER_01, (LPCTSTR)strName);
-            strName.Format(_T("02：%s"), g_strFavorite[1]);
+            strName.Format(_T("02：%s"), (LPCWSTR)g_strFavorite[1]);
             pPopup->ModifyMenu((UINT)ID_FAVORITE_FOLDER_02, MF_BYCOMMAND, ID_FAVORITE_FOLDER_02, (LPCTSTR)strName);
-            strName.Format(_T("03：%s"), g_strFavorite[2]);
+            strName.Format(_T("03：%s"), (LPCWSTR)g_strFavorite[2]);
             pPopup->ModifyMenu((UINT)ID_FAVORITE_FOLDER_03, MF_BYCOMMAND, ID_FAVORITE_FOLDER_03, (LPCTSTR)strName);
-            strName.Format(_T("04：%s"), g_strFavorite[3]);
+            strName.Format(_T("04：%s"), (LPCWSTR)g_strFavorite[3]);
             pPopup->ModifyMenu((UINT)ID_FAVORITE_FOLDER_04, MF_BYCOMMAND, ID_FAVORITE_FOLDER_04, (LPCTSTR)strName);
-            strName.Format(_T("05：%s"), g_strFavorite[4]);
+            strName.Format(_T("05：%s"), (LPCWSTR)g_strFavorite[4]);
             pPopup->ModifyMenu((UINT)ID_FAVORITE_FOLDER_05, MF_BYCOMMAND, ID_FAVORITE_FOLDER_05, (LPCTSTR)strName);
-            strName.Format(_T("06：%s"), g_strFavorite[5]);
+            strName.Format(_T("06：%s"), (LPCWSTR)g_strFavorite[5]);
             pPopup->ModifyMenu((UINT)ID_FAVORITE_FOLDER_06, MF_BYCOMMAND, ID_FAVORITE_FOLDER_06, (LPCTSTR)strName);
-            strName.Format(_T("07：%s"), g_strFavorite[6]);
+            strName.Format(_T("07：%s"), (LPCWSTR)g_strFavorite[6]);
             pPopup->ModifyMenu((UINT)ID_FAVORITE_FOLDER_07, MF_BYCOMMAND, ID_FAVORITE_FOLDER_07, (LPCTSTR)strName);
-            strName.Format(_T("08：%s"), g_strFavorite[7]);
+            strName.Format(_T("08：%s"), (LPCWSTR)g_strFavorite[7]);
             pPopup->ModifyMenu((UINT)ID_FAVORITE_FOLDER_08, MF_BYCOMMAND, ID_FAVORITE_FOLDER_08, (LPCTSTR)strName);
-            strName.Format(_T("09：%s"), g_strFavorite[8]);
+            strName.Format(_T("09：%s"), (LPCWSTR)g_strFavorite[8]);
             pPopup->ModifyMenu((UINT)ID_FAVORITE_FOLDER_09, MF_BYCOMMAND, ID_FAVORITE_FOLDER_09, (LPCTSTR)strName);
-            strName.Format(_T("10：%s"), g_strFavorite[9]);
+            strName.Format(_T("10：%s"), (LPCWSTR)g_strFavorite[9]);
             pPopup->ModifyMenu((UINT)ID_FAVORITE_FOLDER_10, MF_BYCOMMAND, ID_FAVORITE_FOLDER_10, (LPCTSTR)strName);
         }
         break;

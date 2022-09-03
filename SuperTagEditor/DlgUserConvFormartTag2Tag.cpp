@@ -116,7 +116,7 @@ BOOL CDlgUserConvFormartTag2Tag::OnInitDialog()
     m_listFormatType.ResetContent();
     for (i = 0; i < USER_CONV_FORMAT_TAG2TAG_MAX; i++) {
         CString strName;
-        strName.Format(_T("%d: %s"), i+1, m_userFormatTag2Tag[i].strName);
+        strName.Format(_T("%d: %s"), i+1, (LPCWSTR)m_userFormatTag2Tag[i].strName);
         m_listFormatType.AddString(strName);
     }
 
@@ -141,7 +141,7 @@ void CDlgUserConvFormartTag2Tag::OnBtNameChange()
         m_listFormatType.ResetContent();
         int i; for (i = 0; i < USER_CONV_FORMAT_MAX; i++) {
             CString strName;
-            strName.Format(_T("%d: %s"), i+1, m_userFormatTag2Tag[i].strName);
+            strName.Format(_T("%d: %s"), i+1, (LPCWSTR)m_userFormatTag2Tag[i].strName);
             m_listFormatType.AddString(strName);
         }
         // 選択しなおす

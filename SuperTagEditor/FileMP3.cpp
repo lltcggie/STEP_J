@@ -801,7 +801,7 @@ bool CFileMP3::WriteTag(FILE_MP3 *fileMP3, bool bKeepTimeStamp)
             }
             CATCH(CFileException, e) {
                 CString strMsg;
-                strMsg.Format(_T("%s がオープンできませんでした"), fileMP3->strFullPathName);
+                strMsg.Format(_T("%s がオープンできませんでした"), (LPCWSTR)fileMP3->strFullPathName);
                 MessageBox(NULL, strMsg, _T("タイムスタンプの更新エラー"), MB_ICONSTOP|MB_OK|MB_TOPMOST);
                 bResult = false;
             }
@@ -1023,7 +1023,7 @@ bool CFileMP3::CopyFile(FILE_MP3 *fileMP3, const TCHAR *sNewDir, bool bMoveFlag)
     if (_tcsicmp(fileMP3->strFilePath, sNewDir) != 0) {
         // ファイル名が変更されている
         CString strNewName;
-        strNewName.Format(_T("%s%s"), sNewDir, strFileName);
+        strNewName.Format(_T("%s%s"), sNewDir, (LPCWSTR)strFileName);
         if (MyCopyFile(fileMP3->strFullPathName, strNewName, bMoveFlag) == false) {
             // ファイルのコピー／移動に失敗!!
             return(false);

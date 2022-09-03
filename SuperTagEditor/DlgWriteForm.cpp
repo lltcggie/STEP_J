@@ -63,7 +63,7 @@ BOOL CDlgWriteForm::OnInitDialog()
     m_listFormatType.ResetContent();
     for (i = 0; i < WRITE_FORMAT_MAX; i++) {
         CString strName;
-        strName.Format(_T("%d: %s"), i+1, m_writeFormat[i].strName);
+        strName.Format(_T("%d: %s"), i+1, (LPCWSTR)m_writeFormat[i].strName);
         m_listFormatType.AddString(strName);
     }
 
@@ -92,7 +92,7 @@ void CDlgWriteForm::OnBtNameChange()
         m_listFormatType.ResetContent();
         int i; for (i = 0; i < WRITE_FORMAT_MAX; i++) {
             CString strName;
-            strName.Format(_T("%d: %s"), i+1, m_writeFormat[i].strName);
+            strName.Format(_T("%d: %s"), i+1, (LPCWSTR)m_writeFormat[i].strName);
             m_listFormatType.AddString(strName);
         }
         // 選択しなおす

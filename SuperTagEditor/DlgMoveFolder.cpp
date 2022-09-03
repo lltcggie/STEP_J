@@ -155,7 +155,7 @@ void CDlgMoveFolder::OnBtNameChange()
         m_listFormatType.ResetContent();
         int i; for (i = 0; i < USER_MOVE_FODLER_FORMAT_MAX; i++) {
             CString strName;
-            strName.Format(_T("%d: %s"), i+1, m_userFormatEx[i].strName);
+            strName.Format(_T("%d: %s"), i+1, (LPCWSTR)m_userFormatEx[i].strName);
             m_listFormatType.AddString(strName);
         }
         // 選択しなおす
@@ -172,7 +172,7 @@ BOOL CDlgMoveFolder::OnInitDialog()
     m_listFormatType.ResetContent();
     for (i = 0; i < USER_MOVE_FODLER_FORMAT_MAX; i++) {
         CString strName;
-        strName.Format(_T("%d: %s"), i+1, m_userFormatEx[i].strName);
+        strName.Format(_T("%d: %s"), i+1, (LPCWSTR)m_userFormatEx[i].strName);
         m_listFormatType.AddString(strName);
     }
 

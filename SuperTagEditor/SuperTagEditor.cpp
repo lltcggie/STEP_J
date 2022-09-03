@@ -2092,239 +2092,239 @@ void CSuperTagEditorApp::UpdateAccelerator(int nTableMax)
                 // メニュー項目名を取得
                 switch(pKey->wCmdID) {
                 case ID_CONV_FORMAT_EX_01:
-                    strName.Format(_T("01：%s"), g_userConvFormatEx[0].strName);
+                    strName.Format(_T("01：%s"), (LPCWSTR)g_userConvFormatEx[0].strName);
                     break;
                 case ID_CONV_FORMAT_EX_02:
-                    strName.Format(_T("02：%s"), g_userConvFormatEx[1].strName);
+                    strName.Format(_T("02：%s"), (LPCWSTR)g_userConvFormatEx[1].strName);
                     break;
                 case ID_CONV_FORMAT_EX_03:
-                    strName.Format(_T("03：%s"), g_userConvFormatEx[2].strName);
+                    strName.Format(_T("03：%s"), (LPCWSTR)g_userConvFormatEx[2].strName);
                     break;
                 case ID_CONV_FORMAT_EX_04:
-                    strName.Format(_T("04：%s"), g_userConvFormatEx[3].strName);
+                    strName.Format(_T("04：%s"), (LPCWSTR)g_userConvFormatEx[3].strName);
                     break;
                 case ID_CONV_FORMAT_EX_05:
-                    strName.Format(_T("05：%s"), g_userConvFormatEx[4].strName);
+                    strName.Format(_T("05：%s"), (LPCWSTR)g_userConvFormatEx[4].strName);
                     break;
                 case ID_CONV_FORMAT_EX_06:
-                    strName.Format(_T("06：%s"), g_userConvFormatEx[5].strName);
+                    strName.Format(_T("06：%s"), (LPCWSTR)g_userConvFormatEx[5].strName);
                     break;
                 case ID_CONV_FORMAT_EX_07:
-                    strName.Format(_T("07：%s"), g_userConvFormatEx[6].strName);
+                    strName.Format(_T("07：%s"), (LPCWSTR)g_userConvFormatEx[6].strName);
                     break;
                 case ID_CONV_FORMAT_EX_08:
-                    strName.Format(_T("08：%s"), g_userConvFormatEx[7].strName);
+                    strName.Format(_T("08：%s"), (LPCWSTR)g_userConvFormatEx[7].strName);
                     break;
                 case ID_CONV_FORMAT_EX_09:
-                    strName.Format(_T("09：%s"), g_userConvFormatEx[8].strName);
+                    strName.Format(_T("09：%s"), (LPCWSTR)g_userConvFormatEx[8].strName);
                     break;
                 case ID_CONV_FORMAT_EX_10:
-                    strName.Format(_T("10：%s"), g_userConvFormatEx[9].strName);
+                    strName.Format(_T("10：%s"), (LPCWSTR)g_userConvFormatEx[9].strName);
                     break;
                 case ID_WRITE_LIST1:
-                    strName.Format(_T("01：%s"), g_writeFormat[0].strName);
+                    strName.Format(_T("01：%s"), (LPCWSTR)g_writeFormat[0].strName);
                     break;
                 case ID_WRITE_LIST2:
-                    strName.Format(_T("02：%s"), g_writeFormat[1].strName);
+                    strName.Format(_T("02：%s"), (LPCWSTR)g_writeFormat[1].strName);
                     break;
                 case ID_WRITE_LIST3:
-                    strName.Format(_T("03：%s"), g_writeFormat[2].strName);
+                    strName.Format(_T("03：%s"), (LPCWSTR)g_writeFormat[2].strName);
                     break;
                 case ID_WRITE_LIST4:
-                    strName.Format(_T("04：%s"), g_writeFormat[3].strName);
+                    strName.Format(_T("04：%s"), (LPCWSTR)g_writeFormat[3].strName);
                     break;
                 case ID_WRITE_LIST5:
-                    strName.Format(_T("05：%s"), g_writeFormat[4].strName);
+                    strName.Format(_T("05：%s"), (LPCWSTR)g_writeFormat[4].strName);
                     break;
                 case ID_MOVE_FOLDER_01:
-                    strName.Format(_T("01：%s"), g_userMoveFolder[0].strName);
+                    strName.Format(_T("01：%s"), (LPCWSTR)g_userMoveFolder[0].strName);
                     break;
                 case ID_MOVE_FOLDER_02:
-                    strName.Format(_T("02：%s"), g_userMoveFolder[1].strName);
+                    strName.Format(_T("02：%s"), (LPCWSTR)g_userMoveFolder[1].strName);
                     break;
                 case ID_MOVE_FOLDER_03:
-                    strName.Format(_T("03：%s"), g_userMoveFolder[2].strName);
+                    strName.Format(_T("03：%s"), (LPCWSTR)g_userMoveFolder[2].strName);
                     break;
                 case ID_MOVE_FOLDER_04:
-                    strName.Format(_T("04：%s"), g_userMoveFolder[3].strName);
+                    strName.Format(_T("04：%s"), (LPCWSTR)g_userMoveFolder[3].strName);
                     break;
                 case ID_MOVE_FOLDER_05:
-                    strName.Format(_T("05：%s"), g_userMoveFolder[4].strName);
+                    strName.Format(_T("05：%s"), (LPCWSTR)g_userMoveFolder[4].strName);
                     break;
                 case ID_CONV_FORMAT_USER_01: /* TyphoonSwell 027 */
                 case ID_CONV_FORMAT_USER_T2F_01: /* STEP 030 */
                 case ID_CONV_FORMAT_USER_F2T_01: /* STEP 030 */
-                    strName.Format(_T("01：%s"), g_userConvFormat[0].strName);
+                    strName.Format(_T("01：%s"), (LPCWSTR)g_userConvFormat[0].strName);
                     break;
                 case ID_CONV_FORMAT_USER_02: /* TyphoonSwell 027 */
                 case ID_CONV_FORMAT_USER_T2F_02: /* STEP 030 */
                 case ID_CONV_FORMAT_USER_F2T_02: /* STEP 030 */
-                    strName.Format(_T("02：%s"), g_userConvFormat[1].strName);
+                    strName.Format(_T("02：%s"), (LPCWSTR)g_userConvFormat[1].strName);
                     break;
                 case ID_CONV_FORMAT_USER_03: /* TyphoonSwell 027 */
                 case ID_CONV_FORMAT_USER_T2F_03: /* STEP 030 */
                 case ID_CONV_FORMAT_USER_F2T_03: /* STEP 030 */
-                    strName.Format(_T("03：%s"), g_userConvFormat[2].strName);
+                    strName.Format(_T("03：%s"), (LPCWSTR)g_userConvFormat[2].strName);
                     break;
                 case ID_CONV_FORMAT_USER_04: /* LastTrain 057 */
                 case ID_CONV_FORMAT_USER_T2F_04: /* STEP 030 */
                 case ID_CONV_FORMAT_USER_F2T_04: /* STEP 030 */
-                    strName.Format(_T("04：%s"), g_userConvFormat[3].strName);
+                    strName.Format(_T("04：%s"), (LPCWSTR)g_userConvFormat[3].strName);
                     break;
                 case ID_CONV_FORMAT_USER_05: /* LastTrain 057 */
                 case ID_CONV_FORMAT_USER_T2F_05: /* STEP 030 */
                 case ID_CONV_FORMAT_USER_F2T_05: /* STEP 030 */
-                    strName.Format(_T("05：%s"), g_userConvFormat[4].strName);
+                    strName.Format(_T("05：%s"), (LPCWSTR)g_userConvFormat[4].strName);
                     break;
                 case ID_TEIKEI_01: /* SeaKnows 030 */
-                    strName.Format(_T("01: %s"), shortString(g_teikeiInfo[0].strTeikei, TEIKEI_MENU_STRING_MAX));/* STEP 035, FreeFall 051 */
+                    strName.Format(_T("01: %s"), (LPCWSTR)(shortString(g_teikeiInfo[0].strTeikei, TEIKEI_MENU_STRING_MAX)));/* STEP 035, FreeFall 051 */
                     break;
                 case ID_TEIKEI_02: /* SeaKnows 030 */
-                    strName.Format(_T("02: %s"), shortString(g_teikeiInfo[1].strTeikei, TEIKEI_MENU_STRING_MAX));/* STEP 035, FreeFall 051 */
+                    strName.Format(_T("02: %s"), (LPCWSTR)(shortString(g_teikeiInfo[1].strTeikei, TEIKEI_MENU_STRING_MAX)));/* STEP 035, FreeFall 051 */
                     break;
                 case ID_TEIKEI_03: /* SeaKnows 030 */
-                    strName.Format(_T("03: %s"), shortString(g_teikeiInfo[2].strTeikei, TEIKEI_MENU_STRING_MAX));/* STEP 035, FreeFall 051 */
+                    strName.Format(_T("03: %s"), (LPCWSTR)(shortString(g_teikeiInfo[2].strTeikei, TEIKEI_MENU_STRING_MAX)));/* STEP 035, FreeFall 051 */
                     break;
                 case ID_TEIKEI_04: /* SeaKnows 030 */
-                    strName.Format(_T("04: %s"), shortString(g_teikeiInfo[3].strTeikei, TEIKEI_MENU_STRING_MAX));/* STEP 035, FreeFall 051 */
+                    strName.Format(_T("04: %s"), (LPCWSTR)(shortString(g_teikeiInfo[3].strTeikei, TEIKEI_MENU_STRING_MAX)));/* STEP 035, FreeFall 051 */
                     break;
                 case ID_TEIKEI_05: /* SeaKnows 030 */
-                    strName.Format(_T("05: %s"), shortString(g_teikeiInfo[4].strTeikei, TEIKEI_MENU_STRING_MAX));/* STEP 035, FreeFall 051 */
+                    strName.Format(_T("05: %s"), (LPCWSTR)(shortString(g_teikeiInfo[4].strTeikei, TEIKEI_MENU_STRING_MAX)));/* STEP 035, FreeFall 051 */
                     break;
                 case ID_TEIKEI_06: /* SeaKnows 030 */
-                    strName.Format(_T("06: %s"), shortString(g_teikeiInfo[5].strTeikei, TEIKEI_MENU_STRING_MAX));/* STEP 035, FreeFall 051 */
+                    strName.Format(_T("06: %s"), (LPCWSTR)(shortString(g_teikeiInfo[5].strTeikei, TEIKEI_MENU_STRING_MAX)));/* STEP 035, FreeFall 051 */
                     break;
                 case ID_TEIKEI_07: /* SeaKnows 030 */
-                    strName.Format(_T("07: %s"), shortString(g_teikeiInfo[6].strTeikei, TEIKEI_MENU_STRING_MAX));/* STEP 035, FreeFall 051 */
+                    strName.Format(_T("07: %s"), (LPCWSTR)(shortString(g_teikeiInfo[6].strTeikei, TEIKEI_MENU_STRING_MAX)));/* STEP 035, FreeFall 051 */
                     break;
                 case ID_TEIKEI_08: /* SeaKnows 030 */
-                    strName.Format(_T("08: %s"), shortString(g_teikeiInfo[7].strTeikei, TEIKEI_MENU_STRING_MAX));/* STEP 035, FreeFall 051 */
+                    strName.Format(_T("08: %s"), (LPCWSTR)(shortString(g_teikeiInfo[7].strTeikei, TEIKEI_MENU_STRING_MAX)));/* STEP 035, FreeFall 051 */
                     break;
                 case ID_TEIKEI_09: /* SeaKnows 030 */
-                    strName.Format(_T("09: %s"), shortString(g_teikeiInfo[8].strTeikei, TEIKEI_MENU_STRING_MAX));/* STEP 035, FreeFall 051 */
+                    strName.Format(_T("09: %s"), (LPCWSTR)(shortString(g_teikeiInfo[8].strTeikei, TEIKEI_MENU_STRING_MAX)));/* STEP 035, FreeFall 051 */
                     break;
                 case ID_TEIKEI_10: /* SeaKnows 030 */
-                    strName.Format(_T("10: %s"), shortString(g_teikeiInfo[9].strTeikei, TEIKEI_MENU_STRING_MAX));/* STEP 035, FreeFall 051 */
+                    strName.Format(_T("10: %s"), (LPCWSTR)(shortString(g_teikeiInfo[9].strTeikei, TEIKEI_MENU_STRING_MAX)));/* STEP 035, FreeFall 051 */
                     break;
                 case ID_TEIKEI_2_01: /* FreeFall 046 */
-                    strName.Format(_T("01: %s"), shortString(g_teikeiInfo[10].strTeikei, TEIKEI_MENU_STRING_MAX));/* STEP 035, FreeFall 051 */
+                    strName.Format(_T("01: %s"), (LPCWSTR)(shortString(g_teikeiInfo[10].strTeikei, TEIKEI_MENU_STRING_MAX)));/* STEP 035, FreeFall 051 */
                     break;
                 case ID_TEIKEI_2_02: /* FreeFall 046 */
-                    strName.Format(_T("02: %s"), shortString(g_teikeiInfo[11].strTeikei, TEIKEI_MENU_STRING_MAX));/* STEP 035, FreeFall 051 */
+                    strName.Format(_T("02: %s"), (LPCWSTR)(shortString(g_teikeiInfo[11].strTeikei, TEIKEI_MENU_STRING_MAX)));/* STEP 035, FreeFall 051 */
                     break;
                 case ID_TEIKEI_2_03: /* FreeFall 046 */
-                    strName.Format(_T("03: %s"), shortString(g_teikeiInfo[12].strTeikei, TEIKEI_MENU_STRING_MAX));/* STEP 035, FreeFall 051 */
+                    strName.Format(_T("03: %s"), (LPCWSTR)(shortString(g_teikeiInfo[12].strTeikei, TEIKEI_MENU_STRING_MAX)));/* STEP 035, FreeFall 051 */
                     break;
                 case ID_TEIKEI_2_04: /* FreeFall 046 */
-                    strName.Format(_T("04: %s"), shortString(g_teikeiInfo[13].strTeikei, TEIKEI_MENU_STRING_MAX));/* STEP 035, FreeFall 051 */
+                    strName.Format(_T("04: %s"), (LPCWSTR)(shortString(g_teikeiInfo[13].strTeikei, TEIKEI_MENU_STRING_MAX)));/* STEP 035, FreeFall 051 */
                     break;
                 case ID_TEIKEI_2_05: /* FreeFall 046 */
-                    strName.Format(_T("05: %s"), shortString(g_teikeiInfo[14].strTeikei, TEIKEI_MENU_STRING_MAX));/* STEP 035, FreeFall 051 */
+                    strName.Format(_T("05: %s"), (LPCWSTR)(shortString(g_teikeiInfo[14].strTeikei, TEIKEI_MENU_STRING_MAX)));/* STEP 035, FreeFall 051 */
                     break;
                 case ID_TEIKEI_2_06: /* FreeFall 046 */
-                    strName.Format(_T("06: %s"), shortString(g_teikeiInfo[15].strTeikei, TEIKEI_MENU_STRING_MAX));/* STEP 035, FreeFall 051 */
+                    strName.Format(_T("06: %s"), (LPCWSTR)(shortString(g_teikeiInfo[15].strTeikei, TEIKEI_MENU_STRING_MAX)));/* STEP 035, FreeFall 051 */
                     break;
                 case ID_TEIKEI_2_07: /* FreeFall 046 */
-                    strName.Format(_T("07: %s"), shortString(g_teikeiInfo[16].strTeikei, TEIKEI_MENU_STRING_MAX));/* STEP 035, FreeFall 051 */
+                    strName.Format(_T("07: %s"), (LPCWSTR)(shortString(g_teikeiInfo[16].strTeikei, TEIKEI_MENU_STRING_MAX)));/* STEP 035, FreeFall 051 */
                     break;
                 case ID_TEIKEI_2_08: /* FreeFall 046 */
-                    strName.Format(_T("08: %s"), shortString(g_teikeiInfo[17].strTeikei, TEIKEI_MENU_STRING_MAX));/* STEP 035, FreeFall 051 */
+                    strName.Format(_T("08: %s"), (LPCWSTR)(shortString(g_teikeiInfo[17].strTeikei, TEIKEI_MENU_STRING_MAX)));/* STEP 035, FreeFall 051 */
                     break;
                 case ID_TEIKEI_2_09: /* FreeFall 046 */
-                    strName.Format(_T("09: %s"), shortString(g_teikeiInfo[18].strTeikei, TEIKEI_MENU_STRING_MAX));/* STEP 035, FreeFall 051 */
+                    strName.Format(_T("09: %s"), (LPCWSTR)(shortString(g_teikeiInfo[18].strTeikei, TEIKEI_MENU_STRING_MAX)));/* STEP 035, FreeFall 051 */
                     break;
                 case ID_TEIKEI_2_10: /* FreeFall 046 */
-                    strName.Format(_T("10: %s"), shortString(g_teikeiInfo[19].strTeikei, TEIKEI_MENU_STRING_MAX));/* STEP 035, FreeFall 051 */
+                    strName.Format(_T("10: %s"), (LPCWSTR)(shortString(g_teikeiInfo[19].strTeikei, TEIKEI_MENU_STRING_MAX)));/* STEP 035, FreeFall 051 */
                     break;
                 case ID_TEIKEI_3_01: /* FreeFall 046 */
-                    strName.Format(_T("01: %s"), shortString(g_teikeiInfo[20].strTeikei, TEIKEI_MENU_STRING_MAX));/* STEP 035, FreeFall 051 */
+                    strName.Format(_T("01: %s"), (LPCWSTR)(shortString(g_teikeiInfo[20].strTeikei, TEIKEI_MENU_STRING_MAX)));/* STEP 035, FreeFall 051 */
                     break;
                 case ID_TEIKEI_3_02: /* FreeFall 046 */
-                    strName.Format(_T("02: %s"), shortString(g_teikeiInfo[21].strTeikei, TEIKEI_MENU_STRING_MAX));/* STEP 035, FreeFall 051 */
+                    strName.Format(_T("02: %s"), (LPCWSTR)(shortString(g_teikeiInfo[21].strTeikei, TEIKEI_MENU_STRING_MAX)));/* STEP 035, FreeFall 051 */
                     break;
                 case ID_TEIKEI_3_03: /* FreeFall 046 */
-                    strName.Format(_T("03: %s"), shortString(g_teikeiInfo[22].strTeikei, TEIKEI_MENU_STRING_MAX));/* STEP 035, FreeFall 051 */
+                    strName.Format(_T("03: %s"), (LPCWSTR)(shortString(g_teikeiInfo[22].strTeikei, TEIKEI_MENU_STRING_MAX)));/* STEP 035, FreeFall 051 */
                     break;
                 case ID_TEIKEI_3_04: /* FreeFall 046 */
-                    strName.Format(_T("04: %s"), shortString(g_teikeiInfo[23].strTeikei, TEIKEI_MENU_STRING_MAX));/* STEP 035, FreeFall 051 */
+                    strName.Format(_T("04: %s"), (LPCWSTR)(shortString(g_teikeiInfo[23].strTeikei, TEIKEI_MENU_STRING_MAX)));/* STEP 035, FreeFall 051 */
                     break;
                 case ID_TEIKEI_3_05: /* FreeFall 046 */
-                    strName.Format(_T("05: %s"), shortString(g_teikeiInfo[24].strTeikei, TEIKEI_MENU_STRING_MAX));/* STEP 035, FreeFall 051 */
+                    strName.Format(_T("05: %s"), (LPCWSTR)(shortString(g_teikeiInfo[24].strTeikei, TEIKEI_MENU_STRING_MAX)));/* STEP 035, FreeFall 051 */
                     break;
                 case ID_TEIKEI_3_06: /* FreeFall 046 */
-                    strName.Format(_T("06: %s"), shortString(g_teikeiInfo[25].strTeikei, TEIKEI_MENU_STRING_MAX));/* STEP 035, FreeFall 051 */
+                    strName.Format(_T("06: %s"), (LPCWSTR)(shortString(g_teikeiInfo[25].strTeikei, TEIKEI_MENU_STRING_MAX)));/* STEP 035, FreeFall 051 */
                     break;
                 case ID_TEIKEI_3_07: /* FreeFall 046 */
-                    strName.Format(_T("07: %s"), shortString(g_teikeiInfo[26].strTeikei, TEIKEI_MENU_STRING_MAX));/* STEP 035, FreeFall 051 */
+                    strName.Format(_T("07: %s"), (LPCWSTR)(shortString(g_teikeiInfo[26].strTeikei, TEIKEI_MENU_STRING_MAX)));/* STEP 035, FreeFall 051 */
                     break;
                 case ID_TEIKEI_3_08: /* FreeFall 046 */
-                    strName.Format(_T("08: %s"), shortString(g_teikeiInfo[27].strTeikei, TEIKEI_MENU_STRING_MAX));/* STEP 035, FreeFall 051 */
+                    strName.Format(_T("08: %s"), (LPCWSTR)(shortString(g_teikeiInfo[27].strTeikei, TEIKEI_MENU_STRING_MAX)));/* STEP 035, FreeFall 051 */
                     break;
                 case ID_TEIKEI_3_09: /* FreeFall 046 */
-                    strName.Format(_T("09: %s"), shortString(g_teikeiInfo[28].strTeikei, TEIKEI_MENU_STRING_MAX));/* STEP 035, FreeFall 051 */
+                    strName.Format(_T("09: %s"), (LPCWSTR)(shortString(g_teikeiInfo[28].strTeikei, TEIKEI_MENU_STRING_MAX)));/* STEP 035, FreeFall 051 */
                     break;
                 case ID_TEIKEI_3_10: /* FreeFall 046 */
-                    strName.Format(_T("10: %s"), shortString(g_teikeiInfo[29].strTeikei, TEIKEI_MENU_STRING_MAX));/* STEP 035, FreeFall 051 */
+                    strName.Format(_T("10: %s"), (LPCWSTR)(shortString(g_teikeiInfo[29].strTeikei, TEIKEI_MENU_STRING_MAX)));/* STEP 035, FreeFall 051 */
                     break;
                 case ID_FAVORITE_FOLDER_01: /* RockDance 129 */
-                    strName.Format(_T("&1 %s"), shortFavorite(g_strFavorite[0]));
+                    strName.Format(_T("&1 %s"), (LPCWSTR)(shortFavorite(g_strFavorite[0])));
                     break;
                 case ID_FAVORITE_FOLDER_02: /* RockDance 129 */
-                    strName.Format(_T("&2 %s"), shortFavorite(g_strFavorite[1]));
+                    strName.Format(_T("&2 %s"), (LPCWSTR)(shortFavorite(g_strFavorite[1])));
                     break;
                 case ID_FAVORITE_FOLDER_03: /* RockDance 129 */
-                    strName.Format(_T("&3 %s"), shortFavorite(g_strFavorite[2]));
+                    strName.Format(_T("&3 %s"), (LPCWSTR)(shortFavorite(g_strFavorite[2])));
                     break;
                 case ID_FAVORITE_FOLDER_04: /* RockDance 129 */
-                    strName.Format(_T("&4 %s"), shortFavorite(g_strFavorite[3]));
+                    strName.Format(_T("&4 %s"), (LPCWSTR)(shortFavorite(g_strFavorite[3])));
                     break;
                 case ID_FAVORITE_FOLDER_05: /* RockDance 129 */
-                    strName.Format(_T("&5 %s"), shortFavorite(g_strFavorite[4]));
+                    strName.Format(_T("&5 %s"), (LPCWSTR)(shortFavorite(g_strFavorite[4])));
                     break;
                 case ID_FAVORITE_FOLDER_06: /* RockDance 129 */
-                    strName.Format(_T("&6 %s"), shortFavorite(g_strFavorite[5]));
+                    strName.Format(_T("&6 %s"), (LPCWSTR)(shortFavorite(g_strFavorite[5])));
                     break;
                 case ID_FAVORITE_FOLDER_07: /* RockDance 129 */
-                    strName.Format(_T("&7 %s"), shortFavorite(g_strFavorite[6]));
+                    strName.Format(_T("&7 %s"), (LPCWSTR)(shortFavorite(g_strFavorite[6])));
                     break;
                 case ID_FAVORITE_FOLDER_08: /* RockDance 129 */
-                    strName.Format(_T("&8 %s"), shortFavorite(g_strFavorite[7]));
+                    strName.Format(_T("&8 %s"), (LPCWSTR)(shortFavorite(g_strFavorite[7])));
                     break;
                 case ID_FAVORITE_FOLDER_09: /* RockDance 129 */
-                    strName.Format(_T("&9 %s"), shortFavorite(g_strFavorite[8]));
+                    strName.Format(_T("&9 %s"), (LPCWSTR)(shortFavorite(g_strFavorite[8])));
                     break;
                 case ID_FAVORITE_FOLDER_10: /* RockDance 129 */
-                    strName.Format(_T("&0 %s"), shortFavorite(g_strFavorite[9]));
+                    strName.Format(_T("&0 %s"), (LPCWSTR)(shortFavorite(g_strFavorite[9])));
                     break;
                 case ID_EDIT_COPY_FORMAT_01: /* FunnyCorn 175 */
-                    strName.Format(_T("01：%s"), g_userCopyFormat[0].strName);
+                    strName.Format(_T("01：%s"), (LPCWSTR)g_userCopyFormat[0].strName);
                     break;
                 case ID_EDIT_COPY_FORMAT_02: /* FunnyCorn 175 */
-                    strName.Format(_T("02：%s"), g_userCopyFormat[1].strName);
+                    strName.Format(_T("02：%s"), (LPCWSTR)g_userCopyFormat[1].strName);
                     break;
                 case ID_EDIT_COPY_FORMAT_03: /* FunnyCorn 175 */
-                    strName.Format(_T("03：%s"), g_userCopyFormat[2].strName);
+                    strName.Format(_T("03：%s"), (LPCWSTR)g_userCopyFormat[2].strName);
                     break;
                 case ID_EDIT_COPY_FORMAT_04: /* FunnyCorn 175 */
-                    strName.Format(_T("04：%s"), g_userCopyFormat[3].strName);
+                    strName.Format(_T("04：%s"), (LPCWSTR)g_userCopyFormat[3].strName);
                     break;
                 case ID_EDIT_COPY_FORMAT_05: /* FunnyCorn 175 */
-                    strName.Format(_T("05：%s"), g_userCopyFormat[4].strName);
+                    strName.Format(_T("05：%s"), (LPCWSTR)g_userCopyFormat[4].strName);
                     break;
                 case ID_CONV_TAG_TO_TAG_01: /* STEP 034 */
-                    strName.Format(_T("01：%s"), g_userConvFormatTag2Tag[0].strName);
+                    strName.Format(_T("01：%s"), (LPCWSTR)g_userConvFormatTag2Tag[0].strName);
                     break;
                 case ID_CONV_TAG_TO_TAG_02: /* STEP 034 */
-                    strName.Format(_T("02：%s"), g_userConvFormatTag2Tag[1].strName);
+                    strName.Format(_T("02：%s"), (LPCWSTR)g_userConvFormatTag2Tag[1].strName);
                     break;
                 case ID_CONV_TAG_TO_TAG_03: /* STEP 034 */
-                    strName.Format(_T("03：%s"), g_userConvFormatTag2Tag[2].strName);
+                    strName.Format(_T("03：%s"), (LPCWSTR)g_userConvFormatTag2Tag[2].strName);
                     break;
                 case ID_CONV_TAG_TO_TAG_04: /* STEP 034 */
-                    strName.Format(_T("04：%s"), g_userConvFormatTag2Tag[3].strName);
+                    strName.Format(_T("04：%s"), (LPCWSTR)g_userConvFormatTag2Tag[3].strName);
                     break;
                 case ID_CONV_TAG_TO_TAG_05: /* STEP 034 */
-                    strName.Format(_T("05：%s"), g_userConvFormatTag2Tag[4].strName);
+                    strName.Format(_T("05：%s"), (LPCWSTR)g_userConvFormatTag2Tag[4].strName);
                     break;
                 default:
                     pMenu->GetMenuString((UINT)pKey->wCmdID, strName, MF_BYCOMMAND);

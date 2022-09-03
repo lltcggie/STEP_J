@@ -155,7 +155,7 @@ CString CHistoryComboEx::LoadHistory(LPCTSTR lpszSection, LPCTSTR lpszKeyPrefix,
     do
     {
         CString sKey;
-        sKey.Format(_T("%s%d"), m_sKeyPrefix, n++);
+        sKey.Format(_T("%s%d"), (LPCWSTR)m_sKeyPrefix, n++);
         sText = pIniFile->ReadStr(m_sSection, sKey, NULL, buf, _countof(buf));
         cbiItem.pszText = (LPTSTR) (LPCTSTR) sText;
 
@@ -257,7 +257,7 @@ void CHistoryComboEx::SaveHistory(BOOL bAddCurrentItemtoHistory)
     for (int n = 0; n < nMax; n++)
     {
         CString sKey;
-        sKey.Format(_T("%s%d"), m_sKeyPrefix, n);
+        sKey.Format(_T("%s%d"), (LPCWSTR)m_sKeyPrefix, n);
         CString sText;
         GetLBText(n, sText);
         //pApp->WriteProfileString(m_sSection, sKey, sText);
@@ -311,7 +311,7 @@ void CHistoryComboEx::ClearHistory(BOOL bDeleteRegistryEntries)
 
         for (int n = 0; n < nMax; n++)
         {
-            sKey.Format(_T("%s%d"), m_sKeyPrefix, n);
+            sKey.Format(_T("%s%d"), (LPCWSTR)m_sKeyPrefix, n);
             rk.DeleteValue(sKey);
         }
 
