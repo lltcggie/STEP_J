@@ -74,8 +74,8 @@ BOOL CDlgEditShowColumn::OnInitDialog()
 	RECT	rect;
 	m_listColumn.GetClientRect(&rect);
 
-	m_listColumn.InsertColumn(0, _T("項目名"), LVCFMT_LEFT, rect.right-rect.left-16-48);
-	m_listColumn.InsertColumn(1, _T("最大幅"), LVCFMT_LEFT, 48, 1);
+	m_listColumn.InsertColumn(0, _T("項目名"), LVCFMT_LEFT, int((rect.right-rect.left)*0.6));
+	m_listColumn.InsertColumn(1, _T("最大幅"), LVCFMT_LEFT, int((rect.right-rect.left)*0.3), 1);
 	m_listColumn.DeleteAllItems();					// クリア
 
 	bool bFoundFormat = false; /* Conspiracy 198 */
