@@ -367,7 +367,7 @@ STEP_API UINT WINAPI STEPLoad(FILE_INFO *pFileMP3, LPCTSTR szExt)
 		if (LoadFileDSF(pFileMP3) == false) {
 			CString	strMsg;
 			strMsg.Format(_T("%s の読み込みに失敗しました"), GetFullPath(pFileMP3));
-			MessageBox(NULL, strMsg, _T("FLACファイルの読み込み失敗"), MB_ICONSTOP|MB_OK|MB_TOPMOST);
+			MessageBox(NULL, strMsg, _T("DSFファイルの読み込み失敗"), MB_ICONSTOP|MB_OK|MB_TOPMOST);
 			return STEP_ERROR;
 		} else {
 			return STEP_SUCCESS;

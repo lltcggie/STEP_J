@@ -72,7 +72,7 @@ BOOL CDlgPluginSetup::OnInitDialog()
 	RECT	rect;
 	m_listPlugin.GetClientRect(&rect);
 
-	m_listPlugin.InsertColumn(1, _T("プラグイン"), LVCFMT_LEFT, rect.right-rect.left-16, -1);
+	m_listPlugin.InsertColumn(1, _T("プラグイン"), LVCFMT_LEFT, int((rect.right-rect.left)*0.9), -1);
 	m_listPlugin.DeleteAllItems();					// クリア
 
 	for (int nIndex=0;nIndex<plugins.arPlugins.GetSize();nIndex++) {

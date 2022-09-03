@@ -80,7 +80,7 @@ CDoubleZeroString::operator const TCHAR*()
 	{
 		int i; 
         for(i=0;i<m_ar.GetSize();i++)
-			tlen+=	(m_ar[i].GetLength() + 1); // add 1 for the normal zeroterm.
+			tlen += (static_cast<unsigned long long>(m_ar[i].GetLength()) + 1); // add 1 for the normal zeroterm.
 	}
 	else
 		tlen=1;
@@ -94,7 +94,7 @@ CDoubleZeroString::operator const TCHAR*()
     for(i=0;i<m_ar.GetSize();i++)
 	{
         int len = m_ar[i].GetLength();
-        _tcsncpy_s(p, len+1, m_ar[i], len+1);
+		_tcsncpy_s(p, static_cast<rsize_t>(len) + 1, m_ar[i], static_cast<rsize_t>(len) + 1);
 		//_tcscpy(p, m_ar[i]);
 		p+= (len + 1);
 	}

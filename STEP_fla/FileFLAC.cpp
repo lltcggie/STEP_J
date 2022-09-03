@@ -125,8 +125,8 @@ void error_callback_(const FLAC__StreamDecoder *decoder, FLAC__StreamDecoderErro
 }
 
 char * strndup(char* string, int size) {
-	char* buff = (char*)malloc(size+1);
-	memset(buff, 0, size+1);
+	char* buff = (char*)malloc(static_cast<size_t>(size) + 1);
+	memset(buff, 0, static_cast<size_t>(size) + 1);
 	memcpy(buff, string, size);
 	//buff[size] = '0';
 	return buff;
@@ -135,7 +135,7 @@ char * strndup(char* string, int size) {
 TCHAR* convert_from_utf8(const char* utf8_str)
 {//utf8 => tchar*
 	int utf16_len = MultiByteToWideChar(CP_UTF8, 0, utf8_str, -1, 0, 0);
-	WCHAR *utf16_str = (WCHAR*)malloc((utf16_len+1)*sizeof(WCHAR));
+	WCHAR* utf16_str = (WCHAR*)malloc((static_cast<unsigned long long>(utf16_len) + 1) * sizeof(WCHAR));
     MultiByteToWideChar(CP_UTF8, 0, utf8_str, -1, utf16_str, utf16_len);
     utf16_str[utf16_len] = 0;
 #ifdef _UNICODE

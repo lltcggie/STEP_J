@@ -962,7 +962,7 @@ void conv_first_upper(TCHAR *str, const TCHAR *suffixs, const TCHAR* separators 
     if(bUseSuffix){//1文字目を大文字に変換しない語のリストを作成
     //, で区切られた文字列を \0 で区切られた文字列(\0\0で終了)に置換
         int len = wcslen(suffixs);
-        pszzSuffix = (WCHAR*)malloc((len+2)*sizeof(WCHAR));//2=\0\0
+        pszzSuffix = (WCHAR*)malloc((static_cast<unsigned long long>(len) + 2) * sizeof(WCHAR));//2=\0\0
         i = 0;
         while(suffixs[i]){
             if(suffixs[i] != L','){
@@ -1060,7 +1060,7 @@ void conv_fixed_upper_lower(TCHAR *str, CStringArray& fixedWords) /* STEP 040 */
 WCHAR* conv_ansi_to_utf16(const char *str_ansi, int size)
 {//ansi => utf16
     int len_utf16 = MultiByteToWideChar(CP_ACP, 0, str_ansi, size, 0, 0);
-    WCHAR *str_utf16 = (WCHAR*)malloc((len_utf16+1)*sizeof(WCHAR));
+    WCHAR* str_utf16 = (WCHAR*)malloc((static_cast<unsigned long long>(len_utf16) + 1) * sizeof(WCHAR));
     MultiByteToWideChar(CP_ACP, 0, str_ansi, size, str_utf16, len_utf16);
     str_utf16[len_utf16] = 0;
     return str_utf16;
@@ -1069,7 +1069,7 @@ WCHAR* conv_ansi_to_utf16(const char *str_ansi, int size)
 char* conv_utf16_to_ansi(const WCHAR *str_utf16, int size)
 {//utf16 => ansi
     int len_ansi = WideCharToMultiByte(CP_ACP, 0, str_utf16, size, 0, 0, NULL, NULL);
-    char *str_ansi = (char*)malloc(len_ansi+1);
+    char* str_ansi = (char*)malloc(static_cast<size_t>(len_ansi) + 1);
     WideCharToMultiByte(CP_ACP, 0, str_utf16, size, str_ansi, len_ansi, NULL, NULL);
     str_ansi[len_ansi] = 0;
     return str_ansi;
@@ -1078,7 +1078,7 @@ char* conv_utf16_to_ansi(const WCHAR *str_utf16, int size)
 WCHAR* conv_utf8_to_utf16(const char *str_utf8, int size)
 {//utf8 => utf16
     int len_utf16 = MultiByteToWideChar(CP_UTF8, 0, str_utf8, size, 0, 0);
-    WCHAR *str_utf16 = (WCHAR*)malloc((len_utf16+1)*sizeof(WCHAR));
+    WCHAR* str_utf16 = (WCHAR*)malloc((static_cast<unsigned long long>(len_utf16) + 1) * sizeof(WCHAR));
     MultiByteToWideChar(CP_UTF8, 0, str_utf8, size, str_utf16, len_utf16);
     return str_utf16;
 }
@@ -1086,7 +1086,7 @@ WCHAR* conv_utf8_to_utf16(const char *str_utf8, int size)
 char* conv_utf16_to_utf8(const WCHAR *str_utf16, int size)
 {//utf16 => utf8 
     int utf8_len = WideCharToMultiByte(CP_UTF8, 0, str_utf16, size, 0, 0, NULL, NULL);
-    char *str_utf8 = (char*)malloc(utf8_len+1);
+    char* str_utf8 = (char*)malloc(static_cast<size_t>(utf8_len) + 1);
     WideCharToMultiByte(CP_UTF8, 0, str_utf16, size, str_utf8, utf8_len, NULL, NULL);
     str_utf8[utf8_len] = 0;
     return str_utf8;

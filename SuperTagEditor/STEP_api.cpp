@@ -691,7 +691,7 @@ extern "C" STEP_API void WINAPI STEPKeyAssign(UINT nCommandID, TCHAR* lpszName, 
 extern "C" STEP_API UINT WINAPI STEPRegisterExt(UINT nID, LPCTSTR szExt, HBITMAP hBitmap)
 {
 	PSTEPlugin plugin = (PSTEPlugin)plugins.arPlugins.GetAt(nID-1);
-	UINT nFormatType = nID << 8 | (plugin->arExtInfo.GetSize());
+	UINT nFormatType = static_cast<long long>(nID) << 8 | (plugin->arExtInfo.GetSize());
 	arFormatType.Add(nFormatType);
 
 	PSTEPExtInfo info = new STEPExtInfo;

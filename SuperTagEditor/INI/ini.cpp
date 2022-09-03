@@ -353,7 +353,7 @@ BOOL __fastcall CIniFile::Open(const TCHAR *cszFileName)
         if (dwSize > MAX_SIZE) {
             dwSize = MAX_SIZE;
         }
-        BYTE *buf = (BYTE*)malloc(dwSize+3);
+        BYTE* buf = (BYTE*)malloc(static_cast<size_t>(dwSize) + 3);
         ReadFile(hFile, buf, dwSize, &dwSize, NULL);
         buf[dwSize] = buf[dwSize+1] = buf[dwSize+2] = 0;
         OpenFromBuffer(buf, dwSize+3);
