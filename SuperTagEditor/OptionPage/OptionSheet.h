@@ -23,7 +23,7 @@
 #define OSBTN_OK                3	//!<	Use when calling PressButton to simulate pressing the OK button.
 #define OSBTN_APPLYNOW          4	//!<	Use when calling PressButton to simulate pressing the Apply Now button.
 #define OSBTN_CANCEL            5	//!<	Use when calling PressButton to simulate pressing the Cancel button.
-#define OSBTN_HELP              6	//!<	Use when calling PressButton to simulate pressing the Help button. 
+#define OSBTN_HELP              6	//!<	Use when calling PressButton to simulate pressing the Help button.
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
 #define OSBTN_MAX               6	//
 #endif
@@ -62,7 +62,7 @@
 	object and one or more COptionPage objects. A basic option sheet is
 	displayed by the framework as a window with a default or user specified
 	control containing the list of option pages, with which the user selects
-	a page, and an area for the currently selected page. 
+	a page, and an area for the currently selected page.
 
 	Since COptionSheet is derived from CDialog, managing a COptionSheet object
 	is similar to managing a CDialog object. For example, creation of an option
@@ -90,7 +90,7 @@
 	DoModal. To enable the wizard buttons, call SetWizardButtons, using flags
 	to customize their function and appearance. To enable the Finish button,
 	call SetFinishText after the user has taken action on the last page of the
-	wizard. 
+	wizard.
 */
 class COptionSheet : public CDialog
 {
@@ -185,7 +185,7 @@ public:
 		virtual BOOL SetSelection(COptionPage *page) = 0;
 
 		/*!
-			\brief	Retrieves the active (highlighted) page 
+			\brief	Retrieves the active (highlighted) page
 
 			Retrieves the active (highlighted) page. If no page is selected,
 			this method returns NULL.
@@ -240,8 +240,8 @@ public:
 
 
 	/*!
-		Option Sheet initializtion parameters. 
-		
+		Option Sheet initializtion parameters.
+
 	*/
 	struct OPTIONSHEETCFG {
 		DWORD	dwFlags;	//!<	Option sheet initialization flags
@@ -330,7 +330,7 @@ public:
 		\brief	Construct a COptionSheet object
 
 		Use this member function to construct a COptionSheet object. To
-		display the option sheet, call DoModal. 
+		display the option sheet, call DoModal.
 	*/
 	COptionSheet();
 
@@ -347,7 +347,7 @@ public:
 							top. Default is the first page added to the sheet.
 
 		Use this member function to construct a COptionSheet object. To
-		display the option sheet, call DoModal. 
+		display the option sheet, call DoModal.
 	*/
 	COptionSheet(LPCTSTR pszCaption, CWnd* pParentWnd = NULL, UINT iSelectPage = 0);
 
@@ -364,7 +364,7 @@ public:
 							top. Default is the first page added to the sheet.
 
 		Use this member function to construct a COptionSheet object. To
-		display the option sheet, call DoModal. 
+		display the option sheet, call DoModal.
 	*/
 	COptionSheet(UINT nIDTemplate, CWnd* pParentWnd = NULL, UINT iSelectPage = 0);
 
@@ -463,7 +463,7 @@ public:
 
 		Call this member function to get the index number of the option sheet
 		window痴 active page, then use the returned index number as the parameter
-		for GetPage. 
+		for GetPage.
 
 		\return	The index number of the active page.
 	*/
@@ -483,19 +483,19 @@ public:
 
 	*/
 	int GetPageIndex(COptionPage *page) const;
-	
+
 
 	/*!
 		\brief	Retrieves the number of pages in the option sheet.
-		
+
 		Call this member function to determine the number of pages currently
 		in the option sheet.
 
 		\return	The number of pages in the option sheet.
 	*/
 	int GetPageCount();
-	
-	
+
+
 	/*!
 		\brief	Retrieves a pointer to the specified page.
 
@@ -519,7 +519,7 @@ public:
 		\return	The pointer to the group corresponding to the "nPage" page parameter.
 	*/
 	COptionPage *GetPageGroup(int nPage) const;
-	
+
 
 	/*!
 		\brief	Returns the active page object.
@@ -531,8 +531,8 @@ public:
 		\return	The pointer to the active page.
 	*/
 	COptionPage* GetActivePage() const;
-	
-	
+
+
 	/*!
 		\brief	Programmatically sets the active page object.
 
@@ -543,8 +543,8 @@ public:
 				otherwise 0.
 	*/
 	BOOL SetActivePage(COptionPage *page);
-	
-	
+
+
 	/*!
 		\brief	Programmatically sets the active page object.
 
@@ -571,7 +571,7 @@ public:
 							the caption.
 
 		Call this member function to specify the option sheet's caption (the
-		text displayed in the title bar of a frame window). 
+		text displayed in the title bar of a frame window).
 
 		By default, an option sheet uses the caption in the option sheet's
 		dialog resource.
@@ -590,14 +590,14 @@ public:
 							the caption.
 
 		Call this member function to specify the option sheet's caption (the
-		text displayed in the title bar of a frame window). 
+		text displayed in the title bar of a frame window).
 
 		By default, an option sheet uses the caption in the option sheet's
 		dialog resource.
 	*/
 	void SetTitle(UINT nID, UINT nStyle = 0);
 
-	
+
 	/*!
 		\brief	Sets the text for the Finish button.
 
@@ -611,7 +611,7 @@ public:
 	*/
 	void SetFinishText(LPCTSTR lpszText);
 
-	
+
 	/*!
 		\brief	Enables the wizard buttons.
 
@@ -644,7 +644,7 @@ public:
 
 		Call this member function to establish a option page as a wizard. A
 		key characteristic of a wizard option page is that the user navigates
-		using Next or Finish, Back, and Cancel buttons instead of tabs. 
+		using Next or Finish, Back, and Cancel buttons instead of tabs.
 
 		Call SetWizardMode before calling DoModal. After you call SetWizardMode,
 		DoModal will return either ID_WIZFINISH (if the user closes with the
@@ -672,7 +672,7 @@ public:
 
 		Call this member function to enable or disable the Apply Now button,
 		based on whether the settings in the option pages should be applied
-		to the appropriate external object. 
+		to the appropriate external object.
 	*/
 	void	SetModified(BOOL bModified = TRUE);
 
@@ -751,7 +751,7 @@ public:
 		which the catch handles all exceptions, for example, catch (...). This
 		will handle the exception intended for the operating system, causing
 		unpredictable behavior. Using C++ exception handling with specific
-		exception types or using structured 
+		exception types or using structured
 
 
 		\retval	IDOK			Function was successful.
@@ -780,7 +780,7 @@ public:
 
 		Call this member function to display a modeless option sheet. The
 		call to Create can be inside the constructor, or you can call it after
-		the constructor is invoked. 
+		the constructor is invoked.
 
 		The default style, expressed by passing -1 as dwStyle, is actually
 		<b>WS_SYSMENU | WS_POPUP | WS_CAPTION | DS_MODALFRAME | DS_CONTEXT_HELP | WS_VISIBLE</b>.
@@ -805,7 +805,7 @@ public:
 
 	/*!
 		\brief	Adds a page to the option sheet.
-		
+
 		\param	pPage	Points to the page to be added to the option sheet.
 						Cannot be <b>NULL</b>.
 		\param	pParent	Points to the group parent.
@@ -837,7 +837,7 @@ public:
 
 	/*!
 		\brief	Adds a group to the option sheet.
-		
+
 		\param	pPage	Points to the group to be added to the option sheet.
 						Cannot be <b>NULL</b>.
 
@@ -873,7 +873,7 @@ public:
 		closed.
 	*/
 	void RemovePage(int nPage);
-	
+
 	/*!
 		\brief	Removes a page from the option sheet.
 
@@ -899,7 +899,7 @@ public:
 							<li><b>OSBTN_OK</b></li> - Chooses the OK button.
 							<li><b>OSBTN_APPLYNOW</b></li> - Chooses the Apply Now button.
 							<li><b>OSBTN_CANCEL</b></li> - Chooses the Cancel button.
-							<li><b>OSBTN_HELP</b></li> - Chooses the Help button. 
+							<li><b>OSBTN_HELP</b></li> - Chooses the Help button.
 						</ul><br>
 
 		Call this member function to simulate the choice of the specified button
@@ -908,7 +908,7 @@ public:
 		\return	Nonzero if successful; otherwise zero.
 	*/
 	BOOL PressButton(int nButton);
-	
+
 	/*!
 		\brief	Terminates the option sheet.
 
@@ -924,37 +924,37 @@ public:
 
 protected:
 	/*!
-		\brief	Called by the framework when the user chooses the OK button. 
+		\brief	Called by the framework when the user chooses the OK button.
 	*/
 	virtual void OnOK(void);
 
-	
+
 	/*!
-		\brief	Called by the framework when the user chooses the Apply button. 
+		\brief	Called by the framework when the user chooses the Apply button.
 	*/
 	virtual void OnApply(void);
 
-	
+
 	/*!
-		\brief	Called by the framework when the user chooses the Cancel button. 
+		\brief	Called by the framework when the user chooses the Cancel button.
 	*/
 	virtual void OnCancel(void);
 
-	
+
 	/*!
-		\brief	Called by the framework when the user chooses the Next button. 
+		\brief	Called by the framework when the user chooses the Next button.
 	*/
 	virtual void OnNext(void);
 
-	
+
 	/*!
-		\brief	Called by the framework when the user chooses the Back button. 
+		\brief	Called by the framework when the user chooses the Back button.
 	*/
 	virtual void OnBack(void);
 
-	
+
 	/*!
-		\brief	Called by the framework when the user chooses the Finish button. 
+		\brief	Called by the framework when the user chooses the Finish button.
 	*/
 	virtual void OnFinish();
 
@@ -967,7 +967,7 @@ private:
 
 	/*!
 		\brief	Clears the option flags.
-		
+
 		\param	flags	The flags to be cleared.
 	*/
 	void ClearFlags(DWORD flags);

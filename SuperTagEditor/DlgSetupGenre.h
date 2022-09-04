@@ -14,49 +14,49 @@
 
 class CDlgSetupGenre : public COptionPage
 {
-	DECLARE_DYNCREATE(CDlgSetupGenre)
+    DECLARE_DYNCREATE(CDlgSetupGenre)
 
 // コンストラクション
 public:
-	CDlgSetupGenre();
-	~CDlgSetupGenre();
+    CDlgSetupGenre();
+    ~CDlgSetupGenre();
 
 // ダイアログ データ
-	//{{AFX_DATA(CDlgSetupGenre)
-	enum { IDD = IDD_DLG_SETUP_GENRE };
-	CListCtrl	m_listGenre;
-	//}}AFX_DATA
+    //{{AFX_DATA(CDlgSetupGenre)
+    enum { IDD = IDD_DLG_SETUP_GENRE };
+    CListCtrl    m_listGenre;
+    //}}AFX_DATA
 
 
 // オーバーライド
-	// ClassWizard は仮想関数のオーバーライドを生成します。
+    // ClassWizard は仮想関数のオーバーライドを生成します。
 
-	//{{AFX_VIRTUAL(CDlgSetupGenre)
-	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV サポート
-	//}}AFX_VIRTUAL
+    //{{AFX_VIRTUAL(CDlgSetupGenre)
+    protected:
+    virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV サポート
+    //}}AFX_VIRTUAL
 
 // インプリメンテーション
 protected:
-	// 生成されたメッセージ マップ関数
-	//{{AFX_MSG(CDlgSetupGenre)
-	virtual BOOL OnInitDialog();
-	virtual void OnOK();
-	afx_msg void OnBtCheckAll();
-	afx_msg void OnBtUncheckAll();
-	afx_msg void OnBtCheckId3();
-	afx_msg void OnBtCheckWinamp();
-	afx_msg void OnBtCheckScmpx();
-	afx_msg void OnBtResetPage();
-	afx_msg void OnBtAddUser();
-	afx_msg void OnBtDelUser();
-	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
+    // 生成されたメッセージ マップ関数
+    //{{AFX_MSG(CDlgSetupGenre)
+    virtual BOOL OnInitDialog();
+    virtual void OnOK();
+    afx_msg void OnBtCheckAll();
+    afx_msg void OnBtUncheckAll();
+    afx_msg void OnBtCheckId3();
+    afx_msg void OnBtCheckWinamp();
+    afx_msg void OnBtCheckScmpx();
+    afx_msg void OnBtResetPage();
+    afx_msg void OnBtAddUser();
+    afx_msg void OnBtDelUser();
+    //}}AFX_MSG
+    DECLARE_MESSAGE_MAP()
 
 private:
-	void AddUserGenre(int nIndex);
+    void AddUserGenre(int nIndex);
 public:
-	USER_GENRE_LIST*	m_genreListUSER;
+    USER_GENRE_LIST*    m_genreListUSER;
 };
 
 //{{AFX_INSERT_LOCATION}}

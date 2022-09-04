@@ -14,41 +14,41 @@ class CDlgFavorites : public CDialog
 {
 // コンストラクション
 public:
-	CDlgFavorites(CWnd* pParent = NULL);   // 標準のコンストラクタ
+    CDlgFavorites(CWnd* pParent = NULL);   // 標準のコンストラクタ
 
 // ダイアログ データ
-	//{{AFX_DATA(CDlgFavorites)
-	enum { IDD = IDD_DIALOG_FAVORITES };
-	CString	m_strFavirites[10];
-	//}}AFX_DATA
+    //{{AFX_DATA(CDlgFavorites)
+    enum { IDD = IDD_DIALOG_FAVORITES };
+    CString m_strFavirites[10];
+    //}}AFX_DATA
 
 
 // オーバーライド
-	// ClassWizard は仮想関数のオーバーライドを生成します。
-	//{{AFX_VIRTUAL(CDlgFavorites)
-	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV サポート
-	//}}AFX_VIRTUAL
+    // ClassWizard は仮想関数のオーバーライドを生成します。
+    //{{AFX_VIRTUAL(CDlgFavorites)
+    protected:
+    virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV サポート
+    //}}AFX_VIRTUAL
 
 // インプリメンテーション
 protected:
 
-	// 生成されたメッセージ マップ関数
-	//{{AFX_MSG(CDlgFavorites)
-	afx_msg void OnBtRefFavorites1();
-	afx_msg void OnBtRefFavorites10();
-	afx_msg void OnBtRefFavorites2();
-	afx_msg void OnBtRefFavorites3();
-	afx_msg void OnBtRefFavorites4();
-	afx_msg void OnBtRefFavorites5();
-	afx_msg void OnBtRefFavorites6();
-	afx_msg void OnBtRefFavorites7();
-	afx_msg void OnBtRefFavorites8();
-	afx_msg void OnBtRefFavorites9();
-	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
+    // 生成されたメッセージ マップ関数
+    //{{AFX_MSG(CDlgFavorites)
+    afx_msg void OnBtRefFavorites1();
+    afx_msg void OnBtRefFavorites10();
+    afx_msg void OnBtRefFavorites2();
+    afx_msg void OnBtRefFavorites3();
+    afx_msg void OnBtRefFavorites4();
+    afx_msg void OnBtRefFavorites5();
+    afx_msg void OnBtRefFavorites6();
+    afx_msg void OnBtRefFavorites7();
+    afx_msg void OnBtRefFavorites8();
+    afx_msg void OnBtRefFavorites9();
+    //}}AFX_MSG
+    DECLARE_MESSAGE_MAP()
 private:
-	void OnBtRefFavorites(CString& strFavorite);
+    void OnBtRefFavorites(CString& strFavorite);
 };
 
 //{{AFX_INSERT_LOCATION}}

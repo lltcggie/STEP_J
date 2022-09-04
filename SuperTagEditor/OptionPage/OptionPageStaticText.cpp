@@ -66,7 +66,7 @@ END_MESSAGE_MAP()
 /////////////////////////////////////////////////////////////////////////////
 // COptionPageStaticText message handlers
 
-BOOL COptionPageStaticText::OnInitDialog() 
+BOOL COptionPageStaticText::OnInitDialog()
 {
 	COptionPage::OnInitDialog();
 
@@ -76,7 +76,7 @@ BOOL COptionPageStaticText::OnInitDialog()
 	              // EXCEPTION: OCX Property Pages should return FALSE
 }
 
-void COptionPageStaticText::OnSize(UINT nType, int cx, int cy) 
+void COptionPageStaticText::OnSize(UINT nType, int cx, int cy)
 {
 	COptionPage::OnSize(nType, cx, cy);
 
@@ -85,5 +85,5 @@ void COptionPageStaticText::OnSize(UINT nType, int cx, int cy)
 		m_Display.RequestResize();
 	}
 	// TODO: Add your message handler code here
-	
+
 }

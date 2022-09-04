@@ -96,10 +96,10 @@ void CDlgFileRmpID3v2::OnBtResetPage()
     extern const TCHAR strOptSoftwareteTag_default[];
     extern const bool bOptNotUnSyncAlways_default;
     extern const bool bOptUnSyncNew_default;
-    extern const int  nId3v2Encode_default; 
+    extern const int  nId3v2Encode_default;
     extern const int  nId3v2Version_default;
     extern const int  nId3v2EncodeNew_default;
-    extern const int  nId3v2VersionNew_default;    
+    extern const int  nId3v2VersionNew_default;
     // RIFF MP3
     ((CButton *)GetDlgItem(IDC_CH_CHANGE_FILE_EXT))->SetCheck(bOptChangeFileExt_default);
     //((CButton *)GetDlgItem(IDC_CH_AUTO_CONV_RMP))->SetCheck(bOptAutoConvRMP_default);

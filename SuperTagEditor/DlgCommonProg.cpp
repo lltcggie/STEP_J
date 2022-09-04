@@ -15,9 +15,9 @@ static char BASED_CODE THIS_FILE[] = __FILE__;
 
 CDlgCommonProgress::CDlgCommonProgress(UINT nCaptionID)
 {
-	m_nCaptionID = CG_IDS_PROGRESS_CAPTION;
-	if (nCaptionID != 0)
-		m_nCaptionID = nCaptionID;
+    m_nCaptionID = CG_IDS_PROGRESS_CAPTION;
+    if (nCaptionID != 0)
+        m_nCaptionID = nCaptionID;
 
     m_nLower=0;
     m_nUpper=100;
@@ -32,7 +32,7 @@ CDlgCommonProgress::CDlgCommonProgress(UINT nCaptionID)
 CDlgCommonProgress::~CDlgCommonProgress()
 {
     if(m_hWnd!=NULL)
-      DestroyWindow();
+        DestroyWindow();
 }
 
 BOOL CDlgCommonProgress::DestroyWindow()
@@ -45,13 +45,13 @@ BOOL CDlgCommonProgress::DestroyWindow()
 void CDlgCommonProgress::ReEnableParent()
 {
     if(m_bParentDisabled && (m_pParentWnd!=NULL))
-      m_pParentWnd->EnableWindow(TRUE);
+        m_pParentWnd->EnableWindow(TRUE);
     m_bParentDisabled=FALSE;
 }
 
 void CDlgCommonProgress::EnableCancelButton(BOOL bEnable)
 {
-	GetDlgItem(IDCANCEL)->EnableWindow(bEnable);
+    GetDlgItem(IDCANCEL)->EnableWindow(bEnable);
 }
 
 BOOL CDlgCommonProgress::Create(CWnd *pParent)
@@ -65,13 +65,13 @@ BOOL CDlgCommonProgress::Create(CWnd *pParent)
 
     if((m_pParentWnd!=NULL) && m_pParentWnd->IsWindowEnabled())
     {
-      m_pParentWnd->EnableWindow(FALSE);
-      m_bParentDisabled = TRUE;
+        m_pParentWnd->EnableWindow(FALSE);
+        m_bParentDisabled = TRUE;
     }
     if(!CDialog::Create(CDlgCommonProgress::IDD,pParent))
     {
-      ReEnableParent();
-      return FALSE;
+        ReEnableParent();
+        return FALSE;
     }
     return TRUE;
 }
@@ -92,10 +92,10 @@ END_MESSAGE_MAP()
 
 void CDlgCommonProgress::OnCancel()
 {
-	//追加 by Kobarin
-	if (MessageBox(_T("中断してもよろしいですか？"), _T("処理の中断"), MB_ICONQUESTION|MB_YESNOCANCEL|MB_DEFBUTTON2|MB_TOPMOST) == IDYES) {
-		m_bCanceled = TRUE;
-	}
+    //追加 by Kobarin
+    if (MessageBox(_T("中断してもよろしいですか？"), _T("処理の中断"), MB_ICONQUESTION|MB_YESNOCANCEL|MB_DEFBUTTON2|MB_TOPMOST) == IDYES) {
+        m_bCanceled = TRUE;
+    }
 }
 
 void CDlgCommonProgress::SetRange(int nLower,int nUpper)
@@ -104,15 +104,15 @@ void CDlgCommonProgress::SetRange(int nLower,int nUpper)
     m_nUpper = nUpper;
     m_Progress.SetRange(nLower,nUpper);
 }
-  
+
 int CDlgCommonProgress::SetPos(int nPos)
 {
     int iResult = TRUE;
     PumpMessages();
-	if (GetSafeHwnd() != NULL) {
-		m_Progress.SetPos(nPos);
-		UpdatePercent(nPos);
-	}
+    if (GetSafeHwnd() != NULL) {
+        m_Progress.SetPos(nPos);
+        UpdatePercent(nPos);
+    }
     return iResult;
 }
 
@@ -141,19 +141,19 @@ int CDlgCommonProgress::StepIt()
 void CDlgCommonProgress::PumpMessages()
 {
     // ダイアログを使用する前に Create() を呼んでください。
-	if (GetSafeHwnd() == NULL) return;
+    if (GetSafeHwnd() == NULL) return;
 //    ASSERT(m_hWnd!=NULL);
 
     MSG msg;
     // ダイアログ メッセージの処理
     while(PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
     {
-      if(!IsDialogMessage(&msg))
-      {
-        TranslateMessage(&msg);
-        DispatchMessage(&msg);  
-		if (GetSafeHwnd() == NULL) break;
-      }
+        if(!IsDialogMessage(&msg))
+        {
+            TranslateMessage(&msg);
+            DispatchMessage(&msg);
+            if (GetSafeHwnd() == NULL) break;
+        }
     }
 }
 
@@ -162,7 +162,7 @@ void CDlgCommonProgress::UpdatePercent(int nNewPos)
 {
     CWnd *pWndPercent = GetDlgItem(CG_IDC_PROGDLG_PERCENT);
     int nPercent;
-    
+
     int nDivisor = m_nUpper - m_nLower;
     ASSERT(nDivisor>0);  // m_nLower は m_nUpper 未満でなければいけません。
 
@@ -174,32 +174,32 @@ void CDlgCommonProgress::UpdatePercent(int nNewPos)
     // プログレス コントロールは折り返し可能なので、それに応じてパーセンテージも
     // 折り返すようにします。ただし、剰余を取る際、100% を 0% としてはいけません。
     if(nPercent!=100)
-      nPercent %= 100;
+        nPercent %= 100;
 
     // パーセンテージを表示します。
     CString strBuf;
     strBuf.Format(_T("%d%c"),nPercent,_T('%'));
 
-	CString strCur; // 現在のパーセンテージを取得
+    CString strCur; // 現在のパーセンテージを取得
     pWndPercent->GetWindowText(strCur);
 
-	if (strCur != strBuf)
-		pWndPercent->SetWindowText(strBuf);
+    if (strCur != strBuf)
+        pWndPercent->SetWindowText(strBuf);
 }
-    
+
 /////////////////////////////////////////////////////////////////////////////
 // CDlgCommonProgress メッセージ ハンドラ
 
-BOOL CDlgCommonProgress::OnInitDialog() 
+BOOL CDlgCommonProgress::OnInitDialog()
 {
     CDialog::OnInitDialog();
     m_Progress.SetRange(m_nLower,m_nUpper);
     m_Progress.SetStep(m_nStep);
     m_Progress.SetPos(m_nLower);
 
-	CString strCaption;
-	VERIFY(strCaption.LoadString(m_nCaptionID));
+    CString strCaption;
+    VERIFY(strCaption.LoadString(m_nCaptionID));
     SetWindowText(strCaption);
 
-    return TRUE;  
+    return TRUE;
 }

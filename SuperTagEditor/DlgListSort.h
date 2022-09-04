@@ -14,45 +14,45 @@ class CDlgListSort : public CDialog
 {
 // コンストラクション
 public:
-	CDlgListSort(CWnd* pParent = NULL);   // 標準のコンストラクタ
+    CDlgListSort(CWnd* pParent = NULL);   // 標準のコンストラクタ
 
 // ダイアログ データ
-	//{{AFX_DATA(CDlgListSort)
-	enum { IDD = IDD_DLG_LIST_SORT };
-	CComboBox	m_listKey5;
-	CComboBox	m_listKey4;
-	CComboBox	m_listKey3;
-	CComboBox	m_listKey2;
-	CComboBox	m_listKey1;
-	int		m_nSortType1;
-	int		m_nSortType2;
-	int		m_nSortType3;
-	int		m_nKeyColumn1;
-	int		m_nKeyColumn2;
-	int		m_nKeyColumn3;
-	int		m_nKeyColumn4;
-	int		m_nKeyColumn5;
-	int		m_nSortType4;
-	int		m_nSortType5;
-	//}}AFX_DATA
+    //{{AFX_DATA(CDlgListSort)
+    enum { IDD = IDD_DLG_LIST_SORT };
+    CComboBox    m_listKey5;
+    CComboBox    m_listKey4;
+    CComboBox    m_listKey3;
+    CComboBox    m_listKey2;
+    CComboBox    m_listKey1;
+    int     m_nSortType1;
+    int     m_nSortType2;
+    int     m_nSortType3;
+    int     m_nKeyColumn1;
+    int     m_nKeyColumn2;
+    int     m_nKeyColumn3;
+    int     m_nKeyColumn4;
+    int     m_nKeyColumn5;
+    int     m_nSortType4;
+    int     m_nSortType5;
+    //}}AFX_DATA
 
 
 // オーバーライド
-	// ClassWizard は仮想関数のオーバーライドを生成します。
-	//{{AFX_VIRTUAL(CDlgListSort)
-	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV サポート
-	//}}AFX_VIRTUAL
+    // ClassWizard は仮想関数のオーバーライドを生成します。
+    //{{AFX_VIRTUAL(CDlgListSort)
+    protected:
+    virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV サポート
+    //}}AFX_VIRTUAL
 
 // インプリメンテーション
 protected:
 
-	// 生成されたメッセージ マップ関数
-	//{{AFX_MSG(CDlgListSort)
-	virtual BOOL OnInitDialog();
-	virtual void OnOK();
-	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
+    // 生成されたメッセージ マップ関数
+    //{{AFX_MSG(CDlgListSort)
+    virtual BOOL OnInitDialog();
+    virtual void OnOK();
+    //}}AFX_MSG
+    DECLARE_MESSAGE_MAP()
 };
 
 //{{AFX_INSERT_LOCATION}}

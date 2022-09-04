@@ -22,11 +22,11 @@ extern const bool bOptWavSupportTrackNumber_default;
 
 CDlgSetup::CDlgSetup() : CPropertyPage(CDlgSetup::IDD)
 {
-	//{{AFX_DATA_INIT(CDlgSetup)
-	m_bWavGenreListSelect = bOptWavGenreListSelect_default;
-	m_bAviGenreListSelect = bOptAviGenreListSelect_default;
-	m_bWavSupportTrackNumber = bOptWavSupportTrackNumber_default;
-	//}}AFX_DATA_INIT
+    //{{AFX_DATA_INIT(CDlgSetup)
+    m_bWavGenreListSelect = bOptWavGenreListSelect_default;
+    m_bAviGenreListSelect = bOptAviGenreListSelect_default;
+    m_bWavSupportTrackNumber = bOptWavSupportTrackNumber_default;
+    //}}AFX_DATA_INIT
 }
 
 CDlgSetup::~CDlgSetup()
@@ -35,19 +35,19 @@ CDlgSetup::~CDlgSetup()
 
 void CDlgSetup::DoDataExchange(CDataExchange* pDX)
 {
-	CPropertyPage::DoDataExchange(pDX);
-	//{{AFX_DATA_MAP(CDlgSetup)
-	DDX_Check(pDX, IDC_CH_AVI_GENRE_LIST_SELECT, m_bWavGenreListSelect);
-	DDX_Check(pDX, IDC_CH_WAV_GENRE_LIST_SELECT, m_bAviGenreListSelect);
-	DDX_Check(pDX, IDC_CH_WAV_SUPPORT_TRACK_NUMBER, m_bWavSupportTrackNumber);
-	//}}AFX_DATA_MAP
+    CPropertyPage::DoDataExchange(pDX);
+    //{{AFX_DATA_MAP(CDlgSetup)
+    DDX_Check(pDX, IDC_CH_AVI_GENRE_LIST_SELECT, m_bWavGenreListSelect);
+    DDX_Check(pDX, IDC_CH_WAV_GENRE_LIST_SELECT, m_bAviGenreListSelect);
+    DDX_Check(pDX, IDC_CH_WAV_SUPPORT_TRACK_NUMBER, m_bWavSupportTrackNumber);
+    //}}AFX_DATA_MAP
 }
 
 
 BEGIN_MESSAGE_MAP(CDlgSetup, CPropertyPage)
-	//{{AFX_MSG_MAP(CDlgSetup)
-		// メモ: ClassWizard はこの位置に DDX および DDV の呼び出しコードを追加します。
-	//}}AFX_MSG_MAP
+    //{{AFX_MSG_MAP(CDlgSetup)
+        // メモ: ClassWizard はこの位置に DDX および DDV の呼び出しコードを追加します。
+    //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////

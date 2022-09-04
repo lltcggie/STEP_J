@@ -13,39 +13,39 @@
 class CDlgFileNameChange : public CDialog
 {
 public:
-	CString m_strMsgFormat;
+    CString m_strMsgFormat;
 // コンストラクション
 public:
-	CDlgFileNameChange(CWnd* pParent = NULL);   // 標準のコンストラクタ
+    CDlgFileNameChange(CWnd* pParent = NULL);   // 標準のコンストラクタ
 
-	UINT m_nMaxChar;
+    UINT m_nMaxChar;
 // ダイアログ データ
-	//{{AFX_DATA(CDlgFileNameChange)
-	enum { IDD = IDD_DLG_FILENAME_CHANGE };
-	CStatic	m_staticMsg;
-	CEdit	m_editName;
-	CString	m_strFileName;
-	CString	m_strMsg;
-	CString	m_strOrgFileName;
-	//}}AFX_DATA
+    //{{AFX_DATA(CDlgFileNameChange)
+    enum { IDD = IDD_DLG_FILENAME_CHANGE };
+    CStatic m_staticMsg;
+    CEdit   m_editName;
+    CString m_strFileName;
+    CString m_strMsg;
+    CString m_strOrgFileName;
+    //}}AFX_DATA
 
 
 // オーバーライド
-	// ClassWizard は仮想関数のオーバーライドを生成します。
-	//{{AFX_VIRTUAL(CDlgFileNameChange)
-	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV サポート
-	//}}AFX_VIRTUAL
+    // ClassWizard は仮想関数のオーバーライドを生成します。
+    //{{AFX_VIRTUAL(CDlgFileNameChange)
+    protected:
+    virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV サポート
+    //}}AFX_VIRTUAL
 
 // インプリメンテーション
 protected:
 
-	// 生成されたメッセージ マップ関数
-	//{{AFX_MSG(CDlgFileNameChange)
-	afx_msg void OnChangeEditName();
-	virtual BOOL OnInitDialog();
-	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
+    // 生成されたメッセージ マップ関数
+    //{{AFX_MSG(CDlgFileNameChange)
+    afx_msg void OnChangeEditName();
+    virtual BOOL OnInitDialog();
+    //}}AFX_MSG
+    DECLARE_MESSAGE_MAP()
 };
 
 //{{AFX_INSERT_LOCATION}}

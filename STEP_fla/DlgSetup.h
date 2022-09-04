@@ -12,35 +12,35 @@
 
 class CDlgSetup : public CPropertyPage
 {
-	DECLARE_DYNCREATE(CDlgSetup)
+    DECLARE_DYNCREATE(CDlgSetup)
 
 // コンストラクション
 public:
-	CDlgSetup();
-	~CDlgSetup();
+    CDlgSetup();
+    ~CDlgSetup();
 
 // ダイアログ データ
-	//{{AFX_DATA(CDlgSetup)
-	enum { IDD = IDD_DLG_SETUP };
-	BOOL	m_bGenreListSelect;
-	//}}AFX_DATA
+    //{{AFX_DATA(CDlgSetup)
+    enum { IDD = IDD_DLG_SETUP };
+    BOOL    m_bGenreListSelect;
+    //}}AFX_DATA
 
 
 // オーバーライド
-	// ClassWizard は仮想関数のオーバーライドを生成します。
+    // ClassWizard は仮想関数のオーバーライドを生成します。
 
-	//{{AFX_VIRTUAL(CDlgSetup)
-	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV サポート
-	//}}AFX_VIRTUAL
+    //{{AFX_VIRTUAL(CDlgSetup)
+    protected:
+    virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV サポート
+    //}}AFX_VIRTUAL
 
 // インプリメンテーション
 protected:
-	// 生成されたメッセージ マップ関数
-	//{{AFX_MSG(CDlgSetup)
-		// メモ: ClassWizard はこの位置にメンバ関数を追加します。
-	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
+    // 生成されたメッセージ マップ関数
+    //{{AFX_MSG(CDlgSetup)
+        // メモ: ClassWizard はこの位置にメンバ関数を追加します。
+    //}}AFX_MSG
+    DECLARE_MESSAGE_MAP()
 
 };
 

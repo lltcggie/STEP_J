@@ -62,7 +62,7 @@ public:
             controlType = edit;//default;
             return 0;
         }
-        return (controlType == edit || controlType == multiedit/* BeachMonster 089 */ || controlType == multieditreadonly) ? 0 : 1;
+        return (controlType == edit || controlType == multiedit || controlType == multieditreadonly) ? 0 : 1; /* BeachMonster 089 */
     }
 
     void SetListData(int iSubItem, CStringList *strInitArr)
@@ -484,7 +484,7 @@ public:
     bool    IsCurrentCellEditOK(void);
     void    SelectAllItems(BOOL = TRUE);
     int     SelItemRange(BOOL = FALSE, int = 0, int = -1);
-    inline  bool        IsRangeSelected(void) {
+    inline  bool     IsRangeSelected(void) {
                 if (m_bMultiSelect
                 &&  (m_posMultiSelect[0].x >= 1 || m_posMultiSelect[1].x >= 1)) {
                     return(true);

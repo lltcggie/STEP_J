@@ -14,47 +14,47 @@ class CDlgSetCheck : public CDialog
 {
 // コンストラクション
 public:
-	CDlgSetCheck(CWnd* pParent = NULL);   // 標準のコンストラクタ
+    CDlgSetCheck(CWnd* pParent = NULL);   // 標準のコンストラクタ
 
 // ダイアログ データ
-	//{{AFX_DATA(CDlgSetCheck)
-	enum { IDD = IDD_DLG_CHECK_WORD };
-	CButton	m_btMatchSelected;
-	CButton	m_btRegExp;
-	CButton	m_btRangeSelected;
-	CButton	m_btMatchComplete;
-	CButton	m_btCheckDiffUL;
-	CComboBox	m_listTargetColumn;
-	BOOL	m_bCheckDiffUL;
-	BOOL	m_bMatchComplete;
-	BOOL	m_bRangeSelected;
-	BOOL	m_bRegExp;
-	CString	m_strSearchWord;
-	int		m_nTargetColumn;
-	BOOL	m_bMatchSelected;
-	//}}AFX_DATA
+    //{{AFX_DATA(CDlgSetCheck)
+    enum { IDD = IDD_DLG_CHECK_WORD };
+    CButton m_btMatchSelected;
+    CButton m_btRegExp;
+    CButton m_btRangeSelected;
+    CButton m_btMatchComplete;
+    CButton m_btCheckDiffUL;
+    CComboBox    m_listTargetColumn;
+    BOOL    m_bCheckDiffUL;
+    BOOL    m_bMatchComplete;
+    BOOL    m_bRangeSelected;
+    BOOL    m_bRegExp;
+    CString m_strSearchWord;
+    int     m_nTargetColumn;
+    BOOL    m_bMatchSelected;
+    //}}AFX_DATA
 
-	BOOL	m_bEnableRangeSelected;
-	void	UpdateStatus(void);
+    BOOL    m_bEnableRangeSelected;
+    void    UpdateStatus(void);
 
 // オーバーライド
-	// ClassWizard は仮想関数のオーバーライドを生成します。
-	//{{AFX_VIRTUAL(CDlgSetCheck)
-	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV サポート
-	//}}AFX_VIRTUAL
+    // ClassWizard は仮想関数のオーバーライドを生成します。
+    //{{AFX_VIRTUAL(CDlgSetCheck)
+    protected:
+    virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV サポート
+    //}}AFX_VIRTUAL
 
 // インプリメンテーション
 protected:
 
-	// 生成されたメッセージ マップ関数
-	//{{AFX_MSG(CDlgSetCheck)
-	virtual BOOL OnInitDialog();
-	afx_msg void OnChRegexp();
-	afx_msg void OnSelChangeListTarget();
-	afx_msg void OnChRangeSelected();
-	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
+    // 生成されたメッセージ マップ関数
+    //{{AFX_MSG(CDlgSetCheck)
+    virtual BOOL OnInitDialog();
+    afx_msg void OnChRegexp();
+    afx_msg void OnSelChangeListTarget();
+    afx_msg void OnChRangeSelected();
+    //}}AFX_MSG
+    DECLARE_MESSAGE_MAP()
 };
 
 //{{AFX_INSERT_LOCATION}}

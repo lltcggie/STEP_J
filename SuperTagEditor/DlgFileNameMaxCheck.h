@@ -15,33 +15,33 @@ class CDlgFileNameMaxCheck : public COptionPage
 {
 // コンストラクション
 public:
-	CDlgFileNameMaxCheck(CWnd* pParent = NULL);   // 標準のコンストラクタ
+    CDlgFileNameMaxCheck(CWnd* pParent = NULL);   // 標準のコンストラクタ
 
 // ダイアログ データ
-	//{{AFX_DATA(CDlgFileNameMaxCheck)
-	enum { IDD = IDD_DLG_FILENAME_MAX_CHECK };
-	CButton	m_checkFileNameMaxCellColor;
-	BOOL	m_bFileNameMaxCheck;
-	UINT	m_nFileNameMaxChar;
-	BOOL	m_bFileNameMaxCellColor;
-	//}}AFX_DATA
+    //{{AFX_DATA(CDlgFileNameMaxCheck)
+    enum { IDD = IDD_DLG_FILENAME_MAX_CHECK };
+    CButton m_checkFileNameMaxCellColor;
+    BOOL    m_bFileNameMaxCheck;
+    UINT    m_nFileNameMaxChar;
+    BOOL    m_bFileNameMaxCellColor;
+    //}}AFX_DATA
 
 
 // オーバーライド
-	// ClassWizard は仮想関数のオーバーライドを生成します。
-	//{{AFX_VIRTUAL(CDlgFileNameMaxCheck)
-	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV サポート
-	//}}AFX_VIRTUAL
+    // ClassWizard は仮想関数のオーバーライドを生成します。
+    //{{AFX_VIRTUAL(CDlgFileNameMaxCheck)
+    protected:
+    virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV サポート
+    //}}AFX_VIRTUAL
 
 // インプリメンテーション
 protected:
 
-	// 生成されたメッセージ マップ関数
-	//{{AFX_MSG(CDlgFileNameMaxCheck)
-	afx_msg void OnChFilenameMaxCheck();
-	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
+    // 生成されたメッセージ マップ関数
+    //{{AFX_MSG(CDlgFileNameMaxCheck)
+    afx_msg void OnChFilenameMaxCheck();
+    //}}AFX_MSG
+    DECLARE_MESSAGE_MAP()
 };
 
 //{{AFX_INSERT_LOCATION}}

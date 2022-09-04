@@ -801,7 +801,7 @@ bool CFileMP3::WriteTag(FILE_MP3 *fileMP3, bool bKeepTimeStamp)
             }
             CATCH(CFileException, e) {
                 CString strMsg;
-                strMsg.Format(_T("%s がオープンできませんでした"), fileMP3->strFullPathName);
+                strMsg.Format(_T("%s がオープンできませんでした"), (LPCWSTR)fileMP3->strFullPathName);
                 MessageBox(NULL, strMsg, _T("タイムスタンプの更新エラー"), MB_ICONSTOP|MB_OK|MB_TOPMOST);
                 bResult = false;
             }
@@ -827,7 +827,7 @@ bool CFileMP3::WriteTag(FILE_MP3 *fileMP3, bool bKeepTimeStamp)
 // 概要  : ファイル検索：検索処理
 // 引数  : sDir         = 検索するディレクトリ
 //       : sTargetName  = 検索するファイル名
-// 戻り値: CString      = 発見したファイルのフルパス(IsEmpty():未発見)
+// 戻り値: CString   = 発見したファイルのフルパス(IsEmpty():未発見)
 // =============================================
 CString CFileMP3::SearchFileReent(const TCHAR *sDir, const TCHAR *sTargetName)
 {
@@ -880,7 +880,7 @@ CString CFileMP3::SearchFileReent(const TCHAR *sDir, const TCHAR *sTargetName)
 //  概要  : 歌詞ファイルの検索
 //        : 優先順位：MP3と同じフォルダ→歌詞フォルダ→歌詞フォルダのサブディレクトリ
 //  引数  : fileMP3     = ファイル情報
-//  戻り値: CString     = 歌詞ファイル名(見つからなかった場合は空)
+//  戻り値: CString  = 歌詞ファイル名(見つからなかった場合は空)
 // =============================================
 CString CFileMP3::SearchLyricsFile(FILE_MP3 *fileMP3)
 {
@@ -1023,7 +1023,7 @@ bool CFileMP3::CopyFile(FILE_MP3 *fileMP3, const TCHAR *sNewDir, bool bMoveFlag)
     if (_tcsicmp(fileMP3->strFilePath, sNewDir) != 0) {
         // ファイル名が変更されている
         CString strNewName;
-        strNewName.Format(_T("%s%s"), sNewDir, strFileName);
+        strNewName.Format(_T("%s%s"), sNewDir, (LPCWSTR)strFileName);
         if (MyCopyFile(fileMP3->strFullPathName, strNewName, bMoveFlag) == false) {
             // ファイルのコピー／移動に失敗!!
             return(false);

@@ -13,39 +13,39 @@
 
 class CDlgDefaultValue : public COptionPage
 {
-	DECLARE_DYNCREATE(CDlgDefaultValue)
+    DECLARE_DYNCREATE(CDlgDefaultValue)
 
 // コンストラクション
 public:
-	CDlgDefaultValue();
-	~CDlgDefaultValue();
+    CDlgDefaultValue();
+    ~CDlgDefaultValue();
 
 // ダイアログ データ
-	//{{AFX_DATA(CDlgDefaultValue)
-	enum { IDD = IDD_DLG_DEFAUT_VALUE };
-	BOOL	m_bValidFolderSelect;
-	BOOL	m_bValidDupExec;
-	int		m_nRecentFolder;
-	BOOL	m_bSaveRepDlgPos;
-	BOOL	m_bAudioListShow;
-	//}}AFX_DATA
+    //{{AFX_DATA(CDlgDefaultValue)
+    enum { IDD = IDD_DLG_DEFAUT_VALUE };
+    BOOL    m_bValidFolderSelect;
+    BOOL    m_bValidDupExec;
+    int     m_nRecentFolder;
+    BOOL    m_bSaveRepDlgPos;
+    BOOL    m_bAudioListShow;
+    //}}AFX_DATA
 
 
 // オーバーライド
-	// ClassWizard は仮想関数のオーバーライドを生成します。
+    // ClassWizard は仮想関数のオーバーライドを生成します。
 
-	//{{AFX_VIRTUAL(CDlgDefaultValue)
-	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV サポート
-	//}}AFX_VIRTUAL
+    //{{AFX_VIRTUAL(CDlgDefaultValue)
+    protected:
+    virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV サポート
+    //}}AFX_VIRTUAL
 
 // インプリメンテーション
 protected:
-	// 生成されたメッセージ マップ関数
-	//{{AFX_MSG(CDlgDefaultValue)
-	afx_msg void OnBtResetPage();
-	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
+    // 生成されたメッセージ マップ関数
+    //{{AFX_MSG(CDlgDefaultValue)
+    afx_msg void OnBtResetPage();
+    //}}AFX_MSG
+    DECLARE_MESSAGE_MAP()
 
 };
 

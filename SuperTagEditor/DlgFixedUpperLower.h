@@ -13,46 +13,46 @@
 
 class CDlgFixedUpperLower : public COptionPage
 {
-	DECLARE_DYNCREATE(CDlgFixedUpperLower)
+    DECLARE_DYNCREATE(CDlgFixedUpperLower)
 
 // コンストラクション
 public:
-	void EnableButton();
-	CDlgFixedUpperLower();
-	~CDlgFixedUpperLower();
+    void EnableButton();
+    CDlgFixedUpperLower();
+    ~CDlgFixedUpperLower();
 
 // ダイアログ データ
-	//{{AFX_DATA(CDlgFixedUpperLower)
-	enum { IDD = IDD_DLG_FIXED_UPPER_LOWER };
-	CEdit	m_editFixedWord;
-	CButton	m_buttonDelete;
-	CButton	m_buttonAdd;
-	CListCtrl	m_listUpperLower;
-	CString	m_strFixedWord;
-	//}}AFX_DATA
+    //{{AFX_DATA(CDlgFixedUpperLower)
+    enum { IDD = IDD_DLG_FIXED_UPPER_LOWER };
+    CEdit   m_editFixedWord;
+    CButton m_buttonDelete;
+    CButton m_buttonAdd;
+    CListCtrl    m_listUpperLower;
+    CString m_strFixedWord;
+    //}}AFX_DATA
 
-	CStringArray m_arFixedWords;
-	BOOL m_bModify;
+    CStringArray m_arFixedWords;
+    BOOL m_bModify;
 
 // オーバーライド
-	// ClassWizard は仮想関数のオーバーライドを生成します。
+    // ClassWizard は仮想関数のオーバーライドを生成します。
 
-	//{{AFX_VIRTUAL(CDlgFixedUpperLower)
-	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV サポート
-	//}}AFX_VIRTUAL
+    //{{AFX_VIRTUAL(CDlgFixedUpperLower)
+    protected:
+    virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV サポート
+    //}}AFX_VIRTUAL
 
 // インプリメンテーション
 protected:
-	// 生成されたメッセージ マップ関数
-	//{{AFX_MSG(CDlgFixedUpperLower)
-	afx_msg void OnBtAdd();
-	virtual BOOL OnInitDialog();
-	afx_msg void OnChangeEditFixedWord();
-	afx_msg void OnBtDelete();
-	afx_msg void OnItemchangedListUpperLower(NMHDR* pNMHDR, LRESULT* pResult);
-	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
+    // 生成されたメッセージ マップ関数
+    //{{AFX_MSG(CDlgFixedUpperLower)
+    afx_msg void OnBtAdd();
+    virtual BOOL OnInitDialog();
+    afx_msg void OnChangeEditFixedWord();
+    afx_msg void OnBtDelete();
+    afx_msg void OnItemchangedListUpperLower(NMHDR* pNMHDR, LRESULT* pResult);
+    //}}AFX_MSG
+    DECLARE_MESSAGE_MAP()
 
 };
 

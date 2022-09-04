@@ -16,38 +16,38 @@ class CSuperTagEditorDoc;
 
 class CDlgEnvSheet : public COptionSheet/*CPropertySheet*/
 {
-	DECLARE_DYNAMIC(CDlgEnvSheet)
+    DECLARE_DYNAMIC(CDlgEnvSheet)
 
 // コンストラクション
 public:
-	CDlgEnvSheet(UINT nIDCaption, CWnd* pParentWnd = NULL, UINT iSelectPage = 0);
-	CDlgEnvSheet(LPCTSTR pszCaption, CWnd* pParentWnd = NULL, UINT iSelectPage = 0);
+    CDlgEnvSheet(UINT nIDCaption, CWnd* pParentWnd = NULL, UINT iSelectPage = 0);
+    CDlgEnvSheet(LPCTSTR pszCaption, CWnd* pParentWnd = NULL, UINT iSelectPage = 0);
 
 // アトリビュート
 public:
-	CSuperTagEditorDoc	*m_pDoc;
+    CSuperTagEditorDoc    *m_pDoc;
 
 // オペレーション
 public:
-	enum	{ENV_NORMAL = 1, ENV_CONV = 2, ENV_ADVANCED = 4, ENV_ALL = 7};
-	INT_PTR	DoModal(int);
+    enum    {ENV_NORMAL = 1, ENV_CONV = 2, ENV_ADVANCED = 4, ENV_ALL = 7};
+    INT_PTR DoModal(int);
 
 // オーバーライド
-	// ClassWizard は仮想関数のオーバーライドを生成します。
-	//{{AFX_VIRTUAL(CDlgEnvSheet)
-	public:
-	//}}AFX_VIRTUAL
+    // ClassWizard は仮想関数のオーバーライドを生成します。
+    //{{AFX_VIRTUAL(CDlgEnvSheet)
+    public:
+    //}}AFX_VIRTUAL
 
 // インプリメンテーション
 public:
-	virtual ~CDlgEnvSheet();
+    virtual ~CDlgEnvSheet();
 
-	// 生成されたメッセージ マップ関数
+    // 生成されたメッセージ マップ関数
 protected:
-	//{{AFX_MSG(CDlgEnvSheet)
-		// メモ - ClassWizard はこの位置にメンバ関数を追加または削除します。
-	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
+    //{{AFX_MSG(CDlgEnvSheet)
+        // メモ - ClassWizard はこの位置にメンバ関数を追加または削除します。
+    //}}AFX_MSG
+    DECLARE_MESSAGE_MAP()
 };
 
 /////////////////////////////////////////////////////////////////////////////

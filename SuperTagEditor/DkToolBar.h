@@ -9,17 +9,17 @@
 class CToolBarInfo
 {
 public:
-    TBBUTTON         tbButton;      // information regarding the button
-    LPCTSTR          btnText;       // text for the button
+    TBBUTTON    tbButton;      // information regarding the button
+    LPCTSTR     btnText;       // text for the button
 };
 
 class CPluginToolBarInfo
 {
 public:
-    TBBUTTON        tbButton;       // information regarding the button
-    CString         strRegName;
-    int             nIndex;
-    int             nPos;
+    TBBUTTON    tbButton;       // information regarding the button
+    CString     strRegName;
+    int         nIndex;
+    int         nPos;
 };
 
 class CDkToolBar : public CToolBar
@@ -30,9 +30,9 @@ public:
                      CDkToolBar();
 
                     // overridden Create(...) allows initialization of toolbar
-                     // information which allows user-customization; allows
-                     // specification of registry key which allows toolbar
-                     // state persistance
+                    // information which allows user-customization; allows
+                    // specification of registry key which allows toolbar
+                    // state persistance
     BOOL             Create(CWnd *pParentWnd,
                         DWORD dwStyle = WS_CHILD | WS_VISIBLE | CBRS_TOP,
                         UINT nID = AFX_IDW_TOOLBAR,
@@ -87,18 +87,18 @@ public:
     BOOL InsertButton( int nIndex, LPTBBUTTON lpButton, TCHAR* lpszRegName);
     void Customize();
     void UpdateButtonImage();
-    int             nDyImageIndex;
+    int  nDyImageIndex;
     // Generated message map functions
 protected:
-    CToolBarInfo    *toolBarInfo;       // table of buttons and text
-    int              nButtons;          // number of buttons on toolbar
-    CSize            defBtnSize;        // default button size
-    CSize            defImgSize;        // default image size
-    CSize            txtBtnSize;        // size of buttons with text
-    BOOL             iconsAndText;      // indicates if text is shown under icons
-    HKEY             registryKey;       // key where toolbar information is kept
-    CString          registrySubKey;    // key where toolbar information is kept
-    CString          registryValue;     // value where toolbar information is kept
+    CToolBarInfo   *toolBarInfo;       // table of buttons and text
+    int             nButtons;          // number of buttons on toolbar
+    CSize           defBtnSize;        // default button size
+    CSize           defImgSize;        // default image size
+    CSize           txtBtnSize;        // size of buttons with text
+    BOOL            iconsAndText;      // indicates if text is shown under icons
+    HKEY            registryKey;       // key where toolbar information is kept
+    CString         registrySubKey;    // key where toolbar information is kept
+    CString         registryValue;     // value where toolbar information is kept
 
     CPtrArray        pluginToolBarInfo;
 

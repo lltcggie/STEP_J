@@ -14,38 +14,38 @@ class CDlgFileOverWrite : public CDialog
 {
 // コンストラクション
 public:
-	CDlgFileOverWrite(CWnd* pParent = NULL);   // 標準のコンストラクタ
+    CDlgFileOverWrite(CWnd* pParent = NULL);   // 標準のコンストラクタ
 
 // ダイアログ データ
-	//{{AFX_DATA(CDlgFileOverWrite)
-	enum { IDD = IDD_DLG_FILE_OVERWRITE };
-	CString	m_strFileName;
-	CString	m_strTimeStamp;
-	CString	m_strSize;
-	//}}AFX_DATA
+    //{{AFX_DATA(CDlgFileOverWrite)
+    enum { IDD = IDD_DLG_FILE_OVERWRITE };
+    CString m_strFileName;
+    CString m_strTimeStamp;
+    CString m_strSize;
+    //}}AFX_DATA
 
-	int		m_nResult;
+    int     m_nResult;
 
 
 // オーバーライド
-	// ClassWizard は仮想関数のオーバーライドを生成します。
-	//{{AFX_VIRTUAL(CDlgFileOverWrite)
-	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV サポート
-	//}}AFX_VIRTUAL
+    // ClassWizard は仮想関数のオーバーライドを生成します。
+    //{{AFX_VIRTUAL(CDlgFileOverWrite)
+    protected:
+    virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV サポート
+    //}}AFX_VIRTUAL
 
 // インプリメンテーション
 protected:
 
-	// 生成されたメッセージ マップ関数
-	//{{AFX_MSG(CDlgFileOverWrite)
-	virtual void OnOK();
-	afx_msg void OnBtOverwrite();
-	afx_msg void OnBtAllOverwrite();
-	afx_msg void OnBtSkip();
-	virtual void OnCancel();
-	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
+    // 生成されたメッセージ マップ関数
+    //{{AFX_MSG(CDlgFileOverWrite)
+    virtual void OnOK();
+    afx_msg void OnBtOverwrite();
+    afx_msg void OnBtAllOverwrite();
+    afx_msg void OnBtSkip();
+    virtual void OnCancel();
+    //}}AFX_MSG
+    DECLARE_MESSAGE_MAP()
 };
 
 //{{AFX_INSERT_LOCATION}}

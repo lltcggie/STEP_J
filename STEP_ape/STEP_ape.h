@@ -9,10 +9,10 @@
 #endif // _MSC_VER > 1000
 
 #ifndef __AFXWIN_H__
-	#error include 'stdafx.h' before including this file for PCH
+    #error include 'stdafx.h' before including this file for PCH
 #endif
 
-#include "resource.h"		// メイン シンボル
+#include "resource.h"        // メイン シンボル
 
 /////////////////////////////////////////////////////////////////////////////
 // CSTEP_apeApp
@@ -22,18 +22,18 @@
 class CSTEP_apeApp : public CWinApp
 {
 public:
-	CSTEP_apeApp();
+    CSTEP_apeApp();
 
 // オーバーライド
-	// ClassWizard は仮想関数のオーバーライドを生成します。
-	//{{AFX_VIRTUAL(CSTEP_apeApp)
-	//}}AFX_VIRTUAL
+    // ClassWizard は仮想関数のオーバーライドを生成します。
+    //{{AFX_VIRTUAL(CSTEP_apeApp)
+    //}}AFX_VIRTUAL
 
-	//{{AFX_MSG(CSTEP_apeApp)
-		// メモ -  ClassWizard はこの位置にメンバ関数を追加または削除します。
-		//         この位置に生成されるコードを編集しないでください。
-	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
+    //{{AFX_MSG(CSTEP_apeApp)
+        // メモ -  ClassWizard はこの位置にメンバ関数を追加または削除します。
+        //         この位置に生成されるコードを編集しないでください。
+    //}}AFX_MSG
+    DECLARE_MESSAGE_MAP()
 };
 
 

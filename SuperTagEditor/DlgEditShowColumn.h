@@ -13,45 +13,45 @@
 
 class CDlgEditShowColumn : public COptionPage
 {
-	DECLARE_DYNCREATE(CDlgEditShowColumn)
+    DECLARE_DYNCREATE(CDlgEditShowColumn)
 
 // コンストラクション
 public:
-	CDlgEditShowColumn();
-	~CDlgEditShowColumn();
+    CDlgEditShowColumn();
+    ~CDlgEditShowColumn();
 
 // ダイアログ データ
-	//{{AFX_DATA(CDlgEditShowColumn)
-	enum { IDD = IDD_DLG_EDIT_SHOW_COLUMN };
-	CListCtrl	m_listColumn;
-	//}}AFX_DATA
+    //{{AFX_DATA(CDlgEditShowColumn)
+    enum { IDD = IDD_DLG_EDIT_SHOW_COLUMN };
+    CListCtrl    m_listColumn;
+    //}}AFX_DATA
 
 
-	void	SwapListItem(int, int);
-	void	SelChangeList(void);
+    void    SwapListItem(int, int);
+    void    SelChangeList(void);
 
 // オーバーライド
-	// ClassWizard は仮想関数のオーバーライドを生成します。
-	//{{AFX_VIRTUAL(CDlgEditShowColumn)
-	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV サポート
-	//}}AFX_VIRTUAL
+    // ClassWizard は仮想関数のオーバーライドを生成します。
+    //{{AFX_VIRTUAL(CDlgEditShowColumn)
+    protected:
+    virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV サポート
+    //}}AFX_VIRTUAL
 
 // インプリメンテーション
 protected:
 
-	// 生成されたメッセージ マップ関数
-	//{{AFX_MSG(CDlgEditShowColumn)
-	virtual BOOL OnInitDialog();
-	afx_msg void OnBtDown();
-	afx_msg void OnBtUp();
-	virtual void OnOK();
-	afx_msg void OnBtResetPage();
-	afx_msg void OnChangeEditMaxWidth();
-	afx_msg void OnItemChangedListColumn(NMHDR* pNMHDR, LRESULT* pResult);
-	afx_msg void OnItemChangingListColumn(NMHDR* pNMHDR, LRESULT* pResult);
-	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
+    // 生成されたメッセージ マップ関数
+    //{{AFX_MSG(CDlgEditShowColumn)
+    virtual BOOL OnInitDialog();
+    afx_msg void OnBtDown();
+    afx_msg void OnBtUp();
+    virtual void OnOK();
+    afx_msg void OnBtResetPage();
+    afx_msg void OnChangeEditMaxWidth();
+    afx_msg void OnItemChangedListColumn(NMHDR* pNMHDR, LRESULT* pResult);
+    afx_msg void OnItemChangingListColumn(NMHDR* pNMHDR, LRESULT* pResult);
+    //}}AFX_MSG
+    DECLARE_MESSAGE_MAP()
 };
 
 //{{AFX_INSERT_LOCATION}}

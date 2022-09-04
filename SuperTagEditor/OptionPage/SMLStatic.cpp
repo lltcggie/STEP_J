@@ -55,28 +55,28 @@ void CSMLStatic::OnRButtonDblClk(UINT nFlags, CPoint point) {}
 void CSMLStatic::OnRButtonDown(UINT nFlags, CPoint point) {}
 void CSMLStatic::OnRButtonUp(UINT nFlags, CPoint point) {}
 
-BOOL CSMLStatic::OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message) 
+BOOL CSMLStatic::OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message)
 {
 	return TRUE;
 }
 
 
-BOOL CSMLStatic::PreCreateWindow(CREATESTRUCT& cs) 
+BOOL CSMLStatic::PreCreateWindow(CREATESTRUCT& cs)
 {
 	// TODO: Add your specialized code here and/or call the base class
 	cs.style |= ES_MULTILINE | WS_VISIBLE | WS_VSCROLL;
-	
+
 	return CRichEditCtrl::PreCreateWindow(cs);
 }
 
 
-int CSMLStatic::OnCreate(LPCREATESTRUCT lpCreateStruct) 
+int CSMLStatic::OnCreate(LPCREATESTRUCT lpCreateStruct)
 {
 	if (CRichEditCtrl::OnCreate(lpCreateStruct) == -1)
 		return -1;
 
 	InsertDocument();
-	
+
 	return 0;
 }
 
@@ -200,7 +200,7 @@ void CSMLStatic::InsertDocument()
 				break;
 			}
 		}
-		
+
 		// Set the paragraph font and style information
 		SetParaFormat(format);
 
@@ -211,7 +211,6 @@ void CSMLStatic::InsertDocument()
 			CString		typeface;
 
 			blk = group->GetBlock(blkIndex);
-			
 
 			// Create the text block font formatting information for the
 			// rich edit control
@@ -226,7 +225,7 @@ void CSMLStatic::InsertDocument()
 			if(0 == typeface.GetLength()) {
 				typeface = m_Document->GetTypeface();
 			}
-			
+
 			if(typeface.GetLength() >= LF_FACESIZE) {
 				TRACE1("Typeface %s is too long for CHARFORMAT member\n", typeface.GetBuffer(0));
 			} else {
@@ -250,7 +249,7 @@ void CSMLStatic::InsertDocument()
 			}
 
 			SetSelectionCharFormat(charFmt);
-			
+
 			ReplaceSel(blk->GetText(), FALSE);
 		}
 

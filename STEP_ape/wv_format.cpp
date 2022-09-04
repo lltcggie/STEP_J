@@ -59,15 +59,15 @@ void SetAudioFormatWv(FILE_INFO *pFileMP3)
     if(_tfopen_s(&fp, GetFullPath(pFileMP3), _T("rb")) != 0){
         return ;
     }
-    WavpackStreamReader64 StreamReader = 
+    WavpackStreamReader64 StreamReader =
     {
-        wv_read_bytes, 
+        wv_read_bytes,
         wv_write_bytes,
         wv_get_pos,
-        wv_set_pos_abs, 
-        wv_set_pos_rel, 
-        wv_push_back_byte, 
-        wv_get_length, 
+        wv_set_pos_abs,
+        wv_set_pos_rel,
+        wv_push_back_byte,
+        wv_get_length,
         wv_can_seek,
         wv_truncate_here,
         wv_close
@@ -100,7 +100,7 @@ void SetAudioFormatWv(FILE_INFO *pFileMP3)
         dBitrateWvc += 0.5;
         dBitrate /= 1000;
         dBitrate += 0.5;
-        _sntprintf_s(bitrate, _TRUNCATE, _T("%dkbps(%dkbps+%dkbps)"), 
+        _sntprintf_s(bitrate, _TRUNCATE, _T("%dkbps(%dkbps+%dkbps)"),
                     (int)dBitrateWvc, (int)dBitrate, (int)dBitrateWvc-(int)dBitrate);
     }
     else if(dBitrate > 0){

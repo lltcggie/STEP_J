@@ -14,44 +14,44 @@
 
 class CDlgConv : public COptionPage
 {
-	DECLARE_DYNCREATE(CDlgConv)
+    DECLARE_DYNCREATE(CDlgConv)
 
 // コンストラクション
 public:
-	CDlgConv();
-	~CDlgConv();
+    CDlgConv();
+    ~CDlgConv();
 
 // ダイアログ データ
-	//{{AFX_DATA(CDlgConv)
-	enum { IDD = IDD_DIALOG_CONV };
-	CEdit	m_cFirstUpperSentenceSeparator;
-	CEdit	m_cFirstUperIgnoreWords;
-	BOOL	m_bFirstUpperIgnoreWord;
-	CString	m_strFirstUpperIgnoreWords;
-	CString	m_strFirstUpperSentenceSeparator;
-	BOOL	m_bUserConvAddMenu;
-	BOOL	m_bZenHanKigouKana;
+    //{{AFX_DATA(CDlgConv)
+    enum { IDD = IDD_DIALOG_CONV };
+    CEdit   m_cFirstUpperSentenceSeparator;
+    CEdit   m_cFirstUperIgnoreWords;
+    BOOL    m_bFirstUpperIgnoreWord;
+    CString m_strFirstUpperIgnoreWords;
+    CString m_strFirstUpperSentenceSeparator;
+    BOOL    m_bUserConvAddMenu;
+    BOOL    m_bZenHanKigouKana;
     BOOL    m_bAutoTilde2WaveDash;
-	//}}AFX_DATA
+    //}}AFX_DATA
 
 
 // オーバーライド
-	// ClassWizard は仮想関数のオーバーライドを生成します。
+    // ClassWizard は仮想関数のオーバーライドを生成します。
 
-	//{{AFX_VIRTUAL(CDlgConv)
-	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV サポート
-	//}}AFX_VIRTUAL
+    //{{AFX_VIRTUAL(CDlgConv)
+    protected:
+    virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV サポート
+    //}}AFX_VIRTUAL
 
 // インプリメンテーション
 protected:
-	// 生成されたメッセージ マップ関数
-	//{{AFX_MSG(CDlgConv)
-	afx_msg void OnCheckFirstUpperIgnoreWord();
-	virtual BOOL OnInitDialog();
-	afx_msg void OnBtResetPage();
-	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
+    // 生成されたメッセージ マップ関数
+    //{{AFX_MSG(CDlgConv)
+    afx_msg void OnCheckFirstUpperIgnoreWord();
+    virtual BOOL OnInitDialog();
+    afx_msg void OnBtResetPage();
+    //}}AFX_MSG
+    DECLARE_MESSAGE_MAP()
 
 };
 

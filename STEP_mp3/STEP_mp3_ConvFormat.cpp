@@ -156,7 +156,7 @@ bool ConvFileFormat(FILE_INFO* pFileMP3, UINT nType, HWND hWnd) {
             }
             WriteTagID3(pFileMP3);
             STEPInitDataSIF(pFileMP3);
-        } 
+        }
         else if (nFormat == nFileTypeID3V2) { // ID3v2 => ID3v1
             if (DeleteTagID3v2(GetFullPath(pFileMP3), hWnd) == false) {
                 MessageBox(hWnd, _T("ファイル形式の変換に失敗しました"),  GetFullPath(pFileMP3), MB_ICONSTOP|MB_OK|MB_TOPMOST);
@@ -335,7 +335,7 @@ bool WINAPI DeleteId3tagv2(FILE_INFO* pFileInfo, int nProcFlag, HWND hWnd) {
     return true;
 }
 
-bool WINAPI ConvID3v2Version(FILE_INFO* pFileInfo, int nProcFlag, HWND hWnd) 
+bool WINAPI ConvID3v2Version(FILE_INFO* pFileInfo, int nProcFlag, HWND hWnd)
 {
     if (nProcFlag == 3) {
         return false;

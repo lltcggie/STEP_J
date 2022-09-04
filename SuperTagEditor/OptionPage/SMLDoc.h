@@ -317,7 +317,7 @@ public:
 
 		Retrieves the global typeface of the document.
 
-		\return	A reference to a CString object containing the 
+		\return	A reference to a CString object containing the
 	*/
 	CString &GetTypeface();
 };

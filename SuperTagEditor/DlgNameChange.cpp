@@ -16,49 +16,49 @@ static char THIS_FILE[] = __FILE__;
 
 
 CDlgNameChange::CDlgNameChange(CWnd* pParent /*=NULL*/)
-	: CDialog(CDlgNameChange::IDD, pParent)
+    : CDialog(CDlgNameChange::IDD, pParent)
 {
-	//{{AFX_DATA_INIT(CDlgNameChange)
-	m_strName = _T("");
-	//}}AFX_DATA_INIT
+    //{{AFX_DATA_INIT(CDlgNameChange)
+    m_strName = _T("");
+    //}}AFX_DATA_INIT
 }
 
 
 void CDlgNameChange::DoDataExchange(CDataExchange* pDX)
 {
-	CDialog::DoDataExchange(pDX);
-	//{{AFX_DATA_MAP(CDlgNameChange)
-	DDX_Control(pDX, IDC_EDIT_NAME, m_editName);
-	DDX_Text(pDX, IDC_EDIT_NAME, m_strName);
-	DDV_MaxChars(pDX, m_strName, 64);
-	//}}AFX_DATA_MAP
+    CDialog::DoDataExchange(pDX);
+    //{{AFX_DATA_MAP(CDlgNameChange)
+    DDX_Control(pDX, IDC_EDIT_NAME, m_editName);
+    DDX_Text(pDX, IDC_EDIT_NAME, m_strName);
+    DDV_MaxChars(pDX, m_strName, 64);
+    //}}AFX_DATA_MAP
 }
 
 
 BEGIN_MESSAGE_MAP(CDlgNameChange, CDialog)
-	//{{AFX_MSG_MAP(CDlgNameChange)
-	//}}AFX_MSG_MAP
+    //{{AFX_MSG_MAP(CDlgNameChange)
+    //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
 // CDlgNameChange メッセージ ハンドラ
 
-BOOL CDlgNameChange::OnInitDialog() 
+BOOL CDlgNameChange::OnInitDialog()
 {
-	CDialog::OnInitDialog();
+    CDialog::OnInitDialog();
 
-	// 選択状態にする
-	m_editName.SetSel(0, -1);
+    // 選択状態にする
+    m_editName.SetSel(0, -1);
 
-	return TRUE;  // コントロールにフォーカスを設定しないとき、戻り値は TRUE となります
-	              // 例外: OCX プロパティ ページの戻り値は FALSE となります
+    return TRUE;  // コントロールにフォーカスを設定しないとき、戻り値は TRUE となります
+                  // 例外: OCX プロパティ ページの戻り値は FALSE となります
 }
 
-void CDlgNameChange::OnOK() 
+void CDlgNameChange::OnOK()
 {
-	CDialog::OnOK();
+    CDialog::OnOK();
 
-	if (m_strName.IsEmpty() == TRUE) {
-		m_strName = _T("名称未設定");
-	}
+    if (m_strName.IsEmpty() == TRUE) {
+        m_strName = _T("名称未設定");
+    }
 }

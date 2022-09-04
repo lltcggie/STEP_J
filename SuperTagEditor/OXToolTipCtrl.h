@@ -51,8 +51,8 @@ the control using the AddTool(...) member function.
 
 eg. (In a formview or dialog)
 
-     tooltip.Create(this)
-     tooltip.AddTool(GetDlgItem(IDC_CONTROL),
+    tooltip.Create(this)
+    tooltip.AddTool(GetDlgItem(IDC_CONTROL),
             _T("Tooltip text\rThis is the extended\ntooltip text"));
 
 where ID_CONTROL is the ID of a control.
@@ -69,18 +69,18 @@ parent window, and an entry in the message map;
 
 eg. In you view or form
 
-   BEGIN_MESSAGE_MAP(CMyDlg, CDialog)
-   ...
-   ON_NOTIFY_EX( TTN_NEEDTEXT, 0, OnToolTipNotify)
-   END_MESSAGE_MAP()
+    BEGIN_MESSAGE_MAP(CMyDlg, CDialog)
+    ...
+    ON_NOTIFY_EX( TTN_NEEDTEXT, 0, OnToolTipNotify)
+    END_MESSAGE_MAP()
 
-   BOOL CMyDlg::OnInitDialog()
-   {
-       CDialog::OnInitDialog();
+    BOOL CMyDlg::OnInitDialog()
+    {
+        CDialog::OnInitDialog();
 
-       tooltip.Create(this)
-       tooltip.AddTool(GetDlgItem(IDC_CONTROL), LPSTR_TEXTCALLBACK);
-       ...
+        tooltip.Create(this)
+        tooltip.AddTool(GetDlgItem(IDC_CONTROL), LPSTR_TEXTCALLBACK);
+        ...
     }
 
     BOOL CMyDlg::OnToolTipNotify(UINT id, NMHDR* pNMHDR, LRESULT* pResult)
@@ -123,11 +123,11 @@ structure instead of a TOOLINFO structure. This structure is defined as
     struct OXTOOLINFO : public TOOLINFO
     {
     #if (_WIN32_IE < 0x0300)
-       LPARAM    lParam;       Application defined value that is associated with the tool
+        LPARAM    lParam;       Application defined value that is associated with the tool
     #endif
-       int       nWidth;       Width of box, or 0 for default
-       COLORREF  clrTextColor; text color
-       COLORREF  clrBackColor; background color
+        int       nWidth;       Width of box, or 0 for default
+        COLORREF  clrTextColor; text color
+        COLORREF  clrBackColor; background color
     }
 
 and so is very similar to the standard TOOLINFO, and is used in the same way,
@@ -136,13 +136,13 @@ with the exception that the uFlags member is not (yet) used.
 To change the color of an individual tip, use the GetToolInfo/SetToolInfo
 functions
 
-   OXTOOLINFO ToolInfo;
-   if (m_toolTip.GetToolInfo(ToolInfo, GetDlgItem(IDC_CONTROL)))
-   {
-       ToolInfo.clrBackColor = RGB(255, 255, 255);
-       ToolInfo.clrTextColor = RGB(  0,   0, 255);
-       m_toolTip.SetToolInfo(&ToolInfo);
-   }
+    OXTOOLINFO ToolInfo;
+    if (m_toolTip.GetToolInfo(ToolInfo, GetDlgItem(IDC_CONTROL)))
+    {
+        ToolInfo.clrBackColor = RGB(255, 255, 255);
+        ToolInfo.clrTextColor = RGB(  0,   0, 255);
+        m_toolTip.SetToolInfo(&ToolInfo);
+    }
 
 
 

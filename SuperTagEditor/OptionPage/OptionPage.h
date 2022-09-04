@@ -31,7 +31,7 @@
 	a newsletter. In a wizard-type tab dialog box, the option pages do not
 	have tabs, and only one option page is visible at a time. Also, instead
 	of having OK and Apply Now buttons, a wizard-type tab dialog box has a
-	Back button, a Next or Finish button, and a Cancel button. 
+	Back button, a Next or Finish button, and a Cancel button.
 */
 class COptionPage : public CDialog
 {
@@ -84,7 +84,7 @@ public:
 		\brief	Constructs a COptionPage object.
 
 		Constructs a COptionPage object. The object is displayed after all of
-		the following conditions are met: 
+		the following conditions are met:
 
 		<ul>
 			<li>The page has been added to a option sheet using
@@ -104,7 +104,7 @@ public:
 		\brief	Constructs a COptionPage object.
 
 		Constructs a COptionPage object. The object is displayed after all of
-		the following conditions are met: 
+		the following conditions are met:
 
 		<ul>
 			<li>The page has been added to a option sheet using
@@ -113,7 +113,7 @@ public:
 			<li>The user has selected (tabbed to) this page.
 		</ul>
 
-		\param	lpszTemplateName	Points to a string containing the name 
+		\param	lpszTemplateName	Points to a string containing the name
 									of the template for this page. Cannot be NULL.
 		\param	nIDCaption			ID of the name to be placed in the tab for
 									this page. If 0, the name will be taken from
@@ -151,7 +151,7 @@ public:
 
 		Call this member function to enable or disable the Apply Now button,
 		based on whether the settings in the option page should be applied
-		to the appropriate external object. 
+		to the appropriate external object.
 
 		The framework keeps track of which pages are "dirty," that is,
 		option pages for which you have called SetModified( TRUE ). The
@@ -188,7 +188,7 @@ public:
 		For more information about notification messages sent when the user
 		presses the Apply Now or OK button in a option sheet, see OSN_APPLY.
 
-		\return	TRUE if the changes are accepted; otherwise FALSE. 
+		\return	TRUE if the changes are accepted; otherwise FALSE.
 	*/
 	virtual BOOL OnApply();
 
@@ -198,7 +198,7 @@ public:
 		This member function is called by the framework when the user chooses
 		the Cancel button. When the framework calls this function, changes to
 		all option pages that were made by the user previously choosing the
-		Apply Now button are discarded, and the option sheet retains focus. 
+		Apply Now button are discarded, and the option sheet retains focus.
 
 		Override this member function to specify what action the program takes
 		when the user clicks the Cancel button.
@@ -269,7 +269,7 @@ public:
 				before the cancel has taken place.
 
 		This member function is called by the framework when the user clicks the
-		Cancel button and before the cancel action has taken place. 
+		Cancel button and before the cancel action has taken place.
 
 		Override this member function to specify an action the program takes
 		when the user clicks the Cancel button.
@@ -287,13 +287,13 @@ public:
 		on the Back button in a wizard.
 
 		Override this member function to specify some action the user must
-		take when the Back button is pressed. 
+		take when the Back button is pressed.
 
 		For more information on how to make a wizard-type option sheet,
 		see CPropertySheet::SetWizardMode.
 
 		\retval	0	To automatically advance to the next page.
-		\retval	-1	to prevent the page from changing. 
+		\retval	-1	to prevent the page from changing.
 		\retval nId	An identifier of the dialog to be displayed. This is used
 					To jump to a page other than the next one.
 	*/
@@ -304,7 +304,7 @@ public:
 				using a wizard-type option sheet.
 
 		\retval	0	To automatically advance to the next page.
-		\retval	-1	to prevent the page from changing. 
+		\retval	-1	to prevent the page from changing.
 		\retval nId	An identifier of the dialog to be displayed. This is used
 					To jump to a page other than the next one.
 
@@ -312,7 +312,7 @@ public:
 		on the Next button in a wizard.
 
 		Override this member function to specify some action the user must take
-		when the Next button is pressed. 
+		when the Next button is pressed.
 	*/
 	virtual LRESULT OnWizardNext();
 

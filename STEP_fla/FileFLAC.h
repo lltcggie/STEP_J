@@ -40,11 +40,11 @@ struct _File_Tag
     TCHAR *year;           /* Year of track */
     TCHAR *track;          /* Position of track in the album */
     TCHAR *track_total;    /* The number of tracks for the album (ex: 12/20) */
-	TCHAR *str_track;      /* For write tag (ex. 12/20) */
+    TCHAR *str_track;      /* For write tag (ex. 12/20) */
     TCHAR *genre;          /* Genre of song */
     TCHAR *comment;        /* Comment */
-	TCHAR *composer;       /* Composer */
-	TCHAR *performer;      /* Performer */
+    TCHAR *composer;       /* Composer */
+    TCHAR *performer;      /* Performer */
 #endif
     TCHAR *values[FLA_LAST];
     CPtrArray *other;     /* List of unsupported fields (used for ogg only) */

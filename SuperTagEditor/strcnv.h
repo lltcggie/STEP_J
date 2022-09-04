@@ -1,10 +1,10 @@
 #pragma once
 
 enum {
-    CONV_SUJI = 0x01, 
-    CONV_ALPHA = 0x01 << 1, 
-    CONV_KATA = 0x01 << 2, 
-    CONV_KIGOU = 0x01 << 3, 
+    CONV_SUJI = 0x01,
+    CONV_ALPHA = 0x01 << 1,
+    CONV_KATA = 0x01 << 2,
+    CONV_KIGOU = 0x01 << 3,
     //CONV_KIGOU_KATA = 0x01 << 4, //、。「」・をカタカナとして扱う
     CONV_ALL = 0xFFFFFFFF};
 

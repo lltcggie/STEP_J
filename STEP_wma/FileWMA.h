@@ -9,7 +9,7 @@
 #include <wmsdk.h>
 #include "STEPlugin.h"
 
-#define STREAM_NUM	0x0000
+#define STREAM_NUM  0x0000
 
 bool LoadFileWMA(FILE_INFO *pFileMP3);
 bool WriteFileWMA(FILE_INFO *pFileMP3);

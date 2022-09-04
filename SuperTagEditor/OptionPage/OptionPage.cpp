@@ -236,12 +236,12 @@ void COptionPage::GetCaption(CString &str)
 	str = m_Caption;
 }
 
-BOOL COptionPage::OnInitDialog() 
+BOOL COptionPage::OnInitDialog()
 {
 	CDialog::OnInitDialog();
-	
+
 	GetWindowText(m_Caption);
-	
+
 	return TRUE;  // return TRUE unless you set the focus to a control
 	              // EXCEPTION: OCX Property Pages should return FALSE
 }
@@ -276,7 +276,7 @@ void COptionPage::OnReset()
 void COptionPage::OnOK()
 {
 	ASSERT_VALID(this);
-	if (!::IsWindow(m_hWnd))	return;
+	if (!::IsWindow(m_hWnd)) return;
 	UpdateData(TRUE);
 	//CDialog::OnOK();
 }

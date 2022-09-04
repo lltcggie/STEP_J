@@ -14,14 +14,14 @@ class CHeaderCtrlEx : public CHeaderCtrl
 {
 // コンストラクション
 public:
-	CHeaderCtrlEx();
+    CHeaderCtrlEx();
 
 protected:
-	int		m_nSortCol;
-	BOOL	m_bSortAsc;
+    int     m_nSortCol;
+    BOOL    m_bSortAsc;
 
 public:
-	int		SetSortImage(int, BOOL);
+    int     SetSortImage(int, BOOL);
 
 // アトリビュート
 public:
@@ -30,22 +30,22 @@ public:
 public:
 
 // オーバーライド
-	// ClassWizard は仮想関数のオーバーライドを生成します。
-	//{{AFX_VIRTUAL(CHeaderCtrlEx)
-	//}}AFX_VIRTUAL
+    // ClassWizard は仮想関数のオーバーライドを生成します。
+    //{{AFX_VIRTUAL(CHeaderCtrlEx)
+    //}}AFX_VIRTUAL
 
 // インプリメンテーション
 public:
-	virtual ~CHeaderCtrlEx();
+    virtual ~CHeaderCtrlEx();
 
-	// 生成されたメッセージ マップ関数
+    // 生成されたメッセージ マップ関数
 protected:
-	//{{AFX_MSG(CHeaderCtrlEx)
-		// メモ - ClassWizard はこの位置にメンバ関数を追加または削除します。
-	afx_msg void DrawItem(LPDRAWITEMSTRUCT lpDrawItemStruct);
-	//}}AFX_MSG
+    //{{AFX_MSG(CHeaderCtrlEx)
+        // メモ - ClassWizard はこの位置にメンバ関数を追加または削除します。
+    afx_msg void DrawItem(LPDRAWITEMSTRUCT lpDrawItemStruct);
+    //}}AFX_MSG
 
-	DECLARE_MESSAGE_MAP()
+    DECLARE_MESSAGE_MAP()
 };
 
 /////////////////////////////////////////////////////////////////////////////

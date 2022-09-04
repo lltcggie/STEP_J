@@ -13,46 +13,46 @@
 
 class CDlgWriteForm : public COptionPage
 {
-	DECLARE_DYNCREATE(CDlgWriteForm)
+    DECLARE_DYNCREATE(CDlgWriteForm)
 
 // コンストラクション
 public:
-	CDlgWriteForm();
-	~CDlgWriteForm();
+    CDlgWriteForm();
+    ~CDlgWriteForm();
 
 // ダイアログ データ
-	//{{AFX_DATA(CDlgWriteForm)
-	enum { IDD = IDD_DLG_WRITE_FORM };
-	CButton	m_btWriteHtml;
-	CButton	m_btIsHtml;
-	CButton	m_btWriteSelected;
-	CEdit	m_editFileName;
-	CEdit	m_editExtName;
-	CComboBox	m_listFormatType;
-	int		m_nFormatType;
-	//}}AFX_DATA
+    //{{AFX_DATA(CDlgWriteForm)
+    enum { IDD = IDD_DLG_WRITE_FORM };
+    CButton m_btWriteHtml;
+    CButton m_btIsHtml;
+    CButton m_btWriteSelected;
+    CEdit   m_editFileName;
+    CEdit   m_editExtName;
+    CComboBox    m_listFormatType;
+    int     m_nFormatType;
+    //}}AFX_DATA
 
-	WRITE_FORMAT	m_writeFormat[WRITE_FORMAT_MAX];
+    WRITE_FORMAT    m_writeFormat[WRITE_FORMAT_MAX];
 
 // オーバーライド
-	// ClassWizard は仮想関数のオーバーライドを生成します。
+    // ClassWizard は仮想関数のオーバーライドを生成します。
 
-	//{{AFX_VIRTUAL(CDlgWriteForm)
-	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV サポート
-	//}}AFX_VIRTUAL
+    //{{AFX_VIRTUAL(CDlgWriteForm)
+    protected:
+    virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV サポート
+    //}}AFX_VIRTUAL
 
 // インプリメンテーション
 protected:
-	// 生成されたメッセージ マップ関数
-	//{{AFX_MSG(CDlgWriteForm)
-	virtual BOOL OnInitDialog();
-	afx_msg void OnBtNameChange();
-	afx_msg void OnBtRefFile();
-	afx_msg void OnSelChangeListFormatType();
-	virtual void OnOK();
-	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
+    // 生成されたメッセージ マップ関数
+    //{{AFX_MSG(CDlgWriteForm)
+    virtual BOOL OnInitDialog();
+    afx_msg void OnBtNameChange();
+    afx_msg void OnBtRefFile();
+    afx_msg void OnSelChangeListFormatType();
+    virtual void OnOK();
+    //}}AFX_MSG
+    DECLARE_MESSAGE_MAP()
 
 };
 

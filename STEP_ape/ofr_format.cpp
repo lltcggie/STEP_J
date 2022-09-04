@@ -81,8 +81,8 @@ void SetAudioFormatOfr(FILE_INFO *pFileMP3)
     OptimFROG_Info Info = {0};
     if(OptimFROG_getInfo(pInstance, &Info)){
         TCHAR format[256];
-        _sntprintf_s(format, _TRUNCATE, 
-                     _T("OptimFROG %dkbps, %dHz, %dbit, %dch"), 
+        _sntprintf_s(format, _TRUNCATE,
+                     _T("OptimFROG %dkbps, %dHz, %dbit, %dch"),
                      Info.bitrate, Info.samplerate, Info.bitspersample, Info.channels);
         SetAudioFormat(pFileMP3, format);
         SetPlayTime(pFileMP3, Info.length_ms/1000);
