@@ -9,7 +9,7 @@
 #ifndef _UNICODE
 
 //#ifndef iskanji
-//#define iskanji(c)		((c) >= 0x81 && (c) <= 0x9f || (c) >= 0xe0 && (c) <= 0xfc)
+//#define iskanji(c)        ((c) >= 0x81 && (c) <= 0x9f || (c) >= 0xe0 && (c) <= 0xfc)
 //#endif
 
 #endif
