@@ -2,6 +2,14 @@
 *.vcxproj.user
 *.chw
 
+# Visual C++ cache files
+ipch/
+*.aps
+*.ncb
+*.opensdf
+*.sdf
+*.cachefile
+
 Thumbs.db
 */.vs
 */Release
