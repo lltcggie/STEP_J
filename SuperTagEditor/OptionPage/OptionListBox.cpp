@@ -58,8 +58,9 @@ END_MESSAGE_MAP()
 // COptionListBox message handlers
 void COptionListBox::MeasureItem(LPMEASUREITEMSTRUCT lpMeasureItemStruct)
 {
-    if(lpMeasureItemStruct->itemHeight < 18) {
-        lpMeasureItemStruct->itemHeight = 18;
+    unsigned int tempHeight = static_cast<unsigned int>(18 * CClientDC(0).GetDeviceCaps(LOGPIXELSX) / 96.0f);
+    if(lpMeasureItemStruct->itemHeight < tempHeight) {
+        lpMeasureItemStruct->itemHeight = tempHeight;
     }
 }
 
