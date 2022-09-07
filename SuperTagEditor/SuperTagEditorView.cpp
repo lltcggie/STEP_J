@@ -1309,9 +1309,9 @@ void CSuperTagEditorView::OnSelectDeleteFile()
         nCount = m_List.MakeSelectFileArray(arrayList);
 
         CString strMess;
-        strMess.Format(_T("選択されているファイル(%d個)を削除します\n\n")
+        strMess.Format(_T("選択されているファイル(%d個)が消去されます\n\n")
                        _T("実行してもよろしいですか？"), nCount);
-        if (g_bConfDeleteFile == false || MessageBox(strMess, _T("ファイルの削除"), MB_YESNO|MB_TOPMOST) == IDYES) {
+        if (g_bConfDeleteFile == false || MessageBox(strMess, _T("ファイルの削除"), MB_YESNO|MB_TOPMOST|MB_ICONWARNING) == IDYES) {
             /* WildCherry4 082 */
             /*
             // 削除ファイルのリストを作成

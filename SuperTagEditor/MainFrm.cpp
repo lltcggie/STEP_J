@@ -277,7 +277,7 @@ void CMainFrame::OnUpdateFrameTitle(BOOL bAddToTitle)
 {
     CFrameWnd::OnUpdateFrameTitle(bAddToTitle);
 
-    CString strTitle(PROG_NAME " Ver " PROG_VERSION "(" PROG_PLATFORM ")");
+    CString strTitle(PROG_NAME " Ver " PROG_VERSION " (" PROG_PLATFORM ")");
     SetWindowText(strTitle);
 }
 

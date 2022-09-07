@@ -267,6 +267,7 @@ private:
     COptionPage *m_CurrentPage;     //!<    Pointer to the currently active option page
 
     int         m_ListWidth;        //!<    Width of the control containing a list of the option pages
+    float       m_dpiScale;         //!<    DPI scale setting
     COptionList *m_ListWindow;      //!<    Control containing the list of option pages
 
     CString     m_strCaption;       //!<    Caption used on the option sheet dialog

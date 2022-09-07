@@ -130,8 +130,8 @@
 #define IDC_BT_NAME_CHANGE              1041
 #define IDC_EDIT_NAME                   1042
 #define IDC_BT_NUMBER                   1042
-#define IDC_BT_NUMBER2                  1942
-#define IDC_BT_FIX_STRING               1043
+#define IDC_BT_NUMBER2                  1043
+#define IDC_BT_FIX_STRING               1044
 #define IDC_CH_OUTPUT_FULLPATH          1044
 #define IDC_RA_ADD_LIST_ON              1045
 #define IDC_BT_DISC_NUMBER2             1045

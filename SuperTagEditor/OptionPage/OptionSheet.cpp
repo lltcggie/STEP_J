@@ -170,7 +170,8 @@ void COptionSheet::CommonConstruct(CWnd *pParentWnd, UINT iSelectPage)
     m_ButtonHeight = 0;
     m_CurrentPage = NULL;
     m_DlgTemplate = NULL;
-    m_ListWidth = 150;
+    m_dpiScale = 1.0;
+    m_ListWidth = 140;
 
     if (FALSE != IsHelpEnabled()) {
         m_psh.dwFlags |= OSH_HASHELP;
@@ -568,6 +569,9 @@ INT_PTR COptionSheet::DoModal()
 {
     INT_PTR result;
     int oldWidth;
+
+    m_dpiScale = CClientDC(0).GetDeviceCaps(LOGPIXELSX) / 96.0f;
+    m_ListWidth *= m_dpiScale;
 
     // Save the old list control width;
     oldWidth = m_ListWidth;
@@ -1002,7 +1006,23 @@ BOOL COptionSheet::OnInitDialog()
         m_Font.DeleteObject();
     }
 
-    m_Font.Attach(GetStockObject(DEFAULT_GUI_FONT));
+    //m_Font.Attach(GetStockObject(DEFAULT_GUI_FONT));
+    m_Font.CreateFontW(
+    -MulDiv(9, CClientDC(0).GetDeviceCaps(LOGPIXELSY), 72)
+    , 0
+    , 0
+    , 0
+    , 0
+    , 0
+    , 0
+    , 0
+    , 0
+    , 0
+    , 0
+    , 0
+    , 0
+    , TEXT("Meiryo UI")
+    );
 
     // Set the icon
     if(m_psh.dwFlags & OSH_USEHICON && NULL != m_psh.hIcon) {
