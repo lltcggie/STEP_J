@@ -1,14 +1,16 @@
 -------------------------------------------------------------------------------
 
-  五代目 SuperTagEditor STEP_J Version 1.01                    (2022/09/07公開)
+  五代目 SuperTagEditor STEP_J Version 1.01a                   (2022/09/08公開)
 
-         Copyright(C) 2000-2022 MERCURY, haseta, Mimura, Kobarin, jarupxx
-         HomePage: https://github.com/jarupxx/STEP_J/
+              Copyright(C) 2000-2022 MERCURY, haseta, Mimura, Kobarin, jarupxx
+              HomePage: https://github.com/jarupxx/STEP_J/
 -------------------------------------------------------------------------------
 【 タイトル 】 STEP_J
-【バージョン】 1.01
-【ファイル名】 step_j_x64_101.7z
-【 動作環境 】 Windows 10 64bit (Windows 8 以前では動作確認していません)
+【バージョン】 1.01a
+【ファイル名】 step_j_x64_101a.7z
+【 動作環境 】 Windows 7/8.1/10/11 64bit
+               (Windows Vista 以前では動作確認が取れていません)
+
                Visual Studio 2022 の Microsoft Visual C++ 再頒布可能パッケージ
                (ランタイム)のインストールが必要です。
                https://visualstudio.microsoft.com/ja/downloads/#other-ja-family
