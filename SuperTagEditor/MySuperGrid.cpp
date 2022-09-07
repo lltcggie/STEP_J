@@ -86,11 +86,11 @@ struct COLUMN_STATUS    g_columnStatus[/*COLUMN_MAX*/] = {//デバッグ版で _
     {_T("TrackName") , TRUE ,  2, 128,   0, TRUE, 0, LVCFMT_LEFT },    // 曲名
     {_T("ArtistName"), TRUE ,  3, 128,   0, TRUE, 0, LVCFMT_LEFT },    // アーティスト名
     {_T("AlbumName") , TRUE ,  4, 128,   0, TRUE, 0, LVCFMT_LEFT },    // アルバム名／製品名
-    {_T("TrackNo")   , TRUE ,  5,  60,  60, TRUE, 60, LVCFMT_RIGHT},    // トラック番号(ID3 tag v1.1のみ)
-    {_T("TrackTotal"), TRUE ,  6,  60,  60, TRUE, 60, LVCFMT_RIGHT},    // トラック数(by Kobarin)
-    {_T("DiscNo")    , TRUE,   7,  60,  60, TRUE, 60, LVCFMT_RIGHT},    // ディスク番号(Disc => Disc by Kobarin)
-    {_T("DiscTotal") , TRUE,   8,  60,  60, TRUE, 60, LVCFMT_RIGHT},    // ディスク数(by Kobarin)
-    {_T("Year")      , TRUE ,  9,  48,  48, TRUE, 48, LVCFMT_LEFT },    // リリース年号
+    {_T("TrackNo")   , TRUE ,  5,  60,   0, TRUE, 60, LVCFMT_RIGHT},    // トラック番号(ID3 tag v1.1のみ)
+    {_T("TrackTotal"), TRUE ,  6,  60,   0, TRUE, 60, LVCFMT_RIGHT},    // トラック数(by Kobarin)
+    {_T("DiscNo")    , TRUE,   7,  60,   0, TRUE, 60, LVCFMT_RIGHT},    // ディスク番号(Disc => Disc by Kobarin)
+    {_T("DiscTotal") , TRUE,   8,  60,   0, TRUE, 60, LVCFMT_RIGHT},    // ディスク数(by Kobarin)
+    {_T("Year")      , TRUE ,  9,  48,   0, TRUE, 48, LVCFMT_LEFT },    // リリース年号
     {_T("Genre")     , TRUE , 10, 128,   0, TRUE, 0, LVCFMT_LEFT },    // ジャンル
     {_T("Comment")   , TRUE , 11, 128,   0, TRUE, 0, LVCFMT_LEFT },    // コメント文字列
     {_T("Copyright") , FALSE, 12, 128,   0, FALSE, 0, LVCFMT_LEFT },    // 著作権
