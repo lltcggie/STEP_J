@@ -1598,7 +1598,7 @@ STEP_API bool WINAPI STEPOnCommand(UINT nID, HWND hWnd)
                                         _T("ID3v1 には文字列長と扱える文字に制限があるため、変換後に\r\n")
                                         _T("情報の一部を失うことがあります。\n\n")
                                         _T("変換を実行してもよろしいですか？");
-        if (MessageBox(hWnd, sMessage, _T("ID3v1 に変換"), MB_YESNO|MB_TOPMOST) == IDYES) {
+        if (MessageBox(hWnd, sMessage, _T("ID3v1 に変換"), MB_YESNO|MB_TOPMOST|MB_ICONWARNING) == IDYES) {
             STEPProcessSelectedFilesForUpdate(_T("ID3v1 に変換中....."), ConvFileFormatID3v1);
         }
         return true;
@@ -1612,7 +1612,7 @@ STEP_API bool WINAPI STEPOnCommand(UINT nID, HWND hWnd)
                                          _T("また対応ソフトが少ない為、ソフトによってはタグ情報を\r\n")
                                          _T("取得出来ないことがあります。\n\n")
                                          _T("変換を実行してもよろしいですか？");
-        if (MessageBox(hWnd, sMessage, _T("RIFF MP3 に変換"), MB_YESNO|MB_TOPMOST) == IDYES) {
+        if (MessageBox(hWnd, sMessage, _T("RIFF MP3 に変換"), MB_YESNO|MB_TOPMOST|MB_ICONWARNING) == IDYES) {
             STEPProcessSelectedFilesForUpdate(_T("RIFF MP3 に変換中....."), ConvFileFormatRMP);
         }
         return true;
