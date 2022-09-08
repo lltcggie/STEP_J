@@ -1,0 +1,4 @@
+*.rc working-tree-encoding=UTF-16LE-BOM eol=CRLF
+*.html working-tree-encoding=sjis eol=CRLF
+*.hhc working-tree-encoding=sjis eol=CRLF
+*.hhk working-tree-encoding=sjis eol=CRLF
