@@ -8,175 +8,175 @@
 <param name="Window Styles" value="0x800027">
 </OBJECT><UL>
 		<LI><OBJECT type="text/sitemap">
-		<param name="Name" value="MP3ƒ^ƒO•ÒWƒc[ƒ‹ SuperTagEditor">
-		<param name="Local" value="_RESOURCE\index.html">
+		<param name="Name" value="MP3ã‚¿ã‚°ç·¨é›†ãƒ„ãƒ¼ãƒ« SuperTagEditor">
+		<param name="Local" value="_RESOURCEÂ¥index.html">
 		<param name="ImageNumber" value="1">
 		</OBJECT>
 		<LI><OBJECT type="text/sitemap">
-		<param name="Name" value="SuperTagEditor ‚ÌŠT—v">
-		<param name="Local" value="_RESOURCE\ol_top.html">
-		<param name="ImageNumber" value="1">
-		</OBJECT>
-			<UL>
-
-			<LI><OBJECT type="text/sitemap">
-			<param name="Name" value="“Á’¥">
-			<param name="Local" value="_RESOURCE\ol_style.html">
-			<param name="ImageNumber" value="9">
-			</OBJECT>
-			<LI><OBJECT type="text/sitemap">
-			<param name="Name" value="‚±‚ñ‚Èl‚ÉƒIƒXƒXƒ">
-			<param name="Local" value="_RESOURCE\ol_osusume.html">
-			<param name="ImageNumber" value="9">
-			</OBJECT>
-			</UL>
-
-		<LI><OBJECT type="text/sitemap">
-		<param name="Name" value="ƒƒjƒ…[">
-		<param name="Local" value="_RESOURCE\menu_top.html">
+		<param name="Name" value="SuperTagEditor ã®æ¦‚è¦">
+		<param name="Local" value="_RESOURCEÂ¥ol_top.html">
 		<param name="ImageNumber" value="1">
 		</OBJECT>
 			<UL>
 
 			<LI><OBJECT type="text/sitemap">
-			<param name="Name" value="ƒtƒ@ƒCƒ‹">
-			<param name="Local" value="_RESOURCE\menu_file.html">
+			<param name="Name" value="ç‰¹å¾´">
+			<param name="Local" value="_RESOURCEÂ¥ol_style.html">
 			<param name="ImageNumber" value="9">
 			</OBJECT>
 			<LI><OBJECT type="text/sitemap">
-			<param name="Name" value="•ÒW">
-			<param name="Local" value="_RESOURCE\menu_edit.html">
-			<param name="ImageNumber" value="9">
-			</OBJECT>
-			<LI><OBJECT type="text/sitemap">
-			<param name="Name" value="•\Ž¦">
-			<param name="Local" value="_RESOURCE\menu_disp.html">
-			<param name="ImageNumber" value="9">
-			</OBJECT>
-			<LI><OBJECT type="text/sitemap">
-			<param name="Name" value="•ÏŠ·">
-			<param name="Local" value="_RESOURCE\menu_conv.html">
-			<param name="ImageNumber" value="9">
-			</OBJECT>
-			<LI><OBJECT type="text/sitemap">
-			<param name="Name" value="ƒvƒŒƒCƒŠƒXƒg">
-			<param name="Local" value="_RESOURCE\menu_playlist.html">
-			<param name="ImageNumber" value="9">
-			</OBJECT>
-			<LI><OBJECT type="text/sitemap">
-			<param name="Name" value="ƒvƒŒƒCƒ„[§Œä">
-			<param name="Local" value="_RESOURCE\menu_player.html">
-			<param name="ImageNumber" value="9">
-			</OBJECT>
-			<LI><OBJECT type="text/sitemap">
-			<param name="Name" value="ƒIƒvƒVƒ‡ƒ“">
-			<param name="Local" value="_RESOURCE\menu_window.html">
-			<param name="ImageNumber" value="9">
-			</OBJECT>
-			<LI><OBJECT type="text/sitemap">
-			<param name="Name" value="ƒwƒ‹ƒv">
-			<param name="Local" value="_RESOURCE\menu_help.html">
+			<param name="Name" value="ã“ã‚“ãªäººã«ã‚ªã‚¹ã‚¹ãƒ¡">
+			<param name="Local" value="_RESOURCEÂ¥ol_osusume.html">
 			<param name="ImageNumber" value="9">
 			</OBJECT>
 			</UL>
 
 		<LI><OBJECT type="text/sitemap">
-		<param name="Name" value="ƒIƒvƒVƒ‡ƒ“Ý’è‚É‚Â‚¢‚Ä">
-		<param name="Local" value="_RESOURCE\opt_top.html">
+		<param name="Name" value="ãƒ¡ãƒ‹ãƒ¥ãƒ¼">
+		<param name="Local" value="_RESOURCEÂ¥menu_top.html">
 		<param name="ImageNumber" value="1">
 		</OBJECT>
 			<UL>
 
 			<LI><OBJECT type="text/sitemap">
-			<param name="Name" value="ˆê”Êyˆê”Êz">
-			<param name="Local" value="_RESOURCE\opt_nor_normal.html">
+			<param name="Name" value="ãƒ•ã‚¡ã‚¤ãƒ«">
+			<param name="Local" value="_RESOURCEÂ¥menu_file.html">
 			<param name="ImageNumber" value="9">
 			</OBJECT>
 			<LI><OBJECT type="text/sitemap">
-			<param name="Name" value="RIFF MP3/ID3v2yˆê”Êz">
-			<param name="Local" value="_RESOURCE\opt_nor_rmp_id3v2.html">
+			<param name="Name" value="ç·¨é›†">
+			<param name="Local" value="_RESOURCEÂ¥menu_edit.html">
 			<param name="ImageNumber" value="9">
 			</OBJECT>
 			<LI><OBJECT type="text/sitemap">
-			<param name="Name" value="‰ÌŽŒyˆê”Êz">
-			<param name="Local" value="_RESOURCE\opt_nor_lyric.html">
+			<param name="Name" value="è¡¨ç¤º">
+			<param name="Local" value="_RESOURCEÂ¥menu_disp.html">
 			<param name="ImageNumber" value="9">
 			</OBJECT>
 			<LI><OBJECT type="text/sitemap">
-			<param name="Name" value="ƒvƒŒƒCƒ„[yˆê”Êz">
-			<param name="Local" value="_RESOURCE\opt_nor_player.html">
+			<param name="Name" value="å¤‰æ›">
+			<param name="Local" value="_RESOURCEÂ¥menu_conv.html">
 			<param name="ImageNumber" value="9">
 			</OBJECT>
 			<LI><OBJECT type="text/sitemap">
-			<param name="Name" value="Šm”FƒƒbƒZ[ƒWyˆê”Êz">
-			<param name="Local" value="_RESOURCE\opt_nor_conf.html">
+			<param name="Name" value="ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆ">
+			<param name="Local" value="_RESOURCEÂ¥menu_playlist.html">
 			<param name="ImageNumber" value="9">
 			</OBJECT>
 			<LI><OBJECT type="text/sitemap">
-			<param name="Name" value="ƒL[Š„‚è“–‚Äyˆê”Êz">
-			<param name="Local" value="_RESOURCE\opt_nor_key.html">
+			<param name="Name" value="ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼åˆ¶å¾¡">
+			<param name="Local" value="_RESOURCEÂ¥menu_player.html">
 			<param name="ImageNumber" value="9">
 			</OBJECT>
 			<LI><OBJECT type="text/sitemap">
-			<param name="Name" value="ƒ†[ƒU[•ÏŠ·‘Ž®y•ÏŠ·z">
-			<param name="Local" value="_RESOURCE\opt_cnv_user.html">
+			<param name="Name" value="ã‚ªãƒ—ã‚·ãƒ§ãƒ³">
+			<param name="Local" value="_RESOURCEÂ¥menu_window.html">
 			<param name="ImageNumber" value="9">
 			</OBJECT>
 			<LI><OBJECT type="text/sitemap">
-			<param name="Name" value="Šg’£•ÏŠ·‘Ž®y•ÏŠ·z">
-			<param name="Local" value="_RESOURCE\opt_cnv_ext.html">
-			<param name="ImageNumber" value="9">
-			</OBJECT>
-			<LI><OBJECT type="text/sitemap">
-			<param name="Name" value="ƒtƒ@ƒCƒ‹–¼•¶Žš’uŠ·y•ÏŠ·z">
-			<param name="Local" value="_RESOURCE\opt_cnv_name.html">
-			<param name="ImageNumber" value="9">
-			</OBJECT>
-			<LI><OBJECT type="text/sitemap">
-			<param name="Name" value="ƒtƒHƒ‹ƒ_‚Ì“¯Šúyã‹‰ŽÒŒü‚¯z">
-			<param name="Local" value="_RESOURCE\opt_adv_sync.html">
-			<param name="ImageNumber" value="9">
-			</OBJECT>
-			<LI><OBJECT type="text/sitemap">
-			<param name="Name" value="ƒWƒƒƒ“ƒ‹Ý’èyã‹‰ŽÒŒü‚¯z">
-			<param name="Local" value="_RESOURCE\opt_adv_write.html">
-			<param name="ImageNumber" value="9">
-			</OBJECT>
-			<LI><OBJECT type="text/sitemap">
-			<param name="Name" value="•\Ž¦€–ÚÝ’èyã‹‰ŽÒŒü‚¯z">
-			<param name="Local" value="_RESOURCE\opt_adv_disp.html">
-			<param name="ImageNumber" value="9">
-			</OBJECT>
-			<LI><OBJECT type="text/sitemap">
-			<param name="Name" value="•ª—ÞÝ’èyã‹‰ŽÒŒü‚¯z">
-			<param name="Local" value="_RESOURCE\opt_adv_genre.html">
-			<param name="ImageNumber" value="9">
-			</OBJECT>
-			<LI><OBJECT type="text/sitemap">
-			<param name="Name" value="ƒŠƒXƒgo—Íyã‹‰ŽÒŒü‚¯z">
-			<param name="Local" value="_RESOURCE\opt_adv_write.html">
+			<param name="Name" value="ãƒ˜ãƒ«ãƒ—">
+			<param name="Local" value="_RESOURCEÂ¥menu_help.html">
 			<param name="ImageNumber" value="9">
 			</OBJECT>
 			</UL>
 
 		<LI><OBJECT type="text/sitemap">
-		<param name="Name" value="‚e‚`‚p">
-		<param name="Local" value="_RESOURCE\faq.html">
+		<param name="Name" value="ã‚ªãƒ—ã‚·ãƒ§ãƒ³è¨­å®šã«ã¤ã„ã¦">
+		<param name="Local" value="_RESOURCEÂ¥opt_top.html">
+		<param name="ImageNumber" value="1">
+		</OBJECT>
+			<UL>
+
+			<LI><OBJECT type="text/sitemap">
+			<param name="Name" value="ä¸€èˆ¬ã€ä¸€èˆ¬ã€‘">
+			<param name="Local" value="_RESOURCEÂ¥opt_nor_normal.html">
+			<param name="ImageNumber" value="9">
+			</OBJECT>
+			<LI><OBJECT type="text/sitemap">
+			<param name="Name" value="RIFF MP3/ID3v2ã€ä¸€èˆ¬ã€‘">
+			<param name="Local" value="_RESOURCEÂ¥opt_nor_rmp_id3v2.html">
+			<param name="ImageNumber" value="9">
+			</OBJECT>
+			<LI><OBJECT type="text/sitemap">
+			<param name="Name" value="æ­Œè©žã€ä¸€èˆ¬ã€‘">
+			<param name="Local" value="_RESOURCEÂ¥opt_nor_lyric.html">
+			<param name="ImageNumber" value="9">
+			</OBJECT>
+			<LI><OBJECT type="text/sitemap">
+			<param name="Name" value="ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã€ä¸€èˆ¬ã€‘">
+			<param name="Local" value="_RESOURCEÂ¥opt_nor_player.html">
+			<param name="ImageNumber" value="9">
+			</OBJECT>
+			<LI><OBJECT type="text/sitemap">
+			<param name="Name" value="ç¢ºèªãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã€ä¸€èˆ¬ã€‘">
+			<param name="Local" value="_RESOURCEÂ¥opt_nor_conf.html">
+			<param name="ImageNumber" value="9">
+			</OBJECT>
+			<LI><OBJECT type="text/sitemap">
+			<param name="Name" value="ã‚­ãƒ¼å‰²ã‚Šå½“ã¦ã€ä¸€èˆ¬ã€‘">
+			<param name="Local" value="_RESOURCEÂ¥opt_nor_key.html">
+			<param name="ImageNumber" value="9">
+			</OBJECT>
+			<LI><OBJECT type="text/sitemap">
+			<param name="Name" value="ãƒ¦ãƒ¼ã‚¶ãƒ¼å¤‰æ›æ›¸å¼ã€å¤‰æ›ã€‘">
+			<param name="Local" value="_RESOURCEÂ¥opt_cnv_user.html">
+			<param name="ImageNumber" value="9">
+			</OBJECT>
+			<LI><OBJECT type="text/sitemap">
+			<param name="Name" value="æ‹¡å¼µå¤‰æ›æ›¸å¼ã€å¤‰æ›ã€‘">
+			<param name="Local" value="_RESOURCEÂ¥opt_cnv_ext.html">
+			<param name="ImageNumber" value="9">
+			</OBJECT>
+			<LI><OBJECT type="text/sitemap">
+			<param name="Name" value="ãƒ•ã‚¡ã‚¤ãƒ«åæ–‡å­—ç½®æ›ã€å¤‰æ›ã€‘">
+			<param name="Local" value="_RESOURCEÂ¥opt_cnv_name.html">
+			<param name="ImageNumber" value="9">
+			</OBJECT>
+			<LI><OBJECT type="text/sitemap">
+			<param name="Name" value="ãƒ•ã‚©ãƒ«ãƒ€ã®åŒæœŸã€ä¸Šç´šè€…å‘ã‘ã€‘">
+			<param name="Local" value="_RESOURCEÂ¥opt_adv_sync.html">
+			<param name="ImageNumber" value="9">
+			</OBJECT>
+			<LI><OBJECT type="text/sitemap">
+			<param name="Name" value="ã‚¸ãƒ£ãƒ³ãƒ«è¨­å®šã€ä¸Šç´šè€…å‘ã‘ã€‘">
+			<param name="Local" value="_RESOURCEÂ¥opt_adv_write.html">
+			<param name="ImageNumber" value="9">
+			</OBJECT>
+			<LI><OBJECT type="text/sitemap">
+			<param name="Name" value="è¡¨ç¤ºé …ç›®è¨­å®šã€ä¸Šç´šè€…å‘ã‘ã€‘">
+			<param name="Local" value="_RESOURCEÂ¥opt_adv_disp.html">
+			<param name="ImageNumber" value="9">
+			</OBJECT>
+			<LI><OBJECT type="text/sitemap">
+			<param name="Name" value="åˆ†é¡žè¨­å®šã€ä¸Šç´šè€…å‘ã‘ã€‘">
+			<param name="Local" value="_RESOURCEÂ¥opt_adv_genre.html">
+			<param name="ImageNumber" value="9">
+			</OBJECT>
+			<LI><OBJECT type="text/sitemap">
+			<param name="Name" value="ãƒªã‚¹ãƒˆå‡ºåŠ›ã€ä¸Šç´šè€…å‘ã‘ã€‘">
+			<param name="Local" value="_RESOURCEÂ¥opt_adv_write.html">
+			<param name="ImageNumber" value="9">
+			</OBJECT>
+			</UL>
+
+		<LI><OBJECT type="text/sitemap">
+		<param name="Name" value="ï¼¦ï¼¡ï¼±">
+		<param name="Local" value="_RESOURCEÂ¥faq.html">
 		<param name="ImageNumber" value="1">
 		</OBJECT>
 		<LI><OBJECT type="text/sitemap">
-		<param name="Name" value="XV—š—ð">
-		<param name="Local" value="_RESOURCE\history.html">
+		<param name="Name" value="æ›´æ–°å±¥æ­´">
+		<param name="Local" value="_RESOURCEÂ¥history.html">
 		<param name="ImageNumber" value="9">
 		</OBJECT>
 		<LI><OBJECT type="text/sitemap">
-		<param name="Name" value="¡Œã‚Ì—\’è">
-		<param name="Local" value="_RESOURCE\schedule.html">
+		<param name="Name" value="ä»Šå¾Œã®äºˆå®š">
+		<param name="Local" value="_RESOURCEÂ¥schedule.html">
 		<param name="ImageNumber" value="9">
 		</OBJECT>
 		<LI><OBJECT type="text/sitemap">
-		<param name="Name" value="’˜ìŒ E“]Ú“™‚É‚Â‚¢‚Ä">
-		<param name="Local" value="_RESOURCE\copyright.html">
+		<param name="Name" value="è‘—ä½œæ¨©ãƒ»è»¢è¼‰ç­‰ã«ã¤ã„ã¦">
+		<param name="Local" value="_RESOURCEÂ¥copyright.html">
 		<param name="ImageNumber" value="9">
 		</OBJECT>
 </UL>

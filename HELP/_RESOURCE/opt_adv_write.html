@@ -1,130 +1,130 @@
 <HTML>
 
 <HEAD>
-<TITLE>�I�v�V�����ݒ�(�㋉�Ҍ���)�F���X�g�o��</TITLE>
+<TITLE>オプション設定(上級者向け)：リスト出力</TITLE>
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=shift_jis">
 </HEAD>
 
 <BODY bgcolor="#ffffff" text="#000000" link="#ff0000" alink="#cc0000" vlink="#cc0000">
-<BASEFONT size="3" face="�l�r �S�V�b�N">
+<BASEFONT size="3" face="ＭＳ ゴシック">
 
-<!-- �^�C�g�� -->
-<FONT color="#0080ff" size="5" face="�l�r ����"><B>��<I>�I�v�V�����ݒ�(�㋉�Ҍ���)�F���X�g�o��</I></B></FONT><BR>
+<!-- タイトル -->
+<FONT color="#0080ff" size="5" face="ＭＳ 明朝"><B>■<I>オプション設定(上級者向け)：リスト出力</I></B></FONT><BR>
 
-<!-- �{�� -->
+<!-- 本文 -->
 <HR><P>
 <CENTER>
-<!-- ���� -->
+<!-- 説明 -->
 <TABLE border="0" cellspacing="0" cellpadding="0" width="95%"><TR><TD>
 	<BASEFONT size="2">
-SuperTagEditor �ł́A�t�@�C���̈ꗗ�����[�U�[�w��̏����t�@�C���Ń��X�g���o�͂��邱�Ƃ��o���܂��B<BR>
-�ő�łT�܂ł̏�����ݒ�ł��܂��B<BR>
+SuperTagEditor では、ファイルの一覧をユーザー指定の書式ファイルでリストを出力することが出来ます。<BR>
+最大で５つまでの書式を設定できます。<BR>
 	</BASEFONT>
 </TD></TR></TABLE>
 <P>
-<!-- �X�N���[���V���b�g -->
-<!-- IMG src="./image/�t�H���_�̓���.jpg" width="399" height="409" alt="�t�H���_�̓���" -->
+<!-- スクリーンショット -->
+<!-- IMG src="./image/フォルダの同期.jpg" width="399" height="409" alt="フォルダの同期" -->
 <!-- P -->
-<!-- ���� -->
+<!-- 説明 -->
 <TABLE border="0" cellspacing="0" cellpadding="0" width="95%"><TR><TD>
 	<BASEFONT size="2">
-<!-- ���� -->
-<FONT color="#ff0000" size="4"><B>�y���́z</B></FONT><BR>
-���������X�g����I�����Ă��������B<BR>
-�����̖��̂�ύX�������ꍇ�́A[���̕ύX]�{�^���������Ă��������B<BR>
+<!-- 名称 -->
+<FONT color="#ff0000" size="4"><B>【名称】</B></FONT><BR>
+書式をリストから選択してください。<BR>
+書式の名称を変更したい場合は、[名称変更]ボタンを押してください。<BR>
 <P><BR><P>
 
-<!-- �ݒ� -->
-<FONT color="#ff0000" size="4"><B>�y�ݒ�z</B></FONT><BR>
-<FONT color="#0000ff"><B><LI>�����t�@�C��</B></FONT><BR>
-�����t�@�C�����w�肵�Ă��������B<BR>
-�����t�@�C���̊�{�`���͈ȉ��̒ʂ�ł��B<BR>
+<!-- 設定 -->
+<FONT color="#ff0000" size="4"><B>【設定】</B></FONT><BR>
+<FONT color="#0000ff"><B><LI>書式ファイル</B></FONT><BR>
+書式ファイルを指定してください。<BR>
+書式ファイルの基本形式は以下の通りです。<BR>
 <BR>
 <TABLE border="0" bgcolor="#a0ccee" width="80%"><TR><TD>
-�w�b�_��<BR>
+ヘッダ部<BR>
 [LOOP_START]<BR>
-�{�f�B��<BR>
+ボディ部<BR>
 [LOOP_END]<BR>
-�t�b�^��<BR>
+フッタ部<BR>
 </TD></TR></TABLE>
-<FONT color="red">��[LOOP_START] �� [LOOP_END] ����؂�ƂȂ�܂��̂ŁA�K�������̍s��z�u���ĉ������B<BR>
-�܂��A�����̍s�ɂ́A�s����s���ɋ󔒂�^�u�Ȃǂ̑��̕��������Ȃ��ŉ������B</FONT><BR>
+<FONT color="red">※[LOOP_START] と [LOOP_END] が区切りとなりますので、必ずこれらの行を配置して下さい。<BR>
+また、これらの行には、行頭や行末に空白やタブなどの他の文字を入れないで下さい。</FONT><BR>
 <BR>
-�w�b�_���A�t�b�^���͂��ꂼ��P��̂ݏo�͂���܂��B<BR>
-�{�f�B���̓t�@�C���P�ʂł̌J��Ԃ��ƂȂ镔���ł��B�o�͂���Ă�t�@�C���̐������J��Ԃ��o�͂���܂��B<BR>
-���ۂ̎g�p��́A��������Ă��� HTML �o�̓T���v�������� sample_html.txt ���Q�Ƃ��Ă��������B<BR>
+ヘッダ部、フッタ部はそれぞれ１回のみ出力されます。<BR>
+ボディ部はファイル単位での繰り返しとなる部分です。出力されてるファイルの数だけ繰り返し出力されます。<BR>
+実際の使用例は、同梱されている HTML 出力サンプル書式の sample_html.txt を参照してください。<BR>
 
 <BR>
-�����t�@�C����<FONT color="blue"><B>�{�f�B�[��</B></FONT>�Ŏg�p�ł���ϐ��͈ȉ��̒ʂ�ł��B<BR>
-<BR>
-<TABLE border="1" bgcolor="#a0ccee">
-	<TR><TD width="160"><B><CENTER>�ϐ���</CENTER></B></TD><TD width="256"><B><CENTER>���@�@��</CENTER></B></TD></TR>
-	<TR><TD>%FILE_NUMBER%</TD><TD>�t�@�C���ԍ�</TD></TR>
-	<TR><TD>%FILE_NAME%</TD><TD>�t�@�C����(xxxxxx.xxx)</TD></TR>
-	<TR><TD>%PATH_NAME%</TD><TD>�p�X��(x:\xxxx\xxxx\)</TD></TR>
-	<TR><TD>%FULL_PATH%</TD><TD>�t���p�X�̃t�@�C����</TD></TR>
-	<TR><TD>%PLAY_PATH%</TD><TD>���΃p�X�D��̃p�X�t���t�@�C����</TD></TR>
-	<TR><TD>%FILE_TYPE%</TD><TD>�t�@�C���^�C�v(MP3/RIFF MP3/WMA �Ȃ�)</TD></TR>
-
-	<TR><TD>%TRACK_NAME%</TD><TD>�g���b�N��(*1)</TD></TR>
-	<TR><TD>%ALBUM_NAME%</TD><TD>�A���o����(*1)</TD></TR>
-	<TR><TD>%ARTIST_NAME%</TD><TD>�A�[�e�B�X�g��(*1)</TD></TR>
-	<TR><TD>%TRACK_NUMBER%</TD><TD>�g���b�N�ԍ�(*1)</TD></TR>
-	<TR><TD>%TRACK_NUMBER2%</TD><TD>�g���b�N�ԍ�(�Q��)(*1)</TD></TR>
-	<TR><TD>%TRACK_NUMBER3%</TD><TD>�g���b�N�ԍ�(�R��)(*1)</TD></TR>
-	<TR><TD>%RELEASE_YEAR%</TD><TD>�����[�X(*1)</TD></TR>
-	<TR><TD>%GENRE%</TD><TD>�W��������(*1)</TD></TR>
-	<TR><TD>%COMMENT%</TD><TD>�R�����g(*1)</TD></TR>
-
-	<TR><TD>%COPYRIGHT%</TD><TD>SIF�F���쌠</TD></TR>
-	<TR><TD>%ENGINEER%</TD><TD>SIF�F�G���W�j�A</TD></TR>
-	<TR><TD>%SOURCE%</TD><TD>SIF�F�\�[�X</TD></TR>
-	<TR><TD>%SOFTWARE%</TD><TD>SIF�F�\�t�g�E�F�A</TD></TR>
-	<TR><TD>%KEYWORD%</TD><TD>SIF�F�L�[���[�h</TD></TR>
-	<TR><TD>%TECHNICIAN%</TD><TD>SIF�F�Z�p��</TD></TR>
-	<TR><TD>%LYRIC%</TD><TD>SIF�F�̎�</TD></TR>
-	<TR><TD>%COMMISSION%</TD><TD>SIF�F�R�~�b�V����</TD></TR>
-
-	<TR><TD>%FILE_SIZE%</TD><TD>�t�@�C���T�C�Y(0.00MB)</TD></TR>
-	<TR><TD>%FILE_SIZE_BYTE%</TD><TD>�t�@�C���T�C�Y(�o�C�g�\�L)</TD></TR>
-	<TR><TD>%FILE_TIME%</TD><TD>�t�@�C���̍X�V��(00/00/00 00:00:00)</TD></TR>
-	<TR><TD>%FILE_CTIME%</TD><TD>�t�@�C���̍쐬��(00/00/00 00:00:00)</TD></TR>
-	<TR><TD>%TOTAL_SEC%</TD><TD>���t����(��:�b)</TD></TR>
-	<TR><TD>%CHANNELS%</TD><TD>MPEG�F�o�̓`�����l����</TD></TR>
-	<TR><TD>%BIT_RATE%</TD><TD>MPEG�F�r�b�g���[�g</TD></TR>
-	<TR><TD>%SAMPLING_RATE%</TD><TD>MPEG�F�T���v�����O���[�g</TD></TR>
-	<TR><TD>%FRAMES%</TD><TD>MPEG�F�t���[����</TD></TR>
-
-	<TR><TD>%EXIST_LYRIC_FILE%</TD><TD>�̎��t�@�C���̑���</TD></TR>
-	<TR><TD>%LYRIC_FILE_NAME%</TD><TD>�̎��t�@�C����</TD></TR>
-</TABLE>
-(*1)RIFF MP3 �̏ꍇ�ɂ́A���ݕҏW���[�h�ŕ\������Ă�����e���o�͂���܂�<BR>
-<BR>
-<BR>
-�����t�@�C����<FONT color="blue"><B>�t�b�^��</B></FONT>�Ŏg�p�ł���ϐ��͈ȉ��̒ʂ�ł��B<BR>
+書式ファイルの<FONT color="blue"><B>ボディー部</B></FONT>で使用できる変数は以下の通りです。<BR>
 <BR>
 <TABLE border="1" bgcolor="#a0ccee">
-	<TR><TD width="160"><B><CENTER>�ϐ���</CENTER></B></TD><TD width="256"><B><CENTER>���@�@��</CENTER></B></TD></TR>
-	<TR><TD>%FILE_COUNT%</TD><TD>���v�t�@�C����</TD></TR>
-	<TR><TD>%TOTAL_TIME%</TD><TD>�������t����(��:�b)</TD></TR>
-	<TR><TD>%TOTAL_TIME2%</TD><TD>�������t����(��:��:�b)</TD></TR>
-	<TR><TD>%TOTAL_SIZE%</TD><TD>���v�t�@�C���T�C�Y(0.00MB)</TD></TR>
+	<TR><TD width="160"><B><CENTER>変数名</CENTER></B></TD><TD width="256"><B><CENTER>説　　明</CENTER></B></TD></TR>
+	<TR><TD>%FILE_NUMBER%</TD><TD>ファイル番号</TD></TR>
+	<TR><TD>%FILE_NAME%</TD><TD>ファイル名(xxxxxx.xxx)</TD></TR>
+	<TR><TD>%PATH_NAME%</TD><TD>パス名(x:¥xxxx¥xxxx¥)</TD></TR>
+	<TR><TD>%FULL_PATH%</TD><TD>フルパスのファイル名</TD></TR>
+	<TR><TD>%PLAY_PATH%</TD><TD>相対パス優先のパス付きファイル名</TD></TR>
+	<TR><TD>%FILE_TYPE%</TD><TD>ファイルタイプ(MP3/RIFF MP3/WMA など)</TD></TR>
+
+	<TR><TD>%TRACK_NAME%</TD><TD>トラック名(*1)</TD></TR>
+	<TR><TD>%ALBUM_NAME%</TD><TD>アルバム名(*1)</TD></TR>
+	<TR><TD>%ARTIST_NAME%</TD><TD>アーティスト名(*1)</TD></TR>
+	<TR><TD>%TRACK_NUMBER%</TD><TD>トラック番号(*1)</TD></TR>
+	<TR><TD>%TRACK_NUMBER2%</TD><TD>トラック番号(２桁)(*1)</TD></TR>
+	<TR><TD>%TRACK_NUMBER3%</TD><TD>トラック番号(３桁)(*1)</TD></TR>
+	<TR><TD>%RELEASE_YEAR%</TD><TD>リリース(*1)</TD></TR>
+	<TR><TD>%GENRE%</TD><TD>ジャンル名(*1)</TD></TR>
+	<TR><TD>%COMMENT%</TD><TD>コメント(*1)</TD></TR>
+
+	<TR><TD>%COPYRIGHT%</TD><TD>SIF：著作権</TD></TR>
+	<TR><TD>%ENGINEER%</TD><TD>SIF：エンジニア</TD></TR>
+	<TR><TD>%SOURCE%</TD><TD>SIF：ソース</TD></TR>
+	<TR><TD>%SOFTWARE%</TD><TD>SIF：ソフトウェア</TD></TR>
+	<TR><TD>%KEYWORD%</TD><TD>SIF：キーワード</TD></TR>
+	<TR><TD>%TECHNICIAN%</TD><TD>SIF：技術者</TD></TR>
+	<TR><TD>%LYRIC%</TD><TD>SIF：歌詞</TD></TR>
+	<TR><TD>%COMMISSION%</TD><TD>SIF：コミッション</TD></TR>
+
+	<TR><TD>%FILE_SIZE%</TD><TD>ファイルサイズ(0.00MB)</TD></TR>
+	<TR><TD>%FILE_SIZE_BYTE%</TD><TD>ファイルサイズ(バイト表記)</TD></TR>
+	<TR><TD>%FILE_TIME%</TD><TD>ファイルの更新日(00/00/00 00:00:00)</TD></TR>
+	<TR><TD>%FILE_CTIME%</TD><TD>ファイルの作成日(00/00/00 00:00:00)</TD></TR>
+	<TR><TD>%TOTAL_SEC%</TD><TD>演奏時間(分:秒)</TD></TR>
+	<TR><TD>%CHANNELS%</TD><TD>MPEG：出力チャンネル数</TD></TR>
+	<TR><TD>%BIT_RATE%</TD><TD>MPEG：ビットレート</TD></TR>
+	<TR><TD>%SAMPLING_RATE%</TD><TD>MPEG：サンプリングレート</TD></TR>
+	<TR><TD>%FRAMES%</TD><TD>MPEG：フレーム数</TD></TR>
+
+	<TR><TD>%EXIST_LYRIC_FILE%</TD><TD>歌詞ファイルの存在</TD></TR>
+	<TR><TD>%LYRIC_FILE_NAME%</TD><TD>歌詞ファイル名</TD></TR>
+</TABLE>
+(*1)RIFF MP3 の場合には、現在編集モードで表示されている内容が出力されます<BR>
+<BR>
+<BR>
+書式ファイルの<FONT color="blue"><B>フッタ部</B></FONT>で使用できる変数は以下の通りです。<BR>
+<BR>
+<TABLE border="1" bgcolor="#a0ccee">
+	<TR><TD width="160"><B><CENTER>変数名</CENTER></B></TD><TD width="256"><B><CENTER>説　　明</CENTER></B></TD></TR>
+	<TR><TD>%FILE_COUNT%</TD><TD>合計ファイル数</TD></TR>
+	<TR><TD>%TOTAL_TIME%</TD><TD>総合演奏時間(分:秒)</TD></TR>
+	<TR><TD>%TOTAL_TIME2%</TD><TD>総合演奏時間(時:分:秒)</TD></TR>
+	<TR><TD>%TOTAL_SIZE%</TD><TD>合計ファイルサイズ(0.00MB)</TD></TR>
 </TABLE>
 <BR>
 
-<FONT color="#0000ff"><B><LI>�g���q</B></FONT><BR>
-�o�̓t�@�C���̃f�t�H���g�̊g���q���w�肵�܂��B<BR>
-�s���I�h���܂߂Ďw�肵�Ă�������(��F.txt)�B<BR>
+<FONT color="#0000ff"><B><LI>拡張子</B></FONT><BR>
+出力ファイルのデフォルトの拡張子を指定します。<BR>
+ピリオドを含めて指定してください(例：.txt)。<BR>
 
-<FONT color="#0000ff"><B><LI>�I������Ă���t�@�C���݂̂��o�͂���</B></FONT><BR>
-�`�F�b�N����ƁA�I����Ԃ̃t�@�C���݂̂����X�g�ɏo�͂��܂��B<BR>
-�`�F�b�N����Ă��Ȃ��ꍇ�́A�ǂݍ��܂�Ă���S�Ẵt�@�C�������X�g�ɏo�͂��܂��B<BR>
+<FONT color="#0000ff"><B><LI>選択されているファイルのみを出力する</B></FONT><BR>
+チェックすると、選択状態のファイルのみをリストに出力します。<BR>
+チェックされていない場合は、読み込まれている全てのファイルをリストに出力します。<BR>
 <P>
 	</BASEFONT>
 </TD></TR></TABLE>
 </CENTER>
 
-<!-- Copyright �\�L -->
+<!-- Copyright 表記 -->
 <P><HR>
 <DIV align="right">
 <TABLE><TR><TD>
