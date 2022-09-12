@@ -1,0 +1,247 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#ifndef APSTUDIO_INVOKED
+#include "targetver.h"
+#endif
+#include "afxres.h"
+#include "verrsrc.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// 日本語 (日本) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)
+LANGUAGE LANG_JAPANESE, SUBLANG_DEFAULT
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE
+BEGIN
+    "#ifndef APSTUDIO_INVOKED\r\n"
+    "#include ""targetver.h""\r\n"
+    "#endif\r\n"
+    "#include ""afxres.h""\r\n"
+    "#include ""verrsrc.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)\r\n"
+    "LANGUAGE 17, 1\r\n"
+    "#include ""res\\STEP_dsf.rc2""  // Microsoft Visual C++ 以外で編集されたリソース\r\n"
+    "#include ""l.JPN\\afxres.rc""      // 標準コンポーネント\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x40004L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "041104b0"
+        BEGIN
+            VALUE "CompanyName", "TODO: <会社名>"
+            VALUE "FileDescription", "TODO: <ファイルの説明>"
+            VALUE "FileVersion", "1.0.0.1"
+            VALUE "InternalName", "STEP_dsf.dll"
+            VALUE "LegalCopyright", "TODO: (C) <会社名>.  All rights reserved."
+            VALUE "OriginalFilename", "STEP_dsf.dll"
+            VALUE "ProductName", "TODO: <製品名>"
+            VALUE "ProductVersion", "1.0.0.1"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x411, 1200
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_BITMAP_DSF          BITMAP                  "bmpdsf-24.bmp"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_DLG_CONV_ID3V2_VERSION DIALOGEX 0, 0, 215, 142
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "ID3v2のバージョン/文字コードの変換"
+FONT 9, "Meiryo UI", 0, 0, 0x0
+BEGIN
+    LTEXT           "選択中の DSF ファイルについて ID3v2 のバージョンと文字エンコードを変換します\n変換を実行してもよろしいですか？\n良く分からない場合の推奨設定\n\nバージョン： ID3v2.3\n文字エンコード： UTF-16",IDC_STATIC,7,7,201,55
+    LTEXT           "バージョン",IDC_STATIC,34,85,48,8
+    COMBOBOX        IDC_COMBO_ID3V2_VERSION,92,82,70,62,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "文字エンコード",IDC_STATIC,34,104,48,8
+    COMBOBOX        IDC_COMBO_ID3V2_ENCODE,92,101,70,57,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    DEFPUSHBUTTON   "はい",IDOK,45,122,50,14
+    PUSHBUTTON      "いいえ",IDCANCEL,121,122,50,14
+END
+
+IDD_DLG_SETUP DIALOGEX 0, 0, 309, 176
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "DSF"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CONTROL         "ジャンル名はリストから選択する(※再起動後有効)",IDC_CH_GENRE_LIST_SELECT,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,16,116,189,9
+    CONTROL         "Type1： DSD64 / 2.8MHz, 2ch",IDC_RADIO_FORMATTYPE1,
+                    "Button",BS_AUTORADIOBUTTON | WS_GROUP,16,21,174,8
+    CONTROL         "Type2： DSD64 / 2.822MHz, 2ch",IDC_RADIO_FORMATTYPE2,
+                    "Button",BS_AUTORADIOBUTTON,16,33,174,8
+    CONTROL         "Type3： DSD64 / 2.8MHz(2822400Hz), 2ch",IDC_RADIO_FORMATTYPE3,
+                    "Button",BS_AUTORADIOBUTTON,16,44,174,8
+    CONTROL         "Type4： DSD64 / 2.822MHz(2822400Hz), 2ch",IDC_RADIO_FORMATTYPE4,
+                    "Button",BS_AUTORADIOBUTTON,16,56,174,8
+    GROUPBOX        "フォーマットの表示タイプ",IDC_STATIC_FORMATTYPE,7,7,295,90
+    GROUPBOX        "ID3v2",IDC_STATIC_ID3V2,7,100,295,34
+    LTEXT           "※2.8MHz(2,822,400Hz),3.0MHz(3,072,000Hz)以外のサンプリングレートの場合、\n先頭の「DSD64」は表示されません。",IDC_STATIC_FORMATTYPE_INFO,16,74,286,20
+    PUSHBUTTON      "初期値に戻す",IDC_BT_RESET_PAGE,243,156,59,13
+END
+
+IDD_DLG_SETUP_OTHER DIALOGEX 0, 0, 309, 176
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "その他"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    LTEXT           "ID3v2の保存形式",IDC_STATIC,7,7,79,9
+    COMBOBOX        IDC_COMBO_ID3V2_VERSION,68,17,57,62,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO_ID3V2_ENCODE,195,17,75,57,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "バージョン",IDC_STATIC,16,19,47,9
+    LTEXT           "文字エンコード",IDC_STATIC,130,19,59,9
+    LTEXT           "ID3v2の保存形式(新規作成時)",IDC_STATIC,7,36,120,9
+    COMBOBOX        IDC_COMBO_ID3V2_VERSION_NEW,68,47,57,62,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO_ID3V2_ENCODE_NEW,195,47,75,57,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "バージョン",IDC_STATIC,16,49,48,9
+    LTEXT           "文字エンコード",IDC_STATIC,130,49,59,9
+    PUSHBUTTON      "初期値に戻す",IDC_BT_RESET_PAGE,243,156,59,13
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+    IDD_DLG_CONV_ID3V2_VERSION, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 93
+    END
+
+    IDD_DLG_SETUP, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 302
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 169
+    END
+
+    IDD_DLG_SETUP_OTHER, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 302
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 169
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// AFX_DIALOG_LAYOUT
+//
+
+IDD_DLG_CONV_ID3V2_VERSION AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_DLG_SETUP AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_DLG_SETUP_OTHER AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+#endif    // 日本語 (日本) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)
+LANGUAGE 17, 1
+#include "res\STEP_dsf.rc2"  // Microsoft Visual C++ 以外で編集されたリソース
+#include "l.JPN\afxres.rc"      // 標準コンポーネント
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

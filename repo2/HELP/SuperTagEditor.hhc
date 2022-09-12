@@ -1,0 +1,183 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML><HEAD>
+<meta name="GENERATOR" content="HelpMachine 2.5.1">
+<!-- Sitemap 1.0 -->
+</HEAD><BODY>
+<OBJECT type="text/site properties">
+<param name="ImageType" value="Folder">
+<param name="Window Styles" value="0x800027">
+</OBJECT><UL>
+		<LI><OBJECT type="text/sitemap">
+		<param name="Name" value="MP3タグ編集ツール SuperTagEditor">
+		<param name="Local" value="_RESOURCE¥index.html">
+		<param name="ImageNumber" value="1">
+		</OBJECT>
+		<LI><OBJECT type="text/sitemap">
+		<param name="Name" value="SuperTagEditor の概要">
+		<param name="Local" value="_RESOURCE¥ol_top.html">
+		<param name="ImageNumber" value="1">
+		</OBJECT>
+			<UL>
+
+			<LI><OBJECT type="text/sitemap">
+			<param name="Name" value="特徴">
+			<param name="Local" value="_RESOURCE¥ol_style.html">
+			<param name="ImageNumber" value="9">
+			</OBJECT>
+			<LI><OBJECT type="text/sitemap">
+			<param name="Name" value="こんな人にオススメ">
+			<param name="Local" value="_RESOURCE¥ol_osusume.html">
+			<param name="ImageNumber" value="9">
+			</OBJECT>
+			</UL>
+
+		<LI><OBJECT type="text/sitemap">
+		<param name="Name" value="メニュー">
+		<param name="Local" value="_RESOURCE¥menu_top.html">
+		<param name="ImageNumber" value="1">
+		</OBJECT>
+			<UL>
+
+			<LI><OBJECT type="text/sitemap">
+			<param name="Name" value="ファイル">
+			<param name="Local" value="_RESOURCE¥menu_file.html">
+			<param name="ImageNumber" value="9">
+			</OBJECT>
+			<LI><OBJECT type="text/sitemap">
+			<param name="Name" value="編集">
+			<param name="Local" value="_RESOURCE¥menu_edit.html">
+			<param name="ImageNumber" value="9">
+			</OBJECT>
+			<LI><OBJECT type="text/sitemap">
+			<param name="Name" value="表示">
+			<param name="Local" value="_RESOURCE¥menu_disp.html">
+			<param name="ImageNumber" value="9">
+			</OBJECT>
+			<LI><OBJECT type="text/sitemap">
+			<param name="Name" value="変換">
+			<param name="Local" value="_RESOURCE¥menu_conv.html">
+			<param name="ImageNumber" value="9">
+			</OBJECT>
+			<LI><OBJECT type="text/sitemap">
+			<param name="Name" value="プレイリスト">
+			<param name="Local" value="_RESOURCE¥menu_playlist.html">
+			<param name="ImageNumber" value="9">
+			</OBJECT>
+			<LI><OBJECT type="text/sitemap">
+			<param name="Name" value="プレイヤー制御">
+			<param name="Local" value="_RESOURCE¥menu_player.html">
+			<param name="ImageNumber" value="9">
+			</OBJECT>
+			<LI><OBJECT type="text/sitemap">
+			<param name="Name" value="オプション">
+			<param name="Local" value="_RESOURCE¥menu_window.html">
+			<param name="ImageNumber" value="9">
+			</OBJECT>
+			<LI><OBJECT type="text/sitemap">
+			<param name="Name" value="ヘルプ">
+			<param name="Local" value="_RESOURCE¥menu_help.html">
+			<param name="ImageNumber" value="9">
+			</OBJECT>
+			</UL>
+
+		<LI><OBJECT type="text/sitemap">
+		<param name="Name" value="オプション設定について">
+		<param name="Local" value="_RESOURCE¥opt_top.html">
+		<param name="ImageNumber" value="1">
+		</OBJECT>
+			<UL>
+
+			<LI><OBJECT type="text/sitemap">
+			<param name="Name" value="一般【一般】">
+			<param name="Local" value="_RESOURCE¥opt_nor_normal.html">
+			<param name="ImageNumber" value="9">
+			</OBJECT>
+			<LI><OBJECT type="text/sitemap">
+			<param name="Name" value="RIFF MP3/ID3v2【一般】">
+			<param name="Local" value="_RESOURCE¥opt_nor_rmp_id3v2.html">
+			<param name="ImageNumber" value="9">
+			</OBJECT>
+			<LI><OBJECT type="text/sitemap">
+			<param name="Name" value="歌詞【一般】">
+			<param name="Local" value="_RESOURCE¥opt_nor_lyric.html">
+			<param name="ImageNumber" value="9">
+			</OBJECT>
+			<LI><OBJECT type="text/sitemap">
+			<param name="Name" value="プレイヤー【一般】">
+			<param name="Local" value="_RESOURCE¥opt_nor_player.html">
+			<param name="ImageNumber" value="9">
+			</OBJECT>
+			<LI><OBJECT type="text/sitemap">
+			<param name="Name" value="確認メッセージ【一般】">
+			<param name="Local" value="_RESOURCE¥opt_nor_conf.html">
+			<param name="ImageNumber" value="9">
+			</OBJECT>
+			<LI><OBJECT type="text/sitemap">
+			<param name="Name" value="キー割り当て【一般】">
+			<param name="Local" value="_RESOURCE¥opt_nor_key.html">
+			<param name="ImageNumber" value="9">
+			</OBJECT>
+			<LI><OBJECT type="text/sitemap">
+			<param name="Name" value="ユーザー変換書式【変換】">
+			<param name="Local" value="_RESOURCE¥opt_cnv_user.html">
+			<param name="ImageNumber" value="9">
+			</OBJECT>
+			<LI><OBJECT type="text/sitemap">
+			<param name="Name" value="拡張変換書式【変換】">
+			<param name="Local" value="_RESOURCE¥opt_cnv_ext.html">
+			<param name="ImageNumber" value="9">
+			</OBJECT>
+			<LI><OBJECT type="text/sitemap">
+			<param name="Name" value="ファイル名文字置換【変換】">
+			<param name="Local" value="_RESOURCE¥opt_cnv_name.html">
+			<param name="ImageNumber" value="9">
+			</OBJECT>
+			<LI><OBJECT type="text/sitemap">
+			<param name="Name" value="フォルダの同期【上級者向け】">
+			<param name="Local" value="_RESOURCE¥opt_adv_sync.html">
+			<param name="ImageNumber" value="9">
+			</OBJECT>
+			<LI><OBJECT type="text/sitemap">
+			<param name="Name" value="ジャンル設定【上級者向け】">
+			<param name="Local" value="_RESOURCE¥opt_adv_write.html">
+			<param name="ImageNumber" value="9">
+			</OBJECT>
+			<LI><OBJECT type="text/sitemap">
+			<param name="Name" value="表示項目設定【上級者向け】">
+			<param name="Local" value="_RESOURCE¥opt_adv_disp.html">
+			<param name="ImageNumber" value="9">
+			</OBJECT>
+			<LI><OBJECT type="text/sitemap">
+			<param name="Name" value="分類設定【上級者向け】">
+			<param name="Local" value="_RESOURCE¥opt_adv_genre.html">
+			<param name="ImageNumber" value="9">
+			</OBJECT>
+			<LI><OBJECT type="text/sitemap">
+			<param name="Name" value="リスト出力【上級者向け】">
+			<param name="Local" value="_RESOURCE¥opt_adv_write.html">
+			<param name="ImageNumber" value="9">
+			</OBJECT>
+			</UL>
+
+		<LI><OBJECT type="text/sitemap">
+		<param name="Name" value="ＦＡＱ">
+		<param name="Local" value="_RESOURCE¥faq.html">
+		<param name="ImageNumber" value="1">
+		</OBJECT>
+		<LI><OBJECT type="text/sitemap">
+		<param name="Name" value="更新履歴">
+		<param name="Local" value="_RESOURCE¥history.html">
+		<param name="ImageNumber" value="9">
+		</OBJECT>
+		<LI><OBJECT type="text/sitemap">
+		<param name="Name" value="今後の予定">
+		<param name="Local" value="_RESOURCE¥schedule.html">
+		<param name="ImageNumber" value="9">
+		</OBJECT>
+		<LI><OBJECT type="text/sitemap">
+		<param name="Name" value="著作権・転載等について">
+		<param name="Local" value="_RESOURCE¥copyright.html">
+		<param name="ImageNumber" value="9">
+		</OBJECT>
+</UL>
+</BODY></HTML>

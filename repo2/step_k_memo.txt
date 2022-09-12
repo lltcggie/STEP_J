@@ -1,0 +1,92 @@
+メモ：
+  開発者向けのメモです。STEP_K を改良したい方、プラグインを作ってみたい方は目を
+  通してみて下さい。STEP_K のソースコードは Kobarin のホームページにてダウンロ
+  ード出来ます。
+
+  https://kobarin.sakura.ne.jp/
+
+  STEP_K の開発を引き継いでくれる方が現れることを期待します。
+
+・64bit 版でなぜか一部のファイラー(秀丸ファイラー32bit版等)からのドラッグアンド
+  ドロップを受け付けないことがあるため、リンカーオプションに /HIGHENTROPYVA:NO
+  を追加することで回避
+  参考： https://github.com/vim-jp/issues/issues/552
+
+・1.02beta より Ansi 版でのビルド確認は行っていない。プロジェクト/ソリューショ
+  ンから DebugA/ReleaseA も廃止
+
+  動作環境が WindowsXP 以上を求めている以上、Ansi 版の必要性はなく、両対応させ
+  ようとするとソースコードの見通しが悪くなってデメリットにしかならないと判断
+
+・Ogg Opus(STEP_ogg) のタグ書き換えに未対応
+
+  資料が見つからなくて実装を断念。対応するには、
+
+  STEP_ogg.cpp::STEPGetControlType
+
+      if(nFormat == nFileTypeOPUS){//情報取得のみの対応
+          return _NULL;
+      }
+
+  の 3行を削除し、FileOGG.cpp::WriteFileOPUS 関数を実装する。
+  Opus を扱うのに必要なライブラリは、情報取得のためにリンクしているので、書き換
+  え対応の修正作業は最小限で済むはず。
+
+・STEP_reConv.ste
+
+  使い道が分からなかっため、UNICODE 化はしなかった。STEP_K のソースコードには含
+  めていないので、UNICODE 化する場合はオリジナルのソースコードを別途入手する必
+  要がある。
+
+・STEP_wma.ste
+
+  WMA は公式の API を使った方が安全だと判断して mp3infp/u を組み込まなかった。
+  CoInitialize(NULL)/CoUninialize() は STEP 本体から呼び出すように変更した。
+
+  プラグインの仕様として、本体がプラグインの API を呼び出すスレッドでは既に本体
+  側で CoInitializeEx(NULL, COINIT_APARTMENTTHREADED) を呼び出し済みであること
+  を想定することにする。
+
+  COINIT_MULTITHREADED でないと困るプラグインは、プラグイン自身でスレッドを作成
+  して、そのスレッド内で呼び出すようにすること。
+
+・高 DPI に対応出来ていない
+
+  高 DPI 環境でダイアログの文字列が欠けたりせずに表示出来ることを確認したつもり
+  だが、ラベルを十分に広く取るとかで対応しただけで、きちんと対応出来ている訳で
+  はないので、正しく表示できない環境もあるかもしれない。manifest の記述を素直に
+  高 DPI 非対応にしておいた方が良いのかもしれない。（画面がぼやけた感じになるけ
+  ど）
+
+  VCL だと何もしなくても自動的に対応してくれるみたいなんだけど、MFC だとそうで
+  ないようで…。
+
+・STEP 本体を「共有 DLL で MFC を使う」場合の不具合
+
+  MySuperGrid.cpp の ProcessSelectedFiles, ProcessSelectedFilesForUpdate をプ
+  ラグイン側から呼び出し時に予期せぬエラーが発生することがある。
+
+  例えば MP3 選択時に右クリック -> 「標準 MP3 形式に変換」時に
+  CSuperTagEditorDoc::StartLoadFile でプログレスバーを表示しようとするときに発
+  生。リリースモードでは例外発生。デバッグモードではアサーションエラーが発生。
+
+  原因は MFC を使うプラグインがプラグイン内部で
+
+  AFX_MANAGE_STATE(AfxGetStaticModuleState());
+
+  で状態を変更したまま STEP 本体内でリソースにアクセスするため。
+
+  EXE 側では AFX_MANAGE_STATE(AfxGetStaticModuleState()) が使えないようなので
+  どうすれば良いか分からない。
+
+  確実な回避方法が思いつかず、STEP 本体だけはスタティックにリンクするようにし
+  た。本体はランタイムがなくても起動出来て、ランタイムがなければそれを通知する
+  ことが出来るので、これはこれで良しとする。
+
+・ヘルプの開発ツールは「カエルましん」様制作の「ヘルプましん」を使用
+
+  http://kaerumachine.o.oo7.jp/
+
+  「ヘルプましん」本体とは別に「Html Help Workshop」も必要
+
+  https://msdn.microsoft.com/ja-jp/library/windows/desktop/ms669985(v=vs.85).aspx

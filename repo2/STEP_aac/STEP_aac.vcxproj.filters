@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{aace7747-7d31-4c40-9e9e-58b8ff2b203b}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{ebbadad7-9bac-4c8a-9299-171f08d5149a}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{23023b09-23d7-4795-afbe-80c7243e0f28}</UniqueIdentifier>
+      <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
+    </Filter>
+    <Filter Include="mp3infp">
+      <UniqueIdentifier>{805af23c-8843-44b2-a228-887de4679c35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SuperTagEditor">
+      <UniqueIdentifier>{8069c5a4-5eb6-4e73-afb7-55eb77d07e58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SuperTagEditor\INI">
+      <UniqueIdentifier>{c3a3141a-3e34-44fc-b341-098bf38ef363}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="DlgSetup.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FileAAC.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="STEP_aac.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\STEP_SDK\STEPlugin.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mp3infp\GlobalCommand.cpp">
+      <Filter>mp3infp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mp3infp\Tag_Mp4.cpp">
+      <Filter>mp3infp</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SuperTagEditor\strcnv.cpp">
+      <Filter>SuperTagEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SuperTagEditor\INI\ini.cpp">
+      <Filter>SuperTagEditor\INI</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="STEP_aac.def">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="res\STEP_aac.rc2">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="STEP_aac.rc">
+      <Filter>Source Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DlgSetup.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FileAAC.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="STEP_aac.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mp3infp\GlobalCommand.h">
+      <Filter>mp3infp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mp3infp\Tag_Mp4.h">
+      <Filter>mp3infp</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SuperTagEditor\strcnv.h">
+      <Filter>SuperTagEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SuperTagEditor\INI\ini.h">
+      <Filter>SuperTagEditor\INI</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="bitmap_acc-24.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+</Project>
