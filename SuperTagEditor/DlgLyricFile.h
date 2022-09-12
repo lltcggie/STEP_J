@@ -4,60 +4,60 @@
 #if _MSC_VER > 1000
 #pragma once
 #endif // _MSC_VER > 1000
-// DlgLyricFile.h : ƒwƒbƒ_[ ƒtƒ@ƒCƒ‹
+// DlgLyricFile.h : ãƒ˜ãƒƒãƒ€ãƒ¼ ãƒ•ã‚¡ã‚¤ãƒ«
 //
 #include "OptionPage/OptionPage.h"
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgLyricFile ƒ_ƒCƒAƒƒO
+// CDlgLyricFile ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
 
 class CDlgLyricFile : public COptionPage
 {
-	DECLARE_DYNCREATE(CDlgLyricFile)
+    DECLARE_DYNCREATE(CDlgLyricFile)
 
-// ƒRƒ“ƒXƒgƒ‰ƒNƒVƒ‡ƒ“
+// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚·ãƒ§ãƒ³
 public:
-	CDlgLyricFile();
-	~CDlgLyricFile();
+    CDlgLyricFile();
+    ~CDlgLyricFile();
 
-// ƒ_ƒCƒAƒƒO ƒf[ƒ^
-	//{{AFX_DATA(CDlgLyricFile)
-	enum { IDD = IDD_DLG_LYRIC };
-	CButton	m_btSearchLyricsSubDir;
-	CEdit	m_editLyricsPath;
-	CButton	m_btSetLyricsDir;
-	CButton	m_btRefLyrics;
-	BOOL	m_bChangeTextFile;
-	CString	m_strLyricsPath;
-	BOOL	m_bSetLyricsDir;
-	BOOL	m_bSearchLyricsSubDir;
-	//}}AFX_DATA
+// ãƒ€ã‚¤ã‚¢ãƒ­ã‚° ãƒ‡ãƒ¼ã‚¿
+    //{{AFX_DATA(CDlgLyricFile)
+    enum { IDD = IDD_DLG_LYRIC };
+    CButton m_btSearchLyricsSubDir;
+    CEdit   m_editLyricsPath;
+    CButton m_btSetLyricsDir;
+    CButton m_btRefLyrics;
+    BOOL    m_bChangeTextFile;
+    CString m_strLyricsPath;
+    BOOL    m_bSetLyricsDir;
+    BOOL    m_bSearchLyricsSubDir;
+    //}}AFX_DATA
 
-	void	UpdateStatus(void);
+    void    UpdateStatus(void);
 
-// ƒI[ƒo[ƒ‰ƒCƒh
-	// ClassWizard ‚Í‰¼‘zŠÖ”‚ÌƒI[ƒo[ƒ‰ƒCƒh‚ğ¶¬‚µ‚Ü‚·B
+// ã‚ªãƒ¼ãƒãƒ¼ãƒ©ã‚¤ãƒ‰
+    // ClassWizard ã¯ä»®æƒ³é–¢æ•°ã®ã‚ªãƒ¼ãƒãƒ¼ãƒ©ã‚¤ãƒ‰ã‚’ç”Ÿæˆã—ã¾ã™ã€‚
 
-	//{{AFX_VIRTUAL(CDlgLyricFile)
-	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV ƒTƒ|[ƒg
-	//}}AFX_VIRTUAL
+    //{{AFX_VIRTUAL(CDlgLyricFile)
+    protected:
+    virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV ã‚µãƒãƒ¼ãƒˆ
+    //}}AFX_VIRTUAL
 
-// ƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“
+// ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³
 protected:
-	// ¶¬‚³‚ê‚½ƒƒbƒZ[ƒW ƒ}ƒbƒvŠÖ”
-	//{{AFX_MSG(CDlgLyricFile)
-	afx_msg void OnBtRefLyrics();
-	afx_msg void OnChSetLyricsDir();
-	afx_msg void OnChChangeTextFilename();
-	virtual BOOL OnInitDialog();
-	afx_msg void OnBtResetPage();
-	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
+    // ç”Ÿæˆã•ã‚ŒãŸãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒãƒƒãƒ—é–¢æ•°
+    //{{AFX_MSG(CDlgLyricFile)
+    afx_msg void OnBtRefLyrics();
+    afx_msg void OnChSetLyricsDir();
+    afx_msg void OnChChangeTextFilename();
+    virtual BOOL OnInitDialog();
+    afx_msg void OnBtResetPage();
+    //}}AFX_MSG
+    DECLARE_MESSAGE_MAP()
 
 };
 
 //{{AFX_INSERT_LOCATION}}
-// Microsoft Visual C++ ‚Í‘Os‚Ì’¼‘O‚É’Ç‰Á‚ÌéŒ¾‚ğ‘}“ü‚µ‚Ü‚·B
+// Microsoft Visual C++ ã¯å‰è¡Œã®ç›´å‰ã«è¿½åŠ ã®å®£è¨€ã‚’æŒ¿å…¥ã—ã¾ã™ã€‚
 
 #endif // !defined(AFX_DLGLYRICFILE_H__34B29241_448D_4BF4_950D_35DE90673465__INCLUDED_)

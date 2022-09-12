@@ -1,4 +1,4 @@
-// DlgSetClassification.cpp : ƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“ ƒtƒ@ƒCƒ‹
+// DlgSetClassification.cpp : ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³ ãƒ•ã‚¡ã‚¤ãƒ«
 //
 
 #include "stdafx.h"
@@ -12,22 +12,22 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgSetClassification ƒ_ƒCƒAƒƒO
+// CDlgSetClassification ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
 IMPLEMENT_DYNCREATE(CDlgSetClassification, COptionPage)
 
 
 CDlgSetClassification::CDlgSetClassification() : COptionPage(CDlgSetClassification::IDD)
 {
-	//{{AFX_DATA_INIT(CDlgSetClassification)
-	m_nClassType = -1;
-	m_nClass1 = -1;
-	m_nClass2 = -1;
-	m_nClass3 = -1;
-	m_nClass4 = -1;
-	m_nClass5 = -1;
-	m_bExecClassification = FALSE;
-	//}}AFX_DATA_INIT
-	m_bFirstEdit = true;
+    //{{AFX_DATA_INIT(CDlgSetClassification)
+    m_nClassType = -1;
+    m_nClass1 = -1;
+    m_nClass2 = -1;
+    m_nClass3 = -1;
+    m_nClass4 = -1;
+    m_nClass5 = -1;
+    m_bExecClassification = FALSE;
+    //}}AFX_DATA_INIT
+    m_bFirstEdit = true;
 }
 
 CDlgSetClassification::~CDlgSetClassification()
@@ -37,121 +37,121 @@ CDlgSetClassification::~CDlgSetClassification()
 
 void CDlgSetClassification::DoDataExchange(CDataExchange* pDX)
 {
-	COptionPage::DoDataExchange(pDX);
-	//{{AFX_DATA_MAP(CDlgSetClassification)
-	DDX_Control(pDX, IDC_CH_EXEC_CLASSIFICATION, m_btExecClassificasion);
-	DDX_Control(pDX, IDC_ST_CLASS5, m_stClass5);
-	DDX_Control(pDX, IDC_ST_CLASS4, m_stClass4);
-	DDX_Control(pDX, IDC_ST_CLASS3, m_stClass3);
-	DDX_Control(pDX, IDC_ST_CLASS2, m_stClass2);
-	DDX_Control(pDX, IDC_ST_CLASS1, m_stClass1);
-	DDX_Control(pDX, IDC_LIST_CLASS5, m_listClass5);
-	DDX_Control(pDX, IDC_LIST_CLASS4, m_listClass4);
-	DDX_Control(pDX, IDC_LIST_CLASS3, m_listClass3);
-	DDX_Control(pDX, IDC_LIST_CLASS2, m_listClass2);
-	DDX_Control(pDX, IDC_LIST_CLASS1, m_listClass1);
-	DDX_Radio(pDX, IDC_RA_FOLDER, m_nClassType);
-	DDX_CBIndex(pDX, IDC_LIST_CLASS1, m_nClass1);
-	DDX_CBIndex(pDX, IDC_LIST_CLASS2, m_nClass2);
-	DDX_CBIndex(pDX, IDC_LIST_CLASS3, m_nClass3);
-	DDX_CBIndex(pDX, IDC_LIST_CLASS4, m_nClass4);
-	DDX_CBIndex(pDX, IDC_LIST_CLASS5, m_nClass5);
-	DDX_Check(pDX, IDC_CH_EXEC_CLASSIFICATION, m_bExecClassification);
-	//}}AFX_DATA_MAP
+    COptionPage::DoDataExchange(pDX);
+    //{{AFX_DATA_MAP(CDlgSetClassification)
+    DDX_Control(pDX, IDC_CH_EXEC_CLASSIFICATION, m_btExecClassificasion);
+    DDX_Control(pDX, IDC_ST_CLASS5, m_stClass5);
+    DDX_Control(pDX, IDC_ST_CLASS4, m_stClass4);
+    DDX_Control(pDX, IDC_ST_CLASS3, m_stClass3);
+    DDX_Control(pDX, IDC_ST_CLASS2, m_stClass2);
+    DDX_Control(pDX, IDC_ST_CLASS1, m_stClass1);
+    DDX_Control(pDX, IDC_LIST_CLASS5, m_listClass5);
+    DDX_Control(pDX, IDC_LIST_CLASS4, m_listClass4);
+    DDX_Control(pDX, IDC_LIST_CLASS3, m_listClass3);
+    DDX_Control(pDX, IDC_LIST_CLASS2, m_listClass2);
+    DDX_Control(pDX, IDC_LIST_CLASS1, m_listClass1);
+    DDX_Radio(pDX, IDC_RA_FOLDER, m_nClassType);
+    DDX_CBIndex(pDX, IDC_LIST_CLASS1, m_nClass1);
+    DDX_CBIndex(pDX, IDC_LIST_CLASS2, m_nClass2);
+    DDX_CBIndex(pDX, IDC_LIST_CLASS3, m_nClass3);
+    DDX_CBIndex(pDX, IDC_LIST_CLASS4, m_nClass4);
+    DDX_CBIndex(pDX, IDC_LIST_CLASS5, m_nClass5);
+    DDX_Check(pDX, IDC_CH_EXEC_CLASSIFICATION, m_bExecClassification);
+    //}}AFX_DATA_MAP
 }
 
 
 BEGIN_MESSAGE_MAP(CDlgSetClassification, COptionPage)
-	//{{AFX_MSG_MAP(CDlgSetClassification)
-	ON_BN_CLICKED(IDC_RA_FILE_TAG, OnRaFileTag)
-	ON_BN_CLICKED(IDC_RA_FOLDER, OnRaFolder)
-	ON_CBN_SELCHANGE(IDC_LIST_CLASS1, OnSelChangeListClass)
-	ON_CBN_SELCHANGE(IDC_LIST_CLASS2, OnSelChangeListClass)
-	ON_CBN_SELCHANGE(IDC_LIST_CLASS3, OnSelChangeListClass)
-	ON_CBN_SELCHANGE(IDC_LIST_CLASS4, OnSelChangeListClass)
-	ON_CBN_SELCHANGE(IDC_LIST_CLASS5, OnSelChangeListClass)
-	ON_BN_CLICKED(IDC_BT_RESET_PAGE, OnBtResetPage)
-	//}}AFX_MSG_MAP
+    //{{AFX_MSG_MAP(CDlgSetClassification)
+    ON_BN_CLICKED(IDC_RA_FILE_TAG, OnRaFileTag)
+    ON_BN_CLICKED(IDC_RA_FOLDER, OnRaFolder)
+    ON_CBN_SELCHANGE(IDC_LIST_CLASS1, OnSelChangeListClass)
+    ON_CBN_SELCHANGE(IDC_LIST_CLASS2, OnSelChangeListClass)
+    ON_CBN_SELCHANGE(IDC_LIST_CLASS3, OnSelChangeListClass)
+    ON_CBN_SELCHANGE(IDC_LIST_CLASS4, OnSelChangeListClass)
+    ON_CBN_SELCHANGE(IDC_LIST_CLASS5, OnSelChangeListClass)
+    ON_BN_CLICKED(IDC_BT_RESET_PAGE, OnBtResetPage)
+    //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgSetClassification ƒƒbƒZ[ƒW ƒnƒ“ƒhƒ‰
+// CDlgSetClassification ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒãƒ³ãƒ‰ãƒ©
 void CDlgSetClassification::UpdateStatus(void)
 {
-	BOOL	bFlag = m_nClassType ? TRUE : FALSE;
-	m_listClass1.EnableWindow(bFlag);
-	m_listClass2.EnableWindow(bFlag);
-	m_listClass3.EnableWindow(bFlag);
-	m_listClass4.EnableWindow(bFlag);
-	m_listClass5.EnableWindow(bFlag);
-	m_stClass1.EnableWindow(bFlag);
-	m_stClass2.EnableWindow(bFlag);
-	m_stClass3.EnableWindow(bFlag);
-	m_stClass4.EnableWindow(bFlag);
-	m_stClass5.EnableWindow(bFlag);
-	m_btExecClassificasion.EnableWindow(bFlag);
+    BOOL    bFlag = m_nClassType ? TRUE : FALSE;
+    m_listClass1.EnableWindow(bFlag);
+    m_listClass2.EnableWindow(bFlag);
+    m_listClass3.EnableWindow(bFlag);
+    m_listClass4.EnableWindow(bFlag);
+    m_listClass5.EnableWindow(bFlag);
+    m_stClass1.EnableWindow(bFlag);
+    m_stClass2.EnableWindow(bFlag);
+    m_stClass3.EnableWindow(bFlag);
+    m_stClass4.EnableWindow(bFlag);
+    m_stClass5.EnableWindow(bFlag);
+    m_btExecClassificasion.EnableWindow(bFlag);
 }
 
-void CDlgSetClassification::OnRaFileTag() 
+void CDlgSetClassification::OnRaFileTag()
 {
-	m_nClassType = 1;
-	UpdateStatus();
-	OnSelChangeListClass();			// [‚½‚¾‚¿‚ÉXV]‚Ìƒ`ƒFƒbƒNˆ—‚ğ‚³‚¹‚é
+    m_nClassType = 1;
+    UpdateStatus();
+    OnSelChangeListClass();            // [ãŸã ã¡ã«æ›´æ–°]ã®ãƒã‚§ãƒƒã‚¯å‡¦ç†ã‚’ã•ã›ã‚‹
 }
 
-void CDlgSetClassification::OnRaFolder() 
+void CDlgSetClassification::OnRaFolder()
 {
-	m_nClassType = 0;
-	UpdateStatus();
+    m_nClassType = 0;
+    UpdateStatus();
 }
 
-BOOL CDlgSetClassification::OnInitDialog() 
+BOOL CDlgSetClassification::OnInitDialog()
 {
-	COptionPage::OnInitDialog();
+    COptionPage::OnInitDialog();
 
-	// TODO: ‚±‚ÌˆÊ’u‚É‰Šú‰»‚Ì•â‘«ˆ—‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
-	extern	const char	***g_sNameList;
-	int i; for (i = 0; g_sNameList[0][i] != NULL; i++) {
-		m_listClass1.AddString(g_sNameList[0][i]);
-		m_listClass2.AddString(g_sNameList[0][i]);
-		m_listClass3.AddString(g_sNameList[0][i]);
-		m_listClass4.AddString(g_sNameList[0][i]);
-		m_listClass5.AddString(g_sNameList[0][i]);
-	}
-	m_listClass1.SetCurSel(m_nClass1);
-	m_listClass2.SetCurSel(m_nClass2);
-	m_listClass3.SetCurSel(m_nClass3);
-	m_listClass4.SetCurSel(m_nClass4);
-	m_listClass5.SetCurSel(m_nClass5);
-	UpdateStatus();
+    // TODO: ã“ã®ä½ç½®ã«åˆæœŸåŒ–ã®è£œè¶³å‡¦ç†ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
+    extern const TCHAR    ***g_sNameList;
+    int i; for (i = 0; g_sNameList[0][i] != NULL; i++) {
+        m_listClass1.AddString(g_sNameList[0][i]);
+        m_listClass2.AddString(g_sNameList[0][i]);
+        m_listClass3.AddString(g_sNameList[0][i]);
+        m_listClass4.AddString(g_sNameList[0][i]);
+        m_listClass5.AddString(g_sNameList[0][i]);
+    }
+    m_listClass1.SetCurSel(m_nClass1);
+    m_listClass2.SetCurSel(m_nClass2);
+    m_listClass3.SetCurSel(m_nClass3);
+    m_listClass4.SetCurSel(m_nClass4);
+    m_listClass5.SetCurSel(m_nClass5);
+    UpdateStatus();
 
-	return TRUE;  // ƒRƒ“ƒgƒ[ƒ‹‚ÉƒtƒH[ƒJƒX‚ğİ’è‚µ‚È‚¢‚Æ‚«A–ß‚è’l‚Í TRUE ‚Æ‚È‚è‚Ü‚·
-	              // —áŠO: OCX ƒvƒƒpƒeƒB ƒy[ƒW‚Ì–ß‚è’l‚Í FALSE ‚Æ‚È‚è‚Ü‚·
+    return TRUE;  // ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã«ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ã‚’è¨­å®šã—ãªã„ã¨ãã€æˆ»ã‚Šå€¤ã¯ TRUE ã¨ãªã‚Šã¾ã™
+                  // ä¾‹å¤–: OCX ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ ãƒšãƒ¼ã‚¸ã®æˆ»ã‚Šå€¤ã¯ FALSE ã¨ãªã‚Šã¾ã™
 }
 
-void CDlgSetClassification::OnSelChangeListClass() 
+void CDlgSetClassification::OnSelChangeListClass()
 {
-	if (m_bFirstEdit) {
-		// Å‰‚Ì•ÒW‚É‚Í[‚½‚¾‚¿‚ÉXV]‚ğƒ`ƒFƒbƒN‚·‚é
-		m_btExecClassificasion.SetCheck(TRUE);
-		m_bFirstEdit = false;
-	}
+    if (m_bFirstEdit) {
+        // æœ€åˆã®ç·¨é›†æ™‚ã«ã¯[ãŸã ã¡ã«æ›´æ–°]ã‚’ãƒã‚§ãƒƒã‚¯ã™ã‚‹
+        m_btExecClassificasion.SetCheck(TRUE);
+        m_bFirstEdit = false;
+    }
 }
 
-// ‰Šú’l‚É–ß‚·
-void CDlgSetClassification::OnBtResetPage() 
+// åˆæœŸå€¤ã«æˆ»ã™
+void CDlgSetClassification::OnBtResetPage()
 {
-	// •ª—Ş•û–@
-	((CButton *)GetDlgItem(IDC_RA_FOLDER))->SetCheck(TRUE);
-	((CButton *)GetDlgItem(IDC_RA_FILE_TAG))->SetCheck(FALSE);
+    // åˆ†é¡æ–¹æ³•
+    ((CButton *)GetDlgItem(IDC_RA_FOLDER))->SetCheck(TRUE);
+    ((CButton *)GetDlgItem(IDC_RA_FILE_TAG))->SetCheck(FALSE);
 
-	// ŠK‘w
-	m_listClass1.SetCurSel(0);
-	m_listClass2.SetCurSel(0);
-	m_listClass3.SetCurSel(0);
-	m_listClass4.SetCurSel(0);
-	m_listClass5.SetCurSel(0);
+    // éšå±¤
+    m_listClass1.SetCurSel(0);
+    m_listClass2.SetCurSel(0);
+    m_listClass3.SetCurSel(0);
+    m_listClass4.SetCurSel(0);
+    m_listClass5.SetCurSel(0);
 
-	// [‚½‚¾‚¿‚ÉXV]‚ğƒ`ƒFƒbƒN‚·‚é
-	m_btExecClassificasion.SetCheck(TRUE);
+    // [ãŸã ã¡ã«æ›´æ–°]ã‚’ãƒã‚§ãƒƒã‚¯ã™ã‚‹
+    m_btExecClassificasion.SetCheck(TRUE);
 }

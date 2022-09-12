@@ -1,6 +1,6 @@
 //{{NO_DEPENDENCIES}}
-// Microsoft Developer Studio generated include file.
-// Used by STEP_riff.rc
+// Microsoft Visual C++ で生成されたインクルード ファイル。
+// STEP_riff.rc で使用
 //
 #define IDD_DLG_SETUP                   171
 #define IDC_CH_WAV_GENRE_LIST_SELECT    1104
@@ -10,7 +10,7 @@
 #define IDB_BITMAP_AVI                  7001
 
 // Next default values for new objects
-// 
+//
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        7002

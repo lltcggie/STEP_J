@@ -1,4 +1,4 @@
-// SuperTagEditorDoc.h : CSuperTagEditorDoc ƒNƒ‰ƒX‚ÌéŒ¾‚¨‚æ‚ÑƒCƒ“ƒ^[ƒtƒFƒCƒX‚Ì’è‹`‚ğ‚µ‚Ü‚·B
+// SuperTagEditorDoc.h : CSuperTagEditorDoc ã‚¯ãƒ©ã‚¹ã®å®£è¨€ãŠã‚ˆã³ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹ã®å®šç¾©ã‚’ã—ã¾ã™ã€‚
 //
 /////////////////////////////////////////////////////////////////////////////
 
@@ -9,187 +9,187 @@
 #pragma once
 #endif // _MSC_VER > 1000
 
-#define INIT_ARRAY_SIZE			256
-#define ADD_ARRAY_SIZE			256
+#define INIT_ARRAY_SIZE         256
+#define ADD_ARRAY_SIZE          256
 
 #include "FileMP3.h"
 #include "SuperTagEditorView.h"
 
-#include "Registry.h"
+//#include "Registry.h"
 
-struct FILE_STATE	{					// ƒtƒ@ƒCƒ‹î•ñ
-	CString	strFullPathName;			// ƒtƒ‹ƒpƒX–¼
-	CSuperGridCtrl::CTreeItem *pParent;	// e‚ÌƒAƒCƒeƒ€
+struct FILE_STATE    {                  // ãƒ•ã‚¡ã‚¤ãƒ«æƒ…å ±
+    CString strFullPathName;            // ãƒ•ãƒ«ãƒ‘ã‚¹å
+    CSuperGridCtrl::CTreeItem *pParent; // è¦ªã®ã‚¢ã‚¤ãƒ†ãƒ 
 };
 
 class CDlgCommonProgress;
 
 class CSuperTagEditorDoc : public CDocument
 {
-protected: // ƒVƒŠƒAƒ‰ƒCƒY‹@”\‚Ì‚İ‚©‚çì¬‚µ‚Ü‚·B
-	CSuperTagEditorDoc();
-	DECLARE_DYNCREATE(CSuperTagEditorDoc)
+protected: // ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºæ©Ÿèƒ½ã®ã¿ã‹ã‚‰ä½œæˆã—ã¾ã™ã€‚
+    CSuperTagEditorDoc();
+    DECLARE_DYNCREATE(CSuperTagEditorDoc)
 
 
-public:		// ======================================
-			// =====      public ƒƒ“ƒoŠÖ”     =====
-			// ======================================
-	FILE_MP3	*GetListMP3(int nIndex) {return(&m_arrayFiles[nIndex]);}
-	int			GetIndexFromListMP3(FILE_MP3* pFileMP3) { /* STEP 037 */
-				for (int no = 0; no < m_nArrayFileCount; no++) {
-					if (GetListMP3(no) == pFileMP3) {
-						return no;
-					}
-				}
-				return -1;
-	}
-	int			GetArrayFileCount(void) {return(m_nArrayFileCount);}
-	FILE_STATE	*GetRequestFile(int nIndex) {return(&m_arrayRequestFiles[nIndex]);}
-	int			GetRequestFileCount(void) {return(m_nArrayRequestFileCount);}
+public:     // ======================================
+            // =====      public ãƒ¡ãƒ³ãƒé–¢æ•°     =====
+            // ======================================
+    FILE_MP3    *GetListMP3(int nIndex) {return(&m_arrayFiles[nIndex]);}
+    int         GetIndexFromListMP3(FILE_MP3* pFileMP3) { /* STEP 037 */
+                for (int no = 0; no < m_nArrayFileCount; no++) {
+                    if (GetListMP3(no) == pFileMP3) {
+                        return no;
+                    }
+                }
+                return -1;
+    }
+    int         GetArrayFileCount(void) {return(m_nArrayFileCount);}
+    FILE_STATE  *GetRequestFile(int nIndex) {return(&m_arrayRequestFiles[nIndex]);}
+    int         GetRequestFileCount(void) {return(m_nArrayRequestFileCount);}
 
-	CDlgCommonProgress	*GetDlgLoadProgressBarPtr(void) {return(m_dlgLoadProgress);}
+    CDlgCommonProgress    *GetDlgLoadProgressBarPtr(void) {return(m_dlgLoadProgress);}
 
-	inline	bool	CheckFileModified(void) {
-				for (int no = 0; no < m_nArrayFileCount; no++) {
-					if (GetListMP3(no)->bModifyFlag) return(true);
-				}
-				return(false);
-			}
-	inline	void UpdateAllFiles(bool bRedraw) {
-				CMySuperGrid	&listCtrl = GetListCtrl();
-				listCtrl.UpdateAllFiles();
-				if (bRedraw) UpdateAllViews(NULL);
-			}
-	inline	void ExecClassification(void) {
-				// •ª—Ş•\¦XV
-				OnExecClassification();
-			}
+    inline    bool    CheckFileModified(void) {
+                for (int no = 0; no < m_nArrayFileCount; no++) {
+                    if (GetListMP3(no)->bModifyFlag) return(true);
+                }
+                return(false);
+            }
+    inline    void UpdateAllFiles(bool bRedraw) {
+                CMySuperGrid    &listCtrl = GetListCtrl();
+                listCtrl.UpdateAllFiles();
+                if (bRedraw) UpdateAllViews(NULL);
+            }
+    inline    void ExecClassification(void) {
+                // åˆ†é¡è¡¨ç¤ºæ›´æ–°
+                OnExecClassification();
+            }
 
-	inline	void SaveAllTag(void) {OnSaveAllTag();}
+    inline    void SaveAllTag(void) {OnSaveAllTag();}
 
-	bool	LoadPlayList(const char *);
-	bool	FoundFile(const char *, CSuperGridCtrl::CTreeItem * = NULL, bool = true);
-	bool	SearchFileReent(const char *, CSuperGridCtrl::CTreeItem * = NULL);
-	int		AddRequestFile(const char *, CSuperGridCtrl::CTreeItem * = NULL);
-	void	ExecRequestFiles(bool = true, bool = true);
-	void	StartLoadFile(const char *);
-	void	EndLoadFile(void);
-	void	ClearRequestFiles(void);
-	void	OpenFolder(const char *);
-	bool	CheckFileAttribute(FILE_MP3 *);
-	//’Ç‰Á by Kobarin
-	//ƒ^ƒO‚ğXV’†‚©‚Ç‚¤‚©
-	bool	IsTagUpdating(void){return m_TagUpdatingCount != 0;}
+    bool    LoadPlayList(const TCHAR *);
+    bool    FoundFile(const TCHAR *, CSuperGridCtrl::CTreeItem * = NULL, bool = true);
+    bool    SearchFileReent(const TCHAR *, CSuperGridCtrl::CTreeItem * = NULL);
+    int     AddRequestFile(const TCHAR *, CSuperGridCtrl::CTreeItem * = NULL);
+    void    ExecRequestFiles(bool = true, bool = true);
+    void    StartLoadFile(const TCHAR *);
+    void    EndLoadFile(void);
+    void    ClearRequestFiles(void);
+    void    OpenFolder(const TCHAR *);
+    bool    CheckFileAttribute(FILE_MP3 *);
+    //è¿½åŠ  by Kobarin
+    //ã‚¿ã‚°ã‚’æ›´æ–°ä¸­ã‹ã©ã†ã‹
+    bool    IsTagUpdating(void){return m_TagUpdatingCount != 0;}
 
-private:	// ======================================
-			// =====     private ƒƒ“ƒoŠÖ”     =====
-			// ======================================
-			char	*m_sTargetFile;				// ŒŸõˆ—FŒ»İ‚Ìƒtƒ@ƒCƒ‹
-			CArray <FILE_MP3, const FILE_MP3 &>	m_arrayFiles;
-			CArray <FILE_STATE, const FILE_STATE &>	m_arrayRequestFiles;
-			int		m_nArrayFileCount;
-			int		m_nArrayRequestFileCount;
-			bool	m_bSaveAllTagResult;
-			CDlgCommonProgress	*m_dlgLoadProgress;
+private:    // ======================================
+            // =====     private ãƒ¡ãƒ³ãƒé–¢æ•°     =====
+            // ======================================
+            //TCHAR    *m_sTargetFile;                // æ¤œç´¢å‡¦ç†ï¼šç¾åœ¨ã®ãƒ•ã‚¡ã‚¤ãƒ«
+            CArray <FILE_MP3, const FILE_MP3 &>    m_arrayFiles;
+            CArray <FILE_STATE, const FILE_STATE &>    m_arrayRequestFiles;
+            int     m_nArrayFileCount;
+            int     m_nArrayRequestFileCount;
+            bool    m_bSaveAllTagResult;
+            CDlgCommonProgress    *m_dlgLoadProgress;
 
-	inline	void	InitGridList(void) {
-				// ƒOƒŠƒbƒh‚ğ‰Šú‰»
-				CMySuperGrid	&listCtrl = GetListCtrl();
-				listCtrl.DeleteAllEx();
-			}
-	inline	void	InitFileList(void) {
-				for (int no = 0; no < m_nArrayFileCount; no++) {
-					FILE_MP3	*fileMP3 = GetListMP3(no);
-					extern void InitFileSpecificInfo(FILE_MP3* pFileMP3);
-					if (fileMP3->fileSpecificInfo != NULL) {
-						InitFileSpecificInfo(fileMP3);
-					}
-				}
-				m_arrayFiles.RemoveAll();
-				m_arrayFiles.SetSize(INIT_ARRAY_SIZE);
-				m_nArrayFileCount = 0;
-			}
-	inline	CSuperTagEditorView *GetView(void) {
-				POSITION	pos = GetFirstViewPosition();
-				return(((CSuperTagEditorView *)GetNextView(pos)));
-			}
-	inline	CMySuperGrid &GetListCtrl(void) {
-				return(GetView()->GetListCtrl());
-			}
-	inline	void	InitPlugin(void) {
-				extern void STEPluginLoad(HWND);
-				STEPluginLoad(GetView()->GetSafeHwnd());
-				CString strINI = AfxGetApp()->m_pszProfileName;
-				InitProfile();
-			}
-	CTime	GetFileTime(const char *);
-	BOOL	SelectDirectory(char *);
+    inline    void    InitGridList(void) {
+                // ã‚°ãƒªãƒƒãƒ‰ã‚’åˆæœŸåŒ–
+                CMySuperGrid    &listCtrl = GetListCtrl();
+                listCtrl.DeleteAllEx();
+            }
+    inline    void    InitFileList(void) {
+                for (int no = 0; no < m_nArrayFileCount; no++) {
+                    FILE_MP3    *fileMP3 = GetListMP3(no);
+                    extern void InitFileSpecificInfo(FILE_MP3* pFileMP3);
+                    if (fileMP3->fileSpecificInfo != NULL) {
+                        InitFileSpecificInfo(fileMP3);
+                    }
+                }
+                m_arrayFiles.RemoveAll();
+                m_arrayFiles.SetSize(INIT_ARRAY_SIZE);
+                m_nArrayFileCount = 0;
+            }
+    inline    CSuperTagEditorView *GetView(void) {
+                POSITION    pos = GetFirstViewPosition();
+                return(((CSuperTagEditorView *)GetNextView(pos)));
+            }
+    inline    CMySuperGrid &GetListCtrl(void) {
+                return(GetView()->GetListCtrl());
+            }
+    inline    void InitPlugin(void) {
+                extern void STEPluginLoad(HWND);
+                STEPluginLoad(GetView()->GetSafeHwnd());
+                //CString strINI = AfxGetApp()->m_pszProfileName;
+                //InitProfile();
+            }
+    CTime    GetFileTime(const TCHAR *);
+    BOOL    SelectDirectory(TCHAR *sLocal, int size);
 
-	//’Ç‰Á by Kobarin
-	//StartLoadFile/EndLoadFile ‚Í“¯‚¶‰ñ”ŒÄ‚Ño‚³‚È‚¯‚ê‚Î‚È‚ç‚È‚¢
-	//‚æ‚¤‚Éd—l•ÏX
-	int		m_StartLoadFileCount;
-	int		m_TagUpdatingCount;//ƒ^ƒOî•ñ‚ğXV’†
-	bool	m_bInitialized; /* StartInaction2 055 */
+    //è¿½åŠ  by Kobarin
+    //StartLoadFile/EndLoadFile ã¯åŒã˜å›æ•°å‘¼ã³å‡ºã•ãªã‘ã‚Œã°ãªã‚‰ãªã„
+    //ã‚ˆã†ã«ä»•æ§˜å¤‰æ›´
+    int     m_StartLoadFileCount;
+    int     m_TagUpdatingCount;//ã‚¿ã‚°æƒ…å ±ã‚’æ›´æ–°ä¸­
+    bool    m_bInitialized; /* StartInaction2 055 */
 
-protected:	// ======================================
-			// =====    protected ƒƒ“ƒoŠÖ”    =====
-			// ======================================
+protected:    // ======================================
+            // =====    protected ãƒ¡ãƒ³ãƒé–¢æ•°    =====
+            // ======================================
 
-// ƒAƒgƒŠƒrƒ…[ƒg
+// ã‚¢ãƒˆãƒªãƒ“ãƒ¥ãƒ¼ãƒˆ
 public:
 
-// ƒIƒyƒŒ[ƒVƒ‡ƒ“
+// ã‚ªãƒšãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³
 public:
 
-//ƒI[ƒo[ƒ‰ƒCƒh
-	// ClassWizard ‚Í‰¼‘zŠÖ”‚ÌƒI[ƒo[ƒ‰ƒCƒh‚ğ¶¬‚µ‚Ü‚·B
-	//{{AFX_VIRTUAL(CSuperTagEditorDoc)
-	public:
-	virtual BOOL OnNewDocument();
-	virtual void Serialize(CArchive& ar);
-	virtual BOOL CanCloseFrame(CFrameWnd* pFrame);
-	virtual BOOL OnOpenDocument(LPCTSTR lpszPathName);
-	//}}AFX_VIRTUAL
+//ã‚ªãƒ¼ãƒãƒ¼ãƒ©ã‚¤ãƒ‰
+    // ClassWizard ã¯ä»®æƒ³é–¢æ•°ã®ã‚ªãƒ¼ãƒãƒ¼ãƒ©ã‚¤ãƒ‰ã‚’ç”Ÿæˆã—ã¾ã™ã€‚
+    //{{AFX_VIRTUAL(CSuperTagEditorDoc)
+    public:
+    virtual BOOL OnNewDocument();
+    virtual void Serialize(CArchive& ar);
+    virtual BOOL CanCloseFrame(CFrameWnd* pFrame);
+    virtual BOOL OnOpenDocument(LPCTSTR lpszPathName);
+    //}}AFX_VIRTUAL
 
-// ƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“
+// ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³
 public:
-	void SaveAllTag(BOOL bSaveOnly);
-	virtual ~CSuperTagEditorDoc();
+    void SaveAllTag(BOOL bSaveOnly);
+    virtual ~CSuperTagEditorDoc();
 #ifdef _DEBUG
-	virtual void AssertValid() const;
-	virtual void Dump(CDumpContext& dc) const;
+    virtual void AssertValid() const;
+    virtual void Dump(CDumpContext& dc) const;
 #endif
 
 protected:
 
-// ¶¬‚³‚ê‚½ƒƒbƒZ[ƒW ƒ}ƒbƒvŠÖ”
+// ç”Ÿæˆã•ã‚ŒãŸãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒãƒƒãƒ—é–¢æ•°
 protected:
-	//{{AFX_MSG(CSuperTagEditorDoc)
-	afx_msg void OnUpdateOpenFolder(CCmdUI* pCmdUI);
-	afx_msg void OnOpenFolder();
-	afx_msg void OnUpdateSaveAllTag(CCmdUI* pCmdUI);
-	afx_msg void OnSaveAllTag();
-	afx_msg void OnUpdateFileOpen(CCmdUI* pCmdUI);
-	afx_msg void OnUpdateEditFieldSi(CCmdUI* pCmdUI);
-	afx_msg void OnEditFieldSi();
-	afx_msg void OnUpdateEditTd3Tag(CCmdUI* pCmdUI);
-	afx_msg void OnEditTd3Tag();
-	afx_msg void OnUpdateEditChangeField(CCmdUI* pCmdUI);
-	afx_msg void OnEditChangeField();
-	afx_msg void OnUpdateExecClassification(CCmdUI* pCmdUI);
-	afx_msg void OnExecClassification();
-	afx_msg void OnDlgSetupPlugin();
-	afx_msg void OnUpdateDlgSetupPlugin(CCmdUI* pCmdUI);
-	afx_msg void OnDlgEnvironment();
-	afx_msg void OnUpdateDlgEnvironment(CCmdUI* pCmdUI);
-	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
+    //{{AFX_MSG(CSuperTagEditorDoc)
+    afx_msg void OnUpdateOpenFolder(CCmdUI* pCmdUI);
+    afx_msg void OnOpenFolder();
+    afx_msg void OnUpdateSaveAllTag(CCmdUI* pCmdUI);
+    afx_msg void OnSaveAllTag();
+    afx_msg void OnUpdateFileOpen(CCmdUI* pCmdUI);
+    afx_msg void OnUpdateEditFieldSi(CCmdUI* pCmdUI);
+    afx_msg void OnEditFieldSi();
+    afx_msg void OnUpdateEditTd3Tag(CCmdUI* pCmdUI);
+    afx_msg void OnEditTd3Tag();
+    afx_msg void OnUpdateEditChangeField(CCmdUI* pCmdUI);
+    afx_msg void OnEditChangeField();
+    afx_msg void OnUpdateExecClassification(CCmdUI* pCmdUI);
+    afx_msg void OnExecClassification();
+    afx_msg void OnDlgSetupPlugin();
+    afx_msg void OnUpdateDlgSetupPlugin(CCmdUI* pCmdUI);
+    afx_msg void OnDlgEnvironment();
+    afx_msg void OnUpdateDlgEnvironment(CCmdUI* pCmdUI);
+    //}}AFX_MSG
+    DECLARE_MESSAGE_MAP()
 };
 
 /////////////////////////////////////////////////////////////////////////////
 
 //{{AFX_INSERT_LOCATION}}
-// Microsoft Visual C++ ‚Í‘Os‚Ì’¼‘O‚É’Ç‰Á‚ÌéŒ¾‚ğ‘}“ü‚µ‚Ü‚·B
+// Microsoft Visual C++ ã¯å‰è¡Œã®ç›´å‰ã«è¿½åŠ ã®å®£è¨€ã‚’æŒ¿å…¥ã—ã¾ã™ã€‚
 
 #endif // !defined(AFX_DMTLOGVIEWDOC_H__D67B644A_BFAB_11D3_9459_00402641B29B__INCLUDED_)

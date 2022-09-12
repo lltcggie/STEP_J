@@ -4,36 +4,36 @@
 #if _MSC_VER > 1000
 #pragma once
 #endif // _MSC_VER > 1000
-// MyFileDialogPlaylist.h : ƒwƒbƒ_[ ƒtƒ@ƒCƒ‹
+// MyFileDialogPlaylist.h : ãƒ˜ãƒƒãƒ€ãƒ¼ ãƒ•ã‚¡ã‚¤ãƒ«
 //
 
 /////////////////////////////////////////////////////////////////////////////
-// CMyFileDialogPlaylist ƒ_ƒCƒAƒƒO
+// CMyFileDialogPlaylist ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
 
 class CMyFileDialogPlaylist : public CFileDialog
 {
-	DECLARE_DYNAMIC(CMyFileDialogPlaylist)
+    DECLARE_DYNAMIC(CMyFileDialogPlaylist)
 
 public:
-	BOOL OnFileNameOK();
-	void OnInitDone();
-	IFileDialogCustomize* custom;
-	BOOL m_bShowLoadPlaylistDlg;
-	CMyFileDialogPlaylist(BOOL bOpenFileDialog, // TRUE ‚È‚ç‚Î FileOpenA FALSE ‚È‚ç‚Î FileSaveAs
-		LPCTSTR lpszDefExt = NULL,
-		LPCTSTR lpszFileName = NULL,
-		DWORD dwFlags = OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT,
-		LPCTSTR lpszFilter = NULL,
-		CWnd* pParentWnd = NULL);
+    BOOL OnFileNameOK();
+    void OnInitDone();
+    IFileDialogCustomize* custom;
+    BOOL m_bShowLoadPlaylistDlg;
+    CMyFileDialogPlaylist(BOOL bOpenFileDialog, // TRUE ãªã‚‰ã° FileOpenã€ FALSE ãªã‚‰ã° FileSaveAs
+        LPCTSTR lpszDefExt = NULL,
+        LPCTSTR lpszFileName = NULL,
+        DWORD dwFlags = OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT,
+        LPCTSTR lpszFilter = NULL,
+        CWnd* pParentWnd = NULL);
 
 protected:
-	//{{AFX_MSG(CMyFileDialogPlaylist)
-		// ƒƒ‚ - ClassWizard ‚Í‚±‚ÌˆÊ’u‚Éƒƒ“ƒoŠÖ”‚ğ’Ç‰Á‚Ü‚½‚Ííœ‚µ‚Ü‚·B
-	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
+    //{{AFX_MSG(CMyFileDialogPlaylist)
+        // ãƒ¡ãƒ¢ - ClassWizard ã¯ã“ã®ä½ç½®ã«ãƒ¡ãƒ³ãƒé–¢æ•°ã‚’è¿½åŠ ã¾ãŸã¯å‰Šé™¤ã—ã¾ã™ã€‚
+    //}}AFX_MSG
+    DECLARE_MESSAGE_MAP()
 };
 
 //{{AFX_INSERT_LOCATION}}
-// Microsoft Visual C++ ‚Í‘Os‚Ì’¼‘O‚É’Ç‰Á‚ÌéŒ¾‚ğ‘}“ü‚µ‚Ü‚·B
+// Microsoft Visual C++ ã¯å‰è¡Œã®ç›´å‰ã«è¿½åŠ ã®å®£è¨€ã‚’æŒ¿å…¥ã—ã¾ã™ã€‚
 
 #endif // !defined(AFX_MYFILEDIALOGPLAYLIST_H__ED73F544_5953_4A29_9311_7775A9CCB828__INCLUDED_)

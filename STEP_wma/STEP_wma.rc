@@ -13,12 +13,12 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// “ú–{Œê resources
+// æ—¥æœ¬èªž resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)
 #ifdef _WIN32
 LANGUAGE LANG_JAPANESE, SUBLANG_DEFAULT
-#pragma code_page(932)
+#pragma code_page(65001)
 #endif //_WIN32
 
 #ifdef APSTUDIO_INVOKED
@@ -27,18 +27,18 @@ LANGUAGE LANG_JAPANESE, SUBLANG_DEFAULT
 // TEXTINCLUDE
 //
 
-1 TEXTINCLUDE DISCARDABLE 
+1 TEXTINCLUDE DISCARDABLE
 BEGIN
     "resource.h\0"
 END
 
-2 TEXTINCLUDE DISCARDABLE 
+2 TEXTINCLUDE DISCARDABLE
 BEGIN
     "#include ""afxres.h""\r\n"
     "\0"
 END
 
-3 TEXTINCLUDE DISCARDABLE 
+3 TEXTINCLUDE DISCARDABLE
 BEGIN
     "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
     "#define _AFX_NO_OLE_RESOURCES\r\n"
@@ -48,10 +48,10 @@ BEGIN
     "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)\r\n"
     "#ifdef _WIN32\r\n"
     "LANGUAGE 17, 1\r\n"
-    "#pragma code_page(932)\r\n"
+    "#pragma code_page(65001)\r\n"
     "#endif //_WIN32\r\n"
-    "#include ""res\\STEP_wma.rc2""  // Microsoft Visual C++ ˆÈŠO‚Ìƒc[ƒ‹‚Å•ÒW‚³‚ê‚½ƒŠƒ\[ƒX\r\n"
-    "#include ""l.jpn\\afxres.rc""          // •W€‚ÌƒRƒ“ƒ|[ƒlƒ“ƒg\r\n"
+    "#include ""res\\STEP_wma.rc2""  // Microsoft Visual C++ ä»¥å¤–ã®ãƒ„ãƒ¼ãƒ«ã§ç·¨é›†ã•ã‚ŒãŸãƒªã‚½ãƒ¼ã‚¹\r\n"
+    "#include ""l.jpn\\afxres.rc""          // æ¨™æº–ã®ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ\r\n"
     "#endif\r\n"
     "\0"
 END
@@ -64,7 +64,7 @@ END
 // Bitmap
 //
 
-IDB_BITMAP_WMA          BITMAP  DISCARDABLE     "bitmap_w.bmp"
+IDB_BITMAP_WMA          BITMAP  DISCARDABLE     "bitmap_w-24.bmp"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -74,10 +74,10 @@ IDB_BITMAP_WMA          BITMAP  DISCARDABLE     "bitmap_w.bmp"
 IDD_DLG_SETUP DIALOG DISCARDABLE  0, 0, 175, 73
 STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "WMA"
-FONT 9, "‚l‚r ‚oƒSƒVƒbƒN"
+FONT 9, "Meiryo UI"
 BEGIN
-    CONTROL         "ƒWƒƒƒ“ƒ‹–¼‚ÍƒŠƒXƒg‚©‚ç‘I‘ð‚·‚é(¦Ä‹N“®Œã—LŒø)",
-                    IDC_CH_GENRE_LIST_SELECT,"Button",BS_AUTOCHECKBOX | 
+    CONTROL         "ã‚¸ãƒ£ãƒ³ãƒ«åã¯ãƒªã‚¹ãƒˆã‹ã‚‰é¸æŠžã™ã‚‹(â€»å†èµ·å‹•å¾Œæœ‰åŠ¹)",
+                    IDC_CH_GENRE_LIST_SELECT,"Button",BS_AUTOCHECKBOX |
                     WS_TABSTOP,7,7,162,10
 END
 
@@ -88,7 +88,7 @@ END
 //
 
 #ifdef APSTUDIO_INVOKED
-GUIDELINES DESIGNINFO DISCARDABLE 
+GUIDELINES DESIGNINFO DISCARDABLE
 BEGIN
     IDD_DLG_SETUP, DIALOG
     BEGIN
@@ -100,7 +100,7 @@ BEGIN
 END
 #endif    // APSTUDIO_INVOKED
 
-#endif    // “ú–{Œê resources
+#endif    // æ—¥æœ¬èªž resources
 /////////////////////////////////////////////////////////////////////////////
 
 
@@ -118,10 +118,10 @@ END
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)
 #ifdef _WIN32
 LANGUAGE 17, 1
-#pragma code_page(932)
+#pragma code_page(65001)
 #endif //_WIN32
-#include "res\STEP_wma.rc2"  // Microsoft Visual C++ ˆÈŠO‚Ìƒc[ƒ‹‚Å•ÒW‚³‚ê‚½ƒŠƒ\[ƒX
-#include "l.jpn\afxres.rc"          // •W€‚ÌƒRƒ“ƒ|[ƒlƒ“ƒg
+#include "res\STEP_wma.rc2"  // Microsoft Visual C++ ä»¥å¤–ã®ãƒ„ãƒ¼ãƒ«ã§ç·¨é›†ã•ã‚ŒãŸãƒªã‚½ãƒ¼ã‚¹
+#include "l.jpn\afxres.rc"          // æ¨™æº–ã®ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
 #endif
 
 /////////////////////////////////////////////////////////////////////////////

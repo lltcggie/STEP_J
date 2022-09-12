@@ -3,65 +3,58 @@
 
 #include "STEPlugin.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif 
-
 #include <stdio.h>
 #include "ogg/ogg.h"
 #include "vorbis/codec.h"
-#include "metadata.h"
+#include "flac/all.h"
 
-typedef size_t (*vcedit_read_func)(void *, size_t, size_t, void *);
-typedef size_t (*vcedit_write_func)(const void *, size_t, size_t, void *);
-
-typedef struct {
-	ogg_sync_state		*oy;
-	ogg_stream_state	*os;
-
-	vorbis_comment		*vc;
-	vorbis_info         *vi;
-
-	vcedit_read_func read;
-	vcedit_write_func write;
-
-	void		*in;
-	long		serial;
-	unsigned char	*mainbuf;
-	unsigned char	*bookbuf;
-	int		mainlen;
-	int		booklen;
-	char 	    *lasterror;
-	char   *vendor;
-	int prevW;
-	int extrapage;
-	int eosin;
-} vcedit_state;
+enum{
+    FLA_TITLE,      //トラック名
+    FLA_ARTIST,     //アルバム名
+    FLA_ALBUMARTIST,//Albm.アーティスト
+    FLA_ALBUM,      //アルバム名
+    FLA_YEAR,       //寝号
+    FLA_TRACKNUMBER,//TrackNo
+    FLA_TRACKTOTAL, //Track数
+    FLA_DISCNUMBER, //DiscNo
+    FLA_DISCTOTAL,  //Disc数
+    FLA_GENRE,      //ジャンル
+    FLA_COMMENT,    //コメント
+    FLA_COPYRIGHT,  //著作権
+    FLA_LYRICIST,   //作詞者
+    FLA_COMPOSER,   //作曲者
+    FLA_PERFORMER,  //演奏者
+    FLA_ENCODEDBY,  //ソフトウェア
+    FLA_LAST
+};
 
 typedef struct _File_Tag File_Tag;
 struct _File_Tag
 {
     unsigned int key;             /* Incremented value */
     boolean saved;        /* Set to TRUE if this tag had been saved */
-    char *title;          /* Title of track */
-    char *artist;         /* Artist name */
-    char *album;          /* Album name */
-    char *year;           /* Year of track */
-    char *track;          /* Position of track in the album */
-    char *track_total;    /* The number of tracks for the album (ex: 12/20) */
-	char *str_track;      /* For write tag (ex. 12/20) */
-    char *genre;          /* Genre of song */
-    char *comment;        /* Comment */
-	char *composer;       /* Composer */
-	char *performer;      /* Performer */
+#if 0
+    TCHAR *title;          /* Title of track */
+    TCHAR *artist;         /* Artist name */
+    TCHAR *album;          /* Album name */
+    TCHAR *year;           /* Year of track */
+    TCHAR *track;          /* Position of track in the album */
+    TCHAR *track_total;    /* The number of tracks for the album (ex: 12/20) */
+    TCHAR *str_track;      /* For write tag (ex. 12/20) */
+    TCHAR *genre;          /* Genre of song */
+    TCHAR *comment;        /* Comment */
+    TCHAR *composer;       /* Composer */
+    TCHAR *performer;      /* Performer */
+#endif
+    TCHAR *values[FLA_LAST];
     CPtrArray *other;     /* List of unsupported fields (used for ogg only) */
 
     int samplerate;       /* Samplerate (Hz) */
-    int mode;             /* Stereo, ... or channels for ogg */
+    int bps;
+    int channels;         /* Stereo, ... or channels for ogg */
     int size;             /* The size of file (in bytes) */
     int duration;         /* The duration of file (in seconds) */
     int bitrate;          /* Bitrate (kb/s) */
-
 };
 
 const char *flac_error_msg;
@@ -76,7 +69,7 @@ const char *flac_error_msg;
 
 typedef enum
 {
-    FMT_U8, FMT_S8, FMT_U16_LE, FMT_U16_BE, FMT_U16_NE, FMT_S16_LE, FMT_S16_BE, FMT_S16_NE
+    FMT_U8, FMT_S8, FMT_U16_LE, FMT_U16_BE, FMT_U16_NE, FMT_S16_LE, FMT_S16_BE, FMT_S16_NE, FMT_S24_NE
 }
 AFormat;
 
@@ -93,9 +86,5 @@ typedef struct {
     AFormat sample_format; // Note : defined in XMMS devel
     int seek_to_in_sec;
 } file_info_struct;
-
-#ifdef __cplusplus
-}
-#endif 
 
 #endif /* _FILEFLAC_H_ */

@@ -4,70 +4,70 @@
 #if _MSC_VER > 1000
 #pragma once
 #endif // _MSC_VER > 1000
-// DlgSetClassification.h : ƒwƒbƒ_[ ƒtƒ@ƒCƒ‹
+// DlgSetClassification.h : ãƒ˜ãƒƒãƒ€ãƒ¼ ãƒ•ã‚¡ã‚¤ãƒ«
 //
 #include "OptionPage/OptionPage.h"
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgSetClassification ƒ_ƒCƒAƒƒO
+// CDlgSetClassification ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
 
 class CDlgSetClassification : public COptionPage
 {
-	DECLARE_DYNCREATE(CDlgSetClassification)
+    DECLARE_DYNCREATE(CDlgSetClassification)
 
-// ƒRƒ“ƒXƒgƒ‰ƒNƒVƒ‡ƒ“
+// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚·ãƒ§ãƒ³
 public:
-	CDlgSetClassification();
-	~CDlgSetClassification();
+    CDlgSetClassification();
+    ~CDlgSetClassification();
 
-// ƒ_ƒCƒAƒƒO ƒf[ƒ^
-	//{{AFX_DATA(CDlgSetClassification)
-	enum { IDD = IDD_DLG_SET_CLASSIFICATION };
-	CButton	m_btExecClassificasion;
-	CStatic	m_stClass5;
-	CStatic	m_stClass4;
-	CStatic	m_stClass3;
-	CStatic	m_stClass2;
-	CStatic	m_stClass1;
-	CComboBox	m_listClass5;
-	CComboBox	m_listClass4;
-	CComboBox	m_listClass3;
-	CComboBox	m_listClass2;
-	CComboBox	m_listClass1;
-	int		m_nClassType;
-	int		m_nClass1;
-	int		m_nClass2;
-	int		m_nClass3;
-	int		m_nClass4;
-	int		m_nClass5;
-	BOOL	m_bExecClassification;
-	//}}AFX_DATA
+// ãƒ€ã‚¤ã‚¢ãƒ­ã‚° ãƒ‡ãƒ¼ã‚¿
+    //{{AFX_DATA(CDlgSetClassification)
+    enum { IDD = IDD_DLG_SET_CLASSIFICATION };
+    CButton m_btExecClassificasion;
+    CStatic m_stClass5;
+    CStatic m_stClass4;
+    CStatic m_stClass3;
+    CStatic m_stClass2;
+    CStatic m_stClass1;
+    CComboBox   m_listClass5;
+    CComboBox   m_listClass4;
+    CComboBox   m_listClass3;
+    CComboBox   m_listClass2;
+    CComboBox   m_listClass1;
+    int     m_nClassType;
+    int     m_nClass1;
+    int     m_nClass2;
+    int     m_nClass3;
+    int     m_nClass4;
+    int     m_nClass5;
+    BOOL    m_bExecClassification;
+    //}}AFX_DATA
 
-	bool	m_bFirstEdit;
-	void	UpdateStatus(void);
+    bool    m_bFirstEdit;
+    void    UpdateStatus(void);
 
-// ƒI[ƒo[ƒ‰ƒCƒh
-	// ClassWizard ‚Í‰¼‘zŠÖ”‚ÌƒI[ƒo[ƒ‰ƒCƒh‚ğ¶¬‚µ‚Ü‚·B
-	//{{AFX_VIRTUAL(CDlgSetClassification)
-	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV ƒTƒ|[ƒg
-	//}}AFX_VIRTUAL
+// ã‚ªãƒ¼ãƒãƒ¼ãƒ©ã‚¤ãƒ‰
+    // ClassWizard ã¯ä»®æƒ³é–¢æ•°ã®ã‚ªãƒ¼ãƒãƒ¼ãƒ©ã‚¤ãƒ‰ã‚’ç”Ÿæˆã—ã¾ã™ã€‚
+    //{{AFX_VIRTUAL(CDlgSetClassification)
+    protected:
+    virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV ã‚µãƒãƒ¼ãƒˆ
+    //}}AFX_VIRTUAL
 
-// ƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“
+// ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³
 protected:
 
-	// ¶¬‚³‚ê‚½ƒƒbƒZ[ƒW ƒ}ƒbƒvŠÖ”
-	//{{AFX_MSG(CDlgSetClassification)
-	afx_msg void OnRaFileTag();
-	virtual BOOL OnInitDialog();
-	afx_msg void OnRaFolder();
-	afx_msg void OnSelChangeListClass();
-	afx_msg void OnBtResetPage();
-	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
+    // ç”Ÿæˆã•ã‚ŒãŸãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒãƒƒãƒ—é–¢æ•°
+    //{{AFX_MSG(CDlgSetClassification)
+    afx_msg void OnRaFileTag();
+    virtual BOOL OnInitDialog();
+    afx_msg void OnRaFolder();
+    afx_msg void OnSelChangeListClass();
+    afx_msg void OnBtResetPage();
+    //}}AFX_MSG
+    DECLARE_MESSAGE_MAP()
 };
 
 //{{AFX_INSERT_LOCATION}}
-// Microsoft Visual C++ ‚Í‘Os‚Ì’¼‘O‚É’Ç‰Á‚ÌéŒ¾‚ğ‘}“ü‚µ‚Ü‚·B
+// Microsoft Visual C++ ã¯å‰è¡Œã®ç›´å‰ã«è¿½åŠ ã®å®£è¨€ã‚’æŒ¿å…¥ã—ã¾ã™ã€‚
 
 #endif // !defined(AFX_DLGSETCLASSIFICATION_H__F4B6D821_00F8_11D4_9459_00402641B29B__INCLUDED_)

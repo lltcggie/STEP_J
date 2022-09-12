@@ -3,645 +3,1217 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "strcnv.h"
 //#include "imm.h"
 
-#ifndef iskanji
-#define iskanji(c)		((c) >= 0x81 && (c) <= 0x9f || (c) >= 0xe0 && (c) <= 0xfc)
+#ifndef _UNICODE
+
+//#ifndef iskanji
+//#define iskanji(c)        ((c) >= 0x81 && (c) <= 0x9f || (c) >= 0xe0 && (c) <= 0xfc)
+//#endif
+
 #endif
 
-enum	{CONV_SUJI=1, CONV_ALPHA=2, CONV_KATA=4, CONV_KIGOU=8, CONV_ALL=15};
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-extern	int conv_han2zens(unsigned char *, const unsigned char *, int);
-extern	int conv_zen2hans(unsigned char *, const unsigned char *, int);
-extern	void conv_kata2hira(unsigned char *);
-extern	void conv_kata_erase_dakuon(unsigned char *);
-extern	void conv_hira2kata(unsigned char *);
-extern	void conv_upper(unsigned char *);
-extern	void conv_lower(unsigned char *);
-extern	void conv_first_upper(unsigned char *, const char *, const char *, bool);
-//extern	DWORD conv_kan2hira(HWND, unsigned char *, DWORD);
-//extern	void conv_romaji(HWND hwnd, unsigned char *str, unsigned char *sRomaji);
-#ifdef __cplusplus
-}
-#endif
-
-unsigned short han2zen(int c, int flag)
+#ifndef _UNICODE
+unsigned short han2zen(int c, DWORD flag)
 {
-	if (c <= 0x19 || (c >= 0x80 && c <= 0xa0) || c >= 0xe0) {
-		return c;					// §Œä–¢’è‹`
-	}
-	if (flag & CONV_ALPHA) {
-		if (c >= 'A' && c <= 'Z') return(0x8260U + (c - 'A'));	// ‰p‘å•¶š
-		if (c >= 'a' && c <= 'z') return(0x8281U + (c - 'a'));	// ‰p¬•¶š
-	}
-	if (flag & CONV_SUJI) {
-		if (c >= '0' && c <= '9') return(0x824FU + (c - '0'));	// ”š
-	}
+    if (c <= 0x19 || (c >= 0x80 && c <= 0xa0) || c >= 0xe0) {
+        return c;                    // åˆ¶å¾¡æœªå®šç¾©
+    }
+    if (flag & CONV_ALPHA) {
+        if (c >= 'A' && c <= 'Z') return(0x8260U + (c - 'A'));    // è‹±å¤§æ–‡å­—
+        if (c >= 'a' && c <= 'z') return(0x8281U + (c - 'a'));    // è‹±å°æ–‡å­—
+    }
+    if (flag & CONV_SUJI) {
+        if (c >= '0' && c <= '9') return(0x824FU + (c - '0'));    // æ•°å­—
+    }
 
-	int		i;
-	static const unsigned char *s1 = (const unsigned char *)
-		/* 0123456789ABCDEF		        ‚O‚P‚Q‚R‚S‚T‚U‚V‚W‚X‚`‚a‚b‚c‚d‚e */
-		  "   ,. :;?!Şß   "		/* 212X:@@ABCDEFGHIJKLMN */
-		  /* STEP 016 *///" ¤¡,.¥:;?!Şß   "		/* 212X:@@ABCDEFGHIJKLMN */
-		  /* BeachMonster 102 *///"^~_         °- /"	/* 213X:OPQRSTUVWXYZ[\]^ */
-		  /* Baja 169 *///"^~_          - /"	/* 213X:OPQRSTUVWXYZ[\]^ */
-		  "^~_            /"	/* 213X:OPQRSTUVWXYZ[\]^ */
-		  "   |  `\' \"()  []"	/* 214X:_`abcdefghijklmn */
-		  "{}          +-   "	/* 215X:opqrstuvwxyz{|}~7F */
-		  /* STEP 016 *///"{}    ¢£    +-   "	/* 215X:opqrstuvwxyz{|}~7F */
-		  " = <>          \\"	/* 216X:€‚ƒ„…†‡ˆ‰Š‹Œ */
-		  "$  %#&*@        ";	/* 217X:‘’“”•–—˜™š›œ   */
-	static const unsigned char *s2 = (const unsigned char *)
-		/* 0123456789ABCDEF		        ‚O‚P‚Q‚R‚S‚T‚U‚V‚W‚X‚`‚a‚b‚c‚d‚e */
-		  "§±¨²©³ª´«µ¶Ş·Ş¸"		/* 252X:@ƒ@ƒAƒBƒCƒDƒEƒFƒGƒHƒIƒJƒKƒLƒMƒN */
-		  "Ş¹ŞºŞ»Ş¼Ş½Ş¾Ş¿ŞÀ"	/* 253X:ƒOƒPƒQƒRƒSƒTƒUƒVƒWƒXƒYƒZƒ[ƒ\ƒ]ƒ^ */
-		  "ŞÁŞ¯ÂŞÃŞÄŞÅÆÇÈÉÊ"	/* 254X:ƒ_ƒ`ƒaƒbƒcƒdƒeƒfƒgƒhƒiƒjƒkƒlƒmƒn */
-		  "ŞßËŞßÌŞßÍŞßÎŞßÏĞ "	/* 255X:ƒoƒpƒqƒrƒsƒtƒuƒvƒwƒxƒyƒzƒ{ƒ|ƒ}ƒ~7F */
-		  "ÑÒÓ¬Ô­Õ®Ö×ØÙÚÛ Ü"	/* 256X:ƒ€ƒƒ‚ƒƒƒ„ƒ…ƒ†ƒ‡ƒˆƒ‰ƒŠƒ‹ƒŒƒƒƒ */
-		  "  ¦İ";				/* 257X:ƒƒ‘ƒ’ƒ“ƒ”ƒ•ƒ– */
-	static const unsigned char *s3 = (const unsigned char *) /* BeachMonster 102 */
-		/* 0123456789ABCDEF		        ‚O‚P‚Q‚R‚S‚T‚U‚V‚W‚X‚`‚a‚b‚c‚d‚e */
-		  "                "	/* 212X:@@ABCDEFGHIJKLMN */
-		  "            °   "	/* 213X:OPQRSTUVWXYZ[\]^ */
-		  "                "	/* 214X:_`abcdefghijklmn */
-		  "                "	/* 215X:opqrstuvwxyz{|}~7F */
-		  "                "	/* 216X:€‚ƒ„…†‡ˆ‰Š‹Œ */
-		  "                ";	/* 217X:‘’“”•–—˜™š›œ   */
-		 ;
-	static const unsigned char *s4 = (const unsigned char *) /* STEP 016 */
-		/* 0123456789ABCDEF		        ‚O‚P‚Q‚R‚S‚T‚U‚V‚W‚X‚`‚a‚b‚c‚d‚e */
-		  "  ¤¡  ¥         "	/* 212X:@@ABCDEFGHIJKLMN */
-		  "                "	/* 213X:OPQRSTUVWXYZ[\]^ */
-		  "                "	/* 214X:_`abcdefghijklmn */
-		  "      ¢£        "	/* 215X:opqrstuvwxyz{|}~7F */
-		  "                "	/* 216X:€‚ƒ„…†‡ˆ‰Š‹Œ */
-		  "                ";	/* 217X:‘’“”•–—˜™š›œ   */
-		 ;
-	if (flag & CONV_KIGOU) {
-		for (i = 0; s1[i]; i++) if (c == s1[i]) return(0x8140U+i);	// ‹L†
-	}
-	if (flag & CONV_KATA) {
-		for (i = 0; s2[i]; i++) if (c == s2[i]) return(0x8340U+i);	// ƒJƒ^ƒJƒi
-	}
-	if (flag & CONV_KATA) { /* BeachMonster 102 */
-		for (i = 0; s3[i]; i++) if (c == s3[i]) return(0x8140U+i-1/* STEP 016*/);	// ‹L†‚¾‚¯‚ÇƒJƒ^ƒJƒiˆµ‚¢
-	}
-	extern bool g_bZenHanKigouKana; /* STEP 016 */
-	if ((!g_bZenHanKigouKana && flag & CONV_KIGOU) 
-		|| (g_bZenHanKigouKana && flag & CONV_KATA)) { /* STEP 016 */
-		for (i = 0; s4[i]; i++) if (c == s4[i]) return(0x8140U+i-1);
-	}
-	return(c);
+    int     i;
+    static const unsigned char *s1 = (const unsigned char *)
+        /* 0123456789ABCDEF             ï¼ï¼‘ï¼’ï¼“ï¼”ï¼•ï¼–ï¼—ï¼˜ï¼™ï¼¡ï¼¢ï¼£ï¼¤ï¼¥ï¼¦ */
+          "   ,. :;?!ï¾ï¾Ÿ   "     /* 212X:ã€€ã€€ã€ã€‚ï¼Œï¼ãƒ»ï¼šï¼›ï¼Ÿï¼ã‚›ã‚œÂ´ï½€Â¨ */
+          /* STEP 016 *///" ï½¤ï½¡,.ï½¥:;?!ï¾ï¾Ÿ   "     /* 212X:ã€€ã€€ã€ã€‚ï¼Œï¼ãƒ»ï¼šï¼›ï¼Ÿï¼ã‚›ã‚œÂ´ï½€Â¨ */
+          /* BeachMonster 102 *///"^~_         ï½°- /"    /* 213X:ï¼¾ï¿£ï¼¿ãƒ½ãƒ¾ã‚ã‚ã€ƒä»ã€…ã€†ã€‡ãƒ¼â€•â€ï¼ */
+          /* Baja 169 *///"^~_          - /"    /* 213X:ï¼¾ï¿£ï¼¿ãƒ½ãƒ¾ã‚ã‚ã€ƒä»ã€…ã€†ã€‡ãƒ¼â€•â€ï¼ */
+          "^~_            /"    /* 213X:ï¼¾ï¿£ï¼¿ãƒ½ãƒ¾ã‚ã‚ã€ƒä»ã€…ã€†ã€‡ãƒ¼â€•â€ï¼ */
+          "   |  `\' \"()  []"  /* 214X:ï¼¼ï½âˆ¥ï½œâ€¦â€¥â€˜â€™â€œâ€ï¼ˆï¼‰ã€”ã€•ï¼»ï¼½ */
+          "{}          +-   "   /* 215X:ï½›ï½ã€ˆã€‰ã€Šã€‹ã€Œã€ã€ã€ã€ã€‘ï¼‹ï¼Â±Ã—7F */
+          /* STEP 016 *///"{}    ï½¢ï½£    +-   "    /* 215X:ï½›ï½ã€ˆã€‰ã€Šã€‹ã€Œã€ã€ã€ã€ã€‘ï¼‹ï¼Â±Ã—7F */
+          " = <>          \\"   /* 216X:Ã·ï¼â‰ ï¼œï¼â‰¦â‰§âˆâˆ´â™‚â™€Â°â€²â€³â„ƒï¿¥ */
+          "$  %#&*@        ";   /* 217X:ï¼„ï¿ ï¿¡ï¼…ï¼ƒï¼†ï¼Šï¼ Â§â˜†â˜…â—‹â—â—â—‡   */
+    static const unsigned char *s2 = (const unsigned char *)
+        /* 0123456789ABCDEF             ï¼ï¼‘ï¼’ï¼“ï¼”ï¼•ï¼–ï¼—ï¼˜ï¼™ï¼¡ï¼¢ï¼£ï¼¤ï¼¥ï¼¦ */
+          "ï½§ï½±ï½¨ï½²ï½©ï½³ï½ªï½´ï½«ï½µï½¶ï¾ï½·ï¾ï½¸"     /* 252X:ã€€ã‚¡ã‚¢ã‚£ã‚¤ã‚¥ã‚¦ã‚§ã‚¨ã‚©ã‚ªã‚«ã‚¬ã‚­ã‚®ã‚¯ */
+          "ï¾ï½¹ï¾ï½ºï¾ï½»ï¾ï½¼ï¾ï½½ï¾ï½¾ï¾ï½¿ï¾ï¾€"    /* 253X:ã‚°ã‚±ã‚²ã‚³ã‚´ã‚µã‚¶ã‚·ã‚¸ã‚¹ã‚ºã‚»ã‚¼ã‚½ã‚¾ã‚¿ */
+          "ï¾ï¾ï¾ï½¯ï¾‚ï¾ï¾ƒï¾ï¾„ï¾ï¾…ï¾†ï¾‡ï¾ˆï¾‰ï¾Š"    /* 254X:ãƒ€ãƒãƒ‚ãƒƒãƒ„ãƒ…ãƒ†ãƒ‡ãƒˆãƒ‰ãƒŠãƒ‹ãƒŒãƒãƒãƒ */
+          "ï¾ï¾Ÿï¾‹ï¾ï¾Ÿï¾Œï¾ï¾Ÿï¾ï¾ï¾Ÿï¾ï¾ï¾Ÿï¾ï¾ "   /* 255X:ãƒãƒ‘ãƒ’ãƒ“ãƒ”ãƒ•ãƒ–ãƒ—ãƒ˜ãƒ™ãƒšãƒ›ãƒœãƒãƒãƒŸ7F */
+          "ï¾‘ï¾’ï¾“ï½¬ï¾”ï½­ï¾•ï½®ï¾–ï¾—ï¾˜ï¾™ï¾šï¾› ï¾œ"    /* 256X:ãƒ ãƒ¡ãƒ¢ãƒ£ãƒ¤ãƒ¥ãƒ¦ãƒ§ãƒ¨ãƒ©ãƒªãƒ«ãƒ¬ãƒ­ãƒ®ãƒ¯ */
+          "  ï½¦ï¾";               /* 257X:ãƒ°ãƒ±ãƒ²ãƒ³ãƒ´ãƒµãƒ¶ */
+    static const unsigned char *s3 = (const unsigned char *) /* BeachMonster 102 */
+        /* 0123456789ABCDEF             ï¼ï¼‘ï¼’ï¼“ï¼”ï¼•ï¼–ï¼—ï¼˜ï¼™ï¼¡ï¼¢ï¼£ï¼¤ï¼¥ï¼¦ */
+          "                "    /* 212X:ã€€ã€€ã€ã€‚ï¼Œï¼ãƒ»ï¼šï¼›ï¼Ÿï¼ã‚›ã‚œÂ´ï½€Â¨ */
+          "            ï½°   "    /* 213X:ï¼¾ï¿£ï¼¿ãƒ½ãƒ¾ã‚ã‚ã€ƒä»ã€…ã€†ã€‡ãƒ¼â€•â€ï¼ */
+          "                "    /* 214X:ï¼¼ï½âˆ¥ï½œâ€¦â€¥â€˜â€™â€œâ€ï¼ˆï¼‰ã€”ã€•ï¼»ï¼½ */
+          "                "    /* 215X:ï½›ï½ã€ˆã€‰ã€Šã€‹ã€Œã€ã€ã€ã€ã€‘ï¼‹ï¼Â±Ã—7F */
+          "                "    /* 216X:Ã·ï¼â‰ ï¼œï¼â‰¦â‰§âˆâˆ´â™‚â™€Â°â€²â€³â„ƒï¿¥ */
+          "                ";   /* 217X:ï¼„ï¿ ï¿¡ï¼…ï¼ƒï¼†ï¼Šï¼ Â§â˜†â˜…â—‹â—â—â—‡   */
+         ;
+    static const unsigned char *s4 = (const unsigned char *) /* STEP 016 */
+        /* 0123456789ABCDEF             ï¼ï¼‘ï¼’ï¼“ï¼”ï¼•ï¼–ï¼—ï¼˜ï¼™ï¼¡ï¼¢ï¼£ï¼¤ï¼¥ï¼¦ */
+          "  ï½¤ï½¡  ï½¥         "    /* 212X:ã€€ã€€ã€ã€‚ï¼Œï¼ãƒ»ï¼šï¼›ï¼Ÿï¼ã‚›ã‚œÂ´ï½€Â¨ */
+          "                "    /* 213X:ï¼¾ï¿£ï¼¿ãƒ½ãƒ¾ã‚ã‚ã€ƒä»ã€…ã€†ã€‡ãƒ¼â€•â€ï¼ */
+          "                "    /* 214X:ï¼¼ï½âˆ¥ï½œâ€¦â€¥â€˜â€™â€œâ€ï¼ˆï¼‰ã€”ã€•ï¼»ï¼½ */
+          "      ï½¢ï½£        "    /* 215X:ï½›ï½ã€ˆã€‰ã€Šã€‹ã€Œã€ã€ã€ã€ã€‘ï¼‹ï¼Â±Ã—7F */
+          "                "    /* 216X:Ã·ï¼â‰ ï¼œï¼â‰¦â‰§âˆâˆ´â™‚â™€Â°â€²â€³â„ƒï¿¥ */
+          "                ";   /* 217X:ï¼„ï¿ ï¿¡ï¼…ï¼ƒï¼†ï¼Šï¼ Â§â˜†â˜…â—‹â—â—â—‡   */
+         ;
+    if (flag & CONV_KIGOU) {
+        for (i = 0; s1[i]; i++) if (c == s1[i]) return(0x8140U+i);    // è¨˜å·
+    }
+    if (flag & CONV_KATA) {
+        for (i = 0; s2[i]; i++) if (c == s2[i]) return(0x8340U+i);    // ã‚«ã‚¿ã‚«ãƒŠ
+    }
+    if (flag & CONV_KATA) { /* BeachMonster 102 */
+        for (i = 0; s3[i]; i++) if (c == s3[i]) return(0x8140U+i-1/* STEP 016*/);    // è¨˜å·ã ã‘ã©ã‚«ã‚¿ã‚«ãƒŠæ‰±ã„
+    }
+    extern bool g_bZenHanKigouKana; /* STEP 016 */
+    if ((!g_bZenHanKigouKana && flag & CONV_KIGOU) 
+        || (g_bZenHanKigouKana && flag & CONV_KATA)) { /* STEP 016 */
+        for (i = 0; s4[i]; i++) if (c == s4[i]) return(0x8140U+i-1);
+    }
+    return(c);
 }
 
-int conv_han2zens(unsigned char *zen, const unsigned char *han, int flag)
+int conv_han2zens(TCHAR *_zen, int han_size, const TCHAR *_han, DWORD flag)
 {
-	int		i;
-	int		pzen = 0;		// ‘SŠpˆÊ’u
-	int		l = strlen((const char *)han);
-	zen[0] = '\0';
+    unsigned char *zen = (unsigned char*)_zen;
+    const unsigned char *han = (const unsigned char*)_han;
+    int     i;
+    int     pzen = 0;        // å…¨è§’ä½ç½®
+    int     l = strlen((const char *)han);
+    zen[0] = '\0';
 
-	for (i = 0; i < l; i++, pzen++, zen[pzen] = '\0') {
-		if (han[i] == ' ') {		// ‹ó”’
-			if (flag & CONV_KIGOU) {
-				zen[pzen] = 0x81U;
-				pzen++;
-				zen[pzen] = 0x40U;
-			} else {
-				zen[pzen] = ' ';
-			}
-			continue;
-		}
+    for (i = 0; i < l; i++, pzen++, zen[pzen] = '\0') {
+        if (han[i] == ' ') {        // ç©ºç™½
+            if (flag & CONV_KIGOU) {
+                zen[pzen] = 0x81U;
+                pzen++;
+                zen[pzen] = 0x40U;
+            } else {
+                zen[pzen] = ' ';
+            }
+            continue;
+        }
 
-		if (iskanji(han[i])) {		// Š¿š
-			zen[pzen] = han[i];
-			pzen++;
-			i++;
-			zen[pzen] = han[i];
-			continue;
-		}
+        if (_istlead(han[i])) {        // æ¼¢å­—
+            zen[pzen] = han[i];
+            pzen++;
+            i++;
+            zen[pzen] = han[i];
+            continue;
+        }
 
-		if (flag & CONV_KATA) {
-			unsigned int	x;
-			static const unsigned char *s1 = (const unsigned char *)
-			/* 0123456789ABCDEF		        ‚O‚P‚Q‚R‚S‚T‚U‚V‚W‚X‚`‚a‚b‚c‚d‚e */
-			             "¶ · ¸"	/* 252X:@ƒ@ƒAƒBƒCƒDƒEƒFƒGƒHƒIƒJƒKƒLƒMƒN */
-			  " ¹ º » ¼ ½ ¾ ¿ À"	/* 253X:ƒOƒPƒQƒRƒSƒTƒUƒVƒWƒXƒYƒZƒ[ƒ\ƒ]ƒ^ */
-			  " Á ¯Â Ã Ä ÅÆÇÈÉÊ"	/* 254X:ƒ_ƒ`ƒaƒbƒcƒdƒeƒfƒgƒhƒiƒjƒkƒlƒmƒn */
-			  "  Ë  Ì  Í  Î";		/* 255X:ƒoƒpƒqƒrƒsƒtƒuƒvƒwƒxƒyƒzƒ{ƒ|     */
-			static const unsigned char *s2 = (const unsigned char *)
-			/* 0123456789ABCDEF		        ‚O‚P‚Q‚R‚S‚T‚U‚V‚W‚X‚`‚a‚b‚c‚d‚e */
-			                 "Ê"	/* 254X:                              ƒn */
-			  "  Ë  Ì  Í  Î";		/* 255X:ƒoƒpƒqƒrƒsƒtƒuƒvƒwƒxƒyƒzƒ{ƒ|     */
+        if (flag & CONV_KATA) {
+            unsigned int    x;
+            static const unsigned char *s1 = (const unsigned char *)
+            /* 0123456789ABCDEF             ï¼ï¼‘ï¼’ï¼“ï¼”ï¼•ï¼–ï¼—ï¼˜ï¼™ï¼¡ï¼¢ï¼£ï¼¤ï¼¥ï¼¦ */
+                         "ï½¶ ï½· ï½¸"    /* 252X:ã€€ã‚¡ã‚¢ã‚£ã‚¤ã‚¥ã‚¦ã‚§ã‚¨ã‚©ã‚ªã‚«ã‚¬ã‚­ã‚®ã‚¯ */
+              " ï½¹ ï½º ï½» ï½¼ ï½½ ï½¾ ï½¿ ï¾€"    /* 253X:ã‚°ã‚±ã‚²ã‚³ã‚´ã‚µã‚¶ã‚·ã‚¸ã‚¹ã‚ºã‚»ã‚¼ã‚½ã‚¾ã‚¿ */
+              " ï¾ ï½¯ï¾‚ ï¾ƒ ï¾„ ï¾…ï¾†ï¾‡ï¾ˆï¾‰ï¾Š"    /* 254X:ãƒ€ãƒãƒ‚ãƒƒãƒ„ãƒ…ãƒ†ãƒ‡ãƒˆãƒ‰ãƒŠãƒ‹ãƒŒãƒãƒãƒ */
+              "  ï¾‹  ï¾Œ  ï¾  ï¾";       /* 255X:ãƒãƒ‘ãƒ’ãƒ“ãƒ”ãƒ•ãƒ–ãƒ—ãƒ˜ãƒ™ãƒšãƒ›ãƒœãƒ     */
+            static const unsigned char *s2 = (const unsigned char *)
+            /* 0123456789ABCDEF             ï¼ï¼‘ï¼’ï¼“ï¼”ï¼•ï¼–ï¼—ï¼˜ï¼™ï¼¡ï¼¢ï¼£ï¼¤ï¼¥ï¼¦ */
+                             "ï¾Š"    /* 254X:                              ãƒ */
+              "  ï¾‹  ï¾Œ  ï¾  ï¾";       /* 255X:ãƒãƒ‘ãƒ’ãƒ“ãƒ”ãƒ•ãƒ–ãƒ—ãƒ˜ãƒ™ãƒšãƒ›ãƒœãƒ     */
 
-			// [³Ş] => [ƒ”] ‚Ì•ÏŠ·
-			if (han[i] == (unsigned char)'³' && han[i+1] == (unsigned char)'Ş') {
-				zen[pzen] = 0x83U;
-				pzen++;
-				i++;
-				zen[pzen] = 0x94U;
-				goto cont;
-			}
+            // [ï½³ï¾] => [ãƒ´] ã®å¤‰æ›
+            if (han[i] == (unsigned char)'ï½³' && han[i+1] == (unsigned char)'ï¾') {
+                zen[pzen] = 0x83U;
+                pzen++;
+                i++;
+                zen[pzen] = 0x94U;
+                goto cont;
+            }
 
-			// ‘÷‰¹‚Ì•ÏŠ·
-			for (x = 0; s1[x]; x++) {
-				if (han[i] == s1[x] && han[i+1] == (unsigned char)'Ş') {
-					zen[pzen] = 0x83U;
-					pzen++;
-					i++;
-					zen[pzen] = 0x4BU + x;
-					goto cont;
-				}
-			}
+            // æ¿éŸ³ã®å¤‰æ›
+            for (x = 0; s1[x]; x++) {
+                if (han[i] == s1[x] && han[i+1] == (unsigned char)'ï¾') {
+                    zen[pzen] = 0x83U;
+                    pzen++;
+                    i++;
+                    zen[pzen] = 0x4BU + x;
+                    goto cont;
+                }
+            }
 
-			// ”¼‘÷‰¹‚Ì•ÏŠ·
-			for (x = 0; s2[x]; x++) {
-				if (han[i] == s2[x] && han[i+1] == (unsigned char)'ß') {
-					// ”¼‘÷‰¹
-					zen[pzen] = 0x83U;
-					pzen++;
-					i++;
-					zen[pzen] = 0x70U + x;
-					goto cont;
-				}
-			}
-		}
+            // åŠæ¿éŸ³ã®å¤‰æ›
+            for (x = 0; s2[x]; x++) {
+                if (han[i] == s2[x] && han[i+1] == (unsigned char)'ï¾Ÿ') {
+                    // åŠæ¿éŸ³
+                    zen[pzen] = 0x83U;
+                    pzen++;
+                    i++;
+                    zen[pzen] = 0x70U + x;
+                    goto cont;
+                }
+            }
+        }
 
-		// ‚»‚Ì‘¼‚Ì•ÏŠ·
-		{
-			unsigned short z = han2zen(han[i], flag);
-			if (z >= 0x100) {
-				zen[pzen] = (unsigned char)(z >> 8);
-				pzen++;
-				zen[pzen] = (unsigned char)z;
-			} else {
-				zen[pzen] = (unsigned char)z;
-			}
-		}
-cont:	;
-	}
+        // ãã®ä»–ã®å¤‰æ›
+        {
+            unsigned short z = han2zen(han[i], flag);
+            if (z >= 0x100) {
+                zen[pzen] = (unsigned char)(z >> 8);
+                pzen++;
+                zen[pzen] = (unsigned char)z;
+            } else {
+                zen[pzen] = (unsigned char)z;
+            }
+        }
+cont:    ;
+    }
 
-	return(pzen);
+    return(pzen);
 }
 
-unsigned short zen2han(unsigned short c, int flag)
+unsigned short zen2han(unsigned short c, DWORD flag)
 {
-	if (c <= 0x100) return(c);				// ”ñŠ¿š
-	if (flag & CONV_ALPHA) {
-		if (c == 0x8140U) return(' ');			// ‹ó”’
-		if (c >= 0x8260U && c <= 0x8279U) {		// ‚`|‚y
-			return('A' + (c - 0x8260U));
-		}
-		if (c >= 0x8281U && c <= 0x829AU) {		// ‚|‚š
-			return('a' + (c - 0x8281U));
-		}
-	}
-	if (flag & CONV_SUJI) {
-		if (c >= 0x824FU && c <= 0x8258U) {		// ‚O|‚X
-			return('0' + (c - 0x824FU));
-		}
-	}
+    if (c <= 0x100) return(c);              // éæ¼¢å­—
+    if (flag & CONV_ALPHA) {
+        if (c == 0x8140U) return(' ');      // ç©ºç™½
+        if (c >= 0x8260U && c <= 0x8279U) { // ï¼¡ï¼ï¼º
+            return('A' + (c - 0x8260U));
+        }
+        if (c >= 0x8281U && c <= 0x829AU) { // ï½ï¼ï½š
+            return('a' + (c - 0x8281U));
+        }
+    }
+    if (flag & CONV_SUJI) {
+        if (c >= 0x824FU && c <= 0x8258U) { // ï¼ï¼ï¼™
+            return('0' + (c - 0x824FU));
+        }
+    }
 
-	int		i;
-	if (flag & CONV_KIGOU) {
-		// ‚È‚ñ‚Å"`"‚ğ"-"‚É‚µ‚Ä‚é‚Ì‚©Šo‚¦‚Ä‚È‚¢‚Ì‚Åíœ 041018
-		static const unsigned char *han = (const unsigned char *)
-			",.:;?!Şß^~_-/|`\'\"()[]{}+-=<>\\$%#&*@"; /* BeachMonster 102 *//* STEP 016 */
-		static const unsigned char *zen = (const unsigned char *)
-			"CDFGHIJKOPQ|^bMfhijmnop{|ƒ„“”•–—\0"; /* BeachMonster 102 *//* STEP 016 */
-		for (i = 0; zen[i+1]; i+=2) {
-			if (c == ((zen[i] << 8) | zen[i+1])) return(han[i/2]);
-		}
-		extern bool g_bZenHanKigouKana; /* STEP 016 */
-		if (!g_bZenHanKigouKana) { /* STEP 016 */
-			static const unsigned char *han2 = (const unsigned char *)
-				"¥¤¡¢£";
-			static const unsigned char *zen2 = (const unsigned char *)
-				"EABuv\0";
-			for (i = 0; zen2[i+1]; i+=2) {
-				if (c == ((zen2[i] << 8) | zen2[i+1])) return(han2[i/2]);
-			}
-		}
-	}
-	if (flag & CONV_KATA) {
-		static const unsigned char *han = (const unsigned char *)
-			"§±¨²©³ª´«µ¶·¸¹º»¼½¾¿ÀÁ¯ÂÃÄÅÆÇÈÉÊËÌÍÎÏĞÑÒÓ¬Ô­Õ®Ö×ØÙÚÛÜ¦İ°";
-		static const unsigned char *kata = (const unsigned char *)
-			"ƒ@ƒAƒBƒCƒDƒEƒFƒGƒHƒIƒJƒLƒNƒPƒRƒTƒVƒXƒZƒ\ƒ^ƒ`ƒbƒcƒeƒgƒiƒjƒkƒlƒm"
-			"ƒnƒqƒtƒwƒzƒ}ƒ~ƒ€ƒƒ‚ƒƒƒ„ƒ…ƒ†ƒ‡ƒˆƒ‰ƒŠƒ‹ƒŒƒƒƒ’ƒ“[\0";
-		// ƒJƒ^ƒJƒi
-		for (i = 0; kata[i+1]; i+=2) {
-			if (c == ((kata[i] << 8) | kata[i+1])) return(han[i/2]);
-		}
-		extern bool g_bZenHanKigouKana; /* STEP 016 */
-		if (g_bZenHanKigouKana) { /* STEP 016 */
-			static const unsigned char *han2 = (const unsigned char *)
-				"¥¤¡¢£";
-			static const unsigned char *kata2 = (const unsigned char *)
-				"EABuv\0";
-			for (i = 0; kata2[i+1]; i+=2) {
-				if (c == ((kata2[i] << 8) | kata2[i+1])) return(han2[i/2]);
-			}
-		}
-	}
+    int     i;
+    if (flag & CONV_KIGOU) {
+        // ãªã‚“ã§"ï½"ã‚’"-"ã«ã—ã¦ã‚‹ã®ã‹è¦šãˆã¦ãªã„ã®ã§å‰Šé™¤ 041018
+        static const unsigned char *han = (const unsigned char *)
+            ",.:;?!ï¾ï¾Ÿ^~_-/|`\'\"()[]{}+-=<>\\$%#&*@"; /* BeachMonster 102 *//* STEP 016 */
+        static const unsigned char *zen = (const unsigned char *)
+            "ï¼Œï¼ï¼šï¼›ï¼Ÿï¼ã‚›ã‚œï¼¾ï¿£ï¼¿ï¼ï¼ï½œï½€â€™â€ï¼ˆï¼‰ï¼»ï¼½ï½›ï½ï¼‹ï¼ï¼ï¼œï¼ï¿¥ï¼„ï¼…ï¼ƒï¼†ï¼Šï¼ \0"; /* BeachMonster 102 *//* STEP 016 */
+        for (i = 0; zen[i+1]; i+=2) {
+            if (c == ((zen[i] << 8) | zen[i+1])) return(han[i/2]);
+        }
+        extern bool g_bZenHanKigouKana; /* STEP 016 */
+        if (!g_bZenHanKigouKana) { /* STEP 016 */
+            static const unsigned char *han2 = (const unsigned char *)
+                "ï½¥ï½¤ï½¡ï½¢ï½£";
+            static const unsigned char *zen2 = (const unsigned char *)
+                "ãƒ»ã€ã€‚ã€Œã€\0";
+            for (i = 0; zen2[i+1]; i+=2) {
+                if (c == ((zen2[i] << 8) | zen2[i+1])) return(han2[i/2]);
+            }
+        }
+    }
+    if (flag & CONV_KATA) {
+        static const unsigned char *han = (const unsigned char *)
+            "ï½§ï½±ï½¨ï½²ï½©ï½³ï½ªï½´ï½«ï½µï½¶ï½·ï½¸ï½¹ï½ºï½»ï½¼ï½½ï½¾ï½¿ï¾€ï¾ï½¯ï¾‚ï¾ƒï¾„ï¾…ï¾†ï¾‡ï¾ˆï¾‰ï¾Šï¾‹ï¾Œï¾ï¾ï¾ï¾ï¾‘ï¾’ï¾“ï½¬ï¾”ï½­ï¾•ï½®ï¾–ï¾—ï¾˜ï¾™ï¾šï¾›ï¾œï½¦ï¾ï½°";
+        static const unsigned char *kata = (const unsigned char *)
+            "ã‚¡ã‚¢ã‚£ã‚¤ã‚¥ã‚¦ã‚§ã‚¨ã‚©ã‚ªã‚«ã‚­ã‚¯ã‚±ã‚³ã‚µã‚·ã‚¹ã‚»ã‚½ã‚¿ãƒãƒƒãƒ„ãƒ†ãƒˆãƒŠãƒ‹ãƒŒãƒãƒ"
+            "ãƒãƒ’ãƒ•ãƒ˜ãƒ›ãƒãƒŸãƒ ãƒ¡ãƒ¢ãƒ£ãƒ¤ãƒ¥ãƒ¦ãƒ§ãƒ¨ãƒ©ãƒªãƒ«ãƒ¬ãƒ­ãƒ¯ãƒ²ãƒ³ãƒ¼\0";
+        // ã‚«ã‚¿ã‚«ãƒŠ
+        for (i = 0; kata[i+1]; i+=2) {
+            if (c == ((kata[i] << 8) | kata[i+1])) return(han[i/2]);
+        }
+        extern bool g_bZenHanKigouKana; /* STEP 016 */
+        if (g_bZenHanKigouKana) { /* STEP 016 */
+            static const unsigned char *han2 = (const unsigned char *)
+                "ï½¥ï½¤ï½¡ï½¢ï½£";
+            static const unsigned char *kata2 = (const unsigned char *)
+                "ãƒ»ã€ã€‚ã€Œã€\0";
+            for (i = 0; kata2[i+1]; i+=2) {
+                if (c == ((kata2[i] << 8) | kata2[i+1])) return(han2[i/2]);
+            }
+        }
+    }
 
-	// •ÏŠ·‚Å‚«‚È‚©‚Á‚½
-	return(c);
+    // å¤‰æ›ã§ããªã‹ã£ãŸ
+    return(c);
 }
 
-int conv_zen2hans(unsigned char *han, const unsigned char *zen, int flag)
+int conv_zen2hans(TCHAR *_han, int han_size, const TCHAR *_zen, DWORD flag)
 {
-	int		i;
-	int		phan = 0;		// ”¼ŠpˆÊ’u
-	int		l = strlen((const char *)zen);
-	han[0] = '\0';
+    unsigned char *han = (unsigned char *)_han;
+    const unsigned char *zen = (const unsigned char *)_zen;
 
-	for (i = 0; i < l; i++, phan++, han[phan] = '\0') {
-		if (!iskanji(zen[i])) {		// ”ñŠ¿š
-			han[phan] = zen[i];
-			continue;				// –³•ÏŠ·
-		}
+    int     i;
+    int     phan = 0;        // åŠè§’ä½ç½®
+    int     l = strlen((const char *)zen);
+    han[0] = '\0';
 
-		if (flag & CONV_KATA) {
-			int		j;
-			static const unsigned char *k1 = (const unsigned char *)"ƒKƒMƒOƒQƒSƒUƒWƒYƒ[ƒ]ƒ_ƒaƒdƒfƒhƒoƒrƒuƒxƒ{ƒ”\0";
-			static const unsigned char *h1 = (const unsigned char *)"‚ª‚¬‚®‚°‚²‚´‚¶‚¸‚º‚¼‚¾‚À‚Ã‚Å‚Ç‚Î‚Ñ‚Ô‚×‚Ú\0\0\0";
-			static const unsigned char *k2 = (const unsigned char *)"ƒpƒsƒvƒyƒ|\0";
-			static const unsigned char *h2 = (const unsigned char *)"‚Ï‚Ò‚Õ‚Ø‚Û\0";
-			// ‘÷‰¹‚Ì•ÏŠ·
-			for (j = 0; k1[j+1]; j+=2) {
+    for (i = 0; i < l; i++, phan++, han[phan] = '\0') {
+        if (!_istlead(zen[i])) {    // éæ¼¢å­—
+            han[phan] = zen[i];
+            continue;               // ç„¡å¤‰æ›
+        }
+
+        if (flag & CONV_KATA) {
+            int     j;
+            static const unsigned char *k1 = (const unsigned char *)"ã‚¬ã‚®ã‚°ã‚²ã‚´ã‚¶ã‚¸ã‚ºã‚¼ã‚¾ãƒ€ãƒ‚ãƒ…ãƒ‡ãƒ‰ãƒãƒ“ãƒ–ãƒ™ãƒœãƒ´\0";
+            static const unsigned char *h1 = (const unsigned char *)"ãŒããã’ã”ã–ã˜ãšãœãã ã¢ã¥ã§ã©ã°ã³ã¶ã¹ã¼\0\0\0";
+            static const unsigned char *k2 = (const unsigned char *)"ãƒ‘ãƒ”ãƒ—ãƒšãƒ\0";
+            static const unsigned char *h2 = (const unsigned char *)"ã±ã´ã·ãºã½\0";
+            // æ¿éŸ³ã®å¤‰æ›
+            for (j = 0; k1[j+1]; j+=2) {
 #if 1
-				if (zen[i] == k1[j] && zen[i+1] == k1[j+1]) {	// ƒJƒ^ƒJƒi
+                if (zen[i] == k1[j] && zen[i+1] == k1[j+1]) {   // ã‚«ã‚¿ã‚«ãƒŠ
 #else
-				if ((zen[i] == k1[j] && zen[i+1] == k1[j+1])	// ƒJƒ^ƒJƒi
-				||  (zen[i] == h1[j] && zen[i+1] == h1[j+1])) {	// ‚Ğ‚ç‚ª‚È
+                if ((zen[i] == k1[j] && zen[i+1] == k1[j+1])    // ã‚«ã‚¿ã‚«ãƒŠ
+                ||  (zen[i] == h1[j] && zen[i+1] == h1[j+1])) { // ã²ã‚‰ãŒãª
 #endif
-					static const unsigned char *h = (const unsigned char *)"¶·¸¹º»¼½¾¿ÀÁÂÃÄÊËÌÍÎ³";
-					han[phan] = h[j/2];
-					phan++;
-					han[phan] = (unsigned char)'Ş';
-					i++;
-					goto cont;
-				}
-			}
+                    static const unsigned char *h = (const unsigned char *)"ï½¶ï½·ï½¸ï½¹ï½ºï½»ï½¼ï½½ï½¾ï½¿ï¾€ï¾ï¾‚ï¾ƒï¾„ï¾Šï¾‹ï¾Œï¾ï¾ï½³";
+                    han[phan] = h[j/2];
+                    phan++;
+                    han[phan] = (unsigned char)'ï¾';
+                    i++;
+                    goto cont;
+                }
+            }
 
-			// ”¼‘÷‰¹‚Ì•ÏŠ·
-			for (j = 0; k2[j+1]; j+=2) {
+            // åŠæ¿éŸ³ã®å¤‰æ›
+            for (j = 0; k2[j+1]; j+=2) {
 #if 1
-				if (zen[i] == k2[j] && zen[i+1] == k2[j+1]) {	// ƒJƒ^ƒJƒi
+                if (zen[i] == k2[j] && zen[i+1] == k2[j+1]) {   // ã‚«ã‚¿ã‚«ãƒŠ
 #else
-				if ((zen[i] == k2[j] && zen[i+1] == k2[j+1])	// ƒJƒ^ƒJƒi
-				||  (zen[i] == h2[j] && zen[i+1] == h2[j+1])) {	// ‚Ğ‚ç‚ª‚È
+                if ((zen[i] == k2[j] && zen[i+1] == k2[j+1])    // ã‚«ã‚¿ã‚«ãƒŠ
+                ||  (zen[i] == h2[j] && zen[i+1] == h2[j+1])) { // ã²ã‚‰ãŒãª
 #endif
-					static const unsigned char *h = (const unsigned char *)"ÊËÌÍÎ";
-					han[phan] = h[j/2];
-					phan++;
-					han[phan] = (unsigned char)'ß';
-					i++;
-					goto cont;
-				}
-			}
-		}
+                    static const unsigned char *h = (const unsigned char *)"ï¾Šï¾‹ï¾Œï¾ï¾";
+                    han[phan] = h[j/2];
+                    phan++;
+                    han[phan] = (unsigned char)'ï¾Ÿ';
+                    i++;
+                    goto cont;
+                }
+            }
+        }
 
-		// ‚»‚Ì‘¼‚Ì•ÏŠ·
-		{
-			unsigned short c;
-			c = zen2han((zen[i] << 8) | zen[i+1], flag);
-			i++;
-			if (c >= 0x100) {
-				han[phan] = (unsigned char)(c >> 8);
-				phan++;
-				han[phan] = (unsigned char)c;
-			} else {
-				han[phan] = (unsigned char)c;
-			}
-		}
+        // ãã®ä»–ã®å¤‰æ›
+        {
+            unsigned short c;
+            c = zen2han((zen[i] << 8) | zen[i+1], flag);
+            i++;
+            if (c >= 0x100) {
+                han[phan] = (unsigned char)(c >> 8);
+                phan++;
+                han[phan] = (unsigned char)c;
+            } else {
+                han[phan] = (unsigned char)c;
+            }
+        }
 
-cont:	;
-	}
+cont:    ;
+    }
 
-	return(phan);
+    return(phan);
 }
+#else
 
-static const unsigned char *kata = (const unsigned char *)
-	"ƒ@ƒAƒBƒCƒDƒEƒFƒGƒHƒIƒJƒKƒLƒMƒNƒOƒPƒQƒRƒSƒTƒUƒVƒWƒXƒYƒZƒ[ƒ\ƒ]"
-	"ƒ^ƒ_ƒ`ƒaƒbƒcƒdƒeƒfƒgƒhƒiƒjƒkƒlƒmƒnƒoƒpƒqƒrƒsƒtƒuƒvƒwƒxƒyƒzƒ{ƒ|"
-	"ƒ}ƒ~ƒ€ƒƒ‚ƒƒƒ„ƒ…ƒ†ƒ‡ƒˆƒ‰ƒŠƒ‹ƒŒƒƒƒƒ’ƒ“";
-static const unsigned char *hira = (const unsigned char *)
-	"‚Ÿ‚ ‚¡‚¢‚£‚¤‚¥‚¦‚§‚¨‚©‚ª‚«‚¬‚­‚®‚¯‚°‚±‚²‚³‚´‚µ‚¶‚·‚¸‚¹‚º‚»‚¼"
-	"‚½‚¾‚¿‚À‚Á‚Â‚Ã‚Ä‚Å‚Æ‚Ç‚È‚É‚Ê‚Ë‚Ì‚Í‚Î‚Ï‚Ğ‚Ñ‚Ò‚Ó‚Ô‚Õ‚Ö‚×‚Ø‚Ù‚Ú‚Û"
-	"‚Ü‚İ‚Ş‚ß‚à‚á‚â‚ã‚ä‚å‚æ‚ç‚è‚é‚ê‚ë‚ì‚í‚ğ‚ñ";
-static const unsigned char *alphaS = (const unsigned char *)
-	"‚‚‚‚ƒ‚„‚…‚†‚‡‚ˆ‚‰‚Š‚‹‚Œ‚‚‚‚‚‘‚’‚“‚”‚•‚–‚—‚˜‚™‚šf‚O‚P‚Q‚R‚S‚T‚U‚V‚W‚X" /* STEP 026 */;
-static const unsigned char *alphaL = (const unsigned char *)
-	"‚`‚a‚b‚c‚d‚e‚f‚g‚h‚i‚j‚k‚l‚m‚n‚o‚p‚q‚r‚s‚t‚u‚v‚w‚x‚yf‚O‚P‚Q‚R‚S‚T‚U‚V‚W‚X" /* STEP 026 */;
+static const WCHAR kigou_han[] = 
+    //012345678901234 5 678901234567 8901234567890
+    L",.:;?!ï¾ï¾Ÿ^~_-/|`\'\"()[]{}+-=<>\\$%#&*@ ";//ï½¥ï½¤ï½¡ï½¢ï½£ ";
+static const WCHAR kigou_zen[] = 
+    //0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0(æœ€å¾Œã¯å…¨è§’ã‚¹ãƒšãƒ¼ã‚¹)
+    L"ï¼Œï¼ï¼šï¼›ï¼Ÿï¼ã‚›ã‚œï¼¾ï¿£ï¼¿ï¼ï¼ï½œï½€â€™â€ï¼ˆï¼‰ï¼»ï¼½ï½›ï½ï¼‹ï¼ï¼ï¼œï¼ï¿¥ï¼„ï¼…ï¼ƒï¼†ï¼Šï¼ ã€€";//ãƒ»ã€ã€‚ã€Œã€ã€€";
+/*
+static const WCHAR kigou_kana_han[] = //ã€ã€‚ã€Œã€ãƒ»ã‚’ã‚«ã‚¿ã‚«ãƒŠã¨ã—ã¦æ‰±ã†
+    //012
+    L"ï½¤ï½¡ï½¥";
+static const WCHAR kigou_kana_zen[] = //ã€ã€‚ã€Œã€ãƒ»ã‚’ã‚«ã‚¿ã‚«ãƒŠã¨ã—ã¦æ‰±ã†
+    //0 1 2
+    L"ã€ã€‚ãƒ»";
+*/
+static const WCHAR kata_han[] = 
+    L"ï½§ï½±ï½¨ï½²ï½©ï½³ï½ªï½´ï½«ï½µï½¶ï½·ï½¸ï½¹ï½ºï½»ï½¼ï½½ï½¾ï½¿ï¾€ï¾ï½¯ï¾‚ï¾ƒï¾„ï¾…ï¾†ï¾‡ï¾ˆï¾‰ï¾Šï¾‹ï¾Œï¾ï¾ï¾ï¾ï¾‘ï¾’ï¾“ï½¬ï¾”ï½­ï¾•ï½®ï¾–ï¾—ï¾˜ï¾™ï¾šï¾›ï¾œï½¦ï¾ï½°";
+static const WCHAR kata_zen[] = 
+    L"ã‚¡ã‚¢ã‚£ã‚¤ã‚¥ã‚¦ã‚§ã‚¨ã‚©ã‚ªã‚«ã‚­ã‚¯ã‚±ã‚³ã‚µã‚·ã‚¹ã‚»ã‚½ã‚¿ãƒãƒƒãƒ„ãƒ†ãƒˆãƒŠãƒ‹ãƒŒãƒãƒ"
+    L"ãƒãƒ’ãƒ•ãƒ˜ãƒ›ãƒãƒŸãƒ ãƒ¡ãƒ¢ãƒ£ãƒ¤ãƒ¥ãƒ¦ãƒ§ãƒ¨ãƒ©ãƒªãƒ«ãƒ¬ãƒ­ãƒ¯ãƒ²ãƒ³ãƒ¼";
+static const WCHAR kata_dakuon_han[] = 
+    L"ï½³ï½¶ï½·ï½¸ï½¹ï½ºï½»ï½¼ï½½ï½¾ï½¿ï¾€ï¾ï¾‚ï¾ƒï¾„ï¾Šï¾‹ï¾Œï¾ï¾";
+static const WCHAR kata_dakuon_zen[] = 
+    L"ãƒ´ã‚¬ã‚®ã‚°ã‚²ã‚´ã‚¶ã‚¸ã‚ºã‚¼ã‚¾ãƒ€ã‚¸ãƒ…ãƒ‡ãƒ‰ãƒãƒ“ãƒ–ãƒ™ãƒœ";
+static const WCHAR kata_handakuon_han[] = 
+    L"ï¾Šï¾‹ï¾Œï¾ï¾";
+static const WCHAR kata_handakuon_zen[] = 
+    L"ãƒ‘ãƒ”ãƒ—ãƒšãƒ";
 
-static const unsigned char *kata_dakuon = (const unsigned char *) /* FunnyCorn 179 */
-	"ƒ@ƒAƒBƒCƒDƒEƒFƒGƒHƒIƒJƒJƒLƒLƒNƒNƒPƒPƒRƒRƒTƒTƒVƒVƒXƒXƒZƒZƒ\ƒ\"
-	"ƒ^ƒ^ƒ`ƒ`ƒbƒcƒcƒeƒeƒgƒgƒiƒjƒkƒlƒmƒnƒnƒnƒqƒqƒqƒtƒtƒtƒwƒwƒwƒzƒzƒz"
-	"ƒ}ƒ~ƒ€ƒƒ‚ƒƒƒ„ƒ…ƒ†ƒ‡ƒˆƒ‰ƒŠƒ‹ƒŒƒƒƒƒ’ƒ“";
+//å…¨è§’ãƒ»åŠè§’å¤‰æ›ã§ã€ã€‚ã€Œã€ã‚’ã‚«ã‚¿ã‚«ãƒŠã¨ã—ã¦æ‰±ã†(g_bZenHanKigouKana == true ã®ã¨ãä½¿ã†)
+static const WCHAR kata_han2[] = L"ï½¥ï½¤ï½¡ï½¢ï½£";
+static const WCHAR kata_zen2[] = L"ãƒ»ã€ã€‚ã€Œã€";
 
-void conv_table(const unsigned char *before, const unsigned char *after, unsigned char *str)
+int conv_han2zens(TCHAR *zen, int zen_size, const TCHAR *han, DWORD flag, bool bZenHanKigouKana)
 {
-	while(*str != '\0') {
-		if (iskanji(*str)) {		// Š¿š
-			int i; for (i = 0; before[i]; i+=2) {
-				if (before[i] == str[0] && before[i+1] == str[1]) {
-					str[0] = after[i];
-					str[1] = after[i+1];
-					break;
-				}
-			}
-			str++;
-		}
-		str++;
-	}
+    //extern bool g_bZenHanKigouKana;
+    WCHAR *dst = (WCHAR*)zen;
+    const WCHAR *src = (const WCHAR*)han;
+    wcsncpy_s(zen, zen_size, han, _TRUNCATE);
+    int len = wcslen(zen);
+    //æ¿éŸ³ãƒ»åŠæ¿éŸ³ãŒæ¶ˆãˆã‚‹ã ã‘ãªã®ã§ã€ä»¥é™ã‚µã‚¤ã‚ºã‚’æ°—ã«ã™ã‚‹å¿…è¦ã¯ãªã„
+    int i, j;
+    if(flag & CONV_SUJI){
+        for(i = 0 ; dst[i]; i++){
+            if(L'0' <= dst[i] && dst[i] <= L'9'){
+                dst[i] += L'ï¼' -L'0';
+            }
+        }
+    }
+    if(flag & CONV_ALPHA){
+        for(i = 0 ; dst[i]; i++){
+            if(L'a' <= dst[i] && dst[i] <= L'z'){
+                dst[i] += L'ï½' -L'a';
+            }
+            else if(L'A' <= dst[i] && dst[i] <= L'Z'){
+                dst[i] += L'ï¼¡' - L'A';
+            }
+            //else if(dst[i] == L' '){//åŠè§’ã‚¹ãƒšãƒ¼ã‚¹->å…¨è§’ã‚¹ãƒšãƒ¼ã‚¹(ã‚ªãƒªã‚¸ãƒŠãƒ«ã«åˆã‚ã›ã¦å¤‰æ›ã—ãªã„)
+            //å…¨è§’ã‚¹ãƒšãƒ¼ã‚¹=>åŠè§’ã‚¹ãƒšãƒ¼ã‚¹ã¯å¤‰æ›ã™ã‚‹
+            //    dst[i] = L'ã€€';
+            //}
+        }
+    }
+    
+    if(flag & CONV_KIGOU) {
+        for(i = 0; dst[i]; i++){
+            for(j = 0; kigou_han[j]; j++){
+                if(dst[i] == kigou_han[j]){
+                    dst[i] = kigou_zen[j];
+                    break;
+                }
+            }
+            if(!bZenHanKigouKana){
+                for(j = 0; kata_han2[j]; j++){
+                    if(dst[i] == kata_han2[j]){
+                        dst[i] = kata_zen2[j];
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    if(flag & CONV_KATA) {
+        for(i = 0; dst[i]; i++){
+            bool bDakuon = false;//æ¿éŸ³/åŠæ¿éŸ³ã®å ´åˆ true
+            if(dst[i+1] == L'ï¾Ÿ'){//åŠæ¿éŸ³
+                for(j = 0; kata_handakuon_han[j]; j++){
+                    if(dst[i] == kata_handakuon_han[j]){
+                        dst[i] = kata_handakuon_zen[j];
+                        //ï¾Ÿã‚’é™¤å»
+                        memmove(&dst[i+1], &dst[i+2], (len-i)*sizeof(WCHAR));
+                        len--;
+                        break;
+                    }
+                }
+                if(kata_handakuon_han[j]){
+                    continue;
+                }
+                bDakuon = true;
+            }
+            else if(dst[i+1] == L'ï¾'){//æ¿éŸ³
+                for(j = 0; kata_dakuon_han[j]; j++){
+                    if(dst[i] == kata_dakuon_han[j]){
+                        dst[i] = kata_dakuon_zen[j];
+                        //ï¾ã‚’é™¤å»
+                        memmove(&dst[i+1], &dst[i+2], (len-i)*sizeof(WCHAR));
+                        len--;
+                        break;
+                    }
+                }
+                if(kata_dakuon_han[j]){
+                    continue;
+                }
+                bDakuon = true;
+            }
+            for(j = 0; kata_han[j]; j++){
+                if(dst[i] == kata_han[j]){
+                    dst[i] = kata_zen[j];
+                    if(bDakuon){
+                    //æ¿éŸ³/åŠæ¿éŸ³ã‚’ã¤ã‘ã‚‹ã¹ãã§ãªã„åŠè§’ã‚«ãƒŠã®å ´åˆã¯æ¿éŸ³/åŠæ¿éŸ³ã‚’é™¤å»
+                    //ï½±ï¾ => ã‚¢ (ã‚ªãƒªã‚¸ãƒŠãƒ«ã®æ–¹ã ã¨ã‚¢ã‚¬ã«ãªã‚‹)
+                        memmove(&dst[i+1], &dst[i+2], (len-i)*sizeof(WCHAR));
+                        len--;
+                    }
+                    break;
+                }
+            }
+            if(bZenHanKigouKana){
+                for(j = 0; kata_han2[j]; j++){
+                    if(dst[i] == kata_han2[j]){
+                        dst[i] = kata_zen2[j];
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    return 0;
 }
-// [ƒJƒ^ƒJƒi]‚Ì‘÷‰¹A”¼‘÷‰¹‚ğ‚È‚­‚·
-void conv_kata_erase_dakuon(unsigned char *str)
+int conv_zen2hans(TCHAR *han, int han_size, const TCHAR *zen, DWORD flag, bool bZenHanKigouKana)
 {
-	conv_table(kata, kata_dakuon, str);
+    //extern bool g_bZenHanKigouKana;
+    WCHAR *dst = (WCHAR*)han;
+    const WCHAR *src = (const WCHAR*)zen;
+    wcsncpy_s(dst, han_size, src, _TRUNCATE);
+    int len = wcslen(dst);
+    int i, j;
+    if(flag & CONV_SUJI){
+        for(i = 0 ; dst[i]; i++){
+            if(L'ï¼' <= dst[i] && dst[i] <= L'ï¼™'){
+                dst[i] -= (L'ï¼' -L'0');
+            }
+        }
+    }
+    if(flag & CONV_ALPHA){
+        for(i = 0 ; dst[i]; i++){
+            if(L'ï½' <= dst[i] && dst[i] <= L'ï½š'){
+                dst[i] -= (L'ï½' -L'a');
+            }
+            else if(L'ï¼¡' <= dst[i] && dst[i] <= L'ï¼º'){
+                dst[i] -= (L'ï¼¡' - L'A');
+            }
+            else if(dst[i] == L'ã€€'){//å…¨è§’ã‚¹ãƒšãƒ¼ã‚¹=>åŠè§’ã‚¹ãƒšãƒ¼ã‚¹
+                //(ã‚ªãƒªã‚¸ãƒŠãƒ«ã«åˆã‚ã›ã¦åŠè§’ã‚¹ãƒšãƒ¼ã‚¹->å…¨è§’ã‚¹ãƒšãƒ¼ã‚¹ã¯å¤‰æ›ã—ãªã„)
+                dst[i] = L' ';
+            }        }
+    }
+    if(flag & CONV_KIGOU) {
+        for(i = 0; dst[i]; i++){
+            for(j = 0; kigou_zen[j]; j++){
+                if(dst[i] == kigou_zen[j]){
+                    dst[i] = kigou_han[j];
+                    break;
+                }
+            }
+            if(!bZenHanKigouKana){
+                for(j = 0; kata_zen2[j]; j++){
+                    if(dst[i] == kata_zen2[j]){
+                        dst[i] = kata_han2[j];
+                        break;
+                    }
+                }
+            }        
+        }
+
+    }
+    if(flag & CONV_KATA) {
+    //æ¿éŸ³ãƒ»åŠæ¿éŸ³ã‚’ä»˜åŠ ã™ã‚‹ã¨ãã«ã‚µã‚¤ã‚ºãŒå¤§ãããªã‚‹
+        for(i = 0; dst[i] && i < han_size; i++){
+            //åŠæ¿éŸ³
+            for(j = 0; kata_handakuon_zen[j]; j++){
+                if(dst[i] == kata_handakuon_zen[j]){
+                    dst[i] = kata_handakuon_han[j];
+                    if(i + 1 >= han_size){
+                        break;
+                    }
+                    //ï¾Ÿã‚’ä»˜åŠ 
+                    memmove(&dst[i+2], &dst[i+1], (len-i)*sizeof(WCHAR));
+                    dst[i+1] = L'ï¾Ÿ';
+                    len++;
+                    break;
+                }
+            }
+            if(kata_handakuon_zen[j]){
+                continue;
+            }
+            //æ¿éŸ³
+            for(j = 0; kata_dakuon_zen[j]; j++){
+                if(dst[i] == kata_dakuon_zen[j]){
+                    dst[i] = kata_dakuon_han[j];
+                    if(i + 1 >= han_size){
+                        break;
+                    }
+                    //ï¾ã‚’ä»˜åŠ 
+                    memmove(&dst[i+2], &dst[i+1], (len-i)*sizeof(WCHAR));
+                    dst[i+1] = L'ï¾';
+                    len++;
+                    break;
+                }
+            }
+            if(kata_dakuon_zen[j]){
+                continue;
+            }
+            for(j = 0; kata_zen[j]; j++){
+                if(dst[i] == kata_zen[j]){
+                    dst[i] = kata_han[j];
+                    break;
+                }
+            }
+            if(bZenHanKigouKana){
+                for(j = 0; kata_zen2[j]; j++){
+                    if(dst[i] == kata_zen2[j]){
+                        dst[i] = kata_han2[j];
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    return 0;
 }
-// [ƒJƒ^ƒJƒi]=>[‚Ğ‚ç‚ª‚È]‚É•ÏŠ·
-void conv_kata2hira(unsigned char *str)
+#endif
+static const TCHAR kata[] = //(const unsigned char *)
+    _T("ã‚¡ã‚¢ã‚£ã‚¤ã‚¥ã‚¦ã‚§ã‚¨ã‚©ã‚ªã‚«ã‚¬ã‚­ã‚®ã‚¯ã‚°ã‚±ã‚²ã‚³ã‚´ã‚µã‚¶ã‚·ã‚¸ã‚¹ã‚ºã‚»ã‚¼ã‚½ã‚¾")
+    _T("ã‚¿ãƒ€ãƒãƒ‚ãƒƒãƒ„ãƒ…ãƒ†ãƒ‡ãƒˆãƒ‰ãƒŠãƒ‹ãƒŒãƒãƒãƒãƒãƒ‘ãƒ’ãƒ“ãƒ”ãƒ•ãƒ–ãƒ—ãƒ˜ãƒ™ãƒšãƒ›ãƒœãƒ")
+    _T("ãƒãƒŸãƒ ãƒ¡ãƒ¢ãƒ£ãƒ¤ãƒ¥ãƒ¦ãƒ§ãƒ¨ãƒ©ãƒªãƒ«ãƒ¬ãƒ­ãƒ®ãƒ¯ãƒ²ãƒ³")
+#ifdef _UNICODE
+    _T("ãƒ´");//UNICODE ã®å ´åˆã ã‘ã€Œãƒ´ã€ã¨ã€Œã‚”ã€ã«å¯¾å¿œ
+#else
+    ;
+#endif
+static const TCHAR hira[] = //(const unsigned char *)
+    _T("ãã‚ãƒã„ã…ã†ã‡ãˆã‰ãŠã‹ãŒããããã‘ã’ã“ã”ã•ã–ã—ã˜ã™ãšã›ãœãã")
+    _T("ãŸã ã¡ã¢ã£ã¤ã¥ã¦ã§ã¨ã©ãªã«ã¬ã­ã®ã¯ã°ã±ã²ã³ã´ãµã¶ã·ã¸ã¹ãºã»ã¼ã½")
+    _T("ã¾ã¿ã‚€ã‚ã‚‚ã‚ƒã‚„ã‚…ã‚†ã‚‡ã‚ˆã‚‰ã‚Šã‚‹ã‚Œã‚ã‚ã‚ã‚’ã‚“")
+#ifdef _UNICODE
+    _T("ã‚”");//UNICODE ã®å ´åˆã ã‘ã€Œãƒ´ã€ã¨ã€Œã‚”ã€ã«å¯¾å¿œ
+#else
+    ;
+#endif
+
+static const TCHAR alphaS[] = //(const unsigned char *)
+    _T("ï½ï½‚ï½ƒï½„ï½…ï½†ï½‡ï½ˆï½‰ï½Šï½‹ï½Œï½ï½ï½ï½ï½‘ï½’ï½“ï½”ï½•ï½–ï½—ï½˜ï½™ï½šâ€™ï¼ï¼‘ï¼’ï¼“ï¼”ï¼•ï¼–ï¼—ï¼˜ï¼™") /* STEP 026 */;
+static const TCHAR alphaL[] = //(const unsigned char *)
+    _T("ï¼¡ï¼¢ï¼£ï¼¤ï¼¥ï¼¦ï¼§ï¼¨ï¼©ï¼ªï¼«ï¼¬ï¼­ï¼®ï¼¯ï¼°ï¼±ï¼²ï¼³ï¼´ï¼µï¼¶ï¼·ï¼¸ï¼¹ï¼ºâ€™ï¼ï¼‘ï¼’ï¼“ï¼”ï¼•ï¼–ï¼—ï¼˜ï¼™") /* STEP 026 */;
+
+static const TCHAR kata_dakuon[] = //(const unsigned char *) /* FunnyCorn 179 */
+    _T("ã‚¡ã‚¢ã‚£ã‚¤ã‚¥ã‚¦ã‚§ã‚¨ã‚©ã‚ªã‚«ã‚«ã‚­ã‚­ã‚¯ã‚¯ã‚±ã‚±ã‚³ã‚³ã‚µã‚µã‚·ã‚·ã‚¹ã‚¹ã‚»ã‚»ã‚½ã‚½")
+    _T("ã‚¿ã‚¿ãƒãƒãƒƒãƒ„ãƒ„ãƒ†ãƒ†ãƒˆãƒˆãƒŠãƒ‹ãƒŒãƒãƒãƒãƒãƒãƒ’ãƒ’ãƒ’ãƒ•ãƒ•ãƒ•ãƒ˜ãƒ˜ãƒ˜ãƒ›ãƒ›ãƒ›")
+    _T("ãƒãƒŸãƒ ãƒ¡ãƒ¢ãƒ£ãƒ¤ãƒ¥ãƒ¦ãƒ§ãƒ¨ãƒ©ãƒªãƒ«ãƒ¬ãƒ­ãƒ®ãƒ¯ãƒ²ãƒ³");
+
+//void conv_table(const unsigned char *before, const unsigned char *after, unsigned char *str)
+void conv_table(const TCHAR *_before, const TCHAR *_after, TCHAR *_str)
 {
-	conv_table(kata, hira, str);
+#ifndef _UNICODE
+    const unsigned char *before = (const unsigned char*)_before;
+    const unsigned char *after = (const unsigned char*)_after;
+    unsigned char *str = (unsigned char*)_str;
+    while(*str != '\0') {
+        if (_istlead(*str)) {       // æ¼¢å­—
+            int i; for (i = 0; before[i]; i+=2) {
+                if (before[i] == str[0] && before[i+1] == str[1]) {
+                    str[0] = after[i];
+                    str[1] = after[i+1];
+                    break;
+                }
+            }
+            str++;
+        }
+        str++;
+    }
+#else
+    const WCHAR *before = _before;
+    const WCHAR *after = _after;
+    WCHAR *str = _str;
+    while(*str) {
+        int i; 
+        for (i = 0; before[i]; i++) {
+            if (before[i] == str[0]) {
+                str[0] = after[i];
+                break;
+            }
+        }
+        str++;
+    }
+#endif
+}
+// [ã‚«ã‚¿ã‚«ãƒŠ]ã®æ¿éŸ³ã€åŠæ¿éŸ³ã‚’ãªãã™
+void conv_kata_erase_dakuon(TCHAR *str)
+{
+    conv_table(kata, kata_dakuon, str);
+}
+// [ã‚«ã‚¿ã‚«ãƒŠ]=>[ã²ã‚‰ãŒãª]ã«å¤‰æ›
+void conv_kata2hira(TCHAR *str)
+{
+    conv_table(kata, hira, str);
+}
+// [ã²ã‚‰ãŒãª]=>[ã‚«ã‚¿ã‚«ãƒŠ]ã«å¤‰æ›
+void conv_hira2kata(TCHAR *str)
+{
+    conv_table(hira, kata, str);
+}
+// [å°æ–‡å­—]=>[å¤§æ–‡å­—]ã«å¤‰æ›
+void conv_upper(TCHAR *str)
+{
+    _tcsupr_s(str, _tcslen(str)+1);
+    conv_table(alphaS, alphaL, str);
+}
+// [å¤§æ–‡å­—]=>[å°æ–‡å­—]ã«å¤‰æ›
+void conv_lower(TCHAR *str)
+{
+    _tcslwr_s(str, _tcslen(str)+1);
+    conv_table(alphaL, alphaS, str);
 }
 
-// [‚Ğ‚ç‚ª‚È]=>[ƒJƒ^ƒJƒi]‚É•ÏŠ·
-void conv_hira2kata(unsigned char *str)
-{
-	conv_table(hira, kata, str);
-}
-
-// [¬•¶š]=>[‘å•¶š]‚É•ÏŠ·
-void conv_upper(unsigned char *str)
-{
-	_mbsupr(str);
-	conv_table(alphaS, alphaL, str);
-}
-
-// [‘å•¶š]=>[¬•¶š]‚É•ÏŠ·
-void conv_lower(unsigned char *str)
-{
-	_mbslwr(str);
-	conv_table(alphaL, alphaS, str);
-}
-
+#ifndef _UNICODE
 void lower_suffix_word(unsigned char *str, int len, CString suffixs) /* STEP 026*/
 {
-	CString strZWord((LPCTSTR)str, len);
-	CString strWord;
-	conv_zen2hans((unsigned char *)strWord.GetBuffer(len*2+1), (const unsigned char *)(const char *)strZWord, CONV_ALL);
-	strWord.ReleaseBuffer();
-	strWord.MakeLower();
-	while (1) {
-		CString suffix = suffixs.SpanExcluding(",");
-		if (suffix == strWord) {
-			if (iskanji(*str)) {		// Š¿š
-				int i; for (i = 0; alphaS[i]; i+=2) {
-					if ((alphaS[i] == str[0] && alphaS[i+1] == str[1])
-					||  (alphaL[i] == str[0] && alphaL[i+1] == str[1])) {
-						str[0] = alphaS[i];
-						str[1] = alphaS[i+1];
-						break;
-					}
-				}
-			} else {
-				*str = tolower(*str);
-			}
-			return;
-		}
-		suffixs.TrimLeft(suffix);
-		suffixs.TrimLeft(',');
-		if (suffixs.GetLength() == 0) {
-			return;
-		}
-	}
+    CString strZWord((LPCTSTR)str, len);
+    CString strWord;
+    conv_zen2hans(strWord.GetBuffer((len+1)*2), (len+1)*2, strZWord, CONV_ALL);
+    strWord.ReleaseBuffer();
+    strWord.MakeLower();
+    while (1) {
+        CString suffix = suffixs.SpanExcluding(_T(","));
+        if (suffix == strWord) {
+            if (_istlead(*str)) {        // æ¼¢å­—
+                int i; for (i = 0; alphaS[i]; i+=2) {
+                    if ((alphaS[i] == str[0] && alphaS[i+1] == str[1])
+                    ||  (alphaL[i] == str[0] && alphaL[i+1] == str[1])) {
+                        str[0] = alphaS[i];
+                        str[1] = alphaS[i+1];
+                        break;
+                    }
+                }
+            } else {
+                *str = tolower(*str);
+            }
+            return;
+        }
+        suffixs.TrimLeft(suffix);
+        suffixs.TrimLeft(',');
+        if (suffixs.GetLength() == 0) {
+            return;
+        }
+    }
 }
-
 bool isSentenceSeparate(unsigned char* str, int len, CString separator) /* STEP 026 */
 {
-	CString strZWord((LPCTSTR)str, len);
-	CString strChar;
-	conv_zen2hans((unsigned char *)strChar.GetBuffer(2+1), (const unsigned char *)(const char *)strZWord, CONV_ALL);
-	strChar.ReleaseBuffer();
-	for (int i=0;i<separator.GetLength();i++) {
-		unsigned char c = separator.GetAt(i);
-		if (iskanji(c)) {		// Š¿š
-			char	kanji[3];
-			kanji[0] = separator.GetAt(i);
-			kanji[1] = separator.GetAt(i+1);
-			kanji[2] = '\0';
-			if (strChar == kanji) {
-				return true;
-			}
-		} else {
-			if (strChar == separator.GetAt(i)) {
-				return true;
-			}
-		}
-	}
-	return false;
+    CString strZWord((LPCTSTR)str, len);
+    CString strChar;
+    conv_zen2hans(strChar.GetBuffer(2+1), 2+1, strZWord, CONV_ALL);
+    strChar.ReleaseBuffer();
+    for (int i=0;i<separator.GetLength();i++) {
+        unsigned char c = separator.GetAt(i);
+        if (_istlead(c)) {        // æ¼¢å­—
+            char    kanji[3];
+            kanji[0] = separator.GetAt(i);
+            kanji[1] = separator.GetAt(i+1);
+            kanji[2] = '\0';
+            if (strChar == kanji) {
+                return true;
+            }
+        } else {
+            if (strChar == separator.GetAt(i)) {
+                return true;
+            }
+        }
+    }
+    return false;
 }
 
-// ’PŒê‚Ì‚P•¶š–Ú‚Ì‚İA[¬•¶š]=>[‘å•¶š]‚É•ÏŠ·
-void conv_first_upper(unsigned char *str, const char *suffixs, const char* separator , bool bUseSuffix)
+// å˜èªã®ï¼‘æ–‡å­—ç›®ã®ã¿ã€[å°æ–‡å­—]=>[å¤§æ–‡å­—]ã«å¤‰æ›
+void conv_first_upper(TCHAR *_str, const TCHAR *suffixs, const TCHAR* separator , bool bUseSuffix)
 {
-	bool	bFirst = true;
-	unsigned char*	pFirstPos = NULL; /* STEP 026 */
-	unsigned char*	pEndPos = NULL; /* STEP 026 */
-	bool	bFirstWord = true; /* STEP 026 */
-	while(TRUE) {
-		if (iskanji(*str)) {		// Š¿š
-			int i; for (i = 0; alphaS[i]; i+=2) {
-				if ((alphaS[i] == str[0] && alphaS[i+1] == str[1])
-				||  (alphaL[i] == str[0] && alphaL[i+1] == str[1])) {
-					if (bFirst) {
-						str[0] = alphaL[i];
-						str[1] = alphaL[i+1];
-						pFirstPos = str; /* STEP 026 */
-					}
-					bFirst = false;
-					break;
-				}
-			}
-			if (alphaS[i] == '\0') {	// ’PŒê‚Ì‹æØ‚è
-				pEndPos = str-1; /* STEP 026 */
-				if (pFirstPos != NULL && pEndPos != NULL && !bFirstWord && bUseSuffix) { /* STEP 026 */
-					lower_suffix_word(pFirstPos, pEndPos - pFirstPos + 1, suffixs);
-				}
-				pFirstPos = NULL; /* STEP 026 */
-				pEndPos = NULL; /* STEP 026 */
-				if (!bFirst) bFirstWord = FALSE; /* STEP 026 */
-				if (bUseSuffix) { /* STEP 026 */
-					if (isSentenceSeparate(str, 2, separator)) {
-						bFirstWord = TRUE;
-					}
-				}
-				bFirst = true;
-			}
-			if (*str == '\0')	break; /* STEP 026 */
-			str++;
-		} else {					// ”ñŠ¿š
-			if ((*str >= 'a' && *str <= 'z')
-			||  (*str >= 'A' && *str <= 'Z')
-			||  (*str >= '0' && *str <= '9') /* STEP 026 2005.12.02 */
-			||  (*str == '\'')) {
-				if (bFirst) {
-					*str = toupper(*str);
-					bFirst = false;
-					pFirstPos = str; /* STEP 026 */
-				}
-			} else {
-				// ’PŒê‚Ì‹æØ‚è
-				pEndPos = str-1;
-				if (pFirstPos != NULL && pEndPos != NULL && !bFirstWord && bUseSuffix) { /* STEP 026 */
-					lower_suffix_word(pFirstPos, pEndPos - pFirstPos + 1, suffixs);
-				}
-				pFirstPos = NULL; /* STEP 026 */
-				pEndPos = NULL; /* STEP 026 */
-				if (!bFirst) bFirstWord = FALSE; /* STEP 026 */
-				if (bUseSuffix) { /* STEP 026 */
-					if (isSentenceSeparate(str, 1, separator)) {
-						bFirstWord = TRUE;
-					}
-				}
-				if (*str == '\n') {
-					bFirstWord = TRUE;
-				}
-				bFirst = true;
-			}
-		}
-		if (*str == '\0')	break; /* STEP 026 */
-		str++;
-	}
+    bool    bFirst = true;
+    unsigned char*    str = (unsigned char*)_str;
+    unsigned char*    pFirstPos = NULL; /* STEP 026 */
+    unsigned char*    pEndPos = NULL; /* STEP 026 */
+    bool    bFirstWord = true; /* STEP 026 */
+    while(TRUE) {
+        if (_istlead(*str)) {       // æ¼¢å­—
+            int i; for (i = 0; alphaS[i]; i+=2) {
+                if ((alphaS[i] == str[0] && alphaS[i+1] == str[1])
+                ||  (alphaL[i] == str[0] && alphaL[i+1] == str[1])) {
+                    if (bFirst) {
+                        str[0] = alphaL[i];
+                        str[1] = alphaL[i+1];
+                        pFirstPos = str; /* STEP 026 */
+                    }
+                    bFirst = false;
+                    break;
+                }
+            }
+            if (alphaS[i] == '\0') {    // å˜èªã®åŒºåˆ‡ã‚Š
+                pEndPos = str-1; /* STEP 026 */
+                if (pFirstPos != NULL && pEndPos != NULL && !bFirstWord && bUseSuffix) { /* STEP 026 */
+                    lower_suffix_word(pFirstPos, pEndPos - pFirstPos + 1, suffixs);
+                }
+                pFirstPos = NULL; /* STEP 026 */
+                pEndPos = NULL; /* STEP 026 */
+                if (!bFirst) bFirstWord = FALSE; /* STEP 026 */
+                if (bUseSuffix) { /* STEP 026 */
+                    if (isSentenceSeparate(str, 2, separator)) {
+                        bFirstWord = TRUE;
+                    }
+                }
+                bFirst = true;
+            }
+            if (*str == '\0')    break; /* STEP 026 */
+            str++;
+        } else {                // éæ¼¢å­—
+            if ((*str >= 'a' && *str <= 'z')
+            ||  (*str >= 'A' && *str <= 'Z')
+            ||  (*str >= '0' && *str <= '9') /* STEP 026 2005.12.02 */
+            ||  (*str == '\'')) {
+                if (bFirst) {
+                    *str = toupper(*str);
+                    bFirst = false;
+                    pFirstPos = str; /* STEP 026 */
+                }
+            } else {
+                // å˜èªã®åŒºåˆ‡ã‚Š
+                pEndPos = str-1;
+                if (pFirstPos != NULL && pEndPos != NULL && !bFirstWord && bUseSuffix) { /* STEP 026 */
+                    lower_suffix_word(pFirstPos, pEndPos - pFirstPos + 1, suffixs);
+                }
+                pFirstPos = NULL; /* STEP 026 */
+                pEndPos = NULL; /* STEP 026 */
+                if (!bFirst) bFirstWord = FALSE; /* STEP 026 */
+                if (bUseSuffix) { /* STEP 026 */
+                    if (isSentenceSeparate(str, 1, separator)) {
+                        bFirstWord = TRUE;
+                    }
+                }
+                if (*str == '\n') {
+                    bFirstWord = TRUE;
+                }
+                bFirst = true;
+            }
+        }
+        if (*str == '\0')    break; /* STEP 026 */
+        str++;
+    }
 }
 
 bool isKigou(char ch) {
-	static const unsigned char *s1 = (const unsigned char *)
-		/* 0123456789ABCDEF		        ‚O‚P‚Q‚R‚S‚T‚U‚V‚W‚X‚`‚a‚b‚c‚d‚e */
-		  "   ,. :;?!Şß   "		/* 212X:@@ABCDEFGHIJKLMN */
-		  "^~_            /"	/* 213X:OPQRSTUVWXYZ[\]^ */
-		  "   |  `\' \"()  []"	/* 214X:_`abcdefghijklmn */
-		  "{}          +-   "	/* 215X:opqrstuvwxyz{|}~7F */
-		  /* STEP 016 *///"{}    ¢£    +-   "	/* 215X:opqrstuvwxyz{|}~7F */
-		  " = <>          \\"	/* 216X:€‚ƒ„…†‡ˆ‰Š‹Œ */
-		  "$  %#&*@        ";	/* 217X:‘’“”•–—˜™š›œ   */
-	for (int i=0;s1[i]!='\0';i++) {
-		if (ch == s1[i]) {
-			return true;
-		}
-	}
-	return false;
+    static const unsigned char *s1 = (const unsigned char *)
+        /* 0123456789ABCDEF             ï¼ï¼‘ï¼’ï¼“ï¼”ï¼•ï¼–ï¼—ï¼˜ï¼™ï¼¡ï¼¢ï¼£ï¼¤ï¼¥ï¼¦ */
+          "   ,. :;?!ï¾ï¾Ÿ   "     /* 212X:ã€€ã€€ã€ã€‚ï¼Œï¼ãƒ»ï¼šï¼›ï¼Ÿï¼ã‚›ã‚œÂ´ï½€Â¨ */
+          "^~_            /"    /* 213X:ï¼¾ï¿£ï¼¿ãƒ½ãƒ¾ã‚ã‚ã€ƒä»ã€…ã€†ã€‡ãƒ¼â€•â€ï¼ */
+          "   |  `\' \"()  []"  /* 214X:ï¼¼ï½âˆ¥ï½œâ€¦â€¥â€˜â€™â€œâ€ï¼ˆï¼‰ã€”ã€•ï¼»ï¼½ */
+          "{}          +-   "   /* 215X:ï½›ï½ã€ˆã€‰ã€Šã€‹ã€Œã€ã€ã€ã€ã€‘ï¼‹ï¼Â±Ã—7F */
+          /* STEP 016 *///"{}    ï½¢ï½£    +-   " /* 215X:ï½›ï½ã€ˆã€‰ã€Šã€‹ã€Œã€ã€ã€ã€ã€‘ï¼‹ï¼Â±Ã—7F */
+          " = <>          \\"   /* 216X:Ã·ï¼â‰ ï¼œï¼â‰¦â‰§âˆâˆ´â™‚â™€Â°â€²â€³â„ƒï¿¥ */
+          "$  %#&*@        ";   /* 217X:ï¼„ï¿ ï¿¡ï¼…ï¼ƒï¼†ï¼Šï¼ Â§â˜†â˜…â—‹â—â—â—‡   */
+    for (int i=0;s1[i]!='\0';i++) {
+        if (ch == s1[i]) {
+            return true;
+        }
+    }
+    return false;
 }
 
 unsigned char* fixed_upper_lower(unsigned char *str, CStringArray& fixedWords) /* STEP 040*/
 {
-	CString strZWord((LPCTSTR)str);
-	CString strWord;
-	conv_zen2hans((unsigned char *)strWord.GetBuffer(strlen((char*)str)+1), (const unsigned char *)(const char *)strZWord, CONV_ALL);
-	strWord.ReleaseBuffer();
-	strWord.MakeLower();
-	for (int i=0;i<fixedWords.GetSize();i++) {
-		CString fixed = fixedWords.GetAt(i);
-		CString strFixZWord(fixed);
-		CString strFixWord;
-		conv_zen2hans((unsigned char *)strFixWord.GetBuffer(strFixZWord.GetLength()+1), (const unsigned char *)(const char *)strFixZWord, CONV_ALL);
-		strFixWord.ReleaseBuffer();
-		fixed = strFixWord;
-		fixed.MakeLower();
-//		if (fixed == strWord) {
-		if (strWord.Find(fixed, 0) == 0 && (strWord == fixed || (strWord.GetLength() >= fixed.GetLength() && isKigou(strWord.GetAt(strlen(fixed)))) )) {
-			unsigned char* pos = str;
-			for (int j=0;j<fixed.GetLength();j++) {
-				if (iskanji(*pos)) {		// Š¿š
-					for (int k = 0; alphaS[k]; k+=2) {
-						if ((alphaS[k] == pos[0] && alphaS[k+1] == pos[1])
-						||  (alphaL[k] == pos[0] && alphaL[k+1] == pos[1])) {
-							if (isupper(strFixWord.GetAt(j))) {
-								pos[0] = alphaL[k];
-								pos[1] = alphaL[k+1];
-							} else {
-								pos[0] = alphaS[k];
-								pos[1] = alphaS[k+1];
-							}
-							break;
-						}
-					}
-					pos += 2;
-				} else {
-					*pos = strFixWord.GetAt(j);
-					pos++;
-				}
-			}
-			return pos;
-		}
-	}
-	return NULL;
+    CString strZWord((LPCTSTR)str);
+    CString strWord;
+    conv_zen2hans(strWord.GetBuffer(strlen((char*)str)+1), strlen((char*)str)+1, strZWord, CONV_ALL);
+    strWord.ReleaseBuffer();
+    strWord.MakeLower();
+    for (int i=0;i<fixedWords.GetSize();i++) {
+        CString fixed = fixedWords.GetAt(i);
+        CString strFixZWord(fixed);
+        CString strFixWord;
+        conv_zen2hans(strFixWord.GetBuffer(strFixZWord.GetLength()+1), strFixZWord.GetLength()+1, strFixZWord, CONV_ALL);
+        strFixWord.ReleaseBuffer();
+        fixed = strFixWord;
+        fixed.MakeLower();
+//        if (fixed == strWord) {
+        if (strWord.Find(fixed, 0) == 0 && (strWord == fixed || (strWord.GetLength() >= fixed.GetLength() && isKigou(strWord.GetAt(_tcslen(fixed)))) )) {
+            unsigned char* pos = str;
+            for (int j=0;j<fixed.GetLength();j++) {
+                if (_istlead(*pos)) {        // æ¼¢å­—
+                    for (int k = 0; alphaS[k]; k+=2) {
+                        if ((alphaS[k] == pos[0] && alphaS[k+1] == pos[1])
+                        ||  (alphaL[k] == pos[0] && alphaL[k+1] == pos[1])) {
+                            if (isupper(strFixWord.GetAt(j))) {
+                                pos[0] = alphaL[k];
+                                pos[1] = alphaL[k+1];
+                            } else {
+                                pos[0] = alphaS[k];
+                                pos[1] = alphaS[k+1];
+                            }
+                            break;
+                        }
+                    }
+                    pos += 2;
+                } else {
+                    *pos = strFixWord.GetAt(j);
+                    pos++;
+                }
+            }
+            return pos;
+        }
+    }
+    return NULL;
 }
 
-void conv_fixed_upper_lower(unsigned char *str, CStringArray& fixedWords) /* STEP 040 */
+void conv_fixed_upper_lower(TCHAR *_str, CStringArray& fixedWords) /* STEP 040 */
 {
-	unsigned char* current = str;
-	bool bConv = false;
-	while (TRUE) {
-		if ((current = fixed_upper_lower(str, fixedWords))) {
-			bConv = true;
-			str = current;
-		} else {
-			bConv = false;
-			current = str;
-		}
-		if (*str == '\0')	break;
-		if (bConv)	continue;
-		//if (iskanji(*str)) {		// Š¿š
-		//	str++;
-		//}
-		//str++;
-		bool bBreak;
-		if (current == str)	{
-			bBreak = TRUE;
-		}
-		while(TRUE) {
-			if (*str == '\0')	break;
-			if (iskanji(*str)) {		// Š¿š
-				int i; for (i = 0; alphaS[i]; i+=2) {
-					if ((alphaS[i] == str[0] && alphaS[i+1] == str[1])
-					||  (alphaL[i] == str[0] && alphaL[i+1] == str[1])) {
-						break;
-					}
-				}
-				if (alphaS[i] == '\0') {	// ’PŒê‚Ì‹æØ‚è
-					str += 2;
-					continue;
-				} else {
-					if (!bBreak) {
-						break;
-					}
-					str += 2;
-				}
-			} else {					// ”ñŠ¿š
-				if ((*str >= 'a' && *str <= 'z')
-				||  (*str >= 'A' && *str <= 'Z')
-				||  (*str >= '0' && *str <= '9')
-				||  (*str == '\'')) {
-					if (!bBreak) {
-						break;
-					}
-					str++;
-				} else {
-					str++;
-					if (bBreak) {
-						break;
-					}
-					continue;
-				}
-			}
-		}
-	}
+    unsigned char* str = (unsigned char*)_str;
+    unsigned char* current = str;
+    bool bConv = false;
+    while (TRUE) {
+        if ((current = fixed_upper_lower(str, fixedWords))) {
+            bConv = true;
+            str = current;
+        } else {
+            bConv = false;
+            current = str;
+        }
+        if (*str == '\0')    break;
+        if (bConv)    continue;
+        //if (_istlead(*str)) {        // æ¼¢å­—
+        //    str++;
+        //}
+        //str++;
+        bool bBreak;
+        if (current == str)    {
+            bBreak = TRUE;
+        }
+        while(TRUE) {
+            if (*str == '\0')    break;
+            if (_istlead(*str)) {        // æ¼¢å­—
+                int i; for (i = 0; alphaS[i]; i+=2) {
+                    if ((alphaS[i] == str[0] && alphaS[i+1] == str[1])
+                    ||  (alphaL[i] == str[0] && alphaL[i+1] == str[1])) {
+                        break;
+                    }
+                }
+                if (alphaS[i] == '\0') {    // å˜èªã®åŒºåˆ‡ã‚Š
+                    str += 2;
+                    continue;
+                } else {
+                    if (!bBreak) {
+                        break;
+                    }
+                    str += 2;
+                }
+            } else {                    // éæ¼¢å­—
+                if ((*str >= 'a' && *str <= 'z')
+                ||  (*str >= 'A' && *str <= 'Z')
+                ||  (*str >= '0' && *str <= '9')
+                ||  (*str == '\'')) {
+                    if (!bBreak) {
+                        break;
+                    }
+                    str++;
+                } else {
+                    str++;
+                    if (bBreak) {
+                        break;
+                    }
+                    continue;
+                }
+            }
+        }
+    }
+}
+
+#else
+//by Kobarin
+//UNICODE ç‰ˆ conv_first_upper,conv_fixed_upper_lower
+//å˜èªã®åŒºåˆ‡ã‚Šæ–‡å­—ãŒã‚ªãƒªã‚¸ãƒŠãƒ«(ANSIç‰ˆ)ã¨ç•°ãªã‚‹
+//ã‚ªãƒªã‚¸ãƒŠãƒ«ã¯è‹±æ•°å­—ã¨'ã‚’é™¤ãã»ã¨ã‚“ã©ã®æ–‡å­—?
+static const WCHAR word_delimiters[] = //å˜èªã®åŒºåˆ‡ã‚Šæ–‡å­—(' ã‚’é™¤ãã»ã¨ã‚“ã©ã®è¨˜å·)
+    L" !\"#$%&()=-~^\\|@`[{+;*:}]<,>.?/_\r\n\t"
+    L"ã€€ï¼ï¿¥â€ï¼ƒï¼„ï¼†ï¼ˆï¼‰ï¼ï¼ï½ï¼¾ï½œï¼ â€˜ã€Œï½›ï¼‹ï¼›ï¼Šï¼šï½ã€ï¼œï¼Œï¼ï¼ï¼Ÿï¼";
+
+static WCHAR* wcstok_internal(WCHAR *pszStr, const WCHAR *cszDelimiters, WCHAR **ppszNext, WCHAR *pDelimiter)
+{//C ãƒ©ãƒ³ã‚¿ã‚¤ãƒ é–¢æ•°ã® _wcstok ã¨å¤§ä½“åŒã˜(conv_first_upper/conv_fixed_upper_lower ç”¨)
+ //çŠ¶æ…‹ã‚’å†…éƒ¨ã§æŒãŸãšã« *ppszNext ã«ä»£å…¥ã™ã‚‹(ã‚¹ãƒ¬ãƒƒãƒ‰ãƒ­ãƒ¼ã‚«ãƒ«å¤‰æ•°ã‚’ä½¿ã‚ãªã„)ç‚¹ã¨
+ //cszDelimiters ã®ã©ã®æ–‡å­—ã§åŒºåˆ‡ã£ãŸã‹ã‚’ *pDelimiter ã«å…¥ã‚Œã‚‹ç‚¹ãŒç•°ãªã‚‹
+ //äºŒåº¦ç›®ä»¥é™ã®å‘¼ã³å‡ºã—æ™‚ã¯ pszStr ã« NULL ã‚’æ¸¡ã™ã®ã§ã¯ãªãã€å‰å›å‘¼ã³å‡ºã—æ™‚ã«å—ã‘å–ã£ãŸ *ppszNext ã‚’æ¸¡ã™
+ //NULL ãŒè¿”ã£ãŸã‚‰çµ‚äº†
+    *pDelimiter = NULL;
+    *ppszNext = NULL;
+    wchar_t *p = pszStr;
+    if (p) {
+        while (*p) {
+            const wchar_t *delim = cszDelimiters;
+            while (*delim) {
+                if (*p == *delim++) {
+                    *pDelimiter = *p;
+                    *p++ = 0;
+                    *ppszNext = p;
+                    return pszStr;
+                }
+            }
+            p++;
+        }
+        if (*pszStr) {
+            return pszStr;
+        }
+    }
+    return NULL;
+}
+// å˜èªã®ï¼‘æ–‡å­—ç›®ã®ã¿ã€[å°æ–‡å­—]=>[å¤§æ–‡å­—]ã«å¤‰æ›
+void conv_first_upper(TCHAR *str, const TCHAR *suffixs, const TCHAR* separators , bool bUseSuffix)
+{//by Kobarin
+ //ANSI ç‰ˆ conv_first_upper ã¨è‹¥å¹²ä»•æ§˜ãŒç•°ãªã‚‹
+ //åŸä½œè€…ãŒæ„å›³ã—ã¦ã„ã‚‹ã®ã¨ã»ã¼åŒã˜å‹•ä½œã«ãªã£ã¦ã‚‹ã¨æ€ã†ã‘ã©â€¦ã€‚
+    WCHAR *pOrgStr = str;
+    //wcstok_internal ã«ã‚ˆã£ã¦æ›¸ãæ›ãˆã‚‰ã‚Œã¦ã—ã¾ã†ãŸã‚ã‚³ãƒ”ãƒ¼ã‚’ä½œæˆ
+    WCHAR *pCpyStr = _wcsdup(pOrgStr);//ã‚³ãƒ”ãƒ¼ã‚’ä½œæˆ
+    WCHAR *pszNext;
+    WCHAR delimiter;
+    WCHAR *pszzSuffix = NULL;//ï¼‘æ–‡å­—ç›®ã‚’å¤§æ–‡å­—ã«å¤‰æ›ã—ãªã„å˜èªã®ãƒªã‚¹ãƒˆ
+    int i;
+    if(bUseSuffix){//1æ–‡å­—ç›®ã‚’å¤§æ–‡å­—ã«å¤‰æ›ã—ãªã„èªã®ãƒªã‚¹ãƒˆã‚’ä½œæˆ
+    //, ã§åŒºåˆ‡ã‚‰ã‚ŒãŸæ–‡å­—åˆ—ã‚’ \0 ã§åŒºåˆ‡ã‚‰ã‚ŒãŸæ–‡å­—åˆ—(\0\0ã§çµ‚äº†)ã«ç½®æ›
+        int len = wcslen(suffixs);
+        pszzSuffix = (WCHAR*)malloc((static_cast<unsigned long long>(len) + 2) * sizeof(WCHAR));//2=\0\0
+        i = 0;
+        while(suffixs[i]){
+            if(suffixs[i] != L','){
+                pszzSuffix[i] = suffixs[i];
+            }
+            else{
+                pszzSuffix[i] = 0;
+            }
+            i++;
+        }
+        pszzSuffix[i] = pszzSuffix[i+1] = 0;//æœ«å°¾ã‚’\0\0ã«
+    }
+    BOOL  bFirst = TRUE;
+    WCHAR *p = wcstok_internal(pCpyStr, word_delimiters, &pszNext, &delimiter);
+    while(p){
+        if(!pszzSuffix || bFirst){
+            if(*p){
+                pOrgStr[p - pCpyStr] = towupper(*p);
+                bFirst = FALSE;
+            }
+        }
+        else if(*p){//1æ–‡å­—ç›®ã‚’å¤§æ–‡å­—ã«å¤‰æ›ã™ã‚‹ã‹ã©ã†ã‹èª¿ã¹ã‚‹
+            WCHAR *suffix = pszzSuffix;
+            while(*suffix){
+                if(wcscmp(p, suffix) == 0){
+                    break;//å¤‰æ›ã—ãªã„å˜èªã®ãƒªã‚¹ãƒˆã«è©²å½“
+                }
+                suffix += wcslen(suffix) + 1;
+            }
+            if(!*suffix){
+                pOrgStr[p - pCpyStr] = towupper(*p);
+            }
+        }
+        if(pszzSuffix && !bFirst){
+        //(ä»¥ä¸‹ã®æ–‡å­—ã«ç¶šãå˜èªã¯æ–‡é ­ã¨ã™ã‚‹)ã®æ–‡å­—ã§åŒºåˆ‡ã‚‰ã‚Œã¦ã„ã‚‹ã‹èª¿ã¹ã‚‹
+            //åŒºåˆ‡ã‚Šæ–‡å­—ãŒ suffixs ã«å«ã¾ã‚Œãªã„å ´åˆ
+            WCHAR *last = p;//æœ€å¾Œã®æ–‡å­—
+            if(*last){
+                while(last[1]){
+                    last++;
+                }
+                i = 0;
+                while(separators[i]){
+                    if(separators[i++] == *last){
+                        bFirst = TRUE;
+                        break;
+                    }
+                }
+            }
+            //åŒºåˆ‡ã‚Šæ–‡å­—ãŒ suffixs ã«å«ã¾ã‚Œã‚‹å ´åˆ
+            if(!bFirst){
+                i = 0;
+                while(separators[i]){//
+                    if(separators[i++] == delimiter){
+                        bFirst = TRUE;
+                        break;
+                    }
+                }
+            }
+        }
+        p = wcstok_internal(pszNext, word_delimiters, &pszNext, &delimiter);
+    }
+    if(pszzSuffix){
+        free(pszzSuffix);
+    }
+    free(pCpyStr);
+}
+
+void conv_fixed_upper_lower(TCHAR *str, CStringArray& fixedWords) /* STEP 040 */
+{//å¤§æ–‡å­—å°æ–‡å­—å›ºå®š UNICODE ç‰ˆ by Kobarin
+ //å˜èªã®åŒºåˆ‡ã‚Šæ–‡å­—ãŒã‚ªãƒªã‚¸ãƒŠãƒ«ã¨ç•°ãªã‚‹(ã‚ªãƒªã‚¸ãƒŠãƒ«ã¯è‹±æ•°å­—ä»¥å¤–?)
+    int nCount = fixedWords.GetCount();
+    if(nCount == 0){
+        return;
+    }
+    int i;
+    WCHAR *pszCpy = _wcsdup(str);//wcstok_internal ã«ã‚ˆã£ã¦æ›¸ãæ›ãˆã‚‰ã‚Œã‚‹ã®ã§ã‚³ãƒ”ãƒ¼ä½œæˆ
+    WCHAR *pszNext;
+    WCHAR *p;
+    WCHAR delimiter;
+    p = wcstok_internal(pszCpy, word_delimiters, &pszNext, &delimiter);
+    while(p){
+        for(i = 0; i < nCount; i++){
+            if(_wcsicmp(p, fixedWords[i]) == 0){
+                memcpy(&str[p-pszCpy], fixedWords[i], fixedWords[i].GetLength()*sizeof(WCHAR));
+                break;
+            }
+        }
+        p = wcstok_internal(pszNext, word_delimiters, &pszNext, &delimiter);
+    }
+    free(pszCpy);
+}
+#endif
+
+WCHAR* conv_ansi_to_utf16(const char *str_ansi, int size)
+{//ansi => utf16
+    int len_utf16 = MultiByteToWideChar(CP_ACP, 0, str_ansi, size, 0, 0);
+    WCHAR* str_utf16 = (WCHAR*)malloc((static_cast<unsigned long long>(len_utf16) + 1) * sizeof(WCHAR));
+    MultiByteToWideChar(CP_ACP, 0, str_ansi, size, str_utf16, len_utf16);
+    str_utf16[len_utf16] = 0;
+    return str_utf16;
+}
+
+char* conv_utf16_to_ansi(const WCHAR *str_utf16, int size)
+{//utf16 => ansi
+    int len_ansi = WideCharToMultiByte(CP_ACP, 0, str_utf16, size, 0, 0, NULL, NULL);
+    char* str_ansi = (char*)malloc(static_cast<size_t>(len_ansi) + 1);
+    WideCharToMultiByte(CP_ACP, 0, str_utf16, size, str_ansi, len_ansi, NULL, NULL);
+    str_ansi[len_ansi] = 0;
+    return str_ansi;
+}
+
+WCHAR* conv_utf8_to_utf16(const char *str_utf8, int size)
+{//utf8 => utf16
+    int len_utf16 = MultiByteToWideChar(CP_UTF8, 0, str_utf8, size, 0, 0);
+    WCHAR* str_utf16 = (WCHAR*)malloc((static_cast<unsigned long long>(len_utf16) + 1) * sizeof(WCHAR));
+    MultiByteToWideChar(CP_UTF8, 0, str_utf8, size, str_utf16, len_utf16);
+    return str_utf16;
+}
+
+char* conv_utf16_to_utf8(const WCHAR *str_utf16, int size)
+{//utf16 => utf8 
+    int utf8_len = WideCharToMultiByte(CP_UTF8, 0, str_utf16, size, 0, 0, NULL, NULL);
+    char* str_utf8 = (char*)malloc(static_cast<size_t>(utf8_len) + 1);
+    WideCharToMultiByte(CP_UTF8, 0, str_utf16, size, str_utf8, utf8_len, NULL, NULL);
+    str_utf8[utf8_len] = 0;
+    return str_utf8;
+}
+
+char* conv_ansi_to_utf8(const char *str_ansi, int size)
+{//ansi => utf8
+    WCHAR *str_utf16 = conv_ansi_to_utf16(str_ansi, size);
+    char *str_utf8 = conv_utf16_to_ansi(str_utf16);
+    free(str_utf16);
+    return str_utf8;
+}
+
+char* conv_utf8_to_ansi(const char *str_utf8, int size)
+{//utf8 => ansi
+    WCHAR *str_utf16 = conv_utf8_to_utf16(str_utf8, size);
+    char *str_ansi = conv_utf16_to_ansi(str_utf16);
+    free(str_utf16);
+    return str_ansi;
+}
+
+static void le2be(WCHAR *dst)
+{//ãƒªãƒˆãƒ«ã‚¨ãƒ³ãƒ‡ã‚£ã‚¢ãƒ³/ãƒ“ãƒƒã‚°ã‚¨ãƒ³ãƒ‡ã‚£ã‚¢ãƒ³å…¥ã‚Œæ›¿ãˆ
+    while(*dst){
+        BYTE *p = (BYTE*)dst;
+        BYTE tmp = p[0];
+        p[0] = p[1];
+        p[1] = tmp;
+        dst++;
+    }
+}
+TCHAR* conv_data_to_tstr(const BYTE *data, DWORD dwBufferSize, void **ppFree)
+{// BOM ã‚’è‡ªå‹•åˆ¤åˆ¥ã—ã¦ TCHAR* å¤‰æ›
+ // *pFree != NULL ã®ã¨ãã¯ *pFree ã‚’å‘¼ã³å‡ºã—å´ã§ free ã™ã‚‹
+    enum{
+        CODE_ANSI = 0, CODE_UTF16LE, CODE_UTF16BE, CODE_UTF8
+    };
+    int nCode = CODE_ANSI;
+    *ppFree = NULL;
+    //BOM åˆ¤åˆ¥
+    if(dwBufferSize >= 2){
+        if(memcmp(data, "\xFF\xFE", 2) == 0){
+            nCode = CODE_UTF16LE;
+            data += 2;
+            dwBufferSize -= 2;
+        }
+        else if(memcmp(data, "\xFE\xFF", 2) == 0){
+            nCode = CODE_UTF16BE;
+            data += 2;
+            dwBufferSize -= 2;
+        }
+        else if(dwBufferSize >= 3 && memcmp(data, "\xEF\xBB\xBF", 3) == 0){
+            nCode = CODE_UTF8;
+            data += 3;
+            dwBufferSize -= 3;
+        }
+    }
+#ifdef _UNICODE
+    WCHAR *str_utf16;
+    if(nCode == CODE_ANSI){
+        str_utf16 = conv_ansi_to_utf16((const char*)data, dwBufferSize);
+    }
+    else if(nCode == CODE_UTF8){
+        str_utf16 = conv_utf8_to_utf16((const char*)data, dwBufferSize);
+    }
+    else{
+        str_utf16 = (WCHAR*)data;
+        if(dwBufferSize >= sizeof(WCHAR) && 
+           str_utf16[dwBufferSize / sizeof(WCHAR) - 1] == 0){//çµ‚ç«¯ãŒ 0
+            if(nCode != CODE_UTF16BE){
+            //UTF16BE ã®å ´åˆã¯å¤‰æ›ãŒå¿…è¦(ç¬¬1å¼•æ•°ã‚’ const ã«ã—ãªã‘ã‚Œã°ã“ã“ã§å¤‰æ›ã—ã¦ã‚‚è‰¯ã„ãŒâ€¦)
+                return str_utf16;
+            }
+        }
+        //0 ã§çµ‚ã‚ã£ã¦ã„ãªã„ or å¤‰æ›ãŒå¿…è¦
+        str_utf16 = (WCHAR*)malloc(dwBufferSize+sizeof(WCHAR));
+        if(dwBufferSize >= sizeof(WCHAR)){
+            memcpy(str_utf16, data, dwBufferSize);
+            str_utf16[dwBufferSize / sizeof(WCHAR)-1] = 0;
+            if(nCode == CODE_UTF16BE){
+                le2be(str_utf16);
+            }
+        }
+        else{
+            str_utf16[0] = 0;
+        }
+    }
+    *ppFree= str_utf16;
+    return str_utf16;
+#else
+    char *str_ansi;
+    if(nCode == CODE_ANSI){
+        str_ansi = (char*)malloc(dwBufferSize + 1);
+        memcpy(str_ansi, data, dwBufferSize);
+        str_ansi[dwBufferSize] = 0;
+        //ãƒãƒ«ãƒãƒã‚¤ãƒˆ2ãƒã‚¤ãƒˆç›®ã§åˆ‡ã‚Œã¦ã„ã‚‹ã‹ã©ã†ã‹ã®ç¢ºèª
+        DWORD i = 0;
+        while(str_ansi[i]){
+            if(IsDBCSLeadByte((BYTE)str_ansi[i])){
+                i++;
+                if(!str_ansi[i]){
+                    str_ansi[i-1] = 0;
+                    break;
+                }
+            }
+            i++;
+        }
+    }
+    else if(nCode == CODE_UTF8){
+        str_ansi = conv_utf8_to_ansi((const char*)data);
+    }
+    else{
+        WCHAR *str_utf16 = (WCHAR*)malloc(dwBufferSize+sizeof(WCHAR));
+        if(dwBufferSize >= 2){
+            memcpy(str_utf16, data, dwBufferSize);
+            str_utf16[dwBufferSize / sizeof(WCHAR)-1] = 0;
+            if(nCode == CODE_UTF16BE){
+                le2be(str_utf16);
+            }
+        }
+        else{
+            str_utf16[0] = 0;
+        }
+        str_ansi = conv_utf16_to_ansi(str_utf16);
+        free(str_utf16);
+    }
+    *ppFree = str_ansi;
+    return str_ansi;
+#endif
 }

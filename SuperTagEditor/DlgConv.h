@@ -4,57 +4,58 @@
 #if _MSC_VER > 1000
 #pragma once
 #endif // _MSC_VER > 1000
-// CDlgConv.h : ƒwƒbƒ_[ ƒtƒ@ƒCƒ‹
+// CDlgConv.h : ãƒ˜ãƒƒãƒ€ãƒ¼ ãƒ•ã‚¡ã‚¤ãƒ«
 //
 
 #include "OptionPage/OptionPage.h"
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgConv ƒ_ƒCƒAƒƒO
+// CDlgConv ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
 
 class CDlgConv : public COptionPage
 {
-	DECLARE_DYNCREATE(CDlgConv)
+    DECLARE_DYNCREATE(CDlgConv)
 
-// ƒRƒ“ƒXƒgƒ‰ƒNƒVƒ‡ƒ“
+// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚·ãƒ§ãƒ³
 public:
-	CDlgConv();
-	~CDlgConv();
+    CDlgConv();
+    ~CDlgConv();
 
-// ƒ_ƒCƒAƒƒO ƒf[ƒ^
-	//{{AFX_DATA(CDlgConv)
-	enum { IDD = IDD_DIALOG_CONV };
-	CEdit	m_cFirstUpperSentenceSeparator;
-	CEdit	m_cFirstUperIgnoreWords;
-	BOOL	m_bFirstUpperIgnoreWord;
-	CString	m_strFirstUpperIgnoreWords;
-	CString	m_strFirstUpperSentenceSeparator;
-	BOOL	m_bUserConvAddMenu;
-	BOOL	m_bZenHanKigouKana;
-	//}}AFX_DATA
+// ãƒ€ã‚¤ã‚¢ãƒ­ã‚° ãƒ‡ãƒ¼ã‚¿
+    //{{AFX_DATA(CDlgConv)
+    enum { IDD = IDD_DIALOG_CONV };
+    CEdit   m_cFirstUpperSentenceSeparator;
+    CEdit   m_cFirstUperIgnoreWords;
+    BOOL    m_bFirstUpperIgnoreWord;
+    CString m_strFirstUpperIgnoreWords;
+    CString m_strFirstUpperSentenceSeparator;
+    BOOL    m_bUserConvAddMenu;
+    BOOL    m_bZenHanKigouKana;
+    BOOL    m_bAutoTilde2WaveDash;
+    //}}AFX_DATA
 
 
-// ƒI[ƒo[ƒ‰ƒCƒh
-	// ClassWizard ‚Í‰¼‘zŠÖ”‚ÌƒI[ƒo[ƒ‰ƒCƒh‚ğ¶¬‚µ‚Ü‚·B
+// ã‚ªãƒ¼ãƒãƒ¼ãƒ©ã‚¤ãƒ‰
+    // ClassWizard ã¯ä»®æƒ³é–¢æ•°ã®ã‚ªãƒ¼ãƒãƒ¼ãƒ©ã‚¤ãƒ‰ã‚’ç”Ÿæˆã—ã¾ã™ã€‚
 
-	//{{AFX_VIRTUAL(CDlgConv)
-	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV ƒTƒ|[ƒg
-	//}}AFX_VIRTUAL
+    //{{AFX_VIRTUAL(CDlgConv)
+    protected:
+    virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV ã‚µãƒãƒ¼ãƒˆ
+    //}}AFX_VIRTUAL
 
-// ƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“
+// ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³
 protected:
-	// ¶¬‚³‚ê‚½ƒƒbƒZ[ƒW ƒ}ƒbƒvŠÖ”
-	//{{AFX_MSG(CDlgConv)
-	afx_msg void OnCheckFirstUpperIgnoreWord();
-	virtual BOOL OnInitDialog();
-	afx_msg void OnBtResetPage();
-	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
+    // ç”Ÿæˆã•ã‚ŒãŸãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒãƒƒãƒ—é–¢æ•°
+    //{{AFX_MSG(CDlgConv)
+    afx_msg void OnCheckFirstUpperIgnoreWord();
+    virtual BOOL OnInitDialog();
+    afx_msg void OnBtResetPage();
+    //}}AFX_MSG
+    DECLARE_MESSAGE_MAP()
 
 };
 
 //{{AFX_INSERT_LOCATION}}
-// Microsoft Visual C++ ‚Í‘Os‚Ì’¼‘O‚É’Ç‰Á‚ÌéŒ¾‚ğ‘}“ü‚µ‚Ü‚·B
+// Microsoft Visual C++ ã¯å‰è¡Œã®ç›´å‰ã«è¿½åŠ ã®å®£è¨€ã‚’æŒ¿å…¥ã—ã¾ã™ã€‚
 
 #endif // !defined(AFX_CDlgConv_H__205D5D6E_8399_4AF8_8224_4F1BD0A912EC__INCLUDED_)

@@ -4,47 +4,48 @@
 #if _MSC_VER > 1000
 #pragma once
 #endif // _MSC_VER > 1000
-// DlgConvID3v2Version.h : ƒwƒbƒ_[ ƒtƒ@ƒCƒ‹
+// DlgConvID3v2Version.h : ãƒ˜ãƒƒãƒ€ãƒ¼ ãƒ•ã‚¡ã‚¤ãƒ«
 //
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgConvID3v2Version ƒ_ƒCƒAƒƒO
+// CDlgConvID3v2Version ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
 
 class CDlgConvID3v2Version : public CDialog
 {
-// ƒRƒ“ƒXƒgƒ‰ƒNƒVƒ‡ƒ“
+// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚·ãƒ§ãƒ³
 public:
-	CDlgConvID3v2Version(CWnd* pParent = NULL);   // •W€‚ÌƒRƒ“ƒXƒgƒ‰ƒNƒ^
+    CDlgConvID3v2Version(CWnd* pParent = NULL);   // æ¨™æº–ã®ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 
-// ƒ_ƒCƒAƒƒO ƒf[ƒ^
-	//{{AFX_DATA(CDlgConvID3v2Version)
-	enum { IDD = IDD_DLG_CONV_ID3V2_VERSION };
-	CComboBox	m_cbId3v2Version;
-	CComboBox	m_cbId3v2Encode;
-	int		m_nId3v2Encode;
-	int		m_nId3v2Version;
-	//}}AFX_DATA
+// ãƒ€ã‚¤ã‚¢ãƒ­ã‚° ãƒ‡ãƒ¼ã‚¿
+    //{{AFX_DATA(CDlgConvID3v2Version)
+    enum { IDD = IDD_DLG_CONV_ID3V2_VERSION };
+    CComboBox   m_cbId3v2Version;
+    CComboBox   m_cbId3v2Encode;
+    int     m_nId3v2Encode;
+    int     m_nId3v2Version;
+    BOOL    m_bID3v2UnSync;
+    //}}AFX_DATA
 
 
-// ƒI[ƒo[ƒ‰ƒCƒh
-	// ClassWizard ‚Í‰¼‘zŠÖ”‚ÌƒI[ƒo[ƒ‰ƒCƒh‚ğ¶¬‚µ‚Ü‚·B
-	//{{AFX_VIRTUAL(CDlgConvID3v2Version)
-	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV ƒTƒ|[ƒg
-	//}}AFX_VIRTUAL
+// ã‚ªãƒ¼ãƒãƒ¼ãƒ©ã‚¤ãƒ‰
+    // ClassWizard ã¯ä»®æƒ³é–¢æ•°ã®ã‚ªãƒ¼ãƒãƒ¼ãƒ©ã‚¤ãƒ‰ã‚’ç”Ÿæˆã—ã¾ã™ã€‚
+    //{{AFX_VIRTUAL(CDlgConvID3v2Version)
+    protected:
+    virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV ã‚µãƒãƒ¼ãƒˆ
+    //}}AFX_VIRTUAL
 
-// ƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“
+// ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³
 protected:
 
-	// ¶¬‚³‚ê‚½ƒƒbƒZ[ƒW ƒ}ƒbƒvŠÖ”
-	//{{AFX_MSG(CDlgConvID3v2Version)
-	virtual BOOL OnInitDialog();
-	afx_msg void OnSelchangeComboId3v2Version();
-	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
+    // ç”Ÿæˆã•ã‚ŒãŸãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒãƒƒãƒ—é–¢æ•°
+    //{{AFX_MSG(CDlgConvID3v2Version)
+    virtual BOOL OnInitDialog();
+    afx_msg void OnSelchangeComboId3v2Version();
+    //}}AFX_MSG
+    DECLARE_MESSAGE_MAP()
 };
 
 //{{AFX_INSERT_LOCATION}}
-// Microsoft Visual C++ ‚Í‘Os‚Ì’¼‘O‚É’Ç‰Á‚ÌéŒ¾‚ğ‘}“ü‚µ‚Ü‚·B
+// Microsoft Visual C++ ã¯å‰è¡Œã®ç›´å‰ã«è¿½åŠ ã®å®£è¨€ã‚’æŒ¿å…¥ã—ã¾ã™ã€‚
 
 #endif // !defined(AFX_DLGCONVID3V2VERSION_H__949D751B_4994_4BBA_8532_64763197473C__INCLUDED_)

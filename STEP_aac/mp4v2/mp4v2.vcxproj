@@ -1,32 +1,54 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Release|Win32">
       <Configuration>Release</Configuration>
       <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{F6FEB880-93CD-4451-A7D5-6C5C37E9A5B6}</ProjectGuid>
     <RootNamespace>mp4v2</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
     <UseOfMfc>false</UseOfMfc>
-    <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v90</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
     <UseOfMfc>false</UseOfMfc>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <PlatformToolset>v100</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -35,19 +57,41 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC60.props" />
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC60.props" />
+  </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC60.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
-    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\Release\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\Release\</IntDir>
-    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\Debug\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\Debug\</IntDir>
-    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+    <_ProjectFileVersion>14.0.24720.0</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)_temp\_lib\$(PlatformShortName)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)_temp\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(SolutionDir)_temp\_lib\$(PlatformShortName)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)_temp\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)_temp\_lib\$(PlatformShortName)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)_temp\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(SolutionDir)_temp\_lib\$(PlatformShortName)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)_temp\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
@@ -56,27 +100,21 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>.\Release/mp4v2.tlb</TypeLibraryName>
-      <HeaderFileName>
-      </HeaderFileName>
+      <HeaderFileName />
     </Midl>
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
-      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;MP4V2_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.\;.\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>MP4V2_USE_STATIC_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <PrecompiledHeaderOutputFile>.\Release/mp4v2.pch</PrecompiledHeaderOutputFile>
-      <AssemblerListingLocation>.\Release/</AssemblerListingLocation>
-      <ObjectFileName>.\Release/</ObjectFileName>
-      <ProgramDataBaseFileName>.\Release/</ProgramDataBaseFileName>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WarningLevel>TurnOffAllWarnings</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
-      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <DebugInformationFormat>None</DebugInformationFormat>
+      <OmitFramePointers>true</OmitFramePointers>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -84,26 +122,69 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>odbc32.lib;odbccp32.lib;wsock32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>.\Release/mp4v2.dll</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <ModuleDefinitionFile>mp4v2.def</ModuleDefinitionFile>
-      <ProgramDatabaseFile>.\Release/mp4v2.pdb</ProgramDatabaseFile>
+      <ModuleDefinitionFile>
+      </ModuleDefinitionFile>
+      <ProgramDatabaseFile>$(IntDir)$(TargetName).pdb</ProgramDatabaseFile>
       <GenerateMapFile>true</GenerateMapFile>
       <MapFileName>.\mp4v2.map</MapFileName>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <TargetMachine>MachineX86</TargetMachine>
+      <ImportLibrary>$(IntDir)$(TargetName).lib</ImportLibrary>
+      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
     </Link>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>.\Release/mp4v2.bsc</OutputFile>
+      <OutputFile>$(IntDir)$(TargetName).bsc</OutputFile>
     </Bscmake>
-    <PostBuildEvent>
-      <Command>copy Release\mp4v2.dll ..\..\SuperTagEditor\PublicRelease\mp4v2.dll
-copy Release\mp4v2.dll ..\..\STEP_aac\Release\mp4v2.dll
-</Command>
-    </PostBuildEvent>
+    <PostBuildEvent />
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TypeLibraryName>.\Release/mp4v2.tlb</TypeLibraryName>
+      <HeaderFileName>
+      </HeaderFileName>
+    </Midl>
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <AdditionalIncludeDirectories>.\;.\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>MP4V2_USE_STATIC_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>None</DebugInformationFormat>
+      <OmitFramePointers>true</OmitFramePointers>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x040b</Culture>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>odbc32.lib;odbccp32.lib;wsock32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <ModuleDefinitionFile>
+      </ModuleDefinitionFile>
+      <ProgramDatabaseFile>$(IntDir)$(TargetName).pdb</ProgramDatabaseFile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>.\mp4v2.map</MapFileName>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <ImportLibrary>$(IntDir)$(TargetName).lib</ImportLibrary>
+      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+    </Link>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>$(IntDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+    <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>
@@ -112,24 +193,19 @@ copy Release\mp4v2.dll ..\..\STEP_aac\Release\mp4v2.dll
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>.\Debug/mp4v2.tlb</TypeLibraryName>
-      <HeaderFileName>
-      </HeaderFileName>
+      <HeaderFileName />
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;MP4V2_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.\;.\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>MP4V2_USE_STATIC_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <PrecompiledHeaderOutputFile>.\Debug/mp4v2.pch</PrecompiledHeaderOutputFile>
-      <AssemblerListingLocation>.\Debug/</AssemblerListingLocation>
-      <ObjectFileName>.\Debug/</ObjectFileName>
-      <ProgramDataBaseFileName>.\Debug/</ProgramDataBaseFileName>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <BrowseInformation>true</BrowseInformation>
       <WarningLevel>TurnOffAllWarnings</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -137,121 +213,182 @@ copy Release\mp4v2.dll ..\..\STEP_aac\Release\mp4v2.dll
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>wsock32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>.\Debug/mp4v2.dll</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <ModuleDefinitionFile>mp4v2.def</ModuleDefinitionFile>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ProgramDatabaseFile>.\Debug/mp4v2.pdb</ProgramDatabaseFile>
-      <RandomizedBaseAddress>false</RandomizedBaseAddress>
-      <DataExecutionPrevention>
-      </DataExecutionPrevention>
-      <ImportLibrary>.\Debug/mp4v2.lib</ImportLibrary>
+      <ModuleDefinitionFile>
+      </ModuleDefinitionFile>
+      <ProgramDatabaseFile>$(IntDir)$(TargetName).pdb</ProgramDatabaseFile>
+      <DataExecutionPrevention />
       <TargetMachine>MachineX86</TargetMachine>
+      <ImportLibrary>$(IntDir)$(TargetName).lib</ImportLibrary>
     </Link>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>.\Debug/mp4v2.bsc</OutputFile>
+      <OutputFile>$(IntDir)$(TargetName).bsc</OutputFile>
     </Bscmake>
-    <PostBuildEvent>
-      <Command>copy Debug\mp4v2.dll ..\..\SuperTagEditor\Debug\mp4v2.dll
-copy Debug\mp4v2.dll ..\..\STEP_aac\Debug\mp4v2.dll
-</Command>
-    </PostBuildEvent>
+    <PostBuildEvent />
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TypeLibraryName>.\Debug/mp4v2.tlb</TypeLibraryName>
+      <HeaderFileName>
+      </HeaderFileName>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>.\;.\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>MP4V2_USE_STATIC_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <BrowseInformation>true</BrowseInformation>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x040b</Culture>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>wsock32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <ModuleDefinitionFile>
+      </ModuleDefinitionFile>
+      <ProgramDatabaseFile>$(IntDir)$(TargetName).pdb</ProgramDatabaseFile>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <ImportLibrary>$(IntDir)$(TargetName).lib</ImportLibrary>
+    </Link>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>$(IntDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+    <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="3gp.cpp" />
-    <ClCompile Include="atom_amr.cpp" />
-    <ClCompile Include="atom_avc1.cpp" />
-    <ClCompile Include="atom_avcC.cpp" />
-    <ClCompile Include="atom_d263.cpp" />
-    <ClCompile Include="atom_damr.cpp" />
-    <ClCompile Include="atom_dref.cpp" />
-    <ClCompile Include="atom_elst.cpp" />
-    <ClCompile Include="atom_enca.cpp" />
-    <ClCompile Include="atom_encv.cpp" />
-    <ClCompile Include="atom_free.cpp" />
-    <ClCompile Include="atom_ftyp.cpp" />
-    <ClCompile Include="atom_gmin.cpp" />
-    <ClCompile Include="atom_hdlr.cpp" />
-    <ClCompile Include="atom_hinf.cpp" />
-    <ClCompile Include="atom_hnti.cpp" />
-    <ClCompile Include="atom_href.cpp" />
-    <ClCompile Include="atom_mdat.cpp" />
-    <ClCompile Include="atom_mdhd.cpp" />
-    <ClCompile Include="atom_meta.cpp" />
-    <ClCompile Include="atom_mp4a.cpp" />
-    <ClCompile Include="atom_mp4s.cpp" />
-    <ClCompile Include="atom_mp4v.cpp" />
-    <ClCompile Include="atom_mvhd.cpp" />
-    <ClCompile Include="atom_ohdr.cpp" />
-    <ClCompile Include="atom_root.cpp" />
-    <ClCompile Include="atom_rtp.cpp" />
-    <ClCompile Include="atom_s263.cpp" />
-    <ClCompile Include="atom_sdp.cpp" />
-    <ClCompile Include="atom_smi.cpp" />
-    <ClCompile Include="atom_sound.cpp" />
-    <ClCompile Include="atom_standard.cpp" />
-    <ClCompile Include="atom_stbl.cpp" />
-    <ClCompile Include="atom_stdp.cpp" />
-    <ClCompile Include="atom_stsc.cpp" />
-    <ClCompile Include="atom_stsd.cpp" />
-    <ClCompile Include="atom_stsz.cpp" />
-    <ClCompile Include="atom_stz2.cpp" />
-    <ClCompile Include="atom_text.cpp" />
-    <ClCompile Include="atom_tfhd.cpp" />
-    <ClCompile Include="atom_tkhd.cpp" />
-    <ClCompile Include="atom_treftype.cpp" />
-    <ClCompile Include="atom_trun.cpp" />
-    <ClCompile Include="atom_udta.cpp" />
-    <ClCompile Include="atom_url.cpp" />
-    <ClCompile Include="atom_urn.cpp" />
-    <ClCompile Include="atom_video.cpp" />
-    <ClCompile Include="atom_vmhd.cpp" />
-    <ClCompile Include="descriptors.cpp" />
-    <ClCompile Include="isma.cpp" />
-    <ClCompile Include="mp4.cpp" />
-    <ClCompile Include="mp4atom.cpp" />
-    <ClCompile Include="mp4container.cpp" />
-    <ClCompile Include="mp4descriptor.cpp" />
-    <ClCompile Include="mp4file.cpp" />
-    <ClCompile Include="mp4file_io.cpp" />
-    <ClCompile Include="mp4info.cpp" />
-    <ClCompile Include="mp4meta.cpp" />
-    <ClCompile Include="mp4property.cpp" />
-    <ClCompile Include="mp4track.cpp" />
-    <ClCompile Include="mp4util.cpp" />
-    <ClCompile Include="need_for_win32.c" />
-    <ClCompile Include="ocidescriptors.cpp" />
-    <ClCompile Include="odcommands.cpp" />
-    <ClCompile Include="qosqualifiers.cpp" />
-    <ClCompile Include="rtphint.cpp" />
-    <ClCompile Include="virtual_io.cpp" />
+    <ClCompile Include="libplatform\io\File.cpp" />
+    <ClCompile Include="libplatform\io\FileSystem.cpp" />
+    <ClCompile Include="libplatform\io\FileSystem_win32.cpp" />
+    <ClCompile Include="libplatform\io\File_win32.cpp" />
+    <ClCompile Include="libplatform\number\random_win32.cpp" />
+    <ClCompile Include="libplatform\platform_win32.cpp" />
+    <ClCompile Include="libplatform\process\process_win32.cpp" />
+    <ClCompile Include="libplatform\sys\error.cpp" />
+    <ClCompile Include="libplatform\time\time.cpp" />
+    <ClCompile Include="libplatform\time\time_win32.cpp" />
+    <ClCompile Include="src\3gp.cpp" />
+    <ClCompile Include="src\atom_ac3.cpp" />
+    <ClCompile Include="src\atom_amr.cpp" />
+    <ClCompile Include="src\atom_avc1.cpp" />
+    <ClCompile Include="src\atom_avcC.cpp" />
+    <ClCompile Include="src\atom_chpl.cpp" />
+    <ClCompile Include="src\atom_colr.cpp" />
+    <ClCompile Include="src\atom_d263.cpp" />
+    <ClCompile Include="src\atom_dac3.cpp" />
+    <ClCompile Include="src\atom_damr.cpp" />
+    <ClCompile Include="src\atom_dref.cpp" />
+    <ClCompile Include="src\atom_elst.cpp" />
+    <ClCompile Include="src\atom_enca.cpp" />
+    <ClCompile Include="src\atom_encv.cpp" />
+    <ClCompile Include="src\atom_free.cpp" />
+    <ClCompile Include="src\atom_ftab.cpp" />
+    <ClCompile Include="src\atom_ftyp.cpp" />
+    <ClCompile Include="src\atom_gmin.cpp" />
+    <ClCompile Include="src\atom_hdlr.cpp" />
+    <ClCompile Include="src\atom_hinf.cpp" />
+    <ClCompile Include="src\atom_hnti.cpp" />
+    <ClCompile Include="src\atom_href.cpp" />
+    <ClCompile Include="src\atom_mdat.cpp" />
+    <ClCompile Include="src\atom_mdhd.cpp" />
+    <ClCompile Include="src\atom_meta.cpp" />
+    <ClCompile Include="src\atom_mp4s.cpp" />
+    <ClCompile Include="src\atom_mp4v.cpp" />
+    <ClCompile Include="src\atom_mvhd.cpp" />
+    <ClCompile Include="src\atom_nmhd.cpp" />
+    <ClCompile Include="src\atom_ohdr.cpp" />
+    <ClCompile Include="src\atom_pasp.cpp" />
+    <ClCompile Include="src\atom_root.cpp" />
+    <ClCompile Include="src\atom_rtp.cpp" />
+    <ClCompile Include="src\atom_s263.cpp" />
+    <ClCompile Include="src\atom_sdp.cpp" />
+    <ClCompile Include="src\atom_sdtp.cpp" />
+    <ClCompile Include="src\atom_smi.cpp" />
+    <ClCompile Include="src\atom_sound.cpp" />
+    <ClCompile Include="src\atom_standard.cpp" />
+    <ClCompile Include="src\atom_stbl.cpp" />
+    <ClCompile Include="src\atom_stdp.cpp" />
+    <ClCompile Include="src\atom_stsc.cpp" />
+    <ClCompile Include="src\atom_stsd.cpp" />
+    <ClCompile Include="src\atom_stsz.cpp" />
+    <ClCompile Include="src\atom_stz2.cpp" />
+    <ClCompile Include="src\atom_text.cpp" />
+    <ClCompile Include="src\atom_tfhd.cpp" />
+    <ClCompile Include="src\atom_tkhd.cpp" />
+    <ClCompile Include="src\atom_treftype.cpp" />
+    <ClCompile Include="src\atom_trun.cpp" />
+    <ClCompile Include="src\atom_tx3g.cpp" />
+    <ClCompile Include="src\atom_udta.cpp" />
+    <ClCompile Include="src\atom_url.cpp" />
+    <ClCompile Include="src\atom_urn.cpp" />
+    <ClCompile Include="src\atom_uuid.cpp" />
+    <ClCompile Include="src\atom_video.cpp" />
+    <ClCompile Include="src\atom_vmhd.cpp" />
+    <ClCompile Include="src\bmff\typebmff.cpp" />
+    <ClCompile Include="src\cmeta.cpp" />
+    <ClCompile Include="src\descriptors.cpp" />
+    <ClCompile Include="src\exception.cpp" />
+    <ClCompile Include="src\isma.cpp" />
+    <ClCompile Include="src\itmf\CoverArtBox.cpp" />
+    <ClCompile Include="src\itmf\generic.cpp" />
+    <ClCompile Include="src\itmf\Tags.cpp" />
+    <ClCompile Include="src\itmf\type.cpp" />
+    <ClCompile Include="src\log.cpp" />
+    <ClCompile Include="src\mp4.cpp" />
+    <ClCompile Include="src\mp4atom.cpp" />
+    <ClCompile Include="src\mp4container.cpp" />
+    <ClCompile Include="src\mp4descriptor.cpp" />
+    <ClCompile Include="src\mp4file.cpp" />
+    <ClCompile Include="src\mp4file_io.cpp" />
+    <ClCompile Include="src\mp4info.cpp" />
+    <ClCompile Include="src\mp4property.cpp" />
+    <ClCompile Include="src\mp4track.cpp" />
+    <ClCompile Include="src\mp4util.cpp" />
+    <ClCompile Include="src\ocidescriptors.cpp" />
+    <ClCompile Include="src\odcommands.cpp" />
+    <ClCompile Include="src\qosqualifiers.cpp" />
+    <ClCompile Include="src\rtphint.cpp" />
+    <ClCompile Include="src\text.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="atoms.h" />
-    <ClInclude Include="descriptors.h" />
-    <ClInclude Include="mp4.h" />
-    <ClInclude Include="mp4array.h" />
-    <ClInclude Include="mp4atom.h" />
-    <ClInclude Include="mp4common.h" />
-    <ClInclude Include="mp4container.h" />
-    <ClInclude Include="mp4descriptor.h" />
-    <ClInclude Include="mp4file.h" />
-    <ClInclude Include="mp4property.h" />
-    <ClInclude Include="mp4track.h" />
-    <ClInclude Include="mp4util.h" />
-    <ClInclude Include="mpeg4ip.h" />
-    <ClInclude Include="mpeg4ip_version.h" />
-    <ClInclude Include="mpeg4ip_win32.h" />
-    <ClInclude Include="ocidescriptors.h" />
-    <ClInclude Include="odcommands.h" />
-    <ClInclude Include="qosqualifiers.h" />
-    <ClInclude Include="rtphint.h" />
-    <ClInclude Include="virtual_io.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="mp4v2.def" />
-    <None Include="STEP.TXT" />
+    <ClInclude Include="include\mp4v2\mp4v2.h" />
+    <ClInclude Include="src\atoms.h" />
+    <ClInclude Include="src\bmff\typebmff.h" />
+    <ClInclude Include="src\descriptors.h" />
+    <ClInclude Include="src\enum.h" />
+    <ClInclude Include="src\exception.h" />
+    <ClInclude Include="src\impl.h" />
+    <ClInclude Include="src\itmf\CoverArtBox.h" />
+    <ClInclude Include="src\itmf\generic.h" />
+    <ClInclude Include="src\itmf\Tags.h" />
+    <ClInclude Include="src\itmf\type.h" />
+    <ClInclude Include="src\log.h" />
+    <ClInclude Include="src\mp4array.h" />
+    <ClInclude Include="src\mp4atom.h" />
+    <ClInclude Include="src\mp4container.h" />
+    <ClInclude Include="src\mp4descriptor.h" />
+    <ClInclude Include="src\mp4file.h" />
+    <ClInclude Include="src\mp4property.h" />
+    <ClInclude Include="src\mp4track.h" />
+    <ClInclude Include="src\mp4util.h" />
+    <ClInclude Include="src\ocidescriptors.h" />
+    <ClInclude Include="src\odcommands.h" />
+    <ClInclude Include="src\qosqualifiers.h" />
+    <ClInclude Include="src\rtphint.h" />
+    <ClInclude Include="src\src.h" />
+    <ClInclude Include="src\text.h" />
+    <ClInclude Include="src\util.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

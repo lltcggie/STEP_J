@@ -1,4 +1,4 @@
-// DlgEnvSheet.cpp : ƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“ ƒtƒ@ƒCƒ‹
+// DlgEnvSheet.cpp : ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³ ãƒ•ã‚¡ã‚¤ãƒ«
 //
 
 #include "stdafx.h"
@@ -41,12 +41,12 @@ static char THIS_FILE[] = __FILE__;
 IMPLEMENT_DYNAMIC(CDlgEnvSheet, COptionSheet)
 
 CDlgEnvSheet::CDlgEnvSheet(UINT nIDCaption, CWnd* pParentWnd, UINT iSelectPage)
-	:COptionSheet(nIDCaption, pParentWnd, iSelectPage)
+    :COptionSheet(nIDCaption, pParentWnd, iSelectPage)
 {
 }
 
 CDlgEnvSheet::CDlgEnvSheet(LPCTSTR pszCaption, CWnd* pParentWnd, UINT iSelectPage)
-	:COptionSheet(pszCaption, pParentWnd, iSelectPage)
+    :COptionSheet(pszCaption, pParentWnd, iSelectPage)
 {
 }
 
@@ -56,378 +56,382 @@ CDlgEnvSheet::~CDlgEnvSheet()
 
 
 BEGIN_MESSAGE_MAP(CDlgEnvSheet, COptionSheet)
-	//{{AFX_MSG_MAP(CDlgEnvSheet)
-		// ƒƒ‚ - ClassWizard ‚Í‚±‚ÌˆÊ’u‚Éƒ}ƒbƒsƒ“ƒO—p‚Ìƒ}ƒNƒ‚ğ’Ç‰Á‚Ü‚½‚Ííœ‚µ‚Ü‚·B
-	//}}AFX_MSG_MAP
+    //{{AFX_MSG_MAP(CDlgEnvSheet)
+        // ãƒ¡ãƒ¢ - ClassWizard ã¯ã“ã®ä½ç½®ã«ãƒãƒƒãƒ”ãƒ³ã‚°ç”¨ã®ãƒã‚¯ãƒ­ã‚’è¿½åŠ ã¾ãŸã¯å‰Šé™¤ã—ã¾ã™ã€‚
+    //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgEnvSheet ƒƒbƒZ[ƒW ƒnƒ“ƒhƒ‰
+// CDlgEnvSheet ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒãƒ³ãƒ‰ãƒ©
 
-int CDlgEnvSheet::DoModal(int nType) 
+INT_PTR CDlgEnvSheet::DoModal(int nType)
 {
-	int		i, nResult;
-	CDlgEnvironment		pageEnv;
-	CDlgLyricFile		pageLyric;
-	CDlgEnvPlayer		pagePlayer;
-	CDlgUserConvFormat	pageConv;
-	CDlgConvFormatEx	pageConvEx;
-	CDlgMoveFolder		pageMoveFolder;
-	CDlgCopyFormat		pageCopyFormat; /* FunnyCorn 175 */
-	CDlgKeyConfig		pageKey;
-	CDlgEditShowColumn	pageColumn;
-	CDlgEnvConf			pageConf;
-	CDlgSetClassification	pageClass;
-	CDlgReplaceFileName	pageReplace;
-	CDlgSetupGenre		pageGenre;
-	CDlgFolderSync		pageSync;
-	CDlgWriteForm		pageWrite;
-	CDlgFileNameMaxCheck	pageFileNameMax;
-	//CDlgTeikei			pageTeikei; /* FreeFall 046 */
-	CDlgDefaultValue	pageDefaultValue;
-	CDlgUserConvFormartTag2Tag	pageConvTag2Tag; /* STEP 032 */
-	CDlgFixedUpperLower	pageFixedUpperLower; /* STEP 040 */
+    int    i;
+    INT_PTR nResult;
+    CDlgEnvironment        pageEnv;
+    CDlgLyricFile        pageLyric;
+    CDlgEnvPlayer        pagePlayer;
+    CDlgUserConvFormat    pageConv;
+    CDlgConvFormatEx    pageConvEx;
+    CDlgMoveFolder        pageMoveFolder;
+    CDlgCopyFormat        pageCopyFormat; /* FunnyCorn 175 */
+    CDlgKeyConfig        pageKey;
+    CDlgEditShowColumn    pageColumn;
+    CDlgEnvConf            pageConf;
+    CDlgSetClassification    pageClass;
+    CDlgReplaceFileName    pageReplace;
+    CDlgSetupGenre        pageGenre;
+    CDlgFolderSync        pageSync;
+    CDlgWriteForm        pageWrite;
+    CDlgFileNameMaxCheck    pageFileNameMax;
+    //CDlgTeikei            pageTeikei; /* FreeFall 046 */
+    CDlgDefaultValue    pageDefaultValue;
+    CDlgUserConvFormartTag2Tag    pageConvTag2Tag; /* STEP 032 */
+    CDlgFixedUpperLower    pageFixedUpperLower; /* STEP 040 */
 
-	CDlgConv	pageConvTop; /* STEP 026*/
-	COptionListBox	listBox;
+    CDlgConv    pageConvTop; /* STEP 026*/
+    COptionListBox    listBox;
 
-	SetListControl(&listBox);
+    SetListControl(&listBox);
 
-	pageGenre.m_genreListUSER = NULL;
+    pageGenre.m_genreListUSER = NULL;
 
-	// ƒvƒƒpƒeƒB[ƒV[ƒg‚ÌƒXƒ^ƒCƒ‹‚ğ•ÏX
-	m_psh.dwFlags |= PSH_NOAPPLYNOW;	// [“K—p]ƒ{ƒ^ƒ“–³‚µ
+    // ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ãƒ¼ã‚·ãƒ¼ãƒˆã®ã‚¹ã‚¿ã‚¤ãƒ«ã‚’å¤‰æ›´
+    m_psh.dwFlags |= PSH_NOAPPLYNOW;    // [é©ç”¨]ãƒœã‚¿ãƒ³ç„¡ã—
 
-	// •Ï”‚Ì‰Šú‰»
-	if (true || nType & ENV_NORMAL) {
-		// ŠÂ‹«İ’è
-		pageEnv.m_bESCEditCancel		= g_bOptESCEditCancel ? TRUE : FALSE;
-		pageEnv.m_bEnableEditCursorExit	= g_bOptEnableEditCursorExit ? TRUE : FALSE;
-		pageEnv.m_bEnterBeginEdit	= g_bOptEnterBeginEdit ? TRUE : FALSE;
-		pageEnv.m_bEditOkDown		= g_bOptEditOkDown ? TRUE : FALSE;
-		pageEnv.m_bKeepTimeStamp	= g_bOptKeepTimeStamp ? TRUE : FALSE;
-		pageEnv.m_bSyncCreateTime	= g_bOptSyncCreateTime ? TRUE : FALSE;
-		pageEnv.m_bAutoOpenFolder	= g_bOptAutoOpenFolder ? TRUE : FALSE;
-		pageEnv.m_bLoadFileAdjustColumn	= g_bOptLoadFileAdjustColumn ? TRUE : FALSE;
-		pageEnv.m_bLoadFileChecked	= g_bOptLoadFileChecked ? TRUE : FALSE;
-		pageEnv.m_bHideMP3ListFile	= g_bOptHideMP3ListFile ? TRUE : FALSE;
-		pageEnv.m_bDropSearchSubFolder	= g_bOptDropSearchSubFolder ? TRUE : FALSE;	/* TyphoonSwell 026 */
-		pageEnv.m_bShowZenSpace	= g_bOptShowZenSpace ? TRUE : FALSE;	/* BeachMonster 107 */
-		pageEnv.m_bSortIgnoreCase = g_bOptSortIgnoreCase ? TRUE : FALSE;	/* BeachMonster4 114 */
-		pageEnv.m_bSortIgnoreZenHan = g_bOptSortIgnoreZenHan ? TRUE : FALSE;	/* BeachMonster4 114 */
-		pageEnv.m_bSortIgnoreKataHita = g_bOptSortIgnoreKataHira ? TRUE : FALSE;	/* FunnyCorn 179 */
-		pageEnv.m_bShowTotalParent = g_bOptShowTotalParent ? TRUE : FALSE;	/* RockDance 128 */
-		pageEnv.m_bShowTips	= g_bOptShowTips ? TRUE : FALSE;	/* Rumble 188 */
+    // å¤‰æ•°ã®åˆæœŸåŒ–
+    if (true || nType & ENV_NORMAL) {
+        // ç’°å¢ƒè¨­å®š
+        pageEnv.m_bESCEditCancel        = g_bOptESCEditCancel ? TRUE : FALSE;
+        pageEnv.m_bEnableEditCursorExit = g_bOptEnableEditCursorExit ? TRUE : FALSE;
+        pageEnv.m_bEnterBeginEdit       = g_bOptEnterBeginEdit ? TRUE : FALSE;
+        pageEnv.m_bEditOkDown           = g_bOptEditOkDown ? TRUE : FALSE;
+        pageEnv.m_bKeepTimeStamp        = g_bOptKeepTimeStamp ? TRUE : FALSE;
+        pageEnv.m_bSyncCreateTime       = g_bOptSyncCreateTime ? TRUE : FALSE;
+        pageEnv.m_bAutoOpenFolder       = g_bOptAutoOpenFolder ? TRUE : FALSE;
+        pageEnv.m_bLoadFileAdjustColumn = g_bOptLoadFileAdjustColumn ? TRUE : FALSE;
+        pageEnv.m_bLoadFileChecked      = g_bOptLoadFileChecked ? TRUE : FALSE;
+        pageEnv.m_bHideMP3ListFile      = g_bOptHideMP3ListFile ? TRUE : FALSE;
+        pageEnv.m_bDropSearchSubFolder  = g_bOptDropSearchSubFolder ? TRUE : FALSE;    /* TyphoonSwell 026 */
+        pageEnv.m_bShowZenSpace         = g_bOptShowZenSpace ? TRUE : FALSE;    /* BeachMonster 107 */
+        pageEnv.m_bSortIgnoreCase       = g_bOptSortIgnoreCase ? TRUE : FALSE;    /* BeachMonster4 114 */
+        pageEnv.m_bSortIgnoreZenHan     = g_bOptSortIgnoreZenHan ? TRUE : FALSE;    /* BeachMonster4 114 */
+        pageEnv.m_bSortIgnoreKataHita   = g_bOptSortIgnoreKataHira ? TRUE : FALSE;    /* FunnyCorn 179 */
+        pageEnv.m_bShowTotalParent      = g_bOptShowTotalParent ? TRUE : FALSE;    /* RockDance 128 */
+        pageEnv.m_bShowTips             = g_bOptShowTips ? TRUE : FALSE;    /* Rumble 188 */
 
-		// ‰ÌŒƒtƒ@ƒCƒ‹
-		pageLyric.m_bChangeTextFile		= g_bOptChangeTextFile ? TRUE : FALSE;
-		pageLyric.m_bSetLyricsDir		= g_bOptSetLyricsDir ? TRUE : FALSE;
-		pageLyric.m_bSearchLyricsSubDir	= g_bOptSearchLyricsSubDir ? TRUE : FALSE;
-		pageLyric.m_strLyricsPath		= g_strOptLyricsPath;
+        // æ­Œè©ãƒ•ã‚¡ã‚¤ãƒ«
+        pageLyric.m_bChangeTextFile     = g_bOptChangeTextFile ? TRUE : FALSE;
+        pageLyric.m_bSetLyricsDir       = g_bOptSetLyricsDir ? TRUE : FALSE;
+        pageLyric.m_bSearchLyricsSubDir = g_bOptSearchLyricsSubDir ? TRUE : FALSE;
+        pageLyric.m_strLyricsPath       = g_strOptLyricsPath;
 
-		// ƒvƒŒƒCƒ„[
-		pagePlayer.m_nPlayerType	= g_nOptPlayerType;
-		pagePlayer.m_strWinAmpPath	= g_sOptWinAmpPath;
+        // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼
+        pagePlayer.m_nPlayerType    = g_nOptPlayerType;
+        pagePlayer.m_strWinAmpPath  = g_sOptWinAmpPath;
 
-		// Šm”FƒƒbƒZ[ƒW
-		pageConf.m_bConfDeleteFile	= g_bConfDeleteFile ? TRUE : FALSE;
-		pageConf.m_bConfDeleteList	= g_bConfDeleteList ? TRUE : FALSE;
-		pageConf.m_bConfEditModify	= g_bConfEditModify ? TRUE : FALSE;
-		pageConf.m_bConfFolderSync	= g_bConfFolderSync ? TRUE : FALSE;
+        // ç¢ºèªãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
+        pageConf.m_bConfDeleteFile  = g_bConfDeleteFile ? TRUE : FALSE;
+        pageConf.m_bConfDeleteList  = g_bConfDeleteList ? TRUE : FALSE;
+        pageConf.m_bConfEditModify  = g_bConfEditModify ? TRUE : FALSE;
+        pageConf.m_bConfFolderSync  = g_bConfFolderSync ? TRUE : FALSE;
 
-		// ƒL[Š„‚è“–‚Ä
-		// Œ»İ‚ÌƒL[Š„‚è“–‚Ä‚ğƒŒƒWƒXƒgƒŠ‚É•Û‘¶
-		((CSuperTagEditorApp *)AfxGetApp())->WriteKeyConfig();
+        // ã‚­ãƒ¼å‰²ã‚Šå½“ã¦
+        // ç¾åœ¨ã®ã‚­ãƒ¼å‰²ã‚Šå½“ã¦ã‚’ãƒ¬ã‚¸ã‚¹ãƒˆãƒªã«ä¿å­˜
+        ((CSuperTagEditorApp *)AfxGetApp())->WriteKeyConfig();
 
-		// ƒtƒ@ƒCƒ‹–¼Å‘å•¶š”
-		pageFileNameMax.m_bFileNameMaxCheck = g_bConfFileNameMaxCheck ? TRUE : FALSE;
-		pageFileNameMax.m_nFileNameMaxChar = g_nConfFileNameMaxChar;
-		pageFileNameMax.m_bFileNameMaxCellColor = g_bFileNameMaxCellColor ? TRUE : FALSE; /* SeaKnows 036 */
-	}
+        // ãƒ•ã‚¡ã‚¤ãƒ«åæœ€å¤§æ–‡å­—æ•°
+        pageFileNameMax.m_bFileNameMaxCheck = g_bConfFileNameMaxCheck ? TRUE : FALSE;
+        pageFileNameMax.m_nFileNameMaxChar  = g_nConfFileNameMaxChar;
+        pageFileNameMax.m_bFileNameMaxCellColor = g_bFileNameMaxCellColor ? TRUE : FALSE; /* SeaKnows 036 */
+    }
 
-	if (true || nType & ENV_CONV) {
-		pageConvTop.m_bFirstUpperIgnoreWord = g_bFirstUpperIgnoreWord;
-		pageConvTop.m_strFirstUpperIgnoreWords = g_strFirstUpperIgnoreWords;
-		pageConvTop.m_strFirstUpperSentenceSeparator = g_strFirstUpperSentenceSeparator;
-		pageConvTop.m_bUserConvAddMenu = g_bUserConvAddMenu;
-		pageConvTop.m_bZenHanKigouKana = g_bZenHanKigouKana;
-		// ƒtƒ@ƒCƒ‹–¼’uŠ·
-		pageReplace.m_bFileNameReplace = (g_nOptCheckFileName == FILENAME_CONV_MULTIBYTE) ? TRUE : FALSE;
-		for (i = 0; i < FILENAME_REPLACE_MAX; i++) {
-			FILENAME_REPLACE	*pRep = &g_fileNameReplace[i];
-			pageReplace.m_strBefore[i] = pRep->strBefore;
-			pageReplace.m_strAfter[i] = pRep->strAfter;
-		}
-		// ƒ†[ƒUƒtƒ@ƒCƒ‹–¼’uŠ· /* FreeFall 050 */
-		for (i = 0; i < USER_FILENAME_REPLACE_MAX; i++) {
-			FILENAME_REPLACE	*pRep = &g_userFileNameReplace[i];
-			pageReplace.m_strUserBefore[i] = pRep->strBefore;
-			pageReplace.m_strUserAfter[i] = pRep->strAfter;
-		}
-		// ƒtƒ@ƒCƒ‹–¼•¶ší‚Ì“ˆê /* LastTrain 058 */
-		pageReplace.m_nFileUnifyAlpha = g_nFileUnifyAlpha;
-		pageReplace.m_nFileUnifyHiraKata = g_nFileUnifyHiraKata;
-		pageReplace.m_nFileUnifyKata = g_nFileUnifyKata;
-		pageReplace.m_nFileUnifyKigou = g_nFileUnifyKigou;
-		pageReplace.m_nFileUnifySuji = g_nFileUnifySuji;
-		pageReplace.m_nFileUnifyUpLow = g_nFileUnifyUpLow;
+    if (true || nType & ENV_CONV) {
+        pageConvTop.m_bFirstUpperIgnoreWord = g_bFirstUpperIgnoreWord;
+        pageConvTop.m_strFirstUpperIgnoreWords = g_strFirstUpperIgnoreWords;
+        pageConvTop.m_strFirstUpperSentenceSeparator = g_strFirstUpperSentenceSeparator;
+        pageConvTop.m_bUserConvAddMenu = g_bUserConvAddMenu;
+        pageConvTop.m_bZenHanKigouKana = g_bZenHanKigouKana;
+        pageConvTop.m_bAutoTilde2WaveDash = g_bAutoTilde2WaveDash;
+        // ãƒ•ã‚¡ã‚¤ãƒ«åç½®æ›
+        pageReplace.m_bFileNameReplace = (g_nOptCheckFileName == FILENAME_CONV_MULTIBYTE) ? TRUE : FALSE;
+        for (i = 0; i < FILENAME_REPLACE_MAX; i++) {
+            FILENAME_REPLACE    *pRep = &g_fileNameReplace[i];
+            pageReplace.m_strBefore[i] = pRep->strBefore;
+            pageReplace.m_strAfter[i] = pRep->strAfter;
+        }
+        // ãƒ¦ãƒ¼ã‚¶ãƒ•ã‚¡ã‚¤ãƒ«åç½®æ› /* FreeFall 050 */
+        for (i = 0; i < USER_FILENAME_REPLACE_MAX; i++) {
+            FILENAME_REPLACE    *pRep = &g_userFileNameReplace[i];
+            pageReplace.m_strUserBefore[i] = pRep->strBefore;
+            pageReplace.m_strUserAfter[i] = pRep->strAfter;
+        }
+        // ãƒ•ã‚¡ã‚¤ãƒ«åæ–‡å­—ç¨®ã®çµ±ä¸€ /* LastTrain 058 */
+        pageReplace.m_nFileUnifyAlpha = g_nFileUnifyAlpha;
+        pageReplace.m_nFileUnifyHiraKata = g_nFileUnifyHiraKata;
+        pageReplace.m_nFileUnifyKata = g_nFileUnifyKata;
+        pageReplace.m_nFileUnifyKigou = g_nFileUnifyKigou;
+        pageReplace.m_nFileUnifySuji = g_nFileUnifySuji;
+        pageReplace.m_nFileUnifyUpLow = g_nFileUnifyUpLow;
 
-		// Šg’£q•ÏŠ· /* STEP 006 */
-		pageReplace.m_nExtChange = g_nFileExtChange;
+        // æ‹¡å¼µå­å¤‰æ› /* STEP 006 */
+        pageReplace.m_nExtChange = g_nFileExtChange;
 
-		// ƒ†[ƒU[•ÏŠ·‘®
-		pageConv.m_nFormatType	= g_nUserConvFormatType;
-		for (i = 0; i < USER_CONV_FORMAT_MAX; i++) {
-			pageConv.m_userFormat[i] = g_userConvFormat[i];
-		}
+        // ãƒ¦ãƒ¼ã‚¶ãƒ¼å¤‰æ›æ›¸å¼
+        pageConv.m_nFormatType    = g_nUserConvFormatType;
+        for (i = 0; i < USER_CONV_FORMAT_MAX; i++) {
+            pageConv.m_userFormat[i] = g_userConvFormat[i];
+        }
 
-		// Šg’£ƒ†[ƒU[•ÏŠ·‘®
-		pageConvEx.m_nFormatType	= 0;
-		for (i = 0; i < USER_CONV_FORMAT_EX_MAX; i++) {
-			pageConvEx.m_userFormatEx[i] = g_userConvFormatEx[i];
-		}
+        // æ‹¡å¼µãƒ¦ãƒ¼ã‚¶ãƒ¼å¤‰æ›æ›¸å¼
+        pageConvEx.m_nFormatType    = 0;
+        for (i = 0; i < USER_CONV_FORMAT_EX_MAX; i++) {
+            pageConvEx.m_userFormatEx[i] = g_userConvFormatEx[i];
+        }
 
-		// ˆÚ“®æƒtƒHƒ‹ƒ_‘®
-		pageMoveFolder.m_nFormatType	= 0;
-		for (i = 0; i < USER_MOVE_FODLER_FORMAT_MAX; i++) {
-			pageMoveFolder.m_userFormatEx[i] = g_userMoveFolder[i];
-		}
+        // ç§»å‹•å…ˆãƒ•ã‚©ãƒ«ãƒ€æ›¸å¼
+        pageMoveFolder.m_nFormatType    = 0;
+        for (i = 0; i < USER_MOVE_FODLER_FORMAT_MAX; i++) {
+            pageMoveFolder.m_userFormatEx[i] = g_userMoveFolder[i];
+        }
 
-		// ‘®ƒRƒs[ /* FunnyCorn 175 */
-		pageCopyFormat.m_nFormatType	= 0;
-		for (i = 0; i < USER_COPY_FORMAT_FORMAT_MAX; i++) {
-			pageCopyFormat.m_userFormatEx[i] = g_userCopyFormat[i];
-		}
+        // æ›¸å¼ã‚³ãƒ”ãƒ¼ /* FunnyCorn 175 */
+        pageCopyFormat.m_nFormatType    = 0;
+        for (i = 0; i < USER_COPY_FORMAT_FORMAT_MAX; i++) {
+            pageCopyFormat.m_userFormatEx[i] = g_userCopyFormat[i];
+        }
 
-		// ƒ^ƒOî•ñ•ÏŠ· /* STEP 034 */
-		pageConvTag2Tag.m_nFormatType	= 0;
-		for (i = 0; i < USER_CONV_FORMAT_TAG2TAG_MAX; i++) {
-			pageConvTag2Tag.m_userFormatTag2Tag[i] = g_userConvFormatTag2Tag[i];
-		}
+        // ã‚¿ã‚°æƒ…å ±å¤‰æ› /* STEP 034 */
+        pageConvTag2Tag.m_nFormatType    = 0;
+        for (i = 0; i < USER_CONV_FORMAT_TAG2TAG_MAX; i++) {
+            pageConvTag2Tag.m_userFormatTag2Tag[i] = g_userConvFormatTag2Tag[i];
+        }
 
-		// ‘å•¶š¬•¶šŒÅ’è•ÏŠ· /* STEP 040 */
-		for (i = 0; i<g_arFixedWords.GetSize(); i++) {
-			pageFixedUpperLower.m_arFixedWords.Add(g_arFixedWords.GetAt(i));
-		}
-	}
+        // å¤§æ–‡å­—å°æ–‡å­—å›ºå®šå¤‰æ› /* STEP 040 */
+        for (i = 0; i<g_arFixedWords.GetSize(); i++) {
+            pageFixedUpperLower.m_arFixedWords.Add(g_arFixedWords.GetAt(i));
+        }
+    }
 
-	if (true || nType & ENV_ADVANCED) {
-		// •ª—Şİ’è
-		pageClass.m_nClassType	= g_classInfo.nType;
-		pageClass.m_nClass1	= g_classInfo.nColumn[0] + 1;
-		pageClass.m_nClass2	= g_classInfo.nColumn[1] + 1;
-		pageClass.m_nClass3	= g_classInfo.nColumn[2] + 1;
-		pageClass.m_nClass4	= g_classInfo.nColumn[3] + 1;
-		pageClass.m_nClass5	= g_classInfo.nColumn[4] + 1;
+    if (true || nType & ENV_ADVANCED) {
+        // åˆ†é¡è¨­å®š
+        pageClass.m_nClassType  = g_classInfo.nType;
+        pageClass.m_nClass1     = g_classInfo.nColumn[0] + 1;
+        pageClass.m_nClass2     = g_classInfo.nColumn[1] + 1;
+        pageClass.m_nClass3     = g_classInfo.nColumn[2] + 1;
+        pageClass.m_nClass4     = g_classInfo.nColumn[3] + 1;
+        pageClass.m_nClass5     = g_classInfo.nColumn[4] + 1;
 
-		// ƒtƒHƒ‹ƒ_‚Ì“¯Šú
-		pageSync.m_bEnableFolderSync	= g_bEnableFolderSync ? TRUE : FALSE;
-		pageSync.m_strRootFolder		= g_strRootFolder;
-		pageSync.m_bSelectAlways		= g_bSyncSelectAlways ? TRUE : FALSE;
-		pageSync.m_bDeleteFolder		= g_bSyncDeleteFolder ? TRUE : FALSE;
-		pageSync.m_bMoveLyricsFile		= g_bSyncLyricsFileMove ? TRUE : FALSE;
+        // ãƒ•ã‚©ãƒ«ãƒ€ã®åŒæœŸ
+        pageSync.m_bEnableFolderSync    = g_bEnableFolderSync ? TRUE : FALSE;
+        pageSync.m_strRootFolder        = g_strRootFolder;
+        pageSync.m_bSelectAlways        = g_bSyncSelectAlways ? TRUE : FALSE;
+        pageSync.m_bDeleteFolder        = g_bSyncDeleteFolder ? TRUE : FALSE;
+        pageSync.m_bMoveLyricsFile      = g_bSyncLyricsFileMove ? TRUE : FALSE;
 
-		// ƒŠƒXƒgo—Í‘®
-		pageWrite.m_nFormatType	= 0;
-		for (i = 0; i < WRITE_FORMAT_MAX; i++) {
-			pageWrite.m_writeFormat[i] = g_writeFormat[i];
-		}
+        // ãƒªã‚¹ãƒˆå‡ºåŠ›æ›¸å¼
+        pageWrite.m_nFormatType    = 0;
+        for (i = 0; i < WRITE_FORMAT_MAX; i++) {
+            pageWrite.m_writeFormat[i] = g_writeFormat[i];
+        }
 
-		// ƒ†[ƒUw’èƒWƒƒƒ“ƒ‹
-		pageGenre.m_genreListUSER = new USER_GENRE_LIST[USER_GENRE_LIST_MAX];
-		for (i = 0; i < USER_GENRE_LIST_MAX; i++) {
-			pageGenre.m_genreListUSER[i] = g_genreListUSER[i];
-		}
+        // ãƒ¦ãƒ¼ã‚¶æŒ‡å®šã‚¸ãƒ£ãƒ³ãƒ«
+        pageGenre.m_genreListUSER = new USER_GENRE_LIST[USER_GENRE_LIST_MAX];
+        for (i = 0; i < USER_GENRE_LIST_MAX; i++) {
+            pageGenre.m_genreListUSER[i] = g_genreListUSER[i];
+        }
 
-		// ‚»‚Ì‘¼ /* SeaKnows 031,033 */ 
-		pageDefaultValue.m_bValidFolderSelect = g_bValidFolderSelect;
-		pageDefaultValue.m_bValidDupExec = g_bValidDupExec; /* FreeFall 045 */
-		pageDefaultValue.m_nRecentFolder = g_nRecentFolder; /* StartInaction 053 */
-		pageDefaultValue.m_bSaveRepDlgPos = g_bSaveRepDlgPos; /* WildCherry4 086 */
-		pageDefaultValue.m_bAudioListShow = g_bAudioListShow; /* Conspiracy 199 */
-	}
+        // ãã®ä»– /* SeaKnows 031,033 */
+        pageDefaultValue.m_bValidFolderSelect = g_bValidFolderSelect;
+        pageDefaultValue.m_bValidDupExec = g_bValidDupExec; /* FreeFall 045 */
+        pageDefaultValue.m_nRecentFolder = g_nRecentFolder; /* StartInaction 053 */
+        pageDefaultValue.m_bSaveRepDlgPos = g_bSaveRepDlgPos; /* WildCherry4 086 */
+        pageDefaultValue.m_bAudioListShow = g_bAudioListShow; /* Conspiracy 199 */
+    }
 
-	// ƒy[ƒW‚Ì’Ç‰Á
-	if (true || nType & ENV_NORMAL  ) AddGroup(&pageEnv);
-	AddGroup(&pageConvTop);
-	AddGroup(&pageDefaultValue);
-	if (true || nType & ENV_NORMAL  ) AddPage(&pageLyric, &pageEnv);
-	if (true || nType & ENV_NORMAL  ) AddPage(&pagePlayer, &pageEnv);
-	if (true || nType & ENV_NORMAL  ) AddPage(&pageFileNameMax, &pageEnv);
-	if (true || nType & ENV_CONV    ) AddPage(&pageConv, &pageConvTop);
-	if (true || nType & ENV_CONV    ) AddPage(&pageConvEx, &pageConvTop);
-	if (true || nType & ENV_CONV    ) AddPage(&pageConvTag2Tag, &pageConvTop);
-	if (true || nType & ENV_CONV    ) AddPage(&pageMoveFolder, &pageConvTop);
-	if (true || nType & ENV_CONV    ) AddPage(&pageCopyFormat, &pageConvTop);
-	if (true || nType & ENV_ADVANCED) AddPage(&pageSync, &pageDefaultValue);
-	if (true || nType & ENV_CONV    ) AddPage(&pageReplace, &pageConvTop);
-	if (true || nType & ENV_ADVANCED) AddPage(&pageGenre, &pageDefaultValue);
-	if (true || nType & ENV_NORMAL  ) AddPage(&pageConf, &pageEnv);
-	if (true || nType & ENV_ADVANCED) AddPage(&pageColumn, &pageDefaultValue);
-	if (true || nType & ENV_NORMAL  ) AddPage(&pageKey, &pageEnv);
-	if (true || nType & ENV_ADVANCED) AddPage(&pageClass, &pageDefaultValue);
-	if (true || nType & ENV_ADVANCED) AddPage(&pageWrite, &pageDefaultValue);
-	//if (true || nType & ENV_ADVANCED) AddPage(&pageDefaultValue, &pageDefaultValue);
-	if (true || nType & ENV_CONV    ) AddPage(&pageFixedUpperLower, &pageConvTop); /* STEP 040 */
+    // ãƒšãƒ¼ã‚¸ã®è¿½åŠ 
+    if (true || nType & ENV_NORMAL  ) AddGroup(&pageEnv);
+    AddGroup(&pageConvTop);
+    AddGroup(&pageDefaultValue);
+    if (true || nType & ENV_NORMAL  ) AddPage(&pageLyric, &pageEnv);
+    if (true || nType & ENV_NORMAL  ) AddPage(&pagePlayer, &pageEnv);
+    if (true || nType & ENV_NORMAL  ) AddPage(&pageFileNameMax, &pageEnv);
+    if (true || nType & ENV_CONV    ) AddPage(&pageConv, &pageConvTop);
+    if (true || nType & ENV_CONV    ) AddPage(&pageConvEx, &pageConvTop);
+    if (true || nType & ENV_CONV    ) AddPage(&pageConvTag2Tag, &pageConvTop);
+    if (true || nType & ENV_CONV    ) AddPage(&pageMoveFolder, &pageConvTop);
+    if (true || nType & ENV_CONV    ) AddPage(&pageCopyFormat, &pageConvTop);
+    if (true || nType & ENV_ADVANCED) AddPage(&pageSync, &pageDefaultValue);
+    if (true || nType & ENV_CONV    ) AddPage(&pageReplace, &pageConvTop);
+    if (true || nType & ENV_ADVANCED) AddPage(&pageGenre, &pageDefaultValue);
+    if (true || nType & ENV_NORMAL  ) AddPage(&pageConf, &pageEnv);
+    if (true || nType & ENV_ADVANCED) AddPage(&pageColumn, &pageDefaultValue);
+    if (true || nType & ENV_NORMAL  ) AddPage(&pageKey, &pageEnv);
+    if (true || nType & ENV_ADVANCED) AddPage(&pageClass, &pageDefaultValue);
+    if (true || nType & ENV_ADVANCED) AddPage(&pageWrite, &pageDefaultValue);
+    //if (true || nType & ENV_ADVANCED) AddPage(&pageDefaultValue, &pageDefaultValue);
+    if (true || nType & ENV_CONV    ) AddPage(&pageFixedUpperLower, &pageConvTop); /* STEP 040 */
 
-	// ƒvƒƒpƒeƒBƒV[ƒg‚ÌÀs
-	if ((nResult = COptionSheet::DoModal()) == IDOK) {
-		if (true || nType & ENV_NORMAL) {
-			// ŠÂ‹«İ’è
-			g_bOptESCEditCancel			= pageEnv.m_bESCEditCancel ? true : false;
-			g_bOptEnableEditCursorExit	= pageEnv.m_bEnableEditCursorExit ? true : false;
-			g_bOptEnterBeginEdit	= pageEnv.m_bEnterBeginEdit ? true : false;
-			g_bOptEditOkDown		= pageEnv.m_bEditOkDown ? true : false;
-			g_bOptKeepTimeStamp		= pageEnv.m_bKeepTimeStamp ? true : false;
-			g_bOptSyncCreateTime	= pageEnv.m_bSyncCreateTime ? true : false;
-			g_bOptAutoOpenFolder	= pageEnv.m_bAutoOpenFolder ? true : false;
-			g_bOptLoadFileAdjustColumn	= pageEnv.m_bLoadFileAdjustColumn ? true : false;
-			g_bOptLoadFileChecked	= pageEnv.m_bLoadFileChecked ? true : false;
-			g_bOptHideMP3ListFile	= pageEnv.m_bHideMP3ListFile ? true : false;
-			g_bOptDropSearchSubFolder	= pageEnv.m_bDropSearchSubFolder ? true : false; /* TyphoonSwell 026 */
-			g_bOptShowZenSpace	= pageEnv.m_bShowZenSpace ? true : false; /* BeachMonster 107 */
-			g_bOptSortIgnoreCase =  pageEnv.m_bSortIgnoreCase ? true : false;	/* BeachMonster4 114 */
-			g_bOptSortIgnoreZenHan = pageEnv.m_bSortIgnoreZenHan ? true : false;	/* BeachMonster4 114 */
-			g_bOptSortIgnoreKataHira = pageEnv.m_bSortIgnoreKataHita ? true : false;	/* FunnyCorn 179 */
-			g_bOptShowTotalParent = pageEnv.m_bShowTotalParent ? true : false;	/* RockDance 128 */
-			g_bOptShowTips	= pageEnv.m_bShowTips ? true : false; /* Rumble 188 */
+    // ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ã‚·ãƒ¼ãƒˆã®å®Ÿè¡Œ
+    if ((nResult = COptionSheet::DoModal()) == IDOK) {
+        if (true || nType & ENV_NORMAL) {
+            // ç’°å¢ƒè¨­å®š
+            g_bOptESCEditCancel         = pageEnv.m_bESCEditCancel ? true : false;
+            g_bOptEnableEditCursorExit  = pageEnv.m_bEnableEditCursorExit ? true : false;
+            g_bOptEnterBeginEdit    = pageEnv.m_bEnterBeginEdit ? true : false;
+            g_bOptEditOkDown        = pageEnv.m_bEditOkDown ? true : false;
+            g_bOptKeepTimeStamp     = pageEnv.m_bKeepTimeStamp ? true : false;
+            g_bOptSyncCreateTime    = pageEnv.m_bSyncCreateTime ? true : false;
+            g_bOptAutoOpenFolder    = pageEnv.m_bAutoOpenFolder ? true : false;
+            g_bOptLoadFileAdjustColumn  = pageEnv.m_bLoadFileAdjustColumn ? true : false;
+            g_bOptLoadFileChecked   = pageEnv.m_bLoadFileChecked ? true : false;
+            g_bOptHideMP3ListFile   = pageEnv.m_bHideMP3ListFile ? true : false;
+            g_bOptDropSearchSubFolder   = pageEnv.m_bDropSearchSubFolder ? true : false; /* TyphoonSwell 026 */
+            g_bOptShowZenSpace      = pageEnv.m_bShowZenSpace ? true : false; /* BeachMonster 107 */
+            g_bOptSortIgnoreCase    = pageEnv.m_bSortIgnoreCase ? true : false;    /* BeachMonster4 114 */
+            g_bOptSortIgnoreZenHan  = pageEnv.m_bSortIgnoreZenHan ? true : false;    /* BeachMonster4 114 */
+            g_bOptSortIgnoreKataHira = pageEnv.m_bSortIgnoreKataHita ? true : false;    /* FunnyCorn 179 */
+            g_bOptShowTotalParent   = pageEnv.m_bShowTotalParent ? true : false;    /* RockDance 128 */
+            g_bOptShowTips          = pageEnv.m_bShowTips ? true : false; /* Rumble 188 */
 
-			// ‰ÌŒƒtƒ@ƒCƒ‹
-			g_bOptChangeTextFile		= pageLyric.m_bChangeTextFile ? true : false;
-			g_bOptSetLyricsDir			= pageLyric.m_bSetLyricsDir ? true : false;
-			g_bOptSearchLyricsSubDir	= pageLyric.m_bSearchLyricsSubDir ? true : false;
-			g_strOptLyricsPath			= pageLyric.m_strLyricsPath;
+            // æ­Œè©ãƒ•ã‚¡ã‚¤ãƒ«
+            g_bOptChangeTextFile        = pageLyric.m_bChangeTextFile ? true : false;
+            g_bOptSetLyricsDir          = pageLyric.m_bSetLyricsDir ? true : false;
+            g_bOptSearchLyricsSubDir    = pageLyric.m_bSearchLyricsSubDir ? true : false;
+            g_strOptLyricsPath          = pageLyric.m_strLyricsPath;
 
-			// ƒvƒŒƒCƒ„[
-			g_nOptPlayerType	= pagePlayer.m_nPlayerType;
-			g_sOptWinAmpPath	= pagePlayer.m_strWinAmpPath;
+            // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼
+            g_nOptPlayerType    = pagePlayer.m_nPlayerType;
+            g_sOptWinAmpPath    = pagePlayer.m_strWinAmpPath;
 
-			// Šm”FƒƒbƒZ[ƒW
-			g_bConfDeleteFile		= pageConf.m_bConfDeleteFile ? true : false;
-			g_bConfDeleteList		= pageConf.m_bConfDeleteList ? true : false;
-			g_bConfEditModify		= pageConf.m_bConfEditModify ? true : false;
-			g_bConfFolderSync		= pageConf.m_bConfFolderSync ? true : false;
+            // ç¢ºèªãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
+            g_bConfDeleteFile       = pageConf.m_bConfDeleteFile ? true : false;
+            g_bConfDeleteList       = pageConf.m_bConfDeleteList ? true : false;
+            g_bConfEditModify       = pageConf.m_bConfEditModify ? true : false;
+            g_bConfFolderSync       = pageConf.m_bConfFolderSync ? true : false;
 
-			// ƒtƒ@ƒCƒ‹–¼Å‘å•¶š”
-			g_bConfFileNameMaxCheck	= pageFileNameMax.m_bFileNameMaxCheck ? true : false;
-			g_nConfFileNameMaxChar	= pageFileNameMax.m_nFileNameMaxChar;
-			g_bFileNameMaxCellColor = pageFileNameMax.m_bFileNameMaxCellColor ? true : false; /* SeaKnows 036 */
-		}
+            // ãƒ•ã‚¡ã‚¤ãƒ«åæœ€å¤§æ–‡å­—æ•°
+            g_bConfFileNameMaxCheck = pageFileNameMax.m_bFileNameMaxCheck ? true : false;
+            g_nConfFileNameMaxChar  = pageFileNameMax.m_nFileNameMaxChar;
+            g_bFileNameMaxCellColor = pageFileNameMax.m_bFileNameMaxCellColor ? true : false; /* SeaKnows 036 */
+        }
 
-		if (true || nType & ENV_CONV) {
-			g_bFirstUpperIgnoreWord = pageConvTop.m_bFirstUpperIgnoreWord ? true : false;
-			g_strFirstUpperIgnoreWords = pageConvTop.m_strFirstUpperIgnoreWords;
-			g_strFirstUpperSentenceSeparator = pageConvTop.m_strFirstUpperSentenceSeparator;
-			g_bUserConvAddMenu = pageConvTop.m_bUserConvAddMenu ? true : false;
-			g_bZenHanKigouKana = pageConvTop.m_bZenHanKigouKana ? true : false;
-			// ƒtƒ@ƒCƒ‹–¼’uŠ·
-			g_nOptCheckFileName = pageReplace.m_bFileNameReplace ? FILENAME_CONV_MULTIBYTE : FILENAME_NO_CHECK;
-			for (i = 0; i < FILENAME_REPLACE_MAX; i++) {
-				FILENAME_REPLACE	*pRep = &g_fileNameReplace[i];
-				pRep->strAfter = pageReplace.m_strAfter[i];
-			}
-			// ƒ†[ƒUƒtƒ@ƒCƒ‹–¼’uŠ· /* FreeFall 050 */
-			for (i = 0; i < USER_FILENAME_REPLACE_MAX; i++) {
-				FILENAME_REPLACE	*pRep = &g_userFileNameReplace[i];
-				pRep->strBefore = pageReplace.m_strUserBefore[i];
-				pRep->strAfter = pageReplace.m_strUserAfter[i];
-			}
-			// ƒtƒ@ƒCƒ‹–¼•¶ší‚Ì“ˆê /* LastTrain 058 */
-			g_nFileUnifyAlpha = pageReplace.m_nFileUnifyAlpha;
-			g_nFileUnifyHiraKata = pageReplace.m_nFileUnifyHiraKata;
-			g_nFileUnifyKata = pageReplace.m_nFileUnifyKata;
-			g_nFileUnifyKigou = pageReplace.m_nFileUnifyKigou;
-			g_nFileUnifySuji = pageReplace.m_nFileUnifySuji;
-			g_nFileUnifyUpLow = pageReplace.m_nFileUnifyUpLow;
+        if (true || nType & ENV_CONV) {
+            g_bFirstUpperIgnoreWord = pageConvTop.m_bFirstUpperIgnoreWord ? true : false;
+            g_strFirstUpperIgnoreWords = pageConvTop.m_strFirstUpperIgnoreWords;
+            g_strFirstUpperSentenceSeparator = pageConvTop.m_strFirstUpperSentenceSeparator;
+            g_bUserConvAddMenu = pageConvTop.m_bUserConvAddMenu ? true : false;
+            g_bZenHanKigouKana = pageConvTop.m_bZenHanKigouKana ? true : false;
+            g_bAutoTilde2WaveDash = pageConvTop.m_bAutoTilde2WaveDash ? true : false;
 
-			// Šg’£q•ÏŠ· /* STEP 006 */
-			g_nFileExtChange = pageReplace.m_nExtChange;
+            // ãƒ•ã‚¡ã‚¤ãƒ«åç½®æ›
+            g_nOptCheckFileName = pageReplace.m_bFileNameReplace ? FILENAME_CONV_MULTIBYTE : FILENAME_NO_CHECK;
+            for (i = 0; i < FILENAME_REPLACE_MAX; i++) {
+                FILENAME_REPLACE    *pRep = &g_fileNameReplace[i];
+                pRep->strAfter = pageReplace.m_strAfter[i];
+            }
+            // ãƒ¦ãƒ¼ã‚¶ãƒ•ã‚¡ã‚¤ãƒ«åç½®æ› /* FreeFall 050 */
+            for (i = 0; i < USER_FILENAME_REPLACE_MAX; i++) {
+                FILENAME_REPLACE    *pRep = &g_userFileNameReplace[i];
+                pRep->strBefore = pageReplace.m_strUserBefore[i];
+                pRep->strAfter = pageReplace.m_strUserAfter[i];
+            }
+            // ãƒ•ã‚¡ã‚¤ãƒ«åæ–‡å­—ç¨®ã®çµ±ä¸€ /* LastTrain 058 */
+            g_nFileUnifyAlpha   = pageReplace.m_nFileUnifyAlpha;
+            g_nFileUnifyHiraKata = pageReplace.m_nFileUnifyHiraKata;
+            g_nFileUnifyKata    = pageReplace.m_nFileUnifyKata;
+            g_nFileUnifyKigou   = pageReplace.m_nFileUnifyKigou;
+            g_nFileUnifySuji    = pageReplace.m_nFileUnifySuji;
+            g_nFileUnifyUpLow   = pageReplace.m_nFileUnifyUpLow;
 
-			// ƒ†[ƒU[•ÏŠ·‘®
-			g_nUserConvFormatType	= pageConv.m_nFormatType;
-			for (i = 0; i < USER_CONV_FORMAT_MAX; i++) {
-				g_userConvFormat[i] = pageConv.m_userFormat[i];
-			}
+            // æ‹¡å¼µå­å¤‰æ› /* STEP 006 */
+            g_nFileExtChange = pageReplace.m_nExtChange;
 
-			// Šg’£ƒ†[ƒU[•ÏŠ·‘®
-			for (i = 0; i < USER_CONV_FORMAT_EX_MAX; i++) {
-				g_userConvFormatEx[i] = pageConvEx.m_userFormatEx[i];
-			}
+            // ãƒ¦ãƒ¼ã‚¶ãƒ¼å¤‰æ›æ›¸å¼
+            g_nUserConvFormatType   = pageConv.m_nFormatType;
+            for (i = 0; i < USER_CONV_FORMAT_MAX; i++) {
+                g_userConvFormat[i] = pageConv.m_userFormat[i];
+            }
 
-			// ˆÚ“®æƒtƒHƒ‹ƒ_‘®
-			for (i = 0; i < USER_MOVE_FODLER_FORMAT_MAX; i++) {
-				g_userMoveFolder[i] = pageMoveFolder.m_userFormatEx[i];
-			}
+            // æ‹¡å¼µãƒ¦ãƒ¼ã‚¶ãƒ¼å¤‰æ›æ›¸å¼
+            for (i = 0; i < USER_CONV_FORMAT_EX_MAX; i++) {
+                g_userConvFormatEx[i] = pageConvEx.m_userFormatEx[i];
+            }
 
-			// ‘®ƒRƒs[ /* FunnyCorn 175 */
-			for (i = 0; i < USER_COPY_FORMAT_FORMAT_MAX; i++) {
-				g_userCopyFormat[i] = pageCopyFormat.m_userFormatEx[i];
-			}
+            // ç§»å‹•å…ˆãƒ•ã‚©ãƒ«ãƒ€æ›¸å¼
+            for (i = 0; i < USER_MOVE_FODLER_FORMAT_MAX; i++) {
+                g_userMoveFolder[i] = pageMoveFolder.m_userFormatEx[i];
+            }
 
-			// ƒ^ƒOî•ñ•ÏŠ· /* STEP 034 */
-			for (i = 0; i < USER_CONV_FORMAT_TAG2TAG_MAX; i++) {
-				g_userConvFormatTag2Tag[i] = pageConvTag2Tag.m_userFormatTag2Tag[i];
-			}
+            // æ›¸å¼ã‚³ãƒ”ãƒ¼ /* FunnyCorn 175 */
+            for (i = 0; i < USER_COPY_FORMAT_FORMAT_MAX; i++) {
+                g_userCopyFormat[i] = pageCopyFormat.m_userFormatEx[i];
+            }
 
-			// ‘å•¶š¬•¶šŒÅ’è•ÏŠ· /* STEP 040 */
-			if (pageFixedUpperLower.m_bModify) {
-				g_arFixedWords.RemoveAll();
-				for (i = 0; i<pageFixedUpperLower.m_arFixedWords.GetSize(); i++) {
-					g_arFixedWords.Add(pageFixedUpperLower.m_arFixedWords.GetAt(i));
-				}
-				((CSuperTagEditorApp *)AfxGetApp())->WriteFixedWordList();
-			}
-		}
+            // ã‚¿ã‚°æƒ…å ±å¤‰æ› /* STEP 034 */
+            for (i = 0; i < USER_CONV_FORMAT_TAG2TAG_MAX; i++) {
+                g_userConvFormatTag2Tag[i] = pageConvTag2Tag.m_userFormatTag2Tag[i];
+            }
 
-		if (true || nType & ENV_ADVANCED) {
-			// •ª—Şİ’è
-			g_classInfo.nType		= pageClass.m_nClassType;
-			g_classInfo.nColumn[0]	= pageClass.m_nClass1 - 1;
-			g_classInfo.nColumn[1]	= pageClass.m_nClass2 - 1;
-			g_classInfo.nColumn[2]	= pageClass.m_nClass3 - 1;
-			g_classInfo.nColumn[3]	= pageClass.m_nClass4 - 1;
-			g_classInfo.nColumn[4]	= pageClass.m_nClass5 - 1;
+            // å¤§æ–‡å­—å°æ–‡å­—å›ºå®šå¤‰æ› /* STEP 040 */
+            if (pageFixedUpperLower.m_bModify) {
+                g_arFixedWords.RemoveAll();
+                for (i = 0; i<pageFixedUpperLower.m_arFixedWords.GetSize(); i++) {
+                    g_arFixedWords.Add(pageFixedUpperLower.m_arFixedWords.GetAt(i));
+                }
+                ((CSuperTagEditorApp *)AfxGetApp())->WriteFixedWordList();
+            }
+        }
 
-			// ƒtƒHƒ‹ƒ_‚Ì“¯Šú
-			g_bEnableFolderSync		= pageSync.m_bEnableFolderSync ? true : false;
-			g_strRootFolder			= pageSync.m_strRootFolder;
-			g_bSyncSelectAlways		= pageSync.m_bSelectAlways ? true : false;
-			g_bSyncDeleteFolder		= pageSync.m_bDeleteFolder ? true : false;
-			g_bSyncLyricsFileMove	= pageSync.m_bMoveLyricsFile ? true : false;
+        if (true || nType & ENV_ADVANCED) {
+            // åˆ†é¡è¨­å®š
+            g_classInfo.nType       = pageClass.m_nClassType;
+            g_classInfo.nColumn[0]  = pageClass.m_nClass1 - 1;
+            g_classInfo.nColumn[1]  = pageClass.m_nClass2 - 1;
+            g_classInfo.nColumn[2]  = pageClass.m_nClass3 - 1;
+            g_classInfo.nColumn[3]  = pageClass.m_nClass4 - 1;
+            g_classInfo.nColumn[4]  = pageClass.m_nClass5 - 1;
 
-			// •ª—Ş•\¦‚ğXV
-			if (pageClass.m_nClassType != 0
-			&&  pageClass.m_bExecClassification) {
-				m_pDoc->ExecClassification();
-			}
+            // ãƒ•ã‚©ãƒ«ãƒ€ã®åŒæœŸ
+            g_bEnableFolderSync     = pageSync.m_bEnableFolderSync ? true : false;
+            g_strRootFolder         = pageSync.m_strRootFolder;
+            g_bSyncSelectAlways     = pageSync.m_bSelectAlways ? true : false;
+            g_bSyncDeleteFolder     = pageSync.m_bDeleteFolder ? true : false;
+            g_bSyncLyricsFileMove   = pageSync.m_bMoveLyricsFile ? true : false;
 
-			// ƒŠƒXƒgo—Í‘®
-			for (i = 0; i < WRITE_FORMAT_MAX; i++) {
-				g_writeFormat[i] = pageWrite.m_writeFormat[i];
-			}
+            // åˆ†é¡è¡¨ç¤ºã‚’æ›´æ–°
+            if (pageClass.m_nClassType != 0
+            &&  pageClass.m_bExecClassification) {
+                m_pDoc->ExecClassification();
+            }
 
-			// ƒWƒƒƒ“ƒ‹‚Íƒ_ƒCƒAƒƒO‚ÌOnOK()‚ÅƒŒƒWƒXƒgƒŠ‚É‘‚«‚Ş‚Ì‚Åƒ_ƒCƒAƒƒO‘¤‚Åˆ—‚·‚é
+            // ãƒªã‚¹ãƒˆå‡ºåŠ›æ›¸å¼
+            for (i = 0; i < WRITE_FORMAT_MAX; i++) {
+                g_writeFormat[i] = pageWrite.m_writeFormat[i];
+            }
 
-			// ‚»‚Ì‘¼ /* SeaKnows 031,033 */
-			g_bValidFolderSelect = pageDefaultValue.m_bValidFolderSelect ? true : false;
-			g_bValidDupExec = pageDefaultValue.m_bValidDupExec ? true : false; /* FreeFall 045 */
-			g_nRecentFolder = pageDefaultValue.m_nRecentFolder; /* StartInaction 053 */
-			g_bSaveRepDlgPos = pageDefaultValue.m_bSaveRepDlgPos ? true : false; /* WildCherry4 086 */
-			g_bAudioListShow = pageDefaultValue.m_bAudioListShow ? true : false; /* Conspiracy 199 */
-		}
+            // ã‚¸ãƒ£ãƒ³ãƒ«ã¯ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã®OnOK()ã§ãƒ¬ã‚¸ã‚¹ãƒˆãƒªã«æ›¸ãè¾¼ã‚€ã®ã§ãƒ€ã‚¤ã‚¢ãƒ­ã‚°å´ã§å‡¦ç†ã™ã‚‹
 
-		// ƒL[Š„‚è“–‚Ä
-		// Œ»İ‚ÌƒL[Š„‚è“–‚Ä‚ğƒŒƒWƒXƒgƒŠ‚É•Û‘¶
-		((CSuperTagEditorApp *)AfxGetApp())->WriteKeyConfig(true);
+            // ãã®ä»– /* SeaKnows 031,033 */
+            g_bValidFolderSelect = pageDefaultValue.m_bValidFolderSelect ? true : false;
+            g_bValidDupExec = pageDefaultValue.m_bValidDupExec ? true : false; /* FreeFall 045 */
+            g_nRecentFolder = pageDefaultValue.m_nRecentFolder; /* StartInaction 053 */
+            g_bSaveRepDlgPos = pageDefaultValue.m_bSaveRepDlgPos ? true : false; /* WildCherry4 086 */
+            g_bAudioListShow = pageDefaultValue.m_bAudioListShow ? true : false; /* Conspiracy 199 */
+        }
 
-		((CSuperTagEditorApp *)AfxGetApp())->WriteRegistry();
-	} else {
-		if (true || nType & ENV_NORMAL) {
-			// •ÏX‘O‚ÌƒL[Š„‚è“–‚Ä‚ğƒŒƒWƒXƒgƒŠ‚©‚ç“Ç‚İ‚Ş
-			((CSuperTagEditorApp *)AfxGetApp())->ReadKeyConfig();
-		}
-	}
-	delete [] pageGenre.m_genreListUSER;
+        // ã‚­ãƒ¼å‰²ã‚Šå½“ã¦
+        // ç¾åœ¨ã®ã‚­ãƒ¼å‰²ã‚Šå½“ã¦ã‚’ãƒ¬ã‚¸ã‚¹ãƒˆãƒªã«ä¿å­˜
+        ((CSuperTagEditorApp *)AfxGetApp())->WriteKeyConfig(true);
 
-	return(nResult);
+        ((CSuperTagEditorApp *)AfxGetApp())->WriteRegistry();
+    } else {
+        if (true || nType & ENV_NORMAL) {
+            // å¤‰æ›´å‰ã®ã‚­ãƒ¼å‰²ã‚Šå½“ã¦ã‚’ãƒ¬ã‚¸ã‚¹ãƒˆãƒªã‹ã‚‰èª­ã¿è¾¼ã‚€
+            ((CSuperTagEditorApp *)AfxGetApp())->ReadKeyConfig();
+        }
+    }
+    delete [] pageGenre.m_genreListUSER;
+
+    return nResult;
 }

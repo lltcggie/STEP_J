@@ -1,4 +1,4 @@
-// DlgReplaceWord.cpp : ƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“ ƒtƒ@ƒCƒ‹
+// DlgReplaceWord.cpp : ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³ ãƒ•ã‚¡ã‚¤ãƒ«
 //
 
 #include "stdafx.h"
@@ -15,259 +15,259 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgReplaceWord ƒ_ƒCƒAƒƒO
+// CDlgReplaceWord ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
 
 
 CDlgReplaceWord::CDlgReplaceWord(CWnd* pParent /*=NULL*/)
-	: CDialog(CDlgReplaceWord::IDD, pParent)
+    : CDialog(CDlgReplaceWord::IDD, pParent)
 {
-	//{{AFX_DATA_INIT(CDlgReplaceWord)
-	m_bCheckDiffUL = FALSE;
-	m_bMatchComplete = FALSE;
-	m_bRangeSelected = FALSE;
-	m_nTargetColumn = -1;
-	m_bRegExp = FALSE;
-	m_strReplaceWord = _T("");
-	m_strSearchWord = _T("");
-	//}}AFX_DATA_INIT
-	m_pList = NULL;
+    //{{AFX_DATA_INIT(CDlgReplaceWord)
+    m_bCheckDiffUL = FALSE;
+    m_bMatchComplete = FALSE;
+    m_bRangeSelected = FALSE;
+    m_nTargetColumn = -1;
+    m_bRegExp = FALSE;
+    m_strReplaceWord = _T("");
+    m_strSearchWord = _T("");
+    //}}AFX_DATA_INIT
+    m_pList = NULL;
 }
 
 
 void CDlgReplaceWord::DoDataExchange(CDataExchange* pDX)
 {
-	CDialog::DoDataExchange(pDX);
-	//{{AFX_DATA_MAP(CDlgReplaceWord)
-	DDX_Control(pDX, IDC_ED_REPLACE_WORD, m_listReplaceWord);
-	DDX_Control(pDX, IDC_ED_SEARCH_WORD, m_listSearchWord);
-	DDX_Control(pDX, IDC_ST_REPLACE, m_stReplace);
-	DDX_Control(pDX, IDOK, m_btAllReplace);
-	DDX_Control(pDX, ID_BT_REPLACE, m_btReplace);
-	DDX_Control(pDX, IDC_CH_REGEXP, m_btRegExp);
-	DDX_Control(pDX, IDC_CH_RANGE_SELECTED, m_btRangeSelected);
-	DDX_Control(pDX, IDC_CH_MATCH_COMPLETE, m_btMatchComplete);
-	DDX_Control(pDX, IDC_CH_CHECK_UL, m_btCheckDiffUL);
-	DDX_Control(pDX, IDC_LIST_TARGET, m_listTargetColumn);
-	DDX_Check(pDX, IDC_CH_CHECK_UL, m_bCheckDiffUL);
-	DDX_Check(pDX, IDC_CH_MATCH_COMPLETE, m_bMatchComplete);
-	DDX_Check(pDX, IDC_CH_RANGE_SELECTED, m_bRangeSelected);
-	DDX_CBIndex(pDX, IDC_LIST_TARGET, m_nTargetColumn);
-	DDX_Check(pDX, IDC_CH_REGEXP, m_bRegExp);
-	DDX_CBString(pDX, IDC_ED_REPLACE_WORD, m_strReplaceWord);
-	DDX_CBString(pDX, IDC_ED_SEARCH_WORD, m_strSearchWord);
-	//}}AFX_DATA_MAP
+    CDialog::DoDataExchange(pDX);
+    //{{AFX_DATA_MAP(CDlgReplaceWord)
+    DDX_Control(pDX, IDC_ED_REPLACE_WORD, m_listReplaceWord);
+    DDX_Control(pDX, IDC_ED_SEARCH_WORD, m_listSearchWord);
+    DDX_Control(pDX, IDC_ST_REPLACE, m_stReplace);
+    DDX_Control(pDX, IDOK, m_btAllReplace);
+    DDX_Control(pDX, ID_BT_REPLACE, m_btReplace);
+    DDX_Control(pDX, IDC_CH_REGEXP, m_btRegExp);
+    DDX_Control(pDX, IDC_CH_RANGE_SELECTED, m_btRangeSelected);
+    DDX_Control(pDX, IDC_CH_MATCH_COMPLETE, m_btMatchComplete);
+    DDX_Control(pDX, IDC_CH_CHECK_UL, m_btCheckDiffUL);
+    DDX_Control(pDX, IDC_LIST_TARGET, m_listTargetColumn);
+    DDX_Check(pDX, IDC_CH_CHECK_UL, m_bCheckDiffUL);
+    DDX_Check(pDX, IDC_CH_MATCH_COMPLETE, m_bMatchComplete);
+    DDX_Check(pDX, IDC_CH_RANGE_SELECTED, m_bRangeSelected);
+    DDX_CBIndex(pDX, IDC_LIST_TARGET, m_nTargetColumn);
+    DDX_Check(pDX, IDC_CH_REGEXP, m_bRegExp);
+    DDX_CBString(pDX, IDC_ED_REPLACE_WORD, m_strReplaceWord);
+    DDX_CBString(pDX, IDC_ED_SEARCH_WORD, m_strSearchWord);
+    //}}AFX_DATA_MAP
 }
 
 
 BEGIN_MESSAGE_MAP(CDlgReplaceWord, CDialog)
-	//{{AFX_MSG_MAP(CDlgReplaceWord)
-	ON_BN_CLICKED(ID_BT_SEARCH_BEFORE, OnBtSearchBefore)
-	ON_BN_CLICKED(ID_BT_SEARCH_NEXT, OnBtSearchNext)
-	ON_BN_CLICKED(ID_BT_REPLACE, OnBtReplace)
-	ON_CBN_SELCHANGE(IDC_LIST_TARGET, OnSelChangeListTarget)
-	ON_BN_CLICKED(IDC_CH_REGEXP, OnChRegexp)
-	ON_BN_CLICKED(IDC_CH_RANGE_SELECTED, OnChRangeSelected)
-	ON_BN_DOUBLECLICKED(ID_BT_SEARCH_BEFORE, OnBtSearchBefore)
-	ON_BN_DOUBLECLICKED(ID_BT_SEARCH_NEXT, OnBtSearchNext)
-	ON_BN_DOUBLECLICKED(ID_BT_REPLACE, OnBtReplace)
-	ON_BN_DOUBLECLICKED(IDC_CH_REGEXP, OnChRegexp)
-	ON_BN_DOUBLECLICKED(IDC_CH_RANGE_SELECTED, OnChRangeSelected)
-	//}}AFX_MSG_MAP
+    //{{AFX_MSG_MAP(CDlgReplaceWord)
+    ON_BN_CLICKED(ID_BT_SEARCH_BEFORE, OnBtSearchBefore)
+    ON_BN_CLICKED(ID_BT_SEARCH_NEXT, OnBtSearchNext)
+    ON_BN_CLICKED(ID_BT_REPLACE, OnBtReplace)
+    ON_CBN_SELCHANGE(IDC_LIST_TARGET, OnSelChangeListTarget)
+    ON_BN_CLICKED(IDC_CH_REGEXP, OnChRegexp)
+    ON_BN_CLICKED(IDC_CH_RANGE_SELECTED, OnChRangeSelected)
+    ON_BN_DOUBLECLICKED(ID_BT_SEARCH_BEFORE, OnBtSearchBefore)
+    ON_BN_DOUBLECLICKED(ID_BT_SEARCH_NEXT, OnBtSearchNext)
+    ON_BN_DOUBLECLICKED(ID_BT_REPLACE, OnBtReplace)
+    ON_BN_DOUBLECLICKED(IDC_CH_REGEXP, OnChRegexp)
+    ON_BN_DOUBLECLICKED(IDC_CH_RANGE_SELECTED, OnChRangeSelected)
+    //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgReplaceWord ƒƒbƒZ[ƒW ƒnƒ“ƒhƒ‰
+// CDlgReplaceWord ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒãƒ³ãƒ‰ãƒ©
 
 BOOL CDlgReplaceWord::OnInitDialog()
 {
-	CDialog::OnInitDialog();
+    CDialog::OnInitDialog();
 
-	// TODO: ‚±‚ÌˆÊ’u‚É‰Šú‰»‚Ì•â‘«ˆ—‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
-	extern	const char	***g_sNameList;
-	// m_listTargetColumn.AddString("‘S‚Ä‚Ì€–Ú");
-	for (int i = 2; g_sNameList[0][i] != NULL; i++) {
-		m_listTargetColumn.AddString(g_sNameList[0][i]);
-	}
-	/*m_listTargetColumn.AddString("(‘S€–Ú)");*/
-	m_listTargetColumn.SetCurSel(m_nTargetColumn);
+    // TODO: ã“ã®ä½ç½®ã«åˆæœŸåŒ–ã®è£œè¶³å‡¦ç†ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
+    extern const TCHAR    ***g_sNameList;
+    // m_listTargetColumn.AddString("å…¨ã¦ã®é …ç›®");
+    for (int i = 2; g_sNameList[0][i] != NULL; i++) {
+        m_listTargetColumn.AddString(g_sNameList[0][i]);
+    }
+    /*m_listTargetColumn.AddString("(å…¨é …ç›®)");*/
+    m_listTargetColumn.SetCurSel(m_nTargetColumn);
 
-	SetWindowText(m_bModeReplace ? "’uŠ·" : "ŒŸõ");
+    SetWindowText(m_bModeReplace ? _T("ç½®æ›") : _T("æ¤œç´¢"));
 
-	UpdateStatus();
+    UpdateStatus();
 
-	if (m_rect.top != -1 && m_rect.left != -1) { /* WildCherry4 086 */
-		CRect rect;
-		GetWindowRect(rect);
-		MoveWindow(m_rect.left, m_rect.top, rect.Width(), rect.Height());
-	}
+    if (m_rect.top != -1 && m_rect.left != -1) { /* WildCherry4 086 */
+        CRect rect;
+        GetWindowRect(rect);
+        MoveWindow(m_rect.left, m_rect.top, rect.Width(), rect.Height());
+    }
 
-	{ /* BeachMonster 088 */
-		m_strSearchWord = "";
-		m_strReplaceWord = "";
-		UpdateData(FALSE);
-		m_listSearchWord.LoadHistory("haseta\\history", "SearchWord");
-		m_listReplaceWord.LoadHistory("haseta\\history", "ReplaceWord");
-		m_bAddCurrentItemtoHistory = false;
-	}
-	return TRUE;  // ƒRƒ“ƒgƒ[ƒ‹‚ÉƒtƒH[ƒJƒX‚ğİ’è‚µ‚È‚¢‚Æ‚«A–ß‚è’l‚Í TRUE ‚Æ‚È‚è‚Ü‚·
-	              // —áŠO: OCX ƒvƒƒpƒeƒB ƒy[ƒW‚Ì–ß‚è’l‚Í FALSE ‚Æ‚È‚è‚Ü‚·
+    { /* BeachMonster 088 */
+        m_strSearchWord = "";
+        m_strReplaceWord = "";
+        UpdateData(FALSE);
+        m_listSearchWord.LoadHistory(_T("haseta\\history"), _T("SearchWord"));
+        m_listReplaceWord.LoadHistory(_T("haseta\\history"), _T("ReplaceWord"));
+        m_bAddCurrentItemtoHistory = false;
+    }
+    return TRUE;  // ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã«ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ã‚’è¨­å®šã—ãªã„ã¨ãã€æˆ»ã‚Šå€¤ã¯ TRUE ã¨ãªã‚Šã¾ã™
+                  // ä¾‹å¤–: OCX ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ ãƒšãƒ¼ã‚¸ã®æˆ»ã‚Šå€¤ã¯ FALSE ã¨ãªã‚Šã¾ã™
 }
 
 void CDlgReplaceWord::UpdateStatus(void)
 {
-	BOOL	bReplace = m_bModeReplace;
+    BOOL    bReplace = m_bModeReplace;
 
-	/* ŒŸõˆ—‚ªs’PˆÊ‚È‚Ì‚Å’†“r”¼’[
-	if (m_nTargetColumn >= 0) {
-		CString strSelText;
-		m_listTargetColumn.GetLBText(m_nTargetColumn, strSelText);
-		if (strSelText == "(‘S€–Ú)") {
-			m_nTargetColumn = -1;
-			UpdateData(FALSE);
-		}
-	}
-	*/
+    /* æ¤œç´¢å‡¦ç†ãŒè¡Œå˜ä½ãªã®ã§ä¸­é€”åŠç«¯
+    if (m_nTargetColumn >= 0) {
+        CString strSelText;
+        m_listTargetColumn.GetLBText(m_nTargetColumn, strSelText);
+        if (strSelText == "(å…¨é …ç›®)") {
+            m_nTargetColumn = -1;
+            UpdateData(FALSE);
+        }
+    }
+    */
 
-	if (
-			((m_nTargetColumn == COLUMN_TRACK_NUMBER-COLUMN_FILE_NAME) |
-			(m_nTargetColumn == COLUMN_DISK_NUMBER-COLUMN_FILE_NAME))
-		&& FALSE/* BeachMonster 105 */) {
-		m_btCheckDiffUL.EnableWindow(FALSE);
-		m_btRegExp.EnableWindow(FALSE);
-		m_btMatchComplete.EnableWindow(FALSE);
-		bReplace = FALSE;				// ’uŠ·‚Í•s‰Â
-	} else {
-		m_btCheckDiffUL.EnableWindow(m_bRegExp ? FALSE : TRUE);
-		m_btRegExp.EnableWindow(TRUE);
-		m_btRangeSelected.EnableWindow(m_bEnableRangeSelected);
-		m_btMatchComplete.EnableWindow(TRUE);
-	}
-	m_btRangeSelected.EnableWindow(m_bEnableRangeSelected);
+    if (
+            ((m_nTargetColumn == COLUMN_TRACK_NUMBER-COLUMN_FILE_NAME) |
+            (m_nTargetColumn == COLUMN_DISC_NUMBER-COLUMN_FILE_NAME))
+        && FALSE/* BeachMonster 105 */) {
+        m_btCheckDiffUL.EnableWindow(FALSE);
+        m_btRegExp.EnableWindow(FALSE);
+        m_btMatchComplete.EnableWindow(FALSE);
+        bReplace = FALSE;                // ç½®æ›ã¯ä¸å¯
+    } else {
+        m_btCheckDiffUL.EnableWindow(m_bRegExp ? FALSE : TRUE);
+        m_btRegExp.EnableWindow(TRUE);
+        m_btRangeSelected.EnableWindow(m_bEnableRangeSelected);
+        m_btMatchComplete.EnableWindow(TRUE);
+    }
+    m_btRangeSelected.EnableWindow(m_bEnableRangeSelected);
 
-	// ŒŸõ‚Ìê‡‚ÍA’uŠ·ŠÖ˜A‚Ì€–Ú‚ğg—p•s‰Â‚É‚·‚é
-	m_stReplace.EnableWindow(bReplace);
-	m_listReplaceWord.EnableWindow(bReplace);
-	m_btReplace.EnableWindow(bReplace);
-	m_btAllReplace.EnableWindow(bReplace);
+    // æ¤œç´¢ã®å ´åˆã¯ã€ç½®æ›é–¢é€£ã®é …ç›®ã‚’ä½¿ç”¨ä¸å¯ã«ã™ã‚‹
+    m_stReplace.EnableWindow(bReplace);
+    m_listReplaceWord.EnableWindow(bReplace);
+    m_btReplace.EnableWindow(bReplace);
+    m_btAllReplace.EnableWindow(bReplace);
 }
 
 void CDlgReplaceWord::UpdateCheckWordState(void)
 {
-	UpdateData();
+    UpdateData();
 
-	CHECK_WORD_STATE	*pState = &g_chkWord[CHECK_STATE_REPLACE];
-	pState->strSearchWord	= m_strSearchWord;		// •¶š—ñ
-	pState->strReplaceWord	= m_strReplaceWord;		// •¶š—ñ
-	pState->nTargetColumn	= COLUMN_FILE_NAME + m_nTargetColumn;	// ŒŸõ‘ÎÛƒJƒ‰ƒ€
-	/*
-	if (m_nTargetColumn == -1) {
-		pState->nTargetColumn = -1;
-	}
-	*/
-	pState->bCheckDiffUL	= m_bCheckDiffUL;		// ‘å•¶š^¬•¶š‚Ì‹æ•Ê
-	pState->bRegExp			= m_bRegExp;			// ³‹K•\Œ»
-	pState->bRangeSelected	= m_bRangeSelected;		// ‘I‘ğ”ÍˆÍ‚Ì‚İ
-	pState->bMatchComplete	= m_bMatchComplete;		// Š®‘S‚Éˆê’v
+    CHECK_WORD_STATE    *pState = &g_chkWord[CHECK_STATE_REPLACE];
+    pState->strSearchWord   = m_strSearchWord;      // æ–‡å­—åˆ—
+    pState->strReplaceWord  = m_strReplaceWord;     // æ–‡å­—åˆ—
+    pState->nTargetColumn   = COLUMN_FILE_NAME + m_nTargetColumn; // æ¤œç´¢å¯¾è±¡ã‚«ãƒ©ãƒ 
+    /*
+    if (m_nTargetColumn == -1) {
+        pState->nTargetColumn = -1;
+    }
+    */
+    pState->bCheckDiffUL    = m_bCheckDiffUL;       // å¤§æ–‡å­—ï¼å°æ–‡å­—ã®åŒºåˆ¥
+    pState->bRegExp         = m_bRegExp;            // æ­£è¦è¡¨ç¾
+    pState->bRangeSelected  = m_bRangeSelected;     // é¸æŠç¯„å›²ã®ã¿
+    pState->bMatchComplete  = m_bMatchComplete;     // å®Œå…¨ã«ä¸€è‡´
 }
 
 void CDlgReplaceWord::ExecSearch(bool bNext)
 {
-	CHECK_WORD_STATE	*pState = &g_chkWord[CHECK_STATE_REPLACE];
-	UpdateCheckWordState();
+    CHECK_WORD_STATE    *pState = &g_chkWord[CHECK_STATE_REPLACE];
+    UpdateCheckWordState();
 
-	if (m_pList->GetSelectedItem() != -1) {
-		int		nIndex = m_pList->FindNextMatchItem(m_pList->GetSelectedItem(), pState, bNext);
-		if (nIndex != -1) {
+    if (m_pList->GetSelectedItem() != -1) {
+        int     nIndex = m_pList->FindNextMatchItem(m_pList->GetSelectedItem(), pState, bNext);
+        if (nIndex != -1) {
 #ifdef FLICKERFREE
-			m_pList->SetRedraw(FALSE);
+            m_pList->SetRedraw(FALSE);
 #endif
-			if (pState->bRangeSelected == FALSE) {
-				// ‘Ss‘I‘ğ‰ğœ
-				m_pList->SelItemRange(FALSE, 0, -1);
-			}
-			m_pList->SelectAndVisibleColumn(nIndex, pState->nMatchColumn);
-			if (bNext) { /* 2003.06.30 add */
-				m_pList->EnsureVisible(nIndex+1, FALSE);
-			} else {
-				m_pList->EnsureVisible(nIndex-1, FALSE);
-			}
-			m_pList->UpdateWindow();
+            if (pState->bRangeSelected == FALSE) {
+                // å…¨è¡Œé¸æŠè§£é™¤
+                m_pList->SelItemRange(FALSE, 0, -1);
+            }
+            m_pList->SelectAndVisibleColumn(nIndex, pState->nMatchColumn);
+            if (bNext) { /* 2003.06.30 add */
+                m_pList->EnsureVisible(nIndex+1, FALSE);
+            } else {
+                m_pList->EnsureVisible(nIndex-1, FALSE);
+            }
+            m_pList->UpdateWindow();
 #ifdef FLICKERFREE
-			m_pList->SetRedraw(TRUE);
+            m_pList->SetRedraw(TRUE);
 #endif
-		} else {
-			MessageBox("Œ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½", "ŒŸõ¸”s", MB_ICONSTOP|MB_OK|MB_TOPMOST);
-		}
-	}
+        } else {
+            MessageBox(_T("è¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã§ã—ãŸ"), _T("æ¤œç´¢å¤±æ•—"), MB_ICONSTOP|MB_OK|MB_TOPMOST);
+        }
+    }
 }
 
 void CDlgReplaceWord::OnBtSearchBefore()
 {
-	// ‘O•ûŒŸõÀs
-	ExecSearch(false);
+    // å‰æ–¹æ¤œç´¢å®Ÿè¡Œ
+    ExecSearch(false);
 
-	m_bAddCurrentItemtoHistory = true; /* BeachMonster 088 */
+    m_bAddCurrentItemtoHistory = true; /* BeachMonster 088 */
 }
 
 void CDlgReplaceWord::OnBtSearchNext()
 {
-	// Œã•ûŒŸõÀs
-	ExecSearch(true);
+    // å¾Œæ–¹æ¤œç´¢å®Ÿè¡Œ
+    ExecSearch(true);
 
-	m_bAddCurrentItemtoHistory = true; /* BeachMonster 088 */
+    m_bAddCurrentItemtoHistory = true; /* BeachMonster 088 */
 }
 
 void CDlgReplaceWord::OnBtReplace()
 {
-	CHECK_WORD_STATE	*pState = &g_chkWord[CHECK_STATE_REPLACE];
-	UpdateCheckWordState();
+    CHECK_WORD_STATE    *pState = &g_chkWord[CHECK_STATE_REPLACE];
+    UpdateCheckWordState();
 
-	// ’uŠ·
-	m_pList->ReplaceMatchItem(pState, false);
+    // ç½®æ›
+    m_pList->ReplaceMatchItem(pState, false);
 
-	m_bAddCurrentItemtoHistory = true; /* BeachMonster 088 */
+    m_bAddCurrentItemtoHistory = true; /* BeachMonster 088 */
 }
 
 void CDlgReplaceWord::OnOK()
 {
-	CHECK_WORD_STATE	*pState = &g_chkWord[CHECK_STATE_REPLACE];
-	UpdateCheckWordState();
+    CHECK_WORD_STATE    *pState = &g_chkWord[CHECK_STATE_REPLACE];
+    UpdateCheckWordState();
 
-	// ‘S‚Ä’uŠ·
-	m_pList->ReplaceMatchItem(pState, true);
+    // å…¨ã¦ç½®æ›
+    m_pList->ReplaceMatchItem(pState, true);
 
-	GetWindowRect(m_rect); /* WildCherry4 086 */
-	m_listSearchWord.SaveHistory(); /* BeachMonster 088 */
-	m_listReplaceWord.SaveHistory(); /* BeachMonster 088 */
-	m_bAddCurrentItemtoHistory = true; /* BeachMonster 088 */
+    GetWindowRect(m_rect); /* WildCherry4 086 */
+    m_listSearchWord.SaveHistory(); /* BeachMonster 088 */
+    m_listReplaceWord.SaveHistory(); /* BeachMonster 088 */
+    m_bAddCurrentItemtoHistory = true; /* BeachMonster 088 */
 
-	CDialog::OnOK();
+    CDialog::OnOK();
 }
 
 void CDlgReplaceWord::OnSelChangeListTarget()
 {
-	UpdateData();
-	UpdateStatus();
+    UpdateData();
+    UpdateStatus();
 }
 
 void CDlgReplaceWord::OnChRegexp()
 {
-	UpdateData();
-	UpdateStatus();
+    UpdateData();
+    UpdateStatus();
 }
 
 void CDlgReplaceWord::OnChRangeSelected()
 {
-	UpdateData();
-	UpdateStatus();
+    UpdateData();
+    UpdateStatus();
 }
 
 void CDlgReplaceWord::OnCancel() /* WildCherry4 086 */
 {
-	// TODO: ‚±‚ÌˆÊ’u‚É“Á•Ê‚ÈŒãˆ—‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢B
-	GetWindowRect(m_rect);
-	m_listSearchWord.SaveHistory(m_bAddCurrentItemtoHistory); /* BeachMonster 088 */
-	m_listReplaceWord.SaveHistory(m_bAddCurrentItemtoHistory); /* BeachMonster 088 */
+    // TODO: ã“ã®ä½ç½®ã«ç‰¹åˆ¥ãªå¾Œå‡¦ç†ã‚’è¿½åŠ ã—ã¦ãã ã•ã„ã€‚
+    GetWindowRect(m_rect);
+    m_listSearchWord.SaveHistory(m_bAddCurrentItemtoHistory); /* BeachMonster 088 */
+    m_listReplaceWord.SaveHistory(m_bAddCurrentItemtoHistory); /* BeachMonster 088 */
 
-	CDialog::OnCancel();
+    CDialog::OnCancel();
 }

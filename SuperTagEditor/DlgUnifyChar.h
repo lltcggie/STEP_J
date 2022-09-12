@@ -4,49 +4,49 @@
 #if _MSC_VER > 1000
 #pragma once
 #endif // _MSC_VER > 1000
-// DlgUnifyChar.h : �w�b�_�[ �t�@�C��
+// DlgUnifyChar.h : ヘッダー ファイル
 //
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgUnifyChar �_�C�A���O
+// CDlgUnifyChar ダイアログ
 
 class CDlgUnifyChar : public CDialog
 {
-// �R���X�g���N�V����
+// コンストラクション
 public:
-	CDlgUnifyChar(CWnd* pParent = NULL);   // �W���̃R���X�g���N�^
+    CDlgUnifyChar(CWnd* pParent = NULL);   // 標準のコンストラクタ
 
-// �_�C�A���O �f�[�^
-	//{{AFX_DATA(CDlgUnifyChar)
-	enum { IDD = IDD_DIALOG_UNIFY_CHAR };
-	int		m_nConvAlpha;
-	int		m_nConvHiraKata;
-	int		m_nConvKata;
-	int		m_nConvKigou;
-	int		m_nConvSuji;
-	int		m_nConvUpLow;
-	int		m_nConvFixedUpLow;
-	//}}AFX_DATA
+// ダイアログ データ
+    //{{AFX_DATA(CDlgUnifyChar)
+    enum { IDD = IDD_DIALOG_UNIFY_CHAR };
+    int     m_nConvAlpha;
+    int     m_nConvHiraKata;
+    int     m_nConvKata;
+    int     m_nConvKigou;
+    int     m_nConvSuji;
+    int     m_nConvUpLow;
+    int     m_nConvFixedUpLow;
+    //}}AFX_DATA
 
 
-// �I�[�o�[���C�h
-	// ClassWizard �͉��z�֐��̃I�[�o�[���C�h�𐶐����܂��B
-	//{{AFX_VIRTUAL(CDlgUnifyChar)
-	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV �T�|�[�g
-	//}}AFX_VIRTUAL
+// オーバーライド
+    // ClassWizard は仮想関数のオーバーライドを生成します。
+    //{{AFX_VIRTUAL(CDlgUnifyChar)
+    protected:
+    virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV サポート
+    //}}AFX_VIRTUAL
 
-// �C���v�������e�[�V����
+// インプリメンテーション
 protected:
 
-	// �������ꂽ���b�Z�[�W �}�b�v�֐�
-	//{{AFX_MSG(CDlgUnifyChar)
-		// ����: ClassWizard �͂��̈ʒu�Ƀ����o�֐���ǉ����܂��B
-	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
+    // 生成されたメッセージ マップ関数
+    //{{AFX_MSG(CDlgUnifyChar)
+        // メモ: ClassWizard はこの位置にメンバ関数を追加します。
+    //}}AFX_MSG
+    DECLARE_MESSAGE_MAP()
 };
 
 //{{AFX_INSERT_LOCATION}}
-// Microsoft Visual C++ �͑O�s�̒��O�ɒǉ��̐錾��}�����܂��B
+// Microsoft Visual C++ は前行の直前に追加の宣言を挿入します。
 
 #endif // !defined(AFX_DLGUNIFYCHAR_H__53F97B08_CBFE_40A2_A58E_A9DC1662818A__INCLUDED_)

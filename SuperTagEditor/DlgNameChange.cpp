@@ -1,4 +1,4 @@
-// DlgNameChange.cpp : ƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“ ƒtƒ@ƒCƒ‹
+// DlgNameChange.cpp : ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³ ãƒ•ã‚¡ã‚¤ãƒ«
 //
 
 #include "stdafx.h"
@@ -12,53 +12,53 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgNameChange ƒ_ƒCƒAƒƒO
+// CDlgNameChange ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
 
 
 CDlgNameChange::CDlgNameChange(CWnd* pParent /*=NULL*/)
-	: CDialog(CDlgNameChange::IDD, pParent)
+    : CDialog(CDlgNameChange::IDD, pParent)
 {
-	//{{AFX_DATA_INIT(CDlgNameChange)
-	m_strName = _T("");
-	//}}AFX_DATA_INIT
+    //{{AFX_DATA_INIT(CDlgNameChange)
+    m_strName = _T("");
+    //}}AFX_DATA_INIT
 }
 
 
 void CDlgNameChange::DoDataExchange(CDataExchange* pDX)
 {
-	CDialog::DoDataExchange(pDX);
-	//{{AFX_DATA_MAP(CDlgNameChange)
-	DDX_Control(pDX, IDC_EDIT_NAME, m_editName);
-	DDX_Text(pDX, IDC_EDIT_NAME, m_strName);
-	DDV_MaxChars(pDX, m_strName, 64);
-	//}}AFX_DATA_MAP
+    CDialog::DoDataExchange(pDX);
+    //{{AFX_DATA_MAP(CDlgNameChange)
+    DDX_Control(pDX, IDC_EDIT_NAME, m_editName);
+    DDX_Text(pDX, IDC_EDIT_NAME, m_strName);
+    DDV_MaxChars(pDX, m_strName, 64);
+    //}}AFX_DATA_MAP
 }
 
 
 BEGIN_MESSAGE_MAP(CDlgNameChange, CDialog)
-	//{{AFX_MSG_MAP(CDlgNameChange)
-	//}}AFX_MSG_MAP
+    //{{AFX_MSG_MAP(CDlgNameChange)
+    //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgNameChange ƒƒbƒZ[ƒW ƒnƒ“ƒhƒ‰
+// CDlgNameChange ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒãƒ³ãƒ‰ãƒ©
 
-BOOL CDlgNameChange::OnInitDialog() 
+BOOL CDlgNameChange::OnInitDialog()
 {
-	CDialog::OnInitDialog();
+    CDialog::OnInitDialog();
 
-	// ‘I‘ğó‘Ô‚É‚·‚é
-	m_editName.SetSel(0, -1);
+    // é¸æŠçŠ¶æ…‹ã«ã™ã‚‹
+    m_editName.SetSel(0, -1);
 
-	return TRUE;  // ƒRƒ“ƒgƒ[ƒ‹‚ÉƒtƒH[ƒJƒX‚ğİ’è‚µ‚È‚¢‚Æ‚«A–ß‚è’l‚Í TRUE ‚Æ‚È‚è‚Ü‚·
-	              // —áŠO: OCX ƒvƒƒpƒeƒB ƒy[ƒW‚Ì–ß‚è’l‚Í FALSE ‚Æ‚È‚è‚Ü‚·
+    return TRUE;  // ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã«ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ã‚’è¨­å®šã—ãªã„ã¨ãã€æˆ»ã‚Šå€¤ã¯ TRUE ã¨ãªã‚Šã¾ã™
+                  // ä¾‹å¤–: OCX ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ ãƒšãƒ¼ã‚¸ã®æˆ»ã‚Šå€¤ã¯ FALSE ã¨ãªã‚Šã¾ã™
 }
 
-void CDlgNameChange::OnOK() 
+void CDlgNameChange::OnOK()
 {
-	CDialog::OnOK();
+    CDialog::OnOK();
 
-	if (m_strName.IsEmpty() == TRUE) {
-		m_strName = _T("–¼Ì–¢İ’è");
-	}
+    if (m_strName.IsEmpty() == TRUE) {
+        m_strName = _T("åç§°æœªè¨­å®š");
+    }
 }

@@ -8,23 +8,19 @@ class KbDDE
 {
 protected:
     DWORD m_ddeInst;
-    HSZ m_hszService;
-    HSZ m_hszTopic;
-    char m_szTopicName[256];
-    char m_szServiceName[256];
+    HSZ   m_hszService;
+    HSZ   m_hszTopic;
 public:
-    KbDDE(PFNCALLBACK pfnCallBack, LPCSTR cszTopic, LPCSTR cszService);
+    KbDDE(PFNCALLBACK pfnCallBack, LPCTSTR cszService, LPCTSTR cszTopic, DWORD afCmd);
     ~KbDDE(void);
 };
 ///////////////////////////////////////////////////////////////////////////////
 class KbDDEServer : public KbDDE
 {
-private:
-
 public:
-    DWORD __fastcall QueryString(HSZ hsz, char *szBuffer, int Size);
+    DWORD __fastcall QueryString(HSZ hsz, TCHAR *szBuffer, int Size);
     HDDEDATA __fastcall CreateDataHandle(LPBYTE pSrc, DWORD cb, HSZ hsz, UINT wFmt);
-    KbDDEServer(PFNCALLBACK pfnCallBack, LPCSTR cszTopic, LPCSTR cszService);
+    KbDDEServer(PFNCALLBACK pfnCallBack, LPCTSTR cszService, LPCTSTR cszTopic);
     ~KbDDEServer(void);
 };
 ///////////////////////////////////////////////////////////////////////////////
@@ -32,26 +28,21 @@ class KbDDEClient : public KbDDE
 {
 private:
     HCONV m_hConv;
-
-public:
     HDDEDATA ClientTransaction(
-        LPBYTE pData,       // ƒT[ƒo[‚É“n‚·ƒf[ƒ^‚Ìæ“ªƒoƒCƒg‚Ìƒ|ƒCƒ“ƒ^
-        DWORD cbData,       // ƒf[ƒ^‚Ì’·‚³
-    //    HCONV hConv,        // ’ÊMƒnƒ“ƒhƒ‹
-        HSZ hszItem,        // ƒf[ƒ^€–Ú‚Ìƒnƒ“ƒhƒ‹
-        UINT wFmt,          // ƒNƒŠƒbƒvƒ{[ƒhƒtƒH[ƒ}ƒbƒg
-        UINT wType,         // ƒgƒ‰ƒ“ƒUƒNƒVƒ‡ƒ“ƒ^ƒCƒv
-        DWORD dwTimeout,    // ‘Ò‚¿ŠÔ
-        LPDWORD pdwResult   // ƒgƒ‰ƒ“ƒUƒNƒVƒ‡ƒ“‚ÌŒ‹‰Ê‚Ö‚Ìƒ|ƒCƒ“ƒ^
+        LPBYTE pData,       // ã‚µãƒ¼ãƒãƒ¼ã«æ¸¡ã™ãƒ‡ãƒ¼ã‚¿ã®å…ˆé ­ãƒã‚¤ãƒˆã®ãƒã‚¤ãƒ³ã‚¿
+        DWORD cbData,       // ãƒ‡ãƒ¼ã‚¿ã®é•·ã•
+    //    HCONV hConv,        // é€šä¿¡ãƒãƒ³ãƒ‰ãƒ«
+        HSZ hszItem,        // ãƒ‡ãƒ¼ã‚¿é …ç›®ã®ãƒãƒ³ãƒ‰ãƒ«
+        UINT wFmt,          // ã‚¯ãƒªãƒƒãƒ—ãƒœãƒ¼ãƒ‰ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆ
+        UINT wType,         // ãƒˆãƒ©ãƒ³ã‚¶ã‚¯ã‚·ãƒ§ãƒ³ã‚¿ã‚¤ãƒ—
+        DWORD dwTimeout,    // å¾…ã¡æ™‚é–“
+        LPDWORD pdwResult   // ãƒˆãƒ©ãƒ³ã‚¶ã‚¯ã‚·ãƒ§ãƒ³ã®çµæœã¸ã®ãƒã‚¤ãƒ³ã‚¿
     );
-    bool __fastcall Execute(LPCSTR cszFileName, LPCSTR cszCommand);
-    bool __fastcall Execute2(LPCSTR cszFileName, LPCSTR cszCommand); /* WildCherry 070 */
-	bool __fastcall Execute(LPCSTR cszCommand, DWORD dwWait); /* RockDance2 138 */
-    KbDDEClient(PFNCALLBACK pfnCallBack, LPCSTR cszTopic, LPCSTR cszService);
+public:
+    bool __fastcall Execute(LPCTSTR cszCommand, DWORD dwTimeOut);
+    bool __fastcall Request(TCHAR** ppszReturn, const TCHAR *cszCommand, DWORD dwWait, BOOL bCfTextAsUnicode);
+    KbDDEClient(PFNCALLBACK pfnCallBack, LPCTSTR cszService, LPCTSTR cszTopic);
     ~KbDDEClient(void);
 };
 ///////////////////////////////////////////////////////////////////////////////
-//‹N“®‚ÌƒRƒ}ƒ“ƒhƒ‰ƒCƒ“ˆø”‚ğ•Ô‚·
-//iÀsƒtƒ@ƒCƒ‹–¼‚Ì•”•ª‚Íœ‚­j
-const char* __fastcall kbGetCommandLineParams(void);
 #endif

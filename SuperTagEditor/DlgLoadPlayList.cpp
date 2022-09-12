@@ -1,4 +1,4 @@
-// DlgLoadPlayList.cpp : ƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“ ƒtƒ@ƒCƒ‹
+// DlgLoadPlayList.cpp : ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³ ãƒ•ã‚¡ã‚¤ãƒ«
 //
 
 #include "stdafx.h"
@@ -12,38 +12,38 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgLoadPlayList ƒ_ƒCƒAƒƒO
+// CDlgLoadPlayList ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
 
 
 CDlgLoadPlayList::CDlgLoadPlayList(CWnd* pParent /*=NULL*/)
-	: CDialog(CDlgLoadPlayList::IDD, pParent)
+    : CDialog(CDlgLoadPlayList::IDD, pParent)
 {
-	//{{AFX_DATA_INIT(CDlgLoadPlayList)
-	m_bClearCheck = FALSE;
-	m_bClearList = FALSE;
-	m_nAddListFlag = -1;
-	m_nFileCheckFlag = -1;
-	//}}AFX_DATA_INIT
+    //{{AFX_DATA_INIT(CDlgLoadPlayList)
+    m_bClearCheck = FALSE;
+    m_bClearList = FALSE;
+    m_nAddListFlag = -1;
+    m_nFileCheckFlag = -1;
+    //}}AFX_DATA_INIT
 }
 
 
 void CDlgLoadPlayList::DoDataExchange(CDataExchange* pDX)
 {
-	CDialog::DoDataExchange(pDX);
-	//{{AFX_DATA_MAP(CDlgLoadPlayList)
-	DDX_Check(pDX, IDC_CH_CLEAR_CHECK, m_bClearCheck);
-	DDX_Check(pDX, IDC_CH_CLEAR_LIST, m_bClearList);
-	DDX_Radio(pDX, IDC_RA_ADD_LIST_ON, m_nAddListFlag);
-	DDX_Radio(pDX, IDC_RA_FILE_CHECK_ON, m_nFileCheckFlag);
-	//}}AFX_DATA_MAP
+    CDialog::DoDataExchange(pDX);
+    //{{AFX_DATA_MAP(CDlgLoadPlayList)
+    DDX_Check(pDX, IDC_CH_CLEAR_CHECK, m_bClearCheck);
+    DDX_Check(pDX, IDC_CH_CLEAR_LIST, m_bClearList);
+    DDX_Radio(pDX, IDC_RA_ADD_LIST_ON, m_nAddListFlag);
+    DDX_Radio(pDX, IDC_RA_FILE_CHECK_ON, m_nFileCheckFlag);
+    //}}AFX_DATA_MAP
 }
 
 
 BEGIN_MESSAGE_MAP(CDlgLoadPlayList, CDialog)
-	//{{AFX_MSG_MAP(CDlgLoadPlayList)
-		// ƒƒ‚ - ClassWizard ‚Í‚±‚ÌˆÊ’u‚Éƒ}ƒbƒsƒ“ƒO—p‚Ìƒ}ƒNƒ‚ð’Ç‰Á‚Ü‚½‚Ííœ‚µ‚Ü‚·B
-	//}}AFX_MSG_MAP
+    //{{AFX_MSG_MAP(CDlgLoadPlayList)
+        // ãƒ¡ãƒ¢ - ClassWizard ã¯ã“ã®ä½ç½®ã«ãƒžãƒƒãƒ”ãƒ³ã‚°ç”¨ã®ãƒžã‚¯ãƒ­ã‚’è¿½åŠ ã¾ãŸã¯å‰Šé™¤ã—ã¾ã™ã€‚
+    //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgLoadPlayList ƒƒbƒZ[ƒW ƒnƒ“ƒhƒ‰
+// CDlgLoadPlayList ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒãƒ³ãƒ‰ãƒ©

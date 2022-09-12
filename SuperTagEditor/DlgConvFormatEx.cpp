@@ -1,4 +1,4 @@
-// DlgConvFormatEx.cpp : ÉCÉìÉvÉäÉÅÉìÉeÅ[ÉVÉáÉì ÉtÉ@ÉCÉã
+// DlgConvFormatEx.cpp : „Ç§„É≥„Éó„É™„É°„É≥„ÉÜ„Éº„Ç∑„Éß„É≥ „Éï„Ç°„Ç§„É´
 //
 
 #include "stdafx.h"
@@ -13,18 +13,18 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgConvFormatEx ÉvÉçÉpÉeÉB ÉyÅ[ÉW
+// CDlgConvFormatEx „Éó„É≠„Éë„ÉÜ„Ç£ „Éö„Éº„Ç∏
 
 IMPLEMENT_DYNCREATE(CDlgConvFormatEx, COptionPage)
 
 CDlgConvFormatEx::CDlgConvFormatEx() : COptionPage(CDlgConvFormatEx::IDD)
 {
-	//{{AFX_DATA_INIT(CDlgConvFormatEx)
-	m_nAddNumber = 1;
-	m_nInitNumber = 1;
-	m_nMinColumn = 1;
-	m_nFormatType = 0;
-	//}}AFX_DATA_INIT
+    //{{AFX_DATA_INIT(CDlgConvFormatEx)
+    m_nAddNumber = 1;
+    m_nInitNumber = 1;
+    m_nMinColumn = 1;
+    m_nFormatType = 0;
+    //}}AFX_DATA_INIT
 }
 
 CDlgConvFormatEx::~CDlgConvFormatEx()
@@ -33,182 +33,193 @@ CDlgConvFormatEx::~CDlgConvFormatEx()
 
 void CDlgConvFormatEx::DoDataExchange(CDataExchange* pDX)
 {
-	COptionPage::DoDataExchange(pDX);
-	//{{AFX_DATA_MAP(CDlgConvFormatEx)
-	DDX_Control(pDX, IDC_CH_SPACE_INIT, m_btSpaceInitNumber);
-	DDX_Control(pDX, IDC_LIST_FORMAT_TYPE, m_listFormatType);
-	DDX_Control(pDX, IDC_EDIT_FORMAT, m_editFormat);
-	DDX_Text(pDX, IDC_ED_ADD_NUMBER, m_nAddNumber);
-	DDV_MinMaxInt(pDX, m_nAddNumber, 0, 999999);
-	DDX_Text(pDX, IDC_ED_INIT_NUMBER, m_nInitNumber);
-	DDV_MinMaxInt(pDX, m_nInitNumber, 0, 999999);
-	DDX_Text(pDX, IDC_ED_MIN_COLUMN, m_nMinColumn);
-	DDV_MinMaxUInt(pDX, m_nMinColumn, 1, 9);
-	DDX_CBIndex(pDX, IDC_LIST_FORMAT_TYPE, m_nFormatType);
-	//}}AFX_DATA_MAP
+    COptionPage::DoDataExchange(pDX);
+    //{{AFX_DATA_MAP(CDlgConvFormatEx)
+    DDX_Control(pDX, IDC_CH_SPACE_INIT, m_btSpaceInitNumber);
+    DDX_Control(pDX, IDC_LIST_FORMAT_TYPE, m_listFormatType);
+    DDX_Control(pDX, IDC_EDIT_FORMAT, m_editFormat);
+    DDX_Text(pDX, IDC_ED_ADD_NUMBER, m_nAddNumber);
+    DDV_MinMaxInt(pDX, m_nAddNumber, 0, 999999);
+    DDX_Text(pDX, IDC_ED_INIT_NUMBER, m_nInitNumber);
+    DDV_MinMaxInt(pDX, m_nInitNumber, 0, 999999);
+    DDX_Text(pDX, IDC_ED_MIN_COLUMN, m_nMinColumn);
+    DDV_MinMaxUInt(pDX, m_nMinColumn, 1, 9);
+    DDX_CBIndex(pDX, IDC_LIST_FORMAT_TYPE, m_nFormatType);
+    //}}AFX_DATA_MAP
 }
 
 
 BEGIN_MESSAGE_MAP(CDlgConvFormatEx, COptionPage)
-	//{{AFX_MSG_MAP(CDlgConvFormatEx)
-	ON_BN_CLICKED(IDC_BT_ALBUM_NAME, OnBtAlbumName)
-	ON_BN_CLICKED(IDC_BT_ARTIST_NAME, OnBtArtistName)
-	ON_BN_CLICKED(IDC_BT_COMMENT, OnBtComment)
-	ON_BN_CLICKED(IDC_BT_FILE_NAME, OnBtFileName)
-	ON_BN_CLICKED(IDC_BT_FIX_STRING, OnBtFixString)
-	ON_BN_CLICKED(IDC_BT_NUMBER, OnBtNumber)
-	ON_BN_CLICKED(IDC_BT_RELEASE_YEAR, OnBtReleaseYear)
-	ON_BN_CLICKED(IDC_BT_TRACK_NAME, OnBtTrackName)
-	ON_BN_CLICKED(IDC_BT_TRACK_NUMBER, OnBtTrackNumber)
-	ON_BN_CLICKED(IDC_BT_TRACK_NUMBER2, OnBtTrackNumber2)
-	ON_BN_CLICKED(IDC_BT_NAME_CHANGE, OnBtNameChange)
-	ON_CBN_SELCHANGE(IDC_LIST_FORMAT_TYPE, OnSelChangeListFormatType)
-	ON_BN_CLICKED(IDC_BT_TRACK_NUMBER3, OnBtTrackNumber3)
-	//}}AFX_MSG_MAP
+    //{{AFX_MSG_MAP(CDlgConvFormatEx)
+    ON_BN_CLICKED(IDC_BT_ALBUM_NAME, OnBtAlbumName)
+    ON_BN_CLICKED(IDC_BT_ARTIST_NAME, OnBtArtistName)
+    ON_BN_CLICKED(IDC_BT_COMMENT, OnBtComment)
+    ON_BN_CLICKED(IDC_BT_FILE_NAME, OnBtFileName)
+    ON_BN_CLICKED(IDC_BT_FIX_STRING, OnBtFixString)
+    ON_BN_CLICKED(IDC_BT_NUMBER, OnBtNumber)
+    ON_BN_CLICKED(IDC_BT_NUMBER2, OnBtNumber2)
+    ON_BN_CLICKED(IDC_BT_RELEASE_YEAR, OnBtReleaseYear)
+    ON_BN_CLICKED(IDC_BT_TRACK_NAME, OnBtTrackName)
+    ON_BN_CLICKED(IDC_BT_TRACK_NUMBER, OnBtTrackNumber)
+    ON_BN_CLICKED(IDC_BT_TRACK_NUMBER2, OnBtTrackNumber2)
+    ON_BN_CLICKED(IDC_BT_NAME_CHANGE, OnBtNameChange)
+    ON_CBN_SELCHANGE(IDC_LIST_FORMAT_TYPE, OnSelChangeListFormatType)
+    ON_BN_CLICKED(IDC_BT_DISC_NUMBER, OnBtDiscNumber)
+    ON_BN_CLICKED(IDC_BT_DISC_NUMBER2, OnBtDiscNumber2)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgConvFormatEx ÉÅÉbÉZÅ[ÉW ÉnÉìÉhÉâ
+// CDlgConvFormatEx „É°„ÉÉ„Çª„Éº„Ç∏ „Éè„É≥„Éâ„É©
 
-void CDlgConvFormatEx::OutputFormatString(const char *sText)
+void CDlgConvFormatEx::OutputFormatString(const TCHAR *sText)
 {
-	m_editFormat.ReplaceSel(sText, FALSE);
-	m_editFormat.SetFocus();
+    m_editFormat.ReplaceSel(sText, FALSE);
+    m_editFormat.SetFocus();
 }
 
-void CDlgConvFormatEx::OnBtAlbumName() 
+void CDlgConvFormatEx::OnBtAlbumName()
 {
-	OutputFormatString("%ALBUM_NAME%");
+    OutputFormatString(_T("%ALBUM_NAME%"));
 }
 
-void CDlgConvFormatEx::OnBtArtistName() 
+void CDlgConvFormatEx::OnBtArtistName()
 {
-	OutputFormatString("%ARTIST_NAME%");
+    OutputFormatString(_T("%ARTIST_NAME%"));
 }
 
-void CDlgConvFormatEx::OnBtComment() 
+void CDlgConvFormatEx::OnBtComment()
 {
-	OutputFormatString("%COMMENT%");
+    OutputFormatString(_T("%COMMENT%"));
 }
 
-void CDlgConvFormatEx::OnBtFileName() 
+void CDlgConvFormatEx::OnBtFileName()
 {
-	OutputFormatString("%FILE_NAME%");
+    OutputFormatString(_T("%FILE_NAME%"));
 }
 
-void CDlgConvFormatEx::OnBtFixString() 
+void CDlgConvFormatEx::OnBtFixString()
 {
-	OutputFormatString("%STRING%");
+    OutputFormatString(_T("%STRING%"));
 }
 
-void CDlgConvFormatEx::OnBtNumber() 
+void CDlgConvFormatEx::OnBtNumber()
 {
-	OutputFormatString("%NUMBER%");
+    OutputFormatString(_T("%NUMBER%"));
 }
 
-void CDlgConvFormatEx::OnBtReleaseYear() 
+void CDlgConvFormatEx::OnBtNumber2()
 {
-	OutputFormatString("%RELEASE_YEAR%");
+    OutputFormatString(_T("%NUMBER2%"));
 }
 
-void CDlgConvFormatEx::OnBtTrackName() 
+void CDlgConvFormatEx::OnBtReleaseYear()
 {
-	OutputFormatString("%TRACK_NAME%");
+    OutputFormatString(_T("%RELEASE_YEAR%"));
 }
 
-void CDlgConvFormatEx::OnBtTrackNumber() 
+void CDlgConvFormatEx::OnBtTrackName()
 {
-	OutputFormatString("%TRACK_NUMBER%");
+    OutputFormatString(_T("%TRACK_NAME%"));
 }
 
-void CDlgConvFormatEx::OnBtTrackNumber2() 
+void CDlgConvFormatEx::OnBtTrackNumber()
 {
-	OutputFormatString("%TRACK_NUMBER2%");
+    OutputFormatString(_T("%TRACK_NUMBER%"));
 }
 
-void CDlgConvFormatEx::OnBtTrackNumber3() 
+void CDlgConvFormatEx::OnBtTrackNumber2()
 {
-	OutputFormatString("%TRACK_NUMBER3%");
+    OutputFormatString(_T("%TRACK_NUMBER2%"));
 }
 
-void CDlgConvFormatEx::OnBtNameChange() 
+void CDlgConvFormatEx::OnBtDiscNumber()
 {
-	CDlgNameChange	dialog;
-
-	dialog.m_strName = m_userFormatEx[m_nFormatType].strName;
-	if (dialog.DoModal() == IDOK) {
-		// êVÇµÇ¢ñºèÃÇ…ïœçX
-		m_userFormatEx[m_nFormatType].strName = dialog.m_strName;
-
-		// ÉäÉXÉgçXêV
-		OnSelChangeListFormatType();
-		m_listFormatType.ResetContent();
-		int i; for (i = 0; i < USER_CONV_FORMAT_EX_MAX; i++) {
-			CString	strName;
-			strName.Format("%d: %s", i+1, m_userFormatEx[i].strName);
-			m_listFormatType.AddString(strName);
-		}
-		// ëIëÇµÇ»Ç®Ç∑
-		m_listFormatType.SetCurSel(m_nFormatType);
-	}
+    OutputFormatString(_T("%DISC_NUMBER%"));
 }
 
-void CDlgConvFormatEx::OnSelChangeListFormatType() 
+void CDlgConvFormatEx::OnBtDiscNumber2()
 {
-	// åªç›ï“èWíÜÇÃì‡óeÇîΩâfÇ≥ÇπÇÈ
-	m_editFormat.GetWindowText(m_userFormatEx[m_nFormatType].strFormat);
-	m_userFormatEx[m_nFormatType].bSpaceInitNumber = m_btSpaceInitNumber.GetCheck() ? true : false;
-	m_userFormatEx[m_nFormatType].nInitNumber = GetDlgItemInt(IDC_ED_INIT_NUMBER, NULL, FALSE);
-	m_userFormatEx[m_nFormatType].nAddNumber = GetDlgItemInt(IDC_ED_ADD_NUMBER, NULL, FALSE);
-	m_userFormatEx[m_nFormatType].nColumnCount = GetDlgItemInt(IDC_ED_MIN_COLUMN, NULL, FALSE);
-
-	m_nFormatType = m_listFormatType.GetCurSel();
-	m_editFormat.SetWindowText(m_userFormatEx[m_nFormatType].strFormat);
-	m_btSpaceInitNumber.SetCheck(m_userFormatEx[m_nFormatType].bSpaceInitNumber ? TRUE : FALSE);
-	SetDlgItemInt(IDC_ED_INIT_NUMBER, m_userFormatEx[m_nFormatType].nInitNumber, FALSE);
-	SetDlgItemInt(IDC_ED_ADD_NUMBER, m_userFormatEx[m_nFormatType].nAddNumber, FALSE);
-	SetDlgItemInt(IDC_ED_MIN_COLUMN, m_userFormatEx[m_nFormatType].nColumnCount, FALSE);
-
-	m_nInitNumber = m_userFormatEx[m_nFormatType].nInitNumber;
-	m_nAddNumber = m_userFormatEx[m_nFormatType].nAddNumber;
-	m_nMinColumn = m_userFormatEx[m_nFormatType].nColumnCount;
+    OutputFormatString(_T("%DISC_NUMBER2%"));
 }
 
-BOOL CDlgConvFormatEx::OnInitDialog() 
+void CDlgConvFormatEx::OnBtNameChange()
 {
-	COptionPage::OnInitDialog();
+    CDlgNameChange    dialog;
 
-	int		i;
-	m_listFormatType.ResetContent();
-	for (i = 0; i < USER_CONV_FORMAT_EX_MAX; i++) {
-		CString	strName;
-		strName.Format("%d: %s", i+1, m_userFormatEx[i].strName);
-		m_listFormatType.AddString(strName);
-	}
+    dialog.m_strName = m_userFormatEx[m_nFormatType].strName;
+    if (dialog.DoModal() == IDOK) {
+        // Êñ∞„Åó„ÅÑÂêçÁß∞„Å´Â§âÊõ¥
+        m_userFormatEx[m_nFormatType].strName = dialog.m_strName;
 
-	m_listFormatType.SetCurSel(m_nFormatType);
-	m_editFormat.SetWindowText(m_userFormatEx[m_nFormatType].strFormat);
-	m_btSpaceInitNumber.SetCheck(m_userFormatEx[m_nFormatType].bSpaceInitNumber ? TRUE : FALSE);
-	SetDlgItemInt(IDC_ED_INIT_NUMBER, m_userFormatEx[m_nFormatType].nInitNumber, FALSE);
-	SetDlgItemInt(IDC_ED_ADD_NUMBER, m_userFormatEx[m_nFormatType].nAddNumber, FALSE);
-	SetDlgItemInt(IDC_ED_MIN_COLUMN, m_userFormatEx[m_nFormatType].nColumnCount, FALSE);
-
-	m_nInitNumber = m_userFormatEx[m_nFormatType].nInitNumber;
-	m_nAddNumber = m_userFormatEx[m_nFormatType].nAddNumber;
-	m_nMinColumn = m_userFormatEx[m_nFormatType].nColumnCount;
-
-	return TRUE;  // ÉRÉìÉgÉçÅ[ÉãÇ…ÉtÉHÅ[ÉJÉXÇê›íËÇµÇ»Ç¢Ç∆Ç´ÅAñﬂÇËílÇÕ TRUE Ç∆Ç»ÇËÇ‹Ç∑
-	              // ó·äO: OCX ÉvÉçÉpÉeÉB ÉyÅ[ÉWÇÃñﬂÇËílÇÕ FALSE Ç∆Ç»ÇËÇ‹Ç∑
+        // „É™„Çπ„ÉàÊõ¥Êñ∞
+        OnSelChangeListFormatType();
+        m_listFormatType.ResetContent();
+        int i; for (i = 0; i < USER_CONV_FORMAT_EX_MAX; i++) {
+            CString strName;
+            strName.Format(_T("%d: %s"), i+1, (LPCWSTR)m_userFormatEx[i].strName);
+            m_listFormatType.AddString(strName);
+        }
+        // ÈÅ∏Êäû„Åó„Å™„Åä„Åô
+        m_listFormatType.SetCurSel(m_nFormatType);
+    }
 }
 
-void CDlgConvFormatEx::OnOK() 
+void CDlgConvFormatEx::OnSelChangeListFormatType()
 {
-	if (!::IsWindow(m_hWnd))	return;
-	m_editFormat.GetWindowText(m_userFormatEx[m_nFormatType].strFormat);
-	m_userFormatEx[m_nFormatType].bSpaceInitNumber = m_btSpaceInitNumber.GetCheck() ? true : false;
-	m_userFormatEx[m_nFormatType].nInitNumber = GetDlgItemInt(IDC_ED_INIT_NUMBER, NULL, FALSE);
-	m_userFormatEx[m_nFormatType].nAddNumber = GetDlgItemInt(IDC_ED_ADD_NUMBER, NULL, FALSE);
-	m_userFormatEx[m_nFormatType].nColumnCount = GetDlgItemInt(IDC_ED_MIN_COLUMN, NULL, FALSE);
+    // ÁèæÂú®Á∑®ÈõÜ‰∏≠„ÅÆÂÜÖÂÆπ„ÇíÂèçÊò†„Åï„Åõ„Çã
+    m_editFormat.GetWindowText(m_userFormatEx[m_nFormatType].strFormat);
+    m_userFormatEx[m_nFormatType].bSpaceInitNumber = m_btSpaceInitNumber.GetCheck() ? true : false;
+    m_userFormatEx[m_nFormatType].nInitNumber = GetDlgItemInt(IDC_ED_INIT_NUMBER, NULL, FALSE);
+    m_userFormatEx[m_nFormatType].nAddNumber = GetDlgItemInt(IDC_ED_ADD_NUMBER, NULL, FALSE);
+    m_userFormatEx[m_nFormatType].nColumnCount = GetDlgItemInt(IDC_ED_MIN_COLUMN, NULL, FALSE);
 
-	COptionPage::OnOK();
+    m_nFormatType = m_listFormatType.GetCurSel();
+    m_editFormat.SetWindowText(m_userFormatEx[m_nFormatType].strFormat);
+    m_btSpaceInitNumber.SetCheck(m_userFormatEx[m_nFormatType].bSpaceInitNumber ? TRUE : FALSE);
+    SetDlgItemInt(IDC_ED_INIT_NUMBER, m_userFormatEx[m_nFormatType].nInitNumber, FALSE);
+    SetDlgItemInt(IDC_ED_ADD_NUMBER, m_userFormatEx[m_nFormatType].nAddNumber, FALSE);
+    SetDlgItemInt(IDC_ED_MIN_COLUMN, m_userFormatEx[m_nFormatType].nColumnCount, FALSE);
+
+    m_nInitNumber = m_userFormatEx[m_nFormatType].nInitNumber;
+    m_nAddNumber = m_userFormatEx[m_nFormatType].nAddNumber;
+    m_nMinColumn = m_userFormatEx[m_nFormatType].nColumnCount;
+}
+
+BOOL CDlgConvFormatEx::OnInitDialog()
+{
+    COptionPage::OnInitDialog();
+
+    int     i;
+    m_listFormatType.ResetContent();
+    for (i = 0; i < USER_CONV_FORMAT_EX_MAX; i++) {
+        CString strName;
+        strName.Format(_T("%d: %s"), i+1, (LPCWSTR)m_userFormatEx[i].strName);
+        m_listFormatType.AddString(strName);
+    }
+
+    m_listFormatType.SetCurSel(m_nFormatType);
+    m_editFormat.SetWindowText(m_userFormatEx[m_nFormatType].strFormat);
+    m_btSpaceInitNumber.SetCheck(m_userFormatEx[m_nFormatType].bSpaceInitNumber ? TRUE : FALSE);
+    SetDlgItemInt(IDC_ED_INIT_NUMBER, m_userFormatEx[m_nFormatType].nInitNumber, FALSE);
+    SetDlgItemInt(IDC_ED_ADD_NUMBER, m_userFormatEx[m_nFormatType].nAddNumber, FALSE);
+    SetDlgItemInt(IDC_ED_MIN_COLUMN, m_userFormatEx[m_nFormatType].nColumnCount, FALSE);
+
+    m_nInitNumber = m_userFormatEx[m_nFormatType].nInitNumber;
+    m_nAddNumber = m_userFormatEx[m_nFormatType].nAddNumber;
+    m_nMinColumn = m_userFormatEx[m_nFormatType].nColumnCount;
+
+    return TRUE;  // „Ç≥„É≥„Éà„É≠„Éº„É´„Å´„Éï„Ç©„Éº„Ç´„Çπ„ÇíË®≠ÂÆö„Åó„Å™„ÅÑ„Å®„Åç„ÄÅÊàª„ÇäÂÄ§„ÅØ TRUE „Å®„Å™„Çä„Åæ„Åô
+                  // ‰æãÂ§ñ: OCX „Éó„É≠„Éë„ÉÜ„Ç£ „Éö„Éº„Ç∏„ÅÆÊàª„ÇäÂÄ§„ÅØ FALSE „Å®„Å™„Çä„Åæ„Åô
+}
+
+void CDlgConvFormatEx::OnOK()
+{
+    if (!::IsWindow(m_hWnd)) return;
+    m_editFormat.GetWindowText(m_userFormatEx[m_nFormatType].strFormat);
+    m_userFormatEx[m_nFormatType].bSpaceInitNumber = m_btSpaceInitNumber.GetCheck() ? true : false;
+    m_userFormatEx[m_nFormatType].nInitNumber = GetDlgItemInt(IDC_ED_INIT_NUMBER, NULL, FALSE);
+    m_userFormatEx[m_nFormatType].nAddNumber = GetDlgItemInt(IDC_ED_ADD_NUMBER, NULL, FALSE);
+    m_userFormatEx[m_nFormatType].nColumnCount = GetDlgItemInt(IDC_ED_MIN_COLUMN, NULL, FALSE);
+
+    COptionPage::OnOK();
 }

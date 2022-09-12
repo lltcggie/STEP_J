@@ -4,54 +4,54 @@
 #if _MSC_VER > 1000
 #pragma once
 #endif // _MSC_VER > 1000
-// DlgFavorites.h : ƒwƒbƒ_[ ƒtƒ@ƒCƒ‹
+// DlgFavorites.h : ãƒ˜ãƒƒãƒ€ãƒ¼ ãƒ•ã‚¡ã‚¤ãƒ«
 //
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgFavorites ƒ_ƒCƒAƒƒO
+// CDlgFavorites ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
 
 class CDlgFavorites : public CDialog
 {
-// ƒRƒ“ƒXƒgƒ‰ƒNƒVƒ‡ƒ“
+// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚·ãƒ§ãƒ³
 public:
-	CDlgFavorites(CWnd* pParent = NULL);   // •W€‚ÌƒRƒ“ƒXƒgƒ‰ƒNƒ^
+    CDlgFavorites(CWnd* pParent = NULL);   // æ¨™æº–ã®ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 
-// ƒ_ƒCƒAƒƒO ƒf[ƒ^
-	//{{AFX_DATA(CDlgFavorites)
-	enum { IDD = IDD_DIALOG_FAVORITES };
-	CString	m_strFavirites[10];
-	//}}AFX_DATA
+// ãƒ€ã‚¤ã‚¢ãƒ­ã‚° ãƒ‡ãƒ¼ã‚¿
+    //{{AFX_DATA(CDlgFavorites)
+    enum { IDD = IDD_DIALOG_FAVORITES };
+    CString m_strFavirites[10];
+    //}}AFX_DATA
 
 
-// ƒI[ƒo[ƒ‰ƒCƒh
-	// ClassWizard ‚Í‰¼‘zŠÖ”‚ÌƒI[ƒo[ƒ‰ƒCƒh‚ğ¶¬‚µ‚Ü‚·B
-	//{{AFX_VIRTUAL(CDlgFavorites)
-	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV ƒTƒ|[ƒg
-	//}}AFX_VIRTUAL
+// ã‚ªãƒ¼ãƒãƒ¼ãƒ©ã‚¤ãƒ‰
+    // ClassWizard ã¯ä»®æƒ³é–¢æ•°ã®ã‚ªãƒ¼ãƒãƒ¼ãƒ©ã‚¤ãƒ‰ã‚’ç”Ÿæˆã—ã¾ã™ã€‚
+    //{{AFX_VIRTUAL(CDlgFavorites)
+    protected:
+    virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV ã‚µãƒãƒ¼ãƒˆ
+    //}}AFX_VIRTUAL
 
-// ƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“
+// ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³
 protected:
 
-	// ¶¬‚³‚ê‚½ƒƒbƒZ[ƒW ƒ}ƒbƒvŠÖ”
-	//{{AFX_MSG(CDlgFavorites)
-	afx_msg void OnBtRefFavorites1();
-	afx_msg void OnBtRefFavorites10();
-	afx_msg void OnBtRefFavorites2();
-	afx_msg void OnBtRefFavorites3();
-	afx_msg void OnBtRefFavorites4();
-	afx_msg void OnBtRefFavorites5();
-	afx_msg void OnBtRefFavorites6();
-	afx_msg void OnBtRefFavorites7();
-	afx_msg void OnBtRefFavorites8();
-	afx_msg void OnBtRefFavorites9();
-	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
+    // ç”Ÿæˆã•ã‚ŒãŸãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒãƒƒãƒ—é–¢æ•°
+    //{{AFX_MSG(CDlgFavorites)
+    afx_msg void OnBtRefFavorites1();
+    afx_msg void OnBtRefFavorites10();
+    afx_msg void OnBtRefFavorites2();
+    afx_msg void OnBtRefFavorites3();
+    afx_msg void OnBtRefFavorites4();
+    afx_msg void OnBtRefFavorites5();
+    afx_msg void OnBtRefFavorites6();
+    afx_msg void OnBtRefFavorites7();
+    afx_msg void OnBtRefFavorites8();
+    afx_msg void OnBtRefFavorites9();
+    //}}AFX_MSG
+    DECLARE_MESSAGE_MAP()
 private:
-	void OnBtRefFavorites(CString& strFavorite);
+    void OnBtRefFavorites(CString& strFavorite);
 };
 
 //{{AFX_INSERT_LOCATION}}
-// Microsoft Visual C++ ‚Í‘Os‚Ì’¼‘O‚É’Ç‰Á‚ÌéŒ¾‚ğ‘}“ü‚µ‚Ü‚·B
+// Microsoft Visual C++ ã¯å‰è¡Œã®ç›´å‰ã«è¿½åŠ ã®å®£è¨€ã‚’æŒ¿å…¥ã—ã¾ã™ã€‚
 
 #endif // !defined(AFX_DLGFAVORITES_H__72E00FFA_954D_4161_907B_FD5191B44F29__INCLUDED_)

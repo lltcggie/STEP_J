@@ -4,60 +4,60 @@
 #if _MSC_VER > 1000
 #pragma once
 #endif // _MSC_VER > 1000
-// DlgSetCheck.h : ƒwƒbƒ_[ ƒtƒ@ƒCƒ‹
+// DlgSetCheck.h : ãƒ˜ãƒƒãƒ€ãƒ¼ ãƒ•ã‚¡ã‚¤ãƒ«
 //
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgSetCheck ƒ_ƒCƒAƒƒO
+// CDlgSetCheck ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
 
 class CDlgSetCheck : public CDialog
 {
-// ƒRƒ“ƒXƒgƒ‰ƒNƒVƒ‡ƒ“
+// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚·ãƒ§ãƒ³
 public:
-	CDlgSetCheck(CWnd* pParent = NULL);   // •W€‚ÌƒRƒ“ƒXƒgƒ‰ƒNƒ^
+    CDlgSetCheck(CWnd* pParent = NULL);   // æ¨™æº–ã®ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 
-// ƒ_ƒCƒAƒƒO ƒf[ƒ^
-	//{{AFX_DATA(CDlgSetCheck)
-	enum { IDD = IDD_DLG_CHECK_WORD };
-	CButton	m_btMatchSelected;
-	CButton	m_btRegExp;
-	CButton	m_btRangeSelected;
-	CButton	m_btMatchComplete;
-	CButton	m_btCheckDiffUL;
-	CComboBox	m_listTargetColumn;
-	BOOL	m_bCheckDiffUL;
-	BOOL	m_bMatchComplete;
-	BOOL	m_bRangeSelected;
-	BOOL	m_bRegExp;
-	CString	m_strSearchWord;
-	int		m_nTargetColumn;
-	BOOL	m_bMatchSelected;
-	//}}AFX_DATA
+// ãƒ€ã‚¤ã‚¢ãƒ­ã‚° ãƒ‡ãƒ¼ã‚¿
+    //{{AFX_DATA(CDlgSetCheck)
+    enum { IDD = IDD_DLG_CHECK_WORD };
+    CButton m_btMatchSelected;
+    CButton m_btRegExp;
+    CButton m_btRangeSelected;
+    CButton m_btMatchComplete;
+    CButton m_btCheckDiffUL;
+    CComboBox    m_listTargetColumn;
+    BOOL    m_bCheckDiffUL;
+    BOOL    m_bMatchComplete;
+    BOOL    m_bRangeSelected;
+    BOOL    m_bRegExp;
+    CString m_strSearchWord;
+    int     m_nTargetColumn;
+    BOOL    m_bMatchSelected;
+    //}}AFX_DATA
 
-	BOOL	m_bEnableRangeSelected;
-	void	UpdateStatus(void);
+    BOOL    m_bEnableRangeSelected;
+    void    UpdateStatus(void);
 
-// ƒI[ƒo[ƒ‰ƒCƒh
-	// ClassWizard ‚Í‰¼‘zŠÖ”‚ÌƒI[ƒo[ƒ‰ƒCƒh‚ğ¶¬‚µ‚Ü‚·B
-	//{{AFX_VIRTUAL(CDlgSetCheck)
-	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV ƒTƒ|[ƒg
-	//}}AFX_VIRTUAL
+// ã‚ªãƒ¼ãƒãƒ¼ãƒ©ã‚¤ãƒ‰
+    // ClassWizard ã¯ä»®æƒ³é–¢æ•°ã®ã‚ªãƒ¼ãƒãƒ¼ãƒ©ã‚¤ãƒ‰ã‚’ç”Ÿæˆã—ã¾ã™ã€‚
+    //{{AFX_VIRTUAL(CDlgSetCheck)
+    protected:
+    virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV ã‚µãƒãƒ¼ãƒˆ
+    //}}AFX_VIRTUAL
 
-// ƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“
+// ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³
 protected:
 
-	// ¶¬‚³‚ê‚½ƒƒbƒZ[ƒW ƒ}ƒbƒvŠÖ”
-	//{{AFX_MSG(CDlgSetCheck)
-	virtual BOOL OnInitDialog();
-	afx_msg void OnChRegexp();
-	afx_msg void OnSelChangeListTarget();
-	afx_msg void OnChRangeSelected();
-	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
+    // ç”Ÿæˆã•ã‚ŒãŸãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒãƒƒãƒ—é–¢æ•°
+    //{{AFX_MSG(CDlgSetCheck)
+    virtual BOOL OnInitDialog();
+    afx_msg void OnChRegexp();
+    afx_msg void OnSelChangeListTarget();
+    afx_msg void OnChRangeSelected();
+    //}}AFX_MSG
+    DECLARE_MESSAGE_MAP()
 };
 
 //{{AFX_INSERT_LOCATION}}
-// Microsoft Visual C++ ‚Í‘Os‚Ì’¼‘O‚É’Ç‰Á‚ÌéŒ¾‚ğ‘}“ü‚µ‚Ü‚·B
+// Microsoft Visual C++ ã¯å‰è¡Œã®ç›´å‰ã«è¿½åŠ ã®å®£è¨€ã‚’æŒ¿å…¥ã—ã¾ã™ã€‚
 
 #endif // !defined(AFX_DLGSETCHECK_H__2541D100_113B_11D4_9459_00402641B29B__INCLUDED_)

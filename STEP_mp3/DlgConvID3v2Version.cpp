@@ -1,4 +1,4 @@
-// DlgConvID3v2Version.cpp : ƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“ ƒtƒ@ƒCƒ‹
+// DlgConvID3v2Version.cpp : ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³ ãƒ•ã‚¡ã‚¤ãƒ«
 //
 
 #include "stdafx.h"
@@ -12,79 +12,81 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgConvID3v2Version ƒ_ƒCƒAƒƒO
+// CDlgConvID3v2Version ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
 
 
 CDlgConvID3v2Version::CDlgConvID3v2Version(CWnd* pParent /*=NULL*/)
-	: CDialog(CDlgConvID3v2Version::IDD, pParent)
+    : CDialog(CDlgConvID3v2Version::IDD, pParent)
 {
-	//{{AFX_DATA_INIT(CDlgConvID3v2Version)
-	m_nId3v2Encode = -1;
-	m_nId3v2Version = -1;
-	//}}AFX_DATA_INIT
+    //{{AFX_DATA_INIT(CDlgConvID3v2Version)
+    m_nId3v2Encode = 1;
+    m_nId3v2Version = 1;
+    m_bID3v2UnSync = 0;
+    //}}AFX_DATA_INIT
 }
 
 
 void CDlgConvID3v2Version::DoDataExchange(CDataExchange* pDX)
 {
-	CDialog::DoDataExchange(pDX);
-	//{{AFX_DATA_MAP(CDlgConvID3v2Version)
-	DDX_Control(pDX, IDC_COMBO_ID3V2_VERSION, m_cbId3v2Version);
-	DDX_Control(pDX, IDC_COMBO_ID3V2_ENCODE, m_cbId3v2Encode);
-	DDX_CBIndex(pDX, IDC_COMBO_ID3V2_ENCODE, m_nId3v2Encode);
-	DDX_CBIndex(pDX, IDC_COMBO_ID3V2_VERSION, m_nId3v2Version);
-	//}}AFX_DATA_MAP
+    CDialog::DoDataExchange(pDX);
+    //{{AFX_DATA_MAP(CDlgConvID3v2Version)
+    DDX_Control(pDX, IDC_COMBO_ID3V2_VERSION, m_cbId3v2Version);
+    DDX_Control(pDX, IDC_COMBO_ID3V2_ENCODE, m_cbId3v2Encode);
+    DDX_CBIndex(pDX, IDC_COMBO_ID3V2_ENCODE, m_nId3v2Encode);
+    DDX_CBIndex(pDX, IDC_COMBO_ID3V2_VERSION, m_nId3v2Version);
+    DDX_Check(pDX, IDC_UNSYNC, m_bID3v2UnSync);
+    //}}AFX_DATA_MAP
 }
 
 
 BEGIN_MESSAGE_MAP(CDlgConvID3v2Version, CDialog)
-	//{{AFX_MSG_MAP(CDlgConvID3v2Version)
-	ON_CBN_SELCHANGE(IDC_COMBO_ID3V2_VERSION, OnSelchangeComboId3v2Version)
-	ON_CBN_SELENDCANCEL(IDC_COMBO_ID3V2_ENCODE, OnSelchangeComboId3v2Version)
-	//}}AFX_MSG_MAP
+    //{{AFX_MSG_MAP(CDlgConvID3v2Version)
+    ON_CBN_SELCHANGE(IDC_COMBO_ID3V2_VERSION, OnSelchangeComboId3v2Version)
+    ON_CBN_SELENDCANCEL(IDC_COMBO_ID3V2_ENCODE, OnSelchangeComboId3v2Version)
+    //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgConvID3v2Version ƒƒbƒZ[ƒW ƒnƒ“ƒhƒ‰
+// CDlgConvID3v2Version ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒãƒ³ãƒ‰ãƒ©
 
-BOOL CDlgConvID3v2Version::OnInitDialog() 
+BOOL CDlgConvID3v2Version::OnInitDialog()
 {
-	CDialog::OnInitDialog();
-	
-	// TODO: ‚±‚ÌˆÊ’u‚É‰Šú‰»‚Ì•â‘«ˆ—‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
-	m_cbId3v2Encode.AddString("•ÏX‚µ‚È‚¢");
-	m_cbId3v2Encode.AddString("ISO-8859-1");
-	m_cbId3v2Encode.AddString("UTF-16");
-	m_cbId3v2Encode.AddString("UTF-8");
-	m_cbId3v2Encode.SetCurSel(m_nId3v2Encode);
+    CDialog::OnInitDialog();
 
-	m_cbId3v2Version.AddString("•ÏX‚µ‚È‚¢");
-	m_cbId3v2Version.AddString("v2.2");
-	m_cbId3v2Version.AddString("v2.3");
-	m_cbId3v2Version.AddString("v2.4");
-	m_cbId3v2Version.SetCurSel(m_nId3v2Version);
+    // TODO: ã“ã®ä½ç½®ã«åˆæœŸåŒ–ã®è£œè¶³å‡¦ç†ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
+    m_cbId3v2Encode.AddString(_T("å¤‰æ›´ã—ãªã„"));
+    m_cbId3v2Encode.AddString(_T("ISO-8859-1"));
+    m_cbId3v2Encode.AddString(_T("UTF-16"));
+    m_cbId3v2Encode.AddString(_T("UTF-8"));
+    m_cbId3v2Encode.SetCurSel(m_nId3v2Encode);
 
-	return TRUE;  // ƒRƒ“ƒgƒ[ƒ‹‚ÉƒtƒH[ƒJƒX‚ğİ’è‚µ‚È‚¢‚Æ‚«A–ß‚è’l‚Í TRUE ‚Æ‚È‚è‚Ü‚·
-	              // —áŠO: OCX ƒvƒƒpƒeƒB ƒy[ƒW‚Ì–ß‚è’l‚Í FALSE ‚Æ‚È‚è‚Ü‚·
+    m_cbId3v2Version.AddString(_T("å¤‰æ›´ã—ãªã„"));
+    m_cbId3v2Version.AddString(_T("v2.2"));
+    m_cbId3v2Version.AddString(_T("v2.3"));
+    m_cbId3v2Version.AddString(_T("v2.4"));
+    m_cbId3v2Version.SetCurSel(m_nId3v2Version);
+
+    return TRUE;  // ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã«ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ã‚’è¨­å®šã—ãªã„ã¨ãã€æˆ»ã‚Šå€¤ã¯ TRUE ã¨ãªã‚Šã¾ã™
+                  // ä¾‹å¤–: OCX ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ ãƒšãƒ¼ã‚¸ã®æˆ»ã‚Šå€¤ã¯ FALSE ã¨ãªã‚Šã¾ã™
 }
 
-void CDlgConvID3v2Version::OnSelchangeComboId3v2Version() 
+void CDlgConvID3v2Version::OnSelchangeComboId3v2Version()
 {
-	// TODO: ‚±‚ÌˆÊ’u‚ÉƒRƒ“ƒgƒ[ƒ‹’Ê’mƒnƒ“ƒhƒ‰—p‚ÌƒR[ƒh‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
-	UpdateData();
-	int nVer = m_cbId3v2Version.GetCurSel();
-	int nEnc = m_cbId3v2Encode.GetCurSel();
-	if (nVer != 0 && nVer != 3) {
-		if (m_cbId3v2Encode.FindStringExact(0, "UTF-8") != CB_ERR) {
-			m_cbId3v2Encode.DeleteString(3);
-			if (nEnc == 3) {
-				m_cbId3v2Encode.SetCurSel(2);
-			}
-		}
-	} else {
-		if (m_cbId3v2Encode.FindStringExact(0, "UTF-8") == CB_ERR) {
-			m_cbId3v2Encode.AddString("UTF-8");
-		}
-	}
-	UpdateData(FALSE);
+    // TODO: ã“ã®ä½ç½®ã«ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«é€šçŸ¥ãƒãƒ³ãƒ‰ãƒ©ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
+    UpdateData();
+    int nVer = m_cbId3v2Version.GetCurSel();
+    int nEnc = m_cbId3v2Encode.GetCurSel();
+    if (nVer != 0 && nVer != 3) {
+        if (m_cbId3v2Encode.FindStringExact(0, _T("UTF-8")) != CB_ERR) {
+            m_cbId3v2Encode.DeleteString(3);
+            if (nEnc == 3) {
+                m_cbId3v2Encode.SetCurSel(2);
+            }
+        }
+    } else {
+        if (m_cbId3v2Encode.FindStringExact(0, _T("UTF-8")) == CB_ERR) {
+            m_cbId3v2Encode.AddString(_T("UTF-8"));
+        }
+    }
+    UpdateData(FALSE);
 }

@@ -4,63 +4,61 @@
 #if _MSC_VER > 1000
 #pragma once
 #endif // _MSC_VER > 1000
-// DlgFileRmpID3v2.h : ƒwƒbƒ_[ ƒtƒ@ƒCƒ‹
+// DlgFileRmpID3v2.h : ãƒ˜ãƒƒãƒ€ãƒ¼ ãƒ•ã‚¡ã‚¤ãƒ«
 //
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgFileRmpID3v2 ƒ_ƒCƒAƒƒO
+// CDlgFileRmpID3v2 ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
 
 class CDlgFileRmpID3v2 : public CPropertyPage
 {
-	DECLARE_DYNCREATE(CDlgFileRmpID3v2)
+    DECLARE_DYNCREATE(CDlgFileRmpID3v2)
 
-// ƒRƒ“ƒXƒgƒ‰ƒNƒVƒ‡ƒ“
+// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚·ãƒ§ãƒ³
 public:
-	CDlgFileRmpID3v2();
-	~CDlgFileRmpID3v2();
+    CDlgFileRmpID3v2();
+    ~CDlgFileRmpID3v2();
 
-	void	UpdateStatus(void);
+    void    UpdateStatus(void);
 
-// ƒ_ƒCƒAƒƒO ƒf[ƒ^
-	//{{AFX_DATA(CDlgFileRmpID3v2)
-	enum { IDD = IDD_DLG_FILE_RMP_ID3V2 };
-	BOOL	m_bRmpID3tagAutoWrite;
-	BOOL	m_bAutoConvRMP;
-	int		m_nSIFieldConvertType;
-	BOOL	m_bRmpGenreListSelect;
-	BOOL	m_bChangeFileExt;
-	BOOL	m_bAutoConvID3v2;
-	BOOL	m_bID3v2ID3tagAutoWrite;
-	BOOL	m_bID3v2GenreListSelect;
-	BOOL	m_bID3v2GenreAddNumber;
-	BOOL	m_bID3v2Id3tagAutoDelete;
-	//}}AFX_DATA
+// ãƒ€ã‚¤ã‚¢ãƒ­ã‚° ãƒ‡ãƒ¼ã‚¿
+    //{{AFX_DATA(CDlgFileRmpID3v2)
+    enum { IDD = IDD_DLG_FILE_RMP_ID3V2 };
+    BOOL    m_bRmpID3tagAutoWrite;
+    BOOL    m_bAutoConvRMP;
+    int     m_nSIFieldConvertType;
+    BOOL    m_bRmpGenreListSelect;
+    BOOL    m_bChangeFileExt;
+    BOOL    m_bAutoConvID3v2;
+    BOOL    m_bID3v2ID3tagAutoWrite;
+    BOOL    m_bID3v2GenreListSelect;
+    BOOL    m_bID3v2GenreAddNumber;
+    BOOL    m_bID3v2Id3tagAutoDelete;
+    //}}AFX_DATA
 
 
-// ƒI[ƒo[ƒ‰ƒCƒh
-	// ClassWizard ‚Í‰¼‘zŠÖ”‚ÌƒI[ƒo[ƒ‰ƒCƒh‚ğ¶¬‚µ‚Ü‚·B
+// ã‚ªãƒ¼ãƒãƒ¼ãƒ©ã‚¤ãƒ‰
+    // ClassWizard ã¯ä»®æƒ³é–¢æ•°ã®ã‚ªãƒ¼ãƒãƒ¼ãƒ©ã‚¤ãƒ‰ã‚’ç”Ÿæˆã—ã¾ã™ã€‚
 
-	//{{AFX_VIRTUAL(CDlgFileRmpID3v2)
-	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV ƒTƒ|[ƒg
-	//}}AFX_VIRTUAL
+    //{{AFX_VIRTUAL(CDlgFileRmpID3v2)
+    protected:
+    virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV ã‚µãƒãƒ¼ãƒˆ
+    //}}AFX_VIRTUAL
 
-// ƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“
+// ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³
 protected:
-	// ¶¬‚³‚ê‚½ƒƒbƒZ[ƒW ƒ}ƒbƒvŠÖ”
-	//{{AFX_MSG(CDlgFileRmpID3v2)
-	virtual BOOL OnInitDialog();
-	afx_msg void OnBtResetPage();
-	afx_msg void OnChAutoConvRmp();
-	afx_msg void OnChAutoConvId3v2();
-	afx_msg void OnChId3v2Id3tagAutoWrite();
-	afx_msg void OnChId3v2Id3tagAutoDelete();
-	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
+    // ç”Ÿæˆã•ã‚ŒãŸãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒãƒƒãƒ—é–¢æ•°
+    //{{AFX_MSG(CDlgFileRmpID3v2)
+    virtual BOOL OnInitDialog();
+    afx_msg void OnBtResetPage();
+    afx_msg void OnChId3v2Id3tagAutoDelete();
+    //}}AFX_MSG
+    DECLARE_MESSAGE_MAP()
 
+public:
 };
 
 //{{AFX_INSERT_LOCATION}}
-// Microsoft Visual C++ ‚Í‘Os‚Ì’¼‘O‚É’Ç‰Á‚ÌéŒ¾‚ğ‘}“ü‚µ‚Ü‚·B
+// Microsoft Visual C++ ã¯å‰è¡Œã®ç›´å‰ã«è¿½åŠ ã®å®£è¨€ã‚’æŒ¿å…¥ã—ã¾ã™ã€‚
 
 #endif // !defined(AFX_DLGFILERMPID3V2_H__DB58BAE7_750F_475F_A29E_95CD220EE90D__INCLUDED_)

@@ -1,8 +1,7 @@
-// stdafx.cpp : •W€ƒCƒ“ƒNƒ‹[ƒhƒtƒ@ƒCƒ‹‚ðŠÜ‚Þƒ\[ƒX ƒtƒ@ƒCƒ‹
-//              STEP_tta.pch : ¶¬‚³‚ê‚éƒvƒŠƒRƒ“ƒpƒCƒ‹Ïƒwƒbƒ_[
-//              stdafx.obj : ¶¬‚³‚ê‚éƒvƒŠƒRƒ“ƒpƒCƒ‹Ïƒ^ƒCƒvî•ñ
+// stdafx.cpp : æ¨™æº–ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰ã®ã¿ã‚’å«ã‚€ã‚½ãƒ¼ã‚¹ ãƒ•ã‚¡ã‚¤ãƒ«
+// STEP_dsf.pch ã¯ãƒ—ãƒªã‚³ãƒ³ãƒ‘ã‚¤ãƒ«æ¸ˆã¿ãƒ˜ãƒƒãƒ€ãƒ¼ã«ãªã‚Šã¾ã™
+// stdafx.obj ã«ã¯ãƒ—ãƒªã‚³ãƒ³ãƒ‘ã‚¤ãƒ«æ¸ˆã¿åž‹æƒ…å ±ãŒå«ã¾ã‚Œã¾ã™ã€‚
 
 #include "stdafx.h"
-
 
 

@@ -6,20 +6,20 @@
 //extern HINSTANCE g_hInstance;
 //extern HINSTANCE hLib;
 
-/* ÉvÉâÉOÉCÉìÇ©ÇÁåƒÇ—èoÇπÇÈä÷êî */
+/* „Éó„É©„Ç∞„Ç§„É≥„Åã„ÇâÂëº„Å≥Âá∫„Åõ„ÇãÈñ¢Êï∞ */
 extern "C" {
 extern STEP_API UINT (WINAPI *STEPGetCommandID)(void);
 extern STEP_API HMENU (WINAPI *STEPGetMenu)(UINT);
-extern STEP_API void (WINAPI *STEPAddToolBarButton)(HBITMAP, UINT, char*);
+extern STEP_API void (WINAPI *STEPAddToolBarButton)(HBITMAP, UINT, TCHAR*);
 extern STEP_API UINT (WINAPI *STEPRegisterExt)(UINT, LPCTSTR, HBITMAP);
 extern STEP_API UINT (WINAPI *STEPKeyAssign)(UINT, LPCTSTR, LPCTSTR);
-extern STEP_API const char* (WINAPI *STEPGetGenreNameSIF)(BYTE byGenre);
-extern STEP_API BYTE (WINAPI *STEPGetGenreCode)(const char* szGenre);
-extern STEP_API bool (WINAPI *STEPIsUserGenre)(const char* szGenre);
-extern STEP_API int (WINAPI *STEPGetNumericTrackNumber)(const char* szTrackNumber, char* szNumericNumber, int size); /* STEP 037 */
-extern STEP_API int (WINAPI *STEPGetIntegerTrackNumber)(const char* szTrackNumber); /* STEP 037 */
-extern STEP_API int (WINAPI *STEPGetNumericDiskNumber)(const char* szDiskNumber, char* szNumericNumber, int size); /* STEP 037 */
-extern STEP_API int (WINAPI *STEPGetIntegerDiskNumber)(const char* szDiskNumber); /* STEP 037 */
+extern STEP_API const TCHAR* (WINAPI *STEPGetGenreNameSIF)(BYTE byGenre);
+extern STEP_API BYTE (WINAPI *STEPGetGenreCode)(const TCHAR* szGenre);
+extern STEP_API bool (WINAPI *STEPIsUserGenre)(const TCHAR* szGenre);
+extern STEP_API int (WINAPI *STEPGetNumericTrackNumber)(const TCHAR* szTrackNumber, TCHAR* szNumericNumber, int size); /* STEP 037 */
+extern STEP_API int (WINAPI *STEPGetIntegerTrackNumber)(const TCHAR* szTrackNumber); /* STEP 037 */
+extern STEP_API int (WINAPI *STEPGetNumericDiscNumber)(const TCHAR* szDiscNumber, TCHAR* szNumericNumber, int size); /* STEP 037 */
+extern STEP_API int (WINAPI *STEPGetIntegerDiscNumber)(const TCHAR* szDiscNumber); /* STEP 037 */
 
 extern STEP_API void (WINAPI *STEPProcessSelectedFiles)(LPCTSTR, STEPProcessSelectedFilesCB);
 extern STEP_API void (WINAPI *STEPProcessSelectedFilesForUpdate)(LPCTSTR, STEPProcessSelectedFilesCB);
@@ -32,11 +32,11 @@ extern STEP_API bool (WINAPI *STEPItemHasChildren)(int);
 extern STEP_API bool (WINAPI *STEPGetSelectedRange)(int*, int*, int* , int*);
 extern STEP_API bool (WINAPI *STEPIsItemFile)(int);
 extern STEP_API void (WINAPI *STEPChangeSubItemText)(int nItem, int nColumn, LPCTSTR szText);
-extern STEP_API const char* (WINAPI *STEPGetSubItemText)(int nItem, int nColumn);
+extern STEP_API const TCHAR* (WINAPI *STEPGetSubItemText)(int nItem, int nColumn);
 extern STEP_API void (WINAPI *STEPGetFileInfo)(int nItem, FILE_INFO* info);
 extern STEP_API UINT (WINAPI *STEPGETColumnType)(int nColumn);
 extern STEP_API bool (WINAPI *STEPIsCurrentCellEditOK)(void);
-extern STEP_API bool (WINAPI *STEPIsNumeric)(const char* szText); /* STEP 037 */
+extern STEP_API bool (WINAPI *STEPIsNumeric)(const TCHAR* szText); /* STEP 037 */
 extern STEP_API void (WINAPI *STEPConvSiFieldToId3tag)(FILE_INFO* pFileInfo); /* STEP 037 */
 
 extern STEP_API void (WINAPI *STEPInitDataSIF)(FILE_INFO* info);
@@ -51,7 +51,7 @@ extern STEP_API bool (WINAPI *STEPUpdateCellInfo)(void);
 extern bool Initialize(void);
 extern void Finalize(void);
 
-/* É^ÉOèÓïÒÇÃéÊìæÅ^ê›íË */
+/* „Çø„Ç∞ÊÉÖÂ†±„ÅÆÂèñÂæóÔºèË®≠ÂÆö */
 extern LPCTSTR GetFullPath(FILE_INFO* info);
 extern LPCTSTR GetFileName(FILE_INFO* info);
 extern LPCTSTR GetFilePath(FILE_INFO* info);
@@ -63,7 +63,6 @@ extern LPCTSTR GetAlbumName(FILE_INFO* info);
 extern LPCTSTR GetComment(FILE_INFO* info);
 extern LPCTSTR GetYear(FILE_INFO* info);
 extern LPCTSTR GetTrackNumber(FILE_INFO* info);
-extern LPCTSTR GetDiskNumber(FILE_INFO* info);
 extern LPCTSTR GetGenre(FILE_INFO* info);
 extern LPCTSTR GetTrackNameSI(FILE_INFO* info);
 extern LPCTSTR GetArtistNameSI(FILE_INFO* info);
@@ -71,7 +70,9 @@ extern LPCTSTR GetAlbumNameSI(FILE_INFO* info);
 extern LPCTSTR GetCommentSI(FILE_INFO* info);
 extern LPCTSTR GetYearSI(FILE_INFO* info);
 extern LPCTSTR GetTrackNumberSI(FILE_INFO* info);
-extern LPCTSTR GetDiskNumberSI(FILE_INFO* info);
+extern LPCTSTR GetDiscNumberSI(FILE_INFO* info);
+extern LPCTSTR GetTrackTotalSI(FILE_INFO* info);//by Kobarin
+extern LPCTSTR GetDiscTotalSI(FILE_INFO* info); //by Kobarin
 extern LPCTSTR GetGenreSI(FILE_INFO* info);
 extern LPCTSTR GetCopyrightSI(FILE_INFO* info);
 extern LPCTSTR GetEngineerSI(FILE_INFO* info);
@@ -107,7 +108,9 @@ extern void SetAlbumNameSI(FILE_INFO* info, LPCTSTR szValue);
 extern void SetCommentSI(FILE_INFO* info, LPCTSTR szValue);
 extern void SetYearSI(FILE_INFO* info, LPCTSTR szValue);
 extern void SetTrackNumberSI(FILE_INFO* info, LPCTSTR szValue);
-extern void SetDiskNumberSI(FILE_INFO* info, LPCTSTR szValue);
+extern void SetDiscNumberSI(FILE_INFO* info, LPCTSTR szValue);
+extern void SetTrackTotalSI(FILE_INFO* info, LPCTSTR szValue);//by Kobarin
+extern void SetDiscTotalSI(FILE_INFO* info, LPCTSTR szValue); //by Kobarin
 extern void SetGenreSI(FILE_INFO* info, LPCTSTR szValue);
 extern void SetCopyrightSI(FILE_INFO* info, LPCTSTR szValue);
 extern void SetEngineerSI(FILE_INFO* info, LPCTSTR szValue);
@@ -140,8 +143,6 @@ extern int  GetPlayTime(FILE_INFO* pInfo);
 extern void SetPlayTime(FILE_INFO* pInfo, int nPlayTime);
 extern BYTE GetBTrackNumber(FILE_INFO* pInfo);
 extern void SetBTrackNumber(FILE_INFO* pInfo, BYTE nTrackNumber);
-extern BYTE GetBDiskNumber(FILE_INFO* pInfo);
-extern void SetBDiskNumber(FILE_INFO* pInfo, BYTE nDiskNumber);
 extern BYTE GetBGenre(FILE_INFO* pInfo);
 extern void SetBGenre(FILE_INFO* pInfo, BYTE nGenre);
 extern void* GetFileSpecificInfo(FILE_INFO* pInfo);

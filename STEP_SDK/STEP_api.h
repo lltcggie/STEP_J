@@ -1,138 +1,141 @@
 #ifndef STEP_API_H
 #define STEP_API_H
 
-#define STEP_API __declspec(dllexport)
+#define STEP_API //__declspec(dllexport)
 
 #define STEP_API_VERSION 0x000200 /* STEP 029 */
 
-/* ˆ—Œ‹‰Ê */
+/* å‡¦ç†çµæžœ */
 enum {
-	STEP_SUCCESS,			// ³í
-	STEP_UNKNOWN_FORMAT,	// –¢’m‚Ìƒtƒ@ƒCƒ‹Œ`Ž®
-	STEP_ERROR				// ƒGƒ‰[
+    STEP_SUCCESS,           // æ­£å¸¸
+    STEP_UNKNOWN_FORMAT,    // æœªçŸ¥ã®ãƒ•ã‚¡ã‚¤ãƒ«å½¢å¼
+    STEP_ERROR              // ã‚¨ãƒ©ãƒ¼
 };
 
-/* ƒƒjƒ…[Ží•Ê */
+/* ãƒ¡ãƒ‹ãƒ¥ãƒ¼ç¨®åˆ¥ */
 enum {
-	MENU_FILE,
-	MENU_EDIT,
-	MENU_DISP,
-	MENU_CONV,
-	MENU_PLAYLIST,
-	MENU_PLAYER,
-	MENU_OPTION,
-	/*MENU_OPTION_PLUGIN,*/
-	MENU_HELP,
-	// ‚±‚±‚©‚ç‰º‚Í STEPGetMenu() ‚Å‚ÍŽæ“¾‚Å‚«‚È‚¢ STEPOnLoadMenu() ‚ÅŽg‚¤
-	MENU_CELL_RANGE,
-	MENU_FILE_EDIT_OK,
-	MENU_FILE_RANGE,
-	MENU_SELECT_FOLDER,
+    MENU_FILE,
+    MENU_EDIT,
+    MENU_DISP,
+    MENU_CONV,
+    MENU_PLAYLIST,
+    MENU_PLAYER,
+    MENU_OPTION,
+    /*MENU_OPTION_PLUGIN,*/
+    MENU_HELP,
+    // ã“ã“ã‹ã‚‰ä¸‹ã¯ STEPGetMenu() ã§ã¯å–å¾—ã§ããªã„ STEPOnLoadMenu() ã§ä½¿ã†
+    MENU_CELL_RANGE,
+    MENU_FILE_EDIT_OK,
+    MENU_FILE_RANGE,
+    MENU_SELECT_FOLDER,
 };
 
-/* ƒtƒ@ƒCƒ‹Œ`Ž® */
-enum	{
-	FILE_FORMAT_UNKNOWN = 1,	// ƒtƒ@ƒCƒ‹Œ`Ž®F–¢’m‚ÌŒ`Ž®
-	// ‚»‚Ì‘¼‚Íƒvƒ‰ƒOƒCƒ“–ˆ‚É’è‹`
+/* ãƒ•ã‚¡ã‚¤ãƒ«å½¢å¼ */
+enum    {
+    FILE_FORMAT_UNKNOWN = 1,    // ãƒ•ã‚¡ã‚¤ãƒ«å½¢å¼ï¼šæœªçŸ¥ã®å½¢å¼
+    // ãã®ä»–ã¯ãƒ—ãƒ©ã‚°ã‚¤ãƒ³æ¯Žã«å®šç¾©
 };
 
-/* ƒZƒ‹–ˆ‚Ì“ü—Í—pƒRƒ“ƒgƒ[ƒ‹Ží•Ê */
+/* ã‚»ãƒ«æ¯Žã®å…¥åŠ›ç”¨ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ç¨®åˆ¥ */
 enum CONTROLTYPE {edit/*default*/, combobox, invalid, multiedit, multieditreadonly};
-#define _NULL			invalid
-#define _EDIT			edit
-#define _CBOX			combobox
-#define _MEDIT			multiedit
-#define _MEDITR			multieditreadonly
+#define _NULL               invalid
+#define _EDIT               edit
+#define _CBOX               combobox
+#define _MEDIT              multiedit
+#define _MEDITR             multieditreadonly
 
-/* •\Ž¦ƒJƒ‰ƒ€ */
+/* è¡¨ç¤ºã‚«ãƒ©ãƒ  */
 enum COLUMNTYPE {
-	COLUMN_TREE_ITEM = 0,
-	COLUMN_FULL_PATH_NAME = 0,
-	COLUMN_FILE_NAME,
-	COLUMN_TRACK_NAME,		// ‹È–¼
-	COLUMN_ARTIST_NAME,		// ƒA[ƒeƒBƒXƒg–¼
-	COLUMN_ALBUM_NAME,		// ƒAƒ‹ƒoƒ€–¼^»•i–¼
-	COLUMN_TRACK_NUMBER,	// ƒgƒ‰ƒbƒN”Ô†(ID3 tag v1.1‚Ì‚Ý)
-	COLUMN_DISK_NUMBER,		// ƒfƒBƒXƒN”Ô†
-	COLUMN_YEAR,			// ƒŠƒŠ[ƒX”N†
-	COLUMN_GENRE,			// ƒWƒƒƒ“ƒ‹
-	COLUMN_COMMENT,			// ƒRƒƒ“ƒg•¶Žš—ñ
-	COLUMN_COPYRIGHT,		// ’˜ìŒ 
-	COLUMN_ENGINEER,		// ƒGƒ“ƒWƒjƒA(»ìŽÒ)
-	COLUMN_SOURCE,			// ƒ\[ƒX
-	COLUMN_SOFTWARE,		// ƒ\ƒtƒgƒEƒFƒA
-	COLUMN_KEYWORD,			// ƒL[ƒ[ƒh
-	COLUMN_TECHNICIAN,		// ‹ZpŽÒ
-	COLUMN_LYRIC,			// ‰ÌŽŒ
-	COLUMN_COMMISSION,		// ƒRƒ~ƒbƒVƒ‡ƒ“
-	COLUMN_WRITER,			// ìŽŒ
-	COLUMN_COMPOSER,		// ì‹È
-	COLUMN_ALBM_ARTIST,		// Albm.ƒA[ƒeƒBƒXƒg
-	COLUMN_ORIG_ARTIST,		// Orig.ƒA[ƒeƒBƒXƒg
-	COLUMN_URL,				// URL
-	COLUMN_ENCODEST,		// ƒGƒ“ƒR[ƒh‚µ‚½l
-	COLUMN_FILE_SIZE,		// ƒtƒ@ƒCƒ‹ƒTƒCƒY
-	COLUMN_FILE_TIME,		// ƒtƒ@ƒCƒ‹ƒ^ƒCƒ€ƒXƒ^ƒ“ƒv
-	COLUMN_FILE_PATH,		// ƒtƒ@ƒCƒ‹ƒpƒX–¼
-	COLUMN_PLAY_TIME,		// ‰‰‘tŽžŠÔ
-	COLUMN_LYRIC_FILE,		// ‰ÌŽŒƒtƒ@ƒCƒ‹
-	COLUMN_FILE_TYPE,		// ƒtƒ@ƒCƒ‹‚ÌŽí—Þ
-	COLUMN_FORMAT,			// ƒtƒH[ƒ}ƒbƒg
-	COLUMN_OTHER,			// ‚»‚Ì‘¼
-	COLUMN_FILE_CTIME,		// ƒtƒ@ƒCƒ‹ì¬“ú /* 2003.06.19 add */
-	COLUMN_MAX,
+    COLUMN_TREE_ITEM = 0,
+    COLUMN_FULL_PATH_NAME = 0,
+    COLUMN_FILE_NAME,
+    COLUMN_TRACK_NAME,      // æ›²å
+    COLUMN_ARTIST_NAME,     // ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆå
+    COLUMN_ALBUM_NAME,      // ã‚¢ãƒ«ãƒãƒ åï¼è£½å“å
+    COLUMN_TRACK_NUMBER,    // ãƒˆãƒ©ãƒƒã‚¯ç•ªå·(ID3 tag v1.1ã®ã¿)
+    COLUMN_TRACK_TOTAL,     // ãƒˆãƒ©ãƒƒã‚¯æ•°(by Kobarin)
+    COLUMN_DISC_NUMBER,     // ãƒ‡ã‚£ã‚¹ã‚¯ç•ªå·
+    COLUMN_DISC_TOTAL,      // ãƒ‡ã‚£ã‚¹ã‚¯æ•°(by Kobarin)
+    COLUMN_YEAR,            // ãƒªãƒªãƒ¼ã‚¹å¹´å·
+    COLUMN_GENRE,           // ã‚¸ãƒ£ãƒ³ãƒ«
+    COLUMN_COMMENT,         // ã‚³ãƒ¡ãƒ³ãƒˆæ–‡å­—åˆ—
+    COLUMN_COPYRIGHT,       // è‘—ä½œæ¨©
+    COLUMN_ENGINEER,        // ã‚¨ãƒ³ã‚¸ãƒ‹ã‚¢(è£½ä½œè€…)
+    COLUMN_SOURCE,          // ã‚½ãƒ¼ã‚¹
+    COLUMN_SOFTWARE,        // ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢
+    COLUMN_KEYWORD,         // ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰
+    COLUMN_TECHNICIAN,      // æŠ€è¡“è€…
+    COLUMN_LYRIC,           // æ­Œè©ž
+    COLUMN_COMMISSION,      // ã‚³ãƒŸãƒƒã‚·ãƒ§ãƒ³
+    COLUMN_WRITER,          // ä½œè©ž
+    COLUMN_COMPOSER,        // ä½œæ›²
+    COLUMN_ALBM_ARTIST,     // Albm.ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆ
+    COLUMN_ORIG_ARTIST,     // Orig.ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆ
+    COLUMN_URL,             // URL
+    COLUMN_ENCODEST,        // ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰ã—ãŸäºº
+    COLUMN_FILE_SIZE,       // ãƒ•ã‚¡ã‚¤ãƒ«ã‚µã‚¤ã‚º
+    COLUMN_FILE_TIME,       // ãƒ•ã‚¡ã‚¤ãƒ«ã‚¿ã‚¤ãƒ ã‚¹ã‚¿ãƒ³ãƒ—
+    COLUMN_FILE_PATH,       // ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹å
+    COLUMN_PLAY_TIME,       // æ¼”å¥æ™‚é–“
+    COLUMN_LYRIC_FILE,      // æ­Œè©žãƒ•ã‚¡ã‚¤ãƒ«
+    COLUMN_FILE_TYPE,       // ãƒ•ã‚¡ã‚¤ãƒ«ã®ç¨®é¡ž
+    COLUMN_FORMAT,          // ãƒ•ã‚©ãƒ¼ãƒžãƒƒãƒˆ
+    COLUMN_OTHER,           // ãã®ä»–
+    COLUMN_FILE_CTIME,      // ãƒ•ã‚¡ã‚¤ãƒ«ä½œæˆæ—¥ /* 2003.06.19 add */
+    COLUMN_MAX,
 };
 #define COLUMN_EDIT_MAX COLUMN_OTHER
 
-/* ƒ^ƒOî•ñŽæ“¾^Ý’è—p‚ÌƒtƒB[ƒ‹ƒh–¼ */
+/* ã‚¿ã‚°æƒ…å ±å–å¾—ï¼è¨­å®šç”¨ã®ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰å */
 enum FIELDTYPE {
-	FIELD_FULL_PATH_NAME,			// ƒtƒ@ƒCƒ‹–¼(ƒtƒ‹ƒpƒX)
-	FIELD_FILE_NAME,				// strFullPathName ‚Ìƒtƒ@ƒCƒ‹–¼•”•ª
-	FIELD_FILE_PATH,				// strFullPathName ‚ÌƒpƒX•”•ª
-	FIELD_VISUAL_FORMAT,			// ‰f‘œƒtƒH[ƒ}ƒbƒg
-	FIELD_AUDIO_FORMAT,				// ‰¹ºƒtƒH[ƒ}ƒbƒg
-	FIELD_TRACK_NAME,				// ƒgƒ‰ƒbƒN–¼
-	FIELD_ARTIST_NAME,				// ƒA[ƒeƒBƒXƒg–¼
-	FIELD_ALBUM_NAME,				// ƒAƒ‹ƒoƒ€–¼
-	FIELD_COMMENT,					// ƒRƒƒ“ƒg
-	FIELD_YEAR,						// ƒŠƒŠ[ƒX”N†
-	FIELD_TRACK_NUMBER,				// ƒgƒ‰ƒbƒN”Ô†
-	FIELD_DISK_NUMBER,				// ƒfƒBƒXƒN”Ô†
-	FIELD_GENRE,					// ƒWƒƒƒ“ƒ‹–¼
-	FIELD_TRACK_NAME_SI,			// ‹È–¼
-	FIELD_ARTIST_NAME_SI,			// ƒA[ƒeƒBƒXƒg–¼
-	FIELD_ALBUM_NAME_SI,			// »•i–¼
-	FIELD_COMMENT_SI,				// ƒRƒƒ“ƒg•¶Žš—ñ
-	FIELD_YEAR_SI,					// ƒŠƒŠ[ƒX”N†
-	FIELD_GENRE_SI,					// ƒWƒƒƒ“ƒ‹–¼
-	FIELD_TRACK_NUMBER_SI,			// ƒgƒ‰ƒbƒN”Ô†
-	FIELD_DISK_NUMBER_SI,			// ƒfƒBƒXƒN”Ô†
-	FIELD_COPYRIGHT_SI,				// ’˜ìŒ 
-	FIELD_ENGINEER_SI,				// ƒGƒ“ƒWƒjƒA
-	FIELD_SOURCE_SI,				// ƒ\[ƒX
-	FIELD_SOFTWARE_SI,				// ƒ\ƒtƒgƒEƒFƒA
-	FIELD_KEYWORD_SI,				// ƒL[ƒ[ƒh
-	FIELD_TECHNICIAN_SI,			// ‹ZpŽÒ
-	FIELD_LYRIC_SI,					// ‰ÌŽŒ
-	FIELD_COMMISSION_SI,			// ƒRƒ~ƒbƒVƒ‡ƒ“
-	FIELD_WRITER_SI,				// ìŽŒ
-	FIELD_COMPOSER_SI,				// ì‹È
-	FIELD_ALBM_ARTIST_SI,			// Albm.ƒA[ƒeƒBƒXƒg
-	FIELD_ORIG_ARTIST_SI,			// Orig.ƒA[ƒeƒBƒXƒg
-	FIELD_URL_SI,					// URL
-	FIELD_ENCODEST,					// ƒGƒ“ƒR[ƒh‚µ‚½l
-	FIELD_OTHER,					// ‚»‚Ì‘¼
-	FILED_FILE_TYPE_NAME,			// ƒtƒ@ƒCƒ‹ƒ^ƒCƒv•¶Žš—ñ
-	FIELD_MAX
+    FIELD_FULL_PATH_NAME,           // ãƒ•ã‚¡ã‚¤ãƒ«å(ãƒ•ãƒ«ãƒ‘ã‚¹)
+    FIELD_FILE_NAME,                // strFullPathName ã®ãƒ•ã‚¡ã‚¤ãƒ«åéƒ¨åˆ†
+    FIELD_FILE_PATH,                // strFullPathName ã®ãƒ‘ã‚¹éƒ¨åˆ†
+    FIELD_VISUAL_FORMAT,            // æ˜ åƒãƒ•ã‚©ãƒ¼ãƒžãƒƒãƒˆ
+    FIELD_AUDIO_FORMAT,             // éŸ³å£°ãƒ•ã‚©ãƒ¼ãƒžãƒƒãƒˆ
+    FIELD_TRACK_NAME,               // ãƒˆãƒ©ãƒƒã‚¯å
+    FIELD_ARTIST_NAME,              // ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆå
+    FIELD_ALBUM_NAME,               // ã‚¢ãƒ«ãƒãƒ å
+    FIELD_COMMENT,                  // ã‚³ãƒ¡ãƒ³ãƒˆ
+    FIELD_YEAR,                     // ãƒªãƒªãƒ¼ã‚¹å¹´å·
+    FIELD_TRACK_NUMBER,             // ãƒˆãƒ©ãƒƒã‚¯ç•ªå·
+    FIELD_GENRE,                    // ã‚¸ãƒ£ãƒ³ãƒ«å
+    FIELD_TRACK_NAME_SI,            // æ›²å
+    FIELD_ARTIST_NAME_SI,           // ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆå
+    FIELD_ALBUM_NAME_SI,            // è£½å“å
+    FIELD_COMMENT_SI,               // ã‚³ãƒ¡ãƒ³ãƒˆæ–‡å­—åˆ—
+    FIELD_YEAR_SI,                  // ãƒªãƒªãƒ¼ã‚¹å¹´å·
+    FIELD_GENRE_SI,                 // ã‚¸ãƒ£ãƒ³ãƒ«å
+    FIELD_TRACK_NUMBER_SI,          // ãƒˆãƒ©ãƒƒã‚¯ç•ªå·
+    FIELD_TRACK_TOTAL_SI,           // ãƒˆãƒ©ãƒƒã‚¯æ•°(by Kobarin)
+    FIELD_Disc_NUMBER_SI,           // ãƒ‡ã‚£ã‚¹ã‚¯ç•ªå·
+    FIELD_DISC_TOTAL_SI,            // ãƒ‡ã‚£ã‚¹ã‚¯æ•°(by Kobarin)
+    FIELD_COPYRIGHT_SI,             // è‘—ä½œæ¨©
+    FIELD_ENGINEER_SI,              // ã‚¨ãƒ³ã‚¸ãƒ‹ã‚¢
+    FIELD_SOURCE_SI,                // ã‚½ãƒ¼ã‚¹
+    FIELD_SOFTWARE_SI,              // ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢
+    FIELD_KEYWORD_SI,               // ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰
+    FIELD_TECHNICIAN_SI,            // æŠ€è¡“è€…
+    FIELD_LYRIC_SI,                 // æ­Œè©ž
+    FIELD_COMMISSION_SI,            // ã‚³ãƒŸãƒƒã‚·ãƒ§ãƒ³
+    FIELD_WRITER_SI,                // ä½œè©ž
+    FIELD_COMPOSER_SI,              // ä½œæ›²
+    FIELD_ALBM_ARTIST_SI,           // Albm.ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆ
+    FIELD_ORIG_ARTIST_SI,           // Orig.ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆ
+    FIELD_URL_SI,                   // URL
+    FIELD_ENCODEST,                 // ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰ã—ãŸäºº
+    FIELD_OTHER,                    // ãã®ä»–
+    FILED_FILE_TYPE_NAME,           // ãƒ•ã‚¡ã‚¤ãƒ«ã‚¿ã‚¤ãƒ—æ–‡å­—åˆ—
+    FIELD_MAX
 };
 
-/* ƒtƒ@ƒCƒ‹î•ñ */
+/* ãƒ•ã‚¡ã‚¤ãƒ«æƒ…å ± */
 typedef struct _FILE_INFO {
-	void*	pFileMP3;
+    void*    pFileMP3;
 } FILE_INFO;
 
 /**--------------------------------------------------------------------**/
-/* ƒvƒ‰ƒOƒCƒ“‚É•K‚¸ŽÀ‘•‚µ‚È‚¯‚ê‚Î‚¢‚¯‚È‚¢ŠÖ” */
+/* ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ã«å¿…ãšå®Ÿè£…ã—ãªã‘ã‚Œã°ã„ã‘ãªã„é–¢æ•° */
 extern "C" {
 STEP_API bool WINAPI STEPInit(UINT pID, LPCTSTR szPluginFolder);
 STEP_API void WINAPI STEPFinalize();
@@ -141,7 +144,7 @@ STEP_API LPCTSTR WINAPI STEPGetPluginName(void);
 STEP_API LPCTSTR WINAPI STEPGetPluginInfo(void);
 }
 
-/* ƒvƒ‰ƒOƒCƒ“‚ªƒ^ƒO‚Ì“Ç‚Ý‘‚«‚ðƒTƒ|[ƒg‚·‚éê‡‚ÉŽÀ‘•‚µ‚È‚¯‚ê‚Î‚¢‚¯‚È‚¢ŠÖ” */
+/* ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ãŒã‚¿ã‚°ã®èª­ã¿æ›¸ãã‚’ã‚µãƒãƒ¼ãƒˆã™ã‚‹å ´åˆã«å®Ÿè£…ã—ãªã‘ã‚Œã°ã„ã‘ãªã„é–¢æ•° */
 extern "C" {
 STEP_API CONTROLTYPE WINAPI STEPGetControlType(UINT, COLUMNTYPE, bool);
 STEP_API UINT WINAPI STEPGetColumnMax(UINT, COLUMNTYPE, bool);
@@ -149,7 +152,7 @@ STEP_API UINT WINAPI STEPLoad(FILE_INFO*, LPCTSTR);
 STEP_API UINT WINAPI STEPSave(FILE_INFO*);
 }
 
-/* ƒvƒ‰ƒOƒCƒ“‚ÉŽÀ‘•‚Å‚«‚éŠÖ” */
+/* ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ã«å®Ÿè£…ã§ãã‚‹é–¢æ•° */
 extern "C" {
 STEP_API LPCTSTR WINAPI STEPGetToolTipText(UINT nID);
 STEP_API LPCTSTR WINAPI STEPGetStatusMessage(UINT nID);
@@ -171,7 +174,7 @@ STEP_API void WINAPI STEPOnLoadEnd();
 STEP_API void WINAPI STEPOnSaveEnd();
 }
 
-// ƒtƒ@ƒCƒ‹–ˆ‚És‚¤ƒR[ƒ‹ƒoƒbƒNŠÖ” */
+// ãƒ•ã‚¡ã‚¤ãƒ«æ¯Žã«è¡Œã†ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯é–¢æ•° */
 typedef bool WINAPI STEPProcessSelectedFilesCB(FILE_INFO*, int, HWND);
 
 #endif

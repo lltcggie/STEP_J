@@ -4,62 +4,62 @@
 #if _MSC_VER > 1000
 #pragma once
 #endif // _MSC_VER > 1000
-// DlgDefaultValue.h : ƒwƒbƒ_[ ƒtƒ@ƒCƒ‹
+// DlgDefaultValue.h : ãƒ˜ãƒƒãƒ€ãƒ¼ ãƒ•ã‚¡ã‚¤ãƒ«
 //
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgDefaultValue ƒ_ƒCƒAƒƒO
+// CDlgDefaultValue ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
 
 class CDlgDefaultValue : public CPropertyPage
 {
-	DECLARE_DYNCREATE(CDlgDefaultValue)
+    DECLARE_DYNCREATE(CDlgDefaultValue)
 
-// ƒRƒ“ƒXƒgƒ‰ƒNƒVƒ‡ƒ“
+// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚·ãƒ§ãƒ³
 public:
-	CDlgDefaultValue();
-	~CDlgDefaultValue();
+    CDlgDefaultValue();
+    ~CDlgDefaultValue();
 
-// ƒ_ƒCƒAƒƒO ƒf[ƒ^
-	//{{AFX_DATA(CDlgDefaultValue)
-	enum { IDD = IDD_DLG_DEFAUT_VALUE };
-	CComboBox	m_cbId3v2EncodeNew;
-	CComboBox	m_cbId3v2VersionNew;
-	CComboBox	m_cbId3v2Encode;
-	CComboBox	m_cbId3v2Version;
-	CString	m_strSoftwareTag;
-	BOOL	m_bID3v2UnSync;
-	BOOL	m_bID3v2UnSyncNew;
-	int		m_nId3v2Encode;
-	int		m_nId3v2Version;
-	CString	m_strInfo;
-	int		m_nId3v2VersionNew;
-	int		m_nId3v2EncodeNew;
-	//}}AFX_DATA
+// ãƒ€ã‚¤ã‚¢ãƒ­ã‚° ãƒ‡ãƒ¼ã‚¿
+    //{{AFX_DATA(CDlgDefaultValue)
+    enum { IDD = IDD_DLG_DEFAUT_VALUE };
+    CComboBox   m_cbId3v2EncodeNew;
+    CComboBox   m_cbId3v2VersionNew;
+    CComboBox   m_cbId3v2Encode;
+    CComboBox   m_cbId3v2Version;
+    CString m_strSoftwareTag;
+    BOOL    m_bID3v2UnSync;
+    int     m_nId3v2Encode;
+    int     m_nId3v2Version;
+    int     m_nId3v2VersionNew;
+    int     m_nId3v2EncodeNew;
+    //}}AFX_DATA
 
 
-// ƒI[ƒo[ƒ‰ƒCƒh
-	// ClassWizard ‚Í‰¼‘zŠÖ”‚ÌƒI[ƒo[ƒ‰ƒCƒh‚ğ¶¬‚µ‚Ü‚·B
+// ã‚ªãƒ¼ãƒãƒ¼ãƒ©ã‚¤ãƒ‰
+    // ClassWizard ã¯ä»®æƒ³é–¢æ•°ã®ã‚ªãƒ¼ãƒãƒ¼ãƒ©ã‚¤ãƒ‰ã‚’ç”Ÿæˆã—ã¾ã™ã€‚
 
-	//{{AFX_VIRTUAL(CDlgDefaultValue)
-	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV ƒTƒ|[ƒg
-	//}}AFX_VIRTUAL
+    //{{AFX_VIRTUAL(CDlgDefaultValue)
+    protected:
+    virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV ã‚µãƒãƒ¼ãƒˆ
+    //}}AFX_VIRTUAL
 
-// ƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“
+// ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³
 protected:
-	// ¶¬‚³‚ê‚½ƒƒbƒZ[ƒW ƒ}ƒbƒvŠÖ”
-	//{{AFX_MSG(CDlgDefaultValue)
-	afx_msg void OnBtResetPage();
-	afx_msg void OnCheckId3v2Unicode();
-	afx_msg void OnCheckId3v2OldComment();
-	virtual BOOL OnInitDialog();
-	afx_msg void OnSelchangeComboId3v2Version();
-	afx_msg void OnSelchangeComboId3v2VersionNew();
-	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
+    // ç”Ÿæˆã•ã‚ŒãŸãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒãƒƒãƒ—é–¢æ•°
+    //{{AFX_MSG(CDlgDefaultValue)
+    afx_msg void OnBtResetPage();
+    afx_msg void OnCheckId3v2Unicode();
+    afx_msg void OnCheckId3v2OldComment();
+    virtual BOOL OnInitDialog();
+    afx_msg void OnSelchangeComboId3v2Version();
+    afx_msg void OnSelchangeComboId3v2VersionNew();
+    //}}AFX_MSG
+    DECLARE_MESSAGE_MAP()
+public:
+    afx_msg void OnEnChangeSoftwareTag();
 };
 
 //{{AFX_INSERT_LOCATION}}
-// Microsoft Visual C++ ‚Í‘Os‚Ì’¼‘O‚É’Ç‰Á‚ÌéŒ¾‚ğ‘}“ü‚µ‚Ü‚·B
+// Microsoft Visual C++ ã¯å‰è¡Œã®ç›´å‰ã«è¿½åŠ ã®å®£è¨€ã‚’æŒ¿å…¥ã—ã¾ã™ã€‚
 
 #endif // !defined(AFX_DLGDEFAULTVALUE_H__1F3F9F21_D999_4375_814B_07A16F70BB22__INCLUDED_)

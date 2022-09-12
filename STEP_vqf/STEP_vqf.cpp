@@ -1,4 +1,4 @@
-// STEP_vqf.cpp : DLL —p‚Ì‰Šú‰»ˆ—‚Ì’è‹`‚ğs‚¢‚Ü‚·B
+// STEP_vqf.cpp : DLL ç”¨ã®åˆæœŸåŒ–å‡¦ç†ã®å®šç¾©ã‚’è¡Œã„ã¾ã™ã€‚
 //
 
 #include "stdafx.h"
@@ -12,53 +12,53 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 //
-//	ƒƒ‚!
+//    ãƒ¡ãƒ¢!
 //
-//		‚±‚Ì DLL ‚ª MFC DLL ‚É‘Î‚µ‚Ä“®“I‚ÉƒŠƒ“ƒN‚³‚ê‚éê‡A
-//		MFC “à‚ÅŒÄ‚Ño‚³‚ê‚é‚±‚Ì DLL ‚©‚çƒGƒNƒXƒ|[ƒg‚³‚ê‚½
-//		‚Ç‚ÌŠÖ”‚àŠÖ”‚ÌÅ‰‚É’Ç‰Á‚³‚ê‚é AFX_MANAGE_STATE 
-//		ƒ}ƒNƒ‚ğŠÜ‚ñ‚Å‚¢‚È‚¯‚ê‚Î‚È‚è‚Ü‚¹‚ñB
+//        ã“ã® DLL ãŒ MFC DLL ã«å¯¾ã—ã¦å‹•çš„ã«ãƒªãƒ³ã‚¯ã•ã‚Œã‚‹å ´åˆã€
+//        MFC å†…ã§å‘¼ã³å‡ºã•ã‚Œã‚‹ã“ã® DLL ã‹ã‚‰ã‚¨ã‚¯ã‚¹ãƒãƒ¼ãƒˆã•ã‚ŒãŸ
+//        ã©ã®é–¢æ•°ã‚‚é–¢æ•°ã®æœ€åˆã«è¿½åŠ ã•ã‚Œã‚‹ AFX_MANAGE_STATE
+//        ãƒã‚¯ãƒ­ã‚’å«ã‚“ã§ã„ãªã‘ã‚Œã°ãªã‚Šã¾ã›ã‚“ã€‚
 //
-//		—á:
+//        ä¾‹:
 //
-//		extern "C" BOOL PASCAL EXPORT ExportedFunction()
-//		{
-//			AFX_MANAGE_STATE(AfxGetStaticModuleState());
-//			// ’ÊíŠÖ”‚Ì–{‘Ì‚Í‚±‚ÌˆÊ’u‚É‚ ‚è‚Ü‚·
-//		}
+//        extern "C" BOOL PASCAL EXPORT ExportedFunction()
+//        {
+//            AFX_MANAGE_STATE(AfxGetStaticModuleState());
+//            // é€šå¸¸é–¢æ•°ã®æœ¬ä½“ã¯ã“ã®ä½ç½®ã«ã‚ã‚Šã¾ã™
+//        }
 //
-//		‚±‚Ìƒ}ƒNƒ‚ªŠeŠÖ”‚ÉŠÜ‚Ü‚ê‚Ä‚¢‚é‚±‚ÆAMFC “à‚Ì
-//		‚Ç‚ÌŒÄ‚Ño‚µ‚æ‚è—Dæ‚·‚é‚±‚Æ‚Í”ñí‚Éd—v‚Å‚·B
-//		‚±‚ê‚ÍŠÖ”“à‚ÌÅ‰‚ÌƒXƒe[ƒgƒƒ“ƒg‚Å‚È‚¯‚ê‚Î‚È
-//		‚ç‚È‚¢‚±‚Æ‚ğˆÓ–¡‚µ‚Ü‚·AƒRƒ“ƒXƒgƒ‰ƒNƒ^‚ª MFC 
-//		DLL “à‚Ö‚ÌŒÄ‚Ño‚µ‚ğs‚¤‰Â”\«‚ª‚ ‚é‚Ì‚ÅAƒIƒu
-//		ƒWƒFƒNƒg•Ï”‚ÌéŒ¾‚æ‚è‚à‘O‚Å‚È‚¯‚ê‚Î‚È‚è‚Ü‚¹‚ñB
+//        ã“ã®ãƒã‚¯ãƒ­ãŒå„é–¢æ•°ã«å«ã¾ã‚Œã¦ã„ã‚‹ã“ã¨ã€MFC å†…ã®
+//        ã©ã®å‘¼ã³å‡ºã—ã‚ˆã‚Šå„ªå…ˆã™ã‚‹ã“ã¨ã¯éå¸¸ã«é‡è¦ã§ã™ã€‚
+//        ã“ã‚Œã¯é–¢æ•°å†…ã®æœ€åˆã®ã‚¹ãƒ†ãƒ¼ãƒˆãƒ¡ãƒ³ãƒˆã§ãªã‘ã‚Œã°ãª
+//        ã‚‰ãªã„ã“ã¨ã‚’æ„å‘³ã—ã¾ã™ã€ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ãŒ MFC
+//        DLL å†…ã¸ã®å‘¼ã³å‡ºã—ã‚’è¡Œã†å¯èƒ½æ€§ãŒã‚ã‚‹ã®ã§ã€ã‚ªãƒ–
+//        ã‚¸ã‚§ã‚¯ãƒˆå¤‰æ•°ã®å®£è¨€ã‚ˆã‚Šã‚‚å‰ã§ãªã‘ã‚Œã°ãªã‚Šã¾ã›ã‚“ã€‚
 //
-//		Ú×‚É‚Â‚¢‚Ä‚Í MFC ƒeƒNƒjƒJƒ‹ ƒm[ƒg 33 ‚¨‚æ‚Ñ
-//		58 ‚ğQÆ‚µ‚Ä‚­‚¾‚³‚¢B
+//        è©³ç´°ã«ã¤ã„ã¦ã¯ MFC ãƒ†ã‚¯ãƒ‹ã‚«ãƒ« ãƒãƒ¼ãƒˆ 33 ãŠã‚ˆã³
+//        58 ã‚’å‚ç…§ã—ã¦ãã ã•ã„ã€‚
 //
 
 /////////////////////////////////////////////////////////////////////////////
 // CSTEP_vqfApp
 
 BEGIN_MESSAGE_MAP(CSTEP_vqfApp, CWinApp)
-	//{{AFX_MSG_MAP(CSTEP_vqfApp)
-		// ƒƒ‚ - ClassWizard ‚Í‚±‚ÌˆÊ’u‚Éƒ}ƒbƒsƒ“ƒO—p‚Ìƒ}ƒNƒ‚ğ’Ç‰Á‚Ü‚½‚Ííœ‚µ‚Ü‚·B
-		//        ‚±‚ÌˆÊ’u‚É¶¬‚³‚ê‚éƒR[ƒh‚ğ•ÒW‚µ‚È‚¢‚Å‚­‚¾‚³‚¢B
-	//}}AFX_MSG_MAP
+    //{{AFX_MSG_MAP(CSTEP_vqfApp)
+        // ãƒ¡ãƒ¢ - ClassWizard ã¯ã“ã®ä½ç½®ã«ãƒãƒƒãƒ”ãƒ³ã‚°ç”¨ã®ãƒã‚¯ãƒ­ã‚’è¿½åŠ ã¾ãŸã¯å‰Šé™¤ã—ã¾ã™ã€‚
+        //        ã“ã®ä½ç½®ã«ç”Ÿæˆã•ã‚Œã‚‹ã‚³ãƒ¼ãƒ‰ã‚’ç·¨é›†ã—ãªã„ã§ãã ã•ã„ã€‚
+    //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// CSTEP_vqfApp ‚Ì\’z
+// CSTEP_vqfApp ã®æ§‹ç¯‰
 
 CSTEP_vqfApp::CSTEP_vqfApp()
 {
-	// TODO: ‚±‚ÌˆÊ’u‚É\’z—p‚ÌƒR[ƒh‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢B
-	// ‚±‚±‚É InitInstance ‚Ì’†‚Ìd—v‚È‰Šú‰»ˆ—‚ğ‚·‚×‚Ä‹Lq‚µ‚Ä‚­‚¾‚³‚¢B
+    // TODO: ã“ã®ä½ç½®ã«æ§‹ç¯‰ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„ã€‚
+    // ã“ã“ã« InitInstance ã®ä¸­ã®é‡è¦ãªåˆæœŸåŒ–å‡¦ç†ã‚’ã™ã¹ã¦è¨˜è¿°ã—ã¦ãã ã•ã„ã€‚
 }
 
 /////////////////////////////////////////////////////////////////////////////
-// —Bˆê‚Ì CSTEP_vqfApp ƒIƒuƒWƒFƒNƒg
+// å”¯ä¸€ã® CSTEP_vqfApp ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 
 CSTEP_vqfApp theApp;
 
@@ -69,168 +69,171 @@ UINT nFileTypeVQF;
 
 STEP_API LPCTSTR WINAPI STEPGetPluginInfo(void)
 {
-	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-	return "Version 1.00 Copyright (C) 2005-2006 haseta\r\nVQFŒ`®‚ğƒTƒ|[ƒg‚µ‚Ä‚¢‚Ü‚·";
+    AFX_MANAGE_STATE(AfxGetStaticModuleState());
+    return _T("Version 1.00 Copyright (C) 2005-2006 haseta\r\n")
+           _T("Version 1.02 Copyright (C) 2016 Kobarin\r\n")
+           _T("VQFå½¢å¼ã‚’ã‚µãƒãƒ¼ãƒˆã—ã¦ã„ã¾ã™");
 }
 
 STEP_API bool WINAPI STEPInit(UINT pID, LPCTSTR szPluginFolder)
 {
-	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-	if (Initialize() == false)	return false;
-	nPluginID = pID;
+    AFX_MANAGE_STATE(AfxGetStaticModuleState());
+    if (Initialize() == false) return false;
+    nPluginID = pID;
 
-	HBITMAP hVQFBitmap = LoadBitmap(theApp.m_hInstance, MAKEINTRESOURCE(IDB_BITMAP_VQF));
-	nFileTypeVQF = STEPRegisterExt(nPluginID, "vqf", hVQFBitmap);
-	DeleteObject(hVQFBitmap);
+    HBITMAP hVQFBitmap = LoadBitmap(theApp.m_hInstance, MAKEINTRESOURCE(IDB_BITMAP_VQF));
+    nFileTypeVQF = STEPRegisterExt(nPluginID, _T("vqf"), hVQFBitmap);
+    DeleteObject(hVQFBitmap);
 
-	return true;
+    return true;
 }
 
-STEP_API void WINAPI STEPFinalize() {
-	Finalize();
+STEP_API void WINAPI STEPFinalize()
+{
+    Finalize();
 }
 
 STEP_API UINT WINAPI STEPGetAPIVersion(void)
 {
-	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-	return STEP_API_VERSION;
+    AFX_MANAGE_STATE(AfxGetStaticModuleState());
+    return STEP_API_VERSION;
 }
 
 STEP_API LPCTSTR WINAPI STEPGetPluginName(void)
 {
-	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-	return "STEP_vqf";
+    AFX_MANAGE_STATE(AfxGetStaticModuleState());
+    return _T("STEP_vqf");
 }
 
 STEP_API bool WINAPI STEPSupportSIF(UINT nFormat) {
-	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-	return true;
+    AFX_MANAGE_STATE(AfxGetStaticModuleState());
+    return true;
 }
 
 STEP_API bool WINAPI STEPSupportTrackNumberSIF(UINT nFormat) {
-	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-	return false;
+    AFX_MANAGE_STATE(AfxGetStaticModuleState());
+    return false;
 }
 
 STEP_API CONTROLTYPE WINAPI STEPGetControlType(UINT nFormat, COLUMNTYPE nColumn, bool isEditSIF)
 {
-	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-	if (!isEditSIF)	return _NULL;
-	switch (nColumn) {
-	case COLUMN_TRACK_NAME:
-	case COLUMN_ARTIST_NAME:
-	case COLUMN_COPYRIGHT:
-		return _EDIT;
-	case COLUMN_COMMENT:
-		return _MEDIT;
-	}
-	return _NULL;
+    AFX_MANAGE_STATE(AfxGetStaticModuleState());
+    if (!isEditSIF) return _NULL;
+    switch (nColumn) {
+    case COLUMN_TRACK_NAME:
+    case COLUMN_ARTIST_NAME:
+    case COLUMN_COPYRIGHT:
+        return _EDIT;
+    case COLUMN_COMMENT:
+        return _MEDIT;
+    }
+    return _NULL;
 }
 
 STEP_API UINT WINAPI STEPGetColumnMax(UINT nFormat, COLUMNTYPE nColumn, bool isEditSIF) {
-	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-	switch (nColumn) {
-	case COLUMN_TRACK_NAME:		return 1024;
-	case COLUMN_ARTIST_NAME:	return 1024;
-	case COLUMN_COMMENT:		return 1024;
-	case COLUMN_COPYRIGHT:		return 1024;
-	}
-	return 0;
+    AFX_MANAGE_STATE(AfxGetStaticModuleState());
+    switch (nColumn) {
+    case COLUMN_TRACK_NAME:        return 1024;
+    case COLUMN_ARTIST_NAME:    return 1024;
+    case COLUMN_COMMENT:        return 1024;
+    case COLUMN_COPYRIGHT:        return 1024;
+    }
+    return 0;
 }
 
 STEP_API UINT WINAPI STEPLoad(FILE_INFO *pFileMP3, LPCTSTR szExt)
 {
-	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-	if (stricmp(szExt, "vqf") == 0) {
-		extern	bool LoadAttributeFileVQF(FILE_INFO *pFile);
-		if (LoadAttributeFileVQF(pFileMP3) == false) {
-			CString	strMsg;
-			strMsg.Format("%s ‚Ì“Ç‚İ‚İ‚É¸”s‚µ‚Ü‚µ‚½", GetFullPath(pFileMP3));
-			MessageBox(NULL, strMsg, "VQFƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ¸”s", MB_ICONSTOP|MB_OK|MB_TOPMOST);
-			return STEP_ERROR;
-		} else {
-			SetFormat(pFileMP3, nFileTypeVQF);
-			SetFileTypeName(pFileMP3, "VQF");
-			return STEP_SUCCESS;
-		}
-	}
-	return STEP_UNKNOWN_FORMAT;
+    AFX_MANAGE_STATE(AfxGetStaticModuleState());
+    if (_tcsicmp(szExt, _T("vqf")) == 0) {
+        extern bool LoadAttributeFileVQF(FILE_INFO *pFile);
+        if (LoadAttributeFileVQF(pFileMP3) == false) {
+            CString strMsg;
+            strMsg.Format(_T("%s ã®èª­ã¿è¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ"), GetFullPath(pFileMP3));
+            MessageBox(NULL, strMsg, _T("VQFãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿å¤±æ•—"), MB_ICONSTOP|MB_OK|MB_TOPMOST);
+            return STEP_ERROR;
+        } else {
+            SetFormat(pFileMP3, nFileTypeVQF);
+            SetFileTypeName(pFileMP3, _T("VQF"));
+            return STEP_SUCCESS;
+        }
+    }
+    return STEP_UNKNOWN_FORMAT;
 }
 
 STEP_API UINT WINAPI STEPSave(FILE_INFO *pFileMP3)
 {
-	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-	UINT nFormat = GetFormat(pFileMP3);
+    AFX_MANAGE_STATE(AfxGetStaticModuleState());
+    UINT nFormat = GetFormat(pFileMP3);
 
-	if (nFormat == nFileTypeVQF) {
-		extern bool WriteAttributeFileVQF(FILE_INFO *pFileMP3);
-		if (WriteAttributeFileVQF(pFileMP3) == false) {
-			CString	strMsg;
-			strMsg.Format("%s ‚Ì‘‚«‚İ‚É¸”s‚µ‚Ü‚µ‚½", GetFullPath(pFileMP3));
-			MessageBox(NULL, strMsg, "VQFƒtƒ@ƒCƒ‹‚Ì‘‚«‚İ¸”s", MB_ICONSTOP|MB_OK|MB_TOPMOST);
-			return STEP_ERROR;
-		}
-		return STEP_SUCCESS;
-	}
-	return STEP_UNKNOWN_FORMAT;
+    if (nFormat == nFileTypeVQF) {
+        extern bool WriteAttributeFileVQF(FILE_INFO *pFileMP3);
+        if (WriteAttributeFileVQF(pFileMP3) == false) {
+            CString strMsg;
+            strMsg.Format(_T("%s ã®æ›¸ãè¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ"), GetFullPath(pFileMP3));
+            MessageBox(NULL, strMsg, _T("VQFãƒ•ã‚¡ã‚¤ãƒ«ã®æ›¸ãè¾¼ã¿å¤±æ•—"), MB_ICONSTOP|MB_OK|MB_TOPMOST);
+            return STEP_ERROR;
+        }
+        return STEP_SUCCESS;
+    }
+    return STEP_UNKNOWN_FORMAT;
 }
 
 /*
 STEP_API void WINAPI STEPShowOptionDialog(HWND hWnd)
 {
-	AFX_MANAGE_STATE(AfxGetStaticModuleState());
+    AFX_MANAGE_STATE(AfxGetStaticModuleState());
 }
 */
 
 /*
 STEP_API LPCTSTR WINAPI STEPGetToolTipText(UINT nID)
 {
-	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-	return NULL;
+    AFX_MANAGE_STATE(AfxGetStaticModuleState());
+    return NULL;
 }
 */
 
 /*
 STEP_API LPCTSTR WINAPI STEPGetStatusMessage(UINT nID)
 {
-	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-	return NULL;
+    AFX_MANAGE_STATE(AfxGetStaticModuleState());
+    return NULL;
 }
 */
 
 /*
 STEP_API bool WINAPI STEPOnUpdateCommand(UINT nID)
 {
-	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-	return false;
+    AFX_MANAGE_STATE(AfxGetStaticModuleState());
+    return false;
 }
 */
 
 /*
 STEP_API bool WINAPI STEPOnCommand(UINT nID, HWND hWnd)
 {
-	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-	return false;
+    AFX_MANAGE_STATE(AfxGetStaticModuleState());
+    return false;
 }
 */
 
 /*
 STEP_API void WINAPI STEPOnLoadMenu(HMENU hMenu, UINT nType)
 {
-	AFX_MANAGE_STATE(AfxGetStaticModuleState());
+    AFX_MANAGE_STATE(AfxGetStaticModuleState());
 }
 */
 
 /*
 STEP_API LPCTSTR WINAPI STEPGetColumnName(UINT nFormatType, COLUMNTYPE nColumn)
 {
-	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-	return NULL;
+    AFX_MANAGE_STATE(AfxGetStaticModuleState());
+    return NULL;
 }
 
 STEP_API bool WINAPI STEPHasSpecificColumnName(UINT)
 {
-	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-	return true;
+    AFX_MANAGE_STATE(AfxGetStaticModuleState());
+    return true;
 }
 */

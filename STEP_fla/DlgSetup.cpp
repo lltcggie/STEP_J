@@ -1,4 +1,4 @@
-// DlgSetup.cpp : ƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“ ƒtƒ@ƒCƒ‹
+// DlgSetup.cpp : ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³ ãƒ•ã‚¡ã‚¤ãƒ«
 //
 
 #include "stdafx.h"
@@ -12,15 +12,15 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgSetup ƒvƒƒpƒeƒB ƒy[ƒW
+// CDlgSetup ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ ãƒšãƒ¼ã‚¸
 
 IMPLEMENT_DYNCREATE(CDlgSetup, CPropertyPage)
 
 CDlgSetup::CDlgSetup() : CPropertyPage(CDlgSetup::IDD)
 {
-	//{{AFX_DATA_INIT(CDlgSetup)
-	m_bGenreListSelect = FALSE;
-	//}}AFX_DATA_INIT
+    //{{AFX_DATA_INIT(CDlgSetup)
+    m_bGenreListSelect = FALSE;
+    //}}AFX_DATA_INIT
 }
 
 CDlgSetup::~CDlgSetup()
@@ -29,18 +29,18 @@ CDlgSetup::~CDlgSetup()
 
 void CDlgSetup::DoDataExchange(CDataExchange* pDX)
 {
-	CPropertyPage::DoDataExchange(pDX);
-	//{{AFX_DATA_MAP(CDlgSetup)
-	DDX_Check(pDX, IDC_CH_GENRE_LIST_SELECT, m_bGenreListSelect);
-	//}}AFX_DATA_MAP
+    CPropertyPage::DoDataExchange(pDX);
+    //{{AFX_DATA_MAP(CDlgSetup)
+    DDX_Check(pDX, IDC_CH_GENRE_LIST_SELECT, m_bGenreListSelect);
+    //}}AFX_DATA_MAP
 }
 
 
 BEGIN_MESSAGE_MAP(CDlgSetup, CPropertyPage)
-	//{{AFX_MSG_MAP(CDlgSetup)
-		// ƒƒ‚: ClassWizard ‚Í‚±‚ÌˆÊ’u‚É DDX ‚¨‚æ‚Ñ DDV ‚ÌŒÄ‚Ño‚µƒR[ƒh‚ð’Ç‰Á‚µ‚Ü‚·B
-	//}}AFX_MSG_MAP
+    //{{AFX_MSG_MAP(CDlgSetup)
+        // ãƒ¡ãƒ¢: ClassWizard ã¯ã“ã®ä½ç½®ã« DDX ãŠã‚ˆã³ DDV ã®å‘¼ã³å‡ºã—ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¾ã™ã€‚
+    //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgSetup ƒƒbƒZ[ƒW ƒnƒ“ƒhƒ‰
+// CDlgSetup ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒãƒ³ãƒ‰ãƒ©

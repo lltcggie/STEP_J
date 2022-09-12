@@ -4,62 +4,62 @@
 #if _MSC_VER > 1000
 #pragma once
 #endif // _MSC_VER > 1000
-// DlgSetupGenre.h : ƒwƒbƒ_[ ƒtƒ@ƒCƒ‹
+// DlgSetupGenre.h : ãƒ˜ãƒƒãƒ€ãƒ¼ ãƒ•ã‚¡ã‚¤ãƒ«
 //
 #include "OptionPage/OptionPage.h"
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgSetupGenre ƒ_ƒCƒAƒƒO
+// CDlgSetupGenre ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
 
 
 class CDlgSetupGenre : public COptionPage
 {
-	DECLARE_DYNCREATE(CDlgSetupGenre)
+    DECLARE_DYNCREATE(CDlgSetupGenre)
 
-// ƒRƒ“ƒXƒgƒ‰ƒNƒVƒ‡ƒ“
+// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚·ãƒ§ãƒ³
 public:
-	CDlgSetupGenre();
-	~CDlgSetupGenre();
+    CDlgSetupGenre();
+    ~CDlgSetupGenre();
 
-// ƒ_ƒCƒAƒƒO ƒf[ƒ^
-	//{{AFX_DATA(CDlgSetupGenre)
-	enum { IDD = IDD_DLG_SETUP_GENRE };
-	CListCtrl	m_listGenre;
-	//}}AFX_DATA
+// ãƒ€ã‚¤ã‚¢ãƒ­ã‚° ãƒ‡ãƒ¼ã‚¿
+    //{{AFX_DATA(CDlgSetupGenre)
+    enum { IDD = IDD_DLG_SETUP_GENRE };
+    CListCtrl    m_listGenre;
+    //}}AFX_DATA
 
 
-// ƒI[ƒo[ƒ‰ƒCƒh
-	// ClassWizard ‚Í‰¼‘zŠÖ”‚ÌƒI[ƒo[ƒ‰ƒCƒh‚ğ¶¬‚µ‚Ü‚·B
+// ã‚ªãƒ¼ãƒãƒ¼ãƒ©ã‚¤ãƒ‰
+    // ClassWizard ã¯ä»®æƒ³é–¢æ•°ã®ã‚ªãƒ¼ãƒãƒ¼ãƒ©ã‚¤ãƒ‰ã‚’ç”Ÿæˆã—ã¾ã™ã€‚
 
-	//{{AFX_VIRTUAL(CDlgSetupGenre)
-	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV ƒTƒ|[ƒg
-	//}}AFX_VIRTUAL
+    //{{AFX_VIRTUAL(CDlgSetupGenre)
+    protected:
+    virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV ã‚µãƒãƒ¼ãƒˆ
+    //}}AFX_VIRTUAL
 
-// ƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“
+// ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³
 protected:
-	// ¶¬‚³‚ê‚½ƒƒbƒZ[ƒW ƒ}ƒbƒvŠÖ”
-	//{{AFX_MSG(CDlgSetupGenre)
-	virtual BOOL OnInitDialog();
-	virtual void OnOK();
-	afx_msg void OnBtCheckAll();
-	afx_msg void OnBtUncheckAll();
-	afx_msg void OnBtCheckId3();
-	afx_msg void OnBtCheckWinamp();
-	afx_msg void OnBtCheckScmpx();
-	afx_msg void OnBtResetPage();
-	afx_msg void OnBtAddUser();
-	afx_msg void OnBtDelUser();
-	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
+    // ç”Ÿæˆã•ã‚ŒãŸãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒãƒƒãƒ—é–¢æ•°
+    //{{AFX_MSG(CDlgSetupGenre)
+    virtual BOOL OnInitDialog();
+    virtual void OnOK();
+    afx_msg void OnBtCheckAll();
+    afx_msg void OnBtUncheckAll();
+    afx_msg void OnBtCheckId3();
+    afx_msg void OnBtCheckWinamp();
+    afx_msg void OnBtCheckScmpx();
+    afx_msg void OnBtResetPage();
+    afx_msg void OnBtAddUser();
+    afx_msg void OnBtDelUser();
+    //}}AFX_MSG
+    DECLARE_MESSAGE_MAP()
 
 private:
-	void AddUserGenre(int nIndex);
+    void AddUserGenre(int nIndex);
 public:
-	USER_GENRE_LIST*	m_genreListUSER;
+    USER_GENRE_LIST*    m_genreListUSER;
 };
 
 //{{AFX_INSERT_LOCATION}}
-// Microsoft Visual C++ ‚Í‘Os‚Ì’¼‘O‚É’Ç‰Á‚ÌéŒ¾‚ğ‘}“ü‚µ‚Ü‚·B
+// Microsoft Visual C++ ã¯å‰è¡Œã®ç›´å‰ã«è¿½åŠ ã®å®£è¨€ã‚’æŒ¿å…¥ã—ã¾ã™ã€‚
 
 #endif // !defined(AFX_DLGSETUPGENRE_H__F618C220_2DE7_11D4_9459_00402641B29B__INCLUDED_)

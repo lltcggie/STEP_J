@@ -1,4 +1,4 @@
-// DlgFileNameChange.cpp : ƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“ ƒtƒ@ƒCƒ‹
+// DlgFileNameChange.cpp : ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³ ãƒ•ã‚¡ã‚¤ãƒ«
 //
 
 #include "stdafx.h"
@@ -12,66 +12,66 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgFileNameChange ƒ_ƒCƒAƒƒO
+// CDlgFileNameChange ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
 
 
 CDlgFileNameChange::CDlgFileNameChange(CWnd* pParent /*=NULL*/)
-	: CDialog(CDlgFileNameChange::IDD, pParent)
+    : CDialog(CDlgFileNameChange::IDD, pParent)
 {
-	m_nMaxChar = 255;
-	//{{AFX_DATA_INIT(CDlgFileNameChange)
-	m_strFileName = _T("");
-	m_strMsg = _T("");
-	m_strOrgFileName = _T("");
-	//}}AFX_DATA_INIT
+    m_nMaxChar = 255;
+    //{{AFX_DATA_INIT(CDlgFileNameChange)
+    m_strFileName = _T("");
+    m_strMsg = _T("");
+    m_strOrgFileName = _T("");
+    //}}AFX_DATA_INIT
 }
 
 
 void CDlgFileNameChange::DoDataExchange(CDataExchange* pDX)
 {
-	CDialog::DoDataExchange(pDX);
-	//{{AFX_DATA_MAP(CDlgFileNameChange)
-	DDX_Control(pDX, IDC_STATIC_MSG, m_staticMsg);
-	DDX_Control(pDX, IDC_EDIT_NAME, m_editName);
-	DDX_Text(pDX, IDC_EDIT_NAME, m_strFileName);
-	DDV_MaxChars(pDX, m_strFileName, m_nMaxChar);
-	DDX_Text(pDX, IDC_STATIC_MSG, m_strMsg);
-	DDX_Text(pDX, IDC_EDIT_NAME_ORG, m_strOrgFileName);
-	//}}AFX_DATA_MAP
+    CDialog::DoDataExchange(pDX);
+    //{{AFX_DATA_MAP(CDlgFileNameChange)
+    DDX_Control(pDX, IDC_STATIC_MSG, m_staticMsg);
+    DDX_Control(pDX, IDC_EDIT_NAME, m_editName);
+    DDX_Text(pDX, IDC_EDIT_NAME, m_strFileName);
+    DDV_MaxChars(pDX, m_strFileName, m_nMaxChar);
+    DDX_Text(pDX, IDC_STATIC_MSG, m_strMsg);
+    DDX_Text(pDX, IDC_EDIT_NAME_ORG, m_strOrgFileName);
+    //}}AFX_DATA_MAP
 
 }
 
 
 BEGIN_MESSAGE_MAP(CDlgFileNameChange, CDialog)
-	//{{AFX_MSG_MAP(CDlgFileNameChange)
-	ON_EN_CHANGE(IDC_EDIT_NAME, OnChangeEditName)
-	//}}AFX_MSG_MAP
+    //{{AFX_MSG_MAP(CDlgFileNameChange)
+    ON_EN_CHANGE(IDC_EDIT_NAME, OnChangeEditName)
+    //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgFileNameChange ƒƒbƒZ[ƒW ƒnƒ“ƒhƒ‰
+// CDlgFileNameChange ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒãƒ³ãƒ‰ãƒ©
 
-void CDlgFileNameChange::OnChangeEditName() 
+void CDlgFileNameChange::OnChangeEditName()
 {
-	// TODO: ‚±‚ê‚ª RICHEDIT ƒRƒ“ƒgƒ[ƒ‹‚Ìê‡AƒRƒ“ƒgƒ[ƒ‹‚ÍA lParam ƒ}ƒXƒN
-	// “à‚Å‚Ì˜_—˜a‚Ì ENM_CHANGE ƒtƒ‰ƒO•t‚«‚Å CRichEditCrtl().SetEventMask()
-	// ƒƒbƒZ[ƒW‚ğƒRƒ“ƒgƒ[ƒ‹‚Ö‘—‚é‚½‚ß‚É CDialog::OnInitDialog() ŠÖ”‚ğƒI[ƒo[
-	// ƒ‰ƒCƒh‚µ‚È‚¢ŒÀ‚è‚±‚Ì’Ê’m‚ğ‘—‚è‚Ü‚¹‚ñB
-	
-	// TODO: ‚±‚ÌˆÊ’u‚ÉƒRƒ“ƒgƒ[ƒ‹’Ê’mƒnƒ“ƒhƒ‰—p‚ÌƒR[ƒh‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
-	CString strFileName;
-	m_editName.GetLine(0, strFileName.GetBuffer(m_editName.LineLength(0)*2+sizeof(DWORD)+2), m_editName.LineLength(0)*2+sizeof(DWORD)+2); /* STEP 010 ƒoƒbƒtƒ@ƒTƒCƒY‘‚â‚µ‚½ *//* ‚È‚ñ‚Å‚©‚¿‚á‚ñ‚Ææ“¾‚³‚ê‚È‚¢ŠÂ‹«‚ª‚ ‚é‚Ì‚Å‚³‚ç‚É‚Q”{‚É */
-	strFileName.ReleaseBuffer();
-	m_strMsg.Format(m_strMsgFormat, m_nMaxChar, strFileName.GetLength());
-	m_staticMsg.SetWindowText(m_strMsg);
+    // TODO: ã“ã‚ŒãŒ RICHEDIT ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã®å ´åˆã€ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã¯ã€ lParam ãƒã‚¹ã‚¯
+    // å†…ã§ã®è«–ç†å’Œã® ENM_CHANGE ãƒ•ãƒ©ã‚°ä»˜ãã§ CRichEditCrtl().SetEventMask()
+    // ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã¸é€ã‚‹ãŸã‚ã« CDialog::OnInitDialog() é–¢æ•°ã‚’ã‚ªãƒ¼ãƒãƒ¼
+    // ãƒ©ã‚¤ãƒ‰ã—ãªã„é™ã‚Šã“ã®é€šçŸ¥ã‚’é€ã‚Šã¾ã›ã‚“ã€‚
+
+    // TODO: ã“ã®ä½ç½®ã«ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«é€šçŸ¥ãƒãƒ³ãƒ‰ãƒ©ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
+    CString strFileName;
+    m_editName.GetLine(0, strFileName.GetBuffer(m_editName.LineLength(0)*2+sizeof(DWORD)+2), m_editName.LineLength(0)*2+sizeof(DWORD)+2); /* STEP 010 ãƒãƒƒãƒ•ã‚¡ã‚µã‚¤ã‚ºå¢—ã‚„ã—ãŸ *//* ãªã‚“ã§ã‹ã¡ã‚ƒã‚“ã¨å–å¾—ã•ã‚Œãªã„ç’°å¢ƒãŒã‚ã‚‹ã®ã§ã•ã‚‰ã«ï¼’å€ã« */
+    strFileName.ReleaseBuffer();
+    m_strMsg.Format(m_strMsgFormat, m_nMaxChar, strFileName.GetLength());
+    m_staticMsg.SetWindowText(m_strMsg);
 }
 
-BOOL CDlgFileNameChange::OnInitDialog() 
+BOOL CDlgFileNameChange::OnInitDialog()
 {
-	CDialog::OnInitDialog();
-	
-	// TODO: ‚±‚ÌˆÊ’u‚É‰Šú‰»‚Ì•â‘«ˆ—‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
-	OnChangeEditName();
-	return TRUE;  // ƒRƒ“ƒgƒ[ƒ‹‚ÉƒtƒH[ƒJƒX‚ğİ’è‚µ‚È‚¢‚Æ‚«A–ß‚è’l‚Í TRUE ‚Æ‚È‚è‚Ü‚·
-	              // —áŠO: OCX ƒvƒƒpƒeƒB ƒy[ƒW‚Ì–ß‚è’l‚Í FALSE ‚Æ‚È‚è‚Ü‚·
+    CDialog::OnInitDialog();
+
+    // TODO: ã“ã®ä½ç½®ã«åˆæœŸåŒ–ã®è£œè¶³å‡¦ç†ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
+    OnChangeEditName();
+    return TRUE;  // ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã«ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ã‚’è¨­å®šã—ãªã„ã¨ãã€æˆ»ã‚Šå€¤ã¯ TRUE ã¨ãªã‚Šã¾ã™
+                  // ä¾‹å¤–: OCX ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ ãƒšãƒ¼ã‚¸ã®æˆ»ã‚Šå€¤ã¯ FALSE ã¨ãªã‚Šã¾ã™
 }

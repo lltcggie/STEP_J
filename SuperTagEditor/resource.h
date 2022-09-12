@@ -1,6 +1,6 @@
 //{{NO_DEPENDENCIES}}
-// Microsoft Visual C++ generated include file.
-// Used by SuperTagEditor.rc
+// Microsoft Visual C++ で生成されたインクルード ファイル。
+// SuperTagEditor.rc で使用
 //
 #define ID_BT_REPLACE                   3
 #define IDC_BT_SKIP                     4
@@ -12,14 +12,9 @@
 #define CG_IDD_PROGRESS                 102
 #define CG_IDS_PROGRESS_CAPTION         103
 #define IDS_PROPSHT_CAPTION             104
-#define IDD_PROPPAGE1                   105
-#define ID_VIEW_ARRANGE                 127
 #define IDR_MAINFRAME                   128
 #define IDR_SUPERTTYPE                  129
 #define IDB_BITMAP_TREE                 130
-#define IDR_MENU_POPUP_MP3              131
-#define IDD_DLG_ENVIRONMENT2            132
-#define IDD_DLG_KEY_CUSTOMIZE           134
 #define IDD_DLG_LIST_SORT               136
 #define IDD_DLG_SET_CLASSIFICATION      138
 #define IDB_BITMAP_CHECK                141
@@ -31,7 +26,6 @@
 #define IDD_DLG_SEARCH_STATE            149
 #define IDD_DLG_CHECK_WORD              151
 #define IDD_DLG_KEY_CONFIG              153
-#define IDD_DLG_SET_NUMBER              154
 #define IDD_DLG_CONV_FORMAT_EX          154
 #define IDD_DLG_EDIT_SHOW_COLUMN        155
 #define IDD_DLG_ENV_CONF                156
@@ -47,9 +41,7 @@
 #define IDD_DLG_ENV_PLAYER              166
 #define IDD_DLG_WRITE_FORM              167
 #define IDD_CUSTOM_FILE_OPEN            169
-#define IDD_DLG_ENVIRONMENT3            170
 #define IDD_DLG_ENVIRONMENT             170
-#define IDD_DLG_FILE_RMP_ID3V2          171
 #define IDD_DLG_LYRIC                   172
 #define IDD_DLG_DELETE_CHAR             173
 #define IDD_DLG_ADD_NUMBER              174
@@ -72,13 +64,11 @@
 #define IDD_DLG_COPY_FORMAT             190
 #define IDD_DLG_SETUP_PLUGIN            191
 #define IDD_DIALOG_CONV                 192
-#define IDC_CURSOR1                     193
 #define IDD_DLG_USER_CONV_FORMAT_TAG2TAG 193
 #define IDR_MENU_CONV_FORMAT_USER_T2F   194
 #define IDD_DLG_FILE_OVERWRITE2         194
 #define IDR_MENU_CONV_FORMAT_USER_F2T   195
 #define IDD_DLG_FIXED_UPPER_LOWER       197
-#define IDR_RT_MANIFEST2                199
 #define IDC_ST_VERSION                  1000
 #define IDC_ED_FORMAT_TAG2FILE          1000
 #define IDC_ED_FORMAT_FILE2TAG          1001
@@ -88,19 +78,13 @@
 #define CG_IDC_PROGDLG_PROGRESS         1003
 #define CG_IDC_PROGDLG_PERCENT          1004
 #define IDC_CH_ESC_EDIT_CANCEL          1004
-#define IDC_HOTKEY                      1005
 #define IDC_CH_ENABLE_EDIT_CURSOR_EXIT  1005
-#define IDC_BT_CHANGE_KEY               1006
 #define IDC_CH_SHOW_ZEN_SPACE           1006
-#define IDC_BT_CLEAR_KEY                1007
 #define IDC_CH_SHOW_TIPS                1007
-#define IDC_RA_FILENAME_NO_CHECK        1008
-#define IDC_RA_FILENAME_MULTI_BYTE      1009
 #define IDC_ST_MESSAGE                  1013
 #define IDC_ED_WINAMP_PATH              1014
 #define IDC_BT_REF_WINAMP               1015
 #define IDC_CH_KEEP_TIME_STAMP          1016
-#define IDC_CH_CHANGE_FILE_EXT          1017
 #define IDC_LIST_KEY1                   1018
 #define IDC_CH_CHANGE_TEXT_FILENAME     1018
 #define IDC_RA_UP_SORT1                 1019
@@ -146,10 +130,11 @@
 #define IDC_BT_NAME_CHANGE              1041
 #define IDC_EDIT_NAME                   1042
 #define IDC_BT_NUMBER                   1042
-#define IDC_BT_FIX_STRING               1043
+#define IDC_BT_NUMBER2                  1043
+#define IDC_BT_FIX_STRING               1044
 #define IDC_CH_OUTPUT_FULLPATH          1044
-#define IDC_BT_TRACK_NUMBER3            1044
 #define IDC_RA_ADD_LIST_ON              1045
+#define IDC_BT_DISC_NUMBER2             1045
 #define IDC_CH_CLEAR_LIST               1046
 #define IDC_RA_ADD_LIST_OFF             1048
 #define IDC_RA_FILE_CHECK_ON            1049
@@ -163,8 +148,6 @@
 #define IDC_ED_REPLACE_WORD             1058
 #define IDC_LIST_SEARCH_DIR             1059
 #define IDC_LIST_TARGET                 1061
-#define IDC_CH_CONF_CONV_MP3            1062
-#define IDC_CH_CONF_CONV_RMP            1063
 #define IDC_LIST_KEY                    1063
 #define IDC_CH_CONF_DELETE_LIST         1064
 #define IDC_CH_ALT                      1064
@@ -175,13 +158,9 @@
 #define IDC_CH_CONF_EDIT_MODIFY         1066
 #define IDC_LIST_GROUP                  1066
 #define IDC_ED_SIZE                     1067
-#define IDC_CH_CONF_CONV_ID3V2          1067
 #define IDC_ED_INIT_NUMBER              1068
 #define IDC_ED_ADD_NUMBER               1069
 #define IDC_ED_MIN_COLUMN               1070
-#define IDC_RA_MODE_REPLACE             1071
-#define IDC_RA_MODE_ADD_HEAD            1072
-#define IDC_RA_MODE_ADD_TAIL            1073
 #define IDC_EDIT_FORMAT                 1074
 #define IDC_CH_SPACE_INIT               1075
 #define IDC_LIST_COLUMN                 1077
@@ -197,31 +176,23 @@
 #define IDC_ED_BEFORE2                  1097
 #define IDC_ED_AFTER2                   1098
 #define IDC_ED_BEFORE3                  1099
-#define IDC_CH_RMP_ID3TAG_AUTO_WRITE    1099
 #define IDC_ED_AFTER3                   1100
 #define IDC_CH_LOAD_FILE_ADJUST_COLUMN  1100
-#define IDC_CH_RMP_GENRE_LIST_SELECT    1100
 #define IDC_ED_BEFORE4                  1101
-#define IDC_CH_AUTO_CONV_RMP            1101
 #define IDC_CH_LOAD_FILE_CHECKED        1101
 #define IDC_ED_AFTER4                   1102
-#define IDC_CH_AUTO_CONV_ID3V2          1102
 #define IDC_ED_BEFORE5                  1103
 #define IDC_LIST_GENRE                  1103
 #define IDC_CH_HIDE_MP3_LIST_FILE       1103
-#define IDC_CH_ID3V2_ID3TAG_AUTO_WRITE  1103
 #define IDC_ED_AFTER5                   1104
 #define IDC_BT_CHECK_ALL                1104
-#define IDC_CH_ID3V2_GENRE_LIST_SELECT  1104
 #define IDC_CH_DROP_SEARCH_SUBFOLDER    1104
 #define IDC_ED_BEFORE6                  1105
 #define IDC_BT_UNCHECK_ALL              1105
-#define IDC_CH_ID3V2_GENRE_ADD_NUMBER   1105
 #define IDC_CH_SORT_IGNORE_CASE         1105
 #define IDC_ED_AFTER6                   1106
 #define IDC_BT_CHECK_ID3                1106
 #define IDC_CH_SORT_IGNORE_ZENHAN       1106
-#define IDC_CH_ID3V2_ID3TAG_AUTO_DELETE 1106
 #define IDC_ED_BEFORE7                  1107
 #define IDC_BT_CHECK_WINAMP             1107
 #define IDC_CH_SET_LYRICS_DIR           1107
@@ -258,14 +229,15 @@
 #define IDC_ED_USER_BEFORE2             1121
 #define IDC_RA_PLAYER_KBMEDIA           1122
 #define IDC_ED_USER_AFTER2              1122
-#define IDC_RA_PLAYER_EXT               1123
-#define IDC_ED_USER_BEFORE3             1123
 #define IDC_RA_PLAYER_LILITH            1123
+#define IDC_ED_USER_BEFORE3             1123
 #define IDC_ED_USER_AFTER3              1124
-#define IDC_RA_PLAYER_EXT2              1124
+#define IDC_RA_PLAYER_ULILITH           1125
 #define IDC_ED_USER_BEFORE4             1125
+#define IDC_RA_PLAYER_FOOBAR2000        1126
 #define IDC_EDIT_FILENAME               1126
 #define IDC_ED_USER_AFTER4              1126
+#define IDC_RA_PLAYER_EXT               1127
 #define IDC_BT_REF_FILE                 1127
 #define IDC_ED_USER_BEFORE5             1127
 #define IDC_EDIT_EXT_NAME               1128
@@ -276,8 +248,6 @@
 #define IDC_ED_USER_AFTER6              1130
 #define IDC_CH_FILE_ADDPEND             1131
 #define IDC_CH_WRITE_HTML               1131
-#define IDC_RA_SIF_CONV_ALL             1138
-#define IDC_RA_SIF_CONV_LENGTH          1139
 #define IDC_EDIT_MAX_WIDTH              1139
 #define IDC_EDIT_DELETE_CHAR            1141
 #define IDC_EDIT_NUMBER_SEPARATOR       1142
@@ -290,7 +260,6 @@
 #define IDC_STATIC_MSG                  1149
 #define IDC_EDIT_NAME_ORG               1150
 #define IDC_EDIT_TEIKEI_01              1151
-#define IDC_SOFTWARE_TAG                1152
 #define IDC_EDIT_TEIKEI_2               1153
 #define IDC_CHECK_VALID_FOLDER_SELECT   1154
 #define IDC_EDIT_TEIKEI_3               1155
@@ -352,17 +321,12 @@
 #define IDC_BT_REF_FAVORITES9           1206
 #define IDC_EDIT_FAVORITES10            1207
 #define IDC_BT_REF_FAVORITES10          1208
-#define IDC_CHECK_ID3V2_OLD_COMMENT     1211
-#define IDC_CHECK_ID3V2_UNICODE         1212
-#define IDC_COMBOBOXEX1                 1212
-#define IDC_COMBOBOXEX2                 1213
 #define IDC_EDIT_ADD_FRONT              1214
 #define IDC_EDIT_ADD_BACK               1215
 #define IDC_CHECK_ADD_CHAR              1219
 #define IDC_EDIT_ADD_BEFORE             1220
 #define IDC_EDIT_ADD_AFTER              1221
 #define IDC_CHECK_AUDIO_LIST_SHOW       1221
-#define IDC_CHECK_VALID_ALL_FILE        1222
 #define IDC_LIST_PLUGIN                 1223
 #define IDC_BT_SETUP                    1224
 #define IDC_BT_INSTALL                  1225
@@ -395,6 +359,8 @@
 #define IDC_EDIT_FIXED_WORD             1245
 #define IDC_BT_DETAIL_10                1246
 #define IDC_LIST_UPPER_LOWER            1246
+#define IDC_BT_DISC_NUMBER              1248
+#define IDC_CH_AUTO_TILDE_2_WAVE_DASH   1252
 #define ID_OPEN_FOLDER                  32771
 #define ID_CELL_COPY_DOWN               32772
 #define ID_SAVE_ALL_TAG                 32773
@@ -408,8 +374,6 @@
 #define ID_WINAMP_PLAY                  32781
 #define ID_WINAMP_STOP                  32782
 #define ID_WINAMP_EXIT                  32783
-#define ID_FILE_CONV_MP3                32784
-#define ID_FILE_CONV_RMP                32785
 #define ID_EDIT_FIELD_SI                32786
 #define ID_EDIT_TD3_TAG                 32787
 #define ID_EDIT_CHANGE_FIELD            32789
@@ -479,10 +443,8 @@
 #define ID_WRITE_LIST3                  32856
 #define ID_WRITE_LIST4                  32857
 #define ID_WRITE_LIST5                  32858
-#define ID_DELETE_TAG                   32859
 #define ID_WRITE_TREE_PLAYLIST          32860
 #define ID_SET_LIST_FONT                32861
-#define ID_FILE_CONV_ID3V2              32862
 #define ID_DELETE_CHAR                  32863
 #define ID_SET_NUMBER_ADD               32864
 #define ID_MOVE_FOLDER_01               32866
@@ -535,7 +497,6 @@
 #define ID_BUTTON32924                  32924
 #define ID_BUTTON32925                  32925
 #define ID_END_EDIT_RIGHT               32927
-#define ID_MENUITEM32928                32928
 #define ID_DLG_FAVORITES                32933
 #define ID_FAVORITE_FOLDER_01           32935
 #define ID_FAVORITE_FOLDER_02           32936
@@ -549,7 +510,6 @@
 #define ID_FAVORITE_FOLDER_10           32944
 #define ID_FAVORITES_FOLDER             32945
 #define ID_CALC_FOLDER_TOTAL            32950
-#define ID_FILE_CONV_AUTO_ID3           32951
 #define ID_EDIT_PASTE_ADD               32952
 #define ID_EDIT_COPY_FORMAT_01          32954
 #define ID_EDIT_COPY_FORMAT_02          32955
@@ -595,13 +555,13 @@
 #define ID_INDICATOR_INPUT_MODE         59145
 
 // Next default values for new objects
-// 
+//
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        201
+#define _APS_NEXT_RESOURCE_VALUE        209
 #define _APS_NEXT_COMMAND_VALUE         33001
-#define _APS_NEXT_CONTROL_VALUE         1248
-#define _APS_NEXT_SYMED_VALUE           106
+#define _APS_NEXT_CONTROL_VALUE         1253
+#define _APS_NEXT_SYMED_VALUE           108
 #endif
 #endif

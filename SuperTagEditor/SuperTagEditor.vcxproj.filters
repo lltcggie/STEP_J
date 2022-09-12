@@ -1,32 +1,38 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Source Files">
-      <UniqueIdentifier>{3046fbe3-48b0-4ec4-8502-f57cf252a3bf}</UniqueIdentifier>
+      <UniqueIdentifier>{065ea8c3-43d0-4a51-b07b-6f6edf889414}</UniqueIdentifier>
       <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
     </Filter>
     <Filter Include="Header Files">
-      <UniqueIdentifier>{0bec1e52-a474-4f5e-afce-c889c1da6da8}</UniqueIdentifier>
+      <UniqueIdentifier>{729f52a2-c543-405c-9dc2-525712eb8617}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl</Extensions>
     </Filter>
     <Filter Include="Resource Files">
-      <UniqueIdentifier>{77ae14c4-e4eb-4f17-a663-cab4a8bddaeb}</UniqueIdentifier>
+      <UniqueIdentifier>{1829e029-2f58-4ace-8726-ca079f951955}</UniqueIdentifier>
       <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
     </Filter>
     <Filter Include="オプション設定関連">
-      <UniqueIdentifier>{d1161c49-ff7d-459a-88ff-588bee5e344b}</UniqueIdentifier>
+      <UniqueIdentifier>{0cb55450-0e39-4f52-9725-df7ad61abd2d}</UniqueIdentifier>
     </Filter>
     <Filter Include="HELP">
-      <UniqueIdentifier>{3ac76566-8652-4656-b518-8479843bb949}</UniqueIdentifier>
+      <UniqueIdentifier>{57f30594-3a3f-4711-9fda-c971b89d9af8}</UniqueIdentifier>
     </Filter>
     <Filter Include="Plugin">
-      <UniqueIdentifier>{174dd619-dbba-496c-a9b2-daec61433a17}</UniqueIdentifier>
+      <UniqueIdentifier>{b230b529-bb3c-4b35-b225-e031b3951e16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\dde">
+      <UniqueIdentifier>{7e85cd62-6c6f-43ba-bbc4-5081383aceb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\dde">
+      <UniqueIdentifier>{c094ce08-217d-4953-afdd-e9ca730d1076}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ini">
+      <UniqueIdentifier>{40edda95-b2ee-43b2-99ab-eea6916e0afa}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="mp3infp\call_mp3infp.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="ComboInListView.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -105,9 +111,6 @@
     <ClCompile Include="HistoryComboEx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="dde\kbdde.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="ListEditCtrl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -129,16 +132,10 @@
     <ClCompile Include="OXToolTipCtrl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="INI\Profile.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Regexp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SHBrowseForFolder.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="StdAfx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="strcnv.cpp">
@@ -234,11 +231,20 @@
     <ClCompile Include="Plugin.cpp">
       <Filter>Plugin</Filter>
     </ClCompile>
+    <ClCompile Include="dde\kbdde.cpp">
+      <Filter>Source Files\dde</Filter>
+    </ClCompile>
+    <ClCompile Include="dde\player_control.cpp">
+      <Filter>Source Files\dde</Filter>
+    </ClCompile>
     <ClCompile Include="STEP_api.cpp">
       <Filter>Plugin</Filter>
     </ClCompile>
-    <ClCompile Include="..\STEP_SDK\STEPlugin.cpp">
-      <Filter>Plugin</Filter>
+    <ClCompile Include="INI\ini.cpp">
+      <Filter>Source Files\ini</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -247,19 +253,7 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ape\All.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ape\APEInfo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ape\APETag.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="AutoBuildCount.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ID3v2\classID.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ComboInListView.h">
@@ -340,12 +334,6 @@
     <ClInclude Include="HistoryComboEx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ape\IO.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="dde\kbdde.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ListEditCtrl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -370,9 +358,6 @@
     <ClInclude Include="OXToolTipCtrl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="INI\Profile.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Regexp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -382,13 +367,7 @@
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="scmpx.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="SHBrowseForFolder.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="StdAfx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SuperGridCtrl.h">
@@ -401,9 +380,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SuperTagEditorView.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="winamp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DlgConv.h">
@@ -490,6 +466,33 @@
     <ClInclude Include="..\STEP_SDK\STEPlugin.h">
       <Filter>Plugin</Filter>
     </ClInclude>
+    <ClInclude Include="dde\kbdde.h">
+      <Filter>Header Files\dde</Filter>
+    </ClInclude>
+    <ClInclude Include="dde\player_control.h">
+      <Filter>Header Files\dde</Filter>
+    </ClInclude>
+    <ClInclude Include="strcnv.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dde\scmpx.h">
+      <Filter>Header Files\dde</Filter>
+    </ClInclude>
+    <ClInclude Include="dde\wa_ipc.h">
+      <Filter>Header Files\dde</Filter>
+    </ClInclude>
+    <ClInclude Include="dde\winamp.h">
+      <Filter>Header Files\dde</Filter>
+    </ClInclude>
+    <ClInclude Include="INI\ini.h">
+      <Filter>Source Files\ini</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\a1.bin">
@@ -498,40 +501,13 @@
     <None Include="res\bin00001.bin">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="res\check.bmp">
-      <Filter>Resource Files</Filter>
-    </None>
     <None Include="res\cursor1.cur">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\folders.bmp">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\icon1.ico">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="res\rt_manif.bin">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="res\subitems.bmp">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\SuperTagEditor.ico">
-      <Filter>Resource Files</Filter>
-    </None>
     <None Include="res\SuperTagEditor.rc2">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\SuperTagEditorDoc.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\Toolbar.bmp">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\toolbar_.bmp">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\tree.bmp">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="Help\history.html">
@@ -543,13 +519,51 @@
     <None Include="Help\schedule.html">
       <Filter>HELP</Filter>
     </None>
-    <None Include="..\STEP_SDK\STEP_API.txt">
-      <Filter>Plugin</Filter>
+    <None Include="SuperTagEditor.def">
+      <Filter>Source Files</Filter>
     </None>
-    <None Include="..\STEP.txt" />
-    <None Include="SuperTagEditor.reg" />
-    <None Include="..\var_list.txt" />
-    <None Include="..\var_list2.txt" />
+    <None Include="res\ini1.bin">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\check-24.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\folders.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\icon1.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\subitems.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\SuperTagEditor.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\SuperTagEditorDoc.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Toolbar-32.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\toolbar_-32.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\tree-24.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\STEP_SDK\STEP_API.txt">
+      <Filter>Plugin</Filter>
+    </Text>
+    <Text Include="..\var_list.txt" />
+    <Text Include="..\var_list2.txt" />
+    <Text Include="..\step_k_history.txt" />
+    <Text Include="..\step_k_readme.txt" />
+    <Text Include="..\step_k_memo.txt" />
   </ItemGroup>
   <ItemGroup>
     <Manifest Include="VisualStyle.manifest" />

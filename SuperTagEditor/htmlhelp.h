@@ -46,14 +46,14 @@ extern "C" {
 #define HH_CLOSE_ALL            0x0012  // close all windows opened directly or indirectly by the caller
 #define HH_ALINK_LOOKUP         0x0013  // ALink version of HH_KEYWORD_LOOKUP
 #define HH_GET_LAST_ERROR       0x0014  // not currently implemented // See HHERROR.h
-#define HH_ENUM_CATEGORY        0x0015	// Get category name, call repeatedly to enumerate, -1 at end
+#define HH_ENUM_CATEGORY        0x0015    // Get category name, call repeatedly to enumerate, -1 at end
 #define HH_ENUM_CATEGORY_IT     0x0016  // Get category info type members, call repeatedly to enumerate, -1 at end
 #define HH_RESET_IT_FILTER      0x0017  // Clear the info type filter of all info types.
 #define HH_SET_INCLUSIVE_FILTER 0x0018  // set inclusive filtering method for untyped topics to be included in display
 #define HH_SET_EXCLUSIVE_FILTER 0x0019  // set exclusive filtering method for untyped topics to be excluded from display
 #define HH_INITIALIZE            0x001C  // Initializes the help system.
 #define HH_UNINITIALIZE          0x001D  // Uninitializes the help system.
-#define HH_PRETRANSLATEMESSAGE  0x00fd  // Pumps messages. (NULL, NULL, MSG*). 
+#define HH_PRETRANSLATEMESSAGE  0x00fd  // Pumps messages. (NULL, NULL, MSG*).
 #define HH_SET_GLOBAL_PROPERTY  0x00fc  // Set a global property. (NULL, NULL, HH_GPROP)
 
 #define HHWIN_PROP_TAB_AUTOHIDESHOW (1 << 0)    // Automatically hide/show tri-pane window
@@ -391,7 +391,7 @@ HtmlHelpW(
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-// Global Control Properties. 
+// Global Control Properties.
 //
 typedef enum tagHH_GPROPID
 {

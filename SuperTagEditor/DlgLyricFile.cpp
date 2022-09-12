@@ -1,4 +1,4 @@
-// DlgLyricFile.cpp : ƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“ ƒtƒ@ƒCƒ‹
+// DlgLyricFile.cpp : ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³ ãƒ•ã‚¡ã‚¤ãƒ«
 //
 
 #include "stdafx.h"
@@ -14,30 +14,30 @@ static char THIS_FILE[] = __FILE__;
 
 // =============================================
 // SelectDirectory
-// ŠT—v  : ƒtƒHƒ‹ƒ_ŽQÆƒ_ƒCƒAƒƒOˆ—
-// ˆø”  : sLocal			= ƒpƒX(“üo—Í)
-// –ß‚è’l: BOOL
+// æ¦‚è¦  : ãƒ•ã‚©ãƒ«ãƒ€å‚ç…§ãƒ€ã‚¤ã‚¢ãƒ­ã‚°å‡¦ç†
+// å¼•æ•°  : sLocal       = ãƒ‘ã‚¹(å…¥å‡ºåŠ›)
+// æˆ»ã‚Šå€¤: BOOL
 // =============================================
-BOOL SelectDirectory(char *sLocal)
+BOOL SelectDirectory(TCHAR *sLocal, int size)
 {
-	CSHBrowseForFolder	browse;
-	browse.SetEnableSubDirButton(false);
-	return(browse.Exec(sLocal) ? TRUE : FALSE);
+    CSHBrowseForFolder    browse;
+    browse.SetEnableSubDirButton(false);
+    return(browse.Exec(sLocal, size) ? TRUE : FALSE);
 }
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgLyricFile ƒvƒƒpƒeƒB ƒy[ƒW
+// CDlgLyricFile ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ ãƒšãƒ¼ã‚¸
 
 IMPLEMENT_DYNCREATE(CDlgLyricFile, COptionPage)
 
 CDlgLyricFile::CDlgLyricFile() : COptionPage(CDlgLyricFile::IDD)
 {
-	//{{AFX_DATA_INIT(CDlgLyricFile)
-	m_bChangeTextFile = FALSE;
-	m_strLyricsPath = _T("");
-	m_bSetLyricsDir = FALSE;
-	m_bSearchLyricsSubDir = FALSE;
-	//}}AFX_DATA_INIT
+    //{{AFX_DATA_INIT(CDlgLyricFile)
+    m_bChangeTextFile = FALSE;
+    m_strLyricsPath = _T("");
+    m_bSetLyricsDir = FALSE;
+    m_bSearchLyricsSubDir = FALSE;
+    //}}AFX_DATA_INIT
 }
 
 CDlgLyricFile::~CDlgLyricFile()
@@ -46,84 +46,84 @@ CDlgLyricFile::~CDlgLyricFile()
 
 void CDlgLyricFile::DoDataExchange(CDataExchange* pDX)
 {
-	COptionPage::DoDataExchange(pDX);
-	//{{AFX_DATA_MAP(CDlgLyricFile)
-	DDX_Control(pDX, IDC_CH_SEARCH_LYRICS_SUB_DIR, m_btSearchLyricsSubDir);
-	DDX_Control(pDX, IDC_ED_LYRICS_PATH, m_editLyricsPath);
-	DDX_Control(pDX, IDC_CH_SET_LYRICS_DIR, m_btSetLyricsDir);
-	DDX_Control(pDX, IDC_BT_REF_LYRICS, m_btRefLyrics);
-	DDX_Check(pDX, IDC_CH_CHANGE_TEXT_FILENAME, m_bChangeTextFile);
-	DDX_Text(pDX, IDC_ED_LYRICS_PATH, m_strLyricsPath);
-	DDX_Check(pDX, IDC_CH_SET_LYRICS_DIR, m_bSetLyricsDir);
-	DDX_Check(pDX, IDC_CH_SEARCH_LYRICS_SUB_DIR, m_bSearchLyricsSubDir);
-	//}}AFX_DATA_MAP
+    COptionPage::DoDataExchange(pDX);
+    //{{AFX_DATA_MAP(CDlgLyricFile)
+    DDX_Control(pDX, IDC_CH_SEARCH_LYRICS_SUB_DIR, m_btSearchLyricsSubDir);
+    DDX_Control(pDX, IDC_ED_LYRICS_PATH, m_editLyricsPath);
+    DDX_Control(pDX, IDC_CH_SET_LYRICS_DIR, m_btSetLyricsDir);
+    DDX_Control(pDX, IDC_BT_REF_LYRICS, m_btRefLyrics);
+    DDX_Check(pDX, IDC_CH_CHANGE_TEXT_FILENAME, m_bChangeTextFile);
+    DDX_Text(pDX, IDC_ED_LYRICS_PATH, m_strLyricsPath);
+    DDX_Check(pDX, IDC_CH_SET_LYRICS_DIR, m_bSetLyricsDir);
+    DDX_Check(pDX, IDC_CH_SEARCH_LYRICS_SUB_DIR, m_bSearchLyricsSubDir);
+    //}}AFX_DATA_MAP
 }
 
 
 BEGIN_MESSAGE_MAP(CDlgLyricFile, COptionPage)
-	//{{AFX_MSG_MAP(CDlgLyricFile)
-	ON_BN_CLICKED(IDC_BT_REF_LYRICS, OnBtRefLyrics)
-	ON_BN_CLICKED(IDC_CH_SET_LYRICS_DIR, OnChSetLyricsDir)
-	ON_BN_CLICKED(IDC_CH_CHANGE_TEXT_FILENAME, OnChChangeTextFilename)
-	ON_BN_CLICKED(IDC_BT_RESET_PAGE, OnBtResetPage)
-	//}}AFX_MSG_MAP
+    //{{AFX_MSG_MAP(CDlgLyricFile)
+    ON_BN_CLICKED(IDC_BT_REF_LYRICS, OnBtRefLyrics)
+    ON_BN_CLICKED(IDC_CH_SET_LYRICS_DIR, OnChSetLyricsDir)
+    ON_BN_CLICKED(IDC_CH_CHANGE_TEXT_FILENAME, OnChChangeTextFilename)
+    ON_BN_CLICKED(IDC_BT_RESET_PAGE, OnBtResetPage)
+    //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgLyricFile ƒƒbƒZ[ƒW ƒnƒ“ƒhƒ‰
-BOOL CDlgLyricFile::OnInitDialog() 
+// CDlgLyricFile ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒãƒ³ãƒ‰ãƒ©
+BOOL CDlgLyricFile::OnInitDialog()
 {
-	COptionPage::OnInitDialog();
+    COptionPage::OnInitDialog();
 
-	// TODO: ‚±‚ÌˆÊ’u‚É‰Šú‰»‚Ì•â‘«ˆ—‚ð’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
-	UpdateStatus();
+    // TODO: ã“ã®ä½ç½®ã«åˆæœŸåŒ–ã®è£œè¶³å‡¦ç†ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
+    UpdateStatus();
 
-	return TRUE;  // ƒRƒ“ƒgƒ[ƒ‹‚ÉƒtƒH[ƒJƒX‚ðÝ’è‚µ‚È‚¢‚Æ‚«A–ß‚è’l‚Í TRUE ‚Æ‚È‚è‚Ü‚·
-	              // —áŠO: OCX ƒvƒƒpƒeƒB ƒy[ƒW‚Ì–ß‚è’l‚Í FALSE ‚Æ‚È‚è‚Ü‚·
+    return TRUE;  // ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã«ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ã‚’è¨­å®šã—ãªã„ã¨ãã€æˆ»ã‚Šå€¤ã¯ TRUE ã¨ãªã‚Šã¾ã™
+                  // ä¾‹å¤–: OCX ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ ãƒšãƒ¼ã‚¸ã®æˆ»ã‚Šå€¤ã¯ FALSE ã¨ãªã‚Šã¾ã™
 }
 
 void CDlgLyricFile::UpdateStatus(void)
 {
-	UpdateData();
+    UpdateData();
 
-	m_btSetLyricsDir.EnableWindow(m_bChangeTextFile ? TRUE : FALSE);
-	m_btRefLyrics.EnableWindow(m_bSetLyricsDir ? TRUE : FALSE);
-	m_btSearchLyricsSubDir.EnableWindow(m_bSetLyricsDir ? TRUE : FALSE);
-	m_editLyricsPath.EnableWindow(m_bSetLyricsDir ? TRUE : FALSE);
+    m_btSetLyricsDir.EnableWindow(m_bChangeTextFile ? TRUE : FALSE);
+    m_btRefLyrics.EnableWindow(m_bSetLyricsDir ? TRUE : FALSE);
+    m_btSearchLyricsSubDir.EnableWindow(m_bSetLyricsDir ? TRUE : FALSE);
+    m_editLyricsPath.EnableWindow(m_bSetLyricsDir ? TRUE : FALSE);
 }
 
-void CDlgLyricFile::OnBtRefLyrics() 
+void CDlgLyricFile::OnBtRefLyrics()
 {
-	// Œ»ÝŽw’è‚³‚ê‚Ä‚¢‚éƒƒOƒtƒ@ƒCƒ‹–¼‚ðŽæ“¾
-	CString	strFileName;
-	GetDlgItemText(IDC_ED_LYRICS_PATH, strFileName);
+    // ç¾åœ¨æŒ‡å®šã•ã‚Œã¦ã„ã‚‹ãƒ­ã‚°ãƒ•ã‚¡ã‚¤ãƒ«åã‚’å–å¾—
+    CString strFileName;
+    GetDlgItemText(IDC_ED_LYRICS_PATH, strFileName);
 
-	// ƒtƒHƒ‹ƒ_‘I‘ðƒ_ƒCƒAƒƒO‚ðŠJ‚­
-	char	sFolderName[_MAX_PATH] = {'\0'};
-	strcpy(sFolderName, strFileName);
-	if (SelectDirectory(sFolderName) == TRUE) {
-		SetDlgItemText(IDC_ED_LYRICS_PATH, sFolderName);
-	}
+    // ãƒ•ã‚©ãƒ«ãƒ€é¸æŠžãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚’é–‹ã
+    TCHAR    sFolderName[_MAX_PATH] = {'\0'};
+    _tcsncpy_s(sFolderName, strFileName, _TRUNCATE);
+    if (SelectDirectory(sFolderName, _MAX_PATH) == TRUE) {
+        SetDlgItemText(IDC_ED_LYRICS_PATH, sFolderName);
+    }
 }
 
-void CDlgLyricFile::OnChSetLyricsDir() 
+void CDlgLyricFile::OnChSetLyricsDir()
 {
-	UpdateStatus();
+    UpdateStatus();
 }
 
-void CDlgLyricFile::OnChChangeTextFilename() 
+void CDlgLyricFile::OnChChangeTextFilename()
 {
-	UpdateStatus();
+    UpdateStatus();
 }
 
-// ‰Šú’l‚É–ß‚·
-void CDlgLyricFile::OnBtResetPage() 
+// åˆæœŸå€¤ã«æˆ»ã™
+void CDlgLyricFile::OnBtResetPage()
 {
-	// ‰ÌŽŒƒtƒ@ƒCƒ‹
-	((CButton *)GetDlgItem(IDC_CH_CHANGE_TEXT_FILENAME))->SetCheck(TRUE);
-	((CButton *)GetDlgItem(IDC_CH_SET_LYRICS_DIR))->SetCheck(FALSE);
-	((CButton *)GetDlgItem(IDC_CH_SEARCH_LYRICS_SUB_DIR))->SetCheck(FALSE);
-	((CWnd *)GetDlgItem(IDC_ED_LYRICS_PATH))->SetWindowText("");
+    // æ­Œè©žãƒ•ã‚¡ã‚¤ãƒ«
+    ((CButton *)GetDlgItem(IDC_CH_CHANGE_TEXT_FILENAME))->SetCheck(TRUE);
+    ((CButton *)GetDlgItem(IDC_CH_SET_LYRICS_DIR))->SetCheck(FALSE);
+    ((CButton *)GetDlgItem(IDC_CH_SEARCH_LYRICS_SUB_DIR))->SetCheck(FALSE);
+    ((CWnd *)GetDlgItem(IDC_ED_LYRICS_PATH))->SetWindowText(_T(""));
 
-	UpdateStatus();
+    UpdateStatus();
 }

@@ -1,4 +1,4 @@
-// DlgReplaceFileName.cpp : ƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“ ƒtƒ@ƒCƒ‹
+// DlgReplaceFileName.cpp : ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³ ãƒ•ã‚¡ã‚¤ãƒ«
 //
 
 #include "stdafx.h"
@@ -14,7 +14,7 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgReplaceFileName ƒ_ƒCƒAƒƒO
+// CDlgReplaceFileName ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
 
 
 
@@ -24,10 +24,10 @@ IMPLEMENT_DYNCREATE(CDlgReplaceFileName, COptionPage)
 
 CDlgReplaceFileName::CDlgReplaceFileName() : COptionPage(CDlgReplaceFileName::IDD)
 {
-	//{{AFX_DATA_INIT(CDlgReplaceFileName)
-	m_bFileNameReplace = FALSE;
-	m_nExtChange = -1;
-	//}}AFX_DATA_INIT
+    //{{AFX_DATA_INIT(CDlgReplaceFileName)
+    m_bFileNameReplace = FALSE;
+    m_nExtChange = -1;
+    //}}AFX_DATA_INIT
 }
 
 CDlgReplaceFileName::~CDlgReplaceFileName()
@@ -37,131 +37,131 @@ CDlgReplaceFileName::~CDlgReplaceFileName()
 
 void CDlgReplaceFileName::DoDataExchange(CDataExchange* pDX)
 {
-	COptionPage::DoDataExchange(pDX);
-	//{{AFX_DATA_MAP(CDlgReplaceFileName)
-	DDX_Text(pDX, IDC_ED_BEFORE1, m_strBefore[0]);
-	DDX_Text(pDX, IDC_ED_BEFORE2, m_strBefore[1]);
-	DDX_Text(pDX, IDC_ED_BEFORE3, m_strBefore[2]);
-	DDX_Text(pDX, IDC_ED_BEFORE4, m_strBefore[3]);
-	DDX_Text(pDX, IDC_ED_BEFORE5, m_strBefore[4]);
-	DDX_Text(pDX, IDC_ED_BEFORE6, m_strBefore[5]);
-	DDX_Text(pDX, IDC_ED_BEFORE7, m_strBefore[6]);
-	DDX_Text(pDX, IDC_ED_BEFORE8, m_strBefore[7]);
-	DDX_Text(pDX, IDC_ED_BEFORE9, m_strBefore[8]);
-	DDX_Text(pDX, IDC_ED_BEFORE10, m_strBefore[9]);
-	DDX_Text(pDX, IDC_ED_BEFORE11, m_strBefore[10]);
-	DDX_Text(pDX, IDC_ED_BEFORE12, m_strBefore[11]);
-	DDX_Text(pDX, IDC_ED_AFTER1, m_strAfter[0]);
-	DDX_Text(pDX, IDC_ED_AFTER2, m_strAfter[1]);
-	DDX_Text(pDX, IDC_ED_AFTER3, m_strAfter[2]);
-	DDX_Text(pDX, IDC_ED_AFTER4, m_strAfter[3]);
-	DDX_Text(pDX, IDC_ED_AFTER5, m_strAfter[4]);
-	DDX_Text(pDX, IDC_ED_AFTER6, m_strAfter[5]);
-	DDX_Text(pDX, IDC_ED_AFTER7, m_strAfter[6]);
-	DDX_Text(pDX, IDC_ED_AFTER8, m_strAfter[7]);
-	DDX_Text(pDX, IDC_ED_AFTER9, m_strAfter[8]);
-	DDX_Text(pDX, IDC_ED_AFTER10, m_strAfter[9]);
-	DDX_Text(pDX, IDC_ED_AFTER11, m_strAfter[10]);
-	DDX_Text(pDX, IDC_ED_AFTER12, m_strAfter[11]);
-	DDX_Text(pDX, IDC_ED_USER_BEFORE1, m_strUserBefore[0]);
-	DDX_Text(pDX, IDC_ED_USER_BEFORE2, m_strUserBefore[1]);
-	DDX_Text(pDX, IDC_ED_USER_BEFORE3, m_strUserBefore[2]);
-	DDX_Text(pDX, IDC_ED_USER_BEFORE4, m_strUserBefore[3]);
-	DDX_Text(pDX, IDC_ED_USER_BEFORE5, m_strUserBefore[4]);
-	DDX_Text(pDX, IDC_ED_USER_BEFORE6, m_strUserBefore[5]);
-	DDX_Text(pDX, IDC_ED_USER_AFTER1, m_strUserAfter[0]);
-	DDX_Text(pDX, IDC_ED_USER_AFTER2, m_strUserAfter[1]);
-	DDX_Text(pDX, IDC_ED_USER_AFTER3, m_strUserAfter[2]);
-	DDX_Text(pDX, IDC_ED_USER_AFTER4, m_strUserAfter[3]);
-	DDX_Text(pDX, IDC_ED_USER_AFTER5, m_strUserAfter[4]);
-	DDX_Text(pDX, IDC_ED_USER_AFTER6, m_strUserAfter[5]);
-	DDX_Radio(pDX, IDC_RADIO_EXT_NONE, m_nExtChange);
-	DDX_Check(pDX, IDC_CH_FILENAME_MULTI_BYTE, m_bFileNameReplace);
-	//}}AFX_DATA_MAP
+    COptionPage::DoDataExchange(pDX);
+    //{{AFX_DATA_MAP(CDlgReplaceFileName)
+    DDX_Text(pDX, IDC_ED_BEFORE1, m_strBefore[0]);
+    DDX_Text(pDX, IDC_ED_BEFORE2, m_strBefore[1]);
+    DDX_Text(pDX, IDC_ED_BEFORE3, m_strBefore[2]);
+    DDX_Text(pDX, IDC_ED_BEFORE4, m_strBefore[3]);
+    DDX_Text(pDX, IDC_ED_BEFORE5, m_strBefore[4]);
+    DDX_Text(pDX, IDC_ED_BEFORE6, m_strBefore[5]);
+    DDX_Text(pDX, IDC_ED_BEFORE7, m_strBefore[6]);
+    DDX_Text(pDX, IDC_ED_BEFORE8, m_strBefore[7]);
+    DDX_Text(pDX, IDC_ED_BEFORE9, m_strBefore[8]);
+    DDX_Text(pDX, IDC_ED_BEFORE10, m_strBefore[9]);
+    DDX_Text(pDX, IDC_ED_BEFORE11, m_strBefore[10]);
+    DDX_Text(pDX, IDC_ED_BEFORE12, m_strBefore[11]);
+    DDX_Text(pDX, IDC_ED_AFTER1, m_strAfter[0]);
+    DDX_Text(pDX, IDC_ED_AFTER2, m_strAfter[1]);
+    DDX_Text(pDX, IDC_ED_AFTER3, m_strAfter[2]);
+    DDX_Text(pDX, IDC_ED_AFTER4, m_strAfter[3]);
+    DDX_Text(pDX, IDC_ED_AFTER5, m_strAfter[4]);
+    DDX_Text(pDX, IDC_ED_AFTER6, m_strAfter[5]);
+    DDX_Text(pDX, IDC_ED_AFTER7, m_strAfter[6]);
+    DDX_Text(pDX, IDC_ED_AFTER8, m_strAfter[7]);
+    DDX_Text(pDX, IDC_ED_AFTER9, m_strAfter[8]);
+    DDX_Text(pDX, IDC_ED_AFTER10, m_strAfter[9]);
+    DDX_Text(pDX, IDC_ED_AFTER11, m_strAfter[10]);
+    DDX_Text(pDX, IDC_ED_AFTER12, m_strAfter[11]);
+    DDX_Text(pDX, IDC_ED_USER_BEFORE1, m_strUserBefore[0]);
+    DDX_Text(pDX, IDC_ED_USER_BEFORE2, m_strUserBefore[1]);
+    DDX_Text(pDX, IDC_ED_USER_BEFORE3, m_strUserBefore[2]);
+    DDX_Text(pDX, IDC_ED_USER_BEFORE4, m_strUserBefore[3]);
+    DDX_Text(pDX, IDC_ED_USER_BEFORE5, m_strUserBefore[4]);
+    DDX_Text(pDX, IDC_ED_USER_BEFORE6, m_strUserBefore[5]);
+    DDX_Text(pDX, IDC_ED_USER_AFTER1, m_strUserAfter[0]);
+    DDX_Text(pDX, IDC_ED_USER_AFTER2, m_strUserAfter[1]);
+    DDX_Text(pDX, IDC_ED_USER_AFTER3, m_strUserAfter[2]);
+    DDX_Text(pDX, IDC_ED_USER_AFTER4, m_strUserAfter[3]);
+    DDX_Text(pDX, IDC_ED_USER_AFTER5, m_strUserAfter[4]);
+    DDX_Text(pDX, IDC_ED_USER_AFTER6, m_strUserAfter[5]);
+    DDX_Radio(pDX, IDC_RADIO_EXT_NONE, m_nExtChange);
+    DDX_Check(pDX, IDC_CH_FILENAME_MULTI_BYTE, m_bFileNameReplace);
+    //}}AFX_DATA_MAP
 }
 
 
 BEGIN_MESSAGE_MAP(CDlgReplaceFileName, COptionPage)
-	//{{AFX_MSG_MAP(CDlgReplaceFileName)
-	ON_BN_CLICKED(IDC_CH_FILENAME_MULTI_BYTE, OnChFilenameMultiByte)
-	ON_BN_DOUBLECLICKED(IDC_CH_FILENAME_MULTI_BYTE, OnChFilenameMultiByte)
-	ON_BN_CLICKED(IDC_BT_RESET_PAGE, OnBtResetPage)
-	ON_BN_CLICKED(IDC_BT_FILENAME_UNIFY, OnBtFileNameUnify)
-	//}}AFX_MSG_MAP
+    //{{AFX_MSG_MAP(CDlgReplaceFileName)
+    ON_BN_CLICKED(IDC_CH_FILENAME_MULTI_BYTE, OnChFilenameMultiByte)
+    ON_BN_DOUBLECLICKED(IDC_CH_FILENAME_MULTI_BYTE, OnChFilenameMultiByte)
+    ON_BN_CLICKED(IDC_BT_RESET_PAGE, OnBtResetPage)
+    ON_BN_CLICKED(IDC_BT_FILENAME_UNIFY, OnBtFileNameUnify)
+    //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgReplaceFileName ƒƒbƒZ[ƒW ƒnƒ“ƒhƒ‰
+// CDlgReplaceFileName ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒãƒ³ãƒ‰ãƒ©
 
-BOOL CDlgReplaceFileName::OnInitDialog() 
+BOOL CDlgReplaceFileName::OnInitDialog()
 {
-	COptionPage::OnInitDialog();
+    COptionPage::OnInitDialog();
 
-	return TRUE;  // ƒRƒ“ƒgƒ[ƒ‹‚ÉƒtƒH[ƒJƒX‚ðÝ’è‚µ‚È‚¢‚Æ‚«A–ß‚è’l‚Í TRUE ‚Æ‚È‚è‚Ü‚·
-	              // —áŠO: OCX ƒvƒƒpƒeƒB ƒy[ƒW‚Ì–ß‚è’l‚Í FALSE ‚Æ‚È‚è‚Ü‚·
+    return TRUE;  // ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã«ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ã‚’è¨­å®šã—ãªã„ã¨ãã€æˆ»ã‚Šå€¤ã¯ TRUE ã¨ãªã‚Šã¾ã™
+                  // ä¾‹å¤–: OCX ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ ãƒšãƒ¼ã‚¸ã®æˆ»ã‚Šå€¤ã¯ FALSE ã¨ãªã‚Šã¾ã™
 }
 
-void CDlgReplaceFileName::OnChFilenameMultiByte() 
+void CDlgReplaceFileName::OnChFilenameMultiByte()
 {
 }
 
-// ‰Šú’l‚É–ß‚·
-void CDlgReplaceFileName::OnBtResetPage() 
+// åˆæœŸå€¤ã«æˆ»ã™
+void CDlgReplaceFileName::OnBtResetPage()
 {
-	((CButton *)GetDlgItem(IDC_CH_FILENAME_MULTI_BYTE))->SetCheck(TRUE);
+    ((CButton *)GetDlgItem(IDC_CH_FILENAME_MULTI_BYTE))->SetCheck(TRUE);
 
-	((CWnd *)GetDlgItem(IDC_ED_AFTER1))->SetWindowText(g_sRepTable[0][1]);
-	((CWnd *)GetDlgItem(IDC_ED_AFTER2))->SetWindowText(g_sRepTable[1][1]);
-	((CWnd *)GetDlgItem(IDC_ED_AFTER3))->SetWindowText(g_sRepTable[2][1]);
-	((CWnd *)GetDlgItem(IDC_ED_AFTER4))->SetWindowText(g_sRepTable[3][1]);
-	((CWnd *)GetDlgItem(IDC_ED_AFTER5))->SetWindowText(g_sRepTable[4][1]);
-	((CWnd *)GetDlgItem(IDC_ED_AFTER6))->SetWindowText(g_sRepTable[5][1]);
-	((CWnd *)GetDlgItem(IDC_ED_AFTER7))->SetWindowText(g_sRepTable[6][1]);
-	((CWnd *)GetDlgItem(IDC_ED_AFTER8))->SetWindowText(g_sRepTable[7][1]);
-	((CWnd *)GetDlgItem(IDC_ED_AFTER9))->SetWindowText(g_sRepTable[8][1]);
-	((CWnd *)GetDlgItem(IDC_ED_AFTER10))->SetWindowText(g_sRepTable[9][1]);
-	((CWnd *)GetDlgItem(IDC_ED_AFTER11))->SetWindowText(g_sRepTable[10][1]);
-	((CWnd *)GetDlgItem(IDC_ED_AFTER12))->SetWindowText(g_sRepTable[11][1]);
+    ((CWnd *)GetDlgItem(IDC_ED_AFTER1))->SetWindowText(g_sRepTable[0][1]);
+    ((CWnd *)GetDlgItem(IDC_ED_AFTER2))->SetWindowText(g_sRepTable[1][1]);
+    ((CWnd *)GetDlgItem(IDC_ED_AFTER3))->SetWindowText(g_sRepTable[2][1]);
+    ((CWnd *)GetDlgItem(IDC_ED_AFTER4))->SetWindowText(g_sRepTable[3][1]);
+    ((CWnd *)GetDlgItem(IDC_ED_AFTER5))->SetWindowText(g_sRepTable[4][1]);
+    ((CWnd *)GetDlgItem(IDC_ED_AFTER6))->SetWindowText(g_sRepTable[5][1]);
+    ((CWnd *)GetDlgItem(IDC_ED_AFTER7))->SetWindowText(g_sRepTable[6][1]);
+    ((CWnd *)GetDlgItem(IDC_ED_AFTER8))->SetWindowText(g_sRepTable[7][1]);
+    ((CWnd *)GetDlgItem(IDC_ED_AFTER9))->SetWindowText(g_sRepTable[8][1]);
+    ((CWnd *)GetDlgItem(IDC_ED_AFTER10))->SetWindowText(g_sRepTable[9][1]);
+    ((CWnd *)GetDlgItem(IDC_ED_AFTER11))->SetWindowText(g_sRepTable[10][1]);
+    ((CWnd *)GetDlgItem(IDC_ED_AFTER12))->SetWindowText(g_sRepTable[11][1]);
 
-	/* FreeFall 050 */
-	((CWnd *)GetDlgItem(IDC_ED_USER_BEFORE1))->SetWindowText("");
-	((CWnd *)GetDlgItem(IDC_ED_USER_BEFORE2))->SetWindowText("");
-	((CWnd *)GetDlgItem(IDC_ED_USER_BEFORE3))->SetWindowText("");
-	((CWnd *)GetDlgItem(IDC_ED_USER_BEFORE4))->SetWindowText("");
-	((CWnd *)GetDlgItem(IDC_ED_USER_BEFORE5))->SetWindowText("");
-	((CWnd *)GetDlgItem(IDC_ED_USER_BEFORE6))->SetWindowText("");
-	((CWnd *)GetDlgItem(IDC_ED_USER_AFTER1))->SetWindowText("");
-	((CWnd *)GetDlgItem(IDC_ED_USER_AFTER2))->SetWindowText("");
-	((CWnd *)GetDlgItem(IDC_ED_USER_AFTER3))->SetWindowText("");
-	((CWnd *)GetDlgItem(IDC_ED_USER_AFTER4))->SetWindowText("");
-	((CWnd *)GetDlgItem(IDC_ED_USER_AFTER5))->SetWindowText("");
-	((CWnd *)GetDlgItem(IDC_ED_USER_AFTER6))->SetWindowText("");
+    /* FreeFall 050 */
+    ((CWnd *)GetDlgItem(IDC_ED_USER_BEFORE1))->SetWindowText(_T(""));
+    ((CWnd *)GetDlgItem(IDC_ED_USER_BEFORE2))->SetWindowText(_T(""));
+    ((CWnd *)GetDlgItem(IDC_ED_USER_BEFORE3))->SetWindowText(_T(""));
+    ((CWnd *)GetDlgItem(IDC_ED_USER_BEFORE4))->SetWindowText(_T(""));
+    ((CWnd *)GetDlgItem(IDC_ED_USER_BEFORE5))->SetWindowText(_T(""));
+    ((CWnd *)GetDlgItem(IDC_ED_USER_BEFORE6))->SetWindowText(_T(""));
+    ((CWnd *)GetDlgItem(IDC_ED_USER_AFTER1))->SetWindowText(_T(""));
+    ((CWnd *)GetDlgItem(IDC_ED_USER_AFTER2))->SetWindowText(_T(""));
+    ((CWnd *)GetDlgItem(IDC_ED_USER_AFTER3))->SetWindowText(_T(""));
+    ((CWnd *)GetDlgItem(IDC_ED_USER_AFTER4))->SetWindowText(_T(""));
+    ((CWnd *)GetDlgItem(IDC_ED_USER_AFTER5))->SetWindowText(_T(""));
+    ((CWnd *)GetDlgItem(IDC_ED_USER_AFTER6))->SetWindowText(_T(""));
 
-	m_nFileUnifyAlpha = 0;
-	m_nFileUnifyHiraKata = 0;
-	m_nFileUnifyKata = 0;
-	m_nFileUnifyKigou = 0;
-	m_nFileUnifySuji = 0;
-	m_nFileUnifyUpLow = 0;
-	m_nExtChange = 0;
+    m_nFileUnifyAlpha = 0;
+    m_nFileUnifyHiraKata = 0;
+    m_nFileUnifyKata = 0;
+    m_nFileUnifyKigou = 0;
+    m_nFileUnifySuji = 0;
+    m_nFileUnifyUpLow = 0;
+    m_nExtChange = 0;
 }
 
 void CDlgReplaceFileName::OnBtFileNameUnify() /* LastTrain 058 */
 {
-	CDlgUnifyChar dlgUnify;
+    CDlgUnifyChar dlgUnify;
 
-	dlgUnify.m_nConvAlpha = m_nFileUnifyAlpha;
-	dlgUnify.m_nConvHiraKata = m_nFileUnifyHiraKata;
-	dlgUnify.m_nConvKata = m_nFileUnifyKata;
-	dlgUnify.m_nConvKigou = m_nFileUnifyKigou;
-	dlgUnify.m_nConvSuji = m_nFileUnifySuji;
-	dlgUnify.m_nConvUpLow = m_nFileUnifyUpLow;
-	if (dlgUnify.DoModal() == IDOK) {
-		m_nFileUnifyAlpha = dlgUnify.m_nConvAlpha;
-		m_nFileUnifyHiraKata = dlgUnify.m_nConvHiraKata;
-		m_nFileUnifyKata = dlgUnify.m_nConvKata;
-		m_nFileUnifyKigou = dlgUnify.m_nConvKigou;
-		m_nFileUnifySuji = dlgUnify.m_nConvSuji;
-		m_nFileUnifyUpLow = dlgUnify.m_nConvUpLow;
-	}
+    dlgUnify.m_nConvAlpha = m_nFileUnifyAlpha;
+    dlgUnify.m_nConvHiraKata = m_nFileUnifyHiraKata;
+    dlgUnify.m_nConvKata = m_nFileUnifyKata;
+    dlgUnify.m_nConvKigou = m_nFileUnifyKigou;
+    dlgUnify.m_nConvSuji = m_nFileUnifySuji;
+    dlgUnify.m_nConvUpLow = m_nFileUnifyUpLow;
+    if (dlgUnify.DoModal() == IDOK) {
+        m_nFileUnifyAlpha = dlgUnify.m_nConvAlpha;
+        m_nFileUnifyHiraKata = dlgUnify.m_nConvHiraKata;
+        m_nFileUnifyKata = dlgUnify.m_nConvKata;
+        m_nFileUnifyKigou = dlgUnify.m_nConvKigou;
+        m_nFileUnifySuji = dlgUnify.m_nConvSuji;
+        m_nFileUnifyUpLow = dlgUnify.m_nConvUpLow;
+    }
 }

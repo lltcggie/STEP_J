@@ -1,4 +1,4 @@
-// SuperTagEditor.h : DMTLOGVIEW ƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚ÌƒƒCƒ“ ƒwƒbƒ_[ ƒtƒ@ƒCƒ‹
+// SuperTagEditor.h : DMTLOGVIEW ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã®ãƒ¡ã‚¤ãƒ³ ãƒ˜ãƒƒãƒ€ãƒ¼ ãƒ•ã‚¡ã‚¤ãƒ«
 //
 
 #if !defined(AFX_DMTLOGVIEW_H__D67B6444_BFAB_11D3_9459_00402641B29B__INCLUDED_)
@@ -9,378 +9,406 @@
 #endif // _MSC_VER > 1000
 
 #ifndef __AFXWIN_H__
-	#error include 'stdafx.h' before including this file for PCH
+    #error include 'stdafx.h' before including this file for PCH
 #endif
 
-#include "resource.h"       // ƒƒCƒ“ ƒVƒ“ƒ{ƒ‹
+#include "resource.h"       // ãƒ¡ã‚¤ãƒ³ ã‚·ãƒ³ãƒœãƒ«
 
-#define PROG_NAME		"STEP_M"/*"SuperTagEditor"*/	// ƒvƒƒOƒ‰ƒ€–¼
-#define PROG_VERSION	"1.054 f"/*"2.00ƒÀ7"*/			// ƒo[ƒWƒ‡ƒ“
-#define PROG_NAME_ORG		"SuperTagEditor"	// ƒvƒƒOƒ‰ƒ€–¼
-#define PROG_VERSION_ORG	"2.00ƒÀ"			// ƒo[ƒWƒ‡ƒ“
-#define PROG_NAME_ORG2		"STEP"				// ƒvƒƒOƒ‰ƒ€–¼
-#define PROG_VERSION_ORG2	"1.02"				// ƒo[ƒWƒ‡ƒ“
-
-#define WM_USER_SET_STATUS_POS		WM_USER+1
-#define WM_USER_SET_STATUS_SIZE		WM_USER+2
-#define WM_USER_SET_STATUS_INPUT_MODE	WM_USER+3 /* Misirlou 150 */
-
-#ifndef iskanji
-#define iskanji(c)		((BYTE)(c) >= (BYTE)0x81 && (BYTE)(c) <= (BYTE)0x9f || (BYTE)(c) >= (BYTE)0xe0 && (BYTE)(c) <= (BYTE)0xfc)
+#define PROG_NAME       _T("STEP_J")     // ãƒ—ãƒ­ã‚°ãƒ©ãƒ å
+#define PROG_VERSION    _T("1.01")  // ãƒãƒ¼ã‚¸ãƒ§ãƒ³
+#define PROG_COPYRIGHT  _T("Copyright (C) 2022 jarupxx")
+#define PROG_URL        _T("https://github.com/jarupxx/STEP_J/")
+// #define PROG_MAIL       _T("example@co.jp")
+#ifdef _WIN64
+#define PROG_PLATFORM   _T("x64")
+#else
+#define PROG_PLATFORM   _T("x86")
 #endif
 
-#ifndef shortString	/* FreeFall 051 */
-#define shortString(str, count)	str.GetLength() > count ? (str.Left(count) + "...") : str
-#endif
-#define TEIKEI_MENU_STRING_MAX	30	/* FreeFall 051 */
+#define STEP_MUTEX_NAME       _T("STEP_J")    //èµ·å‹•æ¸ˆã¿ Mutex ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆå
+#define STEP_DDE_SERVICE_NAME _T("STEP_J")    //STEP DDE ã‚µãƒ¼ãƒ“ã‚¹å
+#define STEP_DDE_TOPIC_NAME   _T("STEP_J")    //STEP DDE ãƒˆãƒ”ãƒƒã‚¯å
 
-#ifndef shortFavorite	/* RockDance 129 */
-#define shortFavorite(str)	str.GetLength() > 30 ? (str.Left(3) + "..." + str.Right(27)) : str
+#define PROG_NAME_ORG       _T("SuperTagEditor")    // ãƒ—ãƒ­ã‚°ãƒ©ãƒ å
+#define PROG_VERSION_ORG    _T("2.00Î²")            // ãƒãƒ¼ã‚¸ãƒ§ãƒ³
+#define PROG_NAME_ORG2      _T("STEP")              // ãƒ—ãƒ­ã‚°ãƒ©ãƒ å
+#define PROG_VERSION_ORG2   _T("1.02")              // ãƒãƒ¼ã‚¸ãƒ§ãƒ³
+#define PROG_NAME_ORG3      _T("STEP_M")
+#define PROG_VERSION_ORG3   _T("1.054f")
+#define PROG_NAME_ORG4      _T("STEP_K")
+#define PROG_VERSION_ORG4   _T("1.05a")
+
+#define VCRUNTIME_URL _T("https://visualstudio.microsoft.com/ja/downloads/#other-ja-family") //VS2022 å†é ’å¸ƒå¯èƒ½ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸URL
+#define WM_USER_SET_STATUS_POS      WM_USER+1
+#define WM_USER_SET_STATUS_SIZE     WM_USER+2
+#define WM_USER_SET_STATUS_INPUT_MODE   WM_USER+3 /* Misirlou 150 */
+
+//#ifndef iskanji
+//#define iskanji(c)      ((BYTE)(c) >= (BYTE)0x81 && (BYTE)(c) <= (BYTE)0x9f || (BYTE)(c) >= (BYTE)0xe0 && (BYTE)(c) <= (BYTE)0xfc)
+//#endif
+
+#ifndef shortString /* FreeFall 051 */
+#define shortString(str, count) str.GetLength() > count ? (str.Left(count) + "...") : str
+#endif
+#define TEIKEI_MENU_STRING_MAX  30  /* FreeFall 051 */
+
+#ifndef shortFavorite   /* RockDance 129 */
+#define shortFavorite(str)  str.GetLength() > 30 ? (str.Left(3) + "..." + str.Right(27)) : str
 #endif
 
+#include "INI/ini.h"
 #include "regexp.h"
-#include "MyRecentFileList.h"	// ClassView ‚É‚æ‚Á‚Ä’Ç‰Á‚³‚ê‚Ü‚µ‚½B
+#include "MyRecentFileList.h"   // ClassView ã«ã‚ˆã£ã¦è¿½åŠ ã•ã‚Œã¾ã—ãŸã€‚
 
-enum	{
-	FILENAME_NO_CHECK,				// ƒ`ƒFƒbƒN‚µ‚È‚¢
-	FILENAME_CONV_MULTIBYTE,		// ‚QƒoƒCƒg•¶š‚É•ÏŠ·
+//ãƒ•ã‚©ãƒ«ãƒ€ã®åŒæœŸå‡¦ç†ã‚’ç„¡åŠ¹ã«ã™ã‚‹(by Kobarin)
+//æ©Ÿèƒ½ã®å­˜åœ¨æ„ç¾©ãŒåˆ†ã‹ã‚‰ãšã€ä¸å…·åˆãŒã‚ã£ãŸå ´åˆã«è‡´å‘½çš„ã«ãªã‚‹ãŸã‚ STEP_K ã§ã¯ç„¡åŠ¹ã«ã—ã¾ã™ã€‚
+//é–‹ç™ºã®å¾Œã‚’å¼•ãç¶™ãäººã§ã“ã®æ©Ÿèƒ½ã‚’æœ‰åŠ¹ã«ã—ãŸã„å ´åˆã¯ã‚³ãƒ¡ãƒ³ãƒˆã‚¢ã‚¦ãƒˆã—ã¦ä¸‹ã•ã„ã€‚
+//åŒæœŸå‡¦ç†ã®å‹•ä½œç¢ºèªã¯ä¸ååˆ†ãªã®ã§ã€æœ‰åŠ¹ã«ã™ã‚‹å ´åˆã¯æ³¨æ„ã—ã¦ä¸‹ã•ã„ã€‚
+#define DISABLE_FOLDER_SYNC
+
+enum    {
+    FILENAME_NO_CHECK,              // ãƒã‚§ãƒƒã‚¯ã—ãªã„
+    FILENAME_CONV_MULTIBYTE,        // ï¼’ãƒã‚¤ãƒˆæ–‡å­—ã«å¤‰æ›
 };
 
-#define SORT_KEY_MAX		5
-struct	SORT_STATE	{				// ƒ\[ƒgî•ñ
-	int		nKeyColumn;				// ƒ\[ƒgƒL[(ƒJƒ‰ƒ€”Ô†)
-	int		nType;					// ƒ^ƒCƒv(0:¸‡/1:~‡)
+#define SORT_KEY_MAX        5
+struct  SORT_STATE  {               // ã‚½ãƒ¼ãƒˆæƒ…å ±
+    int     nKeyColumn;             // ã‚½ãƒ¼ãƒˆã‚­ãƒ¼(ã‚«ãƒ©ãƒ ç•ªå·)
+    int     nType;                  // ã‚¿ã‚¤ãƒ—(0:æ˜‡é †/1:é™é †)
 };
 
-#define CLASS_MAX			5		// •ª—ŞŠK‘w‚Ì[‚³(Å‘å)
-struct	CLASS_INFO	{				// •ª—Şî•ñ
-	int		nType;					// •ª—Şƒ^ƒCƒv
-	int		nColumn[CLASS_MAX];		// ƒJƒ‰ƒ€”Ô†
+#define CLASS_MAX           5       // åˆ†é¡éšå±¤ã®æ·±ã•(æœ€å¤§)
+struct  CLASS_INFO  {               // åˆ†é¡æƒ…å ±
+    int     nType;                  // åˆ†é¡ã‚¿ã‚¤ãƒ—
+    int     nColumn[CLASS_MAX];     // ã‚«ãƒ©ãƒ ç•ªå·
 };
 
-enum	{
-	COMMAND_GROUP_FILE,
-	COMMAND_GROUP_EDIT,
-	COMMAND_GROUP_DISP,
-	COMMAND_GROUP_CONV, /* 2006.03.03 */
-	COMMAND_GROUP_PLAYLIST,
-	COMMAND_GROUP_PLAYER,
-	COMMAND_GROUP_PLUGIN,
-	COMMAND_GROUP_MAX,
+enum    {
+    COMMAND_GROUP_FILE,
+    COMMAND_GROUP_EDIT,
+    COMMAND_GROUP_DISP,
+    COMMAND_GROUP_CONV, /* 2006.03.03 */
+    COMMAND_GROUP_PLAYLIST,
+    COMMAND_GROUP_PLAYER,
+    COMMAND_GROUP_PLUGIN,
+    COMMAND_GROUP_MAX,
 };
-struct	KEY_CONFIG	{				// ƒL[Š„‚è“–‚Ä
-	WORD	wCmdID;					// ƒƒjƒ…[ƒŠƒ\[ƒX‚h‚c
-	DWORD	dwKeyCode;				// ƒzƒbƒgƒL[
-	int		nGroupID;				// ƒOƒ‹[ƒv–¼
-	char	*sName;					// €–Ú–¼
-	char	*sRegName;				// ƒŒƒWƒXƒgƒŠ–¼
+struct  KEY_CONFIG  {               // ã‚­ãƒ¼å‰²ã‚Šå½“ã¦
+    WORD    wCmdID;                 // ãƒ¡ãƒ‹ãƒ¥ãƒ¼ãƒªã‚½ãƒ¼ã‚¹ï¼©ï¼¤
+    DWORD   dwKeyCode;              // ãƒ›ãƒƒãƒˆã‚­ãƒ¼
+    int     nGroupID;               // ã‚°ãƒ«ãƒ¼ãƒ—å
+    const TCHAR *sName;             // é …ç›®å
+    const TCHAR *sRegName;          // ãƒ¬ã‚¸ã‚¹ãƒˆãƒªå
 };
-extern	KEY_CONFIG	g_listKeyConfig[];
+extern  KEY_CONFIG  g_listKeyConfig[];
 
-#define FILENAME_REPLACE_MAX		12
-#define USER_FILENAME_REPLACE_MAX		6	/* FreeFall 050 */
-struct	FILENAME_REPLACE {			// ƒtƒ@ƒCƒ‹–¼’uŠ·
-	CString	strBefore;				// ’uŠ·‘O‚Ì•¶š
-	CString	strAfter;				// ’uŠ·Œã‚Ì•¶š
+#define FILENAME_REPLACE_MAX        12
+#define USER_FILENAME_REPLACE_MAX    6   /* FreeFall 050 */
+struct  FILENAME_REPLACE {          // ãƒ•ã‚¡ã‚¤ãƒ«åç½®æ›
+    CString strBefore;              // ç½®æ›å‰ã®æ–‡å­—
+    CString strAfter;               // ç½®æ›å¾Œã®æ–‡å­—
 };
-extern	const char *g_sRepTable[FILENAME_REPLACE_MAX][2];
+extern  const TCHAR *g_sRepTable[FILENAME_REPLACE_MAX][2];
 
-#define USER_CONV_FORMAT_MAX		5 /*3 LastTrain 057 */
-struct	USER_CONV_FORMAT	{		// ƒ†[ƒU[•ÏŠ·‘®
-	CString	strName;				// –¼Ì
-	CString	strTag2File;			// ‘®Fƒ^ƒOî•ñ => ƒtƒ@ƒCƒ‹–¼
-	CString	strFile2Tag;			// ‘®Fƒtƒ@ƒCƒ‹–¼ => ƒ^ƒOî•ñ
-};
-
-#define USER_CONV_FORMAT_EX_MAX		10
-struct	USER_CONV_FORMAT_EX	{		// Šg’£”Åƒ†[ƒU[•ÏŠ·‘®
-	CString	strName;				// –¼Ì
-	CString	strFormat;				// ‘®
-	CString	strFixString;			// ŒÅ’è•¶š—ñ
-	int		nInitNumber;			// ˜A”ÔF‰Šú’l
-	int		nAddNumber;				// ˜A”ÔF‰ÁZ’l
-	int		nColumnCount;			// ˜A”ÔFŒ…”
-	bool	bSpaceInitNumber;		// ‘‚«‚İ•s‰Â‚ÌƒZƒ‹‚Å˜A”ÔƒNƒŠƒA
+#define USER_CONV_FORMAT_MAX        5 /*3 LastTrain 057 */
+struct  USER_CONV_FORMAT    {       // ãƒ¦ãƒ¼ã‚¶ãƒ¼å¤‰æ›æ›¸å¼
+    CString strName;                // åç§°
+    CString strTag2File;            // æ›¸å¼ï¼šã‚¿ã‚°æƒ…å ± => ãƒ•ã‚¡ã‚¤ãƒ«å
+    CString strFile2Tag;            // æ›¸å¼ï¼šãƒ•ã‚¡ã‚¤ãƒ«å => ã‚¿ã‚°æƒ…å ±
 };
 
-#define USER_MOVE_FODLER_FORMAT_MAX	5
-struct	USER_MOVE_FODLER_FORMAT	{	// ˆÚ“®æƒtƒHƒ‹ƒ_‘®
-	CString	strName;				// –¼Ì
-	CString	strFormat;				// ‘®
-	CString	strFixString;			// ŒÅ’è•¶š—ñ
-	bool	bCopy;					// ƒRƒs[‚·‚é
-	CString strInitFolder;			// ‰ŠúƒtƒHƒ‹ƒ_ /* STEP 022 */
-	CString strCurrentMoveDirectory;// ‘I‘ğ‚³‚ê‚½ˆÚ“®æƒtƒHƒ‹ƒ_ /* STE 022 */
+#define USER_CONV_FORMAT_EX_MAX     10
+struct  USER_CONV_FORMAT_EX {       // æ‹¡å¼µç‰ˆãƒ¦ãƒ¼ã‚¶ãƒ¼å¤‰æ›æ›¸å¼
+    CString strName;                // åç§°
+    CString strFormat;              // æ›¸å¼
+    CString strFixString;           // å›ºå®šæ–‡å­—åˆ—
+    int     nInitNumber;            // é€£ç•ªï¼šåˆæœŸå€¤
+    int     nAddNumber;             // é€£ç•ªï¼šåŠ ç®—å€¤
+    int     nColumnCount;           // é€£ç•ªï¼šæ¡æ•°
+    bool    bSpaceInitNumber;       // æ›¸ãè¾¼ã¿ä¸å¯ã®ã‚»ãƒ«ã§é€£ç•ªã‚¯ãƒªã‚¢
+};
+
+#define USER_MOVE_FODLER_FORMAT_MAX 5
+struct  USER_MOVE_FODLER_FORMAT {   // ç§»å‹•å…ˆãƒ•ã‚©ãƒ«ãƒ€æ›¸å¼
+    CString strName;                // åç§°
+    CString strFormat;              // æ›¸å¼
+    CString strFixString;           // å›ºå®šæ–‡å­—åˆ—
+    bool    bCopy;                  // ã‚³ãƒ”ãƒ¼ã™ã‚‹
+    CString strInitFolder;          // åˆæœŸãƒ•ã‚©ãƒ«ãƒ€ /* STEP 022 */
+    CString strCurrentMoveDirectory;// é¸æŠã•ã‚ŒãŸç§»å‹•å…ˆãƒ•ã‚©ãƒ«ãƒ€ /* STE 022 */
 };
 
 /* STEP 034 */
-#define USER_CONV_FORMAT_TAG2TAG_MAX	5
-struct USER_CONV_FORMAT_TAG2TAG {	// ƒ^ƒOU•ª•ÏŠ·‘®
-	CString	strName;				// –¼Ì
-	CString	strFormat;				// ‘®
+#define USER_CONV_FORMAT_TAG2TAG_MAX    5
+struct USER_CONV_FORMAT_TAG2TAG {   // ã‚¿ã‚°æŒ¯åˆ†å¤‰æ›æ›¸å¼
+    CString strName;                // åç§°
+    CString strFormat;              // æ›¸å¼
 };
 
 /* FunnyCorn 175 */
-#define USER_COPY_FORMAT_FORMAT_MAX	5
-struct	USER_COPY_FORMAT_FORMAT	{	// ‘®ƒRƒs[
-	CString	strName;				// –¼Ì
-	CString	strFormat;				// ‘®
-	CString	strFixString;			// ŒÅ’è•¶š—ñ
+#define USER_COPY_FORMAT_FORMAT_MAX 5
+struct  USER_COPY_FORMAT_FORMAT {   // æ›¸å¼ã‚³ãƒ”ãƒ¼
+    CString strName;                // åç§°
+    CString strFormat;              // æ›¸å¼
+    CString strFixString;           // å›ºå®šæ–‡å­—åˆ—
 };
 
 /* STEP 035 */
-#define TEIKEI_INFO_MAX	30
-struct TEIKEI_INFO {				// ’èŒ^•¶
-	CString	strTeikei;				// ’èŒ^•¶
-	int		nTeikeiPaste;			// “\‚è•t‚¯ˆÊ’u
-	BOOL	bAddSpace;				// ƒXƒy[ƒX’Ç‰Á
-	BOOL	bAddChar;				// ‘OŒã‚É•¶š‚ğ’Ç‰Á
-	CString	strFront;				// ‘O•t‰Á•¶š
-	CString	strBack;				// Œã•t‰Á•¶š
-	BOOL	bShowDialog;			// “\‚è•t‚¯ƒ_ƒCƒAƒƒO•\¦
+#define TEIKEI_INFO_MAX 30
+struct TEIKEI_INFO {                // å®šå‹æ–‡
+    CString strTeikei;              // å®šå‹æ–‡
+    int     nTeikeiPaste;           // è²¼ã‚Šä»˜ã‘ä½ç½®
+    BOOL    bAddSpace;              // ã‚¹ãƒšãƒ¼ã‚¹è¿½åŠ 
+    BOOL    bAddChar;               // å‰å¾Œã«æ–‡å­—ã‚’è¿½åŠ 
+    CString strFront;               // å‰ä»˜åŠ æ–‡å­—
+    CString strBack;                // å¾Œä»˜åŠ æ–‡å­—
+    BOOL    bShowDialog;            // è²¼ã‚Šä»˜ã‘æ™‚ãƒ€ã‚¤ã‚¢ãƒ­ã‚°è¡¨ç¤º
 };
 
-#define WRITE_FORMAT_MAX			5
-struct	WRITE_FORMAT	{			// Šg’£”Åƒ†[ƒU[•ÏŠ·‘®
-	CString	strName;				// –¼Ì
-	CString	strFileName;			// ‘®ƒtƒ@ƒCƒ‹
-	CString	strExtName;				// Šg’£q
-	bool	bWriteSelected;			// ‘I‘ğƒtƒ@ƒCƒ‹‚Ì‚İã‘‚«
-	CString	strCurrentFile;			// ƒJƒŒƒ“ƒgƒtƒ@ƒCƒ‹–¼
-	bool	bIsHtml;				// HTML ƒtƒ@ƒCƒ‹o—Í—p(‹ó‚Ìê‡‚É‘SŠpƒXƒy[ƒX‚ğo—Í)
-	bool	bWriteHtml;				// HTML ƒtƒ@ƒCƒ‹‚Æ‚µ‚Äo—Íiƒ^ƒO‚ğ’uŠ·‚·‚éj/* BeachMonster5 120 */
+#define WRITE_FORMAT_MAX            5
+struct  WRITE_FORMAT    {           // æ‹¡å¼µç‰ˆãƒ¦ãƒ¼ã‚¶ãƒ¼å¤‰æ›æ›¸å¼
+    CString strName;                // åç§°
+    CString strFileName;            // æ›¸å¼ãƒ•ã‚¡ã‚¤ãƒ«
+    CString strExtName;             // æ‹¡å¼µå­
+    bool    bWriteSelected;         // é¸æŠãƒ•ã‚¡ã‚¤ãƒ«ã®ã¿ä¸Šæ›¸ã
+    CString strCurrentFile;         // ã‚«ãƒ¬ãƒ³ãƒˆãƒ•ã‚¡ã‚¤ãƒ«å
+    bool    bIsHtml;                // HTML ãƒ•ã‚¡ã‚¤ãƒ«å‡ºåŠ›ç”¨(ç©ºã®å ´åˆã«å…¨è§’ã‚¹ãƒšãƒ¼ã‚¹ã‚’å‡ºåŠ›)
+    bool    bWriteHtml;             // HTML ãƒ•ã‚¡ã‚¤ãƒ«ã¨ã—ã¦å‡ºåŠ›ï¼ˆã‚¿ã‚°ã‚’ç½®æ›ã™ã‚‹ï¼‰/* BeachMonster5 120 */
 };
 
-struct	CHECK_WORD_STATE	{		// ğŒƒ`ƒFƒbƒN—p‚Ìî•ñ
-	CString	strSearchWord;			// ŒŸõ•¶š—ñ
-	CString	strReplaceWord;			// ’uŠ·•¶š—ñ
-	int		nTargetColumn;			// ŒŸõ‘ÎÛƒJƒ‰ƒ€
-	BOOL	bCheckDiffUL;			// ‘å•¶š^¬•¶š‚Ì‹æ•Ê
-	BOOL	bRegExp;				// ³‹K•\Œ»
-	BOOL	bRangeSelected;			// ‘I‘ğ”ÍˆÍ‚Ì‚İ
-	BOOL	bMatchComplete;			// Š®‘S‚Éˆê’v
-	BOOL	bMatchSelected;			// ƒ`ƒFƒbƒN‚¹‚¸‚É‘I‘ğó‘Ô‚É‚·‚é
-	int		nMatchColumn;			// (o—Í)ŒŸõŒ‹‰ÊFˆê’v‚µ‚½ƒJƒ‰ƒ€
-	int		nMatchPos;				// (o—Í)ŒŸõŒ‹‰ÊFˆê’v‚µ‚½ˆÊ’u
-	int		nMatchLength;			// (o—Í)ŒŸõŒ‹‰ÊFˆê’v‚µ‚½’·‚³
-	CRegExp	regexp;					// ³‹K•\Œ»ƒNƒ‰ƒX(“à•”ˆ——p)
+struct  CHECK_WORD_STATE    {       // æ¡ä»¶ãƒã‚§ãƒƒã‚¯ç”¨ã®æƒ…å ±
+    CString strSearchWord;          // æ¤œç´¢æ–‡å­—åˆ—
+    CString strReplaceWord;         // ç½®æ›æ–‡å­—åˆ—
+    int     nTargetColumn;          // æ¤œç´¢å¯¾è±¡ã‚«ãƒ©ãƒ 
+    BOOL    bCheckDiffUL;           // å¤§æ–‡å­—ï¼å°æ–‡å­—ã®åŒºåˆ¥
+    BOOL    bRegExp;                // æ­£è¦è¡¨ç¾
+    BOOL    bRangeSelected;         // é¸æŠç¯„å›²ã®ã¿
+    BOOL    bMatchComplete;         // å®Œå…¨ã«ä¸€è‡´
+    BOOL    bMatchSelected;         // ãƒã‚§ãƒƒã‚¯ã›ãšã«é¸æŠçŠ¶æ…‹ã«ã™ã‚‹
+    int     nMatchColumn;           // (å‡ºåŠ›)æ¤œç´¢çµæœï¼šä¸€è‡´ã—ãŸã‚«ãƒ©ãƒ 
+    int     nMatchPos;              // (å‡ºåŠ›)æ¤œç´¢çµæœï¼šä¸€è‡´ã—ãŸä½ç½®
+    int     nMatchLength;           // (å‡ºåŠ›)æ¤œç´¢çµæœï¼šä¸€è‡´ã—ãŸé•·ã•
+    CRegExp regexp;                 // æ­£è¦è¡¨ç¾ã‚¯ãƒ©ã‚¹(å†…éƒ¨å‡¦ç†ç”¨)
 };
-enum	{CHECK_STATE_CHECK, CHECK_STATE_REPLACE, CHECK_STATE_MAX};
-extern	CHECK_WORD_STATE	g_chkWord[CHECK_STATE_MAX];
+enum    {CHECK_STATE_CHECK, CHECK_STATE_REPLACE, CHECK_STATE_MAX};
+extern  CHECK_WORD_STATE    g_chkWord[CHECK_STATE_MAX];
 
-enum	{PLAYER_WINAMP, PLAYER_SCMPX, PLAYER_KBMPLAY, PLAYER_EXTEND, PLAYER_LILITH/* WildCherry 070 */};
+enum    {PLAYER_WINAMP, PLAYER_SCMPX, PLAYER_KBMPLAY, PLAYER_FOOBAR, PLAYER_LILITH, PLAYER_ULILITH, PLAYER_EXTEND};
 
-extern	RECT		g_rectMainWindow;		// ƒƒCƒ“ƒEƒBƒ“ƒhƒE‚ÌÀ•W
-extern	BOOL		g_bMainFrameZoomed;
-extern	BOOL		g_bMainFrameIconic;
-extern	CString		g_strCurrentDirectory;
-extern	CString		g_strCurrentMoveDirectory;
-extern	CString		g_strCurrentPlayList;
-extern	bool		g_bIsVersionUp;
-extern	int			g_nUserConvFormatType;
-extern	USER_CONV_FORMAT	g_userConvFormat[USER_CONV_FORMAT_MAX];
-extern	USER_CONV_FORMAT_EX	g_userConvFormatEx[USER_CONV_FORMAT_EX_MAX];
-extern	USER_MOVE_FODLER_FORMAT	g_userMoveFolder[USER_MOVE_FODLER_FORMAT_MAX];
-extern	USER_COPY_FORMAT_FORMAT	g_userCopyFormat[USER_COPY_FORMAT_FORMAT_MAX]; /* FunnyCorn 175 */
-extern	USER_CONV_FORMAT_TAG2TAG g_userConvFormatTag2Tag[USER_CONV_FORMAT_TAG2TAG_MAX]; /* STEP 034 */
-extern	TEIKEI_INFO g_teikeiInfo[TEIKEI_INFO_MAX]; /* STEP 035 */
-extern	WRITE_FORMAT		g_writeFormat[WRITE_FORMAT_MAX];
-extern	bool		g_bOptESCEditCancel;
-extern	bool		g_bOptEnableEditCursorExit;
-extern	bool		g_bOptEnterBeginEdit;
-extern	bool		g_bOptEditOkDown;
-extern	bool		g_bOptKeepTimeStamp;
-extern	bool		g_bOptSyncCreateTime;
-extern	bool		g_bOptChangeFileExt;
-extern	bool		g_bOptChangeTextFile;
-extern	int			g_nOptCheckFileName;
-extern	bool		g_bOptLoadFileChecked;
-extern	bool		g_bOptHideMP3ListFile;
-extern	bool		g_bOptDropSearchSubFolder; /* TyphoonSwell 026 */
-extern	bool		g_bOptShowZenSpace; /* BeachMonster 107 */
-extern	CString		g_sOptShowOtherChar; /* BeachMonster 107 */ // ‚Æ‚è‚ ‚¦‚¸‚¢‚ê‚Æ‚­
-extern	bool		g_bOptSortIgnoreCase; /* BeachMonster4 114 */
-extern	bool		g_bOptSortIgnoreZenHan; /* BeachMonster4 114 */
-extern	bool		g_bOptSortIgnoreKataHira; /* BeachMonster4 114 */
-extern	bool		g_bOptShowTotalParent; /* RockDance 128 */
-extern	bool		g_bOptShowTips; /* Rumble 188 */
-extern	int			g_nOptPlayerType;
-extern	CString		g_sOptWinAmpPath;
-extern	bool		g_bOptEditFieldSIF;
-extern	bool		g_bOptAutoOpenFolder;
-extern	bool		g_bOptLoadFileAdjustColumn;
-extern	bool		g_bOptSearchLyricFile;
-extern	bool		g_bOptSetLyricsDir;
-extern	bool		g_bOptSearchLyricsSubDir;
-extern	bool		g_bEnableSearchSubDir;
-extern	bool		g_bEnableMoveFolderCopy;
-extern	CString		g_strOptLyricsPath;
-extern	SORT_STATE	g_sortState[SORT_KEY_MAX];
-extern	CLASS_INFO	g_classInfo;
+extern  RECT        g_rectMainWindow;       // ãƒ¡ã‚¤ãƒ³ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®åº§æ¨™
+extern  BOOL        g_bMainFrameZoomed;
+extern  BOOL        g_bMainFrameIconic;
+extern  CString     g_strCurrentDirectory;
+extern  CString     g_strCurrentMoveDirectory;
+extern  CString     g_strCurrentPlayList;
+extern  bool        g_bIsVersionUp;
+extern  int         g_nUserConvFormatType;
+extern  USER_CONV_FORMAT    g_userConvFormat[USER_CONV_FORMAT_MAX];
+extern  USER_CONV_FORMAT_EX g_userConvFormatEx[USER_CONV_FORMAT_EX_MAX];
+extern  USER_MOVE_FODLER_FORMAT g_userMoveFolder[USER_MOVE_FODLER_FORMAT_MAX];
+extern  USER_COPY_FORMAT_FORMAT g_userCopyFormat[USER_COPY_FORMAT_FORMAT_MAX]; /* FunnyCorn 175 */
+extern  USER_CONV_FORMAT_TAG2TAG g_userConvFormatTag2Tag[USER_CONV_FORMAT_TAG2TAG_MAX]; /* STEP 034 */
+extern  TEIKEI_INFO g_teikeiInfo[TEIKEI_INFO_MAX]; /* STEP 035 */
+extern  WRITE_FORMAT        g_writeFormat[WRITE_FORMAT_MAX];
+extern  bool        g_bOptESCEditCancel;
+extern  bool        g_bOptEnableEditCursorExit;
+extern  bool        g_bOptEnterBeginEdit;
+extern  bool        g_bOptEditOkDown;
+extern  bool        g_bOptKeepTimeStamp;
+extern  bool        g_bOptSyncCreateTime;
+extern  bool        g_bOptChangeFileExt;
+extern  bool        g_bOptChangeTextFile;
+extern  int         g_nOptCheckFileName;
+extern  bool        g_bOptLoadFileChecked;
+extern  bool        g_bOptHideMP3ListFile;
+extern  bool        g_bOptDropSearchSubFolder; /* TyphoonSwell 026 */
+extern  bool        g_bOptShowZenSpace; /* BeachMonster 107 */
+extern  CString     g_sOptShowOtherChar; /* BeachMonster 107 */ // ã¨ã‚Šã‚ãˆãšã„ã‚Œã¨ã
+extern  bool        g_bOptSortIgnoreCase; /* BeachMonster4 114 */
+extern  bool        g_bOptSortIgnoreZenHan; /* BeachMonster4 114 */
+extern  bool        g_bOptSortIgnoreKataHira; /* BeachMonster4 114 */
+extern  bool        g_bOptShowTotalParent; /* RockDance 128 */
+extern  bool        g_bOptShowTips; /* Rumble 188 */
+extern  int         g_nOptPlayerType;
+extern  CString     g_sOptWinAmpPath;
+extern  bool        g_bOptEditFieldSIF;
+extern  bool        g_bOptAutoOpenFolder;
+extern  bool        g_bOptLoadFileAdjustColumn;
+extern  bool        g_bOptSearchLyricFile;
+extern  bool        g_bOptSetLyricsDir;
+extern  bool        g_bOptSearchLyricsSubDir;
+extern  bool        g_bEnableSearchSubDir;
+extern  bool        g_bEnableMoveFolderCopy;
+extern  CString     g_strOptLyricsPath;
+extern  SORT_STATE  g_sortState[SORT_KEY_MAX];
+extern  CLASS_INFO  g_classInfo;
 
-//extern	bool		g_bOptID3v2GenreAddNumber;
-extern	bool		g_bConfFileNameMaxCheck;
-extern	int			g_nConfFileNameMaxChar;
-extern	bool		g_bFileNameMaxCellColor; /* SeaKnows 036 */
+//extern    bool        g_bOptID3v2GenreAddNumber;
+extern  bool        g_bConfFileNameMaxCheck;
+extern  int         g_nConfFileNameMaxChar;
+extern  bool        g_bFileNameMaxCellColor; /* SeaKnows 036 */
 
-extern	bool		g_bEnableFolderSync;
-extern	CString		g_strRootFolder;
-extern	bool		g_bSyncSelectAlways;
-extern	bool		g_bSyncDeleteFolder;
-extern	bool		g_bSyncLyricsFileMove;
+extern  bool        g_bEnableFolderSync;
+extern  CString     g_strRootFolder;
+extern  bool        g_bSyncSelectAlways;
+extern  bool        g_bSyncDeleteFolder;
+extern  bool        g_bSyncLyricsFileMove;
 
-extern	bool		g_bConfDeleteFile;
-extern	bool		g_bConfDeleteList;
-extern	bool		g_bConfEditModify;
-extern	bool		g_bConfFolderSync;
+extern  bool        g_bConfDeleteFile;
+extern  bool        g_bConfDeleteList;
+extern  bool        g_bConfEditModify;
+extern  bool        g_bConfFolderSync;
 
-extern	bool		g_bPlayListClearList;
-extern	bool		g_bPlayListClearCheck;
-extern	bool		g_bPlayListAddList;
-extern	bool		g_bPlayListFileCheck;
+extern  bool        g_bPlayListClearList;
+extern  bool        g_bPlayListClearCheck;
+extern  bool        g_bPlayListAddList;
+extern  bool        g_bPlayListFileCheck;
 
-/* STEP 035 *///extern	CString		g_strTeikei[10+20];	/* SeaKnows 030 *//* FreeFall 046 */
-extern	CString		g_strTeikeiGroupName[3];	/* FreeFall 046 */
-extern	bool		g_bValidFolderSelect;	/* SeaKnows 033 */
-extern	bool		g_bValidDupExec;	/* FreeFall 045 */
+/* STEP 035 *///extern  CString     g_strTeikei[10+20]; /* SeaKnows 030 *//* FreeFall 046 */
+extern  CString     g_strTeikeiGroupName[3];    /* FreeFall 046 */
+extern  bool        g_bValidFolderSelect;   /* SeaKnows 033 */
+extern  bool        g_bValidDupExec;    /* FreeFall 045 */
 
-extern	int			g_nRecentFolder; /* StartInaction 053 */
-extern	bool		g_bSaveRepDlgPos; /* WildCherry4 086 */
-extern	int			g_nSaveRepDlgPosX; /* WildCherry4 086 */
-extern	int			g_nSaveRepDlgPosY; /* WildCherry4 086 */
+extern  int         g_nRecentFolder; /* StartInaction 053 */
+extern  bool        g_bSaveRepDlgPos; /* WildCherry4 086 */
+extern  int         g_nSaveRepDlgPosX; /* WildCherry4 086 */
+extern  int         g_nSaveRepDlgPosY; /* WildCherry4 086 */
 
-// •¶ší“ˆê /* StartInaction 054 */
-extern	UINT		g_nUnifyAlpha;
-extern	UINT		g_nUnifyAlpha;
-extern	UINT		g_nUnifyHiraKata;
-extern	UINT		g_nUnifyKata;
-extern	UINT		g_nUnifyKigou;
-extern	UINT		g_nUnifySuji;
-extern	UINT		g_nUnifyUpLow;
-extern	UINT		g_nUnifyFixedUpLow; /* STEP 040 */
+// æ–‡å­—ç¨®çµ±ä¸€ /* StartInaction 054 */
+extern  UINT        g_nUnifyAlpha;
+extern  UINT        g_nUnifyAlpha;
+extern  UINT        g_nUnifyHiraKata;
+extern  UINT        g_nUnifyKata;
+extern  UINT        g_nUnifyKigou;
+extern  UINT        g_nUnifySuji;
+extern  UINT        g_nUnifyUpLow;
+extern  UINT        g_nUnifyFixedUpLow; /* STEP 040 */
 
-// ƒtƒ@ƒCƒ‹–¼•¶ší“ˆê /* LastTrain 058 */
-extern	UINT		g_nFileUnifyAlpha;
-extern	UINT		g_nFileUnifyHiraKata;
-extern	UINT		g_nFileUnifyKata;
-extern	UINT		g_nFileUnifyKigou;
-extern	UINT		g_nFileUnifySuji;
-extern	UINT		g_nFileUnifyUpLow;
+// ãƒ•ã‚¡ã‚¤ãƒ«åæ–‡å­—ç¨®çµ±ä¸€ /* LastTrain 058 */
+extern  UINT        g_nFileUnifyAlpha;
+extern  UINT        g_nFileUnifyHiraKata;
+extern  UINT        g_nFileUnifyKata;
+extern  UINT        g_nFileUnifyKigou;
+extern  UINT        g_nFileUnifySuji;
+extern  UINT        g_nFileUnifyUpLow;
 
-// Šg’£q•ÏŠ· /* STEP 006 */
-extern	UINT		g_nFileExtChange;
+// æ‹¡å¼µå­å¤‰æ› /* STEP 006 */
+extern  UINT        g_nFileExtChange;
 
-extern	bool		g_bEndEditMoveRightCell; /* BeachMonster 091 */
+extern  bool        g_bEndEditMoveRightCell; /* BeachMonster 091 */
 
-extern	bool		g_bShowLoadPlaylistDlg; /* RockDance 126 */
+extern  bool        g_bShowLoadPlaylistDlg; /* RockDance 126 */
 
-extern	CString		g_strFavorite[10];	/* RockDance 129 */
+extern  CString     g_strFavorite[10];  /* RockDance 129 */
 
-extern	int			g_nAddNumberWidth; /* Baja 159 */
-extern	int			g_nAddNumberPos; /* Baja 159 */
-extern	CString		g_strAddNumberSep; /* Baja 159 */
-extern	CString		g_strAddNumberBef; /* Conspiracy 194 */
-extern	CString		g_strAddNumberAft; /* Conspiracy 194 */
+extern  int         g_nAddNumberWidth; /* Baja 159 */
+extern  int         g_nAddNumberPos; /* Baja 159 */
+extern  CString     g_strAddNumberSep; /* Baja 159 */
+extern  CString     g_strAddNumberBef; /* Conspiracy 194 */
+extern  CString     g_strAddNumberAft; /* Conspiracy 194 */
 
-extern	bool		g_bAudioListShow; /* Conspiracy 199 */
+extern  bool        g_bAudioListShow; /* Conspiracy 199 */
 
-extern bool			g_bFirstUpperIgnoreWord; /* STEP 026 */
-extern CString		g_strFirstUpperIgnoreWords; /* STEP 026 */
-extern CString		g_strFirstUpperSentenceSeparator; /* STEP 026 */
-extern bool			g_bUserConvAddMenu; /* STEP 030 */
-extern bool			g_bZenHanKigouKana; /* STEP 016 */
+extern bool         g_bFirstUpperIgnoreWord; /* STEP 026 */
+extern CString      g_strFirstUpperIgnoreWords; /* STEP 026 */
+extern CString      g_strFirstUpperSentenceSeparator; /* STEP 026 */
+extern bool         g_bUserConvAddMenu; /* STEP 030 */
+extern bool         g_bZenHanKigouKana; /* STEP 016 */
 
-extern	LOGFONT		g_fontReport;			// ƒtƒHƒ“ƒg
+extern bool         g_bAutoTilde2WaveDash;//STEP_K(å…¨è§’ãƒãƒ«ãƒ€ã‚’æ³¢ãƒ€ãƒƒã‚·ãƒ¥ã«è‡ªå‹•ç½®æ›)
 
-extern	FILENAME_REPLACE	g_fileNameReplace[FILENAME_REPLACE_MAX];
+extern  LOGFONT     g_fontReport;           // ãƒ•ã‚©ãƒ³ãƒˆ
 
-extern	FILENAME_REPLACE	g_userFileNameReplace[USER_FILENAME_REPLACE_MAX];	/* FreeFall 050 */
+extern  FILENAME_REPLACE    g_fileNameReplace[FILENAME_REPLACE_MAX];
+
+extern  FILENAME_REPLACE    g_userFileNameReplace[USER_FILENAME_REPLACE_MAX];   /* FreeFall 050 */
 
 
-extern	KEY_CONFIG *SearchKeyConfigID(WORD);
+extern  KEY_CONFIG *SearchKeyConfigID(WORD);
 
-extern	CStringArray g_arFixedWords; /* STEP 040 */
+extern  CStringArray g_arFixedWords; /* STEP 040 */
 
 /////////////////////////////////////////////////////////////////////////////
 // CSuperTagEditorApp:
-// ‚±‚ÌƒNƒ‰ƒX‚Ì“®ì‚Ì’è‹`‚ÉŠÖ‚µ‚Ä‚Í SuperTagEditor.cpp ƒtƒ@ƒCƒ‹‚ğQÆ‚µ‚Ä‚­‚¾‚³‚¢B
+// ã“ã®ã‚¯ãƒ©ã‚¹ã®å‹•ä½œã®å®šç¾©ã«é–¢ã—ã¦ã¯ SuperTagEditor.cpp ãƒ•ã‚¡ã‚¤ãƒ«ã‚’å‚ç…§ã—ã¦ãã ã•ã„ã€‚
 //
 
 class CSuperTagEditorApp : public CWinApp
 {
 public:
-	void WriteFixedWordList();
-	CSuperTagEditorApp();
-	~CSuperTagEditorApp();
+    void WriteFixedWordList();
+    CSuperTagEditorApp();
+    ~CSuperTagEditorApp();
 
 protected:
-	BOOL OnOpenRecentFile(UINT nID); /* BeachMonster 104 */
-	HANDLE	m_hMutex;			// ‘½d‹N“®‹Ö~ˆ——p‚ÌMutex
-	HACCEL	m_hAccel;			// ƒAƒNƒZƒ‰ƒŒ[ƒ^ƒe[ƒuƒ‹‚Ìƒnƒ“ƒhƒ‹
-	ACCEL	*m_accelTable;		// ƒAƒNƒZƒ‰ƒŒ[ƒ^ƒe[ƒuƒ‹
-	int		m_nAccelTable;		// ƒAƒNƒZƒ‰ƒŒ[ƒ^ƒe[ƒuƒ‹” /* STEP 030 }\
-
+    BOOL OnOpenRecentFile(UINT nID); /* BeachMonster 104 */
+    HANDLE  m_hMutex;           // å¤šé‡èµ·å‹•ç¦æ­¢å‡¦ç†ç”¨ã®Mutex
+    HACCEL  m_hAccel;           // ã‚¢ã‚¯ã‚»ãƒ©ãƒ¬ãƒ¼ã‚¿ãƒ†ãƒ¼ãƒ–ãƒ«ã®ãƒãƒ³ãƒ‰ãƒ«
+    ACCEL   *m_accelTable;      // ã‚¢ã‚¯ã‚»ãƒ©ãƒ¬ãƒ¼ã‚¿ãƒ†ãƒ¼ãƒ–ãƒ«
+    int     m_nAccelTable;      // ã‚¢ã‚¯ã‚»ãƒ©ãƒ¬ãƒ¼ã‚¿ãƒ†ãƒ¼ãƒ–ãƒ«æ•° /* STEP 030 */
+    CIniFile m_IniFile;
 public:
-	void AddToRecentFileList(LPCTSTR lpszPathName);
-	inline	HACCEL	GetAccelHandle(void) {return(m_hAccel);}
-	TCHAR	*MakeFileName(TCHAR *);
-	void	ReadWindowStatus(char *, RECT *);
-	void	WriteWindowStatus(char *, RECT *);
-	void	ReadRegistry(void);
-	void	WriteRegistry(void);
-	void	ReadKeyConfig(bool = false);
-	void	WriteKeyConfig(bool = false);
-	void	ReadGenreList(void);
-	void	WriteGenreList(void);
-	void	UpdateAccelerator(int = -1);
-	void	DestroyAccelerator(void);
-	void	GetWinampPath(void);
-	void	ReadFixedWordList(void);
+    CIniFile *GetIniFile(void){return &m_IniFile;}
+    void AddToRecentFileList(LPCTSTR lpszPathName);
+    inline  HACCEL  GetAccelHandle(void) {return(m_hAccel);}
+    TCHAR   *MakeFileName(TCHAR *);
+    void    ReadWindowStatus(const TCHAR *, RECT *);
+    void    WriteWindowStatus(const TCHAR *, RECT *);
+    void    ReadRegistry(void);
+    void    WriteRegistry(void);
+    void    ReadKeyConfig(bool = false);
+    void    WriteKeyConfig(bool = false);
+    void    ReadGenreList(void);
+    void    WriteGenreList(void);
+    void    UpdateAccelerator(int = -1);
+    void    DestroyAccelerator(void);
+    void    GetWinampPath(void);
+    void    ReadFixedWordList(void);
 
-// ƒI[ƒo[ƒ‰ƒCƒh
-	// ClassWizard ‚Í‰¼‘zŠÖ”‚ÌƒI[ƒo[ƒ‰ƒCƒh‚ğ¶¬‚µ‚Ü‚·B
-	//{{AFX_VIRTUAL(CSuperTagEditorApp)
-	public:
-	virtual BOOL InitInstance();
-	virtual int ExitInstance();
-	//}}AFX_VIRTUAL
+// ã‚ªãƒ¼ãƒãƒ¼ãƒ©ã‚¤ãƒ‰
+    // ClassWizard ã¯ä»®æƒ³é–¢æ•°ã®ã‚ªãƒ¼ãƒãƒ¼ãƒ©ã‚¤ãƒ‰ã‚’ç”Ÿæˆã—ã¾ã™ã€‚
+    //{{AFX_VIRTUAL(CSuperTagEditorApp)
+    public:
+    virtual BOOL InitInstance();
+    virtual int ExitInstance();
+    //}}AFX_VIRTUAL
 
-// ƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“
-	//{{AFX_MSG(CSuperTagEditorApp)
-	afx_msg void OnAppAbout();
-	afx_msg void OnUpdateFileMruFile(CCmdUI* pCmdUI);
-	afx_msg void OnFavoriteFolder01();
-	afx_msg void OnUpdateFavoriteFolder01(CCmdUI* pCmdUI);
-	afx_msg void OnFavoriteFolder02();
-	afx_msg void OnUpdateFavoriteFolder02(CCmdUI* pCmdUI);
-	afx_msg void OnFavoriteFolder03();
-	afx_msg void OnUpdateFavoriteFolder03(CCmdUI* pCmdUI);
-	afx_msg void OnFavoriteFolder04();
-	afx_msg void OnUpdateFavoriteFolder04(CCmdUI* pCmdUI);
-	afx_msg void OnFavoriteFolder05();
-	afx_msg void OnUpdateFavoriteFolder05(CCmdUI* pCmdUI);
-	afx_msg void OnFavoriteFolder06();
-	afx_msg void OnUpdateFavoriteFolder06(CCmdUI* pCmdUI);
-	afx_msg void OnFavoriteFolder07();
-	afx_msg void OnUpdateFavoriteFolder07(CCmdUI* pCmdUI);
-	afx_msg void OnFavoriteFolder08();
-	afx_msg void OnUpdateFavoriteFolder08(CCmdUI* pCmdUI);
-	afx_msg void OnFavoriteFolder09();
-	afx_msg void OnUpdateFavoriteFolder09(CCmdUI* pCmdUI);
-	afx_msg void OnFavoriteFolder10();
-	afx_msg void OnUpdateFavoriteFolder10(CCmdUI* pCmdUI);
-	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
+// ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³
+    //{{AFX_MSG(CSuperTagEditorApp)
+    afx_msg void OnAppAbout();
+    afx_msg void OnUpdateFileMruFile(CCmdUI* pCmdUI);
+    afx_msg void OnFavoriteFolder01();
+    afx_msg void OnUpdateFavoriteFolder01(CCmdUI* pCmdUI);
+    afx_msg void OnFavoriteFolder02();
+    afx_msg void OnUpdateFavoriteFolder02(CCmdUI* pCmdUI);
+    afx_msg void OnFavoriteFolder03();
+    afx_msg void OnUpdateFavoriteFolder03(CCmdUI* pCmdUI);
+    afx_msg void OnFavoriteFolder04();
+    afx_msg void OnUpdateFavoriteFolder04(CCmdUI* pCmdUI);
+    afx_msg void OnFavoriteFolder05();
+    afx_msg void OnUpdateFavoriteFolder05(CCmdUI* pCmdUI);
+    afx_msg void OnFavoriteFolder06();
+    afx_msg void OnUpdateFavoriteFolder06(CCmdUI* pCmdUI);
+    afx_msg void OnFavoriteFolder07();
+    afx_msg void OnUpdateFavoriteFolder07(CCmdUI* pCmdUI);
+    afx_msg void OnFavoriteFolder08();
+    afx_msg void OnUpdateFavoriteFolder08(CCmdUI* pCmdUI);
+    afx_msg void OnFavoriteFolder09();
+    afx_msg void OnUpdateFavoriteFolder09(CCmdUI* pCmdUI);
+    afx_msg void OnFavoriteFolder10();
+    afx_msg void OnUpdateFavoriteFolder10(CCmdUI* pCmdUI);
+    //}}AFX_MSG
+    DECLARE_MESSAGE_MAP()
 
 private:
-	void OnFavoriteFolder(CString& strFolder);
-	void LoadStdProfileSettings(UINT nMaxMRU);
+    void OnFavoriteFolder(CString& strFolder);
+    void LoadStdProfileSettings(UINT nMaxMRU);
 };
 
 
 /////////////////////////////////////////////////////////////////////////////
 
 //{{AFX_INSERT_LOCATION}}
-// Microsoft Visual C++ ‚Í‘Os‚Ì’¼‘O‚É’Ç‰Á‚ÌéŒ¾‚ğ‘}“ü‚µ‚Ü‚·B
+// Microsoft Visual C++ ã¯å‰è¡Œã®ç›´å‰ã«è¿½åŠ ã®å®£è¨€ã‚’æŒ¿å…¥ã—ã¾ã™ã€‚
 
 #endif // !defined(AFX_DMTLOGVIEW_H__D67B6444_BFAB_11D3_9459_00402641B29B__INCLUDED_)

@@ -1,4 +1,4 @@
-// DlgUnifyChar.cpp : ƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“ ƒtƒ@ƒCƒ‹
+// DlgUnifyChar.cpp : ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³ ãƒ•ã‚¡ã‚¤ãƒ«
 //
 
 #include "stdafx.h"
@@ -12,44 +12,44 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgUnifyChar ƒ_ƒCƒAƒƒO
+// CDlgUnifyChar ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
 
 
 CDlgUnifyChar::CDlgUnifyChar(CWnd* pParent /*=NULL*/)
-	: CDialog(CDlgUnifyChar::IDD, pParent)
+    : CDialog(CDlgUnifyChar::IDD, pParent)
 {
-	//{{AFX_DATA_INIT(CDlgUnifyChar)
-	m_nConvAlpha = -1;
-	m_nConvHiraKata = -1;
-	m_nConvKata = -1;
-	m_nConvKigou = -1;
-	m_nConvSuji = -1;
-	m_nConvUpLow = -1;
-	m_nConvFixedUpLow = -1;
-	//}}AFX_DATA_INIT
+    //{{AFX_DATA_INIT(CDlgUnifyChar)
+    m_nConvAlpha = -1;
+    m_nConvHiraKata = -1;
+    m_nConvKata = -1;
+    m_nConvKigou = -1;
+    m_nConvSuji = -1;
+    m_nConvUpLow = -1;
+    m_nConvFixedUpLow = -1;
+    //}}AFX_DATA_INIT
 }
 
 
 void CDlgUnifyChar::DoDataExchange(CDataExchange* pDX)
 {
-	CDialog::DoDataExchange(pDX);
-	//{{AFX_DATA_MAP(CDlgUnifyChar)
-	DDX_Radio(pDX, IDC_CONV_ALPHA_NONE, m_nConvAlpha);
-	DDX_Radio(pDX, IDC_CONV_HIRAKATA_NONE, m_nConvHiraKata);
-	DDX_Radio(pDX, IDC_CONV_KATA_NONE, m_nConvKata);
-	DDX_Radio(pDX, IDC_CONV_KIGOU_NONE, m_nConvKigou);
-	DDX_Radio(pDX, IDC_CONV_SUJI_NONE, m_nConvSuji);
-	DDX_Radio(pDX, IDC_CONV_UPLOW_NONE, m_nConvUpLow);
-	DDX_Radio(pDX, IDC_CONV_FIXED_UPPER_LOWER_NONE, m_nConvFixedUpLow);
-	//}}AFX_DATA_MAP
+    CDialog::DoDataExchange(pDX);
+    //{{AFX_DATA_MAP(CDlgUnifyChar)
+    DDX_Radio(pDX, IDC_CONV_ALPHA_NONE, m_nConvAlpha);
+    DDX_Radio(pDX, IDC_CONV_HIRAKATA_NONE, m_nConvHiraKata);
+    DDX_Radio(pDX, IDC_CONV_KATA_NONE, m_nConvKata);
+    DDX_Radio(pDX, IDC_CONV_KIGOU_NONE, m_nConvKigou);
+    DDX_Radio(pDX, IDC_CONV_SUJI_NONE, m_nConvSuji);
+    DDX_Radio(pDX, IDC_CONV_UPLOW_NONE, m_nConvUpLow);
+    DDX_Radio(pDX, IDC_CONV_FIXED_UPPER_LOWER_NONE, m_nConvFixedUpLow);
+    //}}AFX_DATA_MAP
 }
 
 
 BEGIN_MESSAGE_MAP(CDlgUnifyChar, CDialog)
-	//{{AFX_MSG_MAP(CDlgUnifyChar)
-		// ƒƒ‚ - ClassWizard ‚Í‚±‚ÌˆÊ’u‚Éƒ}ƒbƒsƒ“ƒO—p‚Ìƒ}ƒNƒ‚ð’Ç‰Á‚Ü‚½‚Ííœ‚µ‚Ü‚·B
-	//}}AFX_MSG_MAP
+    //{{AFX_MSG_MAP(CDlgUnifyChar)
+        // ãƒ¡ãƒ¢ - ClassWizard ã¯ã“ã®ä½ç½®ã«ãƒžãƒƒãƒ”ãƒ³ã‚°ç”¨ã®ãƒžã‚¯ãƒ­ã‚’è¿½åŠ ã¾ãŸã¯å‰Šé™¤ã—ã¾ã™ã€‚
+    //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgUnifyChar ƒƒbƒZ[ƒW ƒnƒ“ƒhƒ‰
+// CDlgUnifyChar ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒãƒ³ãƒ‰ãƒ©

@@ -4,63 +4,66 @@
 #if _MSC_VER > 1000
 #pragma once
 #endif // _MSC_VER > 1000
-// DlgCopyFormat.h : ƒwƒbƒ_[ ƒtƒ@ƒCƒ‹
+// DlgCopyFormat.h : ãƒ˜ãƒƒãƒ€ãƒ¼ ãƒ•ã‚¡ã‚¤ãƒ«
 //
 #include "OptionPage/OptionPage.h"
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgCopyFormat ƒ_ƒCƒAƒƒO
+// CDlgCopyFormat ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
 
 class CDlgCopyFormat : public COptionPage
 {
-// ƒRƒ“ƒXƒgƒ‰ƒNƒVƒ‡ƒ“
+// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚·ãƒ§ãƒ³
 public:
-	void OnOK();
-	CDlgCopyFormat(CWnd* pParent = NULL);   // •W€‚ÌƒRƒ“ƒXƒgƒ‰ƒNƒ^
+    void OnOK();
+    CDlgCopyFormat(CWnd* pParent = NULL);   // æ¨™æº–ã®ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 
-// ƒ_ƒCƒAƒƒO ƒf[ƒ^
-	//{{AFX_DATA(CDlgCopyFormat)
-	enum { IDD = IDD_DLG_COPY_FORMAT };
-	CComboBox	m_listFormatType;
-	CEdit	m_editFormat;
-	int		m_nFormatType;
-	//}}AFX_DATA
+// ãƒ€ã‚¤ã‚¢ãƒ­ã‚° ãƒ‡ãƒ¼ã‚¿
+    //{{AFX_DATA(CDlgCopyFormat)
+    enum { IDD = IDD_DLG_COPY_FORMAT };
+    CComboBox    m_listFormatType;
+    CEdit   m_editFormat;
+    int     m_nFormatType;
+    //}}AFX_DATA
 
-	USER_COPY_FORMAT_FORMAT	m_userFormatEx[USER_COPY_FORMAT_FORMAT_MAX];
+    USER_COPY_FORMAT_FORMAT    m_userFormatEx[USER_COPY_FORMAT_FORMAT_MAX];
 
-// ƒI[ƒo[ƒ‰ƒCƒh
-	// ClassWizard ‚Í‰¼‘zŠÖ”‚ÌƒI[ƒo[ƒ‰ƒCƒh‚ğ¶¬‚µ‚Ü‚·B
-	//{{AFX_VIRTUAL(CDlgCopyFormat)
-	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV ƒTƒ|[ƒg
-	//}}AFX_VIRTUAL
+// ã‚ªãƒ¼ãƒãƒ¼ãƒ©ã‚¤ãƒ‰
+    // ClassWizard ã¯ä»®æƒ³é–¢æ•°ã®ã‚ªãƒ¼ãƒãƒ¼ãƒ©ã‚¤ãƒ‰ã‚’ç”Ÿæˆã—ã¾ã™ã€‚
+    //{{AFX_VIRTUAL(CDlgCopyFormat)
+    protected:
+    virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV ã‚µãƒãƒ¼ãƒˆ
+    //}}AFX_VIRTUAL
 
-// ƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“
+// ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³
 protected:
 
-	// ¶¬‚³‚ê‚½ƒƒbƒZ[ƒW ƒ}ƒbƒvŠÖ”
-	//{{AFX_MSG(CDlgCopyFormat)
-	afx_msg void OnSelChangeListFormatType();
-	afx_msg void OnBtAlbumName();
-	afx_msg void OnBtArtistName();
-	afx_msg void OnBtComment();
-	afx_msg void OnBtFileName();
-	afx_msg void OnBtFixString();
-	afx_msg void OnBtNameChange();
-	afx_msg void OnBtNumber();
-	afx_msg void OnBtReleaseYear();
-	afx_msg void OnBtTrackName();
-	afx_msg void OnBtTrackNumber();
-	afx_msg void OnBtTrackNumber2();
-	afx_msg void OnBtTrackNumber3();
-	virtual BOOL OnInitDialog();
-	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
+    // ç”Ÿæˆã•ã‚ŒãŸãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒãƒƒãƒ—é–¢æ•°
+    //{{AFX_MSG(CDlgCopyFormat)
+    afx_msg void OnSelChangeListFormatType();
+    afx_msg void OnBtAlbumName();
+    afx_msg void OnBtArtistName();
+    afx_msg void OnBtComment();
+    afx_msg void OnBtFileName();
+    afx_msg void OnBtFixString();
+    afx_msg void OnBtNameChange();
+    afx_msg void OnBtNumber();
+    afx_msg void OnBtNumber2();
+    afx_msg void OnBtReleaseYear();
+    afx_msg void OnBtTrackName();
+    afx_msg void OnBtTrackNumber();
+    afx_msg void OnBtTrackNumber2();
+    afx_msg void OnBtDiscNumber();
+    afx_msg void OnBtDiscNumber2();
+    virtual BOOL OnInitDialog();
+    //}}AFX_MSG
+    DECLARE_MESSAGE_MAP()
 private:
-	void OutputFormatString(const char *sText);
+    void OutputFormatString(const TCHAR *sText);
+public:
 };
 
 //{{AFX_INSERT_LOCATION}}
-// Microsoft Visual C++ ‚Í‘Os‚Ì’¼‘O‚É’Ç‰Á‚ÌéŒ¾‚ğ‘}“ü‚µ‚Ü‚·B
+// Microsoft Visual C++ ã¯å‰è¡Œã®ç›´å‰ã«è¿½åŠ ã®å®£è¨€ã‚’æŒ¿å…¥ã—ã¾ã™ã€‚
 
 #endif // !defined(AFX_DLGCOPYFORMAT_H__263B867A_1D1D_4E7B_B72B_1D07BDCE144B__INCLUDED_)

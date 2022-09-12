@@ -1,4 +1,4 @@
-// DlgUserConvFormartTag2Tag.cpp : ÉCÉìÉvÉäÉÅÉìÉeÅ[ÉVÉáÉì ÉtÉ@ÉCÉã
+// DlgUserConvFormartTag2Tag.cpp : „Ç§„É≥„Éó„É™„É°„É≥„ÉÜ„Éº„Ç∑„Éß„É≥ „Éï„Ç°„Ç§„É´
 //
 
 #include "stdafx.h"
@@ -13,15 +13,15 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgUserConvFormartTag2Tag É_ÉCÉAÉçÉO
+// CDlgUserConvFormartTag2Tag „ÉÄ„Ç§„Ç¢„É≠„Ç∞
 
 IMPLEMENT_DYNCREATE(CDlgUserConvFormartTag2Tag, COptionPage)
 
 CDlgUserConvFormartTag2Tag::CDlgUserConvFormartTag2Tag() : COptionPage(CDlgUserConvFormartTag2Tag::IDD)
 {
-	//{{AFX_DATA_INIT(CDlgUserConvFormartTag2Tag)
-	m_nFormatType = -1;
-	//}}AFX_DATA_INIT
+    //{{AFX_DATA_INIT(CDlgUserConvFormartTag2Tag)
+    m_nFormatType = -1;
+    //}}AFX_DATA_INIT
 }
 
 CDlgUserConvFormartTag2Tag::~CDlgUserConvFormartTag2Tag()
@@ -30,132 +30,138 @@ CDlgUserConvFormartTag2Tag::~CDlgUserConvFormartTag2Tag()
 
 void CDlgUserConvFormartTag2Tag::DoDataExchange(CDataExchange* pDX)
 {
-	COptionPage::DoDataExchange(pDX);
-	//{{AFX_DATA_MAP(CDlgUserConvFormartTag2Tag)
-	DDX_Control(pDX, IDC_LIST_FORMAT_TYPE, m_listFormatType);
-	DDX_Control(pDX, IDC_ED_FORMAT, m_editFormat);
-	DDX_CBIndex(pDX, IDC_LIST_FORMAT_TYPE, m_nFormatType);
-	//}}AFX_DATA_MAP
+    COptionPage::DoDataExchange(pDX);
+    //{{AFX_DATA_MAP(CDlgUserConvFormartTag2Tag)
+    DDX_Control(pDX, IDC_LIST_FORMAT_TYPE, m_listFormatType);
+    DDX_Control(pDX, IDC_ED_FORMAT, m_editFormat);
+    DDX_CBIndex(pDX, IDC_LIST_FORMAT_TYPE, m_nFormatType);
+    //}}AFX_DATA_MAP
 }
 
 
 BEGIN_MESSAGE_MAP(CDlgUserConvFormartTag2Tag, COptionPage)
-	//{{AFX_MSG_MAP(CDlgUserConvFormartTag2Tag)
-	ON_BN_CLICKED(IDC_BT_ALBUM_NAME, OnBtAlbumName)
-	ON_BN_CLICKED(IDC_BT_ARTIST_NAME, OnBtArtistName)
-	ON_BN_CLICKED(IDC_BT_COMMENT, OnBtComment)
-	ON_BN_CLICKED(IDC_BT_NAME_CHANGE, OnBtNameChange)
-	ON_BN_CLICKED(IDC_BT_RELEASE_YEAR, OnBtReleaseYear)
-	ON_BN_CLICKED(IDC_BT_TRACK_NAME, OnBtTrackName)
-	ON_BN_CLICKED(IDC_BT_TRACK_NUMBER, OnBtTrackNumber)
-	ON_BN_CLICKED(IDC_BT_TRACK_NUMBER2, OnBtTrackNumber2)
-	ON_BN_CLICKED(IDC_BT_TRACK_NUMBER3, OnBtTrackNumber3)
-	ON_CBN_SELCHANGE(IDC_LIST_FORMAT_TYPE, OnSelChangeListFormatType)
-	//}}AFX_MSG_MAP
+    //{{AFX_MSG_MAP(CDlgUserConvFormartTag2Tag)
+    ON_BN_CLICKED(IDC_BT_ALBUM_NAME, OnBtAlbumName)
+    ON_BN_CLICKED(IDC_BT_ARTIST_NAME, OnBtArtistName)
+    ON_BN_CLICKED(IDC_BT_COMMENT, OnBtComment)
+    ON_BN_CLICKED(IDC_BT_NAME_CHANGE, OnBtNameChange)
+    ON_BN_CLICKED(IDC_BT_RELEASE_YEAR, OnBtReleaseYear)
+    ON_BN_CLICKED(IDC_BT_TRACK_NAME, OnBtTrackName)
+    ON_BN_CLICKED(IDC_BT_TRACK_NUMBER, OnBtTrackNumber)
+    ON_BN_CLICKED(IDC_BT_TRACK_NUMBER2, OnBtTrackNumber2)
+    ON_BN_CLICKED(IDC_BT_DISC_NUMBER, OnBtDiscNumber)
+    ON_BN_CLICKED(IDC_BT_DISC_NUMBER2, OnBtDiscNumber2)
+    ON_CBN_SELCHANGE(IDC_LIST_FORMAT_TYPE, OnSelChangeListFormatType)
+    //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgUserConvFormartTag2Tag ÉÅÉbÉZÅ[ÉW ÉnÉìÉhÉâ
-void CDlgUserConvFormartTag2Tag::OutputFormatString(const char *sText)
+// CDlgUserConvFormartTag2Tag „É°„ÉÉ„Çª„Éº„Ç∏ „Éè„É≥„Éâ„É©
+void CDlgUserConvFormartTag2Tag::OutputFormatString(const TCHAR *sText)
 {
-	m_editFormat.ReplaceSel(sText, FALSE);
-	m_editFormat.SetFocus();
+    m_editFormat.ReplaceSel(sText, FALSE);
+    m_editFormat.SetFocus();
 }
 
-void CDlgUserConvFormartTag2Tag::OnBtAlbumName() 
+void CDlgUserConvFormartTag2Tag::OnBtAlbumName()
 {
-	OutputFormatString("%ALBUM_NAME%");
+    OutputFormatString(_T("%ALBUM_NAME%"));
 }
 
-void CDlgUserConvFormartTag2Tag::OnBtArtistName() 
+void CDlgUserConvFormartTag2Tag::OnBtArtistName()
 {
-	OutputFormatString("%ARTIST_NAME%");
+    OutputFormatString(_T("%ARTIST_NAME%"));
 }
 
-void CDlgUserConvFormartTag2Tag::OnBtComment() 
+void CDlgUserConvFormartTag2Tag::OnBtComment()
 {
-	OutputFormatString("%COMMENT%");
+    OutputFormatString(_T("%COMMENT%"));
 }
 
-void CDlgUserConvFormartTag2Tag::OnBtReleaseYear() 
+void CDlgUserConvFormartTag2Tag::OnBtReleaseYear()
 {
-	OutputFormatString("%RELEASE_YEAR%");
+    OutputFormatString(_T("%RELEASE_YEAR%"));
 }
 
-void CDlgUserConvFormartTag2Tag::OnBtTrackName() 
+void CDlgUserConvFormartTag2Tag::OnBtTrackName()
 {
-	OutputFormatString("%TRACK_NAME%");
+    OutputFormatString(_T("%TRACK_NAME%"));
 }
 
-void CDlgUserConvFormartTag2Tag::OnBtTrackNumber() 
+void CDlgUserConvFormartTag2Tag::OnBtTrackNumber()
 {
-	OutputFormatString("%TRACK_NUMBER%");
+    OutputFormatString(_T("%TRACK_NUMBER%"));
 }
 
-void CDlgUserConvFormartTag2Tag::OnBtTrackNumber2() 
+void CDlgUserConvFormartTag2Tag::OnBtTrackNumber2()
 {
-	OutputFormatString("%TRACK_NUMBER2%");
+    OutputFormatString(_T("%TRACK_NUMBER2%"));
 }
 
-void CDlgUserConvFormartTag2Tag::OnBtTrackNumber3() 
+void CDlgUserConvFormartTag2Tag::OnBtDiscNumber()
 {
-	OutputFormatString("%TRACK_NUMBER3%");
+    OutputFormatString(_T("%DISC_NUMBER%"));
 }
 
-BOOL CDlgUserConvFormartTag2Tag::OnInitDialog() 
+void CDlgUserConvFormartTag2Tag::OnBtDiscNumber2()
 {
-	COptionPage::OnInitDialog();
-	
-	int		i;
-	m_listFormatType.ResetContent();
-	for (i = 0; i < USER_CONV_FORMAT_TAG2TAG_MAX; i++) {
-		CString	strName;
-		strName.Format("%d: %s", i+1, m_userFormatTag2Tag[i].strName);
-		m_listFormatType.AddString(strName);
-	}
-
-	m_listFormatType.SetCurSel(m_nFormatType);
-	m_editFormat.SetWindowText(m_userFormatTag2Tag[m_nFormatType].strFormat);
-	
-	return TRUE;  // ÉRÉìÉgÉçÅ[ÉãÇ…ÉtÉHÅ[ÉJÉXÇê›íËÇµÇ»Ç¢Ç∆Ç´ÅAñﬂÇËílÇÕ TRUE Ç∆Ç»ÇËÇ‹Ç∑
-	              // ó·äO: OCX ÉvÉçÉpÉeÉB ÉyÅ[ÉWÇÃñﬂÇËílÇÕ FALSE Ç∆Ç»ÇËÇ‹Ç∑
+    OutputFormatString(_T("%DISC_NUMBER2%"));
 }
 
-void CDlgUserConvFormartTag2Tag::OnBtNameChange() 
+BOOL CDlgUserConvFormartTag2Tag::OnInitDialog()
 {
-	CDlgNameChange	dialog;
+    COptionPage::OnInitDialog();
 
-	dialog.m_strName = m_userFormatTag2Tag[m_nFormatType].strName;
-	if (dialog.DoModal() == IDOK) {
-		// êVÇµÇ¢ñºèÃÇ…ïœçX
-		m_userFormatTag2Tag[m_nFormatType].strName = dialog.m_strName;
+    int     i;
+    m_listFormatType.ResetContent();
+    for (i = 0; i < USER_CONV_FORMAT_TAG2TAG_MAX; i++) {
+        CString strName;
+        strName.Format(_T("%d: %s"), i+1, (LPCWSTR)m_userFormatTag2Tag[i].strName);
+        m_listFormatType.AddString(strName);
+    }
 
-		// ÉäÉXÉgçXêV
-		OnSelChangeListFormatType();
-		m_listFormatType.ResetContent();
-		int i; for (i = 0; i < USER_CONV_FORMAT_MAX; i++) {
-			CString	strName;
-			strName.Format("%d: %s", i+1, m_userFormatTag2Tag[i].strName);
-			m_listFormatType.AddString(strName);
-		}
-		// ëIëÇµÇ»Ç®Ç∑
-		m_listFormatType.SetCurSel(m_nFormatType);
-	}
+    m_listFormatType.SetCurSel(m_nFormatType);
+    m_editFormat.SetWindowText(m_userFormatTag2Tag[m_nFormatType].strFormat);
+
+    return TRUE;  // „Ç≥„É≥„Éà„É≠„Éº„É´„Å´„Éï„Ç©„Éº„Ç´„Çπ„ÇíË®≠ÂÆö„Åó„Å™„ÅÑ„Å®„Åç„ÄÅÊàª„ÇäÂÄ§„ÅØ TRUE „Å®„Å™„Çä„Åæ„Åô
+                  // ‰æãÂ§ñ: OCX „Éó„É≠„Éë„ÉÜ„Ç£ „Éö„Éº„Ç∏„ÅÆÊàª„ÇäÂÄ§„ÅØ FALSE „Å®„Å™„Çä„Åæ„Åô
 }
 
-void CDlgUserConvFormartTag2Tag::OnSelChangeListFormatType() 
+void CDlgUserConvFormartTag2Tag::OnBtNameChange()
 {
-	// åªç›ï“èWíÜÇÃì‡óeÇîΩâfÇ≥ÇπÇÈ
-	m_editFormat.GetWindowText(m_userFormatTag2Tag[m_nFormatType].strFormat);
+    CDlgNameChange    dialog;
 
-	m_nFormatType = m_listFormatType.GetCurSel();
-	m_editFormat.SetWindowText(m_userFormatTag2Tag[m_nFormatType].strFormat);
+    dialog.m_strName = m_userFormatTag2Tag[m_nFormatType].strName;
+    if (dialog.DoModal() == IDOK) {
+        // Êñ∞„Åó„ÅÑÂêçÁß∞„Å´Â§âÊõ¥
+        m_userFormatTag2Tag[m_nFormatType].strName = dialog.m_strName;
+
+        // „É™„Çπ„ÉàÊõ¥Êñ∞
+        OnSelChangeListFormatType();
+        m_listFormatType.ResetContent();
+        int i; for (i = 0; i < USER_CONV_FORMAT_MAX; i++) {
+            CString strName;
+            strName.Format(_T("%d: %s"), i+1, (LPCWSTR)m_userFormatTag2Tag[i].strName);
+            m_listFormatType.AddString(strName);
+        }
+        // ÈÅ∏Êäû„Åó„Å™„Åä„Åô
+        m_listFormatType.SetCurSel(m_nFormatType);
+    }
 }
 
-void CDlgUserConvFormartTag2Tag::OnOK() 
+void CDlgUserConvFormartTag2Tag::OnSelChangeListFormatType()
 {
-	if (!::IsWindow(m_hWnd))	return;
-	m_editFormat.GetWindowText(m_userFormatTag2Tag[m_nFormatType].strFormat);
+    // ÁèæÂú®Á∑®ÈõÜ‰∏≠„ÅÆÂÜÖÂÆπ„ÇíÂèçÊò†„Åï„Åõ„Çã
+    m_editFormat.GetWindowText(m_userFormatTag2Tag[m_nFormatType].strFormat);
 
-	COptionPage::OnOK();
+    m_nFormatType = m_listFormatType.GetCurSel();
+    m_editFormat.SetWindowText(m_userFormatTag2Tag[m_nFormatType].strFormat);
+}
+
+void CDlgUserConvFormartTag2Tag::OnOK()
+{
+    if (!::IsWindow(m_hWnd)) return;
+    m_editFormat.GetWindowText(m_userFormatTag2Tag[m_nFormatType].strFormat);
+
+    COptionPage::OnOK();
 }

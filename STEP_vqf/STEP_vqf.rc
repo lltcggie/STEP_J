@@ -13,12 +13,12 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// ì˙ñ{åÍ resources
+// Êó•Êú¨Ë™û resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)
 #ifdef _WIN32
 LANGUAGE LANG_JAPANESE, SUBLANG_DEFAULT
-#pragma code_page(932)
+#pragma code_page(65001)
 #endif //_WIN32
 
 #ifdef APSTUDIO_INVOKED
@@ -27,18 +27,18 @@ LANGUAGE LANG_JAPANESE, SUBLANG_DEFAULT
 // TEXTINCLUDE
 //
 
-1 TEXTINCLUDE DISCARDABLE 
+1 TEXTINCLUDE DISCARDABLE
 BEGIN
     "resource.h\0"
 END
 
-2 TEXTINCLUDE DISCARDABLE 
+2 TEXTINCLUDE DISCARDABLE
 BEGIN
     "#include ""afxres.h""\r\n"
     "\0"
 END
 
-3 TEXTINCLUDE DISCARDABLE 
+3 TEXTINCLUDE DISCARDABLE
 BEGIN
     "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
     "#define _AFX_NO_OLE_RESOURCES\r\n"
@@ -48,10 +48,10 @@ BEGIN
     "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)\r\n"
     "#ifdef _WIN32\r\n"
     "LANGUAGE 17, 1\r\n"
-    "#pragma code_page(932)\r\n"
+    "#pragma code_page(65001)\r\n"
     "#endif //_WIN32\r\n"
-    "#include ""res\\STEP_vqf.rc2""  // Microsoft Visual C++ à»äOÇÃÉcÅ[ÉãÇ≈ï“èWÇ≥ÇÍÇΩÉäÉ\Å[ÉX\r\n"
-    "#include ""l.jpn\\afxres.rc""          // ïWèÄÇÃÉRÉìÉ|Å[ÉlÉìÉg\r\n"
+    "#include ""res\\STEP_vqf.rc2""  // Microsoft Visual C++ ‰ª•Â§ñ„ÅÆ„ÉÑ„Éº„É´„ÅßÁ∑®ÈõÜ„Åï„Çå„Åü„É™„ÇΩ„Éº„Çπ\r\n"
+    "#include ""l.jpn\\afxres.rc""          // Ê®ôÊ∫ñ„ÅÆ„Ç≥„É≥„Éù„Éº„Éç„É≥„Éà\r\n"
     "#endif\r\n"
     "\0"
 END
@@ -64,8 +64,8 @@ END
 // Bitmap
 //
 
-IDB_BITMAP_VQF          BITMAP  DISCARDABLE     "bitmap_acc.bmp"
-#endif    // ì˙ñ{åÍ resources
+IDB_BITMAP_VQF          BITMAP  DISCARDABLE     "bitmap_acc-24.bmp"
+#endif    // Êó•Êú¨Ë™û resources
 /////////////////////////////////////////////////////////////////////////////
 
 
@@ -83,10 +83,10 @@ IDB_BITMAP_VQF          BITMAP  DISCARDABLE     "bitmap_acc.bmp"
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)
 #ifdef _WIN32
 LANGUAGE 17, 1
-#pragma code_page(932)
+#pragma code_page(65001)
 #endif //_WIN32
-#include "res\STEP_vqf.rc2"  // Microsoft Visual C++ à»äOÇÃÉcÅ[ÉãÇ≈ï“èWÇ≥ÇÍÇΩÉäÉ\Å[ÉX
-#include "l.jpn\afxres.rc"          // ïWèÄÇÃÉRÉìÉ|Å[ÉlÉìÉg
+#include "res\STEP_vqf.rc2"  // Microsoft Visual C++ ‰ª•Â§ñ„ÅÆ„ÉÑ„Éº„É´„ÅßÁ∑®ÈõÜ„Åï„Çå„Åü„É™„ÇΩ„Éº„Çπ
+#include "l.jpn\afxres.rc"          // Ê®ôÊ∫ñ„ÅÆ„Ç≥„É≥„Éù„Éº„Éç„É≥„Éà
 #endif
 
 /////////////////////////////////////////////////////////////////////////////

@@ -1,4 +1,4 @@
-// DlgConv.cpp : ƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“ ƒtƒ@ƒCƒ‹
+// DlgConv.cpp : ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³ ãƒ•ã‚¡ã‚¤ãƒ«
 //
 
 #include "stdafx.h"
@@ -12,19 +12,20 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgConv ƒvƒƒpƒeƒB ƒy[ƒW
+// CDlgConv ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ ãƒšãƒ¼ã‚¸
 
 IMPLEMENT_DYNCREATE(CDlgConv, COptionPage)
 
 CDlgConv::CDlgConv() : COptionPage(CDlgConv::IDD)
 {
-	//{{AFX_DATA_INIT(CDlgConv)
-	m_bFirstUpperIgnoreWord = FALSE;
-	m_strFirstUpperIgnoreWords = _T("");
-	m_strFirstUpperSentenceSeparator = _T("");
-	m_bUserConvAddMenu = FALSE;
-	m_bZenHanKigouKana = FALSE;
-	//}}AFX_DATA_INIT
+    //{{AFX_DATA_INIT(CDlgConv)
+    m_bFirstUpperIgnoreWord = FALSE;
+    m_strFirstUpperIgnoreWords = _T("");
+    m_strFirstUpperSentenceSeparator = _T("");
+    m_bUserConvAddMenu = FALSE;
+    m_bZenHanKigouKana = FALSE;
+    m_bAutoTilde2WaveDash = FALSE;
+    //}}AFX_DATA_INIT
 }
 
 CDlgConv::~CDlgConv()
@@ -33,59 +34,63 @@ CDlgConv::~CDlgConv()
 
 void CDlgConv::DoDataExchange(CDataExchange* pDX)
 {
-	COptionPage::DoDataExchange(pDX);
-	//{{AFX_DATA_MAP(CDlgConv)
-	DDX_Control(pDX, IDC_EDIT_FIRST_UPPER_SENTENCE_SEPARATOR, m_cFirstUpperSentenceSeparator);
-	DDX_Control(pDX, IDC_EDIT_FIRST_UPPER_IGNORE_WORD, m_cFirstUperIgnoreWords);
-	DDX_Check(pDX, IDC_CHECK_FIRST_UPPER_IGNORE_WORD, m_bFirstUpperIgnoreWord);
-	DDX_Text(pDX, IDC_EDIT_FIRST_UPPER_IGNORE_WORD, m_strFirstUpperIgnoreWords);
-	DDX_Text(pDX, IDC_EDIT_FIRST_UPPER_SENTENCE_SEPARATOR, m_strFirstUpperSentenceSeparator);
-	DDX_Check(pDX, IDC_CHECK_USER_CONV_MENU, m_bUserConvAddMenu);
-	DDX_Check(pDX, IDC_CH_ZENHAN_KIGOU_KANA, m_bZenHanKigouKana);
-	//}}AFX_DATA_MAP
+    COptionPage::DoDataExchange(pDX);
+    //{{AFX_DATA_MAP(CDlgConv)
+    DDX_Control(pDX, IDC_EDIT_FIRST_UPPER_SENTENCE_SEPARATOR, m_cFirstUpperSentenceSeparator);
+    DDX_Control(pDX, IDC_EDIT_FIRST_UPPER_IGNORE_WORD, m_cFirstUperIgnoreWords);
+    DDX_Check(pDX, IDC_CHECK_FIRST_UPPER_IGNORE_WORD, m_bFirstUpperIgnoreWord);
+    DDX_Text(pDX, IDC_EDIT_FIRST_UPPER_IGNORE_WORD, m_strFirstUpperIgnoreWords);
+    DDX_Text(pDX, IDC_EDIT_FIRST_UPPER_SENTENCE_SEPARATOR, m_strFirstUpperSentenceSeparator);
+    DDX_Check(pDX, IDC_CHECK_USER_CONV_MENU, m_bUserConvAddMenu);
+    DDX_Check(pDX, IDC_CH_ZENHAN_KIGOU_KANA, m_bZenHanKigouKana);
+    DDX_Check(pDX, IDC_CH_AUTO_TILDE_2_WAVE_DASH, m_bAutoTilde2WaveDash);
+    //}}AFX_DATA_MAP
 }
 
 
 BEGIN_MESSAGE_MAP(CDlgConv, COptionPage)
-	//{{AFX_MSG_MAP(CDlgConv)
-	ON_BN_CLICKED(IDC_CHECK_FIRST_UPPER_IGNORE_WORD, OnCheckFirstUpperIgnoreWord)
-	ON_BN_CLICKED(IDC_BT_RESET_PAGE, OnBtResetPage)
-	//}}AFX_MSG_MAP
+    //{{AFX_MSG_MAP(CDlgConv)
+    ON_BN_CLICKED(IDC_CHECK_FIRST_UPPER_IGNORE_WORD, OnCheckFirstUpperIgnoreWord)
+    ON_BN_CLICKED(IDC_BT_RESET_PAGE, OnBtResetPage)
+    //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgConv ƒƒbƒZ[ƒW ƒnƒ“ƒhƒ‰
+// CDlgConv ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒãƒ³ãƒ‰ãƒ©
 
-void CDlgConv::OnCheckFirstUpperIgnoreWord() 
+void CDlgConv::OnCheckFirstUpperIgnoreWord()
 {
-	// TODO: ‚±‚ÌˆÊ’u‚ÉƒRƒ“ƒgƒ[ƒ‹’Ê’mƒnƒ“ƒhƒ‰—p‚ÌƒR[ƒh‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
-	UpdateData(TRUE);
-	if (m_bFirstUpperIgnoreWord) {
-		m_cFirstUperIgnoreWords.EnableWindow(TRUE);
-		m_cFirstUpperSentenceSeparator.EnableWindow(TRUE);
-	} else {
-		m_cFirstUperIgnoreWords.EnableWindow(FALSE);
-		m_cFirstUpperSentenceSeparator.EnableWindow(FALSE);
-	}
+    // TODO: ã“ã®ä½ç½®ã«ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«é€šçŸ¥ãƒãƒ³ãƒ‰ãƒ©ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
+    UpdateData(TRUE);
+    if (m_bFirstUpperIgnoreWord) {
+        m_cFirstUperIgnoreWords.EnableWindow(TRUE);
+        m_cFirstUpperSentenceSeparator.EnableWindow(TRUE);
+    } else {
+        m_cFirstUperIgnoreWords.EnableWindow(FALSE);
+        m_cFirstUpperSentenceSeparator.EnableWindow(FALSE);
+    }
 }
 
-BOOL CDlgConv::OnInitDialog() 
+BOOL CDlgConv::OnInitDialog()
 {
-	COptionPage::OnInitDialog();
+    COptionPage::OnInitDialog();
 
-	OnCheckFirstUpperIgnoreWord();
-	return TRUE;  // ƒRƒ“ƒgƒ[ƒ‹‚ÉƒtƒH[ƒJƒX‚ğİ’è‚µ‚È‚¢‚Æ‚«A–ß‚è’l‚Í TRUE ‚Æ‚È‚è‚Ü‚·
-	              // —áŠO: OCX ƒvƒƒpƒeƒB ƒy[ƒW‚Ì–ß‚è’l‚Í FALSE ‚Æ‚È‚è‚Ü‚·
+    OnCheckFirstUpperIgnoreWord();
+    //ãƒªã‚½ãƒ¼ã‚¹ã‹ã‚‰ã ã¨å…¨è§’ãƒãƒ«ãƒ€(UNICODE æ–‡å­—)ã‚’è¡¨ç¤ºå‡ºæ¥ãªã„ã®ã§ã“ã“ã§è¨­å®š
+    SetDlgItemText(IDC_CH_AUTO_TILDE_2_WAVE_DASH, _T("å…¨è§’ãƒãƒ«ãƒ€(ã€œ)ã‚’æ³¢ãƒ€ãƒƒã‚·ãƒ¥(ï½)ã«è‡ªå‹•ç½®æ›"));
+    return TRUE;  // ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã«ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ã‚’è¨­å®šã—ãªã„ã¨ãã€æˆ»ã‚Šå€¤ã¯ TRUE ã¨ãªã‚Šã¾ã™
+                  // ä¾‹å¤–: OCX ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ ãƒšãƒ¼ã‚¸ã®æˆ»ã‚Šå€¤ã¯ FALSE ã¨ãªã‚Šã¾ã™
 }
 
-void CDlgConv::OnBtResetPage() 
+void CDlgConv::OnBtResetPage()
 {
-	// TODO: ‚±‚ÌˆÊ’u‚ÉƒRƒ“ƒgƒ[ƒ‹’Ê’mƒnƒ“ƒhƒ‰—p‚ÌƒR[ƒh‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
-	m_strFirstUpperIgnoreWords = "a,an,and,at,by,for,in,into,of,on,or,the,to,with";
-	m_strFirstUpperSentenceSeparator = ".";
-	m_bFirstUpperIgnoreWord = FALSE;
-	m_bUserConvAddMenu = FALSE;
-
-	UpdateData(FALSE);
-	OnCheckFirstUpperIgnoreWord();
+    // TODO: ã“ã®ä½ç½®ã«ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«é€šçŸ¥ãƒãƒ³ãƒ‰ãƒ©ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
+    m_strFirstUpperIgnoreWords = _T("a,an,and,at,by,for,in,into,of,on,or,the,to,with");
+    m_strFirstUpperSentenceSeparator = _T(".");
+    m_bFirstUpperIgnoreWord = FALSE;
+    m_bUserConvAddMenu = FALSE;
+    m_bZenHanKigouKana = FALSE;
+    m_bAutoTilde2WaveDash = FALSE;
+    UpdateData(FALSE);
+    OnCheckFirstUpperIgnoreWord();
 }

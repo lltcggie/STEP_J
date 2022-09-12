@@ -1,4 +1,4 @@
-// DlgSetup.cpp : ƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“ ƒtƒ@ƒCƒ‹
+// DlgSetup.cpp : ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³ ãƒ•ã‚¡ã‚¤ãƒ«
 //
 
 #include "stdafx.h"
@@ -12,17 +12,17 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgSetup ƒvƒƒpƒeƒB ƒy[ƒW
+// CDlgSetup ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ ãƒšãƒ¼ã‚¸
 
 IMPLEMENT_DYNCREATE(CDlgSetup, CPropertyPage)
 
 CDlgSetup::CDlgSetup() : CPropertyPage(CDlgSetup::IDD)
 {
-	//{{AFX_DATA_INIT(CDlgSetup)
-	m_bGenreListSelect = FALSE;
-	m_bID3TagAutoDelete = FALSE;
-	m_bID3TagAutoWrite = FALSE;
-	//}}AFX_DATA_INIT
+    //{{AFX_DATA_INIT(CDlgSetup)
+    m_bGenreListSelect = FALSE;
+    m_bID3TagAutoDelete = FALSE;
+    m_bID3TagAutoWrite = FALSE;
+    //}}AFX_DATA_INIT
 }
 
 CDlgSetup::~CDlgSetup()
@@ -31,41 +31,43 @@ CDlgSetup::~CDlgSetup()
 
 void CDlgSetup::DoDataExchange(CDataExchange* pDX)
 {
-	CPropertyPage::DoDataExchange(pDX);
-	//{{AFX_DATA_MAP(CDlgSetup)
-	DDX_Check(pDX, IDC_CH_GENRE_LIST_SELECT, m_bGenreListSelect);
-	DDX_Check(pDX, IDC_CH_ID3TAG_AUTO_DELETE, m_bID3TagAutoDelete);
-	DDX_Check(pDX, IDC_CH_ID3TAG_AUTO_WRITE, m_bID3TagAutoWrite);
-	//}}AFX_DATA_MAP
+    CPropertyPage::DoDataExchange(pDX);
+    //{{AFX_DATA_MAP(CDlgSetup)
+    DDX_Check(pDX, IDC_CH_GENRE_LIST_SELECT, m_bGenreListSelect);
+    DDX_Check(pDX, IDC_CH_ID3TAG_AUTO_DELETE, m_bID3TagAutoDelete);
+    DDX_Check(pDX, IDC_CH_ID3TAG_AUTO_WRITE, m_bID3TagAutoWrite);
+    //}}AFX_DATA_MAP
+    ((CButton *)GetDlgItem(IDC_CH_ID3TAG_AUTO_WRITE))->EnableWindow(!m_bID3TagAutoDelete);
 }
 
 
 BEGIN_MESSAGE_MAP(CDlgSetup, CPropertyPage)
-	//{{AFX_MSG_MAP(CDlgSetup)
-	ON_BN_CLICKED(IDC_CH_ID3TAG_AUTO_DELETE, OnChId3tagAutoDelete)
-	ON_BN_CLICKED(IDC_CH_ID3TAG_AUTO_WRITE, OnChId3tagAutoWrite)
-	//}}AFX_MSG_MAP
+    //{{AFX_MSG_MAP(CDlgSetup)
+    ON_BN_CLICKED(IDC_CH_ID3TAG_AUTO_DELETE, OnChId3tagAutoDelete)
+    ON_BN_CLICKED(IDC_CH_ID3TAG_AUTO_WRITE, OnChId3tagAutoWrite)
+    //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgSetup ƒƒbƒZ[ƒW ƒnƒ“ƒhƒ‰
+// CDlgSetup ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒãƒ³ãƒ‰ãƒ©
 
-void CDlgSetup::OnChId3tagAutoDelete() 
+void CDlgSetup::OnChId3tagAutoDelete()
 {
-	// TODO: ‚±‚ÌˆÊ’u‚ÉƒRƒ“ƒgƒ[ƒ‹’Ê’mƒnƒ“ƒhƒ‰—p‚ÌƒR[ƒh‚ð’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
-	UpdateData(TRUE);
-	if (m_bID3TagAutoDelete) {
-		m_bID3TagAutoWrite = FALSE;
-		UpdateData(FALSE);
-	}
+    // TODO: ã“ã®ä½ç½®ã«ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«é€šçŸ¥ãƒãƒ³ãƒ‰ãƒ©ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
+    UpdateData(TRUE);
+    if (m_bID3TagAutoDelete) {
+        //m_bID3TagAutoWrite = FALSE;
+        UpdateData(FALSE);
+    }
+    ((CButton *)GetDlgItem(IDC_CH_ID3TAG_AUTO_WRITE))->EnableWindow(!m_bID3TagAutoDelete);
 }
 
-void CDlgSetup::OnChId3tagAutoWrite() 
+void CDlgSetup::OnChId3tagAutoWrite()
 {
-	// TODO: ‚±‚ÌˆÊ’u‚ÉƒRƒ“ƒgƒ[ƒ‹’Ê’mƒnƒ“ƒhƒ‰—p‚ÌƒR[ƒh‚ð’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
-	UpdateData(TRUE);
-	if (m_bID3TagAutoWrite) {
-		m_bID3TagAutoDelete = FALSE;
-		UpdateData(FALSE);
-	}
+    // TODO: ã“ã®ä½ç½®ã«ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«é€šçŸ¥ãƒãƒ³ãƒ‰ãƒ©ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
+    UpdateData(TRUE);
+    if (m_bID3TagAutoWrite) {
+        //m_bID3TagAutoDelete = FALSE;
+        UpdateData(FALSE);
+    }
 }

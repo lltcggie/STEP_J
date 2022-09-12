@@ -1,33 +1,30 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Source Files">
-      <UniqueIdentifier>{0a6f0c00-724b-4966-a51e-ee17ccc17764}</UniqueIdentifier>
+      <UniqueIdentifier>{8fbec34c-9ed8-472e-b684-a51bbc7ce726}</UniqueIdentifier>
       <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
     </Filter>
     <Filter Include="Header Files">
-      <UniqueIdentifier>{b3c26e3a-518d-4859-8860-818d0e582ee0}</UniqueIdentifier>
+      <UniqueIdentifier>{3e37a962-e05f-4e6f-87ba-1f891ff1817a}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl</Extensions>
     </Filter>
     <Filter Include="Resource Files">
-      <UniqueIdentifier>{390bee3e-b5ce-4fa2-a91a-e7847b5c4622}</UniqueIdentifier>
+      <UniqueIdentifier>{999c439f-3d02-408a-a58e-e409ecadbb6b}</UniqueIdentifier>
       <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
+    </Filter>
+    <Filter Include="mp3infp">
+      <UniqueIdentifier>{1c25682b-75cf-4859-bbff-4a7d986a8430}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SuperTagEditor">
+      <UniqueIdentifier>{cf8867a7-9396-472f-b7f0-dc997b5ec517}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SuperTagEditor\INI">
+      <UniqueIdentifier>{aabbcb42-b309-439f-b6e0-4933a9a9ac16}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="call_mp3infp.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="DlgSetup.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="FileOGG.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GlobalCommand.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="StdAfx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="STEP_ogg.cpp">
@@ -36,30 +33,32 @@
     <ClCompile Include="..\STEP_SDK\STEPlugin.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Tag_Ogg.cpp">
+    <ClCompile Include="FileOGG.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="utf8.cpp">
+    <ClCompile Include="..\SuperTagEditor\strcnv.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="vcedit.cpp">
+    <ClCompile Include="..\mp3infp\GlobalCommand.cpp">
+      <Filter>mp3infp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mp3infp\Tag_Ogg.cpp">
+      <Filter>mp3infp</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="VorbisComments.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\SuperTagEditor\INI\ini.cpp">
+      <Filter>SuperTagEditor\INI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="STEP_ogg.def">
       <Filter>Source Files</Filter>
     </None>
-    <None Include="bitmap1.bmp">
-      <Filter>Resource Files</Filter>
-    </None>
     <None Include="res\STEP_ogg.rc2">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="STEP_ogg.rc">
@@ -73,16 +72,7 @@
     <ClInclude Include="FileOGG.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GlobalCommand.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="mp3infp_ExportFunc.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Resource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="StdAfx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\STEP_SDK\STEP_api.h">
@@ -94,17 +84,28 @@
     <ClInclude Include="..\STEP_SDK\STEPlugin.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Tag_Ogg.h">
+    <ClInclude Include="..\SuperTagEditor\strcnv.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="utf8.h">
+    <ClInclude Include="..\mp3infp\GlobalCommand.h">
+      <Filter>mp3infp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mp3infp\Tag_Ogg.h">
+      <Filter>mp3infp</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="vcedit.h">
+    <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="VorbisComments.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\SuperTagEditor\INI\ini.h">
+      <Filter>SuperTagEditor\INI</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="bitmap1-24.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

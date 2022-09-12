@@ -1,4 +1,4 @@
-// MyFileDialog.cpp : ƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“ ƒtƒ@ƒCƒ‹
+// MyFileDialog.cpp : ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³ ãƒ•ã‚¡ã‚¤ãƒ«
 //
 
 #include "stdafx.h"
@@ -17,41 +17,41 @@ static char THIS_FILE[] = __FILE__;
 IMPLEMENT_DYNAMIC(CMyFileDialog, CFileDialog)
 
 CMyFileDialog::CMyFileDialog(BOOL bOpenFileDialog, LPCTSTR lpszDefExt, LPCTSTR lpszFileName,
-		DWORD dwFlags, LPCTSTR lpszFilter, CWnd* pParentWnd) :
-		CFileDialog(bOpenFileDialog, lpszDefExt, lpszFileName, dwFlags, lpszFilter, pParentWnd)
+        DWORD dwFlags, LPCTSTR lpszFilter, CWnd* pParentWnd) :
+        CFileDialog(bOpenFileDialog, lpszDefExt, lpszFileName, dwFlags, lpszFilter, pParentWnd)
 {
-	custom = NULL;
-	TRY {
-		// Legacy OS [ - Windows XP]
-		SetTemplate(0, IDD_CUSTOM_FILE_OPEN);
-	} CATCH (CNotSupportedException,e){
-		// New OS [ Windows Vista - ]
-		custom = this->GetIFileDialogCustomize();
-		if(custom != NULL){
-			custom->AddCheckButton(IDC_CH_FILE_ADDPEND,L"ã‘‚«‚Ìê‡‚Íƒtƒ@ƒCƒ‹‚ÌÅŒã‚É’Ç‰Áo—Í‚·‚é",false);
-		}
-		custom->Release();
-	}
-	END_CATCH
-	m_bIsWriteAppend = FALSE;
+    custom = NULL;
+    TRY {
+        // Legacy OS [ - Windows XP]
+        SetTemplate(0, IDD_CUSTOM_FILE_OPEN);
+    } CATCH (CNotSupportedException,e){
+        // New OS [ Windows Vista - ]
+        custom = this->GetIFileDialogCustomize();
+        if(custom != NULL){
+            custom->AddCheckButton(IDC_CH_FILE_ADDPEND,L"ä¸Šæ›¸ãã®å ´åˆã¯ãƒ•ã‚¡ã‚¤ãƒ«ã®æœ€å¾Œã«è¿½åŠ å‡ºåŠ›ã™ã‚‹",false);
+        }
+        custom->Release();
+    }
+    END_CATCH
+    m_bIsWriteAppend = FALSE;
 }
 
 BEGIN_MESSAGE_MAP(CMyFileDialog, CFileDialog)
-	//{{AFX_MSG_MAP(CMyFileDialog)
-		// ƒƒ‚ -  ClassWizard ‚Í‚±‚ÌˆÊ’u‚Éƒ}ƒbƒsƒ“ƒO—p‚Ìƒ}ƒNƒ‚ğ’Ç‰Á‚Ü‚½‚Ííœ‚µ‚Ü‚·B
-	//}}AFX_MSG_MAP
+    //{{AFX_MSG_MAP(CMyFileDialog)
+        // ãƒ¡ãƒ¢ -  ClassWizard ã¯ã“ã®ä½ç½®ã«ãƒãƒƒãƒ”ãƒ³ã‚°ç”¨ã®ãƒã‚¯ãƒ­ã‚’è¿½åŠ ã¾ãŸã¯å‰Šé™¤ã—ã¾ã™ã€‚
+    //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 BOOL CMyFileDialog::OnFileNameOK( )
 {
-	if(custom == NULL){
-		// Legacy OS [ - Windows XP]
-		m_bIsWriteAppend = ((CButton *)GetDlgItem(IDC_CH_FILE_ADDPEND))->GetCheck();
-	} else {
-		// New OS [ Windows Vista - ]
-		custom = this->GetIFileDialogCustomize();
-		custom->GetCheckButtonState(IDC_CH_FILE_ADDPEND,&m_bIsWriteAppend);
-		custom->Release();
-	}
-	return(0);
+    if(custom == NULL){
+        // Legacy OS [ - Windows XP]
+        m_bIsWriteAppend = ((CButton *)GetDlgItem(IDC_CH_FILE_ADDPEND))->GetCheck();
+    } else {
+        // New OS [ Windows Vista - ]
+        custom = this->GetIFileDialogCustomize();
+        custom->GetCheckButtonState(IDC_CH_FILE_ADDPEND,&m_bIsWriteAppend);
+        custom->Release();
+    }
+    return(0);
 }

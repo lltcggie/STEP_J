@@ -1,4 +1,4 @@
-// DlgFixedString.cpp : ƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“ ƒtƒ@ƒCƒ‹
+// DlgFixedString.cpp : ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³ ãƒ•ã‚¡ã‚¤ãƒ«
 //
 
 #include "stdafx.h"
@@ -12,32 +12,32 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgFixedString ƒ_ƒCƒAƒƒO
+// CDlgFixedString ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
 
 
 CDlgFixedString::CDlgFixedString(CWnd* pParent /*=NULL*/)
-	: CDialog(CDlgFixedString::IDD, pParent)
+    : CDialog(CDlgFixedString::IDD, pParent)
 {
-	//{{AFX_DATA_INIT(CDlgFixedString)
-	m_strText = _T("");
-	//}}AFX_DATA_INIT
+    //{{AFX_DATA_INIT(CDlgFixedString)
+    m_strText = _T("");
+    //}}AFX_DATA_INIT
 }
 
 
 void CDlgFixedString::DoDataExchange(CDataExchange* pDX)
 {
-	CDialog::DoDataExchange(pDX);
-	//{{AFX_DATA_MAP(CDlgFixedString)
-	DDX_Text(pDX, IDC_EDIT_NAME, m_strText);
-	//}}AFX_DATA_MAP
+    CDialog::DoDataExchange(pDX);
+    //{{AFX_DATA_MAP(CDlgFixedString)
+    DDX_Text(pDX, IDC_EDIT_NAME, m_strText);
+    //}}AFX_DATA_MAP
 }
 
 
 BEGIN_MESSAGE_MAP(CDlgFixedString, CDialog)
-	//{{AFX_MSG_MAP(CDlgFixedString)
-		// ƒƒ‚ - ClassWizard ‚Í‚±‚ÌˆÊ’u‚Éƒ}ƒbƒsƒ“ƒO—p‚Ìƒ}ƒNƒ‚ð’Ç‰Á‚Ü‚½‚Ííœ‚µ‚Ü‚·B
-	//}}AFX_MSG_MAP
+    //{{AFX_MSG_MAP(CDlgFixedString)
+        // ãƒ¡ãƒ¢ - ClassWizard ã¯ã“ã®ä½ç½®ã«ãƒžãƒƒãƒ”ãƒ³ã‚°ç”¨ã®ãƒžã‚¯ãƒ­ã‚’è¿½åŠ ã¾ãŸã¯å‰Šé™¤ã—ã¾ã™ã€‚
+    //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgFixedString ƒƒbƒZ[ƒW ƒnƒ“ƒhƒ‰
+// CDlgFixedString ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒãƒ³ãƒ‰ãƒ©

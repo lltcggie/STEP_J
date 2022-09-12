@@ -1,17 +1,23 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Source Files">
-      <UniqueIdentifier>{8a8fd245-8629-429d-a51b-c2b818e8fa33}</UniqueIdentifier>
+      <UniqueIdentifier>{93ee343f-f94a-4271-a7ba-0508175ded18}</UniqueIdentifier>
       <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
     </Filter>
     <Filter Include="Header Files">
-      <UniqueIdentifier>{c58fd8c0-d2a5-4149-9366-05dea091ffbf}</UniqueIdentifier>
+      <UniqueIdentifier>{7c3baf0c-c51a-45e5-ab99-25c1ee56bd5c}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl</Extensions>
     </Filter>
     <Filter Include="Resource Files">
-      <UniqueIdentifier>{5e9af521-a9ad-4d01-b107-5f62d20f552b}</UniqueIdentifier>
+      <UniqueIdentifier>{2d5d184d-0ae5-43c9-a1c7-bdcbd2f20179}</UniqueIdentifier>
       <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
+    </Filter>
+    <Filter Include="SuperTagEditor">
+      <UniqueIdentifier>{519f8a3f-5588-48f5-9048-f8973b00c00e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SuperTagEditor\INI">
+      <UniqueIdentifier>{cb3ae126-5a07-4c73-a211-b6b9fac2c230}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -21,27 +27,29 @@
     <ClCompile Include="FileFLAC.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="StdAfx.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="STEP_fla.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\STEP_SDK\STEPlugin.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SuperTagEditor\strcnv.cpp">
+      <Filter>SuperTagEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SuperTagEditor\INI\ini.cpp">
+      <Filter>SuperTagEditor\INI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="STEP_fla.def">
       <Filter>Source Files</Filter>
     </None>
-    <None Include="bitmap_w.bmp">
-      <Filter>Resource Files</Filter>
-    </None>
     <None Include="res\STEP_fla.rc2">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="STEP_fla.rc">
@@ -58,9 +66,6 @@
     <ClInclude Include="Resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="StdAfx.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\STEP_SDK\STEP_api.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -70,5 +75,26 @@
     <ClInclude Include="..\STEP_SDK\STEPlugin.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SuperTagEditor\strcnv.h">
+      <Filter>SuperTagEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SuperTagEditor\INI\ini.h">
+      <Filter>SuperTagEditor\INI</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="bitmap_w-24.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+    <Text Include="STEP_fla_memo.txt" />
   </ItemGroup>
 </Project>

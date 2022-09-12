@@ -1,4 +1,4 @@
-// DlgUserConvFormat.cpp : ÉCÉìÉvÉäÉÅÉìÉeÅ[ÉVÉáÉì ÉtÉ@ÉCÉã
+// DlgUserConvFormat.cpp : „Ç§„É≥„Éó„É™„É°„É≥„ÉÜ„Éº„Ç∑„Éß„É≥ „Éï„Ç°„Ç§„É´
 //
 
 #include "stdafx.h"
@@ -13,15 +13,15 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgUserConvFormat É_ÉCÉAÉçÉO
+// CDlgUserConvFormat „ÉÄ„Ç§„Ç¢„É≠„Ç∞
 
 IMPLEMENT_DYNCREATE(CDlgUserConvFormat, COptionPage)
 
 CDlgUserConvFormat::CDlgUserConvFormat() : COptionPage(CDlgUserConvFormat::IDD)
 {
-	//{{AFX_DATA_INIT(CDlgUserConvFormat)
-	m_nFormatType = -1;
-	//}}AFX_DATA_INIT
+    //{{AFX_DATA_INIT(CDlgUserConvFormat)
+    m_nFormatType = -1;
+    //}}AFX_DATA_INIT
 }
 
 CDlgUserConvFormat::~CDlgUserConvFormat()
@@ -31,152 +31,158 @@ CDlgUserConvFormat::~CDlgUserConvFormat()
 
 void CDlgUserConvFormat::DoDataExchange(CDataExchange* pDX)
 {
-	COptionPage::DoDataExchange(pDX);
-	//{{AFX_DATA_MAP(CDlgUserConvFormat)
-	DDX_Control(pDX, IDC_LIST_FORMAT_TYPE, m_listFormatType);
-	DDX_Control(pDX, IDC_ED_FORMAT_TAG2FILE, m_editTag2File);
-	DDX_Control(pDX, IDC_ED_FORMAT_FILE2TAG, m_editFile2Tag);
-	DDX_CBIndex(pDX, IDC_LIST_FORMAT_TYPE, m_nFormatType);
-	//}}AFX_DATA_MAP
+    COptionPage::DoDataExchange(pDX);
+    //{{AFX_DATA_MAP(CDlgUserConvFormat)
+    DDX_Control(pDX, IDC_LIST_FORMAT_TYPE, m_listFormatType);
+    DDX_Control(pDX, IDC_ED_FORMAT_TAG2FILE, m_editTag2File);
+    DDX_Control(pDX, IDC_ED_FORMAT_FILE2TAG, m_editFile2Tag);
+    DDX_CBIndex(pDX, IDC_LIST_FORMAT_TYPE, m_nFormatType);
+    //}}AFX_DATA_MAP
 }
 
 
 BEGIN_MESSAGE_MAP(CDlgUserConvFormat, COptionPage)
-	//{{AFX_MSG_MAP(CDlgUserConvFormat)
-	ON_BN_CLICKED(IDC_BT_ALBUM_NAME, OnBtAlbumName)
-	ON_BN_CLICKED(IDC_BT_ARTIST_NAME, OnBtArtistName)
-	ON_BN_CLICKED(IDC_BT_COMMENT, OnBtComment)
-	ON_BN_CLICKED(IDC_BT_RELEASE_YEAR, OnBtReleaseYear)
-	ON_BN_CLICKED(IDC_BT_TRACK_NAME, OnBtTrackName)
-	ON_BN_CLICKED(IDC_BT_TRACK_NUMBER, OnBtTrackNumber)
-	ON_BN_CLICKED(IDC_BT_TRACK_NUMBER2, OnBtTrackNumber2)
-	ON_BN_CLICKED(IDC_BT_NAME_CHANGE, OnBtNameChange)
-	ON_EN_SETFOCUS(IDC_ED_FORMAT_FILE2TAG, OnSetfocusEdFormatFile2tag)
-	ON_EN_SETFOCUS(IDC_ED_FORMAT_TAG2FILE, OnSetfocusEdFormatTag2file)
-	ON_CBN_SELCHANGE(IDC_LIST_FORMAT_TYPE, OnSelChangeListFormatType)
-	ON_BN_CLICKED(IDC_BT_TRACK_NUMBER3, OnBtTrackNumber3)
-	//}}AFX_MSG_MAP
+    //{{AFX_MSG_MAP(CDlgUserConvFormat)
+    ON_BN_CLICKED(IDC_BT_ALBUM_NAME, OnBtAlbumName)
+    ON_BN_CLICKED(IDC_BT_ARTIST_NAME, OnBtArtistName)
+    ON_BN_CLICKED(IDC_BT_COMMENT, OnBtComment)
+    ON_BN_CLICKED(IDC_BT_RELEASE_YEAR, OnBtReleaseYear)
+    ON_BN_CLICKED(IDC_BT_TRACK_NAME, OnBtTrackName)
+    ON_BN_CLICKED(IDC_BT_TRACK_NUMBER, OnBtTrackNumber)
+    ON_BN_CLICKED(IDC_BT_TRACK_NUMBER2, OnBtTrackNumber2)
+    ON_BN_CLICKED(IDC_BT_DISC_NUMBER, OnBtDiscNumber)
+    ON_BN_CLICKED(IDC_BT_DISC_NUMBER2, &OnBtDiscNumber2)
+    ON_BN_CLICKED(IDC_BT_NAME_CHANGE, OnBtNameChange)
+    ON_EN_SETFOCUS(IDC_ED_FORMAT_FILE2TAG, OnSetfocusEdFormatFile2tag)
+    ON_EN_SETFOCUS(IDC_ED_FORMAT_TAG2FILE, OnSetfocusEdFormatTag2file)
+    ON_CBN_SELCHANGE(IDC_LIST_FORMAT_TYPE, OnSelChangeListFormatType)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgUserConvFormat ÉÅÉbÉZÅ[ÉW ÉnÉìÉhÉâ
+// CDlgUserConvFormat „É°„ÉÉ„Çª„Éº„Ç∏ „Éè„É≥„Éâ„É©
 
-void CDlgUserConvFormat::OutputFormatString(const char *sText)
+void CDlgUserConvFormat::OutputFormatString(const TCHAR *sText)
 {
-	CEdit	*pEdit = m_nOutputFormatType ? &m_editTag2File : &m_editFile2Tag;
-	pEdit->ReplaceSel(sText, FALSE);
-	pEdit->SetFocus();
+    CEdit *pEdit = m_nOutputFormatType ? &m_editTag2File : &m_editFile2Tag;
+    pEdit->ReplaceSel(sText, FALSE);
+    pEdit->SetFocus();
 }
 
-void CDlgUserConvFormat::OnBtTrackName() 
+void CDlgUserConvFormat::OnBtTrackName()
 {
-	OutputFormatString("%TRACK_NAME%");
+    OutputFormatString(_T("%TRACK_NAME%"));
 }
 
-void CDlgUserConvFormat::OnBtArtistName() 
+void CDlgUserConvFormat::OnBtArtistName()
 {
-	OutputFormatString("%ARTIST_NAME%");
+    OutputFormatString(_T("%ARTIST_NAME%"));
 }
 
-void CDlgUserConvFormat::OnBtAlbumName() 
+void CDlgUserConvFormat::OnBtAlbumName()
 {
-	OutputFormatString("%ALBUM_NAME%");
+    OutputFormatString(_T("%ALBUM_NAME%"));
 }
 
-void CDlgUserConvFormat::OnBtReleaseYear() 
+void CDlgUserConvFormat::OnBtReleaseYear()
 {
-	OutputFormatString("%RELEASE_YEAR%");
+    OutputFormatString(_T("%RELEASE_YEAR%"));
 }
 
-void CDlgUserConvFormat::OnBtTrackNumber() 
+void CDlgUserConvFormat::OnBtTrackNumber()
 {
-	OutputFormatString("%TRACK_NUMBER%");
+    OutputFormatString(_T("%TRACK_NUMBER%"));
 }
 
-void CDlgUserConvFormat::OnBtTrackNumber2() 
+void CDlgUserConvFormat::OnBtTrackNumber2()
 {
-	OutputFormatString("%TRACK_NUMBER2%");
+    OutputFormatString(_T("%TRACK_NUMBER2%"));
 }
 
-void CDlgUserConvFormat::OnBtTrackNumber3() 
+void CDlgUserConvFormat::OnBtDiscNumber()
 {
-	OutputFormatString("%TRACK_NUMBER3%");
+    OutputFormatString(_T("%DISC_NUMBER%"));
 }
 
-void CDlgUserConvFormat::OnBtComment() 
+void CDlgUserConvFormat::OnBtDiscNumber2()
 {
-	OutputFormatString("%COMMENT%");
+    OutputFormatString(_T("%DISC_NUMBER2%"));
 }
 
-void CDlgUserConvFormat::OnSetfocusEdFormatFile2tag() 
+void CDlgUserConvFormat::OnBtComment()
 {
-	m_nOutputFormatType = 0;
+    OutputFormatString(_T("%COMMENT%"));
 }
 
-void CDlgUserConvFormat::OnSetfocusEdFormatTag2file() 
+void CDlgUserConvFormat::OnSetfocusEdFormatFile2tag()
 {
-	m_nOutputFormatType = 1;
+    m_nOutputFormatType = 0;
 }
 
-void CDlgUserConvFormat::OnBtNameChange() 
+void CDlgUserConvFormat::OnSetfocusEdFormatTag2file()
 {
-	CDlgNameChange	dialog;
-
-	dialog.m_strName = m_userFormat[m_nFormatType].strName;
-	if (dialog.DoModal() == IDOK) {
-		// êVÇµÇ¢ñºèÃÇ…ïœçX
-		m_userFormat[m_nFormatType].strName = dialog.m_strName;
-
-		// ÉäÉXÉgçXêV
-		OnSelChangeListFormatType();
-		m_listFormatType.ResetContent();
-		int i; for (i = 0; i < USER_CONV_FORMAT_MAX; i++) {
-			CString	strName;
-			strName.Format("%d: %s", i+1, m_userFormat[i].strName);
-			m_listFormatType.AddString(strName);
-		}
-		// ëIëÇµÇ»Ç®Ç∑
-		m_listFormatType.SetCurSel(m_nFormatType);
-	}
+    m_nOutputFormatType = 1;
 }
 
-void CDlgUserConvFormat::OnSelChangeListFormatType() 
+void CDlgUserConvFormat::OnBtNameChange()
 {
-	// åªç›ï“èWíÜÇÃì‡óeÇîΩâfÇ≥ÇπÇÈ
-	m_editTag2File.GetWindowText(m_userFormat[m_nFormatType].strTag2File);
-	m_editFile2Tag.GetWindowText(m_userFormat[m_nFormatType].strFile2Tag);
+    CDlgNameChange    dialog;
 
-	m_nFormatType = m_listFormatType.GetCurSel();
-	m_editTag2File.SetWindowText(m_userFormat[m_nFormatType].strTag2File);
-	m_editFile2Tag.SetWindowText(m_userFormat[m_nFormatType].strFile2Tag);
+    dialog.m_strName = m_userFormat[m_nFormatType].strName;
+    if (dialog.DoModal() == IDOK) {
+        // Êñ∞„Åó„ÅÑÂêçÁß∞„Å´Â§âÊõ¥
+        m_userFormat[m_nFormatType].strName = dialog.m_strName;
+
+        // „É™„Çπ„ÉàÊõ¥Êñ∞
+        OnSelChangeListFormatType();
+        m_listFormatType.ResetContent();
+        int i; for (i = 0; i < USER_CONV_FORMAT_MAX; i++) {
+            CString strName;
+            strName.Format(_T("%d: %s"), i+1, (LPCWSTR)m_userFormat[i].strName);
+            m_listFormatType.AddString(strName);
+        }
+        // ÈÅ∏Êäû„Åó„Å™„Åä„Åô
+        m_listFormatType.SetCurSel(m_nFormatType);
+    }
 }
 
-BOOL CDlgUserConvFormat::OnInitDialog() 
+void CDlgUserConvFormat::OnSelChangeListFormatType()
 {
-	COptionPage::OnInitDialog();
+    // ÁèæÂú®Á∑®ÈõÜ‰∏≠„ÅÆÂÜÖÂÆπ„ÇíÂèçÊò†„Åï„Åõ„Çã
+    m_editTag2File.GetWindowText(m_userFormat[m_nFormatType].strTag2File);
+    m_editFile2Tag.GetWindowText(m_userFormat[m_nFormatType].strFile2Tag);
 
-	int		i;
-	m_listFormatType.ResetContent();
-	for (i = 0; i < USER_CONV_FORMAT_MAX; i++) {
-		CString	strName;
-		strName.Format("%d: %s", i+1, m_userFormat[i].strName);
-		m_listFormatType.AddString(strName);
-	}
-
-	m_listFormatType.SetCurSel(m_nFormatType);
-	m_editTag2File.SetWindowText(m_userFormat[m_nFormatType].strTag2File);
-	m_editFile2Tag.SetWindowText(m_userFormat[m_nFormatType].strFile2Tag);
-
-	return TRUE;  // ÉRÉìÉgÉçÅ[ÉãÇ…ÉtÉHÅ[ÉJÉXÇê›íËÇµÇ»Ç¢Ç∆Ç´ÅAñﬂÇËílÇÕ TRUE Ç∆Ç»ÇËÇ‹Ç∑
-	              // ó·äO: OCX ÉvÉçÉpÉeÉB ÉyÅ[ÉWÇÃñﬂÇËílÇÕ FALSE Ç∆Ç»ÇËÇ‹Ç∑
+    m_nFormatType = m_listFormatType.GetCurSel();
+    m_editTag2File.SetWindowText(m_userFormat[m_nFormatType].strTag2File);
+    m_editFile2Tag.SetWindowText(m_userFormat[m_nFormatType].strFile2Tag);
 }
 
-void CDlgUserConvFormat::OnOK() 
+BOOL CDlgUserConvFormat::OnInitDialog()
 {
-	if (!::IsWindow(m_hWnd))	return;
-	m_editTag2File.GetWindowText(m_userFormat[m_nFormatType].strTag2File);
-	m_editFile2Tag.GetWindowText(m_userFormat[m_nFormatType].strFile2Tag);
+    COptionPage::OnInitDialog();
 
-	COptionPage::OnOK();
+    int     i;
+    m_listFormatType.ResetContent();
+    for (i = 0; i < USER_CONV_FORMAT_MAX; i++) {
+        CString strName;
+        strName.Format(_T("%d: %s"), i+1, (LPCWSTR)m_userFormat[i].strName);
+        m_listFormatType.AddString(strName);
+    }
+
+    m_listFormatType.SetCurSel(m_nFormatType);
+    m_editTag2File.SetWindowText(m_userFormat[m_nFormatType].strTag2File);
+    m_editFile2Tag.SetWindowText(m_userFormat[m_nFormatType].strFile2Tag);
+
+    return TRUE;  // „Ç≥„É≥„Éà„É≠„Éº„É´„Å´„Éï„Ç©„Éº„Ç´„Çπ„ÇíË®≠ÂÆö„Åó„Å™„ÅÑ„Å®„Åç„ÄÅÊàª„ÇäÂÄ§„ÅØ TRUE „Å®„Å™„Çä„Åæ„Åô
+                  // ‰æãÂ§ñ: OCX „Éó„É≠„Éë„ÉÜ„Ç£ „Éö„Éº„Ç∏„ÅÆÊàª„ÇäÂÄ§„ÅØ FALSE „Å®„Å™„Çä„Åæ„Åô
 }
+
+void CDlgUserConvFormat::OnOK()
+{
+    if (!::IsWindow(m_hWnd)) return;
+    m_editTag2File.GetWindowText(m_userFormat[m_nFormatType].strTag2File);
+    m_editFile2Tag.GetWindowText(m_userFormat[m_nFormatType].strFile2Tag);
+
+    COptionPage::OnOK();
+}
+
 

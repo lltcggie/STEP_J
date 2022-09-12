@@ -1,6 +1,6 @@
 //{{NO_DEPENDENCIES}}
-// Microsoft Developer Studio generated include file.
-// Used by STEP_mp3.rc
+// Microsoft Visual C++ で生成されたインクルード ファイル。
+// STEP_mp3.rc で使用
 //
 #define IDD_DLG_FILE_RMP_ID3V2          171
 #define IDD_DLG_DEFAUT_VALUE            180
@@ -23,7 +23,6 @@
 #define IDB_BITMAP_ID3V2                3001
 #define IDB_BITMAP_RMP                  3002
 #define IDC_CHECK_UNSYNC                3002
-#define IDC_CHECK_UNSYNC_NEW            3003
 #define IDB_FILE_CONV_AUTO_ID3          3004
 #define IDC_COMBO_ID3V2_VERSION         3004
 #define IDB_FILE_CONV_MP3               3005
@@ -32,16 +31,18 @@
 #define IDC_STATIC_INFO                 3006
 #define IDB_FILE_CONV_ID3V2             3007
 #define IDC_COMBO_ID3V2_VERSION_NEW     3007
+#define IDC_CHECK1                      3007
+#define IDC_UNSYNC                      3007
 #define IDC_COMBO_ID3V2_ENCODE_NEW      3008
 #define IDD_DLG_CONV_ID3V2_VERSION      3009
 
 // Next default values for new objects
-// 
+//
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        3010
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         3007
+#define _APS_NEXT_CONTROL_VALUE         3008
 #define _APS_NEXT_SYMED_VALUE           3000
 #endif
 #endif

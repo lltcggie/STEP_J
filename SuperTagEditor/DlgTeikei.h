@@ -4,75 +4,75 @@
 #if _MSC_VER > 1000
 #pragma once
 #endif // _MSC_VER > 1000
-// DlgTeikei.h : ƒwƒbƒ_[ ƒtƒ@ƒCƒ‹
+// DlgTeikei.h : ãƒ˜ãƒƒãƒ€ãƒ¼ ãƒ•ã‚¡ã‚¤ãƒ«
 //
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgTeikei ƒ_ƒCƒAƒƒO
+// CDlgTeikei ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
 
 class CDlgTeikei : public CPropertyPage
 {
-	DECLARE_DYNCREATE(CDlgTeikei)
+    DECLARE_DYNCREATE(CDlgTeikei)
 
-// ƒRƒ“ƒXƒgƒ‰ƒNƒVƒ‡ƒ“
+// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚·ãƒ§ãƒ³
 public:
-	CDlgTeikei();
-	~CDlgTeikei();
+    CDlgTeikei();
+    ~CDlgTeikei();
 
-// ƒ_ƒCƒAƒƒO ƒf[ƒ^
-	//{{AFX_DATA(CDlgTeikei)
-	enum { IDD = IDD_DIALOG_TEIKEI };
-	CString	m_strTeikei1;
-	CString	m_strTeikei10;
-	CString	m_strTeikei2;
-	CString	m_strTeikei3;
-	CString	m_strTeikei4;
-	CString	m_strTeikei5;
-	CString	m_strTeikei6;
-	CString	m_strTeikei7;
-	CString	m_strTeikei8;
-	CString	m_strTeikei9;
-	CString	m_strGroupName;
-	//}}AFX_DATA
+// ãƒ€ã‚¤ã‚¢ãƒ­ã‚° ãƒ‡ãƒ¼ã‚¿
+    //{{AFX_DATA(CDlgTeikei)
+    enum { IDD = IDD_DIALOG_TEIKEI };
+    CString m_strTeikei1;
+    CString m_strTeikei10;
+    CString m_strTeikei2;
+    CString m_strTeikei3;
+    CString m_strTeikei4;
+    CString m_strTeikei5;
+    CString m_strTeikei6;
+    CString m_strTeikei7;
+    CString m_strTeikei8;
+    CString m_strTeikei9;
+    CString m_strGroupName;
+    //}}AFX_DATA
 
-	TEIKEI_INFO m_teikeiInfo[10];
+    TEIKEI_INFO m_teikeiInfo[10];
 
 
-// ƒI[ƒo[ƒ‰ƒCƒh
-	// ClassWizard ‚Í‰¼‘zŠÖ”‚ÌƒI[ƒo[ƒ‰ƒCƒh‚ğ¶¬‚µ‚Ü‚·B
+// ã‚ªãƒ¼ãƒãƒ¼ãƒ©ã‚¤ãƒ‰
+    // ClassWizard ã¯ä»®æƒ³é–¢æ•°ã®ã‚ªãƒ¼ãƒãƒ¼ãƒ©ã‚¤ãƒ‰ã‚’ç”Ÿæˆã—ã¾ã™ã€‚
 
-	//{{AFX_VIRTUAL(CDlgTeikei)
-	public:
-	virtual void OnOK();
-	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV ƒTƒ|[ƒg
-	//}}AFX_VIRTUAL
+    //{{AFX_VIRTUAL(CDlgTeikei)
+    public:
+    virtual void OnOK();
+    protected:
+    virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV ã‚µãƒãƒ¼ãƒˆ
+    //}}AFX_VIRTUAL
 
-// ƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“
+// ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³
 protected:
-	// ¶¬‚³‚ê‚½ƒƒbƒZ[ƒW ƒ}ƒbƒvŠÖ”
-	//{{AFX_MSG(CDlgTeikei)
-	virtual BOOL OnInitDialog();
-	afx_msg void OnBtDetail01();
-	afx_msg void OnBtDetail10();
-	afx_msg void OnBtDetail02();
-	afx_msg void OnBtDetail03();
-	afx_msg void OnBtDetail04();
-	afx_msg void OnBtDetail05();
-	afx_msg void OnBtDetail06();
-	afx_msg void OnBtDetail07();
-	afx_msg void OnBtDetail08();
-	afx_msg void OnBtDetail09();
-	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
+    // ç”Ÿæˆã•ã‚ŒãŸãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒãƒƒãƒ—é–¢æ•°
+    //{{AFX_MSG(CDlgTeikei)
+    virtual BOOL OnInitDialog();
+    afx_msg void OnBtDetail01();
+    afx_msg void OnBtDetail10();
+    afx_msg void OnBtDetail02();
+    afx_msg void OnBtDetail03();
+    afx_msg void OnBtDetail04();
+    afx_msg void OnBtDetail05();
+    afx_msg void OnBtDetail06();
+    afx_msg void OnBtDetail07();
+    afx_msg void OnBtDetail08();
+    afx_msg void OnBtDetail09();
+    //}}AFX_MSG
+    DECLARE_MESSAGE_MAP()
 
 public:
-	BYTE m_nGroupNumber;
+    BYTE m_nGroupNumber;
 private:
-	void OnDetail(int nIndex);
+    void OnDetail(int nIndex);
 };
 
 //{{AFX_INSERT_LOCATION}}
-// Microsoft Visual C++ ‚Í‘Os‚Ì’¼‘O‚É’Ç‰Á‚ÌéŒ¾‚ğ‘}“ü‚µ‚Ü‚·B
+// Microsoft Visual C++ ã¯å‰è¡Œã®ç›´å‰ã«è¿½åŠ ã®å®£è¨€ã‚’æŒ¿å…¥ã—ã¾ã™ã€‚
 
 #endif // !defined(AFX_DLGTEIKEI_H__FFEA78C8_E872_4903_9D2C_B2D2C6CC159E__INCLUDED_)

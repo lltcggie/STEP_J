@@ -11,35 +11,42 @@ bool LoadAttributeFileVQF(FILE_INFO *pFileMP3)
     if(vqf.Load(GetFullPath(pFileMP3)) != ERROR_SUCCESS){
         return false;
     }
-	DWORD dwSize;
-	unsigned char *data;
-	//É^ÉCÉgÉã
-	data = vqf.GetField('N','A','M','E',&dwSize);
-	if(data){
-        SetTrackNameSI(pFileMP3, (const char*)data);
+    //„Çø„Ç§„Éà„É´
+    CString data = vqf.GetField('N','A','M','E');
+    if(data){
+        SetTrackNameSI(pFileMP3, data);
     }
-	//ÉAÅ[ÉeÉBÉXÉg
-	data = vqf.GetField('A','U','T','H',&dwSize);
-	if(data){
-		SetArtistNameSI(pFileMP3, (const char*)data);
-	}
-	//ï€ë∂ñº
-	//data = vqf.GetField('F','I','L','E',&dwSize);
-	//if(data){
-	//}
-	//íòçÏå†
-	data = vqf.GetField('(','c',')',' ',&dwSize);
-	if(data){
-		SetCopyrightSI(pFileMP3, (const char*)data);
-	}
-    //ÉRÉÅÉìÉg
-	data = vqf.GetField('C','O','M','T',&dwSize);
-	if(data){
-		SetCommentSI(pFileMP3, (const char*)data);
-	}
-
-	SetPlayTime(pFileMP3, vqf.GetTime());
-	SetAudioFormat(pFileMP3, vqf.GetFormatString());
+    //„Ç¢„Éº„ÉÜ„Ç£„Çπ„Éà
+    data = vqf.GetField('A','U','T','H');
+    if(data){
+        SetArtistNameSI(pFileMP3, data);
+    }
+    //‰øùÂ≠òÂêç
+    //data = vqf.GetField('F','I','L','E');
+    //if(data){
+    //}
+    //Ëëó‰ΩúÊ®©
+    data = vqf.GetField('(','c',')',' ');
+    if(data){
+        SetCopyrightSI(pFileMP3, data);
+    }
+    //„Ç≥„É°„É≥„Éà
+    data = vqf.GetField('C','O','M','T');
+    if(data){
+        SetCommentSI(pFileMP3, data);
+    }
+    SetAudioFormat(pFileMP3, vqf.GetFormatString());
+    CString strTimeString = vqf.GetTimeString();
+    TCHAR *time = strTimeString.GetBuffer();
+    //szTime = "xx:xx (xxxsec) „ÅÆ„Çà„ÅÜ„Å´„Å™„Å£„Å¶„ÅÑ„Çã
+    TCHAR *pszSec = _tcschr(time, _T('('));
+    if(pszSec){
+        pszSec++;
+        TCHAR *end;
+        int sec = _tcstol(pszSec, &end, 10);
+        SetPlayTime(pFileMP3, sec);
+    }
+    strTimeString.ReleaseBuffer();
 
     return true;
 }
@@ -51,25 +58,18 @@ bool WriteAttributeFileVQF(FILE_INFO *pFileMP3)
         return false;
     }
     CString strTmp;
-    //É^ÉCÉgÉã
-	vqf.SetField('N','A','M','E',
-                (const unsigned char *)(LPCSTR)GetTrackNameSI(pFileMP3),
-                strlen(GetTrackNameSI(pFileMP3)));
-    //ÉAÅ[ÉeÉBÉXÉg
-	vqf.SetField('A','U','T','H',
-                (const unsigned char *)(LPCSTR)GetArtistNameSI(pFileMP3),
-                strlen(GetArtistNameSI(pFileMP3)));
-    //ï€ë∂ñº
-	//vqf.SetField('F','I','L','E',
+    //„Çø„Ç§„Éà„É´
+    vqf.SetField('N','A','M','E', GetTrackNameSI(pFileMP3));
+    //„Ç¢„Éº„ÉÜ„Ç£„Çπ„Éà
+    vqf.SetField('A','U','T','H', GetArtistNameSI(pFileMP3));
+    //‰øùÂ≠òÂêç
+    //vqf.SetField('F','I','L','E',
     //              ???,
     //              ???);
-    //íòçÏå†
-	vqf.SetField('(','c',')',' ',
-		        (const unsigned char *)(LPCSTR)GetCopyrightSI(pFileMP3),
-                  strlen(GetCopyrightSI(pFileMP3)));
-    //ÉRÉÅÉìÉg
-	vqf.SetField('C','O','M','T',
-                (const unsigned char *)(LPCSTR)GetCommentSI(pFileMP3),
-                strlen(GetCommentSI(pFileMP3)));
-    return vqf.Save(NULL, GetFullPath(pFileMP3)) == ERROR_SUCCESS;
+    //Ëëó‰ΩúÊ®©
+    vqf.SetField('(','c',')',' ', GetCopyrightSI(pFileMP3));
+    //„Ç≥„É°„É≥„Éà
+    vqf.SetField('C','O','M','T', GetCommentSI(pFileMP3));
+
+    return vqf.Save(GetFullPath(pFileMP3)) == ERROR_SUCCESS;
 }

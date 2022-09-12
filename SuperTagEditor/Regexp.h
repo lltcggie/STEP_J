@@ -4,7 +4,7 @@
 ////////////////////////////////////////////////////////////////////////
 // RegExp.h
 //
-// This code has been derived from work by Henry Spencer. 
+// This code has been derived from work by Henry Spencer.
 // The main changes are
 // 1. All char variables and functions have been changed to TCHAR
 //    counterparts
@@ -41,86 +41,89 @@
 class CRegExp
 {
 public:
-	CRegExp();
-	~CRegExp();
+    CRegExp();
+    ~CRegExp();
 
-	CRegExp *RegComp( const TCHAR *re );
-	int RegFind(const TCHAR *str);
-	TCHAR* GetReplaceString( const TCHAR* sReplaceExp );
-	int GetFindLen()
-	{
-		if( startp[0] == NULL || endp[0] == NULL )
-			return 0;
+    CRegExp *RegComp( const TCHAR *re );
+    int RegFind(const TCHAR *str);
+    TCHAR* GetReplaceString( const TCHAR* sReplaceExp );
+    size_t GetFindLen()
+    {
+        if( startp[0] == NULL || endp[0] == NULL )
+            return 0;
 
-		return endp[0] - startp[0];
-	}
-
-
-private:
-	TCHAR *regnext(TCHAR *node);
-	void reginsert(TCHAR op, TCHAR *opnd);
-
-	int regtry(TCHAR *string);
-	int regmatch(TCHAR *prog);
-	size_t regrepeat(TCHAR *node);
-	TCHAR *reg(int paren, int *flagp);
-	TCHAR *regbranch(int *flagp);
-	void regtail(TCHAR *p, TCHAR *val);
-	void regoptail(TCHAR *p, TCHAR *val);
-	TCHAR *regpiece(int *flagp);
-	TCHAR *regatom(int *flagp);
-
-	// Inline functions
-private:
-	TCHAR OP(TCHAR *p) {return *p;};
-	TCHAR *OPERAND( TCHAR *p) {return (TCHAR*)((short *)(p+1)+1); };
-
-	// regc - emit (if appropriate) a byte of code
-	void regc(TCHAR b)
-	{
-		if (bEmitCode)
-			*regcode++ = b;
-		else
-			regsize++;
-	};
-
-	// regnode - emit a node
-	TCHAR *	regnode(TCHAR op)
-	{
-		if (!bEmitCode) {
-			regsize += 3;
-			return regcode;
-		}
-
-		*regcode++ = op;
-		*regcode++ = _T('\0');		/* Null next pointer. */
-		*regcode++ = _T('\0');
-
-		return regcode-3;
-	};
+        return endp[0] - startp[0];
+    }
 
 
 private:
-	BOOL bEmitCode;
-	BOOL bCompiled;
-	TCHAR *sFoundText;
+    TCHAR *regnext(TCHAR *node);
+    void reginsert(TCHAR op, TCHAR *opnd);
 
-	TCHAR *startp[NSUBEXP];
-	TCHAR *endp[NSUBEXP];
-	TCHAR regstart;		// Internal use only. 
-	TCHAR reganch;		// Internal use only. 
-	TCHAR *regmust;		// Internal use only. 
-	int regmlen;		// Internal use only. 
-	TCHAR *program;		// Unwarranted chumminess with compiler. 
+    int regtry(TCHAR *string);
+    int regmatch(TCHAR *prog);
+    size_t regrepeat(TCHAR *node);
+    TCHAR *reg(int paren, int *flagp);
+    TCHAR *regbranch(int *flagp);
+    void regtail(TCHAR *p, TCHAR *val);
+    void regoptail(TCHAR *p, TCHAR *val);
+    TCHAR *regpiece(int *flagp);
+    TCHAR *regatom(int *flagp);
 
-	TCHAR *regparse;	// Input-scan pointer. 
-	int regnpar;		// () count. 
-	TCHAR *regcode;		// Code-emit pointer; Rdummy = don't. 
-	TCHAR regdummy[3];	// NOTHING, 0 next ptr 
-	long regsize;		// Code size. 
+    // Inline functions
+private:
+    TCHAR OP(TCHAR *p) {return *p;};
+#ifndef _UNICODE
+    TCHAR *OPERAND( TCHAR *p) {return (TCHAR*)((short *)(p+1)+1); };
+#else
+    TCHAR *OPERAND(TCHAR *p) { return (TCHAR*)((int *)(p + 1) + 1); };
+#endif
+    // regc - emit (if appropriate) a byte of code
+    void regc(TCHAR b)
+    {
+        if (bEmitCode)
+            *regcode++ = b;
+        else
+            regsize++;
+    };
 
-	TCHAR *reginput;	// String-input pointer. 
-	TCHAR *regbol;		// Beginning of input, for ^ check. 
+    // regnode - emit a node
+    TCHAR *    regnode(TCHAR op)
+    {
+        if (!bEmitCode) {
+            regsize += 3;
+            return regcode;
+        }
+
+        *regcode++ = op;
+        *regcode++ = _T('\0');        /* Null next pointer. */
+        *regcode++ = _T('\0');
+
+        return regcode-3;
+    };
+
+
+private:
+    BOOL bEmitCode;
+    BOOL bCompiled;
+    TCHAR *sFoundText;
+
+    TCHAR *startp[NSUBEXP];
+    TCHAR *endp[NSUBEXP];
+    TCHAR regstart;     // Internal use only.
+    TCHAR reganch;      // Internal use only.
+    TCHAR *regmust;     // Internal use only.
+    int regmlen;        // Internal use only.
+    TCHAR *program;     // Unwarranted chumminess with compiler.
+
+    TCHAR *regparse;    // Input-scan pointer.
+    int regnpar;        // () count. 
+    TCHAR *regcode;     // Code-emit pointer; Rdummy = don't.
+    TCHAR regdummy[3];  // NOTHING, 0 next ptr
+    long regsize;       // Code size.
+
+    TCHAR *reginput;    // String-input pointer.
+    TCHAR *regbol;      // Beginning of input, for ^ check.
 };
 
 #endif

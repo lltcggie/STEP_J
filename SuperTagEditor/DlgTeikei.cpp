@@ -1,4 +1,4 @@
-// DlgTeikei.cpp : ƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“ ƒtƒ@ƒCƒ‹
+// DlgTeikei.cpp : ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³ ãƒ•ã‚¡ã‚¤ãƒ«
 //
 
 #include "stdafx.h"
@@ -14,25 +14,25 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgTeikei ƒvƒƒpƒeƒB ƒy[ƒW
+// CDlgTeikei ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ ãƒšãƒ¼ã‚¸
 
 IMPLEMENT_DYNCREATE(CDlgTeikei, CPropertyPage)
 
 CDlgTeikei::CDlgTeikei() : CPropertyPage(CDlgTeikei::IDD)
 {
-	//{{AFX_DATA_INIT(CDlgTeikei)
-	m_strTeikei1 = _T("");
-	m_strTeikei10 = _T("");
-	m_strTeikei2 = _T("");
-	m_strTeikei3 = _T("");
-	m_strTeikei4 = _T("");
-	m_strTeikei5 = _T("");
-	m_strTeikei6 = _T("");
-	m_strTeikei7 = _T("");
-	m_strTeikei8 = _T("");
-	m_strTeikei9 = _T("");
-	m_strGroupName = _T("");
-	//}}AFX_DATA_INIT
+    //{{AFX_DATA_INIT(CDlgTeikei)
+    m_strTeikei1 = _T("");
+    m_strTeikei10 = _T("");
+    m_strTeikei2 = _T("");
+    m_strTeikei3 = _T("");
+    m_strTeikei4 = _T("");
+    m_strTeikei5 = _T("");
+    m_strTeikei6 = _T("");
+    m_strTeikei7 = _T("");
+    m_strTeikei8 = _T("");
+    m_strTeikei9 = _T("");
+    m_strGroupName = _T("");
+    //}}AFX_DATA_INIT
 }
 
 CDlgTeikei::~CDlgTeikei()
@@ -41,179 +41,179 @@ CDlgTeikei::~CDlgTeikei()
 
 void CDlgTeikei::DoDataExchange(CDataExchange* pDX)
 {
-	CPropertyPage::DoDataExchange(pDX);
-	//{{AFX_DATA_MAP(CDlgTeikei)
-	DDX_Text(pDX, IDC_EDIT_TEIKEI_01, m_strTeikei1);
-	DDV_MaxChars(pDX, m_strTeikei1, 255);
-	DDX_Text(pDX, IDC_EDIT_TEIKEI_10, m_strTeikei10);
-	DDV_MaxChars(pDX, m_strTeikei10, 255);
-	DDX_Text(pDX, IDC_EDIT_TEIKEI_2, m_strTeikei2);
-	DDV_MaxChars(pDX, m_strTeikei2, 255);
-	DDX_Text(pDX, IDC_EDIT_TEIKEI_3, m_strTeikei3);
-	DDV_MaxChars(pDX, m_strTeikei3, 255);
-	DDX_Text(pDX, IDC_EDIT_TEIKEI_4, m_strTeikei4);
-	DDV_MaxChars(pDX, m_strTeikei4, 255);
-	DDX_Text(pDX, IDC_EDIT_TEIKEI_5, m_strTeikei5);
-	DDV_MaxChars(pDX, m_strTeikei5, 255);
-	DDX_Text(pDX, IDC_EDIT_TEIKEI_6, m_strTeikei6);
-	DDV_MaxChars(pDX, m_strTeikei6, 255);
-	DDX_Text(pDX, IDC_EDIT_TEIKEI_7, m_strTeikei7);
-	DDV_MaxChars(pDX, m_strTeikei7, 255);
-	DDX_Text(pDX, IDC_EDIT_TEIKEI_8, m_strTeikei8);
-	DDV_MaxChars(pDX, m_strTeikei8, 255);
-	DDX_Text(pDX, IDC_EDIT_TEIKEI_9, m_strTeikei9);
-	DDV_MaxChars(pDX, m_strTeikei9, 255);
-	DDX_Text(pDX, IDC_EDIT_TEIKEI_GROUP_NAME, m_strGroupName);
-	DDV_MaxChars(pDX, m_strGroupName, 255);
-	//}}AFX_DATA_MAP
+    CPropertyPage::DoDataExchange(pDX);
+    //{{AFX_DATA_MAP(CDlgTeikei)
+    DDX_Text(pDX, IDC_EDIT_TEIKEI_01, m_strTeikei1);
+    DDV_MaxChars(pDX, m_strTeikei1, 255);
+    DDX_Text(pDX, IDC_EDIT_TEIKEI_10, m_strTeikei10);
+    DDV_MaxChars(pDX, m_strTeikei10, 255);
+    DDX_Text(pDX, IDC_EDIT_TEIKEI_2, m_strTeikei2);
+    DDV_MaxChars(pDX, m_strTeikei2, 255);
+    DDX_Text(pDX, IDC_EDIT_TEIKEI_3, m_strTeikei3);
+    DDV_MaxChars(pDX, m_strTeikei3, 255);
+    DDX_Text(pDX, IDC_EDIT_TEIKEI_4, m_strTeikei4);
+    DDV_MaxChars(pDX, m_strTeikei4, 255);
+    DDX_Text(pDX, IDC_EDIT_TEIKEI_5, m_strTeikei5);
+    DDV_MaxChars(pDX, m_strTeikei5, 255);
+    DDX_Text(pDX, IDC_EDIT_TEIKEI_6, m_strTeikei6);
+    DDV_MaxChars(pDX, m_strTeikei6, 255);
+    DDX_Text(pDX, IDC_EDIT_TEIKEI_7, m_strTeikei7);
+    DDV_MaxChars(pDX, m_strTeikei7, 255);
+    DDX_Text(pDX, IDC_EDIT_TEIKEI_8, m_strTeikei8);
+    DDV_MaxChars(pDX, m_strTeikei8, 255);
+    DDX_Text(pDX, IDC_EDIT_TEIKEI_9, m_strTeikei9);
+    DDV_MaxChars(pDX, m_strTeikei9, 255);
+    DDX_Text(pDX, IDC_EDIT_TEIKEI_GROUP_NAME, m_strGroupName);
+    DDV_MaxChars(pDX, m_strGroupName, 255);
+    //}}AFX_DATA_MAP
 }
 
 
 BEGIN_MESSAGE_MAP(CDlgTeikei, CPropertyPage)
-	//{{AFX_MSG_MAP(CDlgTeikei)
-	ON_BN_CLICKED(IDC_BT_DETAIL_01, OnBtDetail01)
-	ON_BN_CLICKED(IDC_BT_DETAIL_10, OnBtDetail10)
-	ON_BN_CLICKED(IDC_BT_DETAIL_02, OnBtDetail02)
-	ON_BN_CLICKED(IDC_BT_DETAIL_03, OnBtDetail03)
-	ON_BN_CLICKED(IDC_BT_DETAIL_04, OnBtDetail04)
-	ON_BN_CLICKED(IDC_BT_DETAIL_05, OnBtDetail05)
-	ON_BN_CLICKED(IDC_BT_DETAIL_06, OnBtDetail06)
-	ON_BN_CLICKED(IDC_BT_DETAIL_07, OnBtDetail07)
-	ON_BN_CLICKED(IDC_BT_DETAIL_08, OnBtDetail08)
-	ON_BN_CLICKED(IDC_BT_DETAIL_09, OnBtDetail09)
-	//}}AFX_MSG_MAP
+    //{{AFX_MSG_MAP(CDlgTeikei)
+    ON_BN_CLICKED(IDC_BT_DETAIL_01, OnBtDetail01)
+    ON_BN_CLICKED(IDC_BT_DETAIL_10, OnBtDetail10)
+    ON_BN_CLICKED(IDC_BT_DETAIL_02, OnBtDetail02)
+    ON_BN_CLICKED(IDC_BT_DETAIL_03, OnBtDetail03)
+    ON_BN_CLICKED(IDC_BT_DETAIL_04, OnBtDetail04)
+    ON_BN_CLICKED(IDC_BT_DETAIL_05, OnBtDetail05)
+    ON_BN_CLICKED(IDC_BT_DETAIL_06, OnBtDetail06)
+    ON_BN_CLICKED(IDC_BT_DETAIL_07, OnBtDetail07)
+    ON_BN_CLICKED(IDC_BT_DETAIL_08, OnBtDetail08)
+    ON_BN_CLICKED(IDC_BT_DETAIL_09, OnBtDetail09)
+    //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgTeikei ƒƒbƒZ[ƒW ƒnƒ“ƒhƒ‰
+// CDlgTeikei ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒãƒ³ãƒ‰ãƒ©
 
-BOOL CDlgTeikei::OnInitDialog() 
+BOOL CDlgTeikei::OnInitDialog()
 {
-	CPropertyPage::OnInitDialog();
-	
-	// TODO: ‚±‚ÌˆÊ’u‚É‰Šú‰»‚Ì•â‘«ˆ—‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
+    CPropertyPage::OnInitDialog();
 
-	if (m_nGroupNumber == 1) {	// –³—–î—ƒ^ƒu‚Ìƒ^ƒCƒgƒ‹‚ğ•ÏX
-		CPropertySheet *poPropSheet = (CPropertySheet *)GetParent();
-		TC_ITEM tcItem;
-		tcItem.mask = TCIF_TEXT;
-		tcItem.pszText = (LPTSTR)((LPCTSTR)"ƒOƒ‹[ƒv‚P");
-		poPropSheet->GetTabControl()->SetItem(0, &tcItem );
-		tcItem.pszText = (LPTSTR)((LPCTSTR)"ƒOƒ‹[ƒv‚Q");
-		poPropSheet->GetTabControl()->SetItem(1, &tcItem );
-		tcItem.pszText = (LPTSTR)((LPCTSTR)"ƒOƒ‹[ƒv‚R");
-		poPropSheet->GetTabControl()->SetItem(2, &tcItem );
-	}
-	m_strTeikei1 = m_teikeiInfo[0].strTeikei;
-	m_strTeikei2 = m_teikeiInfo[1].strTeikei;
-	m_strTeikei3 = m_teikeiInfo[2].strTeikei;
-	m_strTeikei4 = m_teikeiInfo[3].strTeikei;
-	m_strTeikei5 = m_teikeiInfo[4].strTeikei;
-	m_strTeikei6 = m_teikeiInfo[5].strTeikei;
-	m_strTeikei7 = m_teikeiInfo[6].strTeikei;
-	m_strTeikei8 = m_teikeiInfo[7].strTeikei;
-	m_strTeikei9 = m_teikeiInfo[8].strTeikei;
-	m_strTeikei10 = m_teikeiInfo[9].strTeikei;
+    // TODO: ã“ã®ä½ç½®ã«åˆæœŸåŒ–ã®è£œè¶³å‡¦ç†ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
 
-	UpdateData(FALSE);
+    if (m_nGroupNumber == 1) {    // ç„¡ç†çŸ¢ç†ã‚¿ãƒ–ã®ã‚¿ã‚¤ãƒˆãƒ«ã‚’å¤‰æ›´
+        CPropertySheet *poPropSheet = (CPropertySheet *)GetParent();
+        TC_ITEM tcItem;
+        tcItem.mask = TCIF_TEXT;
+        tcItem.pszText = (LPTSTR)((LPCTSTR)_T("ã‚°ãƒ«ãƒ¼ãƒ—ï¼‘"));
+        poPropSheet->GetTabControl()->SetItem(0, &tcItem );
+        tcItem.pszText = (LPTSTR)((LPCTSTR)_T("ã‚°ãƒ«ãƒ¼ãƒ—ï¼’"));
+        poPropSheet->GetTabControl()->SetItem(1, &tcItem );
+        tcItem.pszText = (LPTSTR)((LPCTSTR)_T("ã‚°ãƒ«ãƒ¼ãƒ—ï¼“"));
+        poPropSheet->GetTabControl()->SetItem(2, &tcItem );
+    }
+    m_strTeikei1 = m_teikeiInfo[0].strTeikei;
+    m_strTeikei2 = m_teikeiInfo[1].strTeikei;
+    m_strTeikei3 = m_teikeiInfo[2].strTeikei;
+    m_strTeikei4 = m_teikeiInfo[3].strTeikei;
+    m_strTeikei5 = m_teikeiInfo[4].strTeikei;
+    m_strTeikei6 = m_teikeiInfo[5].strTeikei;
+    m_strTeikei7 = m_teikeiInfo[6].strTeikei;
+    m_strTeikei8 = m_teikeiInfo[7].strTeikei;
+    m_strTeikei9 = m_teikeiInfo[8].strTeikei;
+    m_strTeikei10 = m_teikeiInfo[9].strTeikei;
 
-	return TRUE;  // ƒRƒ“ƒgƒ[ƒ‹‚ÉƒtƒH[ƒJƒX‚ğİ’è‚µ‚È‚¢‚Æ‚«A–ß‚è’l‚Í TRUE ‚Æ‚È‚è‚Ü‚·
-	              // —áŠO: OCX ƒvƒƒpƒeƒB ƒy[ƒW‚Ì–ß‚è’l‚Í FALSE ‚Æ‚È‚è‚Ü‚·
+    UpdateData(FALSE);
+
+    return TRUE;  // ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã«ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ã‚’è¨­å®šã—ãªã„ã¨ãã€æˆ»ã‚Šå€¤ã¯ TRUE ã¨ãªã‚Šã¾ã™
+                  // ä¾‹å¤–: OCX ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ ãƒšãƒ¼ã‚¸ã®æˆ»ã‚Šå€¤ã¯ FALSE ã¨ãªã‚Šã¾ã™
 }
 
-void CDlgTeikei::OnBtDetail01() 
+void CDlgTeikei::OnBtDetail01()
 {
-	// TODO: ‚±‚ÌˆÊ’u‚ÉƒRƒ“ƒgƒ[ƒ‹’Ê’mƒnƒ“ƒhƒ‰—p‚ÌƒR[ƒh‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
-	OnDetail(0);
+    // TODO: ã“ã®ä½ç½®ã«ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«é€šçŸ¥ãƒãƒ³ãƒ‰ãƒ©ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
+    OnDetail(0);
 }
 
-void CDlgTeikei::OnBtDetail02() 
+void CDlgTeikei::OnBtDetail02()
 {
-	// TODO: ‚±‚ÌˆÊ’u‚ÉƒRƒ“ƒgƒ[ƒ‹’Ê’mƒnƒ“ƒhƒ‰—p‚ÌƒR[ƒh‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
-	OnDetail(1);
+    // TODO: ã“ã®ä½ç½®ã«ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«é€šçŸ¥ãƒãƒ³ãƒ‰ãƒ©ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
+    OnDetail(1);
 }
 
-void CDlgTeikei::OnBtDetail03() 
+void CDlgTeikei::OnBtDetail03()
 {
-	// TODO: ‚±‚ÌˆÊ’u‚ÉƒRƒ“ƒgƒ[ƒ‹’Ê’mƒnƒ“ƒhƒ‰—p‚ÌƒR[ƒh‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
-	OnDetail(2);
+    // TODO: ã“ã®ä½ç½®ã«ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«é€šçŸ¥ãƒãƒ³ãƒ‰ãƒ©ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
+    OnDetail(2);
 }
 
-void CDlgTeikei::OnBtDetail04() 
+void CDlgTeikei::OnBtDetail04()
 {
-	// TODO: ‚±‚ÌˆÊ’u‚ÉƒRƒ“ƒgƒ[ƒ‹’Ê’mƒnƒ“ƒhƒ‰—p‚ÌƒR[ƒh‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
-	OnDetail(3);
+    // TODO: ã“ã®ä½ç½®ã«ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«é€šçŸ¥ãƒãƒ³ãƒ‰ãƒ©ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
+    OnDetail(3);
 }
 
-void CDlgTeikei::OnBtDetail05() 
+void CDlgTeikei::OnBtDetail05()
 {
-	// TODO: ‚±‚ÌˆÊ’u‚ÉƒRƒ“ƒgƒ[ƒ‹’Ê’mƒnƒ“ƒhƒ‰—p‚ÌƒR[ƒh‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
-	OnDetail(4);
+    // TODO: ã“ã®ä½ç½®ã«ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«é€šçŸ¥ãƒãƒ³ãƒ‰ãƒ©ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
+    OnDetail(4);
 }
 
-void CDlgTeikei::OnBtDetail06() 
+void CDlgTeikei::OnBtDetail06()
 {
-	// TODO: ‚±‚ÌˆÊ’u‚ÉƒRƒ“ƒgƒ[ƒ‹’Ê’mƒnƒ“ƒhƒ‰—p‚ÌƒR[ƒh‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
-	OnDetail(5);
+    // TODO: ã“ã®ä½ç½®ã«ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«é€šçŸ¥ãƒãƒ³ãƒ‰ãƒ©ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
+    OnDetail(5);
 }
 
-void CDlgTeikei::OnBtDetail07() 
+void CDlgTeikei::OnBtDetail07()
 {
-	// TODO: ‚±‚ÌˆÊ’u‚ÉƒRƒ“ƒgƒ[ƒ‹’Ê’mƒnƒ“ƒhƒ‰—p‚ÌƒR[ƒh‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
-	OnDetail(6);
+    // TODO: ã“ã®ä½ç½®ã«ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«é€šçŸ¥ãƒãƒ³ãƒ‰ãƒ©ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
+    OnDetail(6);
 }
 
-void CDlgTeikei::OnBtDetail08() 
+void CDlgTeikei::OnBtDetail08()
 {
-	// TODO: ‚±‚ÌˆÊ’u‚ÉƒRƒ“ƒgƒ[ƒ‹’Ê’mƒnƒ“ƒhƒ‰—p‚ÌƒR[ƒh‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
-	OnDetail(7);
+    // TODO: ã“ã®ä½ç½®ã«ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«é€šçŸ¥ãƒãƒ³ãƒ‰ãƒ©ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
+    OnDetail(7);
 }
 
-void CDlgTeikei::OnBtDetail09() 
+void CDlgTeikei::OnBtDetail09()
 {
-	// TODO: ‚±‚ÌˆÊ’u‚ÉƒRƒ“ƒgƒ[ƒ‹’Ê’mƒnƒ“ƒhƒ‰—p‚ÌƒR[ƒh‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
-	OnDetail(8);
+    // TODO: ã“ã®ä½ç½®ã«ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«é€šçŸ¥ãƒãƒ³ãƒ‰ãƒ©ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
+    OnDetail(8);
 }
 
-void CDlgTeikei::OnBtDetail10() 
+void CDlgTeikei::OnBtDetail10()
 {
-	// TODO: ‚±‚ÌˆÊ’u‚ÉƒRƒ“ƒgƒ[ƒ‹’Ê’mƒnƒ“ƒhƒ‰—p‚ÌƒR[ƒh‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
-	OnDetail(9);
+    // TODO: ã“ã®ä½ç½®ã«ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«é€šçŸ¥ãƒãƒ³ãƒ‰ãƒ©ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
+    OnDetail(9);
 }
 
-void CDlgTeikei::OnOK() 
+void CDlgTeikei::OnOK()
 {
-	// TODO: ‚±‚ÌˆÊ’u‚ÉŒÅ—L‚Ìˆ—‚ğ’Ç‰Á‚·‚é‚©A‚Ü‚½‚ÍŠî–{ƒNƒ‰ƒX‚ğŒÄ‚Ño‚µ‚Ä‚­‚¾‚³‚¢
-	m_teikeiInfo[0].strTeikei = m_strTeikei1;
-	m_teikeiInfo[1].strTeikei = m_strTeikei2;
-	m_teikeiInfo[2].strTeikei = m_strTeikei3;
-	m_teikeiInfo[3].strTeikei = m_strTeikei4;
-	m_teikeiInfo[4].strTeikei = m_strTeikei5;
-	m_teikeiInfo[5].strTeikei = m_strTeikei6;
-	m_teikeiInfo[6].strTeikei = m_strTeikei7;
-	m_teikeiInfo[7].strTeikei = m_strTeikei8;
-	m_teikeiInfo[8].strTeikei = m_strTeikei9;
-	m_teikeiInfo[9].strTeikei = m_strTeikei10;
-	
-	CPropertyPage::OnOK();
+    // TODO: ã“ã®ä½ç½®ã«å›ºæœ‰ã®å‡¦ç†ã‚’è¿½åŠ ã™ã‚‹ã‹ã€ã¾ãŸã¯åŸºæœ¬ã‚¯ãƒ©ã‚¹ã‚’å‘¼ã³å‡ºã—ã¦ãã ã•ã„
+    m_teikeiInfo[0].strTeikei = m_strTeikei1;
+    m_teikeiInfo[1].strTeikei = m_strTeikei2;
+    m_teikeiInfo[2].strTeikei = m_strTeikei3;
+    m_teikeiInfo[3].strTeikei = m_strTeikei4;
+    m_teikeiInfo[4].strTeikei = m_strTeikei5;
+    m_teikeiInfo[5].strTeikei = m_strTeikei6;
+    m_teikeiInfo[6].strTeikei = m_strTeikei7;
+    m_teikeiInfo[7].strTeikei = m_strTeikei8;
+    m_teikeiInfo[8].strTeikei = m_strTeikei9;
+    m_teikeiInfo[9].strTeikei = m_strTeikei10;
+
+    CPropertyPage::OnOK();
 }
 
 void CDlgTeikei::OnDetail(int nIndex)
 {
-	CDlgTeikeiPaste dlgTeikei;
+    CDlgTeikeiPaste dlgTeikei;
 
-	dlgTeikei.m_nTeikeiPaste = m_teikeiInfo[nIndex].nTeikeiPaste;
-	dlgTeikei.m_bAddSpace = m_teikeiInfo[nIndex].bAddSpace;
-	dlgTeikei.m_bAddChar = m_teikeiInfo[nIndex].bAddChar;
-	dlgTeikei.m_strFront = m_teikeiInfo[nIndex].strFront;
-	dlgTeikei.m_strBack = m_teikeiInfo[nIndex].strBack;
-	dlgTeikei.m_bShowDialog = m_teikeiInfo[nIndex].bShowDialog;
-	if (dlgTeikei.DoModal() == IDOK) {
-		m_teikeiInfo[nIndex].nTeikeiPaste = dlgTeikei.m_nTeikeiPaste;
-		m_teikeiInfo[nIndex].bAddSpace = dlgTeikei.m_bAddSpace;
-		m_teikeiInfo[nIndex].bAddChar = dlgTeikei.m_bAddChar;
-		m_teikeiInfo[nIndex].strFront = dlgTeikei.m_strFront;
-		m_teikeiInfo[nIndex].strBack = dlgTeikei.m_strBack;
-		m_teikeiInfo[nIndex].bShowDialog = dlgTeikei.m_bShowDialog;
-	}
+    dlgTeikei.m_nTeikeiPaste = m_teikeiInfo[nIndex].nTeikeiPaste;
+    dlgTeikei.m_bAddSpace = m_teikeiInfo[nIndex].bAddSpace;
+    dlgTeikei.m_bAddChar = m_teikeiInfo[nIndex].bAddChar;
+    dlgTeikei.m_strFront = m_teikeiInfo[nIndex].strFront;
+    dlgTeikei.m_strBack = m_teikeiInfo[nIndex].strBack;
+    dlgTeikei.m_bShowDialog = m_teikeiInfo[nIndex].bShowDialog;
+    if (dlgTeikei.DoModal() == IDOK) {
+        m_teikeiInfo[nIndex].nTeikeiPaste = dlgTeikei.m_nTeikeiPaste;
+        m_teikeiInfo[nIndex].bAddSpace = dlgTeikei.m_bAddSpace;
+        m_teikeiInfo[nIndex].bAddChar = dlgTeikei.m_bAddChar;
+        m_teikeiInfo[nIndex].strFront = dlgTeikei.m_strFront;
+        m_teikeiInfo[nIndex].strBack = dlgTeikei.m_strBack;
+        m_teikeiInfo[nIndex].bShowDialog = dlgTeikei.m_bShowDialog;
+    }
 }

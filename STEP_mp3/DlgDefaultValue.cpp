@@ -1,4 +1,4 @@
-// DlgDefaultValue.cpp : ƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“ ƒtƒ@ƒCƒ‹
+// DlgDefaultValue.cpp : ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³ ãƒ•ã‚¡ã‚¤ãƒ«
 //
 
 #include "stdafx.h"
@@ -12,22 +12,20 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgDefaultValue ƒvƒƒpƒeƒB ƒy[ƒW
+// CDlgDefaultValue ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ ãƒšãƒ¼ã‚¸
 
 IMPLEMENT_DYNCREATE(CDlgDefaultValue, CPropertyPage)
 
 CDlgDefaultValue::CDlgDefaultValue() : CPropertyPage(CDlgDefaultValue::IDD)
 {
-	//{{AFX_DATA_INIT(CDlgDefaultValue)
-	m_strSoftwareTag = _T("");
-	m_bID3v2UnSync = FALSE;
-	m_bID3v2UnSyncNew = FALSE;
-	m_nId3v2Encode = -1;
-	m_nId3v2Version = -1;
-	m_strInfo = _T("");
-	m_nId3v2VersionNew = -1;
-	m_nId3v2EncodeNew = -1;
-	//}}AFX_DATA_INIT
+    //{{AFX_DATA_INIT(CDlgDefaultValue)
+    m_strSoftwareTag = _T("");
+    m_bID3v2UnSync = FALSE;
+    m_nId3v2Encode = -1;
+    m_nId3v2Version = -1;
+    m_nId3v2VersionNew = -1;
+    m_nId3v2EncodeNew = -1;
+    //}}AFX_DATA_INIT
 }
 
 CDlgDefaultValue::~CDlgDefaultValue()
@@ -36,124 +34,150 @@ CDlgDefaultValue::~CDlgDefaultValue()
 
 void CDlgDefaultValue::DoDataExchange(CDataExchange* pDX)
 {
-	CPropertyPage::DoDataExchange(pDX);
-	//{{AFX_DATA_MAP(CDlgDefaultValue)
-	DDX_Control(pDX, IDC_COMBO_ID3V2_ENCODE_NEW, m_cbId3v2EncodeNew);
-	DDX_Control(pDX, IDC_COMBO_ID3V2_VERSION_NEW, m_cbId3v2VersionNew);
-	DDX_Control(pDX, IDC_COMBO_ID3V2_ENCODE, m_cbId3v2Encode);
-	DDX_Control(pDX, IDC_COMBO_ID3V2_VERSION, m_cbId3v2Version);
-	DDX_Text(pDX, IDC_SOFTWARE_TAG, m_strSoftwareTag);
-	DDV_MaxChars(pDX, m_strSoftwareTag, 255);
-	DDX_Check(pDX, IDC_CHECK_UNSYNC, m_bID3v2UnSync);
-	DDX_Check(pDX, IDC_CHECK_UNSYNC_NEW, m_bID3v2UnSyncNew);
-	DDX_CBIndex(pDX, IDC_COMBO_ID3V2_ENCODE, m_nId3v2Encode);
-	DDX_CBIndex(pDX, IDC_COMBO_ID3V2_VERSION, m_nId3v2Version);
-	DDX_Text(pDX, IDC_STATIC_INFO, m_strInfo);
-	DDX_CBIndex(pDX, IDC_COMBO_ID3V2_VERSION_NEW, m_nId3v2VersionNew);
-	DDX_CBIndex(pDX, IDC_COMBO_ID3V2_ENCODE_NEW, m_nId3v2EncodeNew);
-	//}}AFX_DATA_MAP
+    CPropertyPage::DoDataExchange(pDX);
+    //{{AFX_DATA_MAP(CDlgDefaultValue)
+    DDX_Control(pDX, IDC_COMBO_ID3V2_ENCODE_NEW, m_cbId3v2EncodeNew);
+    DDX_Control(pDX, IDC_COMBO_ID3V2_VERSION_NEW, m_cbId3v2VersionNew);
+    DDX_Control(pDX, IDC_COMBO_ID3V2_ENCODE, m_cbId3v2Encode);
+    DDX_Control(pDX, IDC_COMBO_ID3V2_VERSION, m_cbId3v2Version);
+    DDX_Text(pDX, IDC_SOFTWARE_TAG, m_strSoftwareTag);
+    DDV_MaxChars(pDX, m_strSoftwareTag, 255);
+    DDX_Check(pDX, IDC_CHECK_UNSYNC, m_bID3v2UnSync);
+    DDX_CBIndex(pDX, IDC_COMBO_ID3V2_ENCODE, m_nId3v2Encode);
+    DDX_CBIndex(pDX, IDC_COMBO_ID3V2_VERSION, m_nId3v2Version);
+    DDX_CBIndex(pDX, IDC_COMBO_ID3V2_VERSION_NEW, m_nId3v2VersionNew);
+    DDX_CBIndex(pDX, IDC_COMBO_ID3V2_ENCODE_NEW, m_nId3v2EncodeNew);
+    //}}AFX_DATA_MAP
 }
 
 
 BEGIN_MESSAGE_MAP(CDlgDefaultValue, CPropertyPage)
-	//{{AFX_MSG_MAP(CDlgDefaultValue)
-	ON_BN_CLICKED(IDC_BT_RESET_PAGE, OnBtResetPage)
-	ON_CBN_SELCHANGE(IDC_COMBO_ID3V2_VERSION, OnSelchangeComboId3v2Version)
-	ON_CBN_SELCHANGE(IDC_COMBO_ID3V2_ENCODE, OnSelchangeComboId3v2Version)
-	ON_CBN_SELCHANGE(IDC_COMBO_ID3V2_VERSION_NEW, OnSelchangeComboId3v2VersionNew)
-	ON_CBN_SELCHANGE(IDC_COMBO_ID3V2_ENCODE_NEW, OnSelchangeComboId3v2VersionNew)
-	//}}AFX_MSG_MAP
+    //{{AFX_MSG_MAP(CDlgDefaultValue)
+    ON_BN_CLICKED(IDC_BT_RESET_PAGE, OnBtResetPage)
+    ON_CBN_SELCHANGE(IDC_COMBO_ID3V2_VERSION, OnSelchangeComboId3v2Version)
+    ON_CBN_SELCHANGE(IDC_COMBO_ID3V2_ENCODE, OnSelchangeComboId3v2Version)
+    ON_CBN_SELCHANGE(IDC_COMBO_ID3V2_VERSION_NEW, OnSelchangeComboId3v2VersionNew)
+    ON_CBN_SELCHANGE(IDC_COMBO_ID3V2_ENCODE_NEW, OnSelchangeComboId3v2VersionNew)
+    //}}AFX_MSG_MAP
+    ON_EN_CHANGE(IDC_SOFTWARE_TAG, &CDlgDefaultValue::OnEnChangeSoftwareTag)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgDefaultValue ƒƒbƒZ[ƒW ƒnƒ“ƒhƒ‰
+// CDlgDefaultValue ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒãƒ³ãƒ‰ãƒ©
 
-void CDlgDefaultValue::OnBtResetPage() 
+void CDlgDefaultValue::OnBtResetPage()
 {
-	// TODO: ‚±‚ÌˆÊ’u‚ÉƒRƒ“ƒgƒ[ƒ‹’Ê’mƒnƒ“ƒhƒ‰—p‚ÌƒR[ƒh‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
-	m_strSoftwareTag = "";
-	m_bID3v2UnSync = FALSE;
-	m_bID3v2UnSyncNew = FALSE;
-	m_cbId3v2Version.SetCurSel(0);
-	m_cbId3v2Encode.SetCurSel(0);
-	m_cbId3v2VersionNew.SetCurSel(1);
-	m_cbId3v2EncodeNew.SetCurSel(0);
-	m_nId3v2Version = 0;
-	m_nId3v2Encode = 0;
-	m_nId3v2VersionNew = 1;
-	m_nId3v2EncodeNew = 0;
-	UpdateData(FALSE);
+    // TODO: ã“ã®ä½ç½®ã«ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«é€šçŸ¥ãƒãƒ³ãƒ‰ãƒ©ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
+    extern const bool bOptAutoConvID3v2_default;
+    extern const bool bOptAutoConvRMP_default;
+    extern const int  nOptSIFieldConvType_default;
+    extern const bool bOptID3v2ID3tagAutoWrite_default;
+    extern const bool bOptRmpID3tagAutoWrite_default;
+    extern const bool bOptID3v2GenreAddNumber_default;
+    extern const bool bOptChangeFileExt_default;
+    extern const bool bOptID3v2GenreListSelect_default;
+    extern const bool bOptRmpGenreListSelect_default;
+    extern const bool bOptID3v2ID3tagAutoDelete_default;
+    extern const TCHAR strOptSoftwareTag_default[];
+    extern const bool bOptUnSync_default;
+    extern const int  nId3v2Encode_default;
+    extern const int  nId3v2Version_default;
+    extern const int  nId3v2EncodeNew_default;
+    extern const int  nId3v2VersionNew_default;
+
+    m_strSoftwareTag = strOptSoftwareTag_default;
+    m_bID3v2UnSync = bOptUnSync_default;
+    m_cbId3v2Version.SetCurSel(nId3v2Version_default);
+    m_cbId3v2Encode.SetCurSel(nId3v2Encode_default);
+    m_cbId3v2VersionNew.SetCurSel(nId3v2VersionNew_default);
+    m_cbId3v2EncodeNew.SetCurSel(nId3v2EncodeNew_default);
+    m_nId3v2Version = nId3v2Version_default;
+    m_nId3v2Encode = nId3v2Encode_default;
+    m_nId3v2VersionNew = nId3v2VersionNew_default;
+    m_nId3v2EncodeNew = nId3v2EncodeNew_default;//by Kobarin (åˆæœŸå€¤ã‚’ UTF-16 ã«å¤‰æ›´)
+    UpdateData(FALSE);
 }
 
-BOOL CDlgDefaultValue::OnInitDialog() 
+BOOL CDlgDefaultValue::OnInitDialog()
 {
-	CPropertyPage::OnInitDialog();
-	
-	// TODO: ‚±‚ÌˆÊ’u‚É‰Šú‰»‚Ì•â‘«ˆ—‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
-	m_cbId3v2Encode.AddString("•ÏX‚µ‚È‚¢");
-	m_cbId3v2Encode.AddString("ISO-8859-1");
-	m_cbId3v2Encode.AddString("UTF-16");
-	m_cbId3v2Encode.AddString("UTF-8");
-	m_cbId3v2Encode.SetCurSel(m_nId3v2Encode);
+    CPropertyPage::OnInitDialog();
 
-	m_cbId3v2Version.AddString("•ÏX‚µ‚È‚¢");
-	m_cbId3v2Version.AddString("v2.2");
-	m_cbId3v2Version.AddString("v2.3");
-	m_cbId3v2Version.AddString("v2.4");
-	m_cbId3v2Version.SetCurSel(m_nId3v2Version);
+    // TODO: ã“ã®ä½ç½®ã«åˆæœŸåŒ–ã®è£œè¶³å‡¦ç†ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
+    m_cbId3v2Encode.AddString(_T("å¤‰æ›´ã—ãªã„"));
+    m_cbId3v2Encode.AddString(_T("ISO-8859-1"));
+    m_cbId3v2Encode.AddString(_T("UTF-16"));
+    m_cbId3v2Encode.AddString(_T("UTF-8"));
+    m_cbId3v2Encode.SetCurSel(m_nId3v2Encode);
 
-	m_cbId3v2EncodeNew.AddString("ISO-8859-1");
-	m_cbId3v2EncodeNew.AddString("UTF-16");
-	m_cbId3v2EncodeNew.AddString("UTF-8");
-	m_cbId3v2EncodeNew.SetCurSel(m_nId3v2EncodeNew);
+    m_cbId3v2Version.AddString(_T("å¤‰æ›´ã—ãªã„"));
+    m_cbId3v2Version.AddString(_T("v2.2"));
+    m_cbId3v2Version.AddString(_T("v2.3"));
+    m_cbId3v2Version.AddString(_T("v2.4"));
+    m_cbId3v2Version.SetCurSel(m_nId3v2Version);
 
-	m_cbId3v2VersionNew.AddString("v2.2");
-	m_cbId3v2VersionNew.AddString("v2.3");
-	m_cbId3v2VersionNew.AddString("v2.4");
-	m_cbId3v2VersionNew.SetCurSel(m_nId3v2VersionNew);
-	
-	return TRUE;  // ƒRƒ“ƒgƒ[ƒ‹‚ÉƒtƒH[ƒJƒX‚ğİ’è‚µ‚È‚¢‚Æ‚«A–ß‚è’l‚Í TRUE ‚Æ‚È‚è‚Ü‚·
-	              // —áŠO: OCX ƒvƒƒpƒeƒB ƒy[ƒW‚Ì–ß‚è’l‚Í FALSE ‚Æ‚È‚è‚Ü‚·
+    m_cbId3v2EncodeNew.AddString(_T("ISO-8859-1"));
+    m_cbId3v2EncodeNew.AddString(_T("UTF-16"));
+    m_cbId3v2EncodeNew.AddString(_T("UTF-8"));
+    m_cbId3v2EncodeNew.SetCurSel(m_nId3v2EncodeNew);
+
+    m_cbId3v2VersionNew.AddString(_T("v2.2"));
+    m_cbId3v2VersionNew.AddString(_T("v2.3"));
+    m_cbId3v2VersionNew.AddString(_T("v2.4"));
+    m_cbId3v2VersionNew.SetCurSel(m_nId3v2VersionNew);
+
+    return TRUE;  // ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã«ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ã‚’è¨­å®šã—ãªã„ã¨ãã€æˆ»ã‚Šå€¤ã¯ TRUE ã¨ãªã‚Šã¾ã™
+                  // ä¾‹å¤–: OCX ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ ãƒšãƒ¼ã‚¸ã®æˆ»ã‚Šå€¤ã¯ FALSE ã¨ãªã‚Šã¾ã™
 }
 
-void CDlgDefaultValue::OnSelchangeComboId3v2Version() 
+void CDlgDefaultValue::OnSelchangeComboId3v2Version()
 {
-	// TODO: ‚±‚ÌˆÊ’u‚ÉƒRƒ“ƒgƒ[ƒ‹’Ê’mƒnƒ“ƒhƒ‰—p‚ÌƒR[ƒh‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
-	UpdateData();
-	int nVer = m_cbId3v2Version.GetCurSel();
-	int nEnc = m_cbId3v2Encode.GetCurSel();
-	if (nVer != 0 && nVer != 3) {
-		if (m_cbId3v2Encode.FindStringExact(0, "UTF-8") != CB_ERR) {
-			m_cbId3v2Encode.DeleteString(3);
-			if (nEnc == 3) {
-				m_cbId3v2Encode.SetCurSel(2);
-			}
-		}
-	} else {
-		if (m_cbId3v2Encode.FindStringExact(0, "UTF-8") == CB_ERR) {
-			m_cbId3v2Encode.AddString("UTF-8");
-		}
-	}
-	UpdateData(FALSE);
+    // TODO: ã“ã®ä½ç½®ã«ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«é€šçŸ¥ãƒãƒ³ãƒ‰ãƒ©ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
+    UpdateData();
+    int nVer = m_cbId3v2Version.GetCurSel();
+    int nEnc = m_cbId3v2Encode.GetCurSel();
+    if (nVer != 0 && nVer != 3) {
+        if (m_cbId3v2Encode.FindStringExact(0, _T("UTF-8")) != CB_ERR) {
+            m_cbId3v2Encode.DeleteString(3);
+            if (nEnc == 3) {
+                m_cbId3v2Encode.SetCurSel(2);
+            }
+        }
+    } else {
+        if (m_cbId3v2Encode.FindStringExact(0, _T("UTF-8")) == CB_ERR) {
+            m_cbId3v2Encode.AddString(_T("UTF-8"));
+        }
+    }
+    UpdateData(FALSE);
 }
 
-void CDlgDefaultValue::OnSelchangeComboId3v2VersionNew() 
+void CDlgDefaultValue::OnSelchangeComboId3v2VersionNew()
 {
-	// TODO: ‚±‚ÌˆÊ’u‚ÉƒRƒ“ƒgƒ[ƒ‹’Ê’mƒnƒ“ƒhƒ‰—p‚ÌƒR[ƒh‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
-	UpdateData();
-	int nVer = m_cbId3v2VersionNew.GetCurSel();
-	int nEnc = m_cbId3v2EncodeNew.GetCurSel();
-	if (nVer != 2) {
-		if (m_cbId3v2EncodeNew.FindStringExact(0, "UTF-8") != CB_ERR) {
-			m_cbId3v2EncodeNew.DeleteString(2);
-			if (nEnc == 2) {
-				m_cbId3v2EncodeNew.SetCurSel(1);
-			}
-		}
-	} else {
-		if (m_cbId3v2EncodeNew.FindStringExact(0, "UTF-8") == CB_ERR) {
-			m_cbId3v2EncodeNew.AddString("UTF-8");
-		}
-	}
-	UpdateData(FALSE);
+    // TODO: ã“ã®ä½ç½®ã«ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«é€šçŸ¥ãƒãƒ³ãƒ‰ãƒ©ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
+    UpdateData();
+    int nVer = m_cbId3v2VersionNew.GetCurSel();
+    int nEnc = m_cbId3v2EncodeNew.GetCurSel();
+    if (nVer != 2) {
+        if (m_cbId3v2EncodeNew.FindStringExact(0, _T("UTF-8")) != CB_ERR) {
+            m_cbId3v2EncodeNew.DeleteString(2);
+            if (nEnc == 2) {
+                m_cbId3v2EncodeNew.SetCurSel(1);
+            }
+        }
+    } else {
+        if (m_cbId3v2EncodeNew.FindStringExact(0, _T("UTF-8")) == CB_ERR) {
+            m_cbId3v2EncodeNew.AddString(_T("UTF-8"));
+        }
+    }
+    UpdateData(FALSE);
+}
+
+
+void CDlgDefaultValue::OnEnChangeSoftwareTag()
+{
+    // TODO: ã“ã‚ŒãŒ RICHEDIT ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã®å ´åˆã€ã“ã®ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ãŒ
+    // ã“ã®é€šçŸ¥ã‚’é€ä¿¡ã™ã‚‹ã«ã¯ã€CPropertyPage::OnInitDialog() é–¢æ•°ã‚’ã‚ªãƒ¼ãƒãƒ¼ãƒ©ã‚¤ãƒ‰ã—ã€
+    // CRichEditCtrl().SetEventMask() ã‚’
+    // OR çŠ¶æ…‹ã® ENM_CHANGE ãƒ•ãƒ©ã‚°ã‚’ãƒã‚¹ã‚¯ã«å…¥ã‚Œã¦å‘¼ã³å‡ºã™å¿…è¦ãŒã‚ã‚Šã¾ã™ã€‚
+
+    // TODO: ã“ã“ã«ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«é€šçŸ¥ãƒãƒ³ãƒ‰ãƒ©ãƒ¼ ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„ã€‚
 }

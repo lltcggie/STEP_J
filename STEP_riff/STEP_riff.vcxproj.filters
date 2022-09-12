@@ -1,33 +1,30 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Source Files">
-      <UniqueIdentifier>{ee910e4d-61a4-4086-9f5c-d29242dcb903}</UniqueIdentifier>
+      <UniqueIdentifier>{a0848b5a-f358-476b-8a31-88beccb1024a}</UniqueIdentifier>
       <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
     </Filter>
     <Filter Include="Header Files">
-      <UniqueIdentifier>{44c88ef0-7c36-4a36-8027-8ceeae7c157a}</UniqueIdentifier>
+      <UniqueIdentifier>{aed3fb57-a772-4f4d-a1ba-ecda95358413}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl</Extensions>
     </Filter>
     <Filter Include="Resource Files">
-      <UniqueIdentifier>{898c5686-0c5b-4201-8931-4192b0b0b9ba}</UniqueIdentifier>
+      <UniqueIdentifier>{5cc50cfc-2ba1-4285-89cb-d9255852f063}</UniqueIdentifier>
       <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
+    </Filter>
+    <Filter Include="mp3infp">
+      <UniqueIdentifier>{9cd05381-3945-48e3-88d2-9114a8517368}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SuperTagEditor">
+      <UniqueIdentifier>{72e837ec-9940-45d9-be7a-ae5a411098de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SuperTagEditor\INI">
+      <UniqueIdentifier>{9c8f007f-c3de-40c4-8a4c-3aa033e2a6b3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="call_mp3infp.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="DlgSetup.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GlobalCommand.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RiffSIF.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="StdAfx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="STEP_riff.cpp">
@@ -39,21 +36,32 @@
     <ClCompile Include="wavavi.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\mp3infp\RiffSIF.cpp">
+      <Filter>mp3infp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mp3infp\GlobalCommand.cpp">
+      <Filter>mp3infp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mp3infp\MMCommand.cpp">
+      <Filter>mp3infp</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SuperTagEditor\strcnv.cpp">
+      <Filter>SuperTagEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SuperTagEditor\INI\ini.cpp">
+      <Filter>SuperTagEditor\INI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="STEP_riff.def">
       <Filter>Source Files</Filter>
     </None>
-    <None Include="bitmap1.bmp">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="bmp00001.bmp">
-      <Filter>Resource Files</Filter>
-    </None>
     <None Include="res\STEP_riff.rc2">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="STEP_riff.rc">
@@ -64,23 +72,43 @@
     <ClInclude Include="DlgSetup.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GlobalCommand.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="mp3infp_ExportFunc.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Resource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="RiffSIF.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="StdAfx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="STEP_riff.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\mp3infp\RiffSIF.h">
+      <Filter>mp3infp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mp3infp\GlobalCommand.h">
+      <Filter>mp3infp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mp3infp\MMCommand.h">
+      <Filter>mp3infp</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SuperTagEditor\strcnv.h">
+      <Filter>SuperTagEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SuperTagEditor\INI\ini.h">
+      <Filter>SuperTagEditor\INI</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="bitmap1-24.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="bmp00001-24.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
   </ItemGroup>
 </Project>

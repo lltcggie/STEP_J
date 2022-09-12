@@ -1,10 +1,10 @@
 // ======================================================
-// ŠT  —v    F ƒtƒHƒ‹ƒ_‘I‘ğƒ_ƒCƒAƒƒO‚Ìƒ‰ƒbƒpƒNƒ‰ƒX
-// ƒ^[ƒQƒbƒgF Windows95/98/NT
-// ˆ—Œn    F Visual C++ Ver 6.0
-// ì¬Ò    F MERCURY
-// ì¬“ú    F 00/06/17(“y)
-// ’˜ìŒ •\‹LF Copyright(C) 2000 MERCURY.
+// æ¦‚  è¦    ï¼š ãƒ•ã‚©ãƒ«ãƒ€é¸æŠãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã®ãƒ©ãƒƒãƒ‘ã‚¯ãƒ©ã‚¹
+// ã‚¿ãƒ¼ã‚²ãƒƒãƒˆï¼š Windows95/98/NT
+// å‡¦ç†ç³»    ï¼š Visual C++ Ver 6.0
+// ä½œæˆè€…    ï¼š MERCURY
+// ä½œæˆæ—¥    ï¼š 00/06/17(åœŸ)
+// è‘—ä½œæ¨©è¡¨è¨˜ï¼š Copyright(C) 2000 MERCURY.
 // ======================================================
 
 #ifndef __SH_BROWSE_FOR_FOLDER_H__
@@ -12,103 +12,102 @@
 
 
 // ======================================
-// =====   ğŒƒRƒ“ƒpƒCƒ‹ƒtƒ‰ƒO     =====
+// =====   æ¡ä»¶ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«ãƒ•ãƒ©ã‚°     =====
 // ======================================
 
 
 
 // ======================================
-// =====   ƒCƒ“ƒNƒ‹[ƒhƒtƒ@ƒCƒ‹     =====
+// =====   ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰ãƒ•ã‚¡ã‚¤ãƒ«     =====
 // ======================================
 
 
 
 // ======================================
-// =====           ’è  ”           =====
+// =====           å®š  æ•°           =====
 // ======================================
 
 
 
 // ======================================
-// =====           ƒ}ƒNƒ           =====
+// =====           ãƒã‚¯ãƒ­           =====
 // ======================================
 
 
 
 // ======================================
-// =====       typedef^enum        =====
+// =====       typedefï¼enum        =====
 // ======================================
 
 
 
 // ======================================
-// =====       \‘¢‘Ì^‹¤—p‘Ì       =====
+// =====       æ§‹é€ ä½“ï¼å…±ç”¨ä½“       =====
 // ======================================
 
 
 
 // ======================================
-// =====         const •Ï”         =====
+// =====         const å¤‰æ•°         =====
 // ======================================
 
 
 
 // ======================================
-// =====        extern •Ï”         =====
+// =====        extern å¤‰æ•°         =====
 // ======================================
 
 
 
 // ======================================
-// =====        static •Ï”         =====
+// =====        static å¤‰æ•°         =====
 // ======================================
 
 
 
 // ======================================
-// =====     ŠÖ”ƒvƒƒgƒ^ƒCƒv       =====
+// =====     é–¢æ•°ãƒ—ãƒ­ãƒˆã‚¿ã‚¤ãƒ—       =====
 // ======================================
 
 
 
 // ======================================
-// =====      ƒvƒƒOƒ‰ƒ€—Ìˆæ        =====
+// =====      ãƒ—ãƒ­ã‚°ãƒ©ãƒ é ˜åŸŸ        =====
 // ======================================
 
 
 #ifdef __cplusplus
 
-class	CSHBrowseForFolder	{
+class   CSHBrowseForFolder  {
 public:
-	CSHBrowseForFolder(bool = false, bool = true);
-	virtual	~CSHBrowseForFolder();
+    CSHBrowseForFolder(bool = false, bool = true);
+    virtual ~CSHBrowseForFolder();
 
-public:		// ======================================
-			// =====      public ƒƒ“ƒoŠÖ”     =====
-			// ======================================
-	inline	static	void	SetEnableSubDirButton(bool bFlag) {m_bEnableSubDirButton = bFlag;}
-	inline	static	bool	GetEnableSubDirButton(void) {return(m_bEnableSubDirButton);}
-	inline	static	void	SetSearchSubDirState(bool bFlag) {m_bSearchSubDirState = bFlag;}
-	inline	static	bool	GetSearchSubDirState(void) {return(GetEnableSubDirButton() ? m_bSearchSubDirState : false);}
-			bool		Exec(char *);
-	inline	static	void	SetCheckBoxTitle(const char* title) {pCheckBoxTitle = title;}
-	inline	static	const char* GetCheckBoxTitle(void) {return (pCheckBoxTitle);}
+public:
+    void  SetEnableSubDirButton(bool bFlag) {m_bEnableSubDirButton = bFlag;}
+    bool  GetEnableSubDirButton(void) {return(m_bEnableSubDirButton);}
+    void  SetSearchSubDirState(bool bFlag) {m_bSearchSubDirState = bFlag;}
+    bool  GetSearchSubDirState(void) {return(GetEnableSubDirButton() ? m_bSearchSubDirState : false);}
+    bool  Exec(TCHAR *sLocal, int size);
+    void  SetCheckBoxTitle(const TCHAR* title) {_tcsncpy_s(m_szCheckBoxTitle, title, _TRUNCATE);}
+    const TCHAR* GetCheckBoxTitle(void) {return m_szCheckBoxTitle;}
 
+private:
+    TCHAR    m_szInitialFolder[MAX_PATH];
+    TCHAR    m_szCheckBoxTitle[256];
+    CButton *m_pSubDir;
+    bool     m_bEnableSubDirButton;
+    bool     m_bSearchSubDirState;
+    WNDPROC  m_VSSelectOrgProc;
 
-private:	// ======================================
-			// =====     private ƒƒ“ƒoŠÖ”     =====
-			// ======================================
-	static	bool	m_bEnableSubDirButton;
-	static	bool	m_bSearchSubDirState;
-	static	WNDPROC	m_VSSelectOrgProc;
-	static	const char* pCheckBoxTitle;
+    static  LRESULT CALLBACK VSSelectFolderSubProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+    LRESULT VSSelectFolderSubProcInternal(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+    static  int CALLBACK CallbackSelectDir(HWND hWnd, UINT uMsg, LPARAM lParam, LPARAM lpData);
+    int CallbackSelectDirInternal(HWND hWnd, UINT uMsg, LPARAM lParam);
 
-	static	LRESULT CALLBACK VSSelectFolderSubProc(HWND, UINT, WPARAM, LPARAM);
-	static	int CALLBACK CallbackSelectDir(HWND, UINT, LPARAM, LPARAM);
-
-protected:	// ======================================
-			// =====    protected ƒƒ“ƒoŠÖ”    =====
-			// ======================================
+protected:  // ======================================
+            // =====    protected ãƒ¡ãƒ³ãƒé–¢æ•°    =====
+            // ======================================
 };
 
 #endif

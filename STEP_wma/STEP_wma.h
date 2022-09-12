@@ -1,4 +1,4 @@
-// STEP_wma.h : STEP_WMA �A�v���P�[�V�����̃��C�� �w�b�_�[ �t�@�C���ł��B
+// STEP_wma.h : STEP_WMA アプリケーションのメイン ヘッダー ファイルです。
 //
 
 #if !defined(AFX_STEP_WMA_H__CBBF85F8_10D0_4AAE_BC99_25FE71369444__INCLUDED_)
@@ -9,37 +9,37 @@
 #endif // _MSC_VER > 1000
 
 #ifndef __AFXWIN_H__
-	#error include 'stdafx.h' before including this file for PCH
+    #error include 'stdafx.h' before including this file for PCH
 #endif
 
-#include "resource.h"		// ���C�� �V���{��
+#include "resource.h"        // メイン シンボル
 
 /////////////////////////////////////////////////////////////////////////////
 // CSTEP_wmaApp
-// ���̃N���X�̓���̒�`�Ɋւ��Ă� STEP_wma.cpp �t�@�C�����Q�Ƃ��Ă��������B
+// このクラスの動作の定義に関しては STEP_wma.cpp ファイルを参照してください。
 //
 
 class CSTEP_wmaApp : public CWinApp
 {
 public:
-	CSTEP_wmaApp();
+    CSTEP_wmaApp();
 
-// �I�[�o�[���C�h
-	// ClassWizard �͉��z�֐��̃I�[�o�[���C�h�𐶐����܂��B
-	//{{AFX_VIRTUAL(CSTEP_wmaApp)
-	//}}AFX_VIRTUAL
+// オーバーライド
+    // ClassWizard は仮想関数のオーバーライドを生成します。
+    //{{AFX_VIRTUAL(CSTEP_wmaApp)
+    //}}AFX_VIRTUAL
 
-	//{{AFX_MSG(CSTEP_wmaApp)
-		// ���� -  ClassWizard �͂��̈ʒu�Ƀ����o�֐���ǉ��܂��͍폜���܂��B
-		//         ���̈ʒu�ɐ��������R�[�h��ҏW���Ȃ��ł��������B
-	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
+    //{{AFX_MSG(CSTEP_wmaApp)
+        // メモ -  ClassWizard はこの位置にメンバ関数を追加または削除します。
+        //         この位置に生成されるコードを編集しないでください。
+    //}}AFX_MSG
+    DECLARE_MESSAGE_MAP()
 };
 
 
 /////////////////////////////////////////////////////////////////////////////
 
 //{{AFX_INSERT_LOCATION}}
-// Microsoft Visual C++ �͑O�s�̒��O�ɒǉ��̐錾��}�����܂��B
+// Microsoft Visual C++ は前行の直前に追加の宣言を挿入します。
 
 #endif // !defined(AFX_STEP_WMA_H__CBBF85F8_10D0_4AAE_BC99_25FE71369444__INCLUDED_)

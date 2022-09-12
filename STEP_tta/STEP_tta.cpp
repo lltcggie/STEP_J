@@ -1,4 +1,4 @@
-// STEP_tta.cpp : DLL —p‚Ì‰Šú‰»ˆ—‚Ì’è‹`‚ğs‚¢‚Ü‚·B
+// STEP_tta.cpp : DLL ç”¨ã®åˆæœŸåŒ–å‡¦ç†ã®å®šç¾©ã‚’è¡Œã„ã¾ã™ã€‚
 //
 
 #include "stdafx.h"
@@ -7,6 +7,13 @@
 
 #include "DlgSetup.h"
 #include "id3tag.h"
+#include "FileTTA.h"
+#include "..\SuperTagEditor\INI\ini.h"
+//è¨­å®šã®èª­ã¿æ›¸ã
+//WritePrivateProfileString ã¯ãƒ•ã‚¡ã‚¤ãƒ«ãŒå­˜åœ¨ã—ãªã„å ´åˆã‚„ã€
+//å…ƒãƒ•ã‚¡ã‚¤ãƒ«ãŒ ANSI ã ã¨ ANSI ã§æ–‡å­—åˆ—ã‚’æ›¸ãè¾¼ã‚€
+//ä½¿ã„è¾›ã„ã®ã§ STEP æœ¬ä½“ã® INI èª­ã¿æ›¸ãã‚¯ãƒ©ã‚¹ã‚’ä½¿ã„å›ã™
+//UTF8/UTF16/ANSI å¯¾å¿œ
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -15,53 +22,53 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 //
-//	ƒƒ‚!
+//  ãƒ¡ãƒ¢!
 //
-//		‚±‚Ì DLL ‚ª MFC DLL ‚É‘Î‚µ‚Ä“®“I‚ÉƒŠƒ“ƒN‚³‚ê‚éê‡A
-//		MFC “à‚ÅŒÄ‚Ño‚³‚ê‚é‚±‚Ì DLL ‚©‚çƒGƒNƒXƒ|[ƒg‚³‚ê‚½
-//		‚Ç‚ÌŠÖ”‚àŠÖ”‚ÌÅ‰‚É’Ç‰Á‚³‚ê‚é AFX_MANAGE_STATE 
-//		ƒ}ƒNƒ‚ğŠÜ‚ñ‚Å‚¢‚È‚¯‚ê‚Î‚È‚è‚Ü‚¹‚ñB
+//      ã“ã® DLL ãŒ MFC DLL ã«å¯¾ã—ã¦å‹•çš„ã«ãƒªãƒ³ã‚¯ã•ã‚Œã‚‹å ´åˆã€
+//      MFC å†…ã§å‘¼ã³å‡ºã•ã‚Œã‚‹ã“ã® DLL ã‹ã‚‰ã‚¨ã‚¯ã‚¹ãƒãƒ¼ãƒˆã•ã‚ŒãŸ
+//      ã©ã®é–¢æ•°ã‚‚é–¢æ•°ã®æœ€åˆã«è¿½åŠ ã•ã‚Œã‚‹ AFX_MANAGE_STATE
+//      ãƒã‚¯ãƒ­ã‚’å«ã‚“ã§ã„ãªã‘ã‚Œã°ãªã‚Šã¾ã›ã‚“ã€‚
 //
-//		—á:
+//      ä¾‹:
 //
-//		extern "C" BOOL PASCAL EXPORT ExportedFunction()
-//		{
-//			AFX_MANAGE_STATE(AfxGetStaticModuleState());
-//			// ’ÊíŠÖ”‚Ì–{‘Ì‚Í‚±‚ÌˆÊ’u‚É‚ ‚è‚Ü‚·
-//		}
+//      extern "C" BOOL PASCAL EXPORT ExportedFunction()
+//      {
+//          AFX_MANAGE_STATE(AfxGetStaticModuleState());
+//          // é€šå¸¸é–¢æ•°ã®æœ¬ä½“ã¯ã“ã®ä½ç½®ã«ã‚ã‚Šã¾ã™
+//      }
 //
-//		‚±‚Ìƒ}ƒNƒ‚ªŠeŠÖ”‚ÉŠÜ‚Ü‚ê‚Ä‚¢‚é‚±‚ÆAMFC “à‚Ì
-//		‚Ç‚ÌŒÄ‚Ño‚µ‚æ‚è—Dæ‚·‚é‚±‚Æ‚Í”ñí‚Éd—v‚Å‚·B
-//		‚±‚ê‚ÍŠÖ”“à‚ÌÅ‰‚ÌƒXƒe[ƒgƒƒ“ƒg‚Å‚È‚¯‚ê‚Î‚È
-//		‚ç‚È‚¢‚±‚Æ‚ğˆÓ–¡‚µ‚Ü‚·AƒRƒ“ƒXƒgƒ‰ƒNƒ^‚ª MFC 
-//		DLL “à‚Ö‚ÌŒÄ‚Ño‚µ‚ğs‚¤‰Â”\«‚ª‚ ‚é‚Ì‚ÅAƒIƒu
-//		ƒWƒFƒNƒg•Ï”‚ÌéŒ¾‚æ‚è‚à‘O‚Å‚È‚¯‚ê‚Î‚È‚è‚Ü‚¹‚ñB
+//      ã“ã®ãƒã‚¯ãƒ­ãŒå„é–¢æ•°ã«å«ã¾ã‚Œã¦ã„ã‚‹ã“ã¨ã€MFC å†…ã®
+//      ã©ã®å‘¼ã³å‡ºã—ã‚ˆã‚Šå„ªå…ˆã™ã‚‹ã“ã¨ã¯éå¸¸ã«é‡è¦ã§ã™ã€‚
+//      ã“ã‚Œã¯é–¢æ•°å†…ã®æœ€åˆã®ã‚¹ãƒ†ãƒ¼ãƒˆãƒ¡ãƒ³ãƒˆã§ãªã‘ã‚Œã°ãª
+//      ã‚‰ãªã„ã“ã¨ã‚’æ„å‘³ã—ã¾ã™ã€ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ãŒ MFC
+//      DLL å†…ã¸ã®å‘¼ã³å‡ºã—ã‚’è¡Œã†å¯èƒ½æ€§ãŒã‚ã‚‹ã®ã§ã€ã‚ªãƒ–
+//      ã‚¸ã‚§ã‚¯ãƒˆå¤‰æ•°ã®å®£è¨€ã‚ˆã‚Šã‚‚å‰ã§ãªã‘ã‚Œã°ãªã‚Šã¾ã›ã‚“ã€‚
 //
-//		Ú×‚É‚Â‚¢‚Ä‚Í MFC ƒeƒNƒjƒJƒ‹ ƒm[ƒg 33 ‚¨‚æ‚Ñ
-//		58 ‚ğQÆ‚µ‚Ä‚­‚¾‚³‚¢B
+//      è©³ç´°ã«ã¤ã„ã¦ã¯ MFC ãƒ†ã‚¯ãƒ‹ã‚«ãƒ« ãƒãƒ¼ãƒˆ 33 ãŠã‚ˆã³
+//      58 ã‚’å‚ç…§ã—ã¦ãã ã•ã„ã€‚
 //
 
 /////////////////////////////////////////////////////////////////////////////
 // CSTEP_ttaApp
 
 BEGIN_MESSAGE_MAP(CSTEP_ttaApp, CWinApp)
-	//{{AFX_MSG_MAP(CSTEP_ttaApp)
-		// ƒƒ‚ - ClassWizard ‚Í‚±‚ÌˆÊ’u‚Éƒ}ƒbƒsƒ“ƒO—p‚Ìƒ}ƒNƒ‚ğ’Ç‰Á‚Ü‚½‚Ííœ‚µ‚Ü‚·B
-		//        ‚±‚ÌˆÊ’u‚É¶¬‚³‚ê‚éƒR[ƒh‚ğ•ÒW‚µ‚È‚¢‚Å‚­‚¾‚³‚¢B
-	//}}AFX_MSG_MAP
+    //{{AFX_MSG_MAP(CSTEP_ttaApp)
+        // ãƒ¡ãƒ¢ - ClassWizard ã¯ã“ã®ä½ç½®ã«ãƒãƒƒãƒ”ãƒ³ã‚°ç”¨ã®ãƒã‚¯ãƒ­ã‚’è¿½åŠ ã¾ãŸã¯å‰Šé™¤ã—ã¾ã™ã€‚
+        //        ã“ã®ä½ç½®ã«ç”Ÿæˆã•ã‚Œã‚‹ã‚³ãƒ¼ãƒ‰ã‚’ç·¨é›†ã—ãªã„ã§ãã ã•ã„ã€‚
+    //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// CSTEP_ttaApp ‚Ì\’z
+// CSTEP_ttaApp ã®æ§‹ç¯‰
 
 CSTEP_ttaApp::CSTEP_ttaApp()
 {
-	// TODO: ‚±‚ÌˆÊ’u‚É\’z—p‚ÌƒR[ƒh‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢B
-	// ‚±‚±‚É InitInstance ‚Ì’†‚Ìd—v‚È‰Šú‰»ˆ—‚ğ‚·‚×‚Ä‹Lq‚µ‚Ä‚­‚¾‚³‚¢B
+    // TODO: ã“ã®ä½ç½®ã«æ§‹ç¯‰ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„ã€‚
+    // ã“ã“ã« InitInstance ã®ä¸­ã®é‡è¦ãªåˆæœŸåŒ–å‡¦ç†ã‚’ã™ã¹ã¦è¨˜è¿°ã—ã¦ãã ã•ã„ã€‚
 }
 
 /////////////////////////////////////////////////////////////////////////////
-// —Bˆê‚Ì CSTEP_ttaApp ƒIƒuƒWƒFƒNƒg
+// å”¯ä¸€ã® CSTEP_ttaApp ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 
 CSTEP_ttaApp theApp;
 
@@ -77,187 +84,205 @@ UINT nFileTypeTTA;
 
 STEP_API LPCTSTR WINAPI STEPGetPluginInfo(void)
 {
-	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-	return "Version 1.00 Copyright (C) 2005-2006 haseta\r\nTTAŒ`®‚ğƒTƒ|[ƒg‚µ‚Ä‚¢‚Ü‚·";
+    AFX_MANAGE_STATE(AfxGetStaticModuleState());
+    return _T("Version 1.00 Copyright (C) 2005-2006 haseta\r\n")
+           _T("Version 1.02 Copyright (C) 2016 Kobarin\r\n")
+           _T("TTAå½¢å¼ã‚’ã‚µãƒãƒ¼ãƒˆã—ã¦ã„ã¾ã™");
 }
 
 STEP_API bool WINAPI STEPInit(UINT pID, LPCTSTR szPluginFolder)
 {
-	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-	if (Initialize() == false)	return false;
-	nPluginID = pID;
+    AFX_MANAGE_STATE(AfxGetStaticModuleState());
+    if (Initialize() == false)  return false;
+    nPluginID = pID;
 
-	// INIƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ
-	strINI = szPluginFolder;
-	strINI += "STEP_tta.ini";
-	bOptGenreListSelect = GetPrivateProfileInt("TTA", "GenreListSelect", 0, strINI) ? true : false;
-	bOptID3TagAutoWrite = GetPrivateProfileInt("TTA", "ID3TagAutoWrite", 0, strINI) ? true : false;
-	bOptID3TagAutoDelete = GetPrivateProfileInt("TTA", "ID3TagAutoDelete", 0, strINI) ? true : false;
+    // INIãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿
+    strINI = szPluginFolder;
+    strINI += _T("STEP_tta.ini");
+    CIniFile iniFile(strINI);
+    bOptGenreListSelect = iniFile.ReadInt(_T("TTA"), _T("GenreListSelect"), 0) != 0;
+    bOptID3TagAutoWrite = iniFile.ReadInt(_T("TTA"), _T("ID3TagAutoWrite"), 1) != 0;
+    bOptID3TagAutoDelete = iniFile.ReadInt(_T("TTA"), _T("ID3TagAutoDelete"), 1) != 0; //åˆæœŸå€¤ã‚’1ã«å¤‰æ›´
 
-	HBITMAP hTTABitmap = LoadBitmap(theApp.m_hInstance, MAKEINTRESOURCE(IDB_BITMAP_TTA));
-	nFileTypeTTA = STEPRegisterExt(nPluginID, "tta", hTTABitmap);
-	DeleteObject(hTTABitmap);
+    HBITMAP hTTABitmap = LoadBitmap(theApp.m_hInstance, MAKEINTRESOURCE(IDB_BITMAP_TTA));
+    nFileTypeTTA = STEPRegisterExt(nPluginID, _T("tta"), hTTABitmap);
+    DeleteObject(hTTABitmap);
 
-	return true;
+    return true;
 }
 
 STEP_API void WINAPI STEPFinalize() {
-	Finalize();
+    Finalize();
 }
 
 STEP_API UINT WINAPI STEPGetAPIVersion(void)
 {
-	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-	return STEP_API_VERSION;
+    AFX_MANAGE_STATE(AfxGetStaticModuleState());
+    return STEP_API_VERSION;
 }
 
 STEP_API LPCTSTR WINAPI STEPGetPluginName(void)
 {
-	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-	return "STEP_tta";
+    AFX_MANAGE_STATE(AfxGetStaticModuleState());
+    return _T("STEP_tta");
 }
 
 STEP_API bool WINAPI STEPSupportSIF(UINT nFormat) {
-	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-	return true;
+    AFX_MANAGE_STATE(AfxGetStaticModuleState());
+    return true;
 }
 
 STEP_API bool WINAPI STEPSupportTrackNumberSIF(UINT nFormat) {
-	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-	return true;
+    AFX_MANAGE_STATE(AfxGetStaticModuleState());
+    return true;
 }
 
 STEP_API CONTROLTYPE WINAPI STEPGetControlType(UINT nFormat, COLUMNTYPE nColumn, bool isEditSIF)
 {
-	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-	if (!isEditSIF && bOptID3TagAutoWrite)	return _NULL;
+    AFX_MANAGE_STATE(AfxGetStaticModuleState());
+    if (!isEditSIF && (bOptID3TagAutoWrite || bOptID3TagAutoDelete))  return _NULL;
 
-	switch (nColumn) {
-	case COLUMN_TRACK_NAME:
-	case COLUMN_ARTIST_NAME:
-	case COLUMN_ALBUM_NAME:
-	case COLUMN_YEAR:
-	case COLUMN_TRACK_NUMBER:
-		return _EDIT;
-	case COLUMN_GENRE:
-		if (bOptGenreListSelect) {
-			return _CBOX;
-		} else {
-			return _EDIT;
-		}
-	case COLUMN_COMMENT:
-		if (isEditSIF) {
-			return _MEDIT;
-		} else {
-			return _EDIT;
-		}
-	}
-	return _NULL;
+    switch (nColumn) {
+    case COLUMN_TRACK_NAME:
+    case COLUMN_ARTIST_NAME:
+    case COLUMN_ALBUM_NAME:
+    case COLUMN_YEAR:
+    case COLUMN_TRACK_NUMBER:
+    case COLUMN_TRACK_TOTAL:
+    case COLUMN_DISC_NUMBER:
+    case COLUMN_DISC_TOTAL:
+    case COLUMN_COPYRIGHT:
+    case COLUMN_WRITER:
+    case COLUMN_COMPOSER:
+    case COLUMN_ALBM_ARTIST:
+    case COLUMN_ORIG_ARTIST:
+    case COLUMN_SOFTWARE:
+    case COLUMN_ENCODEST:
+        return _EDIT;
+    case COLUMN_GENRE:
+        if (bOptGenreListSelect) {
+            return _CBOX;
+        } else {
+            return _EDIT;
+        }
+    case COLUMN_COMMENT:
+        if (isEditSIF) {
+            return _MEDIT;
+        } else {
+            return _EDIT;
+        }
+    }
+    return _NULL;
 }
 
 
 STEP_API UINT WINAPI STEPGetColumnMax(UINT nFormat, COLUMNTYPE nColumn, bool isEditSIF) {
-	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-	if (!isEditSIF) {
-		switch (nColumn) {
-		case COLUMN_TRACK_NAME:
-			return 30;
-		case COLUMN_ARTIST_NAME:
-			return 30;
-		case COLUMN_ALBUM_NAME:
-			return 30;
-		case COLUMN_TRACK_NUMBER:
-			return 3;
-		case COLUMN_YEAR:
-			return 5;
-		case COLUMN_GENRE:
-			return 128;
-		case COLUMN_COMMENT:
-			return 28;
-		default:
-			return 0;
-		}
-	} else {
-		switch (nColumn) {
-		case COLUMN_TRACK_NAME:
-			return 1024;
-		case COLUMN_ALBUM_NAME:
-			return 1024;
-		case COLUMN_ARTIST_NAME:
-			return 1024;
-		case COLUMN_COMMENT:
-			return 1024;
-		case COLUMN_YEAR:
-			return 256;
-		case COLUMN_TRACK_NUMBER:
-			return 256;
-		case COLUMN_GENRE:
-			return 256;
-		}
-	}
-	return 0;
+    AFX_MANAGE_STATE(AfxGetStaticModuleState());
+    if (!isEditSIF) {
+        switch (nColumn) {
+        case COLUMN_TRACK_NAME:
+            return 30;
+        case COLUMN_ARTIST_NAME:
+            return 30;
+        case COLUMN_ALBUM_NAME:
+            return 30;
+        case COLUMN_TRACK_NUMBER:
+            return 3;
+        case COLUMN_YEAR:
+            return 5;
+        case COLUMN_GENRE:
+            return 128;
+        case COLUMN_COMMENT:
+            return 28;
+        default:
+            return 0;
+        }
+    } else {
+        switch (nColumn) {
+        case COLUMN_TRACK_NAME:
+        case COLUMN_ALBUM_NAME:
+        case COLUMN_ARTIST_NAME:
+        case COLUMN_COMMENT:
+        case COLUMN_YEAR:
+        case COLUMN_COPYRIGHT:
+        case COLUMN_WRITER:
+        case COLUMN_COMPOSER:
+        case COLUMN_ALBM_ARTIST:
+        case COLUMN_ORIG_ARTIST:
+        case COLUMN_SOFTWARE:
+        case COLUMN_ENCODEST:
+            return 1024;
+        case COLUMN_TRACK_NUMBER:
+        case COLUMN_TRACK_TOTAL:
+        case COLUMN_DISC_NUMBER:
+        case COLUMN_DISC_TOTAL:
+            return 32;
+        case COLUMN_GENRE:
+            return 256;
+        }
+    }
+    return 0;
 }
 
 STEP_API UINT WINAPI STEPLoad(FILE_INFO *pFileMP3, LPCTSTR szExt)
 {
-	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-	if (stricmp(szExt, "tta") == 0) {
-		extern	bool LoadAttributeFileTTA(FILE_INFO *pFile);
-		if (LoadAttributeFileTTA(pFileMP3) == false) {
-			CString	strMsg;
-			strMsg.Format("%s ‚Ì“Ç‚İ‚İ‚É¸”s‚µ‚Ü‚µ‚½", GetFullPath(pFileMP3));
-			MessageBox(NULL, strMsg, "TTAƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ¸”s", MB_ICONSTOP|MB_OK|MB_TOPMOST);
-			return STEP_ERROR;
-		} else {
-			SetFormat(pFileMP3, nFileTypeTTA);
-			SetFileTypeName(pFileMP3, "True Audio");
-			return STEP_SUCCESS;
-		}
-	}
-	return STEP_UNKNOWN_FORMAT;
+    AFX_MANAGE_STATE(AfxGetStaticModuleState());
+    if (_tcsicmp(szExt, _T("tta")) == 0) {
+        if (LoadFileTTA(pFileMP3) == false) {
+            CString strMsg;
+            strMsg.Format(_T("%s ã®èª­ã¿è¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ"), GetFullPath(pFileMP3));
+            MessageBox(NULL, strMsg, _T("TTAãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿å¤±æ•—"), MB_ICONSTOP|MB_OK|MB_TOPMOST);
+            return STEP_ERROR;
+        } else {
+            SetFormat(pFileMP3, nFileTypeTTA);
+            SetFileTypeName(pFileMP3, _T("True Audio"));
+            return STEP_SUCCESS;
+        }
+    }
+    return STEP_UNKNOWN_FORMAT;
 }
 
 STEP_API UINT WINAPI STEPSave(FILE_INFO *pFileMP3)
 {
-	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-	UINT nFormat = GetFormat(pFileMP3);
+    AFX_MANAGE_STATE(AfxGetStaticModuleState());
+    UINT nFormat = GetFormat(pFileMP3);
 
-	if (nFormat == nFileTypeTTA) {
-		extern bool WriteAttributeFileTTA(FILE_INFO *pFileMP3);
-		if (WriteAttributeFileTTA(pFileMP3) == false) {
-			CString	strMsg;
-			strMsg.Format("%s ‚Ì‘‚«‚İ‚É¸”s‚µ‚Ü‚µ‚½", GetFullPath(pFileMP3));
-			MessageBox(NULL, strMsg, "TTAƒtƒ@ƒCƒ‹‚Ì‘‚«‚İ¸”s", MB_ICONSTOP|MB_OK|MB_TOPMOST);
-			return STEP_ERROR;
-		}
-		return STEP_SUCCESS;
-	}
-	return STEP_UNKNOWN_FORMAT;
+    if (nFormat == nFileTypeTTA) {
+        if (WriteFileTTA(pFileMP3) == false) {
+            CString strMsg;
+            strMsg.Format(_T("%s ã®æ›¸ãè¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ"), GetFullPath(pFileMP3));
+            MessageBox(NULL, strMsg, _T("TTAãƒ•ã‚¡ã‚¤ãƒ«ã®æ›¸ãè¾¼ã¿å¤±æ•—"), MB_ICONSTOP|MB_OK|MB_TOPMOST);
+            return STEP_ERROR;
+        }
+        return STEP_SUCCESS;
+    }
+    return STEP_UNKNOWN_FORMAT;
 }
 
 STEP_API void WINAPI STEPShowOptionDialog(HWND hWnd)
 {
-	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-	CDlgSetup dlg1;
-	CPropertySheet page;
-	dlg1.m_bGenreListSelect = bOptGenreListSelect;
-	dlg1.m_bID3TagAutoDelete = bOptID3TagAutoDelete;
-	dlg1.m_bID3TagAutoWrite = bOptID3TagAutoWrite;
-	page.AddPage(&dlg1);
-	page.SetTitle(CString(STEPGetPluginName()) + " ƒIƒvƒVƒ‡ƒ“İ’è");
-	if (page.DoModal() == IDOK) {
-		bOptGenreListSelect = dlg1.m_bGenreListSelect ? true : false;
-		bOptID3TagAutoDelete = dlg1.m_bID3TagAutoDelete ? true : false;
-		bOptID3TagAutoWrite = dlg1.m_bID3TagAutoWrite ? true : false;
-
-		WritePrivateProfileString("TTA", "GenreListSelect", bOptGenreListSelect ? "1" : "0", strINI);
-		WritePrivateProfileString("TTA", "ID3TagAutoDelete", bOptID3TagAutoDelete ? "1" : "0", strINI);
-		WritePrivateProfileString("TTA", "ID3TagAutoWrite", bOptID3TagAutoWrite ? "1" : "0", strINI);
-		STEPUpdateCellInfo();
-	}
+    AFX_MANAGE_STATE(AfxGetStaticModuleState());
+    CDlgSetup dlg1;
+    CPropertySheet page;
+    dlg1.m_bGenreListSelect = bOptGenreListSelect;
+    dlg1.m_bID3TagAutoDelete = bOptID3TagAutoDelete;
+    dlg1.m_bID3TagAutoWrite = bOptID3TagAutoWrite;
+    page.AddPage(&dlg1);
+    page.SetTitle(CString(STEPGetPluginName()) + _T(" ã‚ªãƒ—ã‚·ãƒ§ãƒ³è¨­å®š"));
+    if (page.DoModal() == IDOK) {
+        bOptGenreListSelect = dlg1.m_bGenreListSelect ? true : false;
+        bOptID3TagAutoDelete = dlg1.m_bID3TagAutoDelete ? true : false;
+        bOptID3TagAutoWrite = dlg1.m_bID3TagAutoWrite ? true : false;
+        CIniFile iniFile(strINI);
+        iniFile.WriteInt(_T("TTA"), _T("GenreListSelect"), bOptGenreListSelect);
+        iniFile.WriteInt(_T("TTA"), _T("ID3TagAutoDelete"), bOptID3TagAutoDelete);
+        iniFile.WriteInt(_T("TTA"), _T("ID3TagAutoWrite"), bOptID3TagAutoWrite);
+        iniFile.Flush();//ä¿å­˜å®Ÿè¡Œ
+        STEPUpdateCellInfo();
+    }
 }
 
 STEP_API bool WINAPI STEPOnConvSiFieldToId3tag(FILE_INFO* pFileInfo)
 {
-	return true;
+    return true;
 }

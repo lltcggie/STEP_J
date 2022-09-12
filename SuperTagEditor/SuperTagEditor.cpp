@@ -1,22 +1,19 @@
-// SuperTagEditor.cpp : ƒAƒvƒŠƒP[ƒVƒ‡ƒ“—pƒNƒ‰ƒX‚Ì‹@”\’è‹`‚ğs‚¢‚Ü‚·B
+// SuperTagEditor.cpp : ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ç”¨ã‚¯ãƒ©ã‚¹ã®æ©Ÿèƒ½å®šç¾©ã‚’è¡Œã„ã¾ã™ã€‚
 //
 
 #include "stdafx.h"
+#include <dos.h> //ã‚³ãƒãƒ³ãƒ‰ãƒ©ã‚¤ãƒ³ã®è§£æãŒã‚ã‚“ã©ã„ã®ã§(^^;
+#include "INI/ini.h"
 #include "SuperTagEditor.h"
 #include "AutoBuildCount.h"
 #include "MainFrm.h"
 #include "SuperTagEditorDoc.h"
 #include "SuperTagEditorView.h"
-//’Ç‰Á by Kobarin
-#include "dde/kbdde.h"
-#include <dos.h> //ƒRƒ}ƒ“ƒhƒ‰ƒCƒ“‚Ì‰ğÍ‚ª‚ß‚ñ‚Ç‚¢‚Ì‚Å(^^;
 #include "DlgCommonProg.h"
 
 #include "FileMP3.h" /* WildCherry2 078 */
 
 #include "Plugin.h"
-
-#include "Registry.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -24,2724 +21,2735 @@
 static char THIS_FILE[] = __FILE__;
 #endif
 
-RECT		g_rectMainWindow;		// ƒƒCƒ“ƒEƒBƒ“ƒhƒE‚ÌÀ•W
-BOOL		g_bMainFrameZoomed;
-BOOL		g_bMainFrameIconic;
-CString		g_strCurrentDirectory;
-CString		g_strCurrentPlayList;
-CString		g_strCurrentMoveDirectory;
-bool		g_bIsVersionUp;
-int			g_nUserConvFormatType;
-USER_CONV_FORMAT	g_userConvFormat[USER_CONV_FORMAT_MAX];
-USER_CONV_FORMAT_EX	g_userConvFormatEx[USER_CONV_FORMAT_EX_MAX];
-USER_MOVE_FODLER_FORMAT	g_userMoveFolder[USER_MOVE_FODLER_FORMAT_MAX];
-USER_COPY_FORMAT_FORMAT	g_userCopyFormat[USER_COPY_FORMAT_FORMAT_MAX]; /* FunnyCorn 175 */
+RECT        g_rectMainWindow;       // ãƒ¡ã‚¤ãƒ³ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®åº§æ¨™
+BOOL        g_bMainFrameZoomed;
+BOOL        g_bMainFrameIconic;
+CString     g_strCurrentDirectory;
+CString     g_strCurrentPlayList;
+CString     g_strCurrentMoveDirectory;
+bool        g_bIsVersionUp;
+int         g_nUserConvFormatType;
+USER_CONV_FORMAT    g_userConvFormat[USER_CONV_FORMAT_MAX];
+USER_CONV_FORMAT_EX g_userConvFormatEx[USER_CONV_FORMAT_EX_MAX];
+USER_MOVE_FODLER_FORMAT g_userMoveFolder[USER_MOVE_FODLER_FORMAT_MAX];
+USER_COPY_FORMAT_FORMAT g_userCopyFormat[USER_COPY_FORMAT_FORMAT_MAX]; /* FunnyCorn 175 */
 USER_CONV_FORMAT_TAG2TAG g_userConvFormatTag2Tag[USER_CONV_FORMAT_TAG2TAG_MAX]; /* STEP 034 */
 TEIKEI_INFO g_teikeiInfo[TEIKEI_INFO_MAX]; /* STEP 035 */
-WRITE_FORMAT		g_writeFormat[WRITE_FORMAT_MAX];
-bool		g_bOptESCEditCancel;
-bool		g_bOptEnableEditCursorExit;
-bool		g_bOptEnterBeginEdit;
-bool		g_bOptEditOkDown;
-bool		g_bOptKeepTimeStamp;
-bool		g_bOptChangeFileExt;
-bool		g_bOptSyncCreateTime;
-bool		g_bOptChangeTextFile;
-int			g_nOptCheckFileName;
-CString		g_sOptWinAmpPath;
-int			g_nOptPlayerType;
-bool		g_bOptEditFieldSIF;
-bool		g_bOptAutoOpenFolder;
-bool		g_bOptLoadFileChecked;
-bool		g_bOptHideMP3ListFile;
-bool		g_bOptDropSearchSubFolder; /* TyphoonSwell 026 */
-bool		g_bOptShowZenSpace; /* BeachMonster 107 */
-CString		g_sOptShowOtherChar; /* BeachMonster 107 */ // ‚Æ‚è‚ ‚¦‚¸‚¢‚ê‚Æ‚­
-bool		g_bOptSortIgnoreCase; /* BeachMonster4 114 */
-bool		g_bOptSortIgnoreZenHan; /* BeachMonster4 114 */
-bool		g_bOptSortIgnoreKataHira; /* FunnyCorn 179 */
-bool		g_bOptShowTotalParent; /* RockDance 128 */
-bool		g_bOptShowTips; /* Rumble 188 */
-bool		g_bOptLoadFileAdjustColumn;
-bool		g_bOptSearchLyricFile;
-bool		g_bOptSetLyricsDir;
-bool		g_bOptSearchLyricsSubDir;
-bool		g_bEnableSearchSubDir;
-bool		g_bEnableMoveFolderCopy;
-CString		g_strOptLyricsPath;
-SORT_STATE	g_sortState[SORT_KEY_MAX];
-CLASS_INFO	g_classInfo;
-CHECK_WORD_STATE	g_chkWord[CHECK_STATE_MAX];
+WRITE_FORMAT        g_writeFormat[WRITE_FORMAT_MAX];
+bool        g_bOptESCEditCancel;
+bool        g_bOptEnableEditCursorExit;
+bool        g_bOptEnterBeginEdit;
+bool        g_bOptEditOkDown;
+bool        g_bOptKeepTimeStamp;
+bool        g_bOptChangeFileExt;
+bool        g_bOptSyncCreateTime;
+bool        g_bOptChangeTextFile;
+int         g_nOptCheckFileName;
+CString     g_sOptWinAmpPath;
+int         g_nOptPlayerType;
+bool        g_bOptEditFieldSIF;
+bool        g_bOptAutoOpenFolder;
+bool        g_bOptLoadFileChecked;
+bool        g_bOptHideMP3ListFile;
+bool        g_bOptDropSearchSubFolder; /* TyphoonSwell 026 */
+bool        g_bOptShowZenSpace; /* BeachMonster 107 */
+CString     g_sOptShowOtherChar; /* BeachMonster 107 */ // ã¨ã‚Šã‚ãˆãšã„ã‚Œã¨ã
+bool        g_bOptSortIgnoreCase; /* BeachMonster4 114 */
+bool        g_bOptSortIgnoreZenHan; /* BeachMonster4 114 */
+bool        g_bOptSortIgnoreKataHira; /* FunnyCorn 179 */
+bool        g_bOptShowTotalParent; /* RockDance 128 */
+bool        g_bOptShowTips; /* Rumble 188 */
+bool        g_bOptLoadFileAdjustColumn;
+bool        g_bOptSearchLyricFile;
+bool        g_bOptSetLyricsDir;
+bool        g_bOptSearchLyricsSubDir;
+bool        g_bEnableSearchSubDir;
+bool        g_bEnableMoveFolderCopy;
+CString     g_strOptLyricsPath;
+SORT_STATE  g_sortState[SORT_KEY_MAX];
+CLASS_INFO  g_classInfo;
+CHECK_WORD_STATE    g_chkWord[CHECK_STATE_MAX];
 
-//bool		g_bOptID3v2GenreAddNumber;
-bool		g_bConfFileNameMaxCheck;
-bool		g_bFileNameMaxCellColor; /* SeaKnows 036 */
-int			g_nConfFileNameMaxChar;
+//bool      g_bOptID3v2GenreAddNumber;
+bool        g_bConfFileNameMaxCheck;
+bool        g_bFileNameMaxCellColor; /* SeaKnows 036 */
+int         g_nConfFileNameMaxChar;
 
-bool		g_bEnableFolderSync;
-CString		g_strRootFolder;
-bool		g_bSyncSelectAlways;
-bool		g_bSyncDeleteFolder;
-bool		g_bSyncLyricsFileMove;
+bool        g_bEnableFolderSync;
+CString     g_strRootFolder;
+bool        g_bSyncSelectAlways;
+bool        g_bSyncDeleteFolder;
+bool        g_bSyncLyricsFileMove;
 
-bool		g_bConfDeleteFile;
-bool		g_bConfDeleteList;
-bool		g_bConfEditModify;
-bool		g_bConfFolderSync;
+bool        g_bConfDeleteFile;
+bool        g_bConfDeleteList;
+bool        g_bConfEditModify;
+bool        g_bConfFolderSync;
 
-bool		g_bPlayListClearList;
-bool		g_bPlayListClearCheck;
-bool		g_bPlayListAddList;
-bool		g_bPlayListFileCheck;
+bool        g_bPlayListClearList;
+bool        g_bPlayListClearCheck;
+bool        g_bPlayListAddList;
+bool        g_bPlayListFileCheck;
 
-/* STEP 035 *///CString		g_strTeikei[10+20];	/* SeaKnows 030 *//* FreeFall 046 */
-CString		g_strTeikeiGroupName[3];	/* FreeFall 046 */
-bool		g_bValidFolderSelect;	/* SeaKnows 033 */
-bool		g_bValidDupExec;	/* FreeFall 045 */
+/* STEP 035 *///CString  g_strTeikei[10+20]; /* SeaKnows 030 *//* FreeFall 046 */
+CString     g_strTeikeiGroupName[3];    /* FreeFall 046 */
+bool        g_bValidFolderSelect;   /* SeaKnows 033 */
+bool        g_bValidDupExec;    /* FreeFall 045 */
 
-int			g_nRecentFolder; /* StartInaction 053 */
-bool		g_bSaveRepDlgPos; /* WildCherry4 086 */
-int			g_nSaveRepDlgPosX; /* WildCherry4 086 */
-int			g_nSaveRepDlgPosY; /* WildCherry4 086 */
+int         g_nRecentFolder; /* StartInaction 053 */
+bool        g_bSaveRepDlgPos; /* WildCherry4 086 */
+int         g_nSaveRepDlgPosX; /* WildCherry4 086 */
+int         g_nSaveRepDlgPosY; /* WildCherry4 086 */
 
-// •¶ší“ˆê /* StartInaction 054 */
-UINT		g_nUnifyAlpha;
-UINT		g_nUnifyHiraKata;
-UINT		g_nUnifyKata;
-UINT		g_nUnifyKigou;
-UINT		g_nUnifySuji;
-UINT		g_nUnifyUpLow;
-UINT		g_nUnifyFixedUpLow; /* STEP 040 */
+// æ–‡å­—ç¨®çµ±ä¸€ /* StartInaction 054 */
+UINT        g_nUnifyAlpha;
+UINT        g_nUnifyHiraKata;
+UINT        g_nUnifyKata;
+UINT        g_nUnifyKigou;
+UINT        g_nUnifySuji;
+UINT        g_nUnifyUpLow;
+UINT        g_nUnifyFixedUpLow; /* STEP 040 */
 
-// ƒtƒ@ƒCƒ‹–¼•¶ší“ˆê /* LastTrain 058 */
-UINT		g_nFileUnifyAlpha;
-UINT		g_nFileUnifyHiraKata;
-UINT		g_nFileUnifyKata;
-UINT		g_nFileUnifyKigou;
-UINT		g_nFileUnifySuji;
-UINT		g_nFileUnifyUpLow;
+// ãƒ•ã‚¡ã‚¤ãƒ«åæ–‡å­—ç¨®çµ±ä¸€ /* LastTrain 058 */
+UINT        g_nFileUnifyAlpha;
+UINT        g_nFileUnifyHiraKata;
+UINT        g_nFileUnifyKata;
+UINT        g_nFileUnifyKigou;
+UINT        g_nFileUnifySuji;
+UINT        g_nFileUnifyUpLow;
 
-// Šg’£q•ÏŠ· /* STEP 006 */
-UINT		g_nFileExtChange;
+// æ‹¡å¼µå­å¤‰æ› /* STEP 006 */
+UINT        g_nFileExtChange;
 
-bool		g_bEndEditMoveRightCell; /* BeachMonster 091 */
+bool        g_bEndEditMoveRightCell; /* BeachMonster 091 */
 
-bool		g_bShowLoadPlaylistDlg; /* RockDance 126 */
+bool        g_bShowLoadPlaylistDlg; /* RockDance 126 */
 
-CString		g_strFavorite[10];	/* RockDance 129 */
+CString     g_strFavorite[10];  /* RockDance 129 */
 
-int			g_nAddNumberWidth; /* Baja 159 */
-int			g_nAddNumberPos; /* Baja 159 */
-CString		g_strAddNumberSep; /* Baja 159 */
-CString		g_strAddNumberBef; /* Conspiracy 194 */
-CString		g_strAddNumberAft; /* Conspiracy 194 */
+int         g_nAddNumberWidth; /* Baja 159 */
+int         g_nAddNumberPos; /* Baja 159 */
+CString     g_strAddNumberSep; /* Baja 159 */
+CString     g_strAddNumberBef; /* Conspiracy 194 */
+CString     g_strAddNumberAft; /* Conspiracy 194 */
 
-bool		g_bAudioListShow; /* Conspiracy 199 */
+bool        g_bAudioListShow; /* Conspiracy 199 */
 
-bool		g_bFirstUpperIgnoreWord; /* STEP 026 */
-CString		g_strFirstUpperIgnoreWords; /* STEP 026 */
-CString		g_strFirstUpperSentenceSeparator; /* STEP 026 */
-bool		g_bUserConvAddMenu; /* STEP 030 */
-bool		g_bZenHanKigouKana; /* STEP 016 */
+bool        g_bFirstUpperIgnoreWord; /* STEP 026 */
+CString     g_strFirstUpperIgnoreWords; /* STEP 026 */
+CString     g_strFirstUpperSentenceSeparator; /* STEP 026 */
+bool        g_bUserConvAddMenu; /* STEP 030 */
+bool        g_bZenHanKigouKana; /* STEP 016 */
 
-LOGFONT		g_fontReport;			// ƒŒƒ|[ƒgƒEƒBƒ“ƒhƒE‚ÌƒtƒHƒ“ƒg
+bool        g_bAutoTilde2WaveDash;//STEP_K (å…¨è§’ãƒãƒ«ãƒ€ã‚’æ³¢ãƒ€ãƒƒã‚·ãƒ¥ã«è‡ªå‹•ç½®æ›ï¼‰
 
-FILENAME_REPLACE	g_fileNameReplace[FILENAME_REPLACE_MAX];
+LOGFONT     g_fontReport;           // ãƒ¬ãƒãƒ¼ãƒˆã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®ãƒ•ã‚©ãƒ³ãƒˆ
 
-FILENAME_REPLACE	g_userFileNameReplace[USER_FILENAME_REPLACE_MAX];	/* FreeFall 050 */
+FILENAME_REPLACE    g_fileNameReplace[FILENAME_REPLACE_MAX];
 
-const char *g_sRepTable[FILENAME_REPLACE_MAX][2] = {
-	{"\"", "h"}, {"*" , "–"}, {"," , "C"}, {"/" , "^"},
-	{":" , "F"}, {";" , "G"}, {"<" , "ƒ"}, {">" , "„"},
-	{"?" , "H"}, {"\\", ""}, {"|" , "b"}, {" " , " "},
+FILENAME_REPLACE    g_userFileNameReplace[USER_FILENAME_REPLACE_MAX];   /* FreeFall 050 */
+
+const TCHAR *g_sRepTable[FILENAME_REPLACE_MAX][2] = {
+    {_T("\""), _T("â€")}, {_T("*") , _T("ï¼Š")}, {_T(",") , _T("ï¼Œ")}, {_T("/") , _T("ï¼")},
+    {_T(":") , _T("ï¼š")}, {_T(";") , _T("ï¼›")}, {_T("<") , _T("ï¼œ")}, {_T(">") , _T("ï¼")},
+    {_T("?") , _T("ï¼Ÿ")}, {_T("\\"), _T("ï¿¥")}, {_T("|") , _T("ï½œ")}, {_T(" ") , _T(" ")},
 };
 
 CStringArray g_arFixedWords; /* STEP 040 */
 
-#define HK_CTRL_C				0x00020043
-#define HK_CTRL_D				0x00020044
-#define HK_CTRL_F				0x00020046
-#define HK_CTRL_H				0x00020048
-#define HK_CTRL_N				0x0002004e
-#define HK_CTRL_O				0x0002004f
-#define HK_CTRL_S				0x00020053
-#define HK_CTRL_V				0x00020056
-#define HK_CTRL_X				0x00020058
+#define HK_CTRL_C               0x00020043
+#define HK_CTRL_D               0x00020044
+#define HK_CTRL_F               0x00020046
+#define HK_CTRL_H               0x00020048
+#define HK_CTRL_N               0x0002004e
+#define HK_CTRL_O               0x0002004f
+#define HK_CTRL_S               0x00020053
+#define HK_CTRL_V               0x00020056
+#define HK_CTRL_X               0x00020058
 
-KEY_CONFIG	g_listKeyConfig[] = {
-	/**
-	 y’ˆÓzƒRƒ}ƒ“ƒh‚ğ’Ç‰Á‚µ‚½ê‡‚ÍA_APS_NEXT_COMMAND_VALUE‚ªXV‚³‚ê‚é‚Ì‚ÅSTEP_api.cpp‚ğƒŠƒRƒ“ƒpƒCƒ‹‚·‚é‚±‚Æ
-	 **/
-	// ƒtƒ@ƒCƒ‹ˆ—
-	{ID_FILE_NEW                  , 0x00000000, COMMAND_GROUP_FILE, "ƒŠƒXƒg‚ğƒNƒŠƒA", "FileNew"},
-	{ID_OPEN_FOLDER               , HK_CTRL_O , COMMAND_GROUP_FILE, "ƒtƒHƒ‹ƒ_‚ğŠJ‚­", "FileOpenFolder"},
-	{ID_SAVE_ALL_TAG              , HK_CTRL_S , COMMAND_GROUP_FILE, "ƒ^ƒOî•ñ‚ğXV", "FileSaveAllTag"},
-	{0x0000                       , 0x00000000, COMMAND_GROUP_FILE, "--------------------", NULL},
-	{ID_WRITE_LIST1               , 0x00000000, COMMAND_GROUP_FILE, "ƒŠƒXƒgo—ÍF‘®‚P", "WriteList1"},
-	{ID_WRITE_LIST2               , 0x00000000, COMMAND_GROUP_FILE, "ƒŠƒXƒgo—ÍF‘®‚Q", "WriteList2"},
-	{ID_WRITE_LIST3               , 0x00000000, COMMAND_GROUP_FILE, "ƒŠƒXƒgo—ÍF‘®‚R", "WriteList3"},
-	{ID_WRITE_LIST4               , 0x00000000, COMMAND_GROUP_FILE, "ƒŠƒXƒgo—ÍF‘®‚S", "WriteList4"},
-	{ID_WRITE_LIST5               , 0x00000000, COMMAND_GROUP_FILE, "ƒŠƒXƒgo—ÍF‘®‚T", "WriteList5"},
-	{0x0000                       , 0x00000000, COMMAND_GROUP_FILE, "--------------------", NULL},
-	{ID_MOVE_FOLDER_01            , 0x00000000, COMMAND_GROUP_FILE, "ƒtƒ@ƒCƒ‹ˆÚ“®F‘®‚P", "MoveFolder1"},
-	{ID_MOVE_FOLDER_02            , 0x00000000, COMMAND_GROUP_FILE, "ƒtƒ@ƒCƒ‹ˆÚ“®F‘®‚Q", "MoveFolder2"},
-	{ID_MOVE_FOLDER_03            , 0x00000000, COMMAND_GROUP_FILE, "ƒtƒ@ƒCƒ‹ˆÚ“®F‘®‚R", "MoveFolder3"},
-	{ID_MOVE_FOLDER_04            , 0x00000000, COMMAND_GROUP_FILE, "ƒtƒ@ƒCƒ‹ˆÚ“®F‘®‚S", "MoveFolder4"},
-	{ID_MOVE_FOLDER_05            , 0x00000000, COMMAND_GROUP_FILE, "ƒtƒ@ƒCƒ‹ˆÚ“®F‘®‚T", "MoveFolder5"},
-	{0x0000                       , 0x00000000, COMMAND_GROUP_FILE, "--------------------", NULL},
-	{ID_FAVORITE_FOLDER_01        , 0x00000000, COMMAND_GROUP_FILE, "‚¨‹C‚É“ü‚è‚ÌƒtƒHƒ‹ƒ_F‚¨‹C‚É“ü‚è‚P", "FavoriteFolder1"},
-	{ID_FAVORITE_FOLDER_02        , 0x00000000, COMMAND_GROUP_FILE, "‚¨‹C‚É“ü‚è‚ÌƒtƒHƒ‹ƒ_F‚¨‹C‚É“ü‚è‚Q", "FavoriteFolder2"},
-	{ID_FAVORITE_FOLDER_03        , 0x00000000, COMMAND_GROUP_FILE, "‚¨‹C‚É“ü‚è‚ÌƒtƒHƒ‹ƒ_F‚¨‹C‚É“ü‚è‚R", "FavoriteFolder3"},
-	{ID_FAVORITE_FOLDER_04        , 0x00000000, COMMAND_GROUP_FILE, "‚¨‹C‚É“ü‚è‚ÌƒtƒHƒ‹ƒ_F‚¨‹C‚É“ü‚è‚S", "FavoriteFolder4"},
-	{ID_FAVORITE_FOLDER_05        , 0x00000000, COMMAND_GROUP_FILE, "‚¨‹C‚É“ü‚è‚ÌƒtƒHƒ‹ƒ_F‚¨‹C‚É“ü‚è‚T", "FavoriteFolder5"},
-	{ID_FAVORITE_FOLDER_06        , 0x00000000, COMMAND_GROUP_FILE, "‚¨‹C‚É“ü‚è‚ÌƒtƒHƒ‹ƒ_F‚¨‹C‚É“ü‚è‚U", "FavoriteFolder6"},
-	{ID_FAVORITE_FOLDER_07        , 0x00000000, COMMAND_GROUP_FILE, "‚¨‹C‚É“ü‚è‚ÌƒtƒHƒ‹ƒ_F‚¨‹C‚É“ü‚è‚V", "FavoriteFolder7"},
-	{ID_FAVORITE_FOLDER_08        , 0x00000000, COMMAND_GROUP_FILE, "‚¨‹C‚É“ü‚è‚ÌƒtƒHƒ‹ƒ_F‚¨‹C‚É“ü‚è‚W", "FavoriteFolder8"},
-	{ID_FAVORITE_FOLDER_09        , 0x00000000, COMMAND_GROUP_FILE, "‚¨‹C‚É“ü‚è‚ÌƒtƒHƒ‹ƒ_F‚¨‹C‚É“ü‚è‚X", "FavoriteFolder9"},
-	{ID_FAVORITE_FOLDER_10        , 0x00000000, COMMAND_GROUP_FILE, "‚¨‹C‚É“ü‚è‚ÌƒtƒHƒ‹ƒ_F‚¨‹C‚É“ü‚è10", "FavoriteFolder10"},
+KEY_CONFIG  g_listKeyConfig[] = {
+    /**
+     ã€æ³¨æ„ã€‘ã‚³ãƒãƒ³ãƒ‰ã‚’è¿½åŠ ã—ãŸå ´åˆã¯ã€_APS_NEXT_COMMAND_VALUEãŒæ›´æ–°ã•ã‚Œã‚‹ã®ã§STEP_api.cppã‚’ãƒªã‚³ãƒ³ãƒ‘ã‚¤ãƒ«ã™ã‚‹ã“ã¨
+     **/
+    // ãƒ•ã‚¡ã‚¤ãƒ«å‡¦ç†
+    {ID_FILE_NEW                  , 0x00000000, COMMAND_GROUP_FILE, _T("ãƒªã‚¹ãƒˆã‚’ã‚¯ãƒªã‚¢"), _T("FileNew")},
+    {ID_OPEN_FOLDER               , HK_CTRL_O , COMMAND_GROUP_FILE, _T("ãƒ•ã‚©ãƒ«ãƒ€ã‚’é–‹ã"), _T("FileOpenFolder")},
+    {ID_SAVE_ALL_TAG              , HK_CTRL_S , COMMAND_GROUP_FILE, _T("ã‚¿ã‚°æƒ…å ±ã‚’æ›´æ–°"), _T("FileSaveAllTag")},
+    {0x0000                       , 0x00000000, COMMAND_GROUP_FILE, _T("--------------------"), NULL},
+    {ID_WRITE_LIST1               , 0x00000000, COMMAND_GROUP_FILE, _T("ãƒªã‚¹ãƒˆå‡ºåŠ›ï¼šæ›¸å¼ï¼‘"), _T("WriteList1")},
+    {ID_WRITE_LIST2               , 0x00000000, COMMAND_GROUP_FILE, _T("ãƒªã‚¹ãƒˆå‡ºåŠ›ï¼šæ›¸å¼ï¼’"), _T("WriteList2")},
+    {ID_WRITE_LIST3               , 0x00000000, COMMAND_GROUP_FILE, _T("ãƒªã‚¹ãƒˆå‡ºåŠ›ï¼šæ›¸å¼ï¼“"), _T("WriteList3")},
+    {ID_WRITE_LIST4               , 0x00000000, COMMAND_GROUP_FILE, _T("ãƒªã‚¹ãƒˆå‡ºåŠ›ï¼šæ›¸å¼ï¼”"), _T("WriteList4")},
+    {ID_WRITE_LIST5               , 0x00000000, COMMAND_GROUP_FILE, _T("ãƒªã‚¹ãƒˆå‡ºåŠ›ï¼šæ›¸å¼ï¼•"), _T("WriteList5")},
+    {0x0000                       , 0x00000000, COMMAND_GROUP_FILE, _T("--------------------"), NULL},
+    {ID_MOVE_FOLDER_01            , 0x00000000, COMMAND_GROUP_FILE, _T("ãƒ•ã‚¡ã‚¤ãƒ«ç§»å‹•ï¼šæ›¸å¼ï¼‘"), _T("MoveFolder1")},
+    {ID_MOVE_FOLDER_02            , 0x00000000, COMMAND_GROUP_FILE, _T("ãƒ•ã‚¡ã‚¤ãƒ«ç§»å‹•ï¼šæ›¸å¼ï¼’"), _T("MoveFolder2")},
+    {ID_MOVE_FOLDER_03            , 0x00000000, COMMAND_GROUP_FILE, _T("ãƒ•ã‚¡ã‚¤ãƒ«ç§»å‹•ï¼šæ›¸å¼ï¼“"), _T("MoveFolder3")},
+    {ID_MOVE_FOLDER_04            , 0x00000000, COMMAND_GROUP_FILE, _T("ãƒ•ã‚¡ã‚¤ãƒ«ç§»å‹•ï¼šæ›¸å¼ï¼”"), _T("MoveFolder4")},
+    {ID_MOVE_FOLDER_05            , 0x00000000, COMMAND_GROUP_FILE, _T("ãƒ•ã‚¡ã‚¤ãƒ«ç§»å‹•ï¼šæ›¸å¼ï¼•"), _T("MoveFolder5")},
+    {0x0000                       , 0x00000000, COMMAND_GROUP_FILE, _T("--------------------"), NULL},
+    {ID_FAVORITE_FOLDER_01        , 0x00000000, COMMAND_GROUP_FILE, _T("ãŠæ°—ã«å…¥ã‚Šã®ãƒ•ã‚©ãƒ«ãƒ€ï¼šãŠæ°—ã«å…¥ã‚Šï¼‘"), _T("FavoriteFolder1")},
+    {ID_FAVORITE_FOLDER_02        , 0x00000000, COMMAND_GROUP_FILE, _T("ãŠæ°—ã«å…¥ã‚Šã®ãƒ•ã‚©ãƒ«ãƒ€ï¼šãŠæ°—ã«å…¥ã‚Šï¼’"), _T("FavoriteFolder2")},
+    {ID_FAVORITE_FOLDER_03        , 0x00000000, COMMAND_GROUP_FILE, _T("ãŠæ°—ã«å…¥ã‚Šã®ãƒ•ã‚©ãƒ«ãƒ€ï¼šãŠæ°—ã«å…¥ã‚Šï¼“"), _T("FavoriteFolder3")},
+    {ID_FAVORITE_FOLDER_04        , 0x00000000, COMMAND_GROUP_FILE, _T("ãŠæ°—ã«å…¥ã‚Šã®ãƒ•ã‚©ãƒ«ãƒ€ï¼šãŠæ°—ã«å…¥ã‚Šï¼”"), _T("FavoriteFolder4")},
+    {ID_FAVORITE_FOLDER_05        , 0x00000000, COMMAND_GROUP_FILE, _T("ãŠæ°—ã«å…¥ã‚Šã®ãƒ•ã‚©ãƒ«ãƒ€ï¼šãŠæ°—ã«å…¥ã‚Šï¼•"), _T("FavoriteFolder5")},
+    {ID_FAVORITE_FOLDER_06        , 0x00000000, COMMAND_GROUP_FILE, _T("ãŠæ°—ã«å…¥ã‚Šã®ãƒ•ã‚©ãƒ«ãƒ€ï¼šãŠæ°—ã«å…¥ã‚Šï¼–"), _T("FavoriteFolder6")},
+    {ID_FAVORITE_FOLDER_07        , 0x00000000, COMMAND_GROUP_FILE, _T("ãŠæ°—ã«å…¥ã‚Šã®ãƒ•ã‚©ãƒ«ãƒ€ï¼šãŠæ°—ã«å…¥ã‚Šï¼—"), _T("FavoriteFolder7")},
+    {ID_FAVORITE_FOLDER_08        , 0x00000000, COMMAND_GROUP_FILE, _T("ãŠæ°—ã«å…¥ã‚Šã®ãƒ•ã‚©ãƒ«ãƒ€ï¼šãŠæ°—ã«å…¥ã‚Šï¼˜"), _T("FavoriteFolder8")},
+    {ID_FAVORITE_FOLDER_09        , 0x00000000, COMMAND_GROUP_FILE, _T("ãŠæ°—ã«å…¥ã‚Šã®ãƒ•ã‚©ãƒ«ãƒ€ï¼šãŠæ°—ã«å…¥ã‚Šï¼™"), _T("FavoriteFolder9")},
+    {ID_FAVORITE_FOLDER_10        , 0x00000000, COMMAND_GROUP_FILE, _T("ãŠæ°—ã«å…¥ã‚Šã®ãƒ•ã‚©ãƒ«ãƒ€ï¼šãŠæ°—ã«å…¥ã‚Š10"), _T("FavoriteFolder10")},
 
-	// •ÒWˆ—
-	{ID_EDIT_COPY                 , HK_CTRL_C , COMMAND_GROUP_EDIT, "ƒRƒs["  , "EditCopy"},
-	{ID_EDIT_PASTE                , HK_CTRL_V , COMMAND_GROUP_EDIT, "“\‚è•t‚¯", "EditPaste"},
-	{ID_EDIT_CUT                  , HK_CTRL_X , COMMAND_GROUP_EDIT, "Ø‚èæ‚è", "EditCut"},
-	{ID_EDIT_PASTE_ADD            , 0x00000000, COMMAND_GROUP_EDIT, "’Ç‰Á‚Å“\‚è•t‚¯", "EditPasteAdd"}, /* FunnyCorn 176 */
-	{0x0000                       , 0x00000000, COMMAND_GROUP_EDIT, "----- ’èŒ^•¶ ƒOƒ‹[ƒv‚P -----", NULL},
-	{ID_TEIKEI_01                 , 0x00000000, COMMAND_GROUP_EDIT, "’èŒ^•¶“\‚è•t‚¯‚P-‚P", "TeikeiPaste1-1"}, /* SeaKnows 030 */ 
-	{ID_TEIKEI_02                 , 0x00000000, COMMAND_GROUP_EDIT, "’èŒ^•¶“\‚è•t‚¯‚P-‚Q", "TeikeiPaste1-2"}, /* SeaKnows 030 */
-	{ID_TEIKEI_03                 , 0x00000000, COMMAND_GROUP_EDIT, "’èŒ^•¶“\‚è•t‚¯‚P-‚R", "TeikeiPaste1-3"}, /* SeaKnows 030 */
-	{ID_TEIKEI_04                 , 0x00000000, COMMAND_GROUP_EDIT, "’èŒ^•¶“\‚è•t‚¯‚P-‚S", "TeikeiPaste1-4"}, /* SeaKnows 030 */
-	{ID_TEIKEI_05                 , 0x00000000, COMMAND_GROUP_EDIT, "’èŒ^•¶“\‚è•t‚¯‚P-‚T", "TeikeiPaste1-5"}, /* SeaKnows 030 */
-	{ID_TEIKEI_06                 , 0x00000000, COMMAND_GROUP_EDIT, "’èŒ^•¶“\‚è•t‚¯‚P-‚U", "TeikeiPaste1-6"}, /* SeaKnows 030 */
-	{ID_TEIKEI_07                 , 0x00000000, COMMAND_GROUP_EDIT, "’èŒ^•¶“\‚è•t‚¯‚P-‚V", "TeikeiPaste1-7"}, /* SeaKnows 030 */
-	{ID_TEIKEI_08                 , 0x00000000, COMMAND_GROUP_EDIT, "’èŒ^•¶“\‚è•t‚¯‚P-‚W", "TeikeiPaste1-8"}, /* SeaKnows 030 */
-	{ID_TEIKEI_09                 , 0x00000000, COMMAND_GROUP_EDIT, "’èŒ^•¶“\‚è•t‚¯‚P-‚X", "TeikeiPaste1-9"}, /* SeaKnows 030 */
-	{ID_TEIKEI_10                 , 0x00000000, COMMAND_GROUP_EDIT, "’èŒ^•¶“\‚è•t‚¯‚P-‚P‚O", "TeikeiPaste1-10"}, /* SeaKnows 030 */
-	{0x0000                       , 0x00000000, COMMAND_GROUP_EDIT, "----- ’èŒ^•¶ ƒOƒ‹[ƒv‚Q -----", NULL},
-	{ID_TEIKEI_2_01               , 0x00000000, COMMAND_GROUP_EDIT, "’èŒ^•¶“\‚è•t‚¯‚Q-‚P", "TeikeiPaste2-1"}, /* FreeFall 046 */
-	{ID_TEIKEI_2_02               , 0x00000000, COMMAND_GROUP_EDIT, "’èŒ^•¶“\‚è•t‚¯‚Q-‚Q", "TeikeiPaste2-2"}, /* FreeFall 046 */
-	{ID_TEIKEI_2_03               , 0x00000000, COMMAND_GROUP_EDIT, "’èŒ^•¶“\‚è•t‚¯‚Q-‚R", "TeikeiPaste2-3"}, /* FreeFall 046 */
-	{ID_TEIKEI_2_04               , 0x00000000, COMMAND_GROUP_EDIT, "’èŒ^•¶“\‚è•t‚¯‚Q-‚S", "TeikeiPaste2-4"}, /* FreeFall 046 */
-	{ID_TEIKEI_2_05               , 0x00000000, COMMAND_GROUP_EDIT, "’èŒ^•¶“\‚è•t‚¯‚Q-‚T", "TeikeiPaste2-5"}, /* FreeFall 046 */
-	{ID_TEIKEI_2_06               , 0x00000000, COMMAND_GROUP_EDIT, "’èŒ^•¶“\‚è•t‚¯‚Q-‚U", "TeikeiPaste2-6"}, /* FreeFall 046 */
-	{ID_TEIKEI_2_07               , 0x00000000, COMMAND_GROUP_EDIT, "’èŒ^•¶“\‚è•t‚¯‚Q-‚V", "TeikeiPaste2-7"}, /* FreeFall 046 */
-	{ID_TEIKEI_2_08               , 0x00000000, COMMAND_GROUP_EDIT, "’èŒ^•¶“\‚è•t‚¯‚Q-‚W", "TeikeiPaste2-8"}, /* FreeFall 046 */
-	{ID_TEIKEI_2_09               , 0x00000000, COMMAND_GROUP_EDIT, "’èŒ^•¶“\‚è•t‚¯‚Q-‚X", "TeikeiPaste2-9"}, /* FreeFall 046 */
-	{ID_TEIKEI_2_10               , 0x00000000, COMMAND_GROUP_EDIT, "’èŒ^•¶“\‚è•t‚¯‚Q-‚P‚O", "TeikeiPaste2-10"}, /* FreeFall 046 */
-	{0x0000                       , 0x00000000, COMMAND_GROUP_EDIT, "----- ’èŒ^•¶ ƒOƒ‹[ƒv‚R -----", NULL},
-	{ID_TEIKEI_3_01               , 0x00000000, COMMAND_GROUP_EDIT, "’èŒ^•¶“\‚è•t‚¯‚R-‚P", "TeikeiPaste3-1"}, /* FreeFall 046 */
-	{ID_TEIKEI_3_02               , 0x00000000, COMMAND_GROUP_EDIT, "’èŒ^•¶“\‚è•t‚¯‚R-‚Q", "TeikeiPaste3-2"}, /* FreeFall 046 */
-	{ID_TEIKEI_3_03               , 0x00000000, COMMAND_GROUP_EDIT, "’èŒ^•¶“\‚è•t‚¯‚R-‚R", "TeikeiPaste3-3"}, /* FreeFall 046 */
-	{ID_TEIKEI_3_04               , 0x00000000, COMMAND_GROUP_EDIT, "’èŒ^•¶“\‚è•t‚¯‚R-‚S", "TeikeiPaste3-4"}, /* FreeFall 046 */
-	{ID_TEIKEI_3_05               , 0x00000000, COMMAND_GROUP_EDIT, "’èŒ^•¶“\‚è•t‚¯‚R-‚T", "TeikeiPaste3-5"}, /* FreeFall 046 */
-	{ID_TEIKEI_3_06               , 0x00000000, COMMAND_GROUP_EDIT, "’èŒ^•¶“\‚è•t‚¯‚R-‚U", "TeikeiPaste3-6"}, /* FreeFall 046 */
-	{ID_TEIKEI_3_07               , 0x00000000, COMMAND_GROUP_EDIT, "’èŒ^•¶“\‚è•t‚¯‚R-‚V", "TeikeiPaste3-7"}, /* FreeFall 046 */
-	{ID_TEIKEI_3_08               , 0x00000000, COMMAND_GROUP_EDIT, "’èŒ^•¶“\‚è•t‚¯‚R-‚W", "TeikeiPaste3-8"}, /* FreeFall 046 */
-	{ID_TEIKEI_3_09               , 0x00000000, COMMAND_GROUP_EDIT, "’èŒ^•¶“\‚è•t‚¯‚R-‚X", "TeikeiPaste3-9"}, /* FreeFall 046 */
-	{ID_TEIKEI_3_10               , 0x00000000, COMMAND_GROUP_EDIT, "’èŒ^•¶“\‚è•t‚¯‚R-‚P‚O", "TeikeiPaste3-10"}, /* FreeFall 046 */
-	{0x0000                       , 0x00000000, COMMAND_GROUP_FILE, "--------------------", NULL},
-	{ID_EDIT_COPY_FORMAT_01       , 0x00000000, COMMAND_GROUP_FILE, "‘®ƒRƒs[F‘®‚P", "CopyFormat1"},
-	{ID_EDIT_COPY_FORMAT_02       , 0x00000000, COMMAND_GROUP_FILE, "‘®ƒRƒs[F‘®‚Q", "CopyFormat2"},
-	{ID_EDIT_COPY_FORMAT_03       , 0x00000000, COMMAND_GROUP_FILE, "‘®ƒRƒs[F‘®‚R", "CopyFormat3"},
-	{ID_EDIT_COPY_FORMAT_04       , 0x00000000, COMMAND_GROUP_FILE, "‘®ƒRƒs[F‘®‚S", "CopyFormat4"},
-	{ID_EDIT_COPY_FORMAT_05       , 0x00000000, COMMAND_GROUP_FILE, "‘®ƒRƒs[F‘®‚T", "CopyFormat5"},
-	{0x0000                       , 0x00000000, COMMAND_GROUP_EDIT, "--------------------", NULL},
-	{ID_CELL_COPY_DOWN            , HK_CTRL_D , COMMAND_GROUP_EDIT, "‰º•ûŒü‚ÖƒRƒs[", "EditCopyDown"},
-	{ID_SET_NUMBER                , HK_CTRL_N , COMMAND_GROUP_EDIT, "‰º•ûŒü‚Ö˜A”Ô"  , "EditSetNumber"},
-	{ID_SET_NUMBER_ADD            , 0x00000000, COMMAND_GROUP_EDIT, "‰º•ûŒü‚Ö˜A”Ôiæ“ª‚É’Ç‰Áj"  , "EditSetNumberAdd"},
-	{0x0000                       , 0x00000000, COMMAND_GROUP_EDIT, "--------------------", NULL},
-	{ID_EDIT_FIND                 , 0x00000000, COMMAND_GROUP_EDIT, "ŒŸõ", "EditFind"},
-	{ID_EDIT_REPLACE              , 0x00000000, COMMAND_GROUP_EDIT, "’uŠ·", "EditReplace"},
-	{0x0000                       , 0x00000000, COMMAND_GROUP_EDIT, "--------------------", NULL},
-	{ID_SELECT_DELETE_LIST        , 0x00000000, COMMAND_GROUP_EDIT, "STE‚ÌƒŠƒXƒg‚©‚çíœ"         , "DeleteList"},
-	{ID_SELECT_DELETE_FILE        , 0x00000000, COMMAND_GROUP_EDIT, "ƒtƒ@ƒCƒ‹‚Ìíœ"              , "DeleteFile"},
-	{ID_SELECT_EDIT_DESTORY       , 0x00000000, COMMAND_GROUP_EDIT, "•ÏX‘O‚Ìó‘Ô‚É–ß‚·"          , "EditModify"},
-	{ID_FOLDER_TREE_SYNC          , 0x00000000, COMMAND_GROUP_EDIT, "ƒtƒHƒ‹ƒ_\¬‚Ì“¯Šú"          , "FolderSync"},
-	{ID_CHECK_FILE_SYNC           , 0x00000000, COMMAND_GROUP_EDIT, "ƒtƒHƒ‹ƒ_\¬‚Ì“¯Šú(ƒ`ƒFƒbƒN‚Ì‚İ)", "CheckFileSync"},
-	{0x0000                       , 0x00000000, COMMAND_GROUP_EDIT, "--------------------", NULL},
-	{ID_DELETE_CHAR_SPACE         , 0x00000000, COMMAND_GROUP_EDIT, "æ“ª/––”ö‚Ì‹ó”’•¶š‚ğíœ"   , "EditDeleteCharSpace"}, /* Rumble 192 */
-	{ID_DELETE_CHAR               , 0x00000000, COMMAND_GROUP_EDIT, "æ“ª/––”ö‚Ì‚•¶š‚ğíœ"     , "EditDeleteChar"},
+    // ç·¨é›†å‡¦ç†
+    {ID_EDIT_COPY                 , HK_CTRL_C , COMMAND_GROUP_EDIT, _T("ã‚³ãƒ”ãƒ¼")  , _T("EditCopy")},
+    {ID_EDIT_PASTE                , HK_CTRL_V , COMMAND_GROUP_EDIT, _T("è²¼ã‚Šä»˜ã‘"), _T("EditPaste")},
+    {ID_EDIT_CUT                  , HK_CTRL_X , COMMAND_GROUP_EDIT, _T("åˆ‡ã‚Šå–ã‚Š"), _T("EditCut")},
+    {ID_EDIT_PASTE_ADD            , 0x00000000, COMMAND_GROUP_EDIT, _T("è¿½åŠ ã§è²¼ã‚Šä»˜ã‘"), _T("EditPasteAdd")}, /* FunnyCorn 176 */
+    {0x0000                       , 0x00000000, COMMAND_GROUP_EDIT, _T("----- å®šå‹æ–‡ ã‚°ãƒ«ãƒ¼ãƒ—ï¼‘ -----"), NULL},
+    {ID_TEIKEI_01                 , 0x00000000, COMMAND_GROUP_EDIT, _T("å®šå‹æ–‡è²¼ã‚Šä»˜ã‘ï¼‘-ï¼‘"), _T("TeikeiPaste1-1")}, /* SeaKnows 030 */
+    {ID_TEIKEI_02                 , 0x00000000, COMMAND_GROUP_EDIT, _T("å®šå‹æ–‡è²¼ã‚Šä»˜ã‘ï¼‘-ï¼’"), _T("TeikeiPaste1-2")}, /* SeaKnows 030 */
+    {ID_TEIKEI_03                 , 0x00000000, COMMAND_GROUP_EDIT, _T("å®šå‹æ–‡è²¼ã‚Šä»˜ã‘ï¼‘-ï¼“"), _T("TeikeiPaste1-3")}, /* SeaKnows 030 */
+    {ID_TEIKEI_04                 , 0x00000000, COMMAND_GROUP_EDIT, _T("å®šå‹æ–‡è²¼ã‚Šä»˜ã‘ï¼‘-ï¼”"), _T("TeikeiPaste1-4")}, /* SeaKnows 030 */
+    {ID_TEIKEI_05                 , 0x00000000, COMMAND_GROUP_EDIT, _T("å®šå‹æ–‡è²¼ã‚Šä»˜ã‘ï¼‘-ï¼•"), _T("TeikeiPaste1-5")}, /* SeaKnows 030 */
+    {ID_TEIKEI_06                 , 0x00000000, COMMAND_GROUP_EDIT, _T("å®šå‹æ–‡è²¼ã‚Šä»˜ã‘ï¼‘-ï¼–"), _T("TeikeiPaste1-6"}), /* SeaKnows 030 */
+    {ID_TEIKEI_07                 , 0x00000000, COMMAND_GROUP_EDIT, _T("å®šå‹æ–‡è²¼ã‚Šä»˜ã‘ï¼‘-ï¼—"), _T("TeikeiPaste1-7")}, /* SeaKnows 030 */
+    {ID_TEIKEI_08                 , 0x00000000, COMMAND_GROUP_EDIT, _T("å®šå‹æ–‡è²¼ã‚Šä»˜ã‘ï¼‘-ï¼˜"), _T("TeikeiPaste1-8")}, /* SeaKnows 030 */
+    {ID_TEIKEI_09                 , 0x00000000, COMMAND_GROUP_EDIT, _T("å®šå‹æ–‡è²¼ã‚Šä»˜ã‘ï¼‘-ï¼™"), _T("TeikeiPaste1-9")}, /* SeaKnows 030 */
+    {ID_TEIKEI_10                 , 0x00000000, COMMAND_GROUP_EDIT, _T("å®šå‹æ–‡è²¼ã‚Šä»˜ã‘ï¼‘-ï¼‘ï¼"), _T("TeikeiPaste1-10")}, /* SeaKnows 030 */
+    {0x0000                       , 0x00000000, COMMAND_GROUP_EDIT, _T("----- å®šå‹æ–‡ ã‚°ãƒ«ãƒ¼ãƒ—ï¼’ -----"), NULL},
+    {ID_TEIKEI_2_01               , 0x00000000, COMMAND_GROUP_EDIT, _T("å®šå‹æ–‡è²¼ã‚Šä»˜ã‘ï¼’-ï¼‘"), _T("TeikeiPaste2-1")}, /* FreeFall 046 */
+    {ID_TEIKEI_2_02               , 0x00000000, COMMAND_GROUP_EDIT, _T("å®šå‹æ–‡è²¼ã‚Šä»˜ã‘ï¼’-ï¼’"), _T("TeikeiPaste2-2")}, /* FreeFall 046 */
+    {ID_TEIKEI_2_03               , 0x00000000, COMMAND_GROUP_EDIT, _T("å®šå‹æ–‡è²¼ã‚Šä»˜ã‘ï¼’-ï¼“"), _T("TeikeiPaste2-3")}, /* FreeFall 046 */
+    {ID_TEIKEI_2_04               , 0x00000000, COMMAND_GROUP_EDIT, _T("å®šå‹æ–‡è²¼ã‚Šä»˜ã‘ï¼’-ï¼”"), _T("TeikeiPaste2-4")}, /* FreeFall 046 */
+    {ID_TEIKEI_2_05               , 0x00000000, COMMAND_GROUP_EDIT, _T("å®šå‹æ–‡è²¼ã‚Šä»˜ã‘ï¼’-ï¼•"), _T("TeikeiPaste2-5")}, /* FreeFall 046 */
+    {ID_TEIKEI_2_06               , 0x00000000, COMMAND_GROUP_EDIT, _T("å®šå‹æ–‡è²¼ã‚Šä»˜ã‘ï¼’-ï¼–"), _T("TeikeiPaste2-6")}, /* FreeFall 046 */
+    {ID_TEIKEI_2_07               , 0x00000000, COMMAND_GROUP_EDIT, _T("å®šå‹æ–‡è²¼ã‚Šä»˜ã‘ï¼’-ï¼—"), _T("TeikeiPaste2-7")}, /* FreeFall 046 */
+    {ID_TEIKEI_2_08               , 0x00000000, COMMAND_GROUP_EDIT, _T("å®šå‹æ–‡è²¼ã‚Šä»˜ã‘ï¼’-ï¼˜"), _T("TeikeiPaste2-8")}, /* FreeFall 046 */
+    {ID_TEIKEI_2_09               , 0x00000000, COMMAND_GROUP_EDIT, _T("å®šå‹æ–‡è²¼ã‚Šä»˜ã‘ï¼’-ï¼™"), _T("TeikeiPaste2-9")}, /* FreeFall 046 */
+    {ID_TEIKEI_2_10               , 0x00000000, COMMAND_GROUP_EDIT, _T("å®šå‹æ–‡è²¼ã‚Šä»˜ã‘ï¼’-ï¼‘ï¼"), _T("TeikeiPaste2-10")}, /* FreeFall 046 */
+    {0x0000                       , 0x00000000, COMMAND_GROUP_EDIT, _T("----- å®šå‹æ–‡ ã‚°ãƒ«ãƒ¼ãƒ—ï¼“ -----"), NULL},
+    {ID_TEIKEI_3_01               , 0x00000000, COMMAND_GROUP_EDIT, _T("å®šå‹æ–‡è²¼ã‚Šä»˜ã‘ï¼“-ï¼‘"), _T("TeikeiPaste3-1")}, /* FreeFall 046 */
+    {ID_TEIKEI_3_02               , 0x00000000, COMMAND_GROUP_EDIT, _T("å®šå‹æ–‡è²¼ã‚Šä»˜ã‘ï¼“-ï¼’"), _T("TeikeiPaste3-2")}, /* FreeFall 046 */
+    {ID_TEIKEI_3_03               , 0x00000000, COMMAND_GROUP_EDIT, _T("å®šå‹æ–‡è²¼ã‚Šä»˜ã‘ï¼“-ï¼“"), _T("TeikeiPaste3-3")}, /* FreeFall 046 */
+    {ID_TEIKEI_3_04               , 0x00000000, COMMAND_GROUP_EDIT, _T("å®šå‹æ–‡è²¼ã‚Šä»˜ã‘ï¼“-ï¼”"), _T("TeikeiPaste3-4")}, /* FreeFall 046 */
+    {ID_TEIKEI_3_05               , 0x00000000, COMMAND_GROUP_EDIT, _T("å®šå‹æ–‡è²¼ã‚Šä»˜ã‘ï¼“-ï¼•"), _T("TeikeiPaste3-5")}, /* FreeFall 046 */
+    {ID_TEIKEI_3_06               , 0x00000000, COMMAND_GROUP_EDIT, _T("å®šå‹æ–‡è²¼ã‚Šä»˜ã‘ï¼“-ï¼–"), _T("TeikeiPaste3-6")}, /* FreeFall 046 */
+    {ID_TEIKEI_3_07               , 0x00000000, COMMAND_GROUP_EDIT, _T("å®šå‹æ–‡è²¼ã‚Šä»˜ã‘ï¼“-ï¼—"), _T("TeikeiPaste3-7")}, /* FreeFall 046 */
+    {ID_TEIKEI_3_08               , 0x00000000, COMMAND_GROUP_EDIT, _T("å®šå‹æ–‡è²¼ã‚Šä»˜ã‘ï¼“-ï¼˜"), _T("TeikeiPaste3-8")}, /* FreeFall 046 */
+    {ID_TEIKEI_3_09               , 0x00000000, COMMAND_GROUP_EDIT, _T("å®šå‹æ–‡è²¼ã‚Šä»˜ã‘ï¼“-ï¼™"), _T("TeikeiPaste3-9")}, /* FreeFall 046 */
+    {ID_TEIKEI_3_10               , 0x00000000, COMMAND_GROUP_EDIT, _T("å®šå‹æ–‡è²¼ã‚Šä»˜ã‘ï¼“-ï¼‘ï¼"), _T("TeikeiPaste3-10")}, /* FreeFall 046 */
+    {0x0000                       , 0x00000000, COMMAND_GROUP_FILE, _T("--------------------"), NULL},
+    {ID_EDIT_COPY_FORMAT_01       , 0x00000000, COMMAND_GROUP_FILE, _T("æ›¸å¼ã‚³ãƒ”ãƒ¼ï¼šæ›¸å¼ï¼‘"), _T("CopyFormat1")},
+    {ID_EDIT_COPY_FORMAT_02       , 0x00000000, COMMAND_GROUP_FILE, _T("æ›¸å¼ã‚³ãƒ”ãƒ¼ï¼šæ›¸å¼ï¼’"), _T("CopyFormat2")},
+    {ID_EDIT_COPY_FORMAT_03       , 0x00000000, COMMAND_GROUP_FILE, _T("æ›¸å¼ã‚³ãƒ”ãƒ¼ï¼šæ›¸å¼ï¼“"), _T("CopyFormat3")},
+    {ID_EDIT_COPY_FORMAT_04       , 0x00000000, COMMAND_GROUP_FILE, _T("æ›¸å¼ã‚³ãƒ”ãƒ¼ï¼šæ›¸å¼ï¼”"), _T("CopyFormat4")},
+    {ID_EDIT_COPY_FORMAT_05       , 0x00000000, COMMAND_GROUP_FILE, _T("æ›¸å¼ã‚³ãƒ”ãƒ¼ï¼šæ›¸å¼ï¼•"), _T("CopyFormat5")},
+    {0x0000                       , 0x00000000, COMMAND_GROUP_EDIT, _T("--------------------"), NULL},
+    {ID_CELL_COPY_DOWN            , HK_CTRL_D , COMMAND_GROUP_EDIT, _T("ä¸‹æ–¹å‘ã¸ã‚³ãƒ”ãƒ¼"), _T("EditCopyDown")},
+    {ID_SET_NUMBER                , HK_CTRL_N , COMMAND_GROUP_EDIT, _T("ä¸‹æ–¹å‘ã¸é€£ç•ª")  , _T("EditSetNumber")},
+    {ID_SET_NUMBER_ADD            , 0x00000000, COMMAND_GROUP_EDIT, _T("ä¸‹æ–¹å‘ã¸é€£ç•ªï¼ˆå…ˆé ­ã«è¿½åŠ ï¼‰")  , _T("EditSetNumberAdd")},
+    {0x0000                       , 0x00000000, COMMAND_GROUP_EDIT, _T("--------------------"), NULL},
+    {ID_EDIT_FIND                 , 0x00000000, COMMAND_GROUP_EDIT, _T("æ¤œç´¢"), _T("EditFind")},
+    {ID_EDIT_REPLACE              , 0x00000000, COMMAND_GROUP_EDIT, _T("ç½®æ›"), _T("EditReplace")},
+    {0x0000                       , 0x00000000, COMMAND_GROUP_EDIT, _T("--------------------"), NULL},
+    {ID_SELECT_DELETE_LIST        , 0x00000000, COMMAND_GROUP_EDIT, _T("STEã®ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤")         , _T("DeleteList")},
+    {ID_SELECT_DELETE_FILE        , 0x00000000, COMMAND_GROUP_EDIT, _T("ãƒ•ã‚¡ã‚¤ãƒ«ã®å‰Šé™¤")              , _T("DeleteFile")},
+    {ID_SELECT_EDIT_DESTORY       , 0x00000000, COMMAND_GROUP_EDIT, _T("å¤‰æ›´å‰ã®çŠ¶æ…‹ã«æˆ»ã™")          , _T("EditModify")},
+    {ID_FOLDER_TREE_SYNC          , 0x00000000, COMMAND_GROUP_EDIT, _T("ãƒ•ã‚©ãƒ«ãƒ€æ§‹æˆã®åŒæœŸ")          , _T("FolderSync")},
+    {ID_CHECK_FILE_SYNC           , 0x00000000, COMMAND_GROUP_EDIT, _T("ãƒ•ã‚©ãƒ«ãƒ€æ§‹æˆã®åŒæœŸ(ãƒã‚§ãƒƒã‚¯ã®ã¿)"), _T("CheckFileSync")},
+    {0x0000                       , 0x00000000, COMMAND_GROUP_EDIT, _T("--------------------"), NULL},
+    {ID_DELETE_CHAR_SPACE         , 0x00000000, COMMAND_GROUP_EDIT, _T("å…ˆé ­/æœ«å°¾ã®ç©ºç™½æ–‡å­—ã‚’å‰Šé™¤")   , _T("EditDeleteCharSpace")}, /* Rumble 192 */
+    {ID_DELETE_CHAR               , 0x00000000, COMMAND_GROUP_EDIT, _T("å…ˆé ­/æœ«å°¾ã®ï½æ–‡å­—ã‚’å‰Šé™¤")     , _T("EditDeleteChar")},
 
-	// •\¦
-	{ID_ADJUST_COLUMN_WIDTH       , 0x00000000, COMMAND_GROUP_DISP, "‘S‚Ä‚ÌƒJƒ‰ƒ€•‚ğ’²®", "AdjustColumnWidth"},
-	{0x0000                       , 0x00000000, COMMAND_GROUP_DISP, "--------------------", NULL},
-	{ID_SORT_LIST                 , 0x00000000, COMMAND_GROUP_DISP, "•À‚Ñ‘Ö‚¦"        , "ListSort"},
-	{ID_SORT_LIST_DIRECT          , 0x00000000, COMMAND_GROUP_DISP, "•À‚Ñ‘Ö‚¦‚ğÄÀs", "ListSortDirect"},
-	{ID_EXEC_CLASSIFICATION       , 0x00000000, COMMAND_GROUP_DISP, "•ª—Ş•\¦‚ğXV"  , "ExecClassification"},
-	{0x0000                       , 0x00000000, COMMAND_GROUP_DISP, "--------------------", NULL},
-	{ID_EDIT_FIELD_SI             , 0x00000000, COMMAND_GROUP_DISP, "SIƒtƒB[ƒ‹ƒh‚ğ•\¦/•ÒW"       , "EditFieldSI"},
-	{ID_EDIT_TD3_TAG              , 0x00000000, COMMAND_GROUP_DISP, "ID3 tag ‚ğ•\¦/•ÒW"           , "EditID3tag"},
-	{ID_EDIT_CHANGE_FIELD         , 0x00000000, COMMAND_GROUP_DISP, "[ID3 tag]<=>[SIƒtƒB[ƒ‹ƒh]Ø‘Ö", "EditChangeField"},
+    // è¡¨ç¤º
+    {ID_ADJUST_COLUMN_WIDTH       , 0x00000000, COMMAND_GROUP_DISP, _T("å…¨ã¦ã®ã‚«ãƒ©ãƒ å¹…ã‚’èª¿æ•´"), _T("AdjustColumnWidth")},
+    {0x0000                       , 0x00000000, COMMAND_GROUP_DISP, _T("--------------------"), NULL},
+    {ID_SORT_LIST                 , 0x00000000, COMMAND_GROUP_DISP, _T("ä¸¦ã³æ›¿ãˆ")        , _T("ListSort")},
+    {ID_SORT_LIST_DIRECT          , 0x00000000, COMMAND_GROUP_DISP, _T("ä¸¦ã³æ›¿ãˆã‚’å†å®Ÿè¡Œ"), _T("ListSortDirect")},
+    {ID_EXEC_CLASSIFICATION       , 0x00000000, COMMAND_GROUP_DISP, _T("åˆ†é¡è¡¨ç¤ºã‚’æ›´æ–°")  , _T("ExecClassification")},
+    {0x0000                       , 0x00000000, COMMAND_GROUP_DISP, _T("--------------------"), NULL},
+    {ID_EDIT_FIELD_SI             , 0x00000000, COMMAND_GROUP_DISP, _T("SIãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã‚’è¡¨ç¤º/ç·¨é›†")       , _T("EditFieldSI")},
+    {ID_EDIT_TD3_TAG              , 0x00000000, COMMAND_GROUP_DISP, _T("ID3 tag ã‚’è¡¨ç¤º/ç·¨é›†")           , _T("EditID3tag")},
+    {ID_EDIT_CHANGE_FIELD         , 0x00000000, COMMAND_GROUP_DISP, _T("[ID3 tag]<=>[SIãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰]åˆ‡æ›¿"), _T("EditChangeField")},
 
-	// ƒvƒŒƒCƒŠƒXƒg
-	{ID_LOAD_PLAYLIST             , 0x00000000, COMMAND_GROUP_PLAYLIST, "ƒvƒŒƒCƒŠƒXƒg‚Ì“Ç‚İ‚İ"        , "LoadPlayList"},
-	{ID_WRITE_PLAYLIST            , 0x00000000, COMMAND_GROUP_PLAYLIST, "ƒvƒŒƒCƒŠƒXƒg‚Ìo—Í"            , "WritePlayList"},
-	{ID_WRITE_TREE_PLAYLIST       , 0x00000000, COMMAND_GROUP_PLAYLIST, "ƒcƒŠ[•ª—Ş‚ÌƒvƒŒƒCƒŠƒXƒgo—Í"  , "WriteTreePlayList"},
-	{0x0000                       , 0x00000000, COMMAND_GROUP_PLAYLIST, "--------------------", NULL},
-	{ID_ALL_FILES_CHECK           , 0x00000000, COMMAND_GROUP_PLAYLIST, "‘S‚Ä‚Ìƒtƒ@ƒCƒ‹‚ğƒ`ƒFƒbƒN‚·‚é"  , "AllFilesCheck"},
-	{ID_ALL_FILES_UNCHECK         , 0x00000000, COMMAND_GROUP_PLAYLIST, "‘S‚Ä‚Ìƒtƒ@ƒCƒ‹‚Ìƒ`ƒFƒbƒN‚ğŠO‚·", "AllFilesUnCheck"},
-	{ID_REVERSE_CHECK             , 0x00000000, COMMAND_GROUP_PLAYLIST, "ƒ`ƒFƒbƒNó‘Ô‚ğ”½“]‚·‚é"        , "ReverseCheck"},
-	{0x0000                       , 0x00000000, COMMAND_GROUP_PLAYLIST, "--------------------", NULL},
-	{ID_CHECK_FILES_SELECT        , 0x00000000, COMMAND_GROUP_PLAYLIST, "ƒ`ƒFƒbƒNƒtƒ@ƒCƒ‹‚ğ‘I‘ğ"        , "CheckFilesSelect"},
-	{ID_SELECT_FILES_CHECK        , 0x00000000, COMMAND_GROUP_PLAYLIST, "‘I‘ğƒtƒ@ƒCƒ‹‚ğƒ`ƒFƒbƒN"        , "SelectFilesCheck"},
-	{ID_SELECT_FILES_UNCHECK      , 0x00000000, COMMAND_GROUP_PLAYLIST, "‘I‘ğƒtƒ@ƒCƒ‹‚Ìƒ`ƒFƒbƒN‚ğŠO‚·"  , "SelectFilesUnCheck"},
-	{0x0000                       , 0x00000000, COMMAND_GROUP_PLAYLIST, "--------------------", NULL},
-	{ID_CHECK_WORD                , 0x00000000, COMMAND_GROUP_PLAYLIST, "ğŒ‚ğw’è‚µ‚Äƒ`ƒFƒbƒN"        , "CheckWord"},
-	{ID_CHECK_FILENAME_MAX        , 0x00000000, COMMAND_GROUP_PLAYLIST, "ƒtƒ@ƒCƒ‹–¼‚Ì’·‚³‚ğƒ`ƒFƒbƒN"    , "CheckFileNameMax"}, /* SeaKnows 037 */
-	{0x0000                       , 0x00000000, COMMAND_GROUP_PLAYLIST, "--------------------", NULL},
-	{ID_SELECT_TREE_COLUM         , 0x00000000, COMMAND_GROUP_PLAYLIST, "ƒcƒŠ[”z‰º‚ÌƒZƒ‹ˆêŠ‡‘I‘ğ"    , "SelectTreeColumn"}, /* TyphoonSwell 025 */
-	{ID_SELECT_TREE_FILE          , 0x00000000, COMMAND_GROUP_PLAYLIST, "ƒcƒŠ[”z‰º‚Ìƒtƒ@ƒCƒ‹ˆêŠ‡‘I‘ğ"  , "SelectTreeFile"}, /* STEP 013 */
-	{0x0000                       , 0x00000000, COMMAND_GROUP_PLAYLIST, "--------------------", NULL},
-	{ID_MOVE_TO_PARENT            , 0x00000000, COMMAND_GROUP_PLAYLIST, "ƒJ[ƒ\ƒ‹‚ğeƒcƒŠ[‚ÖˆÚ“®"      , "MoveToParent"}, /* STEP 014 */
-	{ID_MOVE_TO_PREVIOUS          , 0x00000000, COMMAND_GROUP_PLAYLIST, "ƒJ[ƒ\ƒ‹ˆÊ’u‚ğˆê‚Âã‚ÌƒcƒŠ[‚ÖˆÚ“®"      , "MoveToPrevious"}, /* STEP 014 */
-	{ID_MOVE_TO_NEXT              , 0x00000000, COMMAND_GROUP_PLAYLIST, "ƒJ[ƒ\ƒ‹ˆÊ’u‚ğˆê‚Â‰º‚ÌƒcƒŠ[‚ÖˆÚ“®"      , "MoveToNext"}, /* STEP 014 */
+    // ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆ
+    {ID_LOAD_PLAYLIST             , 0x00000000, COMMAND_GROUP_PLAYLIST, _T("ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆã®èª­ã¿è¾¼ã¿")        , _T("LoadPlayList")},
+    {ID_WRITE_PLAYLIST            , 0x00000000, COMMAND_GROUP_PLAYLIST, _T("ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆã®å‡ºåŠ›")            , _T("WritePlayList")},
+    {ID_WRITE_TREE_PLAYLIST       , 0x00000000, COMMAND_GROUP_PLAYLIST, _T("ãƒ„ãƒªãƒ¼åˆ†é¡ã®ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆå‡ºåŠ›")  , _T("WriteTreePlayList")},
+    {0x0000                       , 0x00000000, COMMAND_GROUP_PLAYLIST, _T("--------------------"), NULL},
+    {ID_ALL_FILES_CHECK           , 0x00000000, COMMAND_GROUP_PLAYLIST, _T("å…¨ã¦ã®ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ãƒã‚§ãƒƒã‚¯ã™ã‚‹")  , _T("AllFilesCheck")},
+    {ID_ALL_FILES_UNCHECK         , 0x00000000, COMMAND_GROUP_PLAYLIST, _T("å…¨ã¦ã®ãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒã‚§ãƒƒã‚¯ã‚’å¤–ã™"), _T("AllFilesUnCheck")},
+    {ID_REVERSE_CHECK             , 0x00000000, COMMAND_GROUP_PLAYLIST, _T("ãƒã‚§ãƒƒã‚¯çŠ¶æ…‹ã‚’åè»¢ã™ã‚‹")        , _T("ReverseCheck")},
+    {0x0000                       , 0x00000000, COMMAND_GROUP_PLAYLIST, _T("--------------------"), NULL},
+    {ID_CHECK_FILES_SELECT        , 0x00000000, COMMAND_GROUP_PLAYLIST, _T("ãƒã‚§ãƒƒã‚¯ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é¸æŠ")        , _T("CheckFilesSelect")},
+    {ID_SELECT_FILES_CHECK        , 0x00000000, COMMAND_GROUP_PLAYLIST, _T("é¸æŠãƒ•ã‚¡ã‚¤ãƒ«ã‚’ãƒã‚§ãƒƒã‚¯")        , _T("SelectFilesCheck")},
+    {ID_SELECT_FILES_UNCHECK      , 0x00000000, COMMAND_GROUP_PLAYLIST, _T("é¸æŠãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒã‚§ãƒƒã‚¯ã‚’å¤–ã™")  , _T("SelectFilesUnCheck")},
+    {0x0000                       , 0x00000000, COMMAND_GROUP_PLAYLIST, _T("--------------------"), NULL},
+    {ID_CHECK_WORD                , 0x00000000, COMMAND_GROUP_PLAYLIST, _T("æ¡ä»¶ã‚’æŒ‡å®šã—ã¦ãƒã‚§ãƒƒã‚¯")        , _T("CheckWord")},
+    {ID_CHECK_FILENAME_MAX        , 0x00000000, COMMAND_GROUP_PLAYLIST, _T("ãƒ•ã‚¡ã‚¤ãƒ«åã®é•·ã•ã‚’ãƒã‚§ãƒƒã‚¯")    , _T("CheckFileNameMax")}, /* SeaKnows 037 */
+    {0x0000                       , 0x00000000, COMMAND_GROUP_PLAYLIST, _T("--------------------"), NULL},
+    {ID_SELECT_TREE_COLUM         , 0x00000000, COMMAND_GROUP_PLAYLIST, _T("ãƒ„ãƒªãƒ¼é…ä¸‹ã®ã‚»ãƒ«ä¸€æ‹¬é¸æŠ")    , _T("SelectTreeColumn")}, /* TyphoonSwell 025 */
+    {ID_SELECT_TREE_FILE          , 0x00000000, COMMAND_GROUP_PLAYLIST, _T("ãƒ„ãƒªãƒ¼é…ä¸‹ã®ãƒ•ã‚¡ã‚¤ãƒ«ä¸€æ‹¬é¸æŠ")  , _T("SelectTreeFile")}, /* STEP 013 */
+    {0x0000                       , 0x00000000, COMMAND_GROUP_PLAYLIST, _T("--------------------"), NULL},
+    {ID_MOVE_TO_PARENT            , 0x00000000, COMMAND_GROUP_PLAYLIST, _T("ã‚«ãƒ¼ã‚½ãƒ«ã‚’è¦ªãƒ„ãƒªãƒ¼ã¸ç§»å‹•")      , _T("MoveToParent")}, /* STEP 014 */
+    {ID_MOVE_TO_PREVIOUS          , 0x00000000, COMMAND_GROUP_PLAYLIST, _T("ã‚«ãƒ¼ã‚½ãƒ«ä½ç½®ã‚’ä¸€ã¤ä¸Šã®ãƒ„ãƒªãƒ¼ã¸ç§»å‹•")      , _T("MoveToPrevious")}, /* STEP 014 */
+    {ID_MOVE_TO_NEXT              , 0x00000000, COMMAND_GROUP_PLAYLIST, _T("ã‚«ãƒ¼ã‚½ãƒ«ä½ç½®ã‚’ä¸€ã¤ä¸‹ã®ãƒ„ãƒªãƒ¼ã¸ç§»å‹•")      , _T("MoveToNext")}, /* STEP 014 */
 
-	// WinAmp §Œäˆ—
-	{ID_WINAMP_PLAY               , 0x00000000, COMMAND_GROUP_PLAYER, "Ä¶"                  , "WinampPlay"},
-	{ID_WINAMP_STOP               , 0x00000000, COMMAND_GROUP_PLAYER, "’â~(Winamp‚Ì‚İ—LŒø)"  , "WinampStop"},
-	{ID_WINAMP_EXIT               , 0x00000000, COMMAND_GROUP_PLAYER, "I—¹"                  , "WinampExit"},
-	{ID_WINAMP_PLAY_PREV          , 0x00000000, COMMAND_GROUP_PLAYER, "‘O‚Ì‹È(Winamp‚Ì‚İ—LŒø)", "WinampPlayPrev"},
-	{ID_WINAMP_PLAY_NEXT          , 0x00000000, COMMAND_GROUP_PLAYER, "Ÿ‚Ì‹È(Winamp‚Ì‚İ—LŒø)", "WinampPlayNext"},
+    // WinAmp åˆ¶å¾¡å‡¦ç†
+    {ID_WINAMP_PLAY               , 0x00000000, COMMAND_GROUP_PLAYER, _T("å†ç”Ÿ")                  , _T("WinampPlay")},
+    {ID_WINAMP_STOP               , 0x00000000, COMMAND_GROUP_PLAYER, _T("åœæ­¢(Winampã®ã¿æœ‰åŠ¹)")  , _T("WinampStop")},
+    {ID_WINAMP_EXIT               , 0x00000000, COMMAND_GROUP_PLAYER, _T("çµ‚äº†")                  , _T("WinampExit")},
+    {ID_WINAMP_PLAY_PREV          , 0x00000000, COMMAND_GROUP_PLAYER, _T("å‰ã®æ›²(Winampã®ã¿æœ‰åŠ¹)"), _T("WinampPlayPrev")},
+    {ID_WINAMP_PLAY_NEXT          , 0x00000000, COMMAND_GROUP_PLAYER, _T("æ¬¡ã®æ›²(Winampã®ã¿æœ‰åŠ¹)"), _T("WinampPlayNext")},
 
-	// •ÏŠ·ˆ—
-	{0x0000                       , 0x00000000, COMMAND_GROUP_CONV, "----- ƒfƒtƒHƒ‹ƒg‘®•ÏŠ· -----", NULL},
-	{ID_CONV_FILENAME_TO_TRACKNAME, 0x00000000, COMMAND_GROUP_CONV, "ƒtƒ@ƒCƒ‹–¼ => ƒgƒ‰ƒbƒN–¼", "ConvFileNameToTrackName"},
-	{ID_CONV_TRACKNAME_TO_FILENAME, 0x00000000, COMMAND_GROUP_CONV, "ƒgƒ‰ƒbƒN–¼ => ƒtƒ@ƒCƒ‹–¼", "ConvTrackNameToFileName"},
-	{0x0000                       , 0x00000000, COMMAND_GROUP_CONV, "----- ƒ†[ƒU[w’è‘®•ÏŠ· -----", NULL},
-	{ID_CONV_TAG2FILE_USER        , 0x00000000, COMMAND_GROUP_CONV, "ƒ^ƒOî•ñ => ƒtƒ@ƒCƒ‹–¼", "ConvUserTagToFile"},
-	{ID_CONV_FILE2TAG_USER        , 0x00000000, COMMAND_GROUP_CONV, "ƒtƒ@ƒCƒ‹–¼ => ƒ^ƒOî•ñ", "ConvUserFileToTag"},
-	{0x0000                       , 0x00000000, COMMAND_GROUP_CONV, "------ •¶š•ÏŠ· -----", NULL},
-	{ID_CONV_STR_HAN_ALL          , 0x00000000, COMMAND_GROUP_CONV, "‘SŠp=>”¼Šp(‘S‚Ä)•ÏŠ·"          , "ConvHanAll"},
-	{ID_CONV_STR_HAN_KIGOU        , 0x00000000, COMMAND_GROUP_CONV, "‘SŠp=>”¼Šp(‹L†)•ÏŠ·"          , "ConvHanKigou"},
-	{ID_CONV_STR_HAN_SUJI         , 0x00000000, COMMAND_GROUP_CONV, "‘SŠp=>”¼Šp(”š)•ÏŠ·"          , "ConvHanSuji"},
-	{ID_CONV_STR_HAN_KATA         , 0x00000000, COMMAND_GROUP_CONV, "‘SŠp=>”¼Šp(ƒJƒ^ƒJƒi)•ÏŠ·"      , "ConvHanLata"},
-	{ID_CONV_STR_HAN_ALPHA        , 0x00000000, COMMAND_GROUP_CONV, "‘SŠp=>”¼Šp(ƒAƒ‹ƒtƒ@ƒxƒbƒg)•ÏŠ·", "ConvHanAlpha"},
-	{ID_CONV_STR_ZEN_ALL          , 0x00000000, COMMAND_GROUP_CONV, "”¼Šp=>‘SŠp(‘S‚Ä)•ÏŠ·"          , "ConvZenAll"},
-	{ID_CONV_STR_ZEN_KIGOU        , 0x00000000, COMMAND_GROUP_CONV, "”¼Šp=>‘SŠp(‹L†)•ÏŠ·"          , "ConvZenKigou"},
-	{ID_CONV_STR_ZEN_SUJI         , 0x00000000, COMMAND_GROUP_CONV, "”¼Šp=>‘SŠp(”š)•ÏŠ·"          , "ConvZenSuji"},
-	{ID_CONV_STR_ZEN_KATA         , 0x00000000, COMMAND_GROUP_CONV, "”¼Šp=>‘SŠp(ƒJƒ^ƒJƒi)•ÏŠ·"      , "ConvZenKata"},
-	{ID_CONV_STR_ZEN_ALPHA        , 0x00000000, COMMAND_GROUP_CONV, "”¼Šp=>‘SŠp(ƒAƒ‹ƒtƒ@ƒxƒbƒg)•ÏŠ·", "ConvZenAlpha"},
-	{ID_CONV_STR_TO_UPPER         , 0x00000000, COMMAND_GROUP_CONV, "¬•¶š=>‘å•¶š•ÏŠ·"            , "ConvToUpper"},
-	{ID_CONV_STR_TO_LOWER         , 0x00000000, COMMAND_GROUP_CONV, "‘å•¶š=>¬•¶š•ÏŠ·"            , "ConvToLower"},
-	{ID_CONV_STR_FIRST_UPPER      , 0x00000000, COMMAND_GROUP_CONV, "’PŒê‚Ì‚P•¶š–Ú‚Ì‚İ‘å•¶š"      , "ConvFirstUpper"},
-	{ID_CONV_STR_FIXED_UPPER_LOWER, 0x00000000, COMMAND_GROUP_CONV, "‘å•¶š¬•¶šŒÅ’è"              , "ConvFIxedUpLow"}, /* STEP 040 */
-	{ID_CONV_STR_HIRA2KATA        , 0x00000000, COMMAND_GROUP_CONV, "‚Ğ‚ç‚ª‚È=>ƒJƒ^ƒJƒi•ÏŠ·"        , "ConvHira2Kata"},
-	{ID_CONV_STR_KATA2HIRA        , 0x00000000, COMMAND_GROUP_CONV, "ƒJƒ^ƒJƒi=>‚Ğ‚ç‚ª‚È•ÏŠ·"        , "ConvKata2Hira"},
-	{0x0000                       , 0x00000000, COMMAND_GROUP_CONV, "----- Šg’£‘®•ÏŠ· -----", NULL},
-	{ID_CONV_FORMAT_EX_01         , 0x00000000, COMMAND_GROUP_CONV, "‘®‚P", "ConvFormatEx01"},
-	{ID_CONV_FORMAT_EX_02         , 0x00000000, COMMAND_GROUP_CONV, "‘®‚Q", "ConvFormatEx02"},
-	{ID_CONV_FORMAT_EX_03         , 0x00000000, COMMAND_GROUP_CONV, "‘®‚R", "ConvFormatEx03"},
-	{ID_CONV_FORMAT_EX_04         , 0x00000000, COMMAND_GROUP_CONV, "‘®‚S", "ConvFormatEx04"},
-	{ID_CONV_FORMAT_EX_05         , 0x00000000, COMMAND_GROUP_CONV, "‘®‚T", "ConvFormatEx05"},
-	{ID_CONV_FORMAT_EX_06         , 0x00000000, COMMAND_GROUP_CONV, "‘®‚U", "ConvFormatEx06"},
-	{ID_CONV_FORMAT_EX_07         , 0x00000000, COMMAND_GROUP_CONV, "‘®‚V", "ConvFormatEx07"},
-	{ID_CONV_FORMAT_EX_08         , 0x00000000, COMMAND_GROUP_CONV, "‘®‚W", "ConvFormatEx08"},
-	{ID_CONV_FORMAT_EX_09         , 0x00000000, COMMAND_GROUP_CONV, "‘®‚X", "ConvFormatEx09"},
-	{ID_CONV_FORMAT_EX_10         , 0x00000000, COMMAND_GROUP_CONV, "‘®‚P‚O", "ConvFormatEx10"},
-	{ID_CONV_EX_SETUP             , 0x00000000, COMMAND_GROUP_CONV, "Šg’£‘®•ÏŠ·‘®İ’è", "ConvUserSetup"}, /* STEP 009 */
-	{0x0000                       , 0x00000000, COMMAND_GROUP_CONV, "----- ƒ†[ƒU[w’è‘®‚ÌØ‘Ö -----", NULL},
-	{ID_CONV_FORMAT_USER_01       , 0x00000000, COMMAND_GROUP_CONV, "‘®‚P", "ConvFormatUser01"},
-	{ID_CONV_FORMAT_USER_02       , 0x00000000, COMMAND_GROUP_CONV, "‘®‚Q", "ConvFormatUser02"},
-	{ID_CONV_FORMAT_USER_03       , 0x00000000, COMMAND_GROUP_CONV, "‘®‚R", "ConvFormatUser03"},
-	{ID_CONV_FORMAT_USER_04       , 0x00000000, COMMAND_GROUP_CONV, "‘®‚S", "ConvFormatUser04"}, /* LastTrain 057 */
-	{ID_CONV_FORMAT_USER_05       , 0x00000000, COMMAND_GROUP_CONV, "‘®‚T", "ConvFormatUser05"}, /* LastTrain 057 */
-	{ID_CONV_USER_SETUP           , 0x00000000, COMMAND_GROUP_CONV, "ƒ†[ƒU[w’è‘®•ÏŠ·‘®İ’è", "ConvUserSetup"}, /* STEP 009 */
-	{0x0000                       , 0x00000000, COMMAND_GROUP_CONV, "----- ƒ†[ƒU[w’è‘® ƒ^ƒOî•ñ => ƒtƒ@ƒCƒ‹–¼ -----", NULL},
-	{ID_CONV_FORMAT_USER_T2F_01   , 0x00000000, COMMAND_GROUP_CONV, "ƒ^ƒOî•ñ => ƒtƒ@ƒCƒ‹–¼ ‘®‚P", "ConvFormatUserT2F01"}, /* STEP 030 */
-	{ID_CONV_FORMAT_USER_T2F_02   , 0x00000000, COMMAND_GROUP_CONV, "ƒ^ƒOî•ñ => ƒtƒ@ƒCƒ‹–¼ ‘®‚Q", "ConvFormatUserT2F02"}, /* STEP 030 */
-	{ID_CONV_FORMAT_USER_T2F_03   , 0x00000000, COMMAND_GROUP_CONV, "ƒ^ƒOî•ñ => ƒtƒ@ƒCƒ‹–¼ ‘®‚R", "ConvFormatUserT2F03"}, /* STEP 030 */
-	{ID_CONV_FORMAT_USER_T2F_04   , 0x00000000, COMMAND_GROUP_CONV, "ƒ^ƒOî•ñ => ƒtƒ@ƒCƒ‹–¼ ‘®‚S", "ConvFormatUserT2F04"}, /* STEP 030 */
-	{ID_CONV_FORMAT_USER_T2F_05   , 0x00000000, COMMAND_GROUP_CONV, "ƒ^ƒOî•ñ => ƒtƒ@ƒCƒ‹–¼ ‘®‚T", "ConvFormatUserT2F05"}, /* STEP 030 */
-	{0x0000                       , 0x00000000, COMMAND_GROUP_CONV, "----- ƒ†[ƒU[w’è‘® ƒtƒ@ƒCƒ‹–¼ => ƒ^ƒOî•ñ -----", NULL},
-	{ID_CONV_FORMAT_USER_F2T_01   , 0x00000000, COMMAND_GROUP_CONV, "ƒtƒ@ƒCƒ‹–¼ => ƒ^ƒOî•ñ ‘®‚P", "ConvFormatUserF2T01"}, /* STEP 030 */
-	{ID_CONV_FORMAT_USER_F2T_02   , 0x00000000, COMMAND_GROUP_CONV, "ƒtƒ@ƒCƒ‹–¼ => ƒ^ƒOî•ñ ‘®‚Q", "ConvFormatUserF2T02"}, /* STEP 030 */
-	{ID_CONV_FORMAT_USER_F2T_03   , 0x00000000, COMMAND_GROUP_CONV, "ƒtƒ@ƒCƒ‹–¼ => ƒ^ƒOî•ñ ‘®‚R", "ConvFormatUserF2T03"}, /* STEP 030 */
-	{ID_CONV_FORMAT_USER_F2T_04   , 0x00000000, COMMAND_GROUP_CONV, "ƒtƒ@ƒCƒ‹–¼ => ƒ^ƒOî•ñ ‘®‚S", "ConvFormatUserF2T04"}, /* STEP 030 */
-	{ID_CONV_FORMAT_USER_F2T_05   , 0x00000000, COMMAND_GROUP_CONV, "ƒtƒ@ƒCƒ‹–¼ => ƒ^ƒOî•ñ ‘®‚T", "ConvFormatUserF2T05"}, /* STEP 030 */
-	{0x0000                       , 0x00000000, COMMAND_GROUP_CONV, "----- ƒ^ƒOî•ñ•ÏŠ· -----", NULL}, /* STEP 034 */
-	{ID_CONV_TAG_TO_TAG_01        , 0x00000000, COMMAND_GROUP_CONV, "‘®‚P", "ConvFormatTag2Tag01"}, /* STEP 034 */
-	{ID_CONV_TAG_TO_TAG_02        , 0x00000000, COMMAND_GROUP_CONV, "‘®‚Q", "ConvFormatTag2Tag02"}, /* STEP 034 */
-	{ID_CONV_TAG_TO_TAG_03        , 0x00000000, COMMAND_GROUP_CONV, "‘®‚R", "ConvFormatTag2Tag03"}, /* STEP 034 */
-	{ID_CONV_TAG_TO_TAG_04        , 0x00000000, COMMAND_GROUP_CONV, "‘®‚S", "ConvFormatTag2Tag04"}, /* STEP 034 */
-	{ID_CONV_TAG_TO_TAG_05        , 0x00000000, COMMAND_GROUP_CONV, "‘®‚T", "ConvFormatTag2Tag05"}, /* STEP 034 */
+    // å¤‰æ›å‡¦ç†
+    {0x0000                       , 0x00000000, COMMAND_GROUP_CONV, _T("----- ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆæ›¸å¼å¤‰æ› -----"), NULL},
+    {ID_CONV_FILENAME_TO_TRACKNAME, 0x00000000, COMMAND_GROUP_CONV, _T("ãƒ•ã‚¡ã‚¤ãƒ«å => ãƒˆãƒ©ãƒƒã‚¯å"), _T("ConvFileNameToTrackName")},
+    {ID_CONV_TRACKNAME_TO_FILENAME, 0x00000000, COMMAND_GROUP_CONV, _T("ãƒˆãƒ©ãƒƒã‚¯å => ãƒ•ã‚¡ã‚¤ãƒ«å"), _T("ConvTrackNameToFileName")},
+    {0x0000                       , 0x00000000, COMMAND_GROUP_CONV, _T("----- ãƒ¦ãƒ¼ã‚¶ãƒ¼æŒ‡å®šæ›¸å¼å¤‰æ› -----"), NULL},
+    {ID_CONV_TAG2FILE_USER        , 0x00000000, COMMAND_GROUP_CONV, _T("ã‚¿ã‚°æƒ…å ± => ãƒ•ã‚¡ã‚¤ãƒ«å"), _T("ConvUserTagToFile")},
+    {ID_CONV_FILE2TAG_USER        , 0x00000000, COMMAND_GROUP_CONV, _T("ãƒ•ã‚¡ã‚¤ãƒ«å => ã‚¿ã‚°æƒ…å ±"), _T("ConvUserFileToTag")},
+    {0x0000                       , 0x00000000, COMMAND_GROUP_CONV, _T("------ æ–‡å­—å¤‰æ› -----"), NULL},
+    {ID_CONV_STR_HAN_ALL          , 0x00000000, COMMAND_GROUP_CONV, _T("å…¨è§’=>åŠè§’(å…¨ã¦)å¤‰æ›")          , _T("ConvHanAll")},
+    {ID_CONV_STR_HAN_KIGOU        , 0x00000000, COMMAND_GROUP_CONV, _T("å…¨è§’=>åŠè§’(è¨˜å·)å¤‰æ›")          , _T("ConvHanKigou")},
+    {ID_CONV_STR_HAN_SUJI         , 0x00000000, COMMAND_GROUP_CONV, _T("å…¨è§’=>åŠè§’(æ•°å­—)å¤‰æ›")          , _T("ConvHanSuji")},
+    {ID_CONV_STR_HAN_KATA         , 0x00000000, COMMAND_GROUP_CONV, _T("å…¨è§’=>åŠè§’(ã‚«ã‚¿ã‚«ãƒŠ)å¤‰æ›")      , _T("ConvHanLata")},
+    {ID_CONV_STR_HAN_ALPHA        , 0x00000000, COMMAND_GROUP_CONV, _T("å…¨è§’=>åŠè§’(ã‚¢ãƒ«ãƒ•ã‚¡ãƒ™ãƒƒãƒˆ)å¤‰æ›"), _T("ConvHanAlpha")},
+    {ID_CONV_STR_ZEN_ALL          , 0x00000000, COMMAND_GROUP_CONV, _T("åŠè§’=>å…¨è§’(å…¨ã¦)å¤‰æ›")          , _T("ConvZenAll")},
+    {ID_CONV_STR_ZEN_KIGOU        , 0x00000000, COMMAND_GROUP_CONV, _T("åŠè§’=>å…¨è§’(è¨˜å·)å¤‰æ›")          , _T("ConvZenKigou")},
+    {ID_CONV_STR_ZEN_SUJI         , 0x00000000, COMMAND_GROUP_CONV, _T("åŠè§’=>å…¨è§’(æ•°å­—)å¤‰æ›")          , _T("ConvZenSuji")},
+    {ID_CONV_STR_ZEN_KATA         , 0x00000000, COMMAND_GROUP_CONV, _T("åŠè§’=>å…¨è§’(ã‚«ã‚¿ã‚«ãƒŠ)å¤‰æ›")      , _T("ConvZenKata")},
+    {ID_CONV_STR_ZEN_ALPHA        , 0x00000000, COMMAND_GROUP_CONV, _T("åŠè§’=>å…¨è§’(ã‚¢ãƒ«ãƒ•ã‚¡ãƒ™ãƒƒãƒˆ)å¤‰æ›"), _T("ConvZenAlpha")},
+    {ID_CONV_STR_TO_UPPER         , 0x00000000, COMMAND_GROUP_CONV, _T("å°æ–‡å­—=>å¤§æ–‡å­—å¤‰æ›")            , _T("ConvToUpper")},
+    {ID_CONV_STR_TO_LOWER         , 0x00000000, COMMAND_GROUP_CONV, _T("å¤§æ–‡å­—=>å°æ–‡å­—å¤‰æ›")            , _T("ConvToLower")},
+    {ID_CONV_STR_FIRST_UPPER      , 0x00000000, COMMAND_GROUP_CONV, _T("å˜èªã®ï¼‘æ–‡å­—ç›®ã®ã¿å¤§æ–‡å­—")      , _T("ConvFirstUpper")},
+    {ID_CONV_STR_FIXED_UPPER_LOWER, 0x00000000, COMMAND_GROUP_CONV, _T("å¤§æ–‡å­—å°æ–‡å­—å›ºå®š")              , _T("ConvFIxedUpLow")}, /* STEP 040 */
+    {ID_CONV_STR_HIRA2KATA        , 0x00000000, COMMAND_GROUP_CONV, _T("ã²ã‚‰ãŒãª=>ã‚«ã‚¿ã‚«ãƒŠå¤‰æ›")        , _T("ConvHira2Kata")},
+    {ID_CONV_STR_KATA2HIRA        , 0x00000000, COMMAND_GROUP_CONV, _T("ã‚«ã‚¿ã‚«ãƒŠ=>ã²ã‚‰ãŒãªå¤‰æ›")        , _T("ConvKata2Hira")},
+    {0x0000                       , 0x00000000, COMMAND_GROUP_CONV, _T("----- æ‹¡å¼µæ›¸å¼å¤‰æ› -----"), NULL},
+    {ID_CONV_FORMAT_EX_01         , 0x00000000, COMMAND_GROUP_CONV, _T("æ›¸å¼ï¼‘"), _T("ConvFormatEx01")},
+    {ID_CONV_FORMAT_EX_02         , 0x00000000, COMMAND_GROUP_CONV, _T("æ›¸å¼ï¼’"), _T("ConvFormatEx02")},
+    {ID_CONV_FORMAT_EX_03         , 0x00000000, COMMAND_GROUP_CONV, _T("æ›¸å¼ï¼“"), _T("ConvFormatEx03")},
+    {ID_CONV_FORMAT_EX_04         , 0x00000000, COMMAND_GROUP_CONV, _T("æ›¸å¼ï¼”"), _T("ConvFormatEx04")},
+    {ID_CONV_FORMAT_EX_05         , 0x00000000, COMMAND_GROUP_CONV, _T("æ›¸å¼ï¼•"), _T("ConvFormatEx05")},
+    {ID_CONV_FORMAT_EX_06         , 0x00000000, COMMAND_GROUP_CONV, _T("æ›¸å¼ï¼–"), _T("ConvFormatEx06")},
+    {ID_CONV_FORMAT_EX_07         , 0x00000000, COMMAND_GROUP_CONV, _T("æ›¸å¼ï¼—"), _T("ConvFormatEx07")},
+    {ID_CONV_FORMAT_EX_08         , 0x00000000, COMMAND_GROUP_CONV, _T("æ›¸å¼ï¼˜"), _T("ConvFormatEx08")},
+    {ID_CONV_FORMAT_EX_09         , 0x00000000, COMMAND_GROUP_CONV, _T("æ›¸å¼ï¼™"), _T("ConvFormatEx09")},
+    {ID_CONV_FORMAT_EX_10         , 0x00000000, COMMAND_GROUP_CONV, _T("æ›¸å¼ï¼‘ï¼"), _T("ConvFormatEx10")},
+    {ID_CONV_EX_SETUP             , 0x00000000, COMMAND_GROUP_CONV, _T("æ‹¡å¼µæ›¸å¼å¤‰æ›æ›¸å¼è¨­å®š"), _T("ConvUserSetup")}, /* STEP 009 */
+    {0x0000                       , 0x00000000, COMMAND_GROUP_CONV, _T("----- ãƒ¦ãƒ¼ã‚¶ãƒ¼æŒ‡å®šæ›¸å¼ã®åˆ‡æ›¿ -----"), NULL},
+    {ID_CONV_FORMAT_USER_01       , 0x00000000, COMMAND_GROUP_CONV, _T("æ›¸å¼ï¼‘"), _T("ConvFormatUser01")},
+    {ID_CONV_FORMAT_USER_02       , 0x00000000, COMMAND_GROUP_CONV, _T("æ›¸å¼ï¼’"), _T("ConvFormatUser02")},
+    {ID_CONV_FORMAT_USER_03       , 0x00000000, COMMAND_GROUP_CONV, _T("æ›¸å¼ï¼“"), _T("ConvFormatUser03")},
+    {ID_CONV_FORMAT_USER_04       , 0x00000000, COMMAND_GROUP_CONV, _T("æ›¸å¼ï¼”"), _T("ConvFormatUser04")}, /* LastTrain 057 */
+    {ID_CONV_FORMAT_USER_05       , 0x00000000, COMMAND_GROUP_CONV, _T("æ›¸å¼ï¼•"), _T("ConvFormatUser05")}, /* LastTrain 057 */
+    {ID_CONV_USER_SETUP           , 0x00000000, COMMAND_GROUP_CONV, _T("ãƒ¦ãƒ¼ã‚¶ãƒ¼æŒ‡å®šæ›¸å¼å¤‰æ›æ›¸å¼è¨­å®š"), _T("ConvUserSetup")}, /* STEP 009 */
+    {0x0000                       , 0x00000000, COMMAND_GROUP_CONV, _T("----- ãƒ¦ãƒ¼ã‚¶ãƒ¼æŒ‡å®šæ›¸å¼ ã‚¿ã‚°æƒ…å ± => ãƒ•ã‚¡ã‚¤ãƒ«å -----"), NULL},
+    {ID_CONV_FORMAT_USER_T2F_01   , 0x00000000, COMMAND_GROUP_CONV, _T("ã‚¿ã‚°æƒ…å ± => ãƒ•ã‚¡ã‚¤ãƒ«å æ›¸å¼ï¼‘"), _T("ConvFormatUserT2F01")}, /* STEP 030 */
+    {ID_CONV_FORMAT_USER_T2F_02   , 0x00000000, COMMAND_GROUP_CONV, _T("ã‚¿ã‚°æƒ…å ± => ãƒ•ã‚¡ã‚¤ãƒ«å æ›¸å¼ï¼’"), _T("ConvFormatUserT2F02")}, /* STEP 030 */
+    {ID_CONV_FORMAT_USER_T2F_03   , 0x00000000, COMMAND_GROUP_CONV, _T("ã‚¿ã‚°æƒ…å ± => ãƒ•ã‚¡ã‚¤ãƒ«å æ›¸å¼ï¼“"), _T("ConvFormatUserT2F03")}, /* STEP 030 */
+    {ID_CONV_FORMAT_USER_T2F_04   , 0x00000000, COMMAND_GROUP_CONV, _T("ã‚¿ã‚°æƒ…å ± => ãƒ•ã‚¡ã‚¤ãƒ«å æ›¸å¼ï¼”"), _T("ConvFormatUserT2F04")}, /* STEP 030 */
+    {ID_CONV_FORMAT_USER_T2F_05   , 0x00000000, COMMAND_GROUP_CONV, _T("ã‚¿ã‚°æƒ…å ± => ãƒ•ã‚¡ã‚¤ãƒ«å æ›¸å¼ï¼•"), _T("ConvFormatUserT2F05")}, /* STEP 030 */
+    {0x0000                       , 0x00000000, COMMAND_GROUP_CONV, _T("----- ãƒ¦ãƒ¼ã‚¶ãƒ¼æŒ‡å®šæ›¸å¼ ãƒ•ã‚¡ã‚¤ãƒ«å => ã‚¿ã‚°æƒ…å ± -----"), NULL},
+    {ID_CONV_FORMAT_USER_F2T_01   , 0x00000000, COMMAND_GROUP_CONV, _T("ãƒ•ã‚¡ã‚¤ãƒ«å => ã‚¿ã‚°æƒ…å ± æ›¸å¼ï¼‘"), _T("ConvFormatUserF2T01")}, /* STEP 030 */
+    {ID_CONV_FORMAT_USER_F2T_02   , 0x00000000, COMMAND_GROUP_CONV, _T("ãƒ•ã‚¡ã‚¤ãƒ«å => ã‚¿ã‚°æƒ…å ± æ›¸å¼ï¼’"), _T("ConvFormatUserF2T02")}, /* STEP 030 */
+    {ID_CONV_FORMAT_USER_F2T_03   , 0x00000000, COMMAND_GROUP_CONV, _T("ãƒ•ã‚¡ã‚¤ãƒ«å => ã‚¿ã‚°æƒ…å ± æ›¸å¼ï¼“"), _T("ConvFormatUserF2T03")}, /* STEP 030 */
+    {ID_CONV_FORMAT_USER_F2T_04   , 0x00000000, COMMAND_GROUP_CONV, _T("ãƒ•ã‚¡ã‚¤ãƒ«å => ã‚¿ã‚°æƒ…å ± æ›¸å¼ï¼”"), _T("ConvFormatUserF2T04")}, /* STEP 030 */
+    {ID_CONV_FORMAT_USER_F2T_05   , 0x00000000, COMMAND_GROUP_CONV, _T("ãƒ•ã‚¡ã‚¤ãƒ«å => ã‚¿ã‚°æƒ…å ± æ›¸å¼ï¼•"), _T("ConvFormatUserF2T05")}, /* STEP 030 */
+    {0x0000                       , 0x00000000, COMMAND_GROUP_CONV, _T("----- ã‚¿ã‚°æƒ…å ±å¤‰æ› -----"), NULL}, /* STEP 034 */
+    {ID_CONV_TAG_TO_TAG_01        , 0x00000000, COMMAND_GROUP_CONV, _T("æ›¸å¼ï¼‘"), _T("ConvFormatTag2Tag01")}, /* STEP 034 */
+    {ID_CONV_TAG_TO_TAG_02        , 0x00000000, COMMAND_GROUP_CONV, _T("æ›¸å¼ï¼’"), _T("ConvFormatTag2Tag02")}, /* STEP 034 */
+    {ID_CONV_TAG_TO_TAG_03        , 0x00000000, COMMAND_GROUP_CONV, _T("æ›¸å¼ï¼“"), _T("ConvFormatTag2Tag03")}, /* STEP 034 */
+    {ID_CONV_TAG_TO_TAG_04        , 0x00000000, COMMAND_GROUP_CONV, _T("æ›¸å¼ï¼”"), _T("ConvFormatTag2Tag04")}, /* STEP 034 */
+    {ID_CONV_TAG_TO_TAG_05        , 0x00000000, COMMAND_GROUP_CONV, _T("æ›¸å¼ï¼•"), _T("ConvFormatTag2Tag05")}, /* STEP 034 */
 
-	{0x0000, 0x00000000, -1, NULL, NULL},		// I’[ƒR[ƒh
-	/**
-	 y’ˆÓzƒRƒ}ƒ“ƒh‚ğ’Ç‰Á‚µ‚½ê‡‚ÍA_APS_NEXT_COMMAND_VALUE‚ªXV‚³‚ê‚é‚Ì‚ÅSTEP_api.cpp‚ğƒŠƒRƒ“ƒpƒCƒ‹‚·‚é‚±‚Æ
-	 **/
+    {0x0000, 0x00000000, -1, NULL, NULL},       // çµ‚ç«¯ã‚³ãƒ¼ãƒ‰
+    /**
+     ã€æ³¨æ„ã€‘ã‚³ãƒãƒ³ãƒ‰ã‚’è¿½åŠ ã—ãŸå ´åˆã¯ã€_APS_NEXT_COMMAND_VALUEãŒæ›´æ–°ã•ã‚Œã‚‹ã®ã§STEP_api.cppã‚’ãƒªã‚³ãƒ³ãƒ‘ã‚¤ãƒ«ã™ã‚‹ã“ã¨
+     **/
 };
 
 KEY_CONFIG *SearchKeyConfigID(WORD wCmdID)
 {
-	int		i;
-	for (i = 0; g_listKeyConfig[i].sName != NULL; i++) {
-		KEY_CONFIG	*pKey = &g_listKeyConfig[i];
-		if (pKey->wCmdID == wCmdID) {
-			return(pKey);
-		}
-	}
-	extern CPlugin plugins;
-	for (i=0;i<plugins.arPluginKey.GetSize();i++) {
-		KEY_CONFIG* pKey = (KEY_CONFIG*)plugins.arPluginKey.GetAt(i);
-		if (pKey->wCmdID == wCmdID) {
-			return pKey;
-		}
-	}
-	return(NULL);
+    int     i;
+    for (i = 0; g_listKeyConfig[i].sName != NULL; i++) {
+        KEY_CONFIG  *pKey = &g_listKeyConfig[i];
+        if (pKey->wCmdID == wCmdID) {
+            return(pKey);
+        }
+    }
+    extern CPlugin plugins;
+    for (i=0;i<plugins.arPluginKey.GetSize();i++) {
+        KEY_CONFIG* pKey = (KEY_CONFIG*)plugins.arPluginKey.GetAt(i);
+        if (pKey->wCmdID == wCmdID) {
+            return pKey;
+        }
+    }
+    return(NULL);
 }
 
-static	char	*g_sKeyName[] = {
-	"",				// 00
-	"LBUTTON",		// 01	ƒ}ƒEƒX‚Ì¶ƒ{ƒ^ƒ“
-	"RBUTTON",		// 02	ƒ}ƒEƒX‚Ì‰Eƒ{ƒ^ƒ“
-	"CANCEL",		// 03	ƒRƒ“ƒgƒ[ƒ‹ ƒuƒŒ[ƒNˆ—‚Ég—p
-	"MBUTTON",		// 04	ƒ}ƒEƒX‚Ì’†‰›ƒ{ƒ^ƒ“ (3‚Âƒ{ƒ^ƒ“‚Ìƒ}ƒEƒX)
-	"","","",		// 05`07	–¢’è‹`
-	"BS",			// 08	BackSpaceƒL[
-	"Tab",			// 09	TabƒL[
-	"","",			// 0A¤ 0B	–¢’è‹`
-	"CLEAR",		// 0C	ClearƒL[
-	"Enter",		// 0D	EnterƒL[
-	"","",			// 0E¤ 0F	–¢’è‹`
-	"Shift",		// 10	ShiftƒL[
-	"Ctrl",			// 11	CtrlƒL[
-	"Alt",			// 12	AltƒL[
-	"PAUSE",		// 13	PauseƒL[
-	"CAPITAL",		// 14	Caps LockƒL[
-	"KANA",			// 15	‰p”ƒJƒiƒL[
-	"","","",		// 16`18	Š¿šƒVƒXƒeƒ€—p‚É—\–ñ
-	"KANJI",		// 19	Š¿šƒVƒXƒeƒ€—p‚É—\–ñ
-	"",				// 1A	–¢’è‹`
-	"ESC",			// 1B	EscƒL[
-	"CONVERT",		// 1C	Š¿šƒVƒXƒeƒ€—p‚É—\–ñ
-	"NOCONVERT",	// 1D	Š¿šƒVƒXƒeƒ€—p‚É—\–ñ
-	"","",			// 1E¤ 1F	Š¿šƒVƒXƒeƒ€—p‚É—\–ñ
-	"Space",		// 20	SpaceƒL[
-	"PageUp",		// 21	Page UpƒL[
-	"PageDown",		// 22	Page DownƒL[
-	"End",			// 23	EndƒL[
-	"Home",			// 24	HomeƒL[
-	"©",			// 25	©ƒL[
-	"ª",			// 26	ªƒL[
-	"¨",			// 27	¨ƒL[
-	"«",			// 28	«ƒL[
-	"SELECT",		// 29	SelectƒL[
-	"",				// 2A	OEMw’è
-	"EXECUTE",		// 2B	ExecuteƒL[
-	"SNAPSHOT",		// 2C	Print ScreenƒL[ (Windows 3.0ˆÈ~—p)
-	"Ins",			// 2D	InsƒL[
-	"Del",			// 2E	DelƒL[
-	"Help",			// 2F	HelpƒL[
-	"0",			// 30	0ƒL[
-	"1",			// 31	1ƒL[
-	"2",			// 32	2ƒL[
-	"3",			// 33	3ƒL[
-	"4",			// 34	4ƒL[
-	"5",			// 35	5ƒL[
-	"6",			// 36	6ƒL[
-	"7",			// 37	7ƒL[
-	"8",			// 38	8ƒL[
-	"9",			// 39	9ƒL[
-	"","","","","","","",	// 3A`40	–¢’è‹`
-	"A",			// 41	AƒL[
-	"B",			// 42	BƒL[
-	"C",			// 43	CƒL[
-	"D",			// 44	DƒL[
-	"E",			// 45	EƒL[
-	"F",			// 46	FƒL[
-	"G",			// 47	GƒL[
-	"H",			// 48	HƒL[
-	"I",			// 49	IƒL[
-	"J",			// 4A	JƒL[
-	"K",			// 4B	KƒL[
-	"L",			// 4C	LƒL[
-	"M",			// 4D	MƒL[
-	"N",			// 4E	NƒL[
-	"O",			// 4F	OƒL[
-	"P",			// 50	PƒL[
-	"Q",			// 51	QƒL[
-	"R",			// 52	RƒL[
-	"S",			// 53	SƒL[
-	"T",			// 54	TƒL[
-	"U",			// 55	UƒL[
-	"V",			// 56	VƒL[
-	"W",			// 57	WƒL[
-	"X",			// 58	XƒL[
-	"Y",			// 59	YƒL[
-	"Z",			// 5A	ZƒL[
-	"","","","","",	// 5B`5F	–¢’è‹`
-	"NUM0",			// 60	ƒeƒ“ƒL[‚Ì0ƒL[
-	"NUM1",			// 61	ƒeƒ“ƒL[‚Ì1ƒL[
-	"NUM2",			// 62	ƒeƒ“ƒL[‚Ì2ƒL[
-	"NUM3",			// 63	ƒeƒ“ƒL[‚Ì3ƒL[
-	"NUM4",			// 64	ƒeƒ“ƒL[‚Ì4ƒL[
-	"NUM5",			// 65	ƒeƒ“ƒL[‚Ì5ƒL[
-	"NUM6",			// 66	ƒeƒ“ƒL[‚Ì6ƒL[
-	"NUM7",			// 67	ƒeƒ“ƒL[‚Ì7ƒL[
-	"NUM8",			// 68	ƒeƒ“ƒL[‚Ì8ƒL[
-	"NUM9",			// 69	ƒeƒ“ƒL[‚Ì9ƒL[
-	"[*]",			// 6A	ƒeƒ“ƒL[‚Ì*ƒL[
-	"[+]",			// 6B	ƒeƒ“ƒL[‚Ì+ƒL[
-	"SEPARATOR",	// 6C	SeparatorƒL[
-	"[-]",			// 6D	ƒeƒ“ƒL[‚Ì|ƒL[
-	"[.]",			// 6E	ƒeƒ“ƒL[‚Ì.ƒL[
-	"[/]",			// 6F	ƒeƒ“ƒL[‚Ì/ƒL[
-	"F1",			// 70	F1ƒL[
-	"F2",			// 71	F2ƒL[
-	"F3",			// 72	F3ƒL[
-	"F4",			// 73	F4ƒL[
-	"F5",			// 74	F5ƒL[
-	"F6",			// 75	F6ƒL[
-	"F7",			// 76	F7ƒL[
-	"F8",			// 77	F8ƒL[
-	"F9",			// 78	F9ƒL[
-	"F10",			// 79	F10ƒL[
-	"F11",			// 7A	F11ƒL[
-	"F12",			// 7B	F12ƒL[
-	"F13",			// 7C	F13ƒL[
-	"F14",			// 7D	F14ƒL[
-	"F15",			// 7E	F15ƒL[
-	"F16",			// 7F	F16ƒL[
-	"F17",			// 80H	F17ƒL[
-	"F18",			// 81H	F18ƒL[
-	"F19",			// 82H	F19ƒL[
-	"F20",			// 83H	F20ƒL[
-	"F21",			// 84H	F21ƒL[
-	"F22",			// 85H	F22ƒL[
-	"F23",			// 86H	F23ƒL[
-	"F24",			// 87H	F24ƒL[
-	"","","","","","","","",	// 88`8F	–¢’è‹`
-	"NUMLOCK",		// 90	Num LockƒL[
-	"SCROLL",		// 91	Scroll LockƒL[
+static TCHAR    *g_sKeyName[] = {
+    _T(""),             // 00
+    _T("LBUTTON"),      // 01   ãƒã‚¦ã‚¹ã®å·¦ãƒœã‚¿ãƒ³
+    _T("RBUTTON"),      // 02   ãƒã‚¦ã‚¹ã®å³ãƒœã‚¿ãƒ³
+    _T("CANCEL"),       // 03   ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ« ãƒ–ãƒ¬ãƒ¼ã‚¯å‡¦ç†ã«ä½¿ç”¨
+    _T("MBUTTON"),      // 04   ãƒã‚¦ã‚¹ã®ä¸­å¤®ãƒœã‚¿ãƒ³ (3ã¤ãƒœã‚¿ãƒ³ã®ãƒã‚¦ã‚¹)
+    _T(""),_T(""),_T(""),       // 05ï½07   æœªå®šç¾©
+    _T("BS"),           // 08   BackSpaceã‚­ãƒ¼
+    _T("Tab"),          // 09   Tabã‚­ãƒ¼
+    _T(""),_T(""),          // 0Aï½¤ 0B   æœªå®šç¾©
+    _T("CLEAR"),        // 0C   Clearã‚­ãƒ¼
+    _T("Enter"),        // 0D   Enterã‚­ãƒ¼
+    _T(""),_T(""),          // 0Eï½¤ 0F   æœªå®šç¾©
+    _T("Shift"),        // 10   Shiftã‚­ãƒ¼
+    _T("Ctrl"),         // 11   Ctrlã‚­ãƒ¼
+    _T("Alt"),          // 12   Altã‚­ãƒ¼
+    _T("PAUSE"),        // 13   Pauseã‚­ãƒ¼
+    _T("CAPITAL"),      // 14   Caps Lockã‚­ãƒ¼
+    _T("KANA"),         // 15   è‹±æ•°ã‚«ãƒŠã‚­ãƒ¼
+    _T(""),_T(""),_T(""),       // 16ï½18   æ¼¢å­—ã‚·ã‚¹ãƒ†ãƒ ç”¨ã«äºˆç´„
+    _T("KANJI"),        // 19   æ¼¢å­—ã‚·ã‚¹ãƒ†ãƒ ç”¨ã«äºˆç´„
+    _T(""),             // 1A   æœªå®šç¾©
+    _T("ESC"),          // 1B   Escã‚­ãƒ¼
+    _T("CONVERT"),      // 1C   æ¼¢å­—ã‚·ã‚¹ãƒ†ãƒ ç”¨ã«äºˆç´„
+    _T("NOCONVERT"),    // 1D   æ¼¢å­—ã‚·ã‚¹ãƒ†ãƒ ç”¨ã«äºˆç´„
+    _T(""),_T(""),          // 1Eï½¤ 1F   æ¼¢å­—ã‚·ã‚¹ãƒ†ãƒ ç”¨ã«äºˆç´„
+    _T("Space"),        // 20   Spaceã‚­ãƒ¼
+    _T("PageUp"),       // 21   Page Upã‚­ãƒ¼
+    _T("PageDown"),     // 22   Page Downã‚­ãƒ¼
+    _T("End"),          // 23   Endã‚­ãƒ¼
+    _T("Home"),         // 24   Homeã‚­ãƒ¼
+    _T("â†"),           // 25   â†ã‚­ãƒ¼
+    _T("â†‘"),           // 26   â†‘ã‚­ãƒ¼
+    _T("â†’"),           // 27   â†’ã‚­ãƒ¼
+    _T("â†“"),           // 28   â†“ã‚­ãƒ¼
+    _T("SELECT"),       // 29   Selectã‚­ãƒ¼
+    _T(""),             // 2A   OEMæŒ‡å®š
+    _T("EXECUTE"),      // 2B   Executeã‚­ãƒ¼
+    _T("SNAPSHOT"),     // 2C   Print Screenã‚­ãƒ¼ (Windows 3.0ä»¥é™ç”¨)
+    _T("Ins"),          // 2D   Insã‚­ãƒ¼
+    _T("Del"),          // 2E   Delã‚­ãƒ¼
+    _T("Help"),         // 2F   Helpã‚­ãƒ¼
+    _T("0"),            // 30   0ã‚­ãƒ¼
+    _T("1"),            // 31   1ã‚­ãƒ¼
+    _T("2"),            // 32   2ã‚­ãƒ¼
+    _T("3"),            // 33   3ã‚­ãƒ¼
+    _T("4"),            // 34   4ã‚­ãƒ¼
+    _T("5"),            // 35   5ã‚­ãƒ¼
+    _T("6"),            // 36   6ã‚­ãƒ¼
+    _T("7"),            // 37   7ã‚­ãƒ¼
+    _T("8"),            // 38   8ã‚­ãƒ¼
+    _T("9"),            // 39   9ã‚­ãƒ¼
+    _T(""),_T(""),_T(""),_T(""),_T(""),_T(""),_T(""),   // 3Aï½40   æœªå®šç¾©
+    _T("A"),            // 41   Aã‚­ãƒ¼
+    _T("B"),            // 42   Bã‚­ãƒ¼
+    _T("C"),            // 43   Cã‚­ãƒ¼
+    _T("D"),            // 44   Dã‚­ãƒ¼
+    _T("E"),            // 45   Eã‚­ãƒ¼
+    _T("F"),            // 46   Fã‚­ãƒ¼
+    _T("G"),            // 47   Gã‚­ãƒ¼
+    _T("H"),            // 48   Hã‚­ãƒ¼
+    _T("I"),            // 49   Iã‚­ãƒ¼
+    _T("J"),            // 4A   Jã‚­ãƒ¼
+    _T("K"),            // 4B   Kã‚­ãƒ¼
+    _T("L"),            // 4C   Lã‚­ãƒ¼
+    _T("M"),            // 4D   Mã‚­ãƒ¼
+    _T("N"),            // 4E   Nã‚­ãƒ¼
+    _T("O"),            // 4F   Oã‚­ãƒ¼
+    _T("P"),            // 50   Pã‚­ãƒ¼
+    _T("Q"),            // 51   Qã‚­ãƒ¼
+    _T("R"),            // 52   Rã‚­ãƒ¼
+    _T("S"),            // 53   Sã‚­ãƒ¼
+    _T("T"),            // 54   Tã‚­ãƒ¼
+    _T("U"),            // 55   Uã‚­ãƒ¼
+    _T("V"),            // 56   Vã‚­ãƒ¼
+    _T("W"),            // 57   Wã‚­ãƒ¼
+    _T("X"),            // 58   Xã‚­ãƒ¼
+    _T("Y"),            // 59   Yã‚­ãƒ¼
+    _T("Z"),            // 5A   Zã‚­ãƒ¼
+    _T(""),_T(""),_T(""),_T(""),_T(""), // 5Bï½5F   æœªå®šç¾©
+    _T("NUM0"),         // 60   ãƒ†ãƒ³ã‚­ãƒ¼ã®0ã‚­ãƒ¼
+    _T("NUM1"),         // 61   ãƒ†ãƒ³ã‚­ãƒ¼ã®1ã‚­ãƒ¼
+    _T("NUM2"),         // 62   ãƒ†ãƒ³ã‚­ãƒ¼ã®2ã‚­ãƒ¼
+    _T("NUM3"),         // 63   ãƒ†ãƒ³ã‚­ãƒ¼ã®3ã‚­ãƒ¼
+    _T("NUM4"),         // 64   ãƒ†ãƒ³ã‚­ãƒ¼ã®4ã‚­ãƒ¼
+    _T("NUM5"),         // 65   ãƒ†ãƒ³ã‚­ãƒ¼ã®5ã‚­ãƒ¼
+    _T("NUM6"),         // 66   ãƒ†ãƒ³ã‚­ãƒ¼ã®6ã‚­ãƒ¼
+    _T("NUM7"),         // 67   ãƒ†ãƒ³ã‚­ãƒ¼ã®7ã‚­ãƒ¼
+    _T("NUM8"),         // 68   ãƒ†ãƒ³ã‚­ãƒ¼ã®8ã‚­ãƒ¼
+    _T("NUM9"),         // 69   ãƒ†ãƒ³ã‚­ãƒ¼ã®9ã‚­ãƒ¼
+    _T("[*]"),          // 6A   ãƒ†ãƒ³ã‚­ãƒ¼ã®*ã‚­ãƒ¼
+    _T("[+]"),          // 6B   ãƒ†ãƒ³ã‚­ãƒ¼ã®+ã‚­ãƒ¼
+    _T("SEPARATOR"),    // 6C   Separatorã‚­ãƒ¼
+    _T("[-]"),          // 6D   ãƒ†ãƒ³ã‚­ãƒ¼ã®ï¼ã‚­ãƒ¼
+    _T("[.]"),          // 6E   ãƒ†ãƒ³ã‚­ãƒ¼ã®.ã‚­ãƒ¼
+    _T("[/]"),          // 6F   ãƒ†ãƒ³ã‚­ãƒ¼ã®/ã‚­ãƒ¼
+    _T("F1"),           // 70   F1ã‚­ãƒ¼
+    _T("F2"),           // 71   F2ã‚­ãƒ¼
+    _T("F3"),           // 72   F3ã‚­ãƒ¼
+    _T("F4"),           // 73   F4ã‚­ãƒ¼
+    _T("F5"),           // 74   F5ã‚­ãƒ¼
+    _T("F6"),           // 75   F6ã‚­ãƒ¼
+    _T("F7"),           // 76   F7ã‚­ãƒ¼
+    _T("F8"),           // 77   F8ã‚­ãƒ¼
+    _T("F9"),           // 78   F9ã‚­ãƒ¼
+    _T("F10"),          // 79   F10ã‚­ãƒ¼
+    _T("F11"),          // 7A   F11ã‚­ãƒ¼
+    _T("F12"),          // 7B   F12ã‚­ãƒ¼
+    _T("F13"),          // 7C   F13ã‚­ãƒ¼
+    _T("F14"),          // 7D   F14ã‚­ãƒ¼
+    _T("F15"),          // 7E   F15ã‚­ãƒ¼
+    _T("F16"),          // 7F   F16ã‚­ãƒ¼
+    _T("F17"),          // 80H  F17ã‚­ãƒ¼
+    _T("F18"),          // 81H  F18ã‚­ãƒ¼
+    _T("F19"),          // 82H  F19ã‚­ãƒ¼
+    _T("F20"),          // 83H  F20ã‚­ãƒ¼
+    _T("F21"),          // 84H  F21ã‚­ãƒ¼
+    _T("F22"),          // 85H  F22ã‚­ãƒ¼
+    _T("F23"),          // 86H  F23ã‚­ãƒ¼
+    _T("F24"),          // 87H  F24ã‚­ãƒ¼
+    _T(""),_T(""),_T(""),_T(""),_T(""),_T(""),_T(""),_T(""),    // 88ï½8F   æœªå®šç¾©
+    _T("NUMLOCK"),      // 90   Num Lockã‚­ãƒ¼
+    _T("SCROLL"),       // 91   Scroll Lockã‚­ãƒ¼
 };
 
 /////////////////////////////////////////////////////////////////////////////
 // CSuperTagEditorApp
 
 BEGIN_MESSAGE_MAP(CSuperTagEditorApp, CWinApp)
-	//{{AFX_MSG_MAP(CSuperTagEditorApp)
-	ON_COMMAND(ID_APP_ABOUT, OnAppAbout)
-	ON_UPDATE_COMMAND_UI(ID_FILE_MRU_FILE1, OnUpdateFileMruFile)
-	ON_COMMAND_EX_RANGE(ID_FILE_MRU_FILE1, ID_FILE_MRU_FILE16, OnOpenRecentFile)
-	ON_UPDATE_COMMAND_UI(ID_FAVORITE_FOLDER_01, OnUpdateFavoriteFolder01)
-	ON_UPDATE_COMMAND_UI(ID_FAVORITE_FOLDER_02, OnUpdateFavoriteFolder02)
-	ON_UPDATE_COMMAND_UI(ID_FAVORITE_FOLDER_03, OnUpdateFavoriteFolder03)
-	ON_UPDATE_COMMAND_UI(ID_FAVORITE_FOLDER_04, OnUpdateFavoriteFolder04)
-	ON_UPDATE_COMMAND_UI(ID_FAVORITE_FOLDER_05, OnUpdateFavoriteFolder05)
-	ON_UPDATE_COMMAND_UI(ID_FAVORITE_FOLDER_06, OnUpdateFavoriteFolder06)
-	ON_UPDATE_COMMAND_UI(ID_FAVORITE_FOLDER_07, OnUpdateFavoriteFolder07)
-	ON_UPDATE_COMMAND_UI(ID_FAVORITE_FOLDER_08, OnUpdateFavoriteFolder08)
-	ON_UPDATE_COMMAND_UI(ID_FAVORITE_FOLDER_09, OnUpdateFavoriteFolder09)
-	ON_UPDATE_COMMAND_UI(ID_FAVORITE_FOLDER_10, OnUpdateFavoriteFolder10)
-	ON_COMMAND(ID_FAVORITE_FOLDER_01, OnFavoriteFolder01)
-	ON_COMMAND(ID_FAVORITE_FOLDER_02, OnFavoriteFolder02)
-	ON_COMMAND(ID_FAVORITE_FOLDER_03, OnFavoriteFolder03)
-	ON_COMMAND(ID_FAVORITE_FOLDER_04, OnFavoriteFolder04)
-	ON_COMMAND(ID_FAVORITE_FOLDER_05, OnFavoriteFolder05)
-	ON_COMMAND(ID_FAVORITE_FOLDER_06, OnFavoriteFolder06)
-	ON_COMMAND(ID_FAVORITE_FOLDER_07, OnFavoriteFolder07)
-	ON_COMMAND(ID_FAVORITE_FOLDER_08, OnFavoriteFolder08)
-	ON_COMMAND(ID_FAVORITE_FOLDER_09, OnFavoriteFolder09)
-	ON_COMMAND(ID_FAVORITE_FOLDER_10, OnFavoriteFolder10)
-	//}}AFX_MSG_MAP
-	// •W€‚Ìƒtƒ@ƒCƒ‹Šî–{ƒhƒLƒ…ƒƒ“ƒg ƒRƒ}ƒ“ƒh
-	ON_COMMAND(ID_FILE_NEW, CWinApp::OnFileNew)
-	ON_COMMAND(ID_FILE_OPEN, CWinApp::OnFileOpen)
+    //{{AFX_MSG_MAP(CSuperTagEditorApp)
+    ON_COMMAND(ID_APP_ABOUT, OnAppAbout)
+    ON_UPDATE_COMMAND_UI(ID_FILE_MRU_FILE1, OnUpdateFileMruFile)
+    ON_COMMAND_EX_RANGE(ID_FILE_MRU_FILE1, ID_FILE_MRU_FILE16, OnOpenRecentFile)
+    ON_UPDATE_COMMAND_UI(ID_FAVORITE_FOLDER_01, OnUpdateFavoriteFolder01)
+    ON_UPDATE_COMMAND_UI(ID_FAVORITE_FOLDER_02, OnUpdateFavoriteFolder02)
+    ON_UPDATE_COMMAND_UI(ID_FAVORITE_FOLDER_03, OnUpdateFavoriteFolder03)
+    ON_UPDATE_COMMAND_UI(ID_FAVORITE_FOLDER_04, OnUpdateFavoriteFolder04)
+    ON_UPDATE_COMMAND_UI(ID_FAVORITE_FOLDER_05, OnUpdateFavoriteFolder05)
+    ON_UPDATE_COMMAND_UI(ID_FAVORITE_FOLDER_06, OnUpdateFavoriteFolder06)
+    ON_UPDATE_COMMAND_UI(ID_FAVORITE_FOLDER_07, OnUpdateFavoriteFolder07)
+    ON_UPDATE_COMMAND_UI(ID_FAVORITE_FOLDER_08, OnUpdateFavoriteFolder08)
+    ON_UPDATE_COMMAND_UI(ID_FAVORITE_FOLDER_09, OnUpdateFavoriteFolder09)
+    ON_UPDATE_COMMAND_UI(ID_FAVORITE_FOLDER_10, OnUpdateFavoriteFolder10)
+    ON_COMMAND(ID_FAVORITE_FOLDER_01, OnFavoriteFolder01)
+    ON_COMMAND(ID_FAVORITE_FOLDER_02, OnFavoriteFolder02)
+    ON_COMMAND(ID_FAVORITE_FOLDER_03, OnFavoriteFolder03)
+    ON_COMMAND(ID_FAVORITE_FOLDER_04, OnFavoriteFolder04)
+    ON_COMMAND(ID_FAVORITE_FOLDER_05, OnFavoriteFolder05)
+    ON_COMMAND(ID_FAVORITE_FOLDER_06, OnFavoriteFolder06)
+    ON_COMMAND(ID_FAVORITE_FOLDER_07, OnFavoriteFolder07)
+    ON_COMMAND(ID_FAVORITE_FOLDER_08, OnFavoriteFolder08)
+    ON_COMMAND(ID_FAVORITE_FOLDER_09, OnFavoriteFolder09)
+    ON_COMMAND(ID_FAVORITE_FOLDER_10, OnFavoriteFolder10)
+    //}}AFX_MSG_MAP
+    // æ¨™æº–ã®ãƒ•ã‚¡ã‚¤ãƒ«åŸºæœ¬ãƒ‰ã‚­ãƒ¥ãƒ¡ãƒ³ãƒˆ ã‚³ãƒãƒ³ãƒ‰
+    ON_COMMAND(ID_FILE_NEW, CWinApp::OnFileNew)
+    ON_COMMAND(ID_FILE_OPEN, CWinApp::OnFileOpen)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// CSuperTagEditorApp ƒNƒ‰ƒX‚Ì\’z
+// CSuperTagEditorApp ã‚¯ãƒ©ã‚¹ã®æ§‹ç¯‰
 
 CSuperTagEditorApp::CSuperTagEditorApp()
 {
-	// TODO: ‚±‚ÌˆÊ’u‚É\’z—pƒR[ƒh‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢B
-	// ‚±‚±‚É InitInstance ’†‚Ìd—v‚È‰Šú‰»ˆ—‚ğ‚·‚×‚Ä‹Lq‚µ‚Ä‚­‚¾‚³‚¢B
-	m_hAccel = 0;
-	m_accelTable = NULL;		// ƒAƒNƒZƒ‰ƒŒ[ƒ^ƒe[ƒuƒ‹
-	m_nAccelTable = 0;
+    // TODO: ã“ã®ä½ç½®ã«æ§‹ç¯‰ç”¨ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„ã€‚
+    // ã“ã“ã« InitInstance ä¸­ã®é‡è¦ãªåˆæœŸåŒ–å‡¦ç†ã‚’ã™ã¹ã¦è¨˜è¿°ã—ã¦ãã ã•ã„ã€‚
+    m_hAccel = 0;
+    m_accelTable = NULL;        // ã‚¢ã‚¯ã‚»ãƒ©ãƒ¬ãƒ¼ã‚¿ãƒ†ãƒ¼ãƒ–ãƒ«
+    m_nAccelTable = 0;
 }
 
 CSuperTagEditorApp::~CSuperTagEditorApp()
 {
-	CString strINI = m_pszProfileName;
-	SaveProfile();
-	FreeProfile();
-	m_pRecentFileList->WriteList();
+    WriteRegistry();
+    m_pRecentFileList->WriteList();
 }
 
 /////////////////////////////////////////////////////////////////////////////
-// —Bˆê‚Ì CSuperTagEditorApp ƒIƒuƒWƒFƒNƒg
+// å”¯ä¸€ã® CSuperTagEditorApp ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 
 CSuperTagEditorApp theApp;
 
 /////////////////////////////////////////////////////////////////////////////
-// CSuperTagEditorApp ƒNƒ‰ƒX‚Ì‰Šú‰»
+// CSuperTagEditorApp ã‚¯ãƒ©ã‚¹ã®åˆæœŸåŒ–
 // =============================================
 // CSuperTagEditorApp::MakeFileName
-// ŠT—v  : ©ƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚ÌƒpƒX‚©‚çƒtƒ@ƒCƒ‹–¼‚ğ
-//       : ƒtƒ‹ƒpƒX‚Åì¬‚·‚é
-// ˆø”  : sExt			= ƒtƒ@ƒCƒ‹Šg’£q
-// –ß‚è’l: TCHAR *		= ƒtƒ@ƒCƒ‹–¼(NULL=¸”s)
+// æ¦‚è¦  : è‡ªã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã®ãƒ‘ã‚¹ã‹ã‚‰ãƒ•ã‚¡ã‚¤ãƒ«åã‚’
+//       : ãƒ•ãƒ«ãƒ‘ã‚¹ã§ä½œæˆã™ã‚‹
+// å¼•æ•°  : sExt         = ãƒ•ã‚¡ã‚¤ãƒ«æ‹¡å¼µå­
+// æˆ»ã‚Šå€¤: TCHAR *      = ãƒ•ã‚¡ã‚¤ãƒ«å(NULL=å¤±æ•—)
 // =============================================
 TCHAR *CSuperTagEditorApp::MakeFileName(TCHAR *sExt)
 {
-	TCHAR   drive[_MAX_DRIVE];
-	TCHAR   dir[_MAX_DIR];
-	TCHAR   fname[_MAX_FNAME];
-	TCHAR   buff[_MAX_PATH] = {'\0'};
+    TCHAR   drive[_MAX_DRIVE];
+    TCHAR   dir[_MAX_DIR];
+    TCHAR   fname[_MAX_FNAME];
+    TCHAR   buff[_MAX_PATH] = {0};
+    TCHAR   buff_canonicalized[_MAX_PATH];//by Kobarin(C:\\.\ste\SuperTagEditor.exe ã®ã‚ˆã†ã«ãªã‚‹ã“ã¨ãŒã‚ã‚‹)
+    //è‡ªå·±ã‚¢ãƒ—ãƒªã®ãƒ‘ã‚¹æ‰€å¾—ï¼ˆå¤§å°æ–‡å­—è­˜åˆ¥ä»˜ãï¼‰
+    GetModuleFileName(m_hInstance, buff, _MAX_PATH);
+    PathCanonicalize(buff_canonicalized, buff);
+    WIN32_FIND_DATA wfd;
 
-	//©ŒÈƒAƒvƒŠ‚ÌƒpƒXŠ“¾i‘å¬•¶š¯•Ê•t‚«j
-	GetModuleFileName(m_hInstance, buff, _MAX_PATH);
-	WIN32_FIND_DATA wfd;
+    HANDLE  h = ::FindFirstFile(buff_canonicalized, &wfd);
+    if (h == NULL) return(NULL);
 
-	HANDLE  h = ::FindFirstFile(buff, &wfd);
-	if (h == NULL) return(NULL);
+    _tsplitpath_s(buff_canonicalized, drive, _MAX_DRIVE, dir, _MAX_DIR, NULL, 0, NULL, 0);
+    _tmakepath_s(buff_canonicalized, drive, dir, wfd.cFileName, NULL);
+    ::FindClose(h);
 
-	_tsplitpath(buff, drive, dir, NULL, NULL);
-	_tmakepath(buff, drive, dir, wfd.cFileName, NULL);
-	::FindClose(h);
+    _tsplitpath_s(buff_canonicalized, drive, _MAX_DRIVE, dir, _MAX_DIR, fname, _MAX_FNAME, NULL, 0);
+    _tmakepath_s(buff_canonicalized, drive, dir, fname, sExt);
 
-	_tsplitpath(buff, drive, dir, fname, NULL);
-	_tmakepath(buff, drive, dir, fname, sExt);
-	return(_tcsdup(buff));
+    return(_tcsdup(buff_canonicalized));
 }
 
 
 BOOL CSuperTagEditorApp::InitInstance()
 {
-	// •W€“I‚È‰Šú‰»ˆ—
-	// ‚à‚µ‚±‚ê‚ç‚Ì‹@”\‚ğg—p‚¹‚¸AÀsƒtƒ@ƒCƒ‹‚ÌƒTƒCƒY‚ğ¬‚³‚­
-	// ‚µ‚½‚¯‚ê‚ÎˆÈ‰º‚Ì“Á’è‚Ì‰Šú‰»ƒ‹[ƒ`ƒ“‚Ì’†‚©‚ç•s•K—v‚È‚à‚Ì
-	// ‚ğíœ‚µ‚Ä‚­‚¾‚³‚¢B
+    // æ¨™æº–çš„ãªåˆæœŸåŒ–å‡¦ç†
+    // ã‚‚ã—ã“ã‚Œã‚‰ã®æ©Ÿèƒ½ã‚’ä½¿ç”¨ã›ãšã€å®Ÿè¡Œãƒ•ã‚¡ã‚¤ãƒ«ã®ã‚µã‚¤ã‚ºã‚’å°ã•ã
+    // ã—ãŸã‘ã‚Œã°ä»¥ä¸‹ã®ç‰¹å®šã®åˆæœŸåŒ–ãƒ«ãƒ¼ãƒãƒ³ã®ä¸­ã‹ã‚‰ä¸å¿…è¦ãªã‚‚ã®
+    // ã‚’å‰Šé™¤ã—ã¦ãã ã•ã„ã€‚
 
-	// ‘½d‹N“®‹Ö~ˆ— /* FreeFall 045 */
+    CoInitializeEx(NULL, COINIT_APARTMENTTHREADED);
 
-	// İ’è‚ª•Û‘¶‚³‚ê‚é‰º‚ÌƒŒƒWƒXƒgƒŠ ƒL[‚ğ•ÏX‚µ‚Ü‚·B
-	// TODO: ‚±‚Ì•¶š—ñ‚ğA‰ïĞ–¼‚Ü‚½‚ÍŠ‘®‚È‚Ç“KØ‚È‚à‚Ì‚É
-	// •ÏX‚µ‚Ä‚­‚¾‚³‚¢B
-	//SetRegistryKey(_T("MERCURY"));
-	free((void *)m_pszProfileName);
-	m_pszProfileName = MakeFileName("ini");
-	{ /* STEP 031 */
-		BOOL bFlag = FALSE;
-		for (int i = 1; i < __argc; i++) {
-			LPCTSTR pszParam = __targv[i];
-			if (bFlag) {
-				free((void *)m_pszProfileName);
-				m_pszProfileName = _strdup(pszParam);
-				break;
-			}
-			if (pszParam[0] == '-' || pszParam[0] == '/')
-			{
-				if (strcmp(pszParam, "-I") == 0 || strcmp(pszParam, "/I") == 0) {
-					bFlag = TRUE;
-				}
-			}
-		}
-	}
-	//if (MyGetProfileInt("STEx", "UseRegistry", 0) ? true : false) {
-	//	SetRegistryKey(_T("MERCURY"));
-	//}
+    // å¤šé‡èµ·å‹•ç¦æ­¢å‡¦ç† /* FreeFall 045 */
 
-	// ª‚±‚±‚Åİ’è‚µ‚½ INI ƒtƒ@ƒCƒ‹–¼Ì‚ÍƒfƒXƒgƒ‰ƒNƒ^‚Å free ‚³‚ê‚é
-	CString strINI = m_pszProfileName;
-	InitProfile();
-	ReadRegistry();
+    // è¨­å®šãŒä¿å­˜ã•ã‚Œã‚‹ä¸‹ã®ãƒ¬ã‚¸ã‚¹ãƒˆãƒª ã‚­ãƒ¼ã‚’å¤‰æ›´ã—ã¾ã™ã€‚
+    // TODO: ã“ã®æ–‡å­—åˆ—ã‚’ã€ä¼šç¤¾åã¾ãŸã¯æ‰€å±ãªã©é©åˆ‡ãªã‚‚ã®ã«
+    // å¤‰æ›´ã—ã¦ãã ã•ã„ã€‚
+    //SetRegistryKey(_T("MERCURY"));
+    free((void *)m_pszProfileName);
+    m_pszProfileName = MakeFileName(_T("ini"));
+    { /* STEP 031 */
+        BOOL bFlag = FALSE;
+        for (int i = 1; i < __argc; i++) {
+            LPCTSTR pszParam = __targv[i];
+            if (bFlag) {
+                free((void *)m_pszProfileName);
+                m_pszProfileName = _tcsdup(pszParam);
+                break;
+            }
+            if (pszParam[0] == _T('-') || pszParam[0] == _T('/'))
+            {
+                if (_tcscmp(pszParam, _T("-I")) == 0 || _tcscmp(pszParam, _T("/I")) == 0) {
+                    bFlag = TRUE;
+                }
+            }
+        }
+    }
+    m_IniFile.Open(m_pszProfileName);
+    ReadRegistry();
 
-	LoadStdProfileSettings(g_nRecentFolder);  // •W€‚Ì INI ƒtƒ@ƒCƒ‹‚ÌƒIƒvƒVƒ‡ƒ“‚ğƒ[ÄŞ‚µ‚Ü‚· (MRU ‚ğŠÜ‚Ş)  /* StartInaction 053 */
+    LoadStdProfileSettings(g_nRecentFolder);  // æ¨™æº–ã® INI ãƒ•ã‚¡ã‚¤ãƒ«ã®ã‚ªãƒ—ã‚·ãƒ§ãƒ³ã‚’ãƒ­ãƒ¼ãƒ‰ã—ã¾ã™ (MRU ã‚’å«ã‚€)  /* StartInaction 053 */
 
-	// ‘½d‹N“®‹Ö~ˆ— /* FreeFall 045 */
-	if (!g_bValidDupExec) {
-		char	*sMutexName = PROG_NAME;
-		HANDLE hPrevMutex = OpenMutex(MUTEX_ALL_ACCESS, FALSE, sMutexName);
-		if(hPrevMutex){
-	//		MessageBox(NULL, "Šù‚É "PROG_NAME" ‚Í‹N“®’†‚Å‚·", "‘½d‹N“®ƒGƒ‰[", MB_ICONSTOP|MB_OK|MB_TOPMOST);
-			// C³ by Kobarin
-			// ‹N“®Ï‚İ‚Ì STE ‚Éƒtƒ@ƒCƒ‹–¼EƒtƒHƒ‹ƒ_–¼‚ğ“n‚·
-			if(__argc >= 2){
-				KbDDEClient ddeClient(NULL, "SuperTagEditor","SuperTagEditor");
-				int i;
-				for(i = 1; i < __argc; i++){
-					ddeClient.Execute(__argv[i],//ƒtƒ@ƒCƒ‹–¼
-									  ""        //ƒXƒCƒbƒ`i‚È‚µj
-									  );
-				}
-			}
-			CloseHandle(hPrevMutex);
-			//CloseHandle(hPrevMutex);
-			return FALSE;
-		}
-		m_hMutex = CreateMutex(FALSE, 0, sMutexName);
-	}
+    // å¤šé‡èµ·å‹•ç¦æ­¢å‡¦ç† /* FreeFall 045 */
+    if (!g_bValidDupExec) {
+        HANDLE hMutex = OpenMutex(MUTEX_ALL_ACCESS, FALSE, STEP_MUTEX_NAME);
+        if(hMutex){
+    //      MessageBox(NULL, "æ—¢ã« "PROG_NAME" ã¯èµ·å‹•ä¸­ã§ã™", "å¤šé‡èµ·å‹•ã‚¨ãƒ©ãƒ¼", MB_ICONSTOP|MB_OK|MB_TOPMOST);
+            // èµ·å‹•æ¸ˆã¿ã® STE ã«ãƒ•ã‚¡ã‚¤ãƒ«åãƒ»ãƒ•ã‚©ãƒ«ãƒ€åã‚’æ¸¡ã™
+            if(__argc >= 2){
+                KbDDEClient ddeClient(NULL, STEP_DDE_SERVICE_NAME, STEP_DDE_TOPIC_NAME);
+                TCHAR szCommand[2048];
+                int i;
+                for(i = 1; i < __argc; i++){
+                    _sntprintf_s(szCommand, _TRUNCATE, _T("\"%s\""), __targv[i]);//ãƒ•ã‚¡ã‚¤ãƒ«åã‚’ "" ã§æ‹¬ã‚‹
+                    if(!ddeClient.Execute(szCommand, 3000)){
+                    //å¤±æ•—ã—ãŸã‚‰ãã‚Œä»¥ä¸Šã¯æ¸¡ã•ãªã„
+                        break;
+                    }
+                }
+            }
+            CloseHandle(hMutex);
+            return FALSE;
+        }
+        m_hMutex = CreateMutex(FALSE, 0, STEP_MUTEX_NAME);
+    }
 
-	// ƒAƒvƒŠƒP[ƒVƒ‡ƒ“—p‚ÌƒhƒLƒ…ƒƒ“ƒg ƒeƒ“ƒvƒŒ[ƒg‚ğ“o˜^‚µ‚Ü‚·BƒhƒLƒ…ƒƒ“ƒg ƒeƒ“ƒvƒŒ[ƒg
-	//  ‚ÍƒhƒLƒ…ƒƒ“ƒgAƒtƒŒ[ƒ€ ƒEƒBƒ“ƒhƒE‚Æƒrƒ…[‚ğŒ‹‡‚·‚é‚½‚ß‚É‹@”\‚µ‚Ü‚·B
+    // ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ç”¨ã®ãƒ‰ã‚­ãƒ¥ãƒ¡ãƒ³ãƒˆ ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆã‚’ç™»éŒ²ã—ã¾ã™ã€‚ãƒ‰ã‚­ãƒ¥ãƒ¡ãƒ³ãƒˆ ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆ
+    //  ã¯ãƒ‰ã‚­ãƒ¥ãƒ¡ãƒ³ãƒˆã€ãƒ•ãƒ¬ãƒ¼ãƒ  ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã¨ãƒ“ãƒ¥ãƒ¼ã‚’çµåˆã™ã‚‹ãŸã‚ã«æ©Ÿèƒ½ã—ã¾ã™ã€‚
 
-	CSingleDocTemplate* pDocTemplate;
-	pDocTemplate = new CSingleDocTemplate(
-		IDR_MAINFRAME,
-		RUNTIME_CLASS(CSuperTagEditorDoc),
-		RUNTIME_CLASS(CMainFrame),       // ƒƒCƒ“ SDI ƒtƒŒ[ƒ€ ƒEƒBƒ“ƒhƒE
-		RUNTIME_CLASS(CSuperTagEditorView));
-	AddDocTemplate(pDocTemplate);
+    CSingleDocTemplate* pDocTemplate;
+    pDocTemplate = new CSingleDocTemplate(
+        IDR_MAINFRAME,
+        RUNTIME_CLASS(CSuperTagEditorDoc),
+        RUNTIME_CLASS(CMainFrame),       // ãƒ¡ã‚¤ãƒ³ SDI ãƒ•ãƒ¬ãƒ¼ãƒ  ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦
+        RUNTIME_CLASS(CSuperTagEditorView));
+    AddDocTemplate(pDocTemplate);
 
-	// DDE Execute open ‚ğg—p‰Â”\‚É‚µ‚Ü‚·B
-	EnableShellOpen();
-//	RegisterShellFileTypes(TRUE);
+    // DDE Execute open ã‚’ä½¿ç”¨å¯èƒ½ã«ã—ã¾ã™ã€‚
+    EnableShellOpen();
+//  RegisterShellFileTypes(TRUE);
 
-	// DDEAfile open ‚È‚Ç•W€‚ÌƒVƒFƒ‹ ƒRƒ}ƒ“ƒh‚ÌƒRƒ}ƒ“ƒhƒ‰ƒCƒ“‚ğ‰ğÍ‚µ‚Ü‚·B
-	CCommandLineInfo cmdInfo;
-	ParseCommandLine(cmdInfo);
+    // DDEã€file open ãªã©æ¨™æº–ã®ã‚·ã‚§ãƒ« ã‚³ãƒãƒ³ãƒ‰ã®ã‚³ãƒãƒ³ãƒ‰ãƒ©ã‚¤ãƒ³ã‚’è§£æã—ã¾ã™ã€‚
+    CCommandLineInfo cmdInfo;
+    ParseCommandLine(cmdInfo);
 
-	// Å‘å‰»‹N“®‘Î‰
-	if (g_bMainFrameZoomed) {
-		CWinApp::m_nCmdShow = SW_SHOWMAXIMIZED;
-	} else if (g_bMainFrameIconic) {
-		CWinApp::m_nCmdShow = SW_SHOWMINIMIZED;
-	}
+    // æœ€å¤§åŒ–èµ·å‹•å¯¾å¿œ
+    if (g_bMainFrameZoomed) {
+        CWinApp::m_nCmdShow = SW_SHOWMAXIMIZED;
+    } else if (g_bMainFrameIconic) {
+        CWinApp::m_nCmdShow = SW_SHOWMINIMIZED;
+    }
 
-	// ƒRƒ}ƒ“ƒhƒ‰ƒCƒ“‚ÅƒfƒBƒXƒpƒbƒ` ƒRƒ}ƒ“ƒh‚ğw’è‚µ‚Ü‚·B
-	if (!ProcessShellCommand(cmdInfo))
-		return FALSE;
-	// ProcessShellCommand()‚Åˆµ‚í‚ê‚È‚©‚Á‚½‚à‚Ì‚ğ‚±‚±‚Åˆ—
-	{ /* Misirlou 140 */
-		BOOL bFirst = TRUE;
-		for (int i = 1; i < __argc; i++) {
-			LPCTSTR pszParam = __targv[i];
-			BOOL bFlag = FALSE;
-			BOOL bLast = ((i + 1) == __argc);
-			if (pszParam[0] == '-' || pszParam[0] == '/')
-			{
-				// remove flag specifier
-				bFlag = TRUE;
-				++pszParam;
-			}
-			if (!bFlag && !bFirst) {
-				OpenDocumentFile(pszParam);
-			}
-			if (!bFlag)	bFirst = FALSE;
-		}
-	}
+    // ã‚³ãƒãƒ³ãƒ‰ãƒ©ã‚¤ãƒ³ã§ãƒ‡ã‚£ã‚¹ãƒ‘ãƒƒãƒ ã‚³ãƒãƒ³ãƒ‰ã‚’æŒ‡å®šã—ã¾ã™ã€‚
+    if (!ProcessShellCommand(cmdInfo))
+        return FALSE;
+    // ProcessShellCommand()ã§æ‰±ã‚ã‚Œãªã‹ã£ãŸã‚‚ã®ã‚’ã“ã“ã§å‡¦ç†
+    { /* Misirlou 140 */
+        BOOL bFirst = TRUE;
+        for (int i = 1; i < __argc; i++) {
+            LPCTSTR pszParam = __targv[i];
+            BOOL bFlag = FALSE;
+            BOOL bLast = ((i + 1) == __argc);
+            if (pszParam[0] == _T('-') || pszParam[0] == _T('/'))
+            {
+                // remove flag specifier
+                bFlag = TRUE;
+                ++pszParam;
+            }
+            if (!bFlag && !bFirst) {
+                OpenDocumentFile(pszParam);
 
-	// ƒƒCƒ“ ƒEƒBƒ“ƒhƒE‚ª‰Šú‰»‚³‚ê‚½‚Ì‚ÅA•\¦‚ÆXV‚ğs‚¢‚Ü‚·B
-	if (g_bMainFrameZoomed) {
-//		m_pMainWnd->ShowWindow(SW_SHOWMAXIMIZED);
-//		m_pMainWnd->UpdateWindow();
-	} else if (g_bMainFrameIconic) {
-//		m_pMainWnd->ShowWindow(SW_SHOWMINIMIZED);
-//		m_pMainWnd->UpdateWindow();
-	} else {
-		m_pMainWnd->ShowWindow(SW_SHOW);
-		m_pMainWnd->UpdateWindow();
-	}
+            }
+            if (!bFlag) bFirst = FALSE;
+        }
+    }
 
-	// ƒhƒ‰ƒbƒO/ƒhƒƒbƒv ƒI[ƒvƒ“‚ğ‹–‰Â‚µ‚Ü‚·
-//	m_pMainWnd->DragAcceptFiles();
+    // ãƒ¡ã‚¤ãƒ³ ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãŒåˆæœŸåŒ–ã•ã‚ŒãŸã®ã§ã€è¡¨ç¤ºã¨æ›´æ–°ã‚’è¡Œã„ã¾ã™ã€‚
+    if (g_bMainFrameZoomed) {
+//      m_pMainWnd->ShowWindow(SW_SHOWMAXIMIZED);
+//      m_pMainWnd->UpdateWindow();
+    } else if (g_bMainFrameIconic) {
+//      m_pMainWnd->ShowWindow(SW_SHOWMINIMIZED);
+//      m_pMainWnd->UpdateWindow();
+    } else {
+        m_pMainWnd->ShowWindow(SW_SHOW);
+        m_pMainWnd->UpdateWindow();
+    }
 
-    //’Ç‰Á by Kobarin
-    //KbSTE ‚Ìƒtƒ‹ƒpƒXƒtƒ@ƒCƒ‹–¼‚ğƒŒƒWƒXƒgƒŠ‚É•Û‘¶
-    //iKbMedia Player ‚Æ˜AŒg‚·‚é‚½‚ßj
-    //WriteKbSTEPathToRegistry();
+    // ãƒ‰ãƒ©ãƒƒã‚°/ãƒ‰ãƒ­ãƒƒãƒ— ã‚ªãƒ¼ãƒ—ãƒ³ã‚’è¨±å¯ã—ã¾ã™
+//  m_pMainWnd->DragAcceptFiles();
+    //VS2022 ãƒ©ãƒ³ã‚¿ã‚¤ãƒ ã®æœ‰ç„¡ã‚’ç¢ºèª
+#ifdef _WIN64
+    HINSTANCE hDll = LoadLibrary(_T("vcruntime140_1.dll"));
+#else
+    HINSTANCE hDll = LoadLibrary(_T("vcruntime140.dll"));
+#endif
+#if 0
+#ifdef _DEBUG
+    if(hDll){
+        FreeLibrary(hDll);hDll = NULL;
+    }
+#endif
+#endif
+    if(!hDll){//ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã•ã‚Œã¦ã„ãªã„
+        MessageBox(NULL,
+                   _T("VS2022 ãƒ©ãƒ³ã‚¿ã‚¤ãƒ ãŒã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã•ã‚Œã¦ã„ã¾ã›ã‚“ã€‚\n")
+                   _T("STEP_J ã®å‹•ä½œã«ã¯ VS2022 ãƒ©ãƒ³ã‚¿ã‚¤ãƒ ã®ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ãŒå¿…è¦ã§ã™ã€‚\n")
+                   _T("æ—¢ã«ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«æ¸ˆã¿ãªã®ã«ã“ã®ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ãŒè¡¨ç¤ºã•ã‚Œã‚‹å ´åˆã¯ãƒ©ãƒ³ã‚¿ã‚¤ãƒ ã®\r\n")
+                   _T("ãƒãƒ¼ã‚¸ãƒ§ãƒ³ãŒå¤ã„å¯èƒ½æ€§ãŒã‚ã‚Šã¾ã™ã€‚æœ€æ–°ç‰ˆã‚’ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã—ç›´ã—ã¦ä¸‹ã•ã„ã€‚\r\n" )
+                   _T("ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã—ãªã„ã¨æ¨™æº–ã®ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ã‚’ä½¿ç”¨å‡ºæ¥ãªã„ãŸã‚ã€ä½•ã‚‚å‡ºæ¥ã¾ã›ã‚“ã€‚\n")
+                   _T("64bit OS ã§ã¯ 64bit ç‰ˆã¨ 32bit ç‰ˆã®ä¸¡æ–¹ã®ãƒ©ãƒ³ã‚¿ã‚¤ãƒ ã‚’ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã™ã‚‹ã“ã¨ã‚’ãŠå‹§ã‚ã—ã¾ã™ã€‚\n")
+                   _T("OK ã‚’ã‚¯ãƒªãƒƒã‚¯ã™ã‚‹ã¨é…å¸ƒã‚µã‚¤ãƒˆã«ã‚¸ãƒ£ãƒ³ãƒ—ã—ã¾ã™ã€‚\n"),
+                   _T("ã‚¨ãƒ©ãƒ¼"), MB_OK|MB_TOPMOST);
+        ShellExecute(NULL, _T("open"), VCRUNTIME_URL, 0, 0, SW_SHOWNORMAL);
+    }
+    else{//OK
+        FreeLibrary(hDll);
+    }
 
-	return TRUE;
+    return TRUE;
 }
 
-int CSuperTagEditorApp::ExitInstance() 
+int CSuperTagEditorApp::ExitInstance()
 {
-	// TODO: ‚±‚ÌˆÊ’u‚ÉŒÅ—L‚Ìˆ—‚ğ’Ç‰Á‚·‚é‚©A‚Ü‚½‚ÍŠî–{ƒNƒ‰ƒX‚ğŒÄ‚Ño‚µ‚Ä‚­‚¾‚³‚¢
-	ReleaseMutex(m_hMutex);
+    // TODO: ã“ã®ä½ç½®ã«å›ºæœ‰ã®å‡¦ç†ã‚’è¿½åŠ ã™ã‚‹ã‹ã€ã¾ãŸã¯åŸºæœ¬ã‚¯ãƒ©ã‚¹ã‚’å‘¼ã³å‡ºã—ã¦ãã ã•ã„
+    ReleaseMutex(m_hMutex);
 
-	// ƒAƒNƒZƒ‰ƒŒ[ƒ^ƒe[ƒuƒ‹‚Ì‰ğ•ú
-	DestroyAccelerator();
+    // ã‚¢ã‚¯ã‚»ãƒ©ãƒ¬ãƒ¼ã‚¿ãƒ†ãƒ¼ãƒ–ãƒ«ã®è§£æ”¾
+    DestroyAccelerator();
 
-	delete [] g_genreListUSER;
+    delete [] g_genreListUSER;
+    CoUninitialize();
 
-	return CWinApp::ExitInstance();
+    return CWinApp::ExitInstance();
 }
 
 
 /////////////////////////////////////////////////////////////////////////////
-// ƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚Ìƒo[ƒWƒ‡ƒ“î•ñ‚Åg‚í‚ê‚é CAboutDlg ƒ_ƒCƒAƒƒO
+// ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã®ãƒãƒ¼ã‚¸ãƒ§ãƒ³æƒ…å ±ã§ä½¿ã‚ã‚Œã‚‹ CAboutDlg ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
 
 class CAboutDlg : public CDialog
 {
 public:
-	CAboutDlg();
+    CAboutDlg();
 
-// ƒ_ƒCƒAƒƒO ƒf[ƒ^
-	//{{AFX_DATA(CAboutDlg)
-	enum { IDD = IDD_ABOUTBOX };
-	CString	m_strVersion;
-	//}}AFX_DATA
+// ãƒ€ã‚¤ã‚¢ãƒ­ã‚° ãƒ‡ãƒ¼ã‚¿
+    //{{AFX_DATA(CAboutDlg)
+    enum { IDD = IDD_ABOUTBOX };
+    CString m_strVersion;
+    //}}AFX_DATA
 
-	// ClassWizard ‰¼‘zŠÖ”‚ÌƒI[ƒo[ƒ‰ƒCƒh‚ğ¶¬‚µ‚Ü‚·B
-	//{{AFX_VIRTUAL(CAboutDlg)
-	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV ‚ÌƒTƒ|[ƒg
-	//}}AFX_VIRTUAL
+    // ClassWizard ä»®æƒ³é–¢æ•°ã®ã‚ªãƒ¼ãƒãƒ¼ãƒ©ã‚¤ãƒ‰ã‚’ç”Ÿæˆã—ã¾ã™ã€‚
+    //{{AFX_VIRTUAL(CAboutDlg)
+    protected:
+    virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV ã®ã‚µãƒãƒ¼ãƒˆ
+    //}}AFX_VIRTUAL
 
-// ƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“
+// ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³
 protected:
-	//{{AFX_MSG(CAboutDlg)
-		// ƒƒbƒZ[ƒW ƒnƒ“ƒhƒ‰‚Í‚ ‚è‚Ü‚¹‚ñB
-	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
+    //{{AFX_MSG(CAboutDlg)
+        // ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒãƒ³ãƒ‰ãƒ©ã¯ã‚ã‚Šã¾ã›ã‚“ã€‚
+    //}}AFX_MSG
+    DECLARE_MESSAGE_MAP()
 };
 
 CAboutDlg::CAboutDlg() : CDialog(CAboutDlg::IDD)
 {
-	//{{AFX_DATA_INIT(CAboutDlg)
-	//}}AFX_DATA_INIT
+    //{{AFX_DATA_INIT(CAboutDlg)
+    //}}AFX_DATA_INIT
 
-	// ƒo[ƒWƒ‡ƒ“î•ñ‚Ìİ’è
-	//m_strVersion.Format(PROG_NAME" Ver "PROG_VERSION"(Build:%d) ‰ü", BUILDCOUNT_NUM);
-	m_strVersion.Format(PROG_NAME_ORG2" ("PROG_NAME_ORG" Ver "PROG_VERSION_ORG"‰ü) Ver "PROG_VERSION_ORG2" ‰ü\n\n"PROG_NAME" Version "PROG_VERSION);
+    // ãƒãƒ¼ã‚¸ãƒ§ãƒ³æƒ…å ±ã®è¨­å®š
+    //m_strVersion.Format(PROG_NAME" Ver "PROG_VERSION"(Build:%d) æ”¹", BUILDCOUNT_NUM);
+    //m_strVersion.Format(PROG_NAME_ORG2 " (" PROG_NAME_ORG " Ver " PROG_VERSION_ORG "æ”¹) Ver " PROG_VERSION_ORG2 " æ”¹\n\n" PROG_NAME " Version " PROG_VERSION);
+    m_strVersion = _T("äº”ä»£ç›® SuperTagEditor\n") PROG_NAME _T(" Version ") PROG_VERSION _T(" (") PROG_PLATFORM _T(")\n")
+                   _T("\n")
+                   PROG_COPYRIGHT _T("\n")
+                   PROG_URL       _T("\n") ;
+                   //PROG_MAIL ; STEP_J ãƒ¡ãƒ¼ãƒ«ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’è¡¨ç¤ºã™ã‚‹å ´åˆã¯æœ‰åŠ¹ã«ã—ã¦ä¸‹ã•ã„ã€‚
 }
 
 void CAboutDlg::DoDataExchange(CDataExchange* pDX)
 {
-	CDialog::DoDataExchange(pDX);
-	//{{AFX_DATA_MAP(CAboutDlg)
-	DDX_Text(pDX, IDC_ST_VERSION, m_strVersion);
-	//}}AFX_DATA_MAP
+    CDialog::DoDataExchange(pDX);
+    //{{AFX_DATA_MAP(CAboutDlg)
+    DDX_Text(pDX, IDC_ST_VERSION, m_strVersion);
+    //}}AFX_DATA_MAP
 }
 
 BEGIN_MESSAGE_MAP(CAboutDlg, CDialog)
-	//{{AFX_MSG_MAP(CAboutDlg)
-		// ƒƒbƒZ[ƒW ƒnƒ“ƒhƒ‰‚Í‚ ‚è‚Ü‚¹‚ñB
-	//}}AFX_MSG_MAP
+    //{{AFX_MSG_MAP(CAboutDlg)
+        // ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒãƒ³ãƒ‰ãƒ©ã¯ã‚ã‚Šã¾ã›ã‚“ã€‚
+    //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
-// ƒ_ƒCƒAƒƒO‚ğÀs‚·‚é‚½‚ß‚ÌƒAƒvƒŠƒP[ƒVƒ‡ƒ“ ƒRƒ}ƒ“ƒh
+// ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚’å®Ÿè¡Œã™ã‚‹ãŸã‚ã®ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ ã‚³ãƒãƒ³ãƒ‰
 void CSuperTagEditorApp::OnAppAbout()
 {
-	CAboutDlg aboutDlg;
-	aboutDlg.DoModal();
+    CAboutDlg aboutDlg;
+    aboutDlg.DoModal();
 }
 
 /////////////////////////////////////////////////////////////////////////////
-// CSuperTagEditorApp ƒƒbƒZ[ƒW ƒnƒ“ƒhƒ‰
-static	char	*sSectionOption			= "Option";
-static	char	*sKeyVersion			= "Version";
-static	char	*sKeyCurrentDir			= "CurrentDir";
-static	char	*sKeyCurrentPlayList	= "CurrentPlayList";
-static	char	*sKeyEnterBeginEdit		= "EnterBeginEdit";
-static	char	*sKeyESCEditCancel		= "ESCEditCancel";
-static	char	*sKeyEnableEditCursorExit= "EnableEditCursorExit";
-static	char	*sKeyEditOkDown			= "EditOkDown";
-static	char	*sKeyKeepTimeStamp		= "KeepTimeStamp";
-static	char	*sKeySyncCreateTime		= "SyncCreateTime";
-static	char	*sKeyChangeFileExt		= "ChangeFileExt";
-static	char	*sKeyLoadFileChecked	= "LoadFileChecked";
-static	char	*sKeyHideMP3ListFile	= "HideMP3ListFile";
-static	char	*sKeyDropSearchSubFolder	= "DropSearchSubFolder";	/* TyphoonSwell 026 */
-static	char	*sKeyShowZenSpace	= "ShowZenSpace";	/* BeachMonster 107 */
-static	char	*sKeyShowOtherChar	= "ShowOtherChar";	/* BeachMonster 107 */
-static	char	*sKeySortIgnoreCase	= "SortIgnoreCase";	/* BeachMonster4 114 */
-static	char	*sKeySortIgnoreZenHan	= "SortIgnoreZenHan";	/* BeachMonster4 114 */
-static	char	*sKeySortIgnoreKataHira	= "SortIgnoreKataHira";	/* FunnyCorn 179 */
-static	char	*sKeyShowTotalParent	= "ShowTotalParent";	/* RockDance 128 */
-static	char	*sKeyShowTips	= "ShowTips";	/* Rumble 188 */
-static	char	*sKeyChangeTextFile		= "ChangeTextFile";
-static	char	*sKeyEditFiledSIF		= "EditFiledSI";
-static	char	*sKeyAutoOpenFolder		= "AutoOpenFolder";
-static	char	*sKeyLoadFileAdjustColumn	= "LoadFileAdjustColumn";
-static	char	*sKeySetLyricsDir		= "SetLyricsDir";
-static	char	*sKeySearchLyricsSubDir	= "SearchLyricsSubDir";
-static	char	*sKeyEnableSearchSubDir	= "EnableSearchSubDir";
-static	char	*sKeyLyricsPath			= "LyricsPath";
-static	char	*sKeyCheckFileName		= "CheckFileName";
-static	char	*sKeyPlayerType			= "PlayerType";
-static	char	*sKeyWinAmpPath			= "WinAmpPath";
+// CSuperTagEditorApp ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒãƒ³ãƒ‰ãƒ©
+static const TCHAR  sSectionOption[]        = _T("Option");
+static const TCHAR  sKeyVersion[]           = _T("Version");
+static const TCHAR  sKeyCurrentDir[]        = _T("CurrentDir");
+static const TCHAR  sKeyCurrentPlayList[]   = _T("CurrentPlayList");
+static const TCHAR  sKeyEnterBeginEdit[]    = _T("EnterBeginEdit");
+static const TCHAR  sKeyESCEditCancel[]     = _T("ESCEditCancel");
+static const TCHAR  sKeyEnableEditCursorExit[] = _T("EnableEditCursorExit");
+static const TCHAR  sKeyEditOkDown[]        = _T("EditOkDown");
+static const TCHAR  sKeyKeepTimeStamp[]     = _T("KeepTimeStamp");
+static const TCHAR  sKeySyncCreateTime[]    = _T("SyncCreateTime");
+static const TCHAR  sKeyChangeFileExt[]     = _T("ChangeFileExt");
+static const TCHAR  sKeyLoadFileChecked[]   = _T("LoadFileChecked");
+static const TCHAR  sKeyHideMP3ListFile[]   = _T("HideMP3ListFile");
+static const TCHAR  sKeyDropSearchSubFolder[] = _T("DropSearchSubFolder");    /* TyphoonSwell 026 */
+static const TCHAR  sKeyShowZenSpace[]      = _T("ShowZenSpace");   /* BeachMonster 107 */
+static const TCHAR  sKeyShowOtherChar[]     = _T("ShowOtherChar");  /* BeachMonster 107 */
+static const TCHAR  sKeySortIgnoreCase[]    = _T("SortIgnoreCase"); /* BeachMonster4 114 */
+static const TCHAR  sKeySortIgnoreZenHan[]  = _T("SortIgnoreZenHan");   /* BeachMonster4 114 */
+static const TCHAR  sKeySortIgnoreKataHira[]= _T("SortIgnoreKataHira"); /* FunnyCorn 179 */
+static const TCHAR  sKeyShowTotalParent[]   = _T("ShowTotalParent");    /* RockDance 128 */
+static const TCHAR  sKeyShowTips[]          = _T("ShowTips");   /* Rumble 188 */
+static const TCHAR  sKeyChangeTextFile[]    = _T("ChangeTextFile");
+static const TCHAR  sKeyEditFiledSIF[]      = _T("EditFiledSI");
+static const TCHAR  sKeyAutoOpenFolder[]    = _T("AutoOpenFolder");
+static const TCHAR  sKeyLoadFileAdjustColumn[]  = _T("LoadFileAdjustColumn");
+static const TCHAR  sKeySetLyricsDir[]      = _T("SetLyricsDir");
+static const TCHAR  sKeySearchLyricsSubDir[]= _T("SearchLyricsSubDir");
+static const TCHAR  sKeyEnableSearchSubDir[]= _T("EnableSearchSubDir");
+static const TCHAR  sKeyLyricsPath[]        = _T("LyricsPath");
+static const TCHAR  sKeyCheckFileName[]     = _T("CheckFileName");
+static const TCHAR  sKeyPlayerType[]        = _T("PlayerType");
+static const TCHAR  sKeyWinAmpPath[]        = _T("WinAmpPath");
 
-static	char	*sKeyID3v2GenreAddNumber	= "ID3v2GenreAddNumber";
-static	char	*sKeyFileNameMaxCheck	= "FileNameMaxCheck";
-static	char	*sKeyFileNameMaxChar	= "FileNameMaxChar";
-static	char	*sKeyFileNameMaxCellColor	= "FileNameMaxCellColor";
+static const TCHAR  sKeyID3v2GenreAddNumber[] = _T("ID3v2GenreAddNumber");
+static const TCHAR  sKeyFileNameMaxCheck[]  = _T("FileNameMaxCheck");
+static const TCHAR  sKeyFileNameMaxChar[]   = _T("FileNameMaxChar");
+static const TCHAR  sKeyFileNameMaxCellColor[] = _T("FileNameMaxCellColor");
 
-static	char	*sSectionFolderSync			= "FolderSync";
-static	char	*sKeyEnableFolderSync		= "EnableFolderSync";
-static	char	*sKeySyncRootFolder			= "RootFolder";
-static	char	*sKeySyncSelectAlways		= "SelectAlways";
-static	char	*sKeySyncDeleteFolder		= "DeleteFolder";
-static	char	*sKeySyncLyricsFileMove		= "LyricsFileMove";
+static const TCHAR  sSectionFolderSync[]    = _T("FolderSync");
+static const TCHAR  sKeyEnableFolderSync[]  = _T("EnableFolderSync");
+static const TCHAR  sKeySyncRootFolder[]    = _T("RootFolder");
+static const TCHAR  sKeySyncSelectAlways[]  = _T("SelectAlways");
+static const TCHAR  sKeySyncDeleteFolder[]  = _T("DeleteFolder");
+static const TCHAR  sKeySyncLyricsFileMove[]= _T("LyricsFileMove");
 
-static	char	*sSectionConfMessage	= "ConfMessage";
-static	char	*sKeyConfConvMP3		= "ConvMP3";
-static	char	*sKeyConfConvRMP		= "ConvRMP";
-static	char	*sKeyConfConvID3v2		= "ConvID3v2";
-static	char	*sKeyConfDeleteFile		= "DeleteFile";
-static	char	*sKeyConfDeleteList		= "DeleteList";
-static	char	*sKeyConfEditModify		= "EditModify";
-static	char	*sKeyConfFolderSync		= "FolderSync";
+static const TCHAR  sSectionConfMessage[]   = _T("ConfMessage");
+static const TCHAR  sKeyConfConvMP3[]       = _T("ConvMP3");
+static const TCHAR  sKeyConfConvRMP[]       = _T("ConvRMP");
+static const TCHAR  sKeyConfConvID3v2[]     = _T("ConvID3v2");
+static const TCHAR  sKeyConfDeleteFile[]    = _T("DeleteFile");
+static const TCHAR  sKeyConfDeleteList[]    = _T("DeleteList");
+static const TCHAR  sKeyConfEditModify[]    = _T("EditModify");
+static const TCHAR  sKeyConfFolderSync[]    = _T("FolderSync");
 
-static	char	*sSectionLoadPlayList	= "LoadPlayList";
-static	char	*sKeyClearList			= "ClearList";
-static	char	*sKeyClearCheck			= "ClearCheck";
-static	char	*sKeyAddList			= "AddList";
-static	char	*sKeyFileCheck			= "FileCheck";
+static const TCHAR  sSectionLoadPlayList[]  = _T("LoadPlayList");
+static const TCHAR  sKeyClearList[]         = _T("ClearList");
+static const TCHAR  sKeyClearCheck[]        = _T("ClearCheck");
+static const TCHAR  sKeyAddList[]           = _T("AddList");
+static const TCHAR  sKeyFileCheck[]         = _T("FileCheck");
 
-static	char	*sSectionCheckWord[CHECK_STATE_MAX]	= {"CheckWord", "ReplaceWord"};
-static	char	*sKeySearchWord		= "SearchWord";
-static	char	*sKeyReplaceWord	= "ReplaceWord";
-static	char	*sKeyTargetColumn	= "TargetColumn";
-static	char	*sKeyCheckDiffUL	= "CheckDiffUL";
-static	char	*sKeyRegExp			= "RegExp";
-static	char	*sKeyRangeSelected	= "RangeSelected";
-static	char	*sKeyMatchComplete	= "MatchComplete";
-static	char	*sKeyMatchSelected	= "MatchSelected";
+static const TCHAR  *sSectionCheckWord[CHECK_STATE_MAX] = {_T("CheckWord"), _T("ReplaceWord")};
+static const TCHAR  sKeySearchWord[]        = _T("SearchWord");
+static const TCHAR  sKeyReplaceWord[]       = _T("ReplaceWord");
+static const TCHAR  sKeyTargetColumn[]      = _T("TargetColumn");
+static const TCHAR  sKeyCheckDiffUL[]       = _T("CheckDiffUL");
+static const TCHAR  sKeyRegExp[]            = _T("RegExp");
+static const TCHAR  sKeyRangeSelected[]     = _T("RangeSelected");
+static const TCHAR  sKeyMatchComplete[]     = _T("MatchComplete");
+static const TCHAR  sKeyMatchSelected[]     = _T("MatchSelected");
 
-// ƒ†[ƒU[‘®•ÏŠ·
-static	char	*sSectionUserConvFormat	= "UserConvFormat";
-static	char	*sKeyConvFormatType		= "ConvFormatType";
-static	char	*sKeyUserFormName		= "Name";
-static	char	*sKeyUserFormTag2File	= "TagToFile";
-static	char	*sKeyUserFormFile2Tag	= "FileToTag";
+// ãƒ¦ãƒ¼ã‚¶ãƒ¼æ›¸å¼å¤‰æ›
+static const TCHAR  sSectionUserConvFormat[] = _T("UserConvFormat");
+static const TCHAR  sKeyConvFormatType[]     = _T("ConvFormatType");
+static const TCHAR  sKeyUserFormName[]       = _T("Name");
+static const TCHAR  sKeyUserFormTag2File[]   = _T("TagToFile");
+static const TCHAR  sKeyUserFormFile2Tag[]   = _T("FileToTag");
 
-// Šg’£”Å‘®•ÏŠ·
-static	char	*sSectionConvFormatEx	= "ConvFormatEx";
-//static	char	*sKeyUserFormName		= "Name";
-static	char	*sKeyUserFormat			= "Format";
-static	char	*sKeyUserFixString		= "FixString";
-static	char	*sKeyUserInitNumber		= "InitNumber";
-static	char	*sKeyUserAddNumber		= "AddNumber";
-static	char	*sKeyUserColumnCount	= "ColumnCount";
-static	char	*sKeyUserSpaceInit		= "SpaceInit";
+// æ‹¡å¼µç‰ˆæ›¸å¼å¤‰æ›
+static const TCHAR  sSectionConvFormatEx[]   = _T("ConvFormatEx");
+//static const TCHAR  sKeyUserFormName[]       = _T("Name");
+static const TCHAR  sKeyUserFormat[]         = _T("Format");
+static const TCHAR  sKeyUserFixString[]      = _T("FixString");
+static const TCHAR  sKeyUserInitNumber[]     = _T("InitNumber");
+static const TCHAR  sKeyUserAddNumber[]      = _T("AddNumber");
+static const TCHAR  sKeyUserColumnCount[]    = _T("ColumnCount");
+static const TCHAR  sKeyUserSpaceInit[]      = _T("SpaceInit");
 
-// ˆÚ“®æƒtƒHƒ‹ƒ_‘®
-static	char	*sSectionMoveFolder		= "MoveFolderFormat";
-//static	char	*sKeyUserFormName		= "Name";
-static	char	*sKeyMoveFolderFormat	= "Format";
-static	char	*sKeyMoveFolderFixString	= "FixString";
-static	char	*sKeyMoveFolderCopy		= "Copy";
-static	char	*sKeyMoveFolderInitFolder	= "InitFolder";
+// ç§»å‹•å…ˆãƒ•ã‚©ãƒ«ãƒ€æ›¸å¼
+static const TCHAR  sSectionMoveFolder[]       = _T("MoveFolderFormat");
+//static const TCHAR  sKeyUserFormName[]        = _T("Name");
+static const TCHAR  sKeyMoveFolderFormat[]     = _T("Format");
+static const TCHAR  sKeyMoveFolderFixString[]  = _T("FixString");
+static const TCHAR  sKeyMoveFolderCopy[]       = _T("Copy");
+static const TCHAR  sKeyMoveFolderInitFolder[] = _T("InitFolder");
 
-// ‘®ƒRƒs[ /* FunnyCorn 175 */
-static	char	*sSectionCopyFormat		= "CopyFormatFormat";
-//static	char	*sKeyUserFormName		= "Name";
-static	char	*sKeyCopyFormatFormat	= "Format";
-static	char	*sKeyCopyFormatFixString	= "FixString";
+// æ›¸å¼ã‚³ãƒ”ãƒ¼ /* FunnyCorn 175 */
+static const TCHAR  sSectionCopyFormat[]       = _T("CopyFormatFormat");
+//static const TCHAR  sKeyUserFormName[]         = _T("Name");
+static const TCHAR  sKeyCopyFormatFormat[]     = _T("Format");
+static const TCHAR  sKeyCopyFormatFixString[]  = _T("FixString");
 
-// ƒ^ƒOî•ñ•ÏŠ· /* STEP 034 */
-static	char	*sSectionConvFormatTag2Tag	= "ConvFormatTag2Tag";
-static	char	*sKeyUserTag2TagFormName	= "Name";
-static	char	*sKeyUserTagTagFormat		= "Format";
+// ã‚¿ã‚°æƒ…å ±å¤‰æ› /* STEP 034 */
+static const TCHAR  sSectionConvFormatTag2Tag[]= _T("ConvFormatTag2Tag");
+static const TCHAR  sKeyUserTag2TagFormName[]  = _T("Name");
+static const TCHAR  sKeyUserTagTagFormat[]     = _T("Format");
 
-// ’èŒ^•¶“\‚è•t‚¯ /* SeaKnows 030 */
-static	char	*sSectionTeikei			= "Teikei";
-static	char	*sSectionTeikeiGroupName	= "TeikeiGroupName";
-static	char	*sSectionTeikeiPaste		= "TeikeiPaste";
-static	char	*sSectionTeikeiAddSpace		= "TeikeiAddSpace";
-static	char	*sSectionTeikeiAddChar		= "TeikeiAddChar";
-static	char	*sSectionTeikeiFront		= "TeikeiAddFront";
-static	char	*sSectionTeikeiBack			= "TeikeiAddBack";
-static	char	*sSectionTeikeiShowDialog	= "TeikeiShowDialog";
+// å®šå‹æ–‡è²¼ã‚Šä»˜ã‘ /* SeaKnows 030 */
+static const TCHAR  sSectionTeikei[]           = _T("Teikei");
+static const TCHAR  sSectionTeikeiGroupName[]  = _T("TeikeiGroupName");
+static const TCHAR  sSectionTeikeiPaste[]      = _T("TeikeiPaste");
+static const TCHAR  sSectionTeikeiAddSpace[]   = _T("TeikeiAddSpace");
+static const TCHAR  sSectionTeikeiAddChar[]    = _T("TeikeiAddChar");
+static const TCHAR  sSectionTeikeiFront[]      = _T("TeikeiAddFront");
+static const TCHAR  sSectionTeikeiBack[]       = _T("TeikeiAddBack");
+static const TCHAR  sSectionTeikeiShowDialog[] = _T("TeikeiShowDialog");
 
-// ƒtƒHƒ‹ƒ_’Pˆê‘I‘ğ /* SeaKnows 033 */
-static	char	*sSectionValidFolderSelect	= "ValidFolderSelect";
-// ‘½d‹N“®‚ğ‹–‰Â‚·‚é /* FreeFall 045 */
-static	char	*sSectionValidDupExec	= "ValidDupExec";
-// Å‹ßg‚Á‚½ƒtƒHƒ‹ƒ_‚Ì”
-static	char	*sSectionRecentFolderNum	= "RecentFolderNum";
-// ŒŸõE’uŠ·ƒ_ƒCƒAƒƒO‚ÌˆÊ’u‚ğ‹L‰¯‚·‚é
-static	char	*sSectionSaveRepDlgPos	= "SaveRepDlgPos";
-static	char	*sSectionSaveRepDlgPosX	= "SaveRepDlgPosX";
-static	char	*sSectionSaveRepDlgPosY	= "SaveRepDlgPosY";
-// ‰º•ûŒü‚É˜A”Ô‚ğ’Ç‰Áƒ_ƒCƒAƒƒO‚Ìİ’è /* Baja 159 */
-static	char	*sSectionAddNumberWidth = "AddNumberWidth";
-static	char	*sSectionAddNumberPos	= "AddNumberPos";
-static	char	*sSectionAddNumberSep	= "AddNumberSep";
-static	char	*sSectionAddNumberBef	= "AddNumberBef"; /* Conspiracy 194 */
-static	char	*sSectionAddNumberAft	= "AddNumberAft"; /* Conspiracy 194 */
-// Audio List‚É•\¦‚³‚ê‚éƒtƒHƒ‹ƒ_–¼‚È‚Ç‚Ì•ª—Ş‚ğƒZƒ‹ƒTƒCƒY‚ğ–³‹‚µ‚Ä(ÀÛ‚Í—×‚RƒZƒ‹•ª‚Ü‚Å)•\¦‚·‚é
-static	char	*sSectionAudioListShow	= "AudioListShow"; /* Conspiracy 199 */
+// ãƒ•ã‚©ãƒ«ãƒ€å˜ä¸€é¸æŠ /* SeaKnows 033 */
+static const TCHAR  sSectionValidFolderSelect[]= _T("ValidFolderSelect");
+// å¤šé‡èµ·å‹•ã‚’è¨±å¯ã™ã‚‹ /* FreeFall 045 */
+static const TCHAR  sSectionValidDupExec[]     = _T("ValidDupExec");
+// æœ€è¿‘ä½¿ã£ãŸãƒ•ã‚©ãƒ«ãƒ€ã®æ•°
+static const TCHAR  sSectionRecentFolderNum[]  = _T("RecentFolderNum");
+// æ¤œç´¢ãƒ»ç½®æ›ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã®ä½ç½®ã‚’è¨˜æ†¶ã™ã‚‹
+static const TCHAR  sSectionSaveRepDlgPos[]    = _T("SaveRepDlgPos");
+static const TCHAR  sSectionSaveRepDlgPosX[]   = _T("SaveRepDlgPosX");
+static const TCHAR  sSectionSaveRepDlgPosY[]   = _T("SaveRepDlgPosY");
+// ä¸‹æ–¹å‘ã«é€£ç•ªã‚’è¿½åŠ ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã®è¨­å®š /* Baja 159 */
+static const TCHAR  sSectionAddNumberWidth[]   = _T("AddNumberWidth");
+static const TCHAR  sSectionAddNumberPos[]     = _T("AddNumberPos");
+static const TCHAR  sSectionAddNumberSep[]     = _T("AddNumberSep");
+static const TCHAR  sSectionAddNumberBef[]     = _T("AddNumberBef"); /* Conspiracy 194 */
+static const TCHAR  sSectionAddNumberAft[]     = _T("AddNumberAft"); /* Conspiracy 194 */
+// Audio Listã«è¡¨ç¤ºã•ã‚Œã‚‹ãƒ•ã‚©ãƒ«ãƒ€åãªã©ã®åˆ†é¡ã‚’ã‚»ãƒ«ã‚µã‚¤ã‚ºã‚’ç„¡è¦–ã—ã¦(å®Ÿéš›ã¯éš£ï¼“ã‚»ãƒ«åˆ†ã¾ã§)è¡¨ç¤ºã™ã‚‹
+static const TCHAR  sSectionAudioListShow[]    = _T("AudioListShow"); /* Conspiracy 199 */
 
-// ƒtƒHƒ“ƒgİ’è
-static	char	*sSectionFont			= "Font";
-static	char	*sKeyFontFace			= "Face";
-static	char	*sKeyFontHeight			= "Height";
-static	char	*sKeyFontWidth			= "Width";
-static	char	*sKeyFontEscapement		= "Escapement";
-static	char	*sKeyFontOrientation	= "Orientation";
-static	char	*sKeyFontWeight			= "Weight";
-static	char	*sKeyFontItalic			= "Italic";
-static	char	*sKeyFontUnderline		= "Underline";
-static	char	*sKeyFontStrikeOut		= "StrikeOut";
-static	char	*sKeyFontCharSet		= "CharSet";
-static	char	*sKeyFontOutPrecision	= "OutPrecision";
-static	char	*sKeyFontClipPrecision	= "ClipPrecision";
-static	char	*sKeyFontQuality		= "Quality";
-static	char	*sKeyFontPitchAndFamily	= "PitchAndFamily";
+// ãƒ•ã‚©ãƒ³ãƒˆè¨­å®š
+static const TCHAR  sSectionFont[]           = _T("Font");
+static const TCHAR  sKeyFontFace[]           = _T("Face");
+static const TCHAR  sKeyFontHeight[]         = _T("Height");
+static const TCHAR  sKeyFontWidth[]          = _T("Width");
+static const TCHAR  sKeyFontEscapement[]     = _T("Escapement");
+static const TCHAR  sKeyFontOrientation[]    = _T("Orientation");
+static const TCHAR  sKeyFontWeight[]         = _T("Weight");
+static const TCHAR  sKeyFontItalic[]         = _T("Italic");
+static const TCHAR  sKeyFontUnderline[]      = _T("Underline");
+static const TCHAR  sKeyFontStrikeOut[]      = _T("StrikeOut");
+static const TCHAR  sKeyFontCharSet[]        = _T("CharSet");
+static const TCHAR  sKeyFontOutPrecision[]   = _T("OutPrecision");
+static const TCHAR  sKeyFontClipPrecision[]  = _T("ClipPrecision");
+static const TCHAR  sKeyFontQuality[]        = _T("Quality");
+static const TCHAR  sKeyFontPitchAndFamily[] = _T("PitchAndFamily");
 
-// ƒŠƒXƒgo—Í‘®
-static	char	*sSectionWriteFormat	= "WriteFormat";
-static	char	*sKeyWriteFormName		= "Name";
-static	char	*sKeyWriteFileName		= "FileName";
-static	char	*sKeyWriteExtName		= "ExtName";
-static	char	*sKeyWriteSelected		= "WriteSelected";
-static	char	*sKeyWriteCurrentFile	= "CurrentFile";
-static	char	*sKeyWriteIsHtml		= "IsHtml";
-static	char	*sKeyWriteHtml			= "WriteHtml"; /* BeachMonster5 120 */
+// ãƒªã‚¹ãƒˆå‡ºåŠ›æ›¸å¼
+static const TCHAR  sSectionWriteFormat[]    = _T("WriteFormat");
+static const TCHAR  sKeyWriteFormName[]      = _T("Name");
+static const TCHAR  sKeyWriteFileName[]      = _T("FileName");
+static const TCHAR  sKeyWriteExtName[]       = _T("ExtName");
+static const TCHAR  sKeyWriteSelected[]      = _T("WriteSelected");
+static const TCHAR  sKeyWriteCurrentFile[]   = _T("CurrentFile");
+static const TCHAR  sKeyWriteIsHtml[]        = _T("IsHtml");
+static const TCHAR  sKeyWriteHtml[]          = _T("WriteHtml"); /* BeachMonster5 120 */
 
-static	char	*sSectionRepFileName	= "RepFileName";
-static	char	*sKeyRepCharAfter		= "RepCharAfter";
-static	char	*sKeyRepCharBefore		= "RepCharBefore";	/* FreeFall 050 */
+static const TCHAR  sSectionRepFileName[]    = _T("RepFileName");
+static const TCHAR  sKeyRepCharAfter[]       = _T("RepCharAfter");
+static const TCHAR  sKeyRepCharBefore[]      = _T("RepCharBefore");  /* FreeFall 050 */
 
-static	char	*sSectionSort		= "Sort";
-static	char	*sKeySortColumn		= "Column";
-static	char	*sKeySortType		= "Type";
+static const TCHAR  sSectionSort[]       = _T("Sort");
+static const TCHAR  sKeySortColumn[]     = _T("Column");
+static const TCHAR  sKeySortType[]       = _T("Type");
 
-static	char	*sSectionClass		= "Class";
-static	char	*sKeyClassType		= "Type";
-static	char	*sKeyClassColumn	= "Column";
+static const TCHAR  sSectionClass[]      = _T("Class");
+static const TCHAR  sKeyClassType[]      = _T("Type");
+static const TCHAR  sKeyClassColumn[]    = _T("Column");
 
-static	char	*sSectionWindow		= "Window";
-static	char	*sKeyWinZoomed		= "Zoomed";
-static	char	*sKeyWinIconic		= "Iconic";
-static	char	*sKeyMainWindow		= "MainWindow";
-static	char	*sKeySplitSize		= "SplitSize";
+static const TCHAR  sSectionWindow[]     = _T("Window");
+static const TCHAR  sKeyWinZoomed[]      = _T("Zoomed");
+static const TCHAR  sKeyWinIconic[]      = _T("Iconic");
+static const TCHAR  sKeyMainWindow[]     = _T("MainWindow");
+static const TCHAR  sKeySplitSize[]      = _T("SplitSize");
 
-static	char	*sSectionKeyConfig	= "KeyConfig";
+static const TCHAR  sSectionKeyConfig[]  = _T("KeyConfig");
 
-static	char	*sSectionGenreList	= "GenreList";
-static	char	*sSectionUserGenreList	= "UserGenreList";
-static	char	*sKeyUserGenreAddList	= "AddList";
-static	char	*sKeyUserGenreNo	= "No";
-static	char	*sKeyUserGenreName	= "Name";
+static const TCHAR  sSectionGenreList[]  = _T("GenreList");
+static const TCHAR  sSectionUserGenreList[]  = _T("UserGenreList");
+static const TCHAR  sKeyUserGenreAddList[]   = _T("AddList");
+static const TCHAR  sKeyUserGenreNo[]    = _T("No");
+static const TCHAR  sKeyUserGenreName[]  = _T("Name");
 
-// •¶ší“ˆê /* StartInaction 054 */
-static	char	*sKeyUnifyAlpha	= "UnifyAlpha";
-static	char	*sKeyUnifyHiraKata	= "UnifyHiraKata";
-static	char	*sKeyUnifyKata	= "UnifyKata";
-static	char	*sKeyUnifyKigou	= "UnifyKigou";
-static	char	*sKeyUnifySuji	= "UnifySuji";
-static	char	*sKeyUnifyUpLow	= "UnifyUpLow";
-static	char	*sKeyUnifyFixedUpLow	= "UnifyFixedUpLow"; /* STEP 040 */
+// æ–‡å­—ç¨®çµ±ä¸€ /* StartInaction 054 */
+static const TCHAR  sKeyUnifyAlpha[] = _T("UnifyAlpha");
+static const TCHAR  sKeyUnifyHiraKata[]  = _T("UnifyHiraKata");
+static const TCHAR  sKeyUnifyKata[]  = _T("UnifyKata");
+static const TCHAR  sKeyUnifyKigou[] = _T("UnifyKigou");
+static const TCHAR  sKeyUnifySuji[]  = _T("UnifySuji");
+static const TCHAR  sKeyUnifyUpLow[] = _T("UnifyUpLow");
+static const TCHAR  sKeyUnifyFixedUpLow[]    = _T("UnifyFixedUpLow"); /* STEP 040 */
 
-// Šg’£q“ˆê /* STE 007 */
-static	char	*sKeyFileExtChange = "FileExtChange";
+// æ‹¡å¼µå­çµ±ä¸€ /* STE 007 */
+static const TCHAR  sKeyFileExtChange[] = _T("FileExtChange");
 
-// ƒtƒ@ƒCƒ‹–¼•¶ší“ˆê /* LastTrain 058 */
-static	char	*sKeyFileUnifyAlpha	= "FileUnifyAlpha";
-static	char	*sKeyFileUnifyHiraKata	= "FileUnifyHiraKata";
-static	char	*sKeyFileUnifyKata	= "FileUnifyKata";
-static	char	*sKeyFileUnifyKigou	= "FileUnifyKigou";
-static	char	*sKeyFileUnifySuji	= "FileUnifySuji";
-static	char	*sKeyFileUnifyUpLow	= "FileUnifyUpLow";
+// ãƒ•ã‚¡ã‚¤ãƒ«åæ–‡å­—ç¨®çµ±ä¸€ /* LastTrain 058 */
+static const TCHAR  sKeyFileUnifyAlpha[] = _T("FileUnifyAlpha");
+static const TCHAR  sKeyFileUnifyHiraKata[]  = _T("FileUnifyHiraKata");
+static const TCHAR  sKeyFileUnifyKata[]  = _T("FileUnifyKata");
+static const TCHAR  sKeyFileUnifyKigou[] = _T("FileUnifyKigou");
+static const TCHAR  sKeyFileUnifySuji[]  = _T("FileUnifySuji");
+static const TCHAR  sKeyFileUnifyUpLow[] = _T("FileUnifyUpLow");
 
-// ƒvƒŒƒCƒŠƒXƒg“ü—Íİ’èƒ_ƒCƒAƒƒO‚ğ•\¦‚·‚é /* RockDance 126 */
-static	char	*sKeyShowLoadPlaylistDlg = "ShowLoadPlaylistDlg";
+// ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆå…¥åŠ›è¨­å®šãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚’è¡¨ç¤ºã™ã‚‹ /* RockDance 126 */
+static const TCHAR  sKeyShowLoadPlaylistDlg[] = _T("ShowLoadPlaylistDlg");
 
-// ‚¨‹C‚É“ü‚è‚ÌƒtƒHƒ‹ƒ_ /* RockDance 129 */
-static	char	*sSectionFavorites			= "Favorites";
+// ãŠæ°—ã«å…¥ã‚Šã®ãƒ•ã‚©ãƒ«ãƒ€ /* RockDance 129 */
+static const TCHAR  sSectionFavorites[]          = _T("Favorites");
 
-static	char	*sKeyFirstUpperIgnoreWord = "FistUpperIgnoreWord";
-static	char	*sKeyFirstUpperIgnoreWords = "FistUpperIgnoreWords";
-static	char	*sKeyFirstUpperSentenceSeparator = "FistUpperSentenceSeparator";
-static	char	*sKeyUserConvAddMenu = "UserConvAddMenu";
-static	char	*sKeyZenHanKigouKana = "ZenHanKigouKana";
+static const TCHAR  sKeyFirstUpperIgnoreWord[] = _T("FistUpperIgnoreWord");
+static const TCHAR  sKeyFirstUpperIgnoreWords[] = _T("FistUpperIgnoreWords");
+static const TCHAR  sKeyFirstUpperSentenceSeparator[] = _T("FistUpperSentenceSeparator");
+static const TCHAR  sKeyUserConvAddMenu[] = _T("UserConvAddMenu");
+static const TCHAR  sKeyZenHanKigouKana[] = _T("ZenHanKigouKana");
 
-void CSuperTagEditorApp::ReadWindowStatus(char *sKey, RECT *rect)
+static const TCHAR  sKeyAutoTilde2WaveDash[] = _T("AutoTilde2WaveDash");//å…¨è§’ãƒãƒ«ãƒ€ã‚’æ³¢ãƒ€ãƒƒã‚·ãƒ¥ã«è‡ªå‹•ç½®æ›
+
+void CSuperTagEditorApp::ReadWindowStatus(const TCHAR *sKey, RECT *rect)
 {
-	static	char	*sDefault = "0 0 0 0";
-	CString	str;
-	LPCSTR	sBuffer;
-	CString strINI = m_pszProfileName;
-	//Profile_Initialize(strINI, TRUE);
-	str = MyGetProfileString(sSectionWindow, sKey, sDefault);
-	sBuffer = (LPCSTR)str;
-	sscanf(sBuffer, "%d %d %d %d", &rect->left,
-								   &rect->top,
-								   &rect->right,
-								   &rect->bottom);
-	//Profile_Free();
+    static const TCHAR sDefault[] = _T("0 0 0 0");
+    TCHAR buffer[2048];
+    m_IniFile.ReadStr(sSectionWindow, sKey, sDefault, buffer, _countof(buffer));
+    _stscanf_s(buffer, _T("%d %d %d %d"), &rect->left,
+                                          &rect->top,
+                                          &rect->right,
+                                          &rect->bottom);
 }
 
-void CSuperTagEditorApp::WriteWindowStatus(char *sKey, RECT *rect)
+void CSuperTagEditorApp::WriteWindowStatus(const TCHAR *sKey, RECT *rect)
 {
-	CString	str;
-	str.Format("%d %d %d %d", rect->left,
-							  rect->top,
-							  rect->right,
-							  rect->bottom);
-	CString strINI = m_pszProfileName;
-	//Profile_Initialize(strINI, TRUE);
-	MyWriteProfileString(sSectionWindow, sKey, str);
-	//Profile_Free();
+    CString str;
+    str.Format(_T("%d %d %d %d"), rect->left,
+                              rect->top,
+                              rect->right,
+                              rect->bottom);
+    m_IniFile.WriteStr(sSectionWindow, sKey, str);
 }
 
 void CSuperTagEditorApp::ReadRegistry(void)
 {
-	CString strINI = m_pszProfileName;
-	//Profile_Initialize(strINI, TRUE);
-	int		i;
+    int     i;
 
-	// Šeíİ’è‚ğ“Ç‚İ‚Ş
-	CString	strVersion;
-	strVersion = MyGetProfileString(sSectionOption, sKeyVersion, "");
-	g_bIsVersionUp = strcmp(strVersion, PROG_VERSION) ? true : false;
+    // å„ç¨®è¨­å®šã‚’èª­ã¿è¾¼ã‚€
+    CString strVersion;
+    TCHAR buf[2048];
+    strVersion = m_IniFile.ReadStr(sSectionOption, sKeyVersion, _T(""), buf, _countof(buf));
+    g_bIsVersionUp = _tcscmp(strVersion, PROG_VERSION) ? true : false;
 
-	g_strCurrentDirectory	= MyGetProfileString(sSectionOption, sKeyCurrentDir, "");
-	g_strCurrentPlayList	= MyGetProfileString(sSectionOption, sKeyCurrentPlayList, "*.m3u");
+    g_strCurrentDirectory   = m_IniFile.ReadStr(sSectionOption, sKeyCurrentDir, _T(""), buf, _countof(buf));
+    g_strCurrentPlayList    = m_IniFile.ReadStr(sSectionOption, sKeyCurrentPlayList, _T("*.m3u"), buf, _countof(buf));
 
-	// ˆê”Ê - ƒ†[ƒU[ƒCƒ“ƒ^[ƒtƒF[ƒX
-	g_bOptESCEditCancel			= MyGetProfileInt(sSectionOption, sKeyESCEditCancel, 0) ? true : false;
-	g_bOptEnableEditCursorExit	= MyGetProfileInt(sSectionOption, sKeyEnableEditCursorExit, 1) ? true : false;
-	g_bOptEditOkDown		= MyGetProfileInt(sSectionOption, sKeyEditOkDown, 1) ? true : false;
-	g_bOptEnterBeginEdit	= MyGetProfileInt(sSectionOption, sKeyEnterBeginEdit, 0) ? true : false;
+    // ä¸€èˆ¬ - ãƒ¦ãƒ¼ã‚¶ãƒ¼ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹
+    g_bOptESCEditCancel         = m_IniFile.ReadInt(sSectionOption, sKeyESCEditCancel, 0) ? true : false;
+    g_bOptEnableEditCursorExit  = m_IniFile.ReadInt(sSectionOption, sKeyEnableEditCursorExit, 1) ? true : false;
+    g_bOptEditOkDown        = m_IniFile.ReadInt(sSectionOption, sKeyEditOkDown, 1) ? true : false;
+    g_bOptEnterBeginEdit    = m_IniFile.ReadInt(sSectionOption, sKeyEnterBeginEdit, 0) ? true : false;
 
-	// ˆê”Ê - “®ìİ’è
-	g_bOptKeepTimeStamp		= MyGetProfileInt(sSectionOption, sKeyKeepTimeStamp, 0) ? true : false;
-	g_bOptSyncCreateTime	= MyGetProfileInt(sSectionOption, sKeySyncCreateTime, 0) ? true : false;
-	g_bOptChangeFileExt		= MyGetProfileInt(sSectionOption, sKeyChangeFileExt, 0) ? true : false;
-	g_bOptAutoOpenFolder	= MyGetProfileInt(sSectionOption, sKeyAutoOpenFolder, 0) ? true : false;
-	g_bOptLoadFileAdjustColumn	= MyGetProfileInt(sSectionOption, sKeyLoadFileAdjustColumn, 1) ? true : false;
-	g_bOptLoadFileChecked	= MyGetProfileInt(sSectionOption, sKeyLoadFileChecked, 1) ? true : false;
-	g_bOptHideMP3ListFile	= MyGetProfileInt(sSectionOption, sKeyHideMP3ListFile, 0) ? true : false;
+    // ä¸€èˆ¬ - å‹•ä½œè¨­å®š
+    g_bOptKeepTimeStamp     = m_IniFile.ReadInt(sSectionOption, sKeyKeepTimeStamp, 0) ? true : false;
+    g_bOptSyncCreateTime    = m_IniFile.ReadInt(sSectionOption, sKeySyncCreateTime, 0) ? true : false;
+    g_bOptChangeFileExt     = m_IniFile.ReadInt(sSectionOption, sKeyChangeFileExt, 0) ? true : false;
+    g_bOptAutoOpenFolder    = m_IniFile.ReadInt(sSectionOption, sKeyAutoOpenFolder, 0) ? true : false;
+    g_bOptLoadFileAdjustColumn  = m_IniFile.ReadInt(sSectionOption, sKeyLoadFileAdjustColumn, 1) ? true : false;
+    g_bOptLoadFileChecked   = m_IniFile.ReadInt(sSectionOption, sKeyLoadFileChecked, 1) ? true : false;
+    g_bOptHideMP3ListFile   = m_IniFile.ReadInt(sSectionOption, sKeyHideMP3ListFile, 0) ? true : false;
 
-	// ˆê”Ê - ‰ÌŒƒtƒ@ƒCƒ‹
-	g_bOptChangeTextFile		= MyGetProfileInt(sSectionOption, sKeyChangeTextFile, 1) ? true : false;
-	g_bOptSetLyricsDir			= MyGetProfileInt(sSectionOption, sKeySetLyricsDir, 0) ? true : false;
-	g_bOptSearchLyricsSubDir	= MyGetProfileInt(sSectionOption, sKeySearchLyricsSubDir, 0) ? true : false;
-	g_strOptLyricsPath			= MyGetProfileString(sSectionOption, sKeyLyricsPath, "");
+    // ä¸€èˆ¬ - æ­Œè©ãƒ•ã‚¡ã‚¤ãƒ«
+    g_bOptChangeTextFile        = m_IniFile.ReadInt(sSectionOption, sKeyChangeTextFile, 1) ? true : false;
+    g_bOptSetLyricsDir          = m_IniFile.ReadInt(sSectionOption, sKeySetLyricsDir, 0) ? true : false;
+    g_bOptSearchLyricsSubDir    = m_IniFile.ReadInt(sSectionOption, sKeySearchLyricsSubDir, 0) ? true : false;
+    g_strOptLyricsPath          = m_IniFile.ReadStr(sSectionOption, sKeyLyricsPath, _T(""), buf, _countof(buf));
 
-	// 
-	g_bOptEditFieldSIF		= MyGetProfileInt(sSectionOption, sKeyEditFiledSIF, 1) ? true : false;
-	g_nOptCheckFileName		= MyGetProfileInt(sSectionOption, sKeyCheckFileName, FILENAME_CONV_MULTIBYTE);
-	g_bEnableSearchSubDir	= MyGetProfileInt(sSectionOption, sKeyEnableSearchSubDir, 1) ? true : false;
+    //
+    g_bOptEditFieldSIF      = m_IniFile.ReadInt(sSectionOption, sKeyEditFiledSIF, 1) ? true : false;
+    g_nOptCheckFileName     = m_IniFile.ReadInt(sSectionOption, sKeyCheckFileName, FILENAME_CONV_MULTIBYTE);
+    g_bEnableSearchSubDir   = m_IniFile.ReadInt(sSectionOption, sKeyEnableSearchSubDir, 1) ? true : false;
 
-	// ƒtƒHƒ‹ƒ_‚Ì“¯Šú
-	g_bEnableFolderSync		= MyGetProfileInt(sSectionFolderSync, sKeyEnableFolderSync, 0) ? true : false;
-	g_strRootFolder			= MyGetProfileString(sSectionFolderSync, sKeySyncRootFolder, "");
-	g_bSyncSelectAlways		= MyGetProfileInt(sSectionFolderSync, sKeySyncSelectAlways, 0) ? true : false;
-	g_bSyncDeleteFolder		= MyGetProfileInt(sSectionFolderSync, sKeySyncDeleteFolder, 1) ? true : false;
-	g_bSyncLyricsFileMove	= MyGetProfileInt(sSectionFolderSync, sKeySyncLyricsFileMove, 1) ? true : false;
+    // ãƒ•ã‚©ãƒ«ãƒ€ã®åŒæœŸ
+    g_bEnableFolderSync     = m_IniFile.ReadInt(sSectionFolderSync, sKeyEnableFolderSync, 0) ? true : false;
+    g_strRootFolder         = m_IniFile.ReadStr(sSectionFolderSync, sKeySyncRootFolder, _T(""), buf, _countof(buf));
+    g_bSyncSelectAlways     = m_IniFile.ReadInt(sSectionFolderSync, sKeySyncSelectAlways, 0) ? true : false;
+    g_bSyncDeleteFolder     = m_IniFile.ReadInt(sSectionFolderSync, sKeySyncDeleteFolder, 1) ? true : false;
+    g_bSyncLyricsFileMove   = m_IniFile.ReadInt(sSectionFolderSync, sKeySyncLyricsFileMove, 1) ? true : false;
 
-	// Šm”FƒƒbƒZ[ƒW•\¦
-	g_bConfDeleteFile	= MyGetProfileInt(sSectionConfMessage, sKeyConfDeleteFile, 1) ? true : false;
-	g_bConfDeleteList	= MyGetProfileInt(sSectionConfMessage, sKeyConfDeleteList, 1) ? true : false;
-	g_bConfEditModify	= MyGetProfileInt(sSectionConfMessage, sKeyConfEditModify, 1) ? true : false;
-	g_bConfFolderSync	= MyGetProfileInt(sSectionConfMessage, sKeyConfFolderSync, 1) ? true : false;
+    // ç¢ºèªãƒ¡ãƒƒã‚»ãƒ¼ã‚¸è¡¨ç¤º
+    g_bConfDeleteFile   = m_IniFile.ReadInt(sSectionConfMessage, sKeyConfDeleteFile, 1) ? true : false;
+    g_bConfDeleteList   = m_IniFile.ReadInt(sSectionConfMessage, sKeyConfDeleteList, 1) ? true : false;
+    g_bConfEditModify   = m_IniFile.ReadInt(sSectionConfMessage, sKeyConfEditModify, 1) ? true : false;
+    g_bConfFolderSync   = m_IniFile.ReadInt(sSectionConfMessage, sKeyConfFolderSync, 1) ? true : false;
 
-	// ƒvƒŒƒCƒŠƒXƒg
-	g_bPlayListClearList	= MyGetProfileInt(sSectionLoadPlayList, sKeyClearList, 0) ? true : false;
-	g_bPlayListClearCheck	= MyGetProfileInt(sSectionLoadPlayList, sKeyClearCheck, 1) ? true : false;
-	g_bPlayListAddList		= MyGetProfileInt(sSectionLoadPlayList, sKeyAddList, 0) ? true : false;
-	g_bPlayListFileCheck	= MyGetProfileInt(sSectionLoadPlayList, sKeyFileCheck, 1) ? true : false;
+    // ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆ
+    g_bPlayListClearList    = m_IniFile.ReadInt(sSectionLoadPlayList, sKeyClearList, 0) ? true : false;
+    g_bPlayListClearCheck   = m_IniFile.ReadInt(sSectionLoadPlayList, sKeyClearCheck, 1) ? true : false;
+    g_bPlayListAddList      = true;//m_IniFile.ReadInt(sSectionLoadPlayList, sKeyAddList, 1) ? true : false;//åˆæœŸå€¤å¤‰æ›´(ãªã‚“ã®ãŸã‚ã«ç„¡åŠ¹ã«ã™ã‚‹ã®ã ã‚ã†ã‹ï¼Ÿ)
+    g_bPlayListFileCheck    = m_IniFile.ReadInt(sSectionLoadPlayList, sKeyFileCheck, 1) ? true : false;
 
-	// ğŒƒ`ƒFƒbƒN‚Ìó‘Ô
-	for (i = 0; i < CHECK_STATE_MAX; i++) {
-		CHECK_WORD_STATE	*pState = &g_chkWord[i];
-		char	*sSectionName = sSectionCheckWord[i];
-		pState->strSearchWord	= MyGetProfileString(sSectionName, sKeySearchWord, "");
-		pState->strReplaceWord	= MyGetProfileString(sSectionName, sKeyReplaceWord, "");
-		pState->nTargetColumn	= MyGetProfileInt(sSectionName, sKeyTargetColumn, -1);
-		pState->bCheckDiffUL	= MyGetProfileInt(sSectionName, sKeyCheckDiffUL, 0) ? true : false;
-		pState->bRegExp			= MyGetProfileInt(sSectionName, sKeyRegExp, 0) ? true : false;
-		pState->bRangeSelected	= MyGetProfileInt(sSectionName, sKeyRangeSelected, 0) ? true : false;
-		pState->bMatchComplete	= MyGetProfileInt(sSectionName, sKeyMatchComplete, 0) ? true : false;
-		pState->bMatchSelected	= MyGetProfileInt(sSectionName, sKeyMatchSelected, 0) ? true : false;
-	}
+    // æ¡ä»¶ãƒã‚§ãƒƒã‚¯ã®çŠ¶æ…‹
+    for (i = 0; i < CHECK_STATE_MAX; i++) {
+        CHECK_WORD_STATE    *pState = &g_chkWord[i];
+        const TCHAR *sSectionName = sSectionCheckWord[i];
+        pState->strSearchWord   = m_IniFile.ReadStr(sSectionName, sKeySearchWord, _T(""), buf, _countof(buf));
+        pState->strReplaceWord  = m_IniFile.ReadStr(sSectionName, sKeyReplaceWord, _T(""), buf, _countof(buf));
+        pState->nTargetColumn   = m_IniFile.ReadInt(sSectionName, sKeyTargetColumn, -1);
+        pState->bCheckDiffUL    = m_IniFile.ReadInt(sSectionName, sKeyCheckDiffUL, 0) ? true : false;
+        pState->bRegExp         = m_IniFile.ReadInt(sSectionName, sKeyRegExp, 0) ? true : false;
+        pState->bRangeSelected  = m_IniFile.ReadInt(sSectionName, sKeyRangeSelected, 0) ? true : false;
+        pState->bMatchComplete  = m_IniFile.ReadInt(sSectionName, sKeyMatchComplete, 0) ? true : false;
+        pState->bMatchSelected  = m_IniFile.ReadInt(sSectionName, sKeyMatchSelected, 0) ? true : false;
+    }
 
-	// ƒ†[ƒU[•ÏŠ·‘®
-	const char *sDefFormatTag2File = "%ARTIST_NAME%-%ALBUM_NAME%-%TRACK_NAME%";
-	const char *sDefFormatFile2Tag = sDefFormatTag2File;
-	//g_nUserConvFormatType	= MyGetProfileInt(sSectionUserConvFormat, sKeyConvFormatType, 0);
-	{ /* ”‚ğ‘‚â‚µ‚½‚Ì‚Å–{‰Æ•¹—p‚É‰e‹¿‚ğ—^‚¦‚È‚¢‚æ‚¤‚É LastTrain 057 */
-		CString		strSectionName;
-		strSectionName = "haseta\\";
-		strSectionName += sSectionUserConvFormat;
-		g_nUserConvFormatType	= MyGetProfileInt(strSectionName, sKeyConvFormatType, 0);
-	}
-	for (i = 0; i < USER_CONV_FORMAT_MAX; i++) {
-		CString		strKeyName;
-		// –¼Ì
-		strKeyName.Format("%s%d", sKeyUserFormName, i);
-		g_userConvFormat[i].strName = MyGetProfileString(sSectionUserConvFormat, strKeyName, "–¼Ì–¢İ’è");
-		// ƒ^ƒOî•ñ => ƒtƒ@ƒCƒ‹–¼
-		strKeyName.Format("%s%d", sKeyUserFormTag2File, i);
-		g_userConvFormat[i].strTag2File = MyGetProfileString(sSectionUserConvFormat, strKeyName, sDefFormatTag2File);
-		// ƒtƒ@ƒCƒ‹–¼ => ƒ^ƒOî•ñ
-		strKeyName.Format("%s%d", sKeyUserFormFile2Tag, i);
-		g_userConvFormat[i].strFile2Tag = MyGetProfileString(sSectionUserConvFormat, strKeyName, sDefFormatFile2Tag);
-		// ‚Q‚Â–ÚˆÈ~‚ÍƒfƒtƒHƒ‹ƒg•¶š—ñ‚ÍƒNƒŠƒA
-		sDefFormatTag2File = sDefFormatFile2Tag = "";
-	}
+    // ãƒ¦ãƒ¼ã‚¶ãƒ¼å¤‰æ›æ›¸å¼
+    const TCHAR *sDefFormatTag2File = _T("%ARTIST_NAME%-%ALBUM_NAME%-%TRACK_NAME%");
+    const TCHAR *sDefFormatFile2Tag = sDefFormatTag2File;
+    //g_nUserConvFormatType = m_IniFile.ReadInt(sSectionUserConvFormat, sKeyConvFormatType, 0);
+    { /* æ•°ã‚’å¢—ã‚„ã—ãŸã®ã§æœ¬å®¶ä½µç”¨æ™‚ã«å½±éŸ¿ã‚’ä¸ãˆãªã„ã‚ˆã†ã« LastTrain 057 */
+        CString     strSectionName;
+        strSectionName = _T("haseta\\");
+        strSectionName += sSectionUserConvFormat;
+        g_nUserConvFormatType   = m_IniFile.ReadInt(strSectionName, sKeyConvFormatType, 0);
+    }
+    for (i = 0; i < USER_CONV_FORMAT_MAX; i++) {
+        CString     strKeyName;
+        // åç§°
+        strKeyName.Format(_T("%s%d"), sKeyUserFormName, i);
+        g_userConvFormat[i].strName = m_IniFile.ReadStr(sSectionUserConvFormat, strKeyName, _T("åç§°æœªè¨­å®š"), buf, _countof(buf));
+        // ã‚¿ã‚°æƒ…å ± => ãƒ•ã‚¡ã‚¤ãƒ«å
+        strKeyName.Format(_T("%s%d"), sKeyUserFormTag2File, i);
+        g_userConvFormat[i].strTag2File = m_IniFile.ReadStr(sSectionUserConvFormat, strKeyName, sDefFormatTag2File, buf, _countof(buf));
+        // ãƒ•ã‚¡ã‚¤ãƒ«å => ã‚¿ã‚°æƒ…å ±
+        strKeyName.Format(_T("%s%d"), sKeyUserFormFile2Tag, i);
+        g_userConvFormat[i].strFile2Tag = m_IniFile.ReadStr(sSectionUserConvFormat, strKeyName, sDefFormatFile2Tag, buf, _countof(buf));
+        // ï¼’ã¤ç›®ä»¥é™ã¯ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆæ–‡å­—åˆ—ã¯ã‚¯ãƒªã‚¢
+        sDefFormatTag2File = sDefFormatFile2Tag = _T("");
+    }
 
-	// Šg’£”Åƒ†[ƒU[•ÏŠ·‘®
-	for (i = 0; i < USER_CONV_FORMAT_EX_MAX; i++) {
-		CString		strSectionName;
-		strSectionName.Format("%s%d", sSectionConvFormatEx, i);
-		// –¼Ì
-		g_userConvFormatEx[i].strName = MyGetProfileString(strSectionName, sKeyUserFormName, "–¼Ì–¢İ’è");
-		// ‘®
-		g_userConvFormatEx[i].strFormat = MyGetProfileString(strSectionName, sKeyUserFormat, "");
-		// ŒÅ’è•¶š—ñ
-		g_userConvFormatEx[i].strFixString = MyGetProfileString(strSectionName, sKeyUserFixString, "");
-		// ˜A”ÔF‰Šú’l
-		g_userConvFormatEx[i].nInitNumber = MyGetProfileInt(strSectionName, sKeyUserInitNumber, 1);
-		// ˜A”ÔF‰ÁZ’l
-		g_userConvFormatEx[i].nAddNumber = MyGetProfileInt(strSectionName, sKeyUserAddNumber, 1);
-		// ˜A”ÔFŒ…”
-		g_userConvFormatEx[i].nColumnCount = MyGetProfileInt(strSectionName, sKeyUserColumnCount, 1);
-		// ‘‚«‚İ•s‰Â‚ÌƒZƒ‹‚Å˜A”ÔƒNƒŠƒA
-		g_userConvFormatEx[i].bSpaceInitNumber = MyGetProfileInt(strSectionName, sKeyUserSpaceInit, 0) ? true : false;
-	}
+    // æ‹¡å¼µç‰ˆãƒ¦ãƒ¼ã‚¶ãƒ¼å¤‰æ›æ›¸å¼
+    for (i = 0; i < USER_CONV_FORMAT_EX_MAX; i++) {
+        CString     strSectionName;
+        strSectionName.Format(_T("%s%d"), sSectionConvFormatEx, i);
+        // åç§°
+        g_userConvFormatEx[i].strName = m_IniFile.ReadStr(strSectionName, sKeyUserFormName, _T("åç§°æœªè¨­å®š"), buf, _countof(buf));
+        // æ›¸å¼
+        g_userConvFormatEx[i].strFormat = m_IniFile.ReadStr(strSectionName, sKeyUserFormat, _T(""), buf, _countof(buf));
+        // å›ºå®šæ–‡å­—åˆ—
+        g_userConvFormatEx[i].strFixString = m_IniFile.ReadStr(strSectionName, sKeyUserFixString, _T(""), buf, _countof(buf));
+        // é€£ç•ªï¼šåˆæœŸå€¤
+        g_userConvFormatEx[i].nInitNumber = m_IniFile.ReadInt(strSectionName, sKeyUserInitNumber, 1);
+        // é€£ç•ªï¼šåŠ ç®—å€¤
+        g_userConvFormatEx[i].nAddNumber = m_IniFile.ReadInt(strSectionName, sKeyUserAddNumber, 1);
+        // é€£ç•ªï¼šæ¡æ•°
+        g_userConvFormatEx[i].nColumnCount = m_IniFile.ReadInt(strSectionName, sKeyUserColumnCount, 1);
+        // æ›¸ãè¾¼ã¿ä¸å¯ã®ã‚»ãƒ«ã§é€£ç•ªã‚¯ãƒªã‚¢
+        g_userConvFormatEx[i].bSpaceInitNumber = m_IniFile.ReadInt(strSectionName, sKeyUserSpaceInit, 0) ? true : false;
+    }
 
-	// ˆÚ“®æƒtƒHƒ‹ƒ_‘®
-	for (i = 0; i < USER_MOVE_FODLER_FORMAT_MAX; i++) {
-		CString		strSectionName;
-		strSectionName.Format("haseta\\%s%d", sSectionMoveFolder, i);
-		// –¼Ì
-		g_userMoveFolder[i].strName = MyGetProfileString(strSectionName, sKeyUserFormName, "–¼Ì–¢İ’è");
-		// ‘®
-		g_userMoveFolder[i].strFormat = MyGetProfileString(strSectionName, sKeyMoveFolderFormat, "");
-		// ŒÅ’è•¶š—ñ
-		g_userMoveFolder[i].strFixString = MyGetProfileString(strSectionName, sKeyMoveFolderFixString, "");
-		// ƒRƒs[
-		g_userMoveFolder[i].bCopy = MyGetProfileInt(strSectionName, sKeyMoveFolderCopy, 0) ? true : false;
-		// ‰ŠúƒtƒHƒ‹ƒ_
-		g_userMoveFolder[i].strInitFolder = MyGetProfileString(strSectionName, sKeyMoveFolderInitFolder, ""); /* STEP 022 */
-	}
+    // ç§»å‹•å…ˆãƒ•ã‚©ãƒ«ãƒ€æ›¸å¼
+    for (i = 0; i < USER_MOVE_FODLER_FORMAT_MAX; i++) {
+        CString     strSectionName;
+        strSectionName.Format(_T("haseta\\%s%d"), sSectionMoveFolder, i);
+        // åç§°
+        g_userMoveFolder[i].strName = m_IniFile.ReadStr(strSectionName, sKeyUserFormName, _T("åç§°æœªè¨­å®š"), buf, _countof(buf));
+        // æ›¸å¼
+        g_userMoveFolder[i].strFormat = m_IniFile.ReadStr(strSectionName, sKeyMoveFolderFormat, _T(""), buf, _countof(buf));
+        // å›ºå®šæ–‡å­—åˆ—
+        g_userMoveFolder[i].strFixString = m_IniFile.ReadStr(strSectionName, sKeyMoveFolderFixString, _T(""), buf, _countof(buf));
+        // ã‚³ãƒ”ãƒ¼
+        g_userMoveFolder[i].bCopy = m_IniFile.ReadInt(strSectionName, sKeyMoveFolderCopy, 0) ? true : false;
+        // åˆæœŸãƒ•ã‚©ãƒ«ãƒ€
+        g_userMoveFolder[i].strInitFolder = m_IniFile.ReadStr(strSectionName, sKeyMoveFolderInitFolder, _T(""), buf, _countof(buf)); /* STEP 022 */
+    }
 
-	// ‘®ƒRƒs[ /* FunnyCorn 175 */
-	for (i = 0; i < USER_COPY_FORMAT_FORMAT_MAX; i++) {
-		CString		strSectionName;
-		strSectionName.Format("haseta\\%s%d", sSectionCopyFormat, i);
-		// –¼Ì
-		g_userCopyFormat[i].strName = MyGetProfileString(strSectionName, sKeyUserFormName, "–¼Ì–¢İ’è");
-		// ‘®
-		g_userCopyFormat[i].strFormat = MyGetProfileString(strSectionName, sKeyCopyFormatFormat, "");
-		// ŒÅ’è•¶š—ñ
-		g_userCopyFormat[i].strFixString = MyGetProfileString(strSectionName, sKeyCopyFormatFixString, "");
-	}
+    // æ›¸å¼ã‚³ãƒ”ãƒ¼ /* FunnyCorn 175 */
+    for (i = 0; i < USER_COPY_FORMAT_FORMAT_MAX; i++) {
+        CString     strSectionName;
+        strSectionName.Format(_T("haseta\\%s%d"), sSectionCopyFormat, i);
+        // åç§°
+        g_userCopyFormat[i].strName = m_IniFile.ReadStr(strSectionName, sKeyUserFormName, _T("åç§°æœªè¨­å®š"), buf, _countof(buf));
+        // æ›¸å¼
+        g_userCopyFormat[i].strFormat = m_IniFile.ReadStr(strSectionName, sKeyCopyFormatFormat, _T(""), buf, _countof(buf));
+        // å›ºå®šæ–‡å­—åˆ—
+        g_userCopyFormat[i].strFixString = m_IniFile.ReadStr(strSectionName, sKeyCopyFormatFixString, _T(""), buf, _countof(buf));
+    }
 
-	// ƒ^ƒOî•ñ•ÏŠ· /* STEP 034 */
-	for (i = 0; i < USER_CONV_FORMAT_TAG2TAG_MAX; i++) {
-		CString		strSectionName;
-		strSectionName.Format("haseta\\%s%d", sSectionConvFormatTag2Tag, i);
-		// –¼Ì
-		g_userConvFormatTag2Tag[i].strName = MyGetProfileString(strSectionName, sKeyUserTag2TagFormName, "–¼Ì–¢İ’è");
-		// ‘®
-		g_userConvFormatTag2Tag[i].strFormat = MyGetProfileString(strSectionName, sKeyUserTagTagFormat, "");
-	}
+    // ã‚¿ã‚°æƒ…å ±å¤‰æ› /* STEP 034 */
+    for (i = 0; i < USER_CONV_FORMAT_TAG2TAG_MAX; i++) {
+        CString     strSectionName;
+        strSectionName.Format(_T("haseta\\%s%d"), sSectionConvFormatTag2Tag, i);
+        // åç§°
+        g_userConvFormatTag2Tag[i].strName = m_IniFile.ReadStr(strSectionName, sKeyUserTag2TagFormName, _T("åç§°æœªè¨­å®š"), buf, _countof(buf));
+        // æ›¸å¼
+        g_userConvFormatTag2Tag[i].strFormat = m_IniFile.ReadStr(strSectionName, sKeyUserTagTagFormat, _T(""), buf, _countof(buf));
+    }
 
-	{
-		CString		sSectionOption;
-		sSectionOption = "haseta";
-		//g_bOptID3v2GenreAddNumber	= MyGetProfileInt(sSectionOption, sKeyID3v2GenreAddNumber, 1) ? true : false;
-		g_bConfFileNameMaxCheck	= MyGetProfileInt(sSectionOption, sKeyFileNameMaxCheck, 0) ? true : false;
-		g_bFileNameMaxCellColor	= MyGetProfileInt(sSectionOption, sKeyFileNameMaxCellColor, 0) ? true : false; /* SeaKnows 036 */
-		g_nConfFileNameMaxChar	= MyGetProfileInt(sSectionOption, sKeyFileNameMaxChar, 255);
-		g_bOptDropSearchSubFolder	= MyGetProfileInt(sSectionOption, sKeyDropSearchSubFolder, 0) ? true : false;	/* TyphoonSwell 026 */
-		g_bOptShowZenSpace	= MyGetProfileInt(sSectionOption, sKeyShowZenSpace, 1) ? true : false;	/* BeachMonster 107 */
-		g_sOptShowOtherChar = MyGetProfileString(sSectionOption, sKeyShowOtherChar, "");
-		g_bOptSortIgnoreCase	= MyGetProfileInt(sSectionOption, sKeySortIgnoreCase, 0) ? true : false;	/* BeachMonster4 114 */
-		g_bOptSortIgnoreZenHan	= MyGetProfileInt(sSectionOption, sKeySortIgnoreZenHan, 0) ? true : false;	/* BeachMonster4 114 */
-		g_bOptSortIgnoreKataHira= MyGetProfileInt(sSectionOption, sKeySortIgnoreKataHira, 0) ? true : false;	/* FunnyCorn 179 */
-		g_bOptShowTotalParent	= MyGetProfileInt(sSectionOption, sKeyShowTotalParent, 0) ? true : false;	/* RockDance 128 */
-		g_bOptShowTips	= MyGetProfileInt(sSectionOption, sKeyShowTips, 1) ? true : false;	/* Rumble 188 */
-	}
-	// ’èŒ^•¶“\‚è•t‚¯ /* SeaKnows 030 *//* FreeFall 046 */
-	for (int k=0;k<3;k++) {
-		CString		sSectionOption;
-		CString		strSectionName;
-		sSectionOption = "haseta";
-		strSectionName.Format("%s%d", sSectionTeikeiGroupName, k);
-		g_strTeikeiGroupName[k] = MyGetProfileString(sSectionOption, strSectionName, "–¼Ì–¢İ’è");
-		for (i = 0; i < 10; i++) {
-			if (k == 0) {
-				strSectionName.Format("%s%d", sSectionTeikei, i);
-			} else {
-				strSectionName.Format("%s%d-%d", sSectionTeikei, k, i);
-			}
-			g_teikeiInfo[i+k*10].strTeikei/* STEP 035 */ = MyGetProfileString(sSectionOption, strSectionName, "");
-			/* STEP 035 */
-			if (k == 0) {
-				strSectionName.Format("%s%d", sSectionTeikeiPaste, i);
-			} else {
-				strSectionName.Format("%s%d-%d", sSectionTeikeiPaste, k, i);
-			}
-			g_teikeiInfo[i+k*10].nTeikeiPaste = MyGetProfileInt(sSectionOption, strSectionName, 0);
-			if (k == 0) {
-				strSectionName.Format("%s%d", sSectionTeikeiAddSpace, i);
-			} else {
-				strSectionName.Format("%s%d-%d", sSectionTeikeiAddSpace, k, i);
-			}
-			g_teikeiInfo[i+k*10].bAddSpace = MyGetProfileInt(sSectionOption, strSectionName, 0) ? true : false;
-			if (k == 0) {
-				strSectionName.Format("%s%d", sSectionTeikeiAddChar, i);
-			} else {
-				strSectionName.Format("%s%d-%d", sSectionTeikeiAddChar, k, i);
-			}
-			g_teikeiInfo[i+k*10].bAddChar = MyGetProfileInt(sSectionOption, strSectionName, 0) ? true : false;
-			if (k == 0) {
-				strSectionName.Format("%s%d", sSectionTeikeiFront, i);
-			} else {
-				strSectionName.Format("%s%d-%d", sSectionTeikeiFront, k, i);
-			}
-			g_teikeiInfo[i+k*10].strFront = MyGetProfileString(sSectionOption, strSectionName, "");
-			if (k == 0) {
-				strSectionName.Format("%s%d", sSectionTeikeiBack, i);
-			} else {
-				strSectionName.Format("%s%d-%d", sSectionTeikeiBack, k, i);
-			}
-			g_teikeiInfo[i+k*10].strBack = MyGetProfileString(sSectionOption, strSectionName, "");
-			if (k == 0) {
-				strSectionName.Format("%s%d", sSectionTeikeiShowDialog, i);
-			} else {
-				strSectionName.Format("%s%d-%d", sSectionTeikeiShowDialog, k, i);
-			}
-			g_teikeiInfo[i+k*10].bShowDialog = MyGetProfileInt(sSectionOption, strSectionName, 1) ? true : false;
-		}
-	}
-	// ƒ\ƒtƒgƒEƒFƒA‘¼ /* SeaKnows 031 */
-	{
-		CString		strSectionName;
-		strSectionName = "haseta";
-		g_bValidFolderSelect = MyGetProfileInt(strSectionName, sSectionValidFolderSelect, 0) ? true : false;
-		g_bValidDupExec = MyGetProfileInt(strSectionName, sSectionValidDupExec, 0) ? true : false; /* FreeFall 045 */
-		g_nRecentFolder = MyGetProfileInt(strSectionName, sSectionRecentFolderNum, 5); /* MyWriteProfileInt 053 */
-		g_bSaveRepDlgPos = MyGetProfileInt(strSectionName, sSectionSaveRepDlgPos, 0) ? true : false; /* WildCherry4 086 */
-		g_nSaveRepDlgPosX = MyGetProfileInt(strSectionName, sSectionSaveRepDlgPosX, -1); /* WildCherry4 086 */
-		g_nSaveRepDlgPosY = MyGetProfileInt(strSectionName, sSectionSaveRepDlgPosY, -1); /* WildCherry4 086 */
-		g_nAddNumberWidth = MyGetProfileInt(strSectionName, sSectionAddNumberWidth, 2); /* Baja 159 */
-		g_nAddNumberPos = MyGetProfileInt(strSectionName, sSectionAddNumberPos, 0); /* Baja 159 */
-		g_strAddNumberSep = MyGetProfileString(strSectionName, sSectionAddNumberSep, ""); /* Baja 159 */
-		g_strAddNumberBef = MyGetProfileString(strSectionName, sSectionAddNumberBef, ""); /* Conspiracy 194 */
-		g_strAddNumberAft = MyGetProfileString(strSectionName, sSectionAddNumberAft, ""); /* Conspiracy 194 */
-		g_bAudioListShow = MyGetProfileInt(strSectionName, sSectionAudioListShow, 0) ? true : false; /* Conspiracy 199 */
-	}
+    {
+        CString     sSectionOption;
+        sSectionOption =_T("haseta");
+        //g_bOptID3v2GenreAddNumber = m_IniFile.ReadInt(sSectionOption, sKeyID3v2GenreAddNumber, 1) ? true : false;
+        g_bConfFileNameMaxCheck = m_IniFile.ReadInt(sSectionOption, sKeyFileNameMaxCheck, 0) ? true : false;
+        g_bFileNameMaxCellColor = m_IniFile.ReadInt(sSectionOption, sKeyFileNameMaxCellColor, 0) ? true : false; /* SeaKnows 036 */
+        g_nConfFileNameMaxChar  = m_IniFile.ReadInt(sSectionOption, sKeyFileNameMaxChar, 255);
+        g_bOptDropSearchSubFolder   = m_IniFile.ReadInt(sSectionOption, sKeyDropSearchSubFolder, 0) ? true : false;   /* TyphoonSwell 026 */
+        g_bOptShowZenSpace  = m_IniFile.ReadInt(sSectionOption, sKeyShowZenSpace, 1) ? true : false;  /* BeachMonster 107 */
+        g_sOptShowOtherChar = m_IniFile.ReadStr(sSectionOption, sKeyShowOtherChar, _T(""), buf, _countof(buf));
+        g_bOptSortIgnoreCase    = m_IniFile.ReadInt(sSectionOption, sKeySortIgnoreCase, 0) ? true : false;    /* BeachMonster4 114 */
+        g_bOptSortIgnoreZenHan  = m_IniFile.ReadInt(sSectionOption, sKeySortIgnoreZenHan, 0) ? true : false;  /* BeachMonster4 114 */
+        g_bOptSortIgnoreKataHira= m_IniFile.ReadInt(sSectionOption, sKeySortIgnoreKataHira, 0) ? true : false;    /* FunnyCorn 179 */
+        g_bOptShowTotalParent   = m_IniFile.ReadInt(sSectionOption, sKeyShowTotalParent, 0) ? true : false;   /* RockDance 128 */
+        g_bOptShowTips  = m_IniFile.ReadInt(sSectionOption, sKeyShowTips, 1) ? true : false;  /* Rumble 188 */
+    }
+    // å®šå‹æ–‡è²¼ã‚Šä»˜ã‘ /* SeaKnows 030 *//* FreeFall 046 */
+    for (int k=0;k<3;k++) {
+        CString     sSectionOption;
+        CString     strSectionName;
+        sSectionOption = _T("haseta");
+        strSectionName.Format(_T("%s%d"), sSectionTeikeiGroupName, k);
+        g_strTeikeiGroupName[k] = m_IniFile.ReadStr(sSectionOption, strSectionName, _T("åç§°æœªè¨­å®š"), buf, _countof(buf));
+        for (i = 0; i < 10; i++) {
+            if (k == 0) {
+                strSectionName.Format(_T("%s%d"), sSectionTeikei, i);
+            } else {
+                strSectionName.Format(_T("%s%d-%d"), sSectionTeikei, k, i);
+            }
+            g_teikeiInfo[i+k*10].strTeikei = m_IniFile.ReadStr(sSectionOption, strSectionName, _T(""), buf, _countof(buf)); /* STEP 035 */
+            /* STEP 035 */
+            if (k == 0) {
+                strSectionName.Format(_T("%s%d"), sSectionTeikeiPaste, i);
+            } else {
+                strSectionName.Format(_T("%s%d-%d"), sSectionTeikeiPaste, k, i);
+            }
+            g_teikeiInfo[i+k*10].nTeikeiPaste = m_IniFile.ReadInt(sSectionOption, strSectionName, 0);
+            if (k == 0) {
+                strSectionName.Format(_T("%s%d"), sSectionTeikeiAddSpace, i);
+            } else {
+                strSectionName.Format(_T("%s%d-%d"), sSectionTeikeiAddSpace, k, i);
+            }
+            g_teikeiInfo[i+k*10].bAddSpace = m_IniFile.ReadInt(sSectionOption, strSectionName, 0) ? true : false;
+            if (k == 0) {
+                strSectionName.Format(_T("%s%d"), sSectionTeikeiAddChar, i);
+            } else {
+                strSectionName.Format(_T("%s%d-%d"), sSectionTeikeiAddChar, k, i);
+            }
+            g_teikeiInfo[i+k*10].bAddChar = m_IniFile.ReadInt(sSectionOption, strSectionName, 0) ? true : false;
+            if (k == 0) {
+                strSectionName.Format(_T("%s%d"), sSectionTeikeiFront, i);
+            } else {
+                strSectionName.Format(_T("%s%d-%d"), sSectionTeikeiFront, k, i);
+            }
+            g_teikeiInfo[i+k*10].strFront = m_IniFile.ReadStr(sSectionOption, strSectionName, _T(""), buf, _countof(buf));
+            if (k == 0) {
+                strSectionName.Format(_T("%s%d"), sSectionTeikeiBack, i);
+            } else {
+                strSectionName.Format(_T("%s%d-%d"), sSectionTeikeiBack, k, i);
+            }
+            g_teikeiInfo[i+k*10].strBack = m_IniFile.ReadStr(sSectionOption, strSectionName, _T(""), buf, _countof(buf));
+            if (k == 0) {
+                strSectionName.Format(_T("%s%d"), sSectionTeikeiShowDialog, i);
+            } else {
+                strSectionName.Format(_T("%s%d-%d"), sSectionTeikeiShowDialog, k, i);
+            }
+            g_teikeiInfo[i+k*10].bShowDialog = m_IniFile.ReadInt(sSectionOption, strSectionName, 1) ? true : false;
+        }
+    }
+    // ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢ä»– /* SeaKnows 031 */
+    {
+        CString     strSectionName;
+        strSectionName = _T("haseta");
+        g_bValidFolderSelect = m_IniFile.ReadInt(strSectionName, sSectionValidFolderSelect, 0) ? true : false;
+        g_bValidDupExec = m_IniFile.ReadInt(strSectionName, sSectionValidDupExec, 0) ? true : false; /* FreeFall 045 */
+        g_nRecentFolder = m_IniFile.ReadInt(strSectionName, sSectionRecentFolderNum, 5); /* 053 */
+        g_bSaveRepDlgPos = m_IniFile.ReadInt(strSectionName, sSectionSaveRepDlgPos, 0) ? true : false; /* WildCherry4 086 */
+        g_nSaveRepDlgPosX = m_IniFile.ReadInt(strSectionName, sSectionSaveRepDlgPosX, -1); /* WildCherry4 086 */
+        g_nSaveRepDlgPosY = m_IniFile.ReadInt(strSectionName, sSectionSaveRepDlgPosY, -1); /* WildCherry4 086 */
+        g_nAddNumberWidth = m_IniFile.ReadInt(strSectionName, sSectionAddNumberWidth, 2); /* Baja 159 */
+        g_nAddNumberPos = m_IniFile.ReadInt(strSectionName, sSectionAddNumberPos, 0); /* Baja 159 */
+        g_strAddNumberSep = m_IniFile.ReadStr(strSectionName, sSectionAddNumberSep, _T(""), buf, _countof(buf)); /* Baja 159 */
+        g_strAddNumberBef = m_IniFile.ReadStr(strSectionName, sSectionAddNumberBef, _T(""), buf, _countof(buf)); /* Conspiracy 194 */
+        g_strAddNumberAft = m_IniFile.ReadStr(strSectionName, sSectionAddNumberAft, _T(""), buf, _countof(buf)); /* Conspiracy 194 */
+        g_bAudioListShow = m_IniFile.ReadInt(strSectionName, sSectionAudioListShow, 0) ? true : false; /* Conspiracy 199 */
+    }
 
-	// ƒŠƒXƒgo—Í‘®
-	for (i = 0; i < WRITE_FORMAT_MAX; i++) {
-		CString		strSectionName;
-		strSectionName.Format("%s%d", sSectionWriteFormat, i);
-		// –¼Ì
-		g_writeFormat[i].strName = MyGetProfileString(strSectionName, sKeyWriteFormName, "–¼Ì–¢İ’è");
-		// ‘®ƒtƒ@ƒCƒ‹–¼
-		g_writeFormat[i].strFileName = MyGetProfileString(strSectionName, sKeyWriteFileName, "");
-		// Šg’£q
-		g_writeFormat[i].strExtName = MyGetProfileString(strSectionName, sKeyWriteExtName, ".txt");
-		// ‘I‘ğƒtƒ@ƒCƒ‹‚Ì‚İo—Í
-		g_writeFormat[i].bWriteSelected = MyGetProfileInt(strSectionName, sKeyWriteSelected, 0) ? true : false;
-		// ƒJƒŒƒ“ƒgƒtƒ@ƒCƒ‹–¼
-		g_writeFormat[i].strCurrentFile = MyGetProfileString(strSectionName, sKeyWriteCurrentFile, "");
-		// HTML ƒtƒ@ƒCƒ‹o—Í—p(‹ó‚Ìê‡‚É‘SŠpƒXƒy[ƒX‚ğo—Í)
-		g_writeFormat[i].bIsHtml = MyGetProfileInt(strSectionName, sKeyWriteIsHtml, 0) ? true : false;
-		{ /* BeachMonster5 120 */
-			g_writeFormat[i].bWriteHtml = MyGetProfileInt("haseta\\" + strSectionName, sKeyWriteHtml, 0) ? true : false;
-		}
-	}
+    // ãƒªã‚¹ãƒˆå‡ºåŠ›æ›¸å¼
+    for (i = 0; i < WRITE_FORMAT_MAX; i++) {
+        CString     strSectionName;
+        strSectionName.Format(_T("%s%d"), sSectionWriteFormat, i);
+        // åç§°
+        g_writeFormat[i].strName = m_IniFile.ReadStr(strSectionName, sKeyWriteFormName, _T("åç§°æœªè¨­å®š"), buf, _countof(buf));
+        // æ›¸å¼ãƒ•ã‚¡ã‚¤ãƒ«å
+        g_writeFormat[i].strFileName = m_IniFile.ReadStr(strSectionName, sKeyWriteFileName, _T(""), buf, _countof(buf));
+        // æ‹¡å¼µå­
+        g_writeFormat[i].strExtName = m_IniFile.ReadStr(strSectionName, sKeyWriteExtName, _T(".txt"), buf, _countof(buf));
+        // é¸æŠãƒ•ã‚¡ã‚¤ãƒ«ã®ã¿å‡ºåŠ›
+        g_writeFormat[i].bWriteSelected = m_IniFile.ReadInt(strSectionName, sKeyWriteSelected, 0) ? true : false;
+        // ã‚«ãƒ¬ãƒ³ãƒˆãƒ•ã‚¡ã‚¤ãƒ«å
+        g_writeFormat[i].strCurrentFile = m_IniFile.ReadStr(strSectionName, sKeyWriteCurrentFile, _T(""), buf, _countof(buf));
+        // HTML ãƒ•ã‚¡ã‚¤ãƒ«å‡ºåŠ›ç”¨(ç©ºã®å ´åˆã«å…¨è§’ã‚¹ãƒšãƒ¼ã‚¹ã‚’å‡ºåŠ›)
+        g_writeFormat[i].bIsHtml = m_IniFile.ReadInt(strSectionName, sKeyWriteIsHtml, 0) ? true : false;
+        { /* BeachMonster5 120 */
+            g_writeFormat[i].bWriteHtml = m_IniFile.ReadInt(_T("haseta\\") + strSectionName, sKeyWriteHtml, 0) ? true : false;
+        }
+    }
 
-	// ƒtƒ@ƒCƒ‹–¼’uŠ·•¶š
-	for (i = 0; i < FILENAME_REPLACE_MAX; i++) {
-		FILENAME_REPLACE	*pRep = &g_fileNameReplace[i];
-		CString		strKeyName;
-		// ’uŠ·Œã•¶š—ñ
-		strKeyName.Format("%s%d", sKeyRepCharAfter, i);
-		pRep->strBefore = g_sRepTable[i][0];
-		pRep->strAfter = MyGetProfileString(sSectionRepFileName, strKeyName, g_sRepTable[i][1]);
-	}
-	// ƒ†[ƒUƒtƒ@ƒCƒ‹–¼’uŠ·•¶š /* FreeFall 050 */
-	{
-		CString		strSectionName;
-		strSectionName = "haseta\\User";
-		strSectionName += sSectionRepFileName;
-		for (i = 0; i < USER_FILENAME_REPLACE_MAX; i++) {
-			FILENAME_REPLACE	*pRep = &g_userFileNameReplace[i];
-			CString		strKeyName;
-			// ’uŠ·Œã•¶š—ñ
-			strKeyName.Format("%s%d", sKeyRepCharBefore, i);
-			pRep->strBefore = MyGetProfileString(strSectionName, strKeyName, "");
-			strKeyName.Format("%s%d", sKeyRepCharAfter, i);
-			pRep->strAfter = MyGetProfileString(strSectionName, strKeyName, "");
-		}
-	}
+    // ãƒ•ã‚¡ã‚¤ãƒ«åç½®æ›æ–‡å­—
+    for (i = 0; i < FILENAME_REPLACE_MAX; i++) {
+        FILENAME_REPLACE    *pRep = &g_fileNameReplace[i];
+        CString     strKeyName;
+        // ç½®æ›å¾Œæ–‡å­—åˆ—
+        strKeyName.Format(_T("%s%d"), sKeyRepCharAfter, i);
+        pRep->strBefore = g_sRepTable[i][0];
+        pRep->strAfter = m_IniFile.ReadStr(sSectionRepFileName, strKeyName, g_sRepTable[i][1], buf, _countof(buf));
+    }
+    // ãƒ¦ãƒ¼ã‚¶ãƒ•ã‚¡ã‚¤ãƒ«åç½®æ›æ–‡å­— /* FreeFall 050 */
+    {
+        CString     strSectionName;
+        strSectionName = _T("haseta\\User");
+        strSectionName += sSectionRepFileName;
+        for (i = 0; i < USER_FILENAME_REPLACE_MAX; i++) {
+            FILENAME_REPLACE    *pRep = &g_userFileNameReplace[i];
+            CString     strKeyName;
+            // ç½®æ›å¾Œæ–‡å­—åˆ—
+            strKeyName.Format(_T("%s%d"), sKeyRepCharBefore, i);
+            pRep->strBefore = m_IniFile.ReadStr(strSectionName, strKeyName, _T(""), buf, _countof(buf));
+            strKeyName.Format(_T("%s%d"), sKeyRepCharAfter, i);
+            pRep->strAfter = m_IniFile.ReadStr(strSectionName, strKeyName, _T(""), buf, _countof(buf));
+        }
+    }
 
-	// •ª—Şİ’èî•ñ
-	g_classInfo.nType = MyGetProfileInt(sSectionClass, sKeyClassType, 0);
-	for (i = 0; i < CLASS_MAX; i++) {
-		CString		strKeyName;
-		// ƒJƒ‰ƒ€”Ô†
-		strKeyName.Format("%s%d", sKeyClassColumn, i);
-		g_classInfo.nColumn[i] = MyGetProfileInt(sSectionClass, strKeyName, -1);
-	}
+    // åˆ†é¡è¨­å®šæƒ…å ±
+    g_classInfo.nType = m_IniFile.ReadInt(sSectionClass, sKeyClassType, 0);
+    for (i = 0; i < CLASS_MAX; i++) {
+        CString     strKeyName;
+        // ã‚«ãƒ©ãƒ ç•ªå·
+        strKeyName.Format(_T("%s%d"), sKeyClassColumn, i);
+        g_classInfo.nColumn[i] = m_IniFile.ReadInt(sSectionClass, strKeyName, -1);
+    }
 
-	// ƒ\[ƒgî•ñ
-	for (i = 0; i < SORT_KEY_MAX; i++) {
-		CString		strKeyName;
-		SORT_STATE	*state = &g_sortState[i];
-		// ƒL[(ƒJƒ‰ƒ€)
-		strKeyName.Format("%s%d", sKeySortColumn, i);
-		state->nKeyColumn = MyGetProfileInt(sSectionSort, strKeyName, -1);
-		// ƒ^ƒCƒv
-		strKeyName.Format("%s%d", sKeySortType, i);
-		state->nType = MyGetProfileInt(sSectionSort, strKeyName, 0);
-	}
+    // ã‚½ãƒ¼ãƒˆæƒ…å ±
+    for (i = 0; i < SORT_KEY_MAX; i++) {
+        CString     strKeyName;
+        SORT_STATE  *state = &g_sortState[i];
+        // ã‚­ãƒ¼(ã‚«ãƒ©ãƒ )
+        strKeyName.Format(_T("%s%d"), sKeySortColumn, i);
+        state->nKeyColumn = m_IniFile.ReadInt(sSectionSort, strKeyName, -1);
+        // ã‚¿ã‚¤ãƒ—
+        strKeyName.Format(_T("%s%d"), sKeySortType, i);
+        state->nType = m_IniFile.ReadInt(sSectionSort, strKeyName, 0);
+    }
 
-	// ƒEƒBƒ“ƒhƒE‚ÌƒtƒHƒ“ƒg‚ğ“Ç‚İ‚Ş
-	CString	strFont;
-	strFont = MyGetProfileString(sSectionFont, sKeyFontFace, "");
-	strcpy(g_fontReport.lfFaceName, (const char *)strFont);
-	g_fontReport.lfHeight			= MyGetProfileInt(sSectionFont, sKeyFontHeight, 0);
-	g_fontReport.lfWidth			= MyGetProfileInt(sSectionFont, sKeyFontWidth, 0);
-	g_fontReport.lfEscapement		= MyGetProfileInt(sSectionFont, sKeyFontEscapement, 0);
-	g_fontReport.lfOrientation		= MyGetProfileInt(sSectionFont, sKeyFontOrientation, 0);
-	g_fontReport.lfWeight			= MyGetProfileInt(sSectionFont, sKeyFontWeight, 0);
-	g_fontReport.lfItalic			= (unsigned char)MyGetProfileInt(sSectionFont, sKeyFontItalic, 0);
-	g_fontReport.lfUnderline		= (unsigned char)MyGetProfileInt(sSectionFont, sKeyFontUnderline, 0);
-	g_fontReport.lfStrikeOut		= (unsigned char)MyGetProfileInt(sSectionFont, sKeyFontStrikeOut, 0);
-	g_fontReport.lfCharSet			= (unsigned char)MyGetProfileInt(sSectionFont, sKeyFontCharSet, 0);
-	g_fontReport.lfOutPrecision		= (unsigned char)MyGetProfileInt(sSectionFont, sKeyFontOutPrecision, 0);
-	g_fontReport.lfClipPrecision	= (unsigned char)MyGetProfileInt(sSectionFont, sKeyFontClipPrecision, 0);
-	g_fontReport.lfQuality			= (unsigned char)MyGetProfileInt(sSectionFont, sKeyFontQuality, 0);
-	g_fontReport.lfPitchAndFamily	= (unsigned char)MyGetProfileInt(sSectionFont, sKeyFontPitchAndFamily, 0);
+    // ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®ãƒ•ã‚©ãƒ³ãƒˆã‚’èª­ã¿è¾¼ã‚€
+    CString strFont;
+    strFont = m_IniFile.ReadStr(sSectionFont, sKeyFontFace, _T("Meiryo UI"), buf, _countof(buf));
+    _tcsncpy_s(g_fontReport.lfFaceName, (const TCHAR *)strFont, _TRUNCATE);
+    g_fontReport.lfHeight           = m_IniFile.ReadInt(sSectionFont, sKeyFontHeight, -MulDiv(9, CClientDC(0).GetDeviceCaps(LOGPIXELSY), 72));
+    g_fontReport.lfWidth            = m_IniFile.ReadInt(sSectionFont, sKeyFontWidth, 0);
+    g_fontReport.lfEscapement       = m_IniFile.ReadInt(sSectionFont, sKeyFontEscapement, 0);
+    g_fontReport.lfOrientation      = m_IniFile.ReadInt(sSectionFont, sKeyFontOrientation, 0);
+    g_fontReport.lfWeight           = m_IniFile.ReadInt(sSectionFont, sKeyFontWeight, 0);
+    g_fontReport.lfItalic           = (unsigned char)m_IniFile.ReadInt(sSectionFont, sKeyFontItalic, 0);
+    g_fontReport.lfUnderline        = (unsigned char)m_IniFile.ReadInt(sSectionFont, sKeyFontUnderline, 0);
+    g_fontReport.lfStrikeOut        = (unsigned char)m_IniFile.ReadInt(sSectionFont, sKeyFontStrikeOut, 0);
+    g_fontReport.lfCharSet          = (unsigned char)m_IniFile.ReadInt(sSectionFont, sKeyFontCharSet, 0);
+    g_fontReport.lfOutPrecision     = (unsigned char)m_IniFile.ReadInt(sSectionFont, sKeyFontOutPrecision, 0);
+    g_fontReport.lfClipPrecision    = (unsigned char)m_IniFile.ReadInt(sSectionFont, sKeyFontClipPrecision, 0);
+    g_fontReport.lfQuality          = (unsigned char)m_IniFile.ReadInt(sSectionFont, sKeyFontQuality, 0);
+    g_fontReport.lfPitchAndFamily   = (unsigned char)m_IniFile.ReadInt(sSectionFont, sKeyFontPitchAndFamily, 0);
 
-	//g_nOptPlayerType		= MyGetProfileInt(sSectionOption, sKeyPlayerType, PLAYER_WINAMP);
-	//g_sOptWinAmpPath		= MyGetProfileString(sSectionOption, sKeyWinAmpPath, "");
-	{ /* ”‚ğ‘‚â‚µ‚½‚Ì‚Å–{‰Æ•¹—p‚É‰e‹¿‚ğ—^‚¦‚È‚¢‚æ‚¤‚É WildCherry 070 */
-		CString		strSectionName;
-		strSectionName = "haseta\\";
-		strSectionName += sSectionOption;
-		g_nOptPlayerType	= MyGetProfileInt(strSectionName, sKeyPlayerType, PLAYER_WINAMP);
-		g_sOptWinAmpPath		= MyGetProfileString(strSectionName, sKeyWinAmpPath, "");
-	}
-	if (g_sOptWinAmpPath.IsEmpty()) {
-		// WinAmp ‚ÌƒpƒX‚ğæ“¾
-		GetWinampPath();
-	}
+    //g_nOptPlayerType      = m_IniFile.ReadInt(sSectionOption, sKeyPlayerType, PLAYER_WINAMP);
+    //g_sOptWinAmpPath      = m_IniFile.ReadStr(sSectionOption, sKeyWinAmpPath, "");
+    { /* æ•°ã‚’å¢—ã‚„ã—ãŸã®ã§æœ¬å®¶ä½µç”¨æ™‚ã«å½±éŸ¿ã‚’ä¸ãˆãªã„ã‚ˆã†ã« WildCherry 070 */
+        CString     strSectionName;
+        strSectionName = _T("haseta\\");
+        strSectionName += sSectionOption;
+        g_nOptPlayerType    = m_IniFile.ReadInt(strSectionName, sKeyPlayerType, PLAYER_WINAMP);
+        g_sOptWinAmpPath        = m_IniFile.ReadStr(strSectionName, sKeyWinAmpPath, _T(""), buf, _countof(buf));
+    }
+    if (g_sOptWinAmpPath.IsEmpty()) {
+        // WinAmp ã®ãƒ‘ã‚¹ã‚’å–å¾—
+        GetWinampPath();
+    }
 
-	g_bMainFrameZoomed		= MyGetProfileInt(sSectionWindow, sKeyWinZoomed, FALSE);
-	g_bMainFrameIconic		= MyGetProfileInt(sSectionWindow, sKeyWinIconic, FALSE);
-	ReadWindowStatus(sKeyMainWindow, &g_rectMainWindow);
+    g_bMainFrameZoomed      = m_IniFile.ReadInt(sSectionWindow, sKeyWinZoomed, FALSE);
+    g_bMainFrameIconic      = m_IniFile.ReadInt(sSectionWindow, sKeyWinIconic, FALSE);
+    ReadWindowStatus(sKeyMainWindow, &g_rectMainWindow);
 
-	// ƒ†[ƒUw’èƒWƒƒƒ“ƒ‹
-	if (g_genreListUSER == NULL) {
-		g_genreListUSER = new USER_GENRE_LIST[USER_GENRE_LIST_MAX];
-	}
+    // ãƒ¦ãƒ¼ã‚¶æŒ‡å®šã‚¸ãƒ£ãƒ³ãƒ«
+    if (g_genreListUSER == NULL) {
+        g_genreListUSER = new USER_GENRE_LIST[USER_GENRE_LIST_MAX];
+    }
 
-	// •¶ší‚Ì“ˆê /* StartInaction 054 */
-	{
-		CString		strSectionName;
-		strSectionName = "haseta";
-		g_nUnifyAlpha = MyGetProfileInt(strSectionName, sKeyUnifyAlpha, 0);
-		g_nUnifyHiraKata = MyGetProfileInt(strSectionName, sKeyUnifyHiraKata, 0);
-		g_nUnifyKata = MyGetProfileInt(strSectionName, sKeyUnifyKata, 0);
-		g_nUnifyKigou = MyGetProfileInt(strSectionName, sKeyUnifyKigou, 0);
-		g_nUnifySuji = MyGetProfileInt(strSectionName, sKeyUnifySuji, 0);
-		g_nUnifyUpLow = MyGetProfileInt(strSectionName, sKeyUnifyUpLow, 0);
-		g_nUnifyFixedUpLow = MyGetProfileInt(strSectionName, sKeyUnifyFixedUpLow, 0); /* STEP 040 */
-	}
+    // æ–‡å­—ç¨®ã®çµ±ä¸€ /* StartInaction 054 */
+    {
+        CString     strSectionName;
+        strSectionName = "haseta";
+        g_nUnifyAlpha = m_IniFile.ReadInt(strSectionName, sKeyUnifyAlpha, 0);
+        g_nUnifyHiraKata = m_IniFile.ReadInt(strSectionName, sKeyUnifyHiraKata, 0);
+        g_nUnifyKata = m_IniFile.ReadInt(strSectionName, sKeyUnifyKata, 0);
+        g_nUnifyKigou = m_IniFile.ReadInt(strSectionName, sKeyUnifyKigou, 0);
+        g_nUnifySuji = m_IniFile.ReadInt(strSectionName, sKeyUnifySuji, 0);
+        g_nUnifyUpLow = m_IniFile.ReadInt(strSectionName, sKeyUnifyUpLow, 0);
+        g_nUnifyFixedUpLow = m_IniFile.ReadInt(strSectionName, sKeyUnifyFixedUpLow, 0); /* STEP 040 */
+    }
 
-	// ƒtƒ@ƒCƒ‹–¼•¶ší‚Ì“ˆê /* LastTrain 058 */
-	{
-		CString		strSectionName;
-		strSectionName = "haseta";
-		g_nFileUnifyAlpha = MyGetProfileInt(strSectionName, sKeyFileUnifyAlpha, 0);
-		g_nFileUnifyHiraKata = MyGetProfileInt(strSectionName, sKeyFileUnifyHiraKata, 0);
-		g_nFileUnifyKata = MyGetProfileInt(strSectionName, sKeyFileUnifyKata, 0);
-		g_nFileUnifyKigou = MyGetProfileInt(strSectionName, sKeyFileUnifyKigou, 0);
-		g_nFileUnifySuji = MyGetProfileInt(strSectionName, sKeyFileUnifySuji, 0);
-		g_nFileUnifyUpLow = MyGetProfileInt(strSectionName, sKeyFileUnifyUpLow, 0);
-	}
+    // ãƒ•ã‚¡ã‚¤ãƒ«åæ–‡å­—ç¨®ã®çµ±ä¸€ /* LastTrain 058 */
+    {
+        CString     strSectionName;
+        strSectionName = "haseta";
+        g_nFileUnifyAlpha = m_IniFile.ReadInt(strSectionName, sKeyFileUnifyAlpha, 0);
+        g_nFileUnifyHiraKata = m_IniFile.ReadInt(strSectionName, sKeyFileUnifyHiraKata, 0);
+        g_nFileUnifyKata = m_IniFile.ReadInt(strSectionName, sKeyFileUnifyKata, 0);
+        g_nFileUnifyKigou = m_IniFile.ReadInt(strSectionName, sKeyFileUnifyKigou, 0);
+        g_nFileUnifySuji = m_IniFile.ReadInt(strSectionName, sKeyFileUnifySuji, 0);
+        g_nFileUnifyUpLow = m_IniFile.ReadInt(strSectionName, sKeyFileUnifyUpLow, 0);
+    }
 
-	// Šg’£q‚Ì“ˆê /* STEP 006 */
-	{
-		CString		strSectionName;
-		strSectionName = "haseta";
-		g_nFileExtChange = MyGetProfileInt(strSectionName, sKeyFileExtChange, 0);
-	}
+    // æ‹¡å¼µå­ã®çµ±ä¸€ /* STEP 006 */
+    {
+        CString     strSectionName;
+        strSectionName = _T("haseta");
+        g_nFileExtChange = m_IniFile.ReadInt(strSectionName, sKeyFileExtChange, 0);
+    }
 
-	// ƒvƒŒƒCƒŠƒXƒg“ü—Íİ’èƒ_ƒCƒAƒƒO‚ğ•\¦‚·‚é /* RockDance 126 */
-	{
-		CString		strSectionName;
-		strSectionName = "haseta";
-		g_bShowLoadPlaylistDlg = MyGetProfileInt(strSectionName, sKeyShowLoadPlaylistDlg, 1) ? true : false;
-	}
+    // ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆå…¥åŠ›è¨­å®šãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚’è¡¨ç¤ºã™ã‚‹ /* RockDance 126 */
+    {
+        CString     strSectionName;
+        strSectionName = _T("haseta");
+        g_bShowLoadPlaylistDlg = m_IniFile.ReadInt(strSectionName, sKeyShowLoadPlaylistDlg, 1) ? true : false;
+    }
 
-	// ‚¨‹C‚É“ü‚è‚ÌƒtƒHƒ‹ƒ_ /* RockDance 129 */
-	{
-		CString		sSectionOption;
-		CString		strSectionName;
-		sSectionOption = "haseta";
-		for (i = 0; i < 10; i++) {
-			strSectionName.Format("%s%d", sSectionFavorites, i);
-			g_strFavorite[i] = MyGetProfileString(sSectionOption, strSectionName, "");
-		}
-	}
+    // ãŠæ°—ã«å…¥ã‚Šã®ãƒ•ã‚©ãƒ«ãƒ€ /* RockDance 129 */
+    {
+        CString     sSectionOption;
+        CString     strSectionName;
+        sSectionOption = _T("haseta");
+        for (i = 0; i < 10; i++) {
+            strSectionName.Format(_T("%s%d"), sSectionFavorites, i);
+            g_strFavorite[i] = m_IniFile.ReadStr(sSectionOption, strSectionName, _T(""), buf, _countof(buf));
+        }
+    }
 
-	{ /* STEP 026 */
-		CString		strSectionName;
-		strSectionName = "haseta";
-		g_bFirstUpperIgnoreWord = MyGetProfileInt(strSectionName, sKeyFirstUpperIgnoreWord, 0) ? true : false;
-		g_strFirstUpperIgnoreWords = MyGetProfileString(sSectionOption, sKeyFirstUpperIgnoreWords, "a,an,and,at,by,for,in,into,of,on,or,the,to,with");
-		g_strFirstUpperSentenceSeparator = MyGetProfileString(sSectionOption, sKeyFirstUpperSentenceSeparator, ".");
-		g_bUserConvAddMenu = MyGetProfileInt(strSectionName, sKeyUserConvAddMenu, 0) ? true : false;
-		g_bZenHanKigouKana = MyGetProfileInt(strSectionName, sKeyZenHanKigouKana, 0) ? true : false;
-	}
+    { /* STEP 026 */
+        CString     strSectionName;
+        strSectionName = "haseta";
+        g_bFirstUpperIgnoreWord = m_IniFile.ReadInt(strSectionName, sKeyFirstUpperIgnoreWord, 0) ? true : false;
+        g_strFirstUpperIgnoreWords = m_IniFile.ReadStr(sSectionOption,
+                                                       sKeyFirstUpperIgnoreWords,
+                                                       _T("a,an,and,at,by,for,in,into,of,on,or,the,to,with"),
+                                                       buf, _countof(buf));
+        g_strFirstUpperSentenceSeparator = m_IniFile.ReadStr(sSectionOption,
+                                                       sKeyFirstUpperSentenceSeparator, _T("."), buf, _countof(buf));
+        g_bUserConvAddMenu = m_IniFile.ReadInt(strSectionName, sKeyUserConvAddMenu, 0) ? true : false;
+        g_bZenHanKigouKana = m_IniFile.ReadInt(strSectionName, sKeyZenHanKigouKana, 0) ? true : false;
 
-	//Profile_Free();
+        g_bAutoTilde2WaveDash = m_IniFile.ReadInt(strSectionName, sKeyAutoTilde2WaveDash, 0) ? true : false;
+    }
+
+    //Profile_Free();
 }
 
 void CSuperTagEditorApp::WriteRegistry(void)
 {
-	CString strINI = m_pszProfileName;
-	InitProfile();
+    int     i;
+    // å„ç¨®è¨­å®šã‚’æ›¸ãè¾¼ã‚€
+    m_IniFile.WriteStr(sSectionOption, sKeyVersion        , CString(PROG_VERSION) + CString("M"));
+    m_IniFile.WriteStr(sSectionOption, sKeyCurrentDir     , g_strCurrentDirectory);
+    m_IniFile.WriteStr(sSectionOption, sKeyCurrentPlayList, g_strCurrentPlayList);
+    //dlgLoadProgress.SetPos(5);
 
+    // ä¸€èˆ¬ - ãƒ¦ãƒ¼ã‚¶ãƒ¼ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹
+    m_IniFile.WriteInt(sSectionOption, sKeyESCEditCancel       , g_bOptESCEditCancel ? 1 : 0);
+    m_IniFile.WriteInt(sSectionOption, sKeyEnableEditCursorExit, g_bOptEnableEditCursorExit ? 1 : 0);
+    m_IniFile.WriteInt(sSectionOption, sKeyEditOkDown          , g_bOptEditOkDown ? 1 : 0);
+    m_IniFile.WriteInt(sSectionOption, sKeyEnterBeginEdit      , g_bOptEnterBeginEdit ? 1 : 0);
+    //dlgLoadProgress.SetPos(10);
 
-	int		i;
+    // ä¸€èˆ¬ - å‹•ä½œè¨­å®š
+    m_IniFile.WriteInt(sSectionOption, sKeyKeepTimeStamp       , g_bOptKeepTimeStamp ? 1 : 0);
+    m_IniFile.WriteInt(sSectionOption, sKeySyncCreateTime      , g_bOptSyncCreateTime ? 1 : 0);
+    m_IniFile.WriteInt(sSectionOption, sKeyChangeFileExt       , g_bOptChangeFileExt ? 1 : 0);
+    m_IniFile.WriteInt(sSectionOption, sKeyAutoOpenFolder      , g_bOptAutoOpenFolder ? 1 : 0);
+    m_IniFile.WriteInt(sSectionOption, sKeyLoadFileAdjustColumn, g_bOptLoadFileAdjustColumn ? 1 : 0);
+    m_IniFile.WriteInt(sSectionOption, sKeyLoadFileChecked     , g_bOptLoadFileChecked ? 1 : 0);
+    m_IniFile.WriteInt(sSectionOption, sKeyHideMP3ListFile     , g_bOptHideMP3ListFile ? 1 : 0);
+    //dlgLoadProgress.SetPos(15);
 
-	// Šeíİ’è‚ğ‘‚«‚Ş
+    // ä¸€èˆ¬ - æ­Œè©ãƒ•ã‚¡ã‚¤ãƒ«
+    m_IniFile.WriteInt(sSectionOption, sKeyChangeTextFile    , g_bOptChangeTextFile ? 1 : 0);
+    m_IniFile.WriteInt(sSectionOption, sKeySetLyricsDir      , g_bOptSetLyricsDir ? 1 : 0);
+    m_IniFile.WriteInt(sSectionOption, sKeySearchLyricsSubDir, g_bOptSearchLyricsSubDir ? 1 : 0);
+    m_IniFile.WriteStr(sSectionOption, sKeyLyricsPath     , g_strOptLyricsPath);
+    //dlgLoadProgress.SetPos(20);
 
-	MyWriteProfileString(sSectionOption, sKeyVersion        , CString(PROG_VERSION) + CString("M"));
-	MyWriteProfileString(sSectionOption, sKeyCurrentDir     , g_strCurrentDirectory);
-	MyWriteProfileString(sSectionOption, sKeyCurrentPlayList, g_strCurrentPlayList);
-	//dlgLoadProgress.SetPos(5);
+    //
+    m_IniFile.WriteInt(sSectionOption, sKeyEditFiledSIF, g_bOptEditFieldSIF ? 1 : 0);
+    m_IniFile.WriteInt(sSectionOption, sKeyCheckFileName, g_nOptCheckFileName);
+    m_IniFile.WriteInt(sSectionOption, sKeyEnableSearchSubDir, g_bEnableSearchSubDir ? 1 : 0);
+    //dlgLoadProgress.SetPos(25);
 
-	// ˆê”Ê - ƒ†[ƒU[ƒCƒ“ƒ^[ƒtƒF[ƒX
-	MyWriteProfileInt(sSectionOption, sKeyESCEditCancel       , g_bOptESCEditCancel ? 1 : 0);
-	MyWriteProfileInt(sSectionOption, sKeyEnableEditCursorExit, g_bOptEnableEditCursorExit ? 1 : 0);
-	MyWriteProfileInt(sSectionOption, sKeyEditOkDown          , g_bOptEditOkDown ? 1 : 0);
-	MyWriteProfileInt(sSectionOption, sKeyEnterBeginEdit      , g_bOptEnterBeginEdit ? 1 : 0);
-	//dlgLoadProgress.SetPos(10);
-	
-	// ˆê”Ê - “®ìİ’è
-	MyWriteProfileInt(sSectionOption, sKeyKeepTimeStamp       , g_bOptKeepTimeStamp ? 1 : 0);
-	MyWriteProfileInt(sSectionOption, sKeySyncCreateTime      , g_bOptSyncCreateTime ? 1 : 0);
-	MyWriteProfileInt(sSectionOption, sKeyChangeFileExt       , g_bOptChangeFileExt ? 1 : 0);
-	MyWriteProfileInt(sSectionOption, sKeyAutoOpenFolder      , g_bOptAutoOpenFolder ? 1 : 0);
-	MyWriteProfileInt(sSectionOption, sKeyLoadFileAdjustColumn, g_bOptLoadFileAdjustColumn ? 1 : 0);
-	MyWriteProfileInt(sSectionOption, sKeyLoadFileChecked     , g_bOptLoadFileChecked ? 1 : 0);
-	MyWriteProfileInt(sSectionOption, sKeyHideMP3ListFile     , g_bOptHideMP3ListFile ? 1 : 0);
-	//dlgLoadProgress.SetPos(15);
+    // ãƒ•ã‚©ãƒ«ãƒ€ã®åŒæœŸ
+    m_IniFile.WriteInt(sSectionFolderSync, sKeyEnableFolderSync, g_bEnableFolderSync ? 1 : 0);
+    m_IniFile.WriteStr(sSectionFolderSync, sKeySyncRootFolder, g_strRootFolder);
+    m_IniFile.WriteInt(sSectionFolderSync, sKeySyncSelectAlways, g_bSyncSelectAlways ? 1 : 0);
+    m_IniFile.WriteInt(sSectionFolderSync, sKeySyncDeleteFolder, g_bSyncDeleteFolder ? 1 : 0);
+    m_IniFile.WriteInt(sSectionFolderSync, sKeySyncLyricsFileMove, g_bSyncLyricsFileMove ? 1 : 0);
+    //dlgLoadProgress.SetPos(30);
 
-	// ˆê”Ê - ‰ÌŒƒtƒ@ƒCƒ‹
-	MyWriteProfileInt(sSectionOption, sKeyChangeTextFile    , g_bOptChangeTextFile ? 1 : 0);
-	MyWriteProfileInt(sSectionOption, sKeySetLyricsDir      , g_bOptSetLyricsDir ? 1 : 0);
-	MyWriteProfileInt(sSectionOption, sKeySearchLyricsSubDir, g_bOptSearchLyricsSubDir ? 1 : 0);
-	MyWriteProfileString(sSectionOption, sKeyLyricsPath     , g_strOptLyricsPath);
-	//dlgLoadProgress.SetPos(20);
+    // ç¢ºèªãƒ¡ãƒƒã‚»ãƒ¼ã‚¸è¡¨ç¤º
+    m_IniFile.WriteInt(sSectionConfMessage, sKeyConfDeleteFile, g_bConfDeleteFile ? 1 : 0);
+    m_IniFile.WriteInt(sSectionConfMessage, sKeyConfDeleteList, g_bConfDeleteList ? 1 : 0);
+    m_IniFile.WriteInt(sSectionConfMessage, sKeyConfEditModify, g_bConfEditModify ? 1 : 0);
+    m_IniFile.WriteInt(sSectionConfMessage, sKeyConfFolderSync, g_bConfFolderSync ? 1 : 0);
+    //dlgLoadProgress.SetPos(35);
 
-	// 
-	MyWriteProfileInt(sSectionOption, sKeyEditFiledSIF, g_bOptEditFieldSIF ? 1 : 0);
-	MyWriteProfileInt(sSectionOption, sKeyCheckFileName, g_nOptCheckFileName);
-	MyWriteProfileInt(sSectionOption, sKeyEnableSearchSubDir, g_bEnableSearchSubDir ? 1 : 0);
-	//dlgLoadProgress.SetPos(25);
+    // ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆ
+    m_IniFile.WriteInt(sSectionLoadPlayList, sKeyClearList , g_bPlayListClearList ? 1 : 0);
+    m_IniFile.WriteInt(sSectionLoadPlayList, sKeyClearCheck, g_bPlayListClearCheck ? 1 : 0);
+    m_IniFile.WriteInt(sSectionLoadPlayList, sKeyAddList   , g_bPlayListAddList ? 1 : 0);
+    m_IniFile.WriteInt(sSectionLoadPlayList, sKeyFileCheck , g_bPlayListFileCheck ? 1 : 0);
+    //dlgLoadProgress.SetPos(40);
 
-	// ƒtƒHƒ‹ƒ_‚Ì“¯Šú
-	MyWriteProfileInt(sSectionFolderSync, sKeyEnableFolderSync, g_bEnableFolderSync ? 1 : 0);
-	MyWriteProfileString(sSectionFolderSync, sKeySyncRootFolder, g_strRootFolder);
-	MyWriteProfileInt(sSectionFolderSync, sKeySyncSelectAlways, g_bSyncSelectAlways ? 1 : 0);
-	MyWriteProfileInt(sSectionFolderSync, sKeySyncDeleteFolder, g_bSyncDeleteFolder ? 1 : 0);
-	MyWriteProfileInt(sSectionFolderSync, sKeySyncLyricsFileMove, g_bSyncLyricsFileMove ? 1 : 0);
-	//dlgLoadProgress.SetPos(30);
+    // æ¡ä»¶ãƒã‚§ãƒƒã‚¯ã®çŠ¶æ…‹
+    for (i = 0; i < CHECK_STATE_MAX; i++) {
+        CHECK_WORD_STATE    *pState = &g_chkWord[i];
+        const TCHAR *sSectionName = sSectionCheckWord[i];
+        m_IniFile.WriteStr(sSectionName, sKeySearchWord, pState->strSearchWord);
+        m_IniFile.WriteStr(sSectionName, sKeyReplaceWord, pState->strReplaceWord);
+        m_IniFile.WriteInt(sSectionName, sKeyTargetColumn , pState->nTargetColumn);
+        m_IniFile.WriteInt(sSectionName, sKeyCheckDiffUL  , pState->bCheckDiffUL ? 1 : 0);
+        m_IniFile.WriteInt(sSectionName, sKeyRegExp       , pState->bRegExp ? 1 : 0);
+        m_IniFile.WriteInt(sSectionName, sKeyRangeSelected, pState->bRangeSelected ? 1 : 0);
+        m_IniFile.WriteInt(sSectionName, sKeyMatchComplete, pState->bMatchComplete ? 1 : 0);
+        m_IniFile.WriteInt(sSectionName, sKeyMatchSelected, pState->bMatchSelected ? 1 : 0);
+    }
+    //dlgLoadProgress.SetPos(45);
 
-	// Šm”FƒƒbƒZ[ƒW•\¦
-	MyWriteProfileInt(sSectionConfMessage, sKeyConfDeleteFile, g_bConfDeleteFile ? 1 : 0);
-	MyWriteProfileInt(sSectionConfMessage, sKeyConfDeleteList, g_bConfDeleteList ? 1 : 0);
-	MyWriteProfileInt(sSectionConfMessage, sKeyConfEditModify, g_bConfEditModify ? 1 : 0);
-	MyWriteProfileInt(sSectionConfMessage, sKeyConfFolderSync, g_bConfFolderSync ? 1 : 0);
-	//dlgLoadProgress.SetPos(35);
+    // ãƒ•ã‚¡ã‚¤ãƒ«åç½®æ›æ–‡å­—
+    for (i = 0; i < FILENAME_REPLACE_MAX; i++) {
+        FILENAME_REPLACE    *pRep = &g_fileNameReplace[i];
+        CString     strKeyName;
+        // ç½®æ›å¾Œæ–‡å­—åˆ—
+        strKeyName.Format(_T("%s%d"), sKeyRepCharAfter, i);
+        m_IniFile.WriteStr(sSectionRepFileName, strKeyName, pRep->strAfter);
+    }
+    //dlgLoadProgress.SetPos(50);
+    // ãƒ¦ãƒ¼ã‚¶ãƒ•ã‚¡ã‚¤ãƒ«åç½®æ›æ–‡å­— /* FreeFall 050 */
+    {
+        CString     strSectionName;
+        strSectionName = _T("haseta\\User");
+        strSectionName += sSectionRepFileName;
+        for (i = 0; i < USER_FILENAME_REPLACE_MAX; i++) {
+            FILENAME_REPLACE    *pRep = &g_userFileNameReplace[i];
+            CString     strKeyName;
+            // ç½®æ›å¾Œæ–‡å­—åˆ—
+            strKeyName.Format(_T("%s%d"), sKeyRepCharBefore, i);
+            m_IniFile.WriteStr(strSectionName, strKeyName, pRep->strBefore);
+            strKeyName.Format(_T("%s%d"), sKeyRepCharAfter, i);
+            m_IniFile.WriteStr(strSectionName, strKeyName, pRep->strAfter);
+        }
+    }
+    //dlgLoadProgress.SetPos(55);
 
-	// ƒvƒŒƒCƒŠƒXƒg
-	MyWriteProfileInt(sSectionLoadPlayList, sKeyClearList , g_bPlayListClearList ? 1 : 0);
-	MyWriteProfileInt(sSectionLoadPlayList, sKeyClearCheck, g_bPlayListClearCheck ? 1 : 0);
-	MyWriteProfileInt(sSectionLoadPlayList, sKeyAddList   , g_bPlayListAddList ? 1 : 0);
-	MyWriteProfileInt(sSectionLoadPlayList, sKeyFileCheck , g_bPlayListFileCheck ? 1 : 0);
-	//dlgLoadProgress.SetPos(40);
+    // ãƒ¦ãƒ¼ã‚¶ãƒ¼å¤‰æ›æ›¸å¼
+    //m_IniFile.WriteInt(sSectionUserConvFormat, sKeyConvFormatType, g_nUserConvFormatType);
+    { /* æ•°ã‚’å¢—ã‚„ã—ãŸã®ã§æœ¬å®¶ä½µç”¨æ™‚ã«å½±éŸ¿ã‚’ä¸ãˆãªã„ã‚ˆã†ã« LastTrain 057 */
+        CString     strSectionName;
+        strSectionName = _T("haseta\\");
+        strSectionName += sSectionUserConvFormat;
+        m_IniFile.WriteInt(strSectionName, sKeyConvFormatType, g_nUserConvFormatType);
+    }
+    //dlgLoadProgress.SetPos(60);
+    for (i = 0; i < USER_CONV_FORMAT_MAX; i++) {
+        CString     strKeyName;
+        // åç§°
+        strKeyName.Format(_T("%s%d"), sKeyUserFormName, i);
+        m_IniFile.WriteStr(sSectionUserConvFormat, strKeyName, g_userConvFormat[i].strName);
+        // ã‚¿ã‚°æƒ…å ± => ãƒ•ã‚¡ã‚¤ãƒ«å
+        strKeyName.Format(_T("%s%d"), sKeyUserFormTag2File, i);
+        m_IniFile.WriteStr(sSectionUserConvFormat, strKeyName, g_userConvFormat[i].strTag2File);
+        // ãƒ•ã‚¡ã‚¤ãƒ«å => ã‚¿ã‚°æƒ…å ±
+        strKeyName.Format(_T("%s%d"), sKeyUserFormFile2Tag, i);
+        m_IniFile.WriteStr(sSectionUserConvFormat, strKeyName, g_userConvFormat[i].strFile2Tag);
+    }
+    //dlgLoadProgress.SetPos(65);
 
-	// ğŒƒ`ƒFƒbƒN‚Ìó‘Ô
-	for (i = 0; i < CHECK_STATE_MAX; i++) {
-		CHECK_WORD_STATE	*pState = &g_chkWord[i];
-		char	*sSectionName = sSectionCheckWord[i];
-		MyWriteProfileString(sSectionName, sKeySearchWord, pState->strSearchWord);
-		MyWriteProfileString(sSectionName, sKeyReplaceWord, pState->strReplaceWord);
-		MyWriteProfileInt(sSectionName, sKeyTargetColumn , pState->nTargetColumn);
-		MyWriteProfileInt(sSectionName, sKeyCheckDiffUL  , pState->bCheckDiffUL ? 1 : 0);
-		MyWriteProfileInt(sSectionName, sKeyRegExp       , pState->bRegExp ? 1 : 0);
-		MyWriteProfileInt(sSectionName, sKeyRangeSelected, pState->bRangeSelected ? 1 : 0);
-		MyWriteProfileInt(sSectionName, sKeyMatchComplete, pState->bMatchComplete ? 1 : 0);
-		MyWriteProfileInt(sSectionName, sKeyMatchSelected, pState->bMatchSelected ? 1 : 0);
-	}
-	//dlgLoadProgress.SetPos(45);
+    // æ‹¡å¼µç‰ˆãƒ¦ãƒ¼ã‚¶ãƒ¼å¤‰æ›æ›¸å¼
+    for (i = 0; i < USER_CONV_FORMAT_EX_MAX; i++) {
+        CString     strSectionName;
+        strSectionName.Format(_T("%s%d"), sSectionConvFormatEx, i);
+        // åç§°
+        m_IniFile.WriteStr(strSectionName, sKeyUserFormName, g_userConvFormatEx[i].strName);
+        // æ›¸å¼
+        m_IniFile.WriteStr(strSectionName, sKeyUserFormat, g_userConvFormatEx[i].strFormat);
+        // å›ºå®šæ–‡å­—åˆ—
+        m_IniFile.WriteStr(strSectionName, sKeyUserFixString, g_userConvFormatEx[i].strFixString);
+        // é€£ç•ªï¼šåˆæœŸå€¤
+        m_IniFile.WriteInt(strSectionName, sKeyUserInitNumber, g_userConvFormatEx[i].nInitNumber);
+        // é€£ç•ªï¼šåŠ ç®—å€¤
+        m_IniFile.WriteInt(strSectionName, sKeyUserAddNumber, g_userConvFormatEx[i].nAddNumber);
+        // é€£ç•ªï¼šæ¡æ•°
+        m_IniFile.WriteInt(strSectionName, sKeyUserColumnCount, g_userConvFormatEx[i].nColumnCount);
+        // æ›¸ãè¾¼ã¿ä¸å¯ã®ã‚»ãƒ«ã§é€£ç•ªã‚¯ãƒªã‚¢
+        m_IniFile.WriteInt(strSectionName, sKeyUserSpaceInit, g_userConvFormatEx[i].bSpaceInitNumber ? 1 : 0);
+    }
+    //dlgLoadProgress.SetPos(70);
 
-	// ƒtƒ@ƒCƒ‹–¼’uŠ·•¶š
-	for (i = 0; i < FILENAME_REPLACE_MAX; i++) {
-		FILENAME_REPLACE	*pRep = &g_fileNameReplace[i];
-		CString		strKeyName;
-		// ’uŠ·Œã•¶š—ñ
-		strKeyName.Format("%s%d", sKeyRepCharAfter, i);
-		MyWriteProfileString(sSectionRepFileName, strKeyName, pRep->strAfter);
-	}
-	//dlgLoadProgress.SetPos(50);
-	// ƒ†[ƒUƒtƒ@ƒCƒ‹–¼’uŠ·•¶š /* FreeFall 050 */
-	{
-		CString		strSectionName;
-		strSectionName = "haseta\\User";
-		strSectionName += sSectionRepFileName;
-		for (i = 0; i < USER_FILENAME_REPLACE_MAX; i++) {
-			FILENAME_REPLACE	*pRep = &g_userFileNameReplace[i];
-			CString		strKeyName;
-			// ’uŠ·Œã•¶š—ñ
-			strKeyName.Format("%s%d", sKeyRepCharBefore, i);
-			MyWriteProfileString(strSectionName, strKeyName, pRep->strBefore);
-			strKeyName.Format("%s%d", sKeyRepCharAfter, i);
-			MyWriteProfileString(strSectionName, strKeyName, pRep->strAfter);
-		}
-	}
-	//dlgLoadProgress.SetPos(55);
+    // ç§»å‹•å…ˆãƒ•ã‚©ãƒ«ãƒ€æ›¸å¼
+    for (i = 0; i < USER_MOVE_FODLER_FORMAT_MAX; i++) {
+        CString     strSectionName;
+        strSectionName.Format(_T("haseta\\%s%d"), sSectionMoveFolder, i);
+        // åç§°
+        m_IniFile.WriteStr(strSectionName, sKeyUserFormName, g_userMoveFolder[i].strName);
+        // æ›¸å¼
+        m_IniFile.WriteStr(strSectionName, sKeyMoveFolderFormat, g_userMoveFolder[i].strFormat);
+        // å›ºå®šæ–‡å­—åˆ—
+        m_IniFile.WriteStr(strSectionName, sKeyMoveFolderFixString, g_userMoveFolder[i].strFixString);
+        // ã‚³ãƒ”ãƒ¼
+        m_IniFile.WriteInt(strSectionName, sKeyMoveFolderCopy, g_userMoveFolder[i].bCopy ? 1 : 0);
+        // æ›¸å¼
+        m_IniFile.WriteStr(strSectionName, sKeyMoveFolderInitFolder, g_userMoveFolder[i].strInitFolder); /* STEP 022 */
+    }
 
-	// ƒ†[ƒU[•ÏŠ·‘®
-	//MyWriteProfileInt(sSectionUserConvFormat, sKeyConvFormatType, g_nUserConvFormatType);
-	{ /* ”‚ğ‘‚â‚µ‚½‚Ì‚Å–{‰Æ•¹—p‚É‰e‹¿‚ğ—^‚¦‚È‚¢‚æ‚¤‚É LastTrain 057 */
-		CString		strSectionName;
-		strSectionName = "haseta\\";
-		strSectionName += sSectionUserConvFormat;
-		MyWriteProfileInt(strSectionName, sKeyConvFormatType, g_nUserConvFormatType);
-	}
-	//dlgLoadProgress.SetPos(60);
-	for (i = 0; i < USER_CONV_FORMAT_MAX; i++) {
-		CString		strKeyName;
-		// –¼Ì
-		strKeyName.Format("%s%d", sKeyUserFormName, i);
-		MyWriteProfileString(sSectionUserConvFormat, strKeyName, g_userConvFormat[i].strName);
-		// ƒ^ƒOî•ñ => ƒtƒ@ƒCƒ‹–¼
-		strKeyName.Format("%s%d", sKeyUserFormTag2File, i);
-		MyWriteProfileString(sSectionUserConvFormat, strKeyName, g_userConvFormat[i].strTag2File);
-		// ƒtƒ@ƒCƒ‹–¼ => ƒ^ƒOî•ñ
-		strKeyName.Format("%s%d", sKeyUserFormFile2Tag, i);
-		MyWriteProfileString(sSectionUserConvFormat, strKeyName, g_userConvFormat[i].strFile2Tag);
-	}
-	//dlgLoadProgress.SetPos(65);
+    // ã‚¿ã‚°æƒ…å ±å¤‰æ› /* STEP 034 */
+    for (i = 0; i < USER_CONV_FORMAT_TAG2TAG_MAX; i++) {
+        CString     strSectionName;
+        strSectionName.Format(_T("haseta\\%s%d"), sSectionConvFormatTag2Tag, i);
+        // åç§°
+        m_IniFile.WriteStr(strSectionName, sKeyUserTag2TagFormName, g_userConvFormatTag2Tag[i].strName);
+        // æ›¸å¼
+        m_IniFile.WriteStr(strSectionName, sKeyUserTagTagFormat, g_userConvFormatTag2Tag[i].strFormat);
+    }
 
-	// Šg’£”Åƒ†[ƒU[•ÏŠ·‘®
-	for (i = 0; i < USER_CONV_FORMAT_EX_MAX; i++) {
-		CString		strSectionName;
-		strSectionName.Format("%s%d", sSectionConvFormatEx, i);
-		// –¼Ì
-		MyWriteProfileString(strSectionName, sKeyUserFormName, g_userConvFormatEx[i].strName);
-		// ‘®
-		MyWriteProfileString(strSectionName, sKeyUserFormat, g_userConvFormatEx[i].strFormat);
-		// ŒÅ’è•¶š—ñ
-		MyWriteProfileString(strSectionName, sKeyUserFixString, g_userConvFormatEx[i].strFixString);
-		// ˜A”ÔF‰Šú’l
-		MyWriteProfileInt(strSectionName, sKeyUserInitNumber, g_userConvFormatEx[i].nInitNumber);
-		// ˜A”ÔF‰ÁZ’l
-		MyWriteProfileInt(strSectionName, sKeyUserAddNumber, g_userConvFormatEx[i].nAddNumber);
-		// ˜A”ÔFŒ…”
-		MyWriteProfileInt(strSectionName, sKeyUserColumnCount, g_userConvFormatEx[i].nColumnCount);
-		// ‘‚«‚İ•s‰Â‚ÌƒZƒ‹‚Å˜A”ÔƒNƒŠƒA
-		MyWriteProfileInt(strSectionName, sKeyUserSpaceInit, g_userConvFormatEx[i].bSpaceInitNumber ? 1 : 0);
-	}
-	//dlgLoadProgress.SetPos(70);
+    //dlgLoadProgress.SetPos(75);
+    // æ›¸å¼ã‚³ãƒ”ãƒ¼ /* FunnyCorn 175 */
+    for (i = 0; i < USER_COPY_FORMAT_FORMAT_MAX; i++) {
+        CString     strSectionName;
+        strSectionName.Format(_T("haseta\\%s%d"), sSectionCopyFormat, i);
+        // åç§°
+        m_IniFile.WriteStr(strSectionName, sKeyUserFormName, g_userCopyFormat[i].strName);
+        // æ›¸å¼
+        m_IniFile.WriteStr(strSectionName, sKeyCopyFormatFormat, g_userCopyFormat[i].strFormat);
+        // å›ºå®šæ–‡å­—åˆ—
+        m_IniFile.WriteStr(strSectionName, sKeyCopyFormatFixString, g_userCopyFormat[i].strFixString);
+    }
+    //dlgLoadProgress.SetPos(80);
+    {
+        CString     sSectionOption;
+        sSectionOption = _T("haseta");
+//      m_IniFile.WriteInt(sSectionOption, sKeyID3v2GenreAddNumber, g_bOptID3v2GenreAddNumber ? 1 : 0);
+        m_IniFile.WriteInt(sSectionOption, sKeyFileNameMaxCheck, g_bConfFileNameMaxCheck ? 1 : 0);
+        m_IniFile.WriteInt(sSectionOption, sKeyFileNameMaxCellColor, g_bFileNameMaxCellColor ? 1 : 0);
+        m_IniFile.WriteInt(sSectionOption, sKeyFileNameMaxChar, g_nConfFileNameMaxChar);
+        m_IniFile.WriteInt(sSectionOption, sKeyDropSearchSubFolder, g_bOptDropSearchSubFolder ? 1 : 0); /* TyphoonSwell 026 */
+        m_IniFile.WriteInt(sSectionOption, sKeyShowZenSpace, g_bOptShowZenSpace ? 1 : 0); /* BeachMonster 107 */
+        //m_IniFile.WriteInt(sSectionOption, sKeyShowZenSpace, g_bOptShowZenSpace ? 1 : 0); /* BeachMonster 107 */
+        m_IniFile.WriteInt(sSectionOption, sKeySortIgnoreCase, g_bOptSortIgnoreCase ? 1 : 0); /* BeachMonster4 114 */
+        m_IniFile.WriteInt(sSectionOption, sKeySortIgnoreZenHan, g_bOptSortIgnoreZenHan ? 1 : 0); /* BeachMonster4 114 */
+        m_IniFile.WriteInt(sSectionOption, sKeySortIgnoreKataHira, g_bOptSortIgnoreKataHira ? 1 : 0); /* FunnyCorn 179 */
+        m_IniFile.WriteInt(sSectionOption, sKeyShowTotalParent, g_bOptShowTotalParent ? 1 : 0); /* RockDance 128 */
+        m_IniFile.WriteInt(sSectionOption, sKeyShowTips, g_bOptShowTips ? 1 : 0); /* Rumble 188 */
+    }
+    //dlgLoadProgress.SetPos(85);
+    // å®šå‹æ–‡è²¼ã‚Šä»˜ã‘ /* SeaKnows 030 */
+    for (int k=0;k<3;k++) {
+        CString     sSectionOption;
+        CString     strSectionName;
+        sSectionOption = _T("haseta");
+        strSectionName.Format(_T("%s%d"), sSectionTeikeiGroupName, k);
+        m_IniFile.WriteStr(sSectionOption, strSectionName, g_strTeikeiGroupName[k]);
+        for (i = 0; i < 10; i++) {
+            if (k == 0) {
+                strSectionName.Format(_T("%s%d"), sSectionTeikei, i);
+            } else {
+                strSectionName.Format(_T("%s%d-%d"), sSectionTeikei, k, i);
+            }
+            m_IniFile.WriteStr(sSectionOption, strSectionName, g_teikeiInfo[i+k*10].strTeikei); /* STEP 035 */
+            /* STEP 035 */
+            if (k == 0) {
+                strSectionName.Format(_T("%s%d"), sSectionTeikeiPaste, i);
+            } else {
+                strSectionName.Format(_T("%s%d-%d"), sSectionTeikeiPaste, k, i);
+            }
+            m_IniFile.WriteInt(sSectionOption, strSectionName, g_teikeiInfo[i+k*10].nTeikeiPaste);
+            if (k == 0) {
+                strSectionName.Format(_T("%s%d"), sSectionTeikeiAddSpace, i);
+            } else {
+                strSectionName.Format(_T("%s%d-%d"), sSectionTeikeiAddSpace, k, i);
+            }
+            m_IniFile.WriteInt(sSectionOption, strSectionName, g_teikeiInfo[i+k*10].bAddSpace ? 1 : 0);
+            if (k == 0) {
+                strSectionName.Format(_T("%s%d"), sSectionTeikeiAddChar, i);
+            } else {
+                strSectionName.Format(_T("%s%d-%d"), sSectionTeikeiAddChar, k, i);
+            }
+            m_IniFile.WriteInt(sSectionOption, strSectionName, g_teikeiInfo[i+k*10].bAddChar ? 1 : 0);
+            if (k == 0) {
+                strSectionName.Format(_T("%s%d"), sSectionTeikeiFront, i);
+            } else {
+                strSectionName.Format(_T("%s%d-%d"), sSectionTeikeiFront, k, i);
+            }
+            m_IniFile.WriteStr(sSectionOption, strSectionName, g_teikeiInfo[i+k*10].strFront);
+            if (k == 0) {
+                strSectionName.Format(_T("%s%d"), sSectionTeikeiBack, i);
+            } else {
+                strSectionName.Format(_T("%s%d-%d"), sSectionTeikeiBack, k, i);
+            }
+            m_IniFile.WriteStr(sSectionOption, strSectionName, g_teikeiInfo[i+k*10].strBack);
+            if (k == 0) {
+                strSectionName.Format(_T("%s%d"), sSectionTeikeiShowDialog, i);
+            } else {
+                strSectionName.Format(_T("%s%d-%d"), sSectionTeikeiShowDialog, k, i);
+            }
+            m_IniFile.WriteInt(sSectionOption, strSectionName, g_teikeiInfo[i+k*10].bShowDialog ? 1 : 0);
+        }
+    }
 
-	// ˆÚ“®æƒtƒHƒ‹ƒ_‘®
-	for (i = 0; i < USER_MOVE_FODLER_FORMAT_MAX; i++) {
-		CString		strSectionName;
-		strSectionName.Format("haseta\\%s%d", sSectionMoveFolder, i);
-		// –¼Ì
-		MyWriteProfileString(strSectionName, sKeyUserFormName, g_userMoveFolder[i].strName);
-		// ‘®
-		MyWriteProfileString(strSectionName, sKeyMoveFolderFormat, g_userMoveFolder[i].strFormat);
-		// ŒÅ’è•¶š—ñ
-		MyWriteProfileString(strSectionName, sKeyMoveFolderFixString, g_userMoveFolder[i].strFixString);
-		// ƒRƒs[
-		MyWriteProfileInt(strSectionName, sKeyMoveFolderCopy, g_userMoveFolder[i].bCopy ? 1 : 0);
-		// ‘®
-		MyWriteProfileString(strSectionName, sKeyMoveFolderInitFolder, g_userMoveFolder[i].strInitFolder); /* STEP 022 */
-	}
+    // ãã®ä»– /* SeaKnows 031,033 */
+    {
+        CString     strSectionName;
+        strSectionName = _T("haseta");
+        m_IniFile.WriteInt(strSectionName, sSectionValidFolderSelect, g_bValidFolderSelect ? 1 : 0);
+        m_IniFile.WriteInt(strSectionName, sSectionValidDupExec, g_bValidDupExec ? 1 : 0); /* FreeFall 045 */
+        m_IniFile.WriteInt(strSectionName, sSectionRecentFolderNum, g_nRecentFolder); /* m_IniFile.WriteInt 053 */
+        m_IniFile.WriteInt(strSectionName, sSectionSaveRepDlgPos, g_bSaveRepDlgPos ? 1 : 0); /* WildCherry4 086 */
+        m_IniFile.WriteInt(strSectionName, sSectionSaveRepDlgPosX, g_nSaveRepDlgPosX); /* WildCherry4 086 */
+        m_IniFile.WriteInt(strSectionName, sSectionSaveRepDlgPosY, g_nSaveRepDlgPosY); /* WildCherry4 086 */
+        m_IniFile.WriteInt(strSectionName, sSectionAddNumberWidth, g_nAddNumberWidth); /* Baja 159 */
+        m_IniFile.WriteInt(strSectionName, sSectionAddNumberPos, g_nAddNumberPos); /* Baja 159 */
+        m_IniFile.WriteStr(strSectionName, sSectionAddNumberSep, g_strAddNumberSep); /* Baja 159 */
+        m_IniFile.WriteStr(strSectionName, sSectionAddNumberBef, g_strAddNumberBef); /* Conspiracy 194 */
+        m_IniFile.WriteStr(strSectionName, sSectionAddNumberAft, g_strAddNumberAft); /* Conspiracy 194 */
+        m_IniFile.WriteInt(strSectionName, sSectionAudioListShow, g_bAudioListShow ? 1 : 0); /* Conspiracy 199 */
+    }
 
-	// ƒ^ƒOî•ñ•ÏŠ· /* STEP 034 */
-	for (i = 0; i < USER_CONV_FORMAT_TAG2TAG_MAX; i++) {
-		CString		strSectionName;
-		strSectionName.Format("haseta\\%s%d", sSectionConvFormatTag2Tag, i);
-		// –¼Ì
-		MyWriteProfileString(strSectionName, sKeyUserTag2TagFormName, g_userConvFormatTag2Tag[i].strName);
-		// ‘®
-		MyWriteProfileString(strSectionName, sKeyUserTagTagFormat, g_userConvFormatTag2Tag[i].strFormat);
-	}
+    // ãƒªã‚¹ãƒˆå‡ºåŠ›æ›¸å¼
+    for (i = 0; i < WRITE_FORMAT_MAX; i++) {
+        CString     strSectionName;
+        strSectionName.Format(_T("%s%d"), sSectionWriteFormat, i);
+        // åç§°
+        m_IniFile.WriteStr(strSectionName, sKeyWriteFormName, g_writeFormat[i].strName);
+        // æ›¸å¼ãƒ•ã‚¡ã‚¤ãƒ«å
+        m_IniFile.WriteStr(strSectionName, sKeyWriteFileName, g_writeFormat[i].strFileName);
+        // æ‹¡å¼µå­
+        m_IniFile.WriteStr(strSectionName, sKeyWriteExtName, g_writeFormat[i].strExtName);
+        // é¸æŠãƒ•ã‚¡ã‚¤ãƒ«ã®ã¿å‡ºåŠ›
+        m_IniFile.WriteInt(strSectionName, sKeyWriteSelected, g_writeFormat[i].bWriteSelected ? 1 : 0);
+        // ã‚«ãƒ¬ãƒ³ãƒˆãƒ•ã‚¡ã‚¤ãƒ«å
+        m_IniFile.WriteStr(strSectionName, sKeyWriteCurrentFile, g_writeFormat[i].strCurrentFile);
+        // HTML ãƒ•ã‚¡ã‚¤ãƒ«å‡ºåŠ›ç”¨(ç©ºã®å ´åˆã«å…¨è§’ã‚¹ãƒšãƒ¼ã‚¹ã‚’å‡ºåŠ›)
+        m_IniFile.WriteInt(strSectionName, sKeyWriteIsHtml, g_writeFormat[i].bIsHtml ? 1 : 0);
+        { /* BeachMonster5 120 */
+            m_IniFile.WriteInt(_T("haseta\\") + strSectionName, sKeyWriteHtml, g_writeFormat[i].bWriteHtml ? 1 : 0);
+        }
+    }
+    //dlgLoadProgress.SetPos(90);
 
-	//dlgLoadProgress.SetPos(75);
-	// ‘®ƒRƒs[ /* FunnyCorn 175 */
-	for (i = 0; i < USER_COPY_FORMAT_FORMAT_MAX; i++) {
-		CString		strSectionName;
-		strSectionName.Format("haseta\\%s%d", sSectionCopyFormat, i);
-		// –¼Ì
-		MyWriteProfileString(strSectionName, sKeyUserFormName, g_userCopyFormat[i].strName);
-		// ‘®
-		MyWriteProfileString(strSectionName, sKeyCopyFormatFormat, g_userCopyFormat[i].strFormat);
-		// ŒÅ’è•¶š—ñ
-		MyWriteProfileString(strSectionName, sKeyCopyFormatFixString, g_userCopyFormat[i].strFixString);
-	}
-	//dlgLoadProgress.SetPos(80);
-	{
-		CString		sSectionOption;
-		sSectionOption = "haseta";
-//		MyWriteProfileInt(sSectionOption, sKeyID3v2GenreAddNumber, g_bOptID3v2GenreAddNumber ? 1 : 0);
-		MyWriteProfileInt(sSectionOption, sKeyFileNameMaxCheck, g_bConfFileNameMaxCheck ? 1 : 0);
-		MyWriteProfileInt(sSectionOption, sKeyFileNameMaxCellColor, g_bFileNameMaxCellColor ? 1 : 0);
-		MyWriteProfileInt(sSectionOption, sKeyFileNameMaxChar, g_nConfFileNameMaxChar);
-		MyWriteProfileInt(sSectionOption, sKeyDropSearchSubFolder, g_bOptDropSearchSubFolder ? 1 : 0); /* TyphoonSwell 026 */
-		MyWriteProfileInt(sSectionOption, sKeyShowZenSpace, g_bOptShowZenSpace ? 1 : 0); /* BeachMonster 107 */
-		//MyWriteProfileInt(sSectionOption, sKeyShowZenSpace, g_bOptShowZenSpace ? 1 : 0); /* BeachMonster 107 */
-		MyWriteProfileInt(sSectionOption, sKeySortIgnoreCase, g_bOptSortIgnoreCase ? 1 : 0); /* BeachMonster4 114 */
-		MyWriteProfileInt(sSectionOption, sKeySortIgnoreZenHan, g_bOptSortIgnoreZenHan ? 1 : 0); /* BeachMonster4 114 */
-		MyWriteProfileInt(sSectionOption, sKeySortIgnoreKataHira, g_bOptSortIgnoreKataHira ? 1 : 0); /* FunnyCorn 179 */
-		MyWriteProfileInt(sSectionOption, sKeyShowTotalParent, g_bOptShowTotalParent ? 1 : 0); /* RockDance 128 */
-		MyWriteProfileInt(sSectionOption, sKeyShowTips, g_bOptShowTips ? 1 : 0); /* Rumble 188 */
-	}
-	//dlgLoadProgress.SetPos(85);
-	// ’èŒ^•¶“\‚è•t‚¯ /* SeaKnows 030 */
-	for (int k=0;k<3;k++) {
-		CString		sSectionOption;
-		CString		strSectionName;
-		sSectionOption = "haseta";
-		strSectionName.Format("%s%d", sSectionTeikeiGroupName, k);
-		MyWriteProfileString(sSectionOption, strSectionName, g_strTeikeiGroupName[k]);
-		for (i = 0; i < 10; i++) {
-			if (k == 0) {
-				strSectionName.Format("%s%d", sSectionTeikei, i);
-			} else {
-				strSectionName.Format("%s%d-%d", sSectionTeikei, k, i);
-			}
-			MyWriteProfileString(sSectionOption, strSectionName, g_teikeiInfo[i+k*10].strTeikei/* STEP 035 */);
-			/* STEP 035 */
-			if (k == 0) {
-				strSectionName.Format("%s%d", sSectionTeikeiPaste, i);
-			} else {
-				strSectionName.Format("%s%d-%d", sSectionTeikeiPaste, k, i);
-			}
-			MyWriteProfileInt(sSectionOption, strSectionName, g_teikeiInfo[i+k*10].nTeikeiPaste);
-			if (k == 0) {
-				strSectionName.Format("%s%d", sSectionTeikeiAddSpace, i);
-			} else {
-				strSectionName.Format("%s%d-%d", sSectionTeikeiAddSpace, k, i);
-			}
-			MyWriteProfileInt(sSectionOption, strSectionName, g_teikeiInfo[i+k*10].bAddSpace ? 1 : 0);
-			if (k == 0) {
-				strSectionName.Format("%s%d", sSectionTeikeiAddChar, i);
-			} else {
-				strSectionName.Format("%s%d-%d", sSectionTeikeiAddChar, k, i);
-			}
-			MyWriteProfileInt(sSectionOption, strSectionName, g_teikeiInfo[i+k*10].bAddChar ? 1 : 0);
-			if (k == 0) {
-				strSectionName.Format("%s%d", sSectionTeikeiFront, i);
-			} else {
-				strSectionName.Format("%s%d-%d", sSectionTeikeiFront, k, i);
-			}
-			MyWriteProfileString(sSectionOption, strSectionName, g_teikeiInfo[i+k*10].strFront);
-			if (k == 0) {
-				strSectionName.Format("%s%d", sSectionTeikeiBack, i);
-			} else {
-				strSectionName.Format("%s%d-%d", sSectionTeikeiBack, k, i);
-			}
-			MyWriteProfileString(sSectionOption, strSectionName, g_teikeiInfo[i+k*10].strBack);
-			if (k == 0) {
-				strSectionName.Format("%s%d", sSectionTeikeiShowDialog, i);
-			} else {
-				strSectionName.Format("%s%d-%d", sSectionTeikeiShowDialog, k, i);
-			}
-			MyWriteProfileInt(sSectionOption, strSectionName, g_teikeiInfo[i+k*10].bShowDialog ? 1 : 0);
-		}
-	}
+    // åˆ†é¡è¨­å®šæƒ…å ±
+    m_IniFile.WriteInt(sSectionClass, sKeyClassType, g_classInfo.nType);
+    for (i = 0; i < CLASS_MAX; i++) {
+        CString     strKeyName;
+        // ã‚«ãƒ©ãƒ ç•ªå·
+        strKeyName.Format(_T("%s%d"), sKeyClassColumn, i);
+        m_IniFile.WriteInt(sSectionClass, strKeyName, g_classInfo.nColumn[i]);
+    }
 
-	// ‚»‚Ì‘¼ /* SeaKnows 031,033 */
-	{
-		CString		strSectionName;
-		strSectionName = "haseta";
-		MyWriteProfileInt(strSectionName, sSectionValidFolderSelect, g_bValidFolderSelect ? 1 : 0);
-		MyWriteProfileInt(strSectionName, sSectionValidDupExec, g_bValidDupExec ? 1 : 0); /* FreeFall 045 */
-		MyWriteProfileInt(strSectionName, sSectionRecentFolderNum, g_nRecentFolder); /* MyWriteProfileInt 053 */
-		MyWriteProfileInt(strSectionName, sSectionSaveRepDlgPos, g_bSaveRepDlgPos ? 1 : 0); /* WildCherry4 086 */
-		MyWriteProfileInt(strSectionName, sSectionSaveRepDlgPosX, g_nSaveRepDlgPosX); /* WildCherry4 086 */
-		MyWriteProfileInt(strSectionName, sSectionSaveRepDlgPosY, g_nSaveRepDlgPosY); /* WildCherry4 086 */
-		MyWriteProfileInt(strSectionName, sSectionAddNumberWidth, g_nAddNumberWidth); /* Baja 159 */
-		MyWriteProfileInt(strSectionName, sSectionAddNumberPos, g_nAddNumberPos); /* Baja 159 */
-		MyWriteProfileString(strSectionName, sSectionAddNumberSep, g_strAddNumberSep); /* Baja 159 */
-		MyWriteProfileString(strSectionName, sSectionAddNumberBef, g_strAddNumberBef); /* Conspiracy 194 */
-		MyWriteProfileString(strSectionName, sSectionAddNumberAft, g_strAddNumberAft); /* Conspiracy 194 */
-		MyWriteProfileInt(strSectionName, sSectionAudioListShow, g_bAudioListShow ? 1 : 0); /* Conspiracy 199 */
-	}
+    // ã‚½ãƒ¼ãƒˆæƒ…å ±
+    for (i = 0; i < SORT_KEY_MAX; i++) {
+        CString     strKeyName;
+        SORT_STATE  *state = &g_sortState[i];
+        // ã‚­ãƒ¼(ã‚«ãƒ©ãƒ )
+        strKeyName.Format(_T("%s%d"), sKeySortColumn, i);
+        m_IniFile.WriteInt(sSectionSort, strKeyName, state->nKeyColumn);
+        // ã‚¿ã‚¤ãƒ—
+        strKeyName.Format(_T("%s%d"), sKeySortType, i);
+        m_IniFile.WriteInt(sSectionSort, strKeyName, state->nType);
+    }
 
-	// ƒŠƒXƒgo—Í‘®
-	for (i = 0; i < WRITE_FORMAT_MAX; i++) {
-		CString		strSectionName;
-		strSectionName.Format("%s%d", sSectionWriteFormat, i);
-		// –¼Ì
-		MyWriteProfileString(strSectionName, sKeyWriteFormName, g_writeFormat[i].strName);
-		// ‘®ƒtƒ@ƒCƒ‹–¼
-		MyWriteProfileString(strSectionName, sKeyWriteFileName, g_writeFormat[i].strFileName);
-		// Šg’£q
-		MyWriteProfileString(strSectionName, sKeyWriteExtName, g_writeFormat[i].strExtName);
-		// ‘I‘ğƒtƒ@ƒCƒ‹‚Ì‚İo—Í
-		MyWriteProfileInt(strSectionName, sKeyWriteSelected, g_writeFormat[i].bWriteSelected ? 1 : 0);
-		// ƒJƒŒƒ“ƒgƒtƒ@ƒCƒ‹–¼
-		MyWriteProfileString(strSectionName, sKeyWriteCurrentFile, g_writeFormat[i].strCurrentFile);
-		// HTML ƒtƒ@ƒCƒ‹o—Í—p(‹ó‚Ìê‡‚É‘SŠpƒXƒy[ƒX‚ğo—Í)
-		MyWriteProfileInt(strSectionName, sKeyWriteIsHtml, g_writeFormat[i].bIsHtml ? 1 : 0);
-		{ /* BeachMonster5 120 */
-			MyWriteProfileInt("haseta\\" + strSectionName, sKeyWriteHtml, g_writeFormat[i].bWriteHtml ? 1 : 0);
-		}
-	}
-	//dlgLoadProgress.SetPos(90);
+    // ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®ãƒ•ã‚©ãƒ³ãƒˆã‚’æ›¸ãè¾¼ã‚€
+    m_IniFile.WriteStr(sSectionFont, sKeyFontFace, g_fontReport.lfFaceName);
+    m_IniFile.WriteInt(sSectionFont, sKeyFontHeight      , g_fontReport.lfHeight);
+    m_IniFile.WriteInt(sSectionFont, sKeyFontWidth       , g_fontReport.lfWidth);
+    m_IniFile.WriteInt(sSectionFont, sKeyFontEscapement  , g_fontReport.lfEscapement);
+    m_IniFile.WriteInt(sSectionFont, sKeyFontOrientation , g_fontReport.lfOrientation);
+    m_IniFile.WriteInt(sSectionFont, sKeyFontWeight      , g_fontReport.lfWeight);
+    m_IniFile.WriteInt(sSectionFont, sKeyFontItalic      , g_fontReport.lfItalic);
+    m_IniFile.WriteInt(sSectionFont, sKeyFontUnderline   , g_fontReport.lfUnderline);
+    m_IniFile.WriteInt(sSectionFont, sKeyFontStrikeOut   , g_fontReport.lfStrikeOut);
+    m_IniFile.WriteInt(sSectionFont, sKeyFontCharSet     , g_fontReport.lfCharSet);
+    m_IniFile.WriteInt(sSectionFont, sKeyFontOutPrecision    , g_fontReport.lfOutPrecision);
+    m_IniFile.WriteInt(sSectionFont, sKeyFontClipPrecision , g_fontReport.lfClipPrecision);
+    m_IniFile.WriteInt(sSectionFont, sKeyFontQuality     , g_fontReport.lfQuality);
+    m_IniFile.WriteInt(sSectionFont, sKeyFontPitchAndFamily, g_fontReport.lfPitchAndFamily);
 
-	// •ª—Şİ’èî•ñ
-	MyWriteProfileInt(sSectionClass, sKeyClassType, g_classInfo.nType);
-	for (i = 0; i < CLASS_MAX; i++) {
-		CString		strKeyName;
-		// ƒJƒ‰ƒ€”Ô†
-		strKeyName.Format("%s%d", sKeyClassColumn, i);
-		MyWriteProfileInt(sSectionClass, strKeyName, g_classInfo.nColumn[i]);
-	}
+    //m_IniFile.WriteInt(sSectionOption, sKeyPlayerType, (int)g_nOptPlayerType);
+    //m_IniFile.WriteStr(sSectionOption, sKeyWinAmpPath, g_sOptWinAmpPath);
+    { /* æ•°ã‚’å¢—ã‚„ã—ãŸã®ã§æœ¬å®¶ä½µç”¨æ™‚ã«å½±éŸ¿ã‚’ä¸ãˆãªã„ã‚ˆã†ã« WildCherry 070 */
+        CString     strSectionName;
+        strSectionName = _T("haseta\\");
+        strSectionName += sSectionOption;
+        m_IniFile.WriteInt(strSectionName, sKeyPlayerType, (int)g_nOptPlayerType);
+        m_IniFile.WriteStr(strSectionName, sKeyWinAmpPath, g_sOptWinAmpPath);
+    }
+    //dlgLoadProgress.SetPos(95);
 
-	// ƒ\[ƒgî•ñ
-	for (i = 0; i < SORT_KEY_MAX; i++) {
-		CString		strKeyName;
-		SORT_STATE	*state = &g_sortState[i];
-		// ƒL[(ƒJƒ‰ƒ€)
-		strKeyName.Format("%s%d", sKeySortColumn, i);
-		MyWriteProfileInt(sSectionSort, strKeyName, state->nKeyColumn);
-		// ƒ^ƒCƒv
-		strKeyName.Format("%s%d", sKeySortType, i);
-		MyWriteProfileInt(sSectionSort, strKeyName, state->nType);
-	}
+    // ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®çŠ¶æ…‹ã‚’ä¿å­˜
+    m_IniFile.WriteInt(sSectionWindow, sKeyWinZoomed, (int)g_bMainFrameZoomed);
+    m_IniFile.WriteInt(sSectionWindow, sKeyWinIconic, (int)g_bMainFrameIconic);
+    WriteWindowStatus(sKeyMainWindow, &g_rectMainWindow);
 
-	// ƒEƒBƒ“ƒhƒE‚ÌƒtƒHƒ“ƒg‚ğ‘‚«‚Ş
-	MyWriteProfileString(sSectionFont, sKeyFontFace, g_fontReport.lfFaceName);
-	MyWriteProfileInt(sSectionFont, sKeyFontHeight		, g_fontReport.lfHeight);
-	MyWriteProfileInt(sSectionFont, sKeyFontWidth 		, g_fontReport.lfWidth);
-	MyWriteProfileInt(sSectionFont, sKeyFontEscapement	, g_fontReport.lfEscapement);
-	MyWriteProfileInt(sSectionFont, sKeyFontOrientation	, g_fontReport.lfOrientation);
-	MyWriteProfileInt(sSectionFont, sKeyFontWeight		, g_fontReport.lfWeight);
-	MyWriteProfileInt(sSectionFont, sKeyFontItalic		, g_fontReport.lfItalic);
-	MyWriteProfileInt(sSectionFont, sKeyFontUnderline 	, g_fontReport.lfUnderline);
-	MyWriteProfileInt(sSectionFont, sKeyFontStrikeOut 	, g_fontReport.lfStrikeOut);
-	MyWriteProfileInt(sSectionFont, sKeyFontCharSet		, g_fontReport.lfCharSet);
-	MyWriteProfileInt(sSectionFont, sKeyFontOutPrecision	, g_fontReport.lfOutPrecision);
-	MyWriteProfileInt(sSectionFont, sKeyFontClipPrecision , g_fontReport.lfClipPrecision);
-	MyWriteProfileInt(sSectionFont, sKeyFontQuality		, g_fontReport.lfQuality);
-	MyWriteProfileInt(sSectionFont, sKeyFontPitchAndFamily, g_fontReport.lfPitchAndFamily);
+    // æ–‡å­—ç¨®ã®çµ±ä¸€ /* StartInaction 054 */
+    {
+        CString     strSectionName;
+        strSectionName = _T("haseta");
+        m_IniFile.WriteInt(strSectionName, sKeyUnifyAlpha, g_nUnifyAlpha);
+        m_IniFile.WriteInt(strSectionName, sKeyUnifyHiraKata, g_nUnifyHiraKata);
+        m_IniFile.WriteInt(strSectionName, sKeyUnifyKata, g_nUnifyKata);
+        m_IniFile.WriteInt(strSectionName, sKeyUnifyKigou, g_nUnifyKigou);
+        m_IniFile.WriteInt(strSectionName, sKeyUnifySuji, g_nUnifySuji);
+        m_IniFile.WriteInt(strSectionName, sKeyUnifyUpLow, g_nUnifyUpLow);
+        m_IniFile.WriteInt(strSectionName, sKeyUnifyFixedUpLow, g_nUnifyFixedUpLow); /* STEP 040 */
+    }
 
-	//MyWriteProfileInt(sSectionOption, sKeyPlayerType, (int)g_nOptPlayerType);
-	//MyWriteProfileString(sSectionOption, sKeyWinAmpPath, g_sOptWinAmpPath);
-	{ /* ”‚ğ‘‚â‚µ‚½‚Ì‚Å–{‰Æ•¹—p‚É‰e‹¿‚ğ—^‚¦‚È‚¢‚æ‚¤‚É WildCherry 070 */
-		CString		strSectionName;
-		strSectionName = "haseta\\";
-		strSectionName += sSectionOption;
-		MyWriteProfileInt(strSectionName, sKeyPlayerType, (int)g_nOptPlayerType);
-		MyWriteProfileString(strSectionName, sKeyWinAmpPath, g_sOptWinAmpPath);
-	}
-	//dlgLoadProgress.SetPos(95);
+    // ãƒ•ã‚¡ã‚¤ãƒ«åæ–‡å­—ç¨®ã®çµ±ä¸€ /* LastTrain 058 */
+    {
+        CString     strSectionName;
+        strSectionName = "haseta";
+        m_IniFile.WriteInt(strSectionName, sKeyFileUnifyAlpha, g_nFileUnifyAlpha);
+        m_IniFile.WriteInt(strSectionName, sKeyFileUnifyHiraKata, g_nFileUnifyHiraKata);
+        m_IniFile.WriteInt(strSectionName, sKeyFileUnifyKata, g_nFileUnifyKata);
+        m_IniFile.WriteInt(strSectionName, sKeyFileUnifyKigou, g_nFileUnifyKigou);
+        m_IniFile.WriteInt(strSectionName, sKeyFileUnifySuji, g_nFileUnifySuji);
+        m_IniFile.WriteInt(strSectionName, sKeyFileUnifyUpLow, g_nFileUnifyUpLow);
+    }
 
-	// ƒEƒBƒ“ƒhƒE‚Ìó‘Ô‚ğ•Û‘¶
-	MyWriteProfileInt(sSectionWindow, sKeyWinZoomed, (int)g_bMainFrameZoomed);
-	MyWriteProfileInt(sSectionWindow, sKeyWinIconic, (int)g_bMainFrameIconic);
-	WriteWindowStatus(sKeyMainWindow, &g_rectMainWindow);
+    // æ‹¡å¼µå­ã®çµ±ä¸€ /* STEP 006 */
+    {
+        CString     strSectionName;
+        strSectionName = "haseta";
+        m_IniFile.WriteInt(strSectionName, sKeyFileExtChange, g_nFileExtChange);
+    }
+    // ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆå…¥åŠ›è¨­å®šãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚’è¡¨ç¤ºã™ã‚‹ /* RockDance 126 */
+    {
+        CString     strSectionName;
+        strSectionName = _T("haseta");
+        m_IniFile.WriteInt(strSectionName, sKeyShowLoadPlaylistDlg, g_bShowLoadPlaylistDlg ? 1 : 0);
+    }
+    //dlgLoadProgress.SetPos(100);
+    // ãŠæ°—ã«å…¥ã‚Šã®ãƒ•ã‚©ãƒ«ãƒ€ /* RockDance 129 */
+    {
+        CString     sSectionOption;
+        CString     strSectionName;
+        sSectionOption = _T("haseta");
+        for (i = 0; i < 10; i++) {
+            strSectionName.Format(_T("%s%d"), sSectionFavorites, i);
+            m_IniFile.WriteStr(sSectionOption, strSectionName, g_strFavorite[i]);
+        }
+    }
 
-	// •¶ší‚Ì“ˆê /* StartInaction 054 */
-	{
-		CString		strSectionName;
-		strSectionName = "haseta";
-		MyWriteProfileInt(strSectionName, sKeyUnifyAlpha, g_nUnifyAlpha);
-		MyWriteProfileInt(strSectionName, sKeyUnifyHiraKata, g_nUnifyHiraKata);
-		MyWriteProfileInt(strSectionName, sKeyUnifyKata, g_nUnifyKata);
-		MyWriteProfileInt(strSectionName, sKeyUnifyKigou, g_nUnifyKigou);
-		MyWriteProfileInt(strSectionName, sKeyUnifySuji, g_nUnifySuji);
-		MyWriteProfileInt(strSectionName, sKeyUnifyUpLow, g_nUnifyUpLow);
-		MyWriteProfileInt(strSectionName, sKeyUnifyFixedUpLow, g_nUnifyFixedUpLow); /* STEP 040 */
-	}
+    { /* STEP 026 */
+        CString     strSectionName;
+        strSectionName = _T("haseta");
+        m_IniFile.WriteInt(strSectionName, sKeyFirstUpperIgnoreWord, g_bFirstUpperIgnoreWord ? 1 : 0);
+        m_IniFile.WriteStr(sSectionOption, sKeyFirstUpperIgnoreWords, g_strFirstUpperIgnoreWords);
+        m_IniFile.WriteStr(sSectionOption, sKeyFirstUpperSentenceSeparator, g_strFirstUpperSentenceSeparator);
+        m_IniFile.WriteInt(strSectionName, sKeyUserConvAddMenu, g_bUserConvAddMenu ? 1 : 0);
+        m_IniFile.WriteInt(strSectionName, sKeyZenHanKigouKana, g_bZenHanKigouKana ? 1 : 0);
+        m_IniFile.WriteInt(strSectionName, sKeyAutoTilde2WaveDash, g_bAutoTilde2WaveDash ? 1 : 0);
+    }
 
-	// ƒtƒ@ƒCƒ‹–¼•¶ší‚Ì“ˆê /* LastTrain 058 */
-	{
-		CString		strSectionName;
-		strSectionName = "haseta";
-		MyWriteProfileInt(strSectionName, sKeyFileUnifyAlpha, g_nFileUnifyAlpha);
-		MyWriteProfileInt(strSectionName, sKeyFileUnifyHiraKata, g_nFileUnifyHiraKata);
-		MyWriteProfileInt(strSectionName, sKeyFileUnifyKata, g_nFileUnifyKata);
-		MyWriteProfileInt(strSectionName, sKeyFileUnifyKigou, g_nFileUnifyKigou);
-		MyWriteProfileInt(strSectionName, sKeyFileUnifySuji, g_nFileUnifySuji);
-		MyWriteProfileInt(strSectionName, sKeyFileUnifyUpLow, g_nFileUnifyUpLow);
-	}
-
-	// Šg’£q‚Ì“ˆê /* STEP 006 */
-	{
-		CString		strSectionName;
-		strSectionName = "haseta";
-		MyWriteProfileInt(strSectionName, sKeyFileExtChange, g_nFileExtChange);
-	}
-	// ƒvƒŒƒCƒŠƒXƒg“ü—Íİ’èƒ_ƒCƒAƒƒO‚ğ•\¦‚·‚é /* RockDance 126 */
-	{
-		CString		strSectionName;
-		strSectionName = "haseta";
-		MyWriteProfileInt(strSectionName, sKeyShowLoadPlaylistDlg, g_bShowLoadPlaylistDlg ? 1 : 0);
-	}
-	//dlgLoadProgress.SetPos(100);
-	// ‚¨‹C‚É“ü‚è‚ÌƒtƒHƒ‹ƒ_ /* RockDance 129 */
-	{
-		CString		sSectionOption;
-		CString		strSectionName;
-		sSectionOption = "haseta";
-		for (i = 0; i < 10; i++) {
-			strSectionName.Format("%s%d", sSectionFavorites, i);
-			MyWriteProfileString(sSectionOption, strSectionName, g_strFavorite[i]);
-		}
-	}
-
-	{ /* STEP 026 */
-		CString		strSectionName;
-		strSectionName = "haseta";
-		MyWriteProfileInt(strSectionName, sKeyFirstUpperIgnoreWord, g_bFirstUpperIgnoreWord ? 1 : 0);
-		MyWriteProfileString(sSectionOption, sKeyFirstUpperIgnoreWords, g_strFirstUpperIgnoreWords);
-		MyWriteProfileString(sSectionOption, sKeyFirstUpperSentenceSeparator, g_strFirstUpperSentenceSeparator);
-		MyWriteProfileInt(strSectionName, sKeyUserConvAddMenu, g_bUserConvAddMenu ? 1 : 0);
-		MyWriteProfileInt(strSectionName, sKeyZenHanKigouKana, g_bZenHanKigouKana ? 1 : 0);
-	}
-
-	/*
-	if (dlgLoadProgress.GetSafeHwnd() != NULL) {
-		dlgLoadProgress.DestroyWindow();
-		dlgLoadProgress.SetCanceled(FALSE);
-	}
-	*/
-	SaveProfile();
-	FreeProfile();
-//	m_pRecentFileList->WriteList();
+    /*
+    if (dlgLoadProgress.GetSafeHwnd() != NULL) {
+        dlgLoadProgress.DestroyWindow();
+        dlgLoadProgress.SetCanceled(FALSE);
+    }
+    */
+    m_IniFile.Flush();
+//  m_pRecentFileList->WriteList();
 }
 
-// ƒL[Š„‚è“–‚Ä‚Ì“Ç‚İ‚İ
+// ã‚­ãƒ¼å‰²ã‚Šå½“ã¦ã®èª­ã¿è¾¼ã¿
 void CSuperTagEditorApp::ReadKeyConfig(bool bUpdate)
 {
-	CString strINI = m_pszProfileName;
-	InitProfile();
-	int		i;
-	int		nTableMax = 0;
-	for (i = 0; g_listKeyConfig[i].sName != NULL; i++) {
-		KEY_CONFIG	*pKey = &g_listKeyConfig[i];
-		if (pKey->wCmdID != 0x0000) {
-			pKey->dwKeyCode = (DWORD)MyGetProfileInt(sSectionKeyConfig, pKey->sRegName, pKey->dwKeyCode);
-			//pKey->dwKeyCode = (DWORD)Profile_GetInt(sSectionKeyConfig, pKey->sRegName, pKey->dwKeyCode, strINI);
-			if (pKey->dwKeyCode != 0) nTableMax++;
-		}
-	}
+    int     i;
+    int     nTableMax = 0;
+    for (i = 0; g_listKeyConfig[i].sName != NULL; i++) {
+        KEY_CONFIG  *pKey = &g_listKeyConfig[i];
+        if (pKey->wCmdID != 0x0000) {
+            pKey->dwKeyCode = (DWORD)m_IniFile.ReadInt(sSectionKeyConfig, pKey->sRegName, pKey->dwKeyCode);
+            //pKey->dwKeyCode = (DWORD)Profile_GetInt(sSectionKeyConfig, pKey->sRegName, pKey->dwKeyCode, strINI);
+            if (pKey->dwKeyCode != 0) nTableMax++;
+        }
+    }
 
-	extern CPlugin plugins;
-	for (i=0;i<plugins.arPluginKey.GetSize();i++) {
-		KEY_CONFIG* pKey = (KEY_CONFIG*)plugins.arPluginKey.GetAt(i);
-		if (pKey->wCmdID != 0x0000) {
-			pKey->dwKeyCode = (DWORD)MyGetProfileInt(sSectionKeyConfig, pKey->sRegName, pKey->dwKeyCode);
-			//pKey->dwKeyCode = (DWORD)Profile_GetInt(sSectionKeyConfig, pKey->sRegName, pKey->dwKeyCode, strINI);
-			if (pKey->dwKeyCode != 0) nTableMax++;
-		}
-	}
-	FreeProfile();
+    extern CPlugin plugins;
+    for (i=0;i<plugins.arPluginKey.GetSize();i++) {
+        KEY_CONFIG* pKey = (KEY_CONFIG*)plugins.arPluginKey.GetAt(i);
+        if (pKey->wCmdID != 0x0000) {
+            pKey->dwKeyCode = (DWORD)m_IniFile.ReadInt(sSectionKeyConfig, pKey->sRegName, pKey->dwKeyCode);
+            //pKey->dwKeyCode = (DWORD)Profile_GetInt(sSectionKeyConfig, pKey->sRegName, pKey->dwKeyCode, strINI);
+            if (pKey->dwKeyCode != 0) nTableMax++;
+        }
+    }
+    //FreeProfile();
 
-	// ƒAƒNƒZƒ‰ƒŒ[ƒ^ƒL[ƒe[ƒuƒ‹‚ÌXV
-	if (bUpdate) UpdateAccelerator(nTableMax);
+    // ã‚¢ã‚¯ã‚»ãƒ©ãƒ¬ãƒ¼ã‚¿ã‚­ãƒ¼ãƒ†ãƒ¼ãƒ–ãƒ«ã®æ›´æ–°
+    if (bUpdate) UpdateAccelerator(nTableMax);
 }
 
-// ƒL[Š„‚è“–‚Ä‚Ì•Û‘¶
+// ã‚­ãƒ¼å‰²ã‚Šå½“ã¦ã®ä¿å­˜
 void CSuperTagEditorApp::WriteKeyConfig(bool bUpdate)
 {
-	CString strINI = m_pszProfileName;
-	InitProfile();
-	int		i;
-	int		nTableMax = 0;
-	//CString sValue;
-	for (i = 0; g_listKeyConfig[i].sName != NULL; i++) {
-		KEY_CONFIG	*pKey = &g_listKeyConfig[i];
-		if (pKey->wCmdID != 0x0000) {
-			//sValue.Format("%d", pKey->dwKeyCode);
-			//WritePrivateProfileString(sSectionKeyConfig, pKey->sRegName, sValue, strINI);
-			//Profile_WriteInt(sSectionKeyConfig, pKey->sRegName, pKey->dwKeyCode, strINI);
-			MyWriteProfileInt(sSectionKeyConfig, pKey->sRegName, pKey->dwKeyCode);
-			if (pKey->dwKeyCode != 0) nTableMax++;
-		}
-	}
+    int     i;
+    int     nTableMax = 0;
+    //CString sValue;
+    for (i = 0; g_listKeyConfig[i].sName != NULL; i++) {
+        KEY_CONFIG  *pKey = &g_listKeyConfig[i];
+        if (pKey->wCmdID != 0x0000) {
+            //sValue.Format("%d", pKey->dwKeyCode);
+            //WritePrivateProfileString(sSectionKeyConfig, pKey->sRegName, sValue, strINI);
+            m_IniFile.WriteInt(sSectionKeyConfig, pKey->sRegName, pKey->dwKeyCode);
+            if (pKey->dwKeyCode != 0) nTableMax++;
+        }
+    }
 
-	extern CPlugin plugins;
-	for (i=0;i<plugins.arPluginKey.GetSize();i++) {
-		KEY_CONFIG* pKey = (KEY_CONFIG*)plugins.arPluginKey.GetAt(i);
-		if (pKey->wCmdID != 0x0000) {
-			//sValue.Format("%ld", pKey->dwKeyCode);
-			//WritePrivateProfileString(sSectionKeyConfig, pKey->sRegName, sValue, strINI);
-			//Profile_WriteInt(sSectionKeyConfig, pKey->sRegName, pKey->dwKeyCode, strINI);
-			MyWriteProfileInt(sSectionKeyConfig, pKey->sRegName, pKey->dwKeyCode);
-			if (pKey->dwKeyCode != 0) nTableMax++;
-		}
-	}
-
-	SaveProfile();
-	FreeProfile();
-
-	// ƒAƒNƒZƒ‰ƒŒ[ƒ^ƒL[ƒe[ƒuƒ‹‚ÌXV
-	if (bUpdate) UpdateAccelerator(nTableMax);
+    extern CPlugin plugins;
+    for (i=0;i<plugins.arPluginKey.GetSize();i++) {
+        KEY_CONFIG* pKey = (KEY_CONFIG*)plugins.arPluginKey.GetAt(i);
+        if (pKey->wCmdID != 0x0000) {
+            //sValue.Format("%ld", pKey->dwKeyCode);
+            //WritePrivateProfileString(sSectionKeyConfig, pKey->sRegName, sValue, strINI);
+            m_IniFile.WriteInt(sSectionKeyConfig, pKey->sRegName, pKey->dwKeyCode);
+            if (pKey->dwKeyCode != 0) nTableMax++;
+        }
+    }
+    m_IniFile.Flush();
+    // ã‚¢ã‚¯ã‚»ãƒ©ãƒ¬ãƒ¼ã‚¿ã‚­ãƒ¼ãƒ†ãƒ¼ãƒ–ãƒ«ã®æ›´æ–°
+    if (bUpdate) UpdateAccelerator(nTableMax);
 }
 
-// ƒAƒNƒZƒ‰ƒŒ[ƒ^ƒe[ƒuƒ‹‚Ì‰ğ•ú
+// ã‚¢ã‚¯ã‚»ãƒ©ãƒ¬ãƒ¼ã‚¿ãƒ†ãƒ¼ãƒ–ãƒ«ã®è§£æ”¾
 void CSuperTagEditorApp::DestroyAccelerator(void)
 {
-	if (m_hAccel != 0) {
-		DestroyAcceleratorTable(m_hAccel);
-		m_hAccel = 0;
-	}
-	if (m_accelTable != NULL) {
-		delete[]	m_accelTable;		// ƒAƒNƒZƒ‰ƒŒ[ƒ^ƒe[ƒuƒ‹
-		m_accelTable = NULL;
-		m_nAccelTable = 0;
-	}
+    if (m_hAccel != 0) {
+        DestroyAcceleratorTable(m_hAccel);
+        m_hAccel = 0;
+    }
+    if (m_accelTable != NULL) {
+        delete[]    m_accelTable;       // ã‚¢ã‚¯ã‚»ãƒ©ãƒ¬ãƒ¼ã‚¿ãƒ†ãƒ¼ãƒ–ãƒ«
+        m_accelTable = NULL;
+        m_nAccelTable = 0;
+    }
 }
 
-// ƒAƒNƒZƒ‰ƒŒ[ƒ^ƒe[ƒuƒ‹‚ÌXV
+// ã‚¢ã‚¯ã‚»ãƒ©ãƒ¬ãƒ¼ã‚¿ãƒ†ãƒ¼ãƒ–ãƒ«ã®æ›´æ–°
 CMenu convSubMenuT2F;
 CMenu convSubMenuF2T;
 CString convSubMenuT2FTitle;
 CString convSubMenuF2TTitle;
 void CSuperTagEditorApp::UpdateAccelerator(int nTableMax)
 {
-	if (nTableMax == -1) {
-		nTableMax = m_nAccelTable;
-	}
+    if (nTableMax == -1) {
+        nTableMax = m_nAccelTable;
+    }
 
-	// ƒAƒNƒZƒ‰ƒŒ[ƒ^ƒe[ƒuƒ‹‚Ì‰ğ•ú
-	DestroyAccelerator();
+    // ã‚¢ã‚¯ã‚»ãƒ©ãƒ¬ãƒ¼ã‚¿ãƒ†ãƒ¼ãƒ–ãƒ«ã®è§£æ”¾
+    DestroyAccelerator();
 
-	CMainFrame/* STEP 030 */	*pMainWnd = (CMainFrame*)/* STEP 030 */AfxGetMainWnd();
-	CMenu	*pMenu = pMainWnd ? pMainWnd->GetMenu() : NULL;
+    CMainFrame *pMainWnd = (CMainFrame*)AfxGetMainWnd(); /* STEP 030 *//* STEP 030 */
+    CMenu   *pMenu = pMainWnd ? pMainWnd->GetMenu() : NULL;
 
-	/* STEP 030 */
-	pMenu->DestroyMenu();
-	CMenu newMenu;
-	newMenu.LoadMenu(IDR_MAINFRAME);
-	pMainWnd->SetMenu(NULL);
-	pMainWnd->SetMenu(&newMenu);
-	pMainWnd->m_hMenuDefault = newMenu.m_hMenu;
-	newMenu.Detach();
+    /* STEP 030 */
+    pMenu->DestroyMenu();
+    CMenu newMenu;
+    newMenu.LoadMenu(IDR_MAINFRAME);
+    pMainWnd->SetMenu(NULL);
+    pMainWnd->SetMenu(&newMenu);
+    pMainWnd->m_hMenuDefault = newMenu.m_hMenu;
+    newMenu.Detach();
 
-	/* STEP 030 */
-	convSubMenuT2F.DestroyMenu();
-	convSubMenuF2T.DestroyMenu();
-	pMenu = pMainWnd ? pMainWnd->GetMenu() : NULL;
-	if (pMenu != NULL && g_bUserConvAddMenu) {
-		CMenu* pUConvMenu = NULL;
-		int nCount = pMenu->GetMenuItemCount();
-		int j; for (int j=0;j<nCount;j++) {
-			CString strTitle;
-			pMenu->GetMenuString(j, strTitle, MF_BYPOSITION);
-			if (strTitle == "•ÏŠ·(&C)") {
-				pMenu = pMenu->GetSubMenu(j);
-				break;
-			}
-		}
-		nCount = pMenu->GetMenuItemCount();
-		for (j=0;j<nCount;j++) {
-			CString strTitle;
-			pMenu->GetMenuString(j, strTitle, MF_BYPOSITION);
-			if (strTitle == "ƒ†[ƒU[w’è•ÏŠ·(&U)") {
-				pUConvMenu = pMenu->GetSubMenu(j);
-				break;
-			}
-		}
-		convSubMenuT2F.LoadMenu(IDR_MENU_CONV_FORMAT_USER_T2F);
-		pUConvMenu->GetMenuString(ID_CONV_TAG2FILE_USER, convSubMenuT2FTitle, MF_BYCOMMAND);
-		pUConvMenu->ModifyMenu(ID_CONV_TAG2FILE_USER, MF_BYCOMMAND | MF_POPUP, (UINT)convSubMenuT2F.GetSubMenu(0)->GetSafeHmenu(), convSubMenuT2FTitle);
-		//pUConvMenu->ModifyMenu(ID_CONV_TAG2FILE_USER, MF_BYCOMMAND | MF_STRING, ID_CONV_TAG2FILE_USER, convSubMenuT2FTitle);
+    /* STEP 030 */
+    convSubMenuT2F.DestroyMenu();
+    convSubMenuF2T.DestroyMenu();
+    pMenu = pMainWnd ? pMainWnd->GetMenu() : NULL;
+    if (pMenu != NULL && g_bUserConvAddMenu) {
+        CMenu* pUConvMenu = NULL;
+        int nCount = pMenu->GetMenuItemCount();
+        int j; for (int j=0;j<nCount;j++) {
+            CString strTitle;
+            pMenu->GetMenuString(j, strTitle, MF_BYPOSITION);
+            if (strTitle == _T("å¤‰æ›(&C)")) {
+                pMenu = pMenu->GetSubMenu(j);
+                break;
+            }
+        }
+        nCount = pMenu->GetMenuItemCount();
+        for (j=0;j<nCount;j++) {
+            CString strTitle;
+            pMenu->GetMenuString(j, strTitle, MF_BYPOSITION);
+            if (strTitle == _T("ãƒ¦ãƒ¼ã‚¶ãƒ¼æŒ‡å®šå¤‰æ›(&U)")) {
+                pUConvMenu = pMenu->GetSubMenu(j);
+                break;
+            }
+        }
+        convSubMenuT2F.LoadMenu(IDR_MENU_CONV_FORMAT_USER_T2F);
+        pUConvMenu->GetMenuString(ID_CONV_TAG2FILE_USER, convSubMenuT2FTitle, MF_BYCOMMAND);
+        pUConvMenu->ModifyMenu(ID_CONV_TAG2FILE_USER, MF_BYCOMMAND | MF_POPUP, (UINT_PTR)convSubMenuT2F.GetSubMenu(0)->GetSafeHmenu(), convSubMenuT2FTitle);
+        //pUConvMenu->ModifyMenu(ID_CONV_TAG2FILE_USER, MF_BYCOMMAND | MF_STRING, ID_CONV_TAG2FILE_USER, convSubMenuT2FTitle);
 
-		convSubMenuF2T.LoadMenu(IDR_MENU_CONV_FORMAT_USER_F2T);
-		pUConvMenu->GetMenuString(ID_CONV_FILE2TAG_USER, convSubMenuF2TTitle, MF_BYCOMMAND);
-		pUConvMenu->ModifyMenu(ID_CONV_FILE2TAG_USER, MF_BYCOMMAND | MF_POPUP, (UINT)convSubMenuF2T.GetSubMenu(0)->GetSafeHmenu(), convSubMenuF2TTitle);
-		//pUConvMenu->ModifyMenu(ID_CONV_FILE2TAG_USER, MF_BYCOMMAND | MF_STRING, ID_CONV_FILE2TAG_USER, convSubMenuF2TTitle);
-	}
-	extern void OnLoadMainMenu();
-	OnLoadMainMenu();
+        convSubMenuF2T.LoadMenu(IDR_MENU_CONV_FORMAT_USER_F2T);
+        pUConvMenu->GetMenuString(ID_CONV_FILE2TAG_USER, convSubMenuF2TTitle, MF_BYCOMMAND);
+        pUConvMenu->ModifyMenu(ID_CONV_FILE2TAG_USER, MF_BYCOMMAND | MF_POPUP, (UINT_PTR)convSubMenuF2T.GetSubMenu(0)->GetSafeHmenu(), convSubMenuF2TTitle);
+        //pUConvMenu->ModifyMenu(ID_CONV_FILE2TAG_USER, MF_BYCOMMAND | MF_STRING, ID_CONV_FILE2TAG_USER, convSubMenuF2TTitle);
+    }
+    extern void OnLoadMainMenu();
+    OnLoadMainMenu();
 
-	pMenu = pMainWnd ? pMainWnd->GetMenu() : NULL;
-	// ƒAƒNƒZƒ‰ƒŒ[ƒ^ƒe[ƒuƒ‹ì¬
-	m_accelTable = new ACCEL[nTableMax];
-	m_nAccelTable = nTableMax;
-	int		i, nCount = 0;
-	for (i = 0; g_listKeyConfig[i].sName != NULL; i++) {
-		KEY_CONFIG	*pKey = &g_listKeyConfig[i];
-		if (pKey->wCmdID != 0x0000) {
-			// ƒAƒNƒZƒ‰ƒŒ[ƒ^‚Ìì¬
-			ACCEL	*pAccel = NULL;
-			WORD	wModifiers = 0x0000;
-			if (pKey->dwKeyCode != 0) {
-				wModifiers = HIWORD(pKey->dwKeyCode);
-				pAccel = &m_accelTable[nCount];
-				pAccel->fVirt = FNOINVERT | FVIRTKEY;
-				if (wModifiers & HOTKEYF_ALT    ) pAccel->fVirt |= FALT;
-				if (wModifiers & HOTKEYF_CONTROL) pAccel->fVirt |= FCONTROL;
-				if (wModifiers & HOTKEYF_SHIFT  ) pAccel->fVirt |= FSHIFT;
-				pAccel->key = LOWORD(pKey->dwKeyCode);
-				pAccel->cmd = pKey->wCmdID;
-				nCount++;
-			}
+    pMenu = pMainWnd ? pMainWnd->GetMenu() : NULL;
+    // ã‚¢ã‚¯ã‚»ãƒ©ãƒ¬ãƒ¼ã‚¿ãƒ†ãƒ¼ãƒ–ãƒ«ä½œæˆ
+    m_accelTable = new ACCEL[nTableMax];
+    m_nAccelTable = nTableMax;
+    int     i, nCount = 0;
+    for (i = 0; g_listKeyConfig[i].sName != NULL; i++) {
+        KEY_CONFIG  *pKey = &g_listKeyConfig[i];
+        if (pKey->wCmdID != 0x0000) {
+            // ã‚¢ã‚¯ã‚»ãƒ©ãƒ¬ãƒ¼ã‚¿ã®ä½œæˆ
+            ACCEL   *pAccel = NULL;
+            WORD    wModifiers = 0x0000;
+            if (pKey->dwKeyCode != 0) {
+                wModifiers = HIWORD(pKey->dwKeyCode);
+                pAccel = &m_accelTable[nCount];
+                pAccel->fVirt = FNOINVERT | FVIRTKEY;
+                if (wModifiers & HOTKEYF_ALT    ) pAccel->fVirt |= FALT;
+                if (wModifiers & HOTKEYF_CONTROL) pAccel->fVirt |= FCONTROL;
+                if (wModifiers & HOTKEYF_SHIFT  ) pAccel->fVirt |= FSHIFT;
+                pAccel->key = LOWORD(pKey->dwKeyCode);
+                pAccel->cmd = pKey->wCmdID;
+                nCount++;
+            }
 
-			// ƒƒjƒ…[€–Ú‚Ì‘‚«Š·‚¦
-			if (pMenu != NULL) {
-				CString	strName;
-				// ƒƒjƒ…[€–Ú–¼‚ğæ“¾
-				switch(pKey->wCmdID) {
-				case ID_CONV_FORMAT_EX_01:
-					strName.Format("01F%s", g_userConvFormatEx[0].strName);
-					break;
-				case ID_CONV_FORMAT_EX_02:
-					strName.Format("02F%s", g_userConvFormatEx[1].strName);
-					break;
-				case ID_CONV_FORMAT_EX_03:
-					strName.Format("03F%s", g_userConvFormatEx[2].strName);
-					break;
-				case ID_CONV_FORMAT_EX_04:
-					strName.Format("04F%s", g_userConvFormatEx[3].strName);
-					break;
-				case ID_CONV_FORMAT_EX_05:
-					strName.Format("05F%s", g_userConvFormatEx[4].strName);
-					break;
-				case ID_CONV_FORMAT_EX_06:
-					strName.Format("06F%s", g_userConvFormatEx[5].strName);
-					break;
-				case ID_CONV_FORMAT_EX_07:
-					strName.Format("07F%s", g_userConvFormatEx[6].strName);
-					break;
-				case ID_CONV_FORMAT_EX_08:
-					strName.Format("08F%s", g_userConvFormatEx[7].strName);
-					break;
-				case ID_CONV_FORMAT_EX_09:
-					strName.Format("09F%s", g_userConvFormatEx[8].strName);
-					break;
-				case ID_CONV_FORMAT_EX_10:
-					strName.Format("10F%s", g_userConvFormatEx[9].strName);
-					break;
-				case ID_WRITE_LIST1:
-					strName.Format("01F%s", g_writeFormat[0].strName);
-					break;
-				case ID_WRITE_LIST2:
-					strName.Format("02F%s", g_writeFormat[1].strName);
-					break;
-				case ID_WRITE_LIST3:
-					strName.Format("03F%s", g_writeFormat[2].strName);
-					break;
-				case ID_WRITE_LIST4:
-					strName.Format("04F%s", g_writeFormat[3].strName);
-					break;
-				case ID_WRITE_LIST5:
-					strName.Format("05F%s", g_writeFormat[4].strName);
-					break;
-				case ID_MOVE_FOLDER_01:
-					strName.Format("01F%s", g_userMoveFolder[0].strName);
-					break;
-				case ID_MOVE_FOLDER_02:
-					strName.Format("02F%s", g_userMoveFolder[1].strName);
-					break;
-				case ID_MOVE_FOLDER_03:
-					strName.Format("03F%s", g_userMoveFolder[2].strName);
-					break;
-				case ID_MOVE_FOLDER_04:
-					strName.Format("04F%s", g_userMoveFolder[3].strName);
-					break;
-				case ID_MOVE_FOLDER_05:
-					strName.Format("05F%s", g_userMoveFolder[4].strName);
-					break;
-				case ID_CONV_FORMAT_USER_01: /* TyphoonSwell 027 */
-				case ID_CONV_FORMAT_USER_T2F_01: /* STEP 030 */
-				case ID_CONV_FORMAT_USER_F2T_01: /* STEP 030 */
-					strName.Format("01F%s", g_userConvFormat[0].strName);
-					break;
-				case ID_CONV_FORMAT_USER_02: /* TyphoonSwell 027 */
-				case ID_CONV_FORMAT_USER_T2F_02: /* STEP 030 */
-				case ID_CONV_FORMAT_USER_F2T_02: /* STEP 030 */
-					strName.Format("02F%s", g_userConvFormat[1].strName);
-					break;
-				case ID_CONV_FORMAT_USER_03: /* TyphoonSwell 027 */
-				case ID_CONV_FORMAT_USER_T2F_03: /* STEP 030 */
-				case ID_CONV_FORMAT_USER_F2T_03: /* STEP 030 */
-					strName.Format("03F%s", g_userConvFormat[2].strName);
-					break;
-				case ID_CONV_FORMAT_USER_04: /* LastTrain 057 */
-				case ID_CONV_FORMAT_USER_T2F_04: /* STEP 030 */
-				case ID_CONV_FORMAT_USER_F2T_04: /* STEP 030 */
-					strName.Format("04F%s", g_userConvFormat[3].strName);
-					break;
-				case ID_CONV_FORMAT_USER_05: /* LastTrain 057 */
-				case ID_CONV_FORMAT_USER_T2F_05: /* STEP 030 */
-				case ID_CONV_FORMAT_USER_F2T_05: /* STEP 030 */
-					strName.Format("05F%s", g_userConvFormat[4].strName);
-					break;
-				case ID_TEIKEI_01: /* SeaKnows 030 */
-					strName.Format("01: %s", shortString(g_teikeiInfo[0].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
-					break;
-				case ID_TEIKEI_02: /* SeaKnows 030 */
-					strName.Format("02: %s", shortString(g_teikeiInfo[1].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
-					break;
-				case ID_TEIKEI_03: /* SeaKnows 030 */
-					strName.Format("03: %s", shortString(g_teikeiInfo[2].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
-					break;
-				case ID_TEIKEI_04: /* SeaKnows 030 */
-					strName.Format("04: %s", shortString(g_teikeiInfo[3].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
-					break;
-				case ID_TEIKEI_05: /* SeaKnows 030 */
-					strName.Format("05: %s", shortString(g_teikeiInfo[4].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
-					break;
-				case ID_TEIKEI_06: /* SeaKnows 030 */
-					strName.Format("06: %s", shortString(g_teikeiInfo[5].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
-					break;
-				case ID_TEIKEI_07: /* SeaKnows 030 */
-					strName.Format("07: %s", shortString(g_teikeiInfo[6].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
-					break;
-				case ID_TEIKEI_08: /* SeaKnows 030 */
-					strName.Format("08: %s", shortString(g_teikeiInfo[7].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
-					break;
-				case ID_TEIKEI_09: /* SeaKnows 030 */
-					strName.Format("09: %s", shortString(g_teikeiInfo[8].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
-					break;
-				case ID_TEIKEI_10: /* SeaKnows 030 */
-					strName.Format("10: %s", shortString(g_teikeiInfo[9].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
-					break;
-				case ID_TEIKEI_2_01: /* FreeFall 046 */
-					strName.Format("01: %s", shortString(g_teikeiInfo[10].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
-					break;
-				case ID_TEIKEI_2_02: /* FreeFall 046 */
-					strName.Format("02: %s", shortString(g_teikeiInfo[11].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
-					break;
-				case ID_TEIKEI_2_03: /* FreeFall 046 */
-					strName.Format("03: %s", shortString(g_teikeiInfo[12].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
-					break;
-				case ID_TEIKEI_2_04: /* FreeFall 046 */
-					strName.Format("04: %s", shortString(g_teikeiInfo[13].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
-					break;
-				case ID_TEIKEI_2_05: /* FreeFall 046 */
-					strName.Format("05: %s", shortString(g_teikeiInfo[14].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
-					break;
-				case ID_TEIKEI_2_06: /* FreeFall 046 */
-					strName.Format("06: %s", shortString(g_teikeiInfo[15].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
-					break;
-				case ID_TEIKEI_2_07: /* FreeFall 046 */
-					strName.Format("07: %s", shortString(g_teikeiInfo[16].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
-					break;
-				case ID_TEIKEI_2_08: /* FreeFall 046 */
-					strName.Format("08: %s", shortString(g_teikeiInfo[17].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
-					break;
-				case ID_TEIKEI_2_09: /* FreeFall 046 */
-					strName.Format("09: %s", shortString(g_teikeiInfo[18].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
-					break;
-				case ID_TEIKEI_2_10: /* FreeFall 046 */
-					strName.Format("10: %s", shortString(g_teikeiInfo[19].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
-					break;
-				case ID_TEIKEI_3_01: /* FreeFall 046 */
-					strName.Format("01: %s", shortString(g_teikeiInfo[20].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
-					break;
-				case ID_TEIKEI_3_02: /* FreeFall 046 */
-					strName.Format("02: %s", shortString(g_teikeiInfo[21].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
-					break;
-				case ID_TEIKEI_3_03: /* FreeFall 046 */
-					strName.Format("03: %s", shortString(g_teikeiInfo[22].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
-					break;
-				case ID_TEIKEI_3_04: /* FreeFall 046 */
-					strName.Format("04: %s", shortString(g_teikeiInfo[23].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
-					break;
-				case ID_TEIKEI_3_05: /* FreeFall 046 */
-					strName.Format("05: %s", shortString(g_teikeiInfo[24].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
-					break;
-				case ID_TEIKEI_3_06: /* FreeFall 046 */
-					strName.Format("06: %s", shortString(g_teikeiInfo[25].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
-					break;
-				case ID_TEIKEI_3_07: /* FreeFall 046 */
-					strName.Format("07: %s", shortString(g_teikeiInfo[26].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
-					break;
-				case ID_TEIKEI_3_08: /* FreeFall 046 */
-					strName.Format("08: %s", shortString(g_teikeiInfo[27].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
-					break;
-				case ID_TEIKEI_3_09: /* FreeFall 046 */
-					strName.Format("09: %s", shortString(g_teikeiInfo[28].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
-					break;
-				case ID_TEIKEI_3_10: /* FreeFall 046 */
-					strName.Format("10: %s", shortString(g_teikeiInfo[29].strTeikei/* STEP 035 */, TEIKEI_MENU_STRING_MAX) /* FreeFall 051 */);
-					break;
-				case ID_FAVORITE_FOLDER_01: /* RockDance 129 */
-					strName.Format("&1 %s", shortFavorite(g_strFavorite[0]));
-					break;
-				case ID_FAVORITE_FOLDER_02: /* RockDance 129 */
-					strName.Format("&2 %s", shortFavorite(g_strFavorite[1]));
-					break;
-				case ID_FAVORITE_FOLDER_03: /* RockDance 129 */
-					strName.Format("&3 %s", shortFavorite(g_strFavorite[2]));
-					break;
-				case ID_FAVORITE_FOLDER_04: /* RockDance 129 */
-					strName.Format("&4 %s", shortFavorite(g_strFavorite[3]));
-					break;
-				case ID_FAVORITE_FOLDER_05: /* RockDance 129 */
-					strName.Format("&5 %s", shortFavorite(g_strFavorite[4]));
-					break;
-				case ID_FAVORITE_FOLDER_06: /* RockDance 129 */
-					strName.Format("&6 %s", shortFavorite(g_strFavorite[5]));
-					break;
-				case ID_FAVORITE_FOLDER_07: /* RockDance 129 */
-					strName.Format("&7 %s", shortFavorite(g_strFavorite[6]));
-					break;
-				case ID_FAVORITE_FOLDER_08: /* RockDance 129 */
-					strName.Format("&8 %s", shortFavorite(g_strFavorite[7]));
-					break;
-				case ID_FAVORITE_FOLDER_09: /* RockDance 129 */
-					strName.Format("&9 %s", shortFavorite(g_strFavorite[8]));
-					break;
-				case ID_FAVORITE_FOLDER_10: /* RockDance 129 */
-					strName.Format("&0 %s", shortFavorite(g_strFavorite[9]));
-					break;
-				case ID_EDIT_COPY_FORMAT_01: /* FunnyCorn 175 */
-					strName.Format("01F%s", g_userCopyFormat[0].strName);
-					break;
-				case ID_EDIT_COPY_FORMAT_02: /* FunnyCorn 175 */
-					strName.Format("02F%s", g_userCopyFormat[1].strName);
-					break;
-				case ID_EDIT_COPY_FORMAT_03: /* FunnyCorn 175 */
-					strName.Format("03F%s", g_userCopyFormat[2].strName);
-					break;
-				case ID_EDIT_COPY_FORMAT_04: /* FunnyCorn 175 */
-					strName.Format("04F%s", g_userCopyFormat[3].strName);
-					break;
-				case ID_EDIT_COPY_FORMAT_05: /* FunnyCorn 175 */
-					strName.Format("05F%s", g_userCopyFormat[4].strName);
-					break;
-				case ID_CONV_TAG_TO_TAG_01: /* STEP 034 */
-					strName.Format("01F%s", g_userConvFormatTag2Tag[0].strName);
-					break;
-				case ID_CONV_TAG_TO_TAG_02: /* STEP 034 */
-					strName.Format("02F%s", g_userConvFormatTag2Tag[1].strName);
-					break;
-				case ID_CONV_TAG_TO_TAG_03: /* STEP 034 */
-					strName.Format("03F%s", g_userConvFormatTag2Tag[2].strName);
-					break;
-				case ID_CONV_TAG_TO_TAG_04: /* STEP 034 */
-					strName.Format("04F%s", g_userConvFormatTag2Tag[3].strName);
-					break;
-				case ID_CONV_TAG_TO_TAG_05: /* STEP 034 */
-					strName.Format("05F%s", g_userConvFormatTag2Tag[4].strName);
-					break;
-				default:
-					pMenu->GetMenuString((UINT)pKey->wCmdID, strName, MF_BYCOMMAND);
-					break;
-				}
+            // ãƒ¡ãƒ‹ãƒ¥ãƒ¼é …ç›®ã®æ›¸ãæ›ãˆ
+            if (pMenu != NULL) {
+                CString strName;
+                // ãƒ¡ãƒ‹ãƒ¥ãƒ¼é …ç›®åã‚’å–å¾—
+                switch(pKey->wCmdID) {
+                case ID_CONV_FORMAT_EX_01:
+                    strName.Format(_T("01ï¼š%s"), (LPCWSTR)g_userConvFormatEx[0].strName);
+                    break;
+                case ID_CONV_FORMAT_EX_02:
+                    strName.Format(_T("02ï¼š%s"), (LPCWSTR)g_userConvFormatEx[1].strName);
+                    break;
+                case ID_CONV_FORMAT_EX_03:
+                    strName.Format(_T("03ï¼š%s"), (LPCWSTR)g_userConvFormatEx[2].strName);
+                    break;
+                case ID_CONV_FORMAT_EX_04:
+                    strName.Format(_T("04ï¼š%s"), (LPCWSTR)g_userConvFormatEx[3].strName);
+                    break;
+                case ID_CONV_FORMAT_EX_05:
+                    strName.Format(_T("05ï¼š%s"), (LPCWSTR)g_userConvFormatEx[4].strName);
+                    break;
+                case ID_CONV_FORMAT_EX_06:
+                    strName.Format(_T("06ï¼š%s"), (LPCWSTR)g_userConvFormatEx[5].strName);
+                    break;
+                case ID_CONV_FORMAT_EX_07:
+                    strName.Format(_T("07ï¼š%s"), (LPCWSTR)g_userConvFormatEx[6].strName);
+                    break;
+                case ID_CONV_FORMAT_EX_08:
+                    strName.Format(_T("08ï¼š%s"), (LPCWSTR)g_userConvFormatEx[7].strName);
+                    break;
+                case ID_CONV_FORMAT_EX_09:
+                    strName.Format(_T("09ï¼š%s"), (LPCWSTR)g_userConvFormatEx[8].strName);
+                    break;
+                case ID_CONV_FORMAT_EX_10:
+                    strName.Format(_T("10ï¼š%s"), (LPCWSTR)g_userConvFormatEx[9].strName);
+                    break;
+                case ID_WRITE_LIST1:
+                    strName.Format(_T("01ï¼š%s"), (LPCWSTR)g_writeFormat[0].strName);
+                    break;
+                case ID_WRITE_LIST2:
+                    strName.Format(_T("02ï¼š%s"), (LPCWSTR)g_writeFormat[1].strName);
+                    break;
+                case ID_WRITE_LIST3:
+                    strName.Format(_T("03ï¼š%s"), (LPCWSTR)g_writeFormat[2].strName);
+                    break;
+                case ID_WRITE_LIST4:
+                    strName.Format(_T("04ï¼š%s"), (LPCWSTR)g_writeFormat[3].strName);
+                    break;
+                case ID_WRITE_LIST5:
+                    strName.Format(_T("05ï¼š%s"), (LPCWSTR)g_writeFormat[4].strName);
+                    break;
+                case ID_MOVE_FOLDER_01:
+                    strName.Format(_T("01ï¼š%s"), (LPCWSTR)g_userMoveFolder[0].strName);
+                    break;
+                case ID_MOVE_FOLDER_02:
+                    strName.Format(_T("02ï¼š%s"), (LPCWSTR)g_userMoveFolder[1].strName);
+                    break;
+                case ID_MOVE_FOLDER_03:
+                    strName.Format(_T("03ï¼š%s"), (LPCWSTR)g_userMoveFolder[2].strName);
+                    break;
+                case ID_MOVE_FOLDER_04:
+                    strName.Format(_T("04ï¼š%s"), (LPCWSTR)g_userMoveFolder[3].strName);
+                    break;
+                case ID_MOVE_FOLDER_05:
+                    strName.Format(_T("05ï¼š%s"), (LPCWSTR)g_userMoveFolder[4].strName);
+                    break;
+                case ID_CONV_FORMAT_USER_01: /* TyphoonSwell 027 */
+                case ID_CONV_FORMAT_USER_T2F_01: /* STEP 030 */
+                case ID_CONV_FORMAT_USER_F2T_01: /* STEP 030 */
+                    strName.Format(_T("01ï¼š%s"), (LPCWSTR)g_userConvFormat[0].strName);
+                    break;
+                case ID_CONV_FORMAT_USER_02: /* TyphoonSwell 027 */
+                case ID_CONV_FORMAT_USER_T2F_02: /* STEP 030 */
+                case ID_CONV_FORMAT_USER_F2T_02: /* STEP 030 */
+                    strName.Format(_T("02ï¼š%s"), (LPCWSTR)g_userConvFormat[1].strName);
+                    break;
+                case ID_CONV_FORMAT_USER_03: /* TyphoonSwell 027 */
+                case ID_CONV_FORMAT_USER_T2F_03: /* STEP 030 */
+                case ID_CONV_FORMAT_USER_F2T_03: /* STEP 030 */
+                    strName.Format(_T("03ï¼š%s"), (LPCWSTR)g_userConvFormat[2].strName);
+                    break;
+                case ID_CONV_FORMAT_USER_04: /* LastTrain 057 */
+                case ID_CONV_FORMAT_USER_T2F_04: /* STEP 030 */
+                case ID_CONV_FORMAT_USER_F2T_04: /* STEP 030 */
+                    strName.Format(_T("04ï¼š%s"), (LPCWSTR)g_userConvFormat[3].strName);
+                    break;
+                case ID_CONV_FORMAT_USER_05: /* LastTrain 057 */
+                case ID_CONV_FORMAT_USER_T2F_05: /* STEP 030 */
+                case ID_CONV_FORMAT_USER_F2T_05: /* STEP 030 */
+                    strName.Format(_T("05ï¼š%s"), (LPCWSTR)g_userConvFormat[4].strName);
+                    break;
+                case ID_TEIKEI_01: /* SeaKnows 030 */
+                    strName.Format(_T("01: %s"), (LPCWSTR)(shortString(g_teikeiInfo[0].strTeikei, TEIKEI_MENU_STRING_MAX)));/* STEP 035, FreeFall 051 */
+                    break;
+                case ID_TEIKEI_02: /* SeaKnows 030 */
+                    strName.Format(_T("02: %s"), (LPCWSTR)(shortString(g_teikeiInfo[1].strTeikei, TEIKEI_MENU_STRING_MAX)));/* STEP 035, FreeFall 051 */
+                    break;
+                case ID_TEIKEI_03: /* SeaKnows 030 */
+                    strName.Format(_T("03: %s"), (LPCWSTR)(shortString(g_teikeiInfo[2].strTeikei, TEIKEI_MENU_STRING_MAX)));/* STEP 035, FreeFall 051 */
+                    break;
+                case ID_TEIKEI_04: /* SeaKnows 030 */
+                    strName.Format(_T("04: %s"), (LPCWSTR)(shortString(g_teikeiInfo[3].strTeikei, TEIKEI_MENU_STRING_MAX)));/* STEP 035, FreeFall 051 */
+                    break;
+                case ID_TEIKEI_05: /* SeaKnows 030 */
+                    strName.Format(_T("05: %s"), (LPCWSTR)(shortString(g_teikeiInfo[4].strTeikei, TEIKEI_MENU_STRING_MAX)));/* STEP 035, FreeFall 051 */
+                    break;
+                case ID_TEIKEI_06: /* SeaKnows 030 */
+                    strName.Format(_T("06: %s"), (LPCWSTR)(shortString(g_teikeiInfo[5].strTeikei, TEIKEI_MENU_STRING_MAX)));/* STEP 035, FreeFall 051 */
+                    break;
+                case ID_TEIKEI_07: /* SeaKnows 030 */
+                    strName.Format(_T("07: %s"), (LPCWSTR)(shortString(g_teikeiInfo[6].strTeikei, TEIKEI_MENU_STRING_MAX)));/* STEP 035, FreeFall 051 */
+                    break;
+                case ID_TEIKEI_08: /* SeaKnows 030 */
+                    strName.Format(_T("08: %s"), (LPCWSTR)(shortString(g_teikeiInfo[7].strTeikei, TEIKEI_MENU_STRING_MAX)));/* STEP 035, FreeFall 051 */
+                    break;
+                case ID_TEIKEI_09: /* SeaKnows 030 */
+                    strName.Format(_T("09: %s"), (LPCWSTR)(shortString(g_teikeiInfo[8].strTeikei, TEIKEI_MENU_STRING_MAX)));/* STEP 035, FreeFall 051 */
+                    break;
+                case ID_TEIKEI_10: /* SeaKnows 030 */
+                    strName.Format(_T("10: %s"), (LPCWSTR)(shortString(g_teikeiInfo[9].strTeikei, TEIKEI_MENU_STRING_MAX)));/* STEP 035, FreeFall 051 */
+                    break;
+                case ID_TEIKEI_2_01: /* FreeFall 046 */
+                    strName.Format(_T("01: %s"), (LPCWSTR)(shortString(g_teikeiInfo[10].strTeikei, TEIKEI_MENU_STRING_MAX)));/* STEP 035, FreeFall 051 */
+                    break;
+                case ID_TEIKEI_2_02: /* FreeFall 046 */
+                    strName.Format(_T("02: %s"), (LPCWSTR)(shortString(g_teikeiInfo[11].strTeikei, TEIKEI_MENU_STRING_MAX)));/* STEP 035, FreeFall 051 */
+                    break;
+                case ID_TEIKEI_2_03: /* FreeFall 046 */
+                    strName.Format(_T("03: %s"), (LPCWSTR)(shortString(g_teikeiInfo[12].strTeikei, TEIKEI_MENU_STRING_MAX)));/* STEP 035, FreeFall 051 */
+                    break;
+                case ID_TEIKEI_2_04: /* FreeFall 046 */
+                    strName.Format(_T("04: %s"), (LPCWSTR)(shortString(g_teikeiInfo[13].strTeikei, TEIKEI_MENU_STRING_MAX)));/* STEP 035, FreeFall 051 */
+                    break;
+                case ID_TEIKEI_2_05: /* FreeFall 046 */
+                    strName.Format(_T("05: %s"), (LPCWSTR)(shortString(g_teikeiInfo[14].strTeikei, TEIKEI_MENU_STRING_MAX)));/* STEP 035, FreeFall 051 */
+                    break;
+                case ID_TEIKEI_2_06: /* FreeFall 046 */
+                    strName.Format(_T("06: %s"), (LPCWSTR)(shortString(g_teikeiInfo[15].strTeikei, TEIKEI_MENU_STRING_MAX)));/* STEP 035, FreeFall 051 */
+                    break;
+                case ID_TEIKEI_2_07: /* FreeFall 046 */
+                    strName.Format(_T("07: %s"), (LPCWSTR)(shortString(g_teikeiInfo[16].strTeikei, TEIKEI_MENU_STRING_MAX)));/* STEP 035, FreeFall 051 */
+                    break;
+                case ID_TEIKEI_2_08: /* FreeFall 046 */
+                    strName.Format(_T("08: %s"), (LPCWSTR)(shortString(g_teikeiInfo[17].strTeikei, TEIKEI_MENU_STRING_MAX)));/* STEP 035, FreeFall 051 */
+                    break;
+                case ID_TEIKEI_2_09: /* FreeFall 046 */
+                    strName.Format(_T("09: %s"), (LPCWSTR)(shortString(g_teikeiInfo[18].strTeikei, TEIKEI_MENU_STRING_MAX)));/* STEP 035, FreeFall 051 */
+                    break;
+                case ID_TEIKEI_2_10: /* FreeFall 046 */
+                    strName.Format(_T("10: %s"), (LPCWSTR)(shortString(g_teikeiInfo[19].strTeikei, TEIKEI_MENU_STRING_MAX)));/* STEP 035, FreeFall 051 */
+                    break;
+                case ID_TEIKEI_3_01: /* FreeFall 046 */
+                    strName.Format(_T("01: %s"), (LPCWSTR)(shortString(g_teikeiInfo[20].strTeikei, TEIKEI_MENU_STRING_MAX)));/* STEP 035, FreeFall 051 */
+                    break;
+                case ID_TEIKEI_3_02: /* FreeFall 046 */
+                    strName.Format(_T("02: %s"), (LPCWSTR)(shortString(g_teikeiInfo[21].strTeikei, TEIKEI_MENU_STRING_MAX)));/* STEP 035, FreeFall 051 */
+                    break;
+                case ID_TEIKEI_3_03: /* FreeFall 046 */
+                    strName.Format(_T("03: %s"), (LPCWSTR)(shortString(g_teikeiInfo[22].strTeikei, TEIKEI_MENU_STRING_MAX)));/* STEP 035, FreeFall 051 */
+                    break;
+                case ID_TEIKEI_3_04: /* FreeFall 046 */
+                    strName.Format(_T("04: %s"), (LPCWSTR)(shortString(g_teikeiInfo[23].strTeikei, TEIKEI_MENU_STRING_MAX)));/* STEP 035, FreeFall 051 */
+                    break;
+                case ID_TEIKEI_3_05: /* FreeFall 046 */
+                    strName.Format(_T("05: %s"), (LPCWSTR)(shortString(g_teikeiInfo[24].strTeikei, TEIKEI_MENU_STRING_MAX)));/* STEP 035, FreeFall 051 */
+                    break;
+                case ID_TEIKEI_3_06: /* FreeFall 046 */
+                    strName.Format(_T("06: %s"), (LPCWSTR)(shortString(g_teikeiInfo[25].strTeikei, TEIKEI_MENU_STRING_MAX)));/* STEP 035, FreeFall 051 */
+                    break;
+                case ID_TEIKEI_3_07: /* FreeFall 046 */
+                    strName.Format(_T("07: %s"), (LPCWSTR)(shortString(g_teikeiInfo[26].strTeikei, TEIKEI_MENU_STRING_MAX)));/* STEP 035, FreeFall 051 */
+                    break;
+                case ID_TEIKEI_3_08: /* FreeFall 046 */
+                    strName.Format(_T("08: %s"), (LPCWSTR)(shortString(g_teikeiInfo[27].strTeikei, TEIKEI_MENU_STRING_MAX)));/* STEP 035, FreeFall 051 */
+                    break;
+                case ID_TEIKEI_3_09: /* FreeFall 046 */
+                    strName.Format(_T("09: %s"), (LPCWSTR)(shortString(g_teikeiInfo[28].strTeikei, TEIKEI_MENU_STRING_MAX)));/* STEP 035, FreeFall 051 */
+                    break;
+                case ID_TEIKEI_3_10: /* FreeFall 046 */
+                    strName.Format(_T("10: %s"), (LPCWSTR)(shortString(g_teikeiInfo[29].strTeikei, TEIKEI_MENU_STRING_MAX)));/* STEP 035, FreeFall 051 */
+                    break;
+                case ID_FAVORITE_FOLDER_01: /* RockDance 129 */
+                    strName.Format(_T("&1 %s"), (LPCWSTR)(shortFavorite(g_strFavorite[0])));
+                    break;
+                case ID_FAVORITE_FOLDER_02: /* RockDance 129 */
+                    strName.Format(_T("&2 %s"), (LPCWSTR)(shortFavorite(g_strFavorite[1])));
+                    break;
+                case ID_FAVORITE_FOLDER_03: /* RockDance 129 */
+                    strName.Format(_T("&3 %s"), (LPCWSTR)(shortFavorite(g_strFavorite[2])));
+                    break;
+                case ID_FAVORITE_FOLDER_04: /* RockDance 129 */
+                    strName.Format(_T("&4 %s"), (LPCWSTR)(shortFavorite(g_strFavorite[3])));
+                    break;
+                case ID_FAVORITE_FOLDER_05: /* RockDance 129 */
+                    strName.Format(_T("&5 %s"), (LPCWSTR)(shortFavorite(g_strFavorite[4])));
+                    break;
+                case ID_FAVORITE_FOLDER_06: /* RockDance 129 */
+                    strName.Format(_T("&6 %s"), (LPCWSTR)(shortFavorite(g_strFavorite[5])));
+                    break;
+                case ID_FAVORITE_FOLDER_07: /* RockDance 129 */
+                    strName.Format(_T("&7 %s"), (LPCWSTR)(shortFavorite(g_strFavorite[6])));
+                    break;
+                case ID_FAVORITE_FOLDER_08: /* RockDance 129 */
+                    strName.Format(_T("&8 %s"), (LPCWSTR)(shortFavorite(g_strFavorite[7])));
+                    break;
+                case ID_FAVORITE_FOLDER_09: /* RockDance 129 */
+                    strName.Format(_T("&9 %s"), (LPCWSTR)(shortFavorite(g_strFavorite[8])));
+                    break;
+                case ID_FAVORITE_FOLDER_10: /* RockDance 129 */
+                    strName.Format(_T("&0 %s"), (LPCWSTR)(shortFavorite(g_strFavorite[9])));
+                    break;
+                case ID_EDIT_COPY_FORMAT_01: /* FunnyCorn 175 */
+                    strName.Format(_T("01ï¼š%s"), (LPCWSTR)g_userCopyFormat[0].strName);
+                    break;
+                case ID_EDIT_COPY_FORMAT_02: /* FunnyCorn 175 */
+                    strName.Format(_T("02ï¼š%s"), (LPCWSTR)g_userCopyFormat[1].strName);
+                    break;
+                case ID_EDIT_COPY_FORMAT_03: /* FunnyCorn 175 */
+                    strName.Format(_T("03ï¼š%s"), (LPCWSTR)g_userCopyFormat[2].strName);
+                    break;
+                case ID_EDIT_COPY_FORMAT_04: /* FunnyCorn 175 */
+                    strName.Format(_T("04ï¼š%s"), (LPCWSTR)g_userCopyFormat[3].strName);
+                    break;
+                case ID_EDIT_COPY_FORMAT_05: /* FunnyCorn 175 */
+                    strName.Format(_T("05ï¼š%s"), (LPCWSTR)g_userCopyFormat[4].strName);
+                    break;
+                case ID_CONV_TAG_TO_TAG_01: /* STEP 034 */
+                    strName.Format(_T("01ï¼š%s"), (LPCWSTR)g_userConvFormatTag2Tag[0].strName);
+                    break;
+                case ID_CONV_TAG_TO_TAG_02: /* STEP 034 */
+                    strName.Format(_T("02ï¼š%s"), (LPCWSTR)g_userConvFormatTag2Tag[1].strName);
+                    break;
+                case ID_CONV_TAG_TO_TAG_03: /* STEP 034 */
+                    strName.Format(_T("03ï¼š%s"), (LPCWSTR)g_userConvFormatTag2Tag[2].strName);
+                    break;
+                case ID_CONV_TAG_TO_TAG_04: /* STEP 034 */
+                    strName.Format(_T("04ï¼š%s"), (LPCWSTR)g_userConvFormatTag2Tag[3].strName);
+                    break;
+                case ID_CONV_TAG_TO_TAG_05: /* STEP 034 */
+                    strName.Format(_T("05ï¼š%s"), (LPCWSTR)g_userConvFormatTag2Tag[4].strName);
+                    break;
+                default:
+                    pMenu->GetMenuString((UINT)pKey->wCmdID, strName, MF_BYCOMMAND);
+                    break;
+                }
 
-				// Œ»İ‚ÌƒAƒNƒZƒ‰ƒŒ[ƒ^ƒL[•”•ª‚ğíœ
-				int		nPos;
-				if ((nPos = strName.Find('\t')) != -1) {
-					strName = strName.Left(nPos);
-				}
+                // ç¾åœ¨ã®ã‚¢ã‚¯ã‚»ãƒ©ãƒ¬ãƒ¼ã‚¿ã‚­ãƒ¼éƒ¨åˆ†ã‚’å‰Šé™¤
+                int     nPos;
+                if ((nPos = strName.Find(_T('\t'))) != -1) {
+                    strName = strName.Left(nPos);
+                }
 
-				if (pAccel != NULL) {
-					// V‚µ‚¢ƒAƒNƒZƒ‰ƒŒ[ƒ^ƒL[•”•ª‚ğ’Ç‰Á
-					strName += '\t';
-					if (wModifiers & HOTKEYF_ALT    ) strName += _T("Alt+");
-					if (wModifiers & HOTKEYF_CONTROL) strName += _T("Ctrl+");
-					if (wModifiers & HOTKEYF_SHIFT  ) strName += _T("Shift+");
-					// ƒL[•”•ª‚ğ’Ç‰Á
-					if (pAccel->key <= 0x91) {
-						strName += g_sKeyName[pAccel->key];
-					} else {
-						strName += _T("?");
-					}
-				}
+                if (pAccel != NULL) {
+                    // æ–°ã—ã„ã‚¢ã‚¯ã‚»ãƒ©ãƒ¬ãƒ¼ã‚¿ã‚­ãƒ¼éƒ¨åˆ†ã‚’è¿½åŠ 
+                    strName += _T('\t');
+                    if (wModifiers & HOTKEYF_ALT    ) strName += _T("Alt+");
+                    if (wModifiers & HOTKEYF_CONTROL) strName += _T("Ctrl+");
+                    if (wModifiers & HOTKEYF_SHIFT  ) strName += _T("Shift+");
+                    // ã‚­ãƒ¼éƒ¨åˆ†ã‚’è¿½åŠ 
+                    if (pAccel->key <= 0x91) {
+                        strName += g_sKeyName[pAccel->key];
+                    } else {
+                        strName += _T("?");
+                    }
+                }
 
-				// ƒƒjƒ…[•¶š—ñ‚ğXV
-				pMenu->ModifyMenu((UINT)pKey->wCmdID, MF_BYCOMMAND, pKey->wCmdID, (LPCTSTR)strName);
-			}
-		}
-	}
+                // ãƒ¡ãƒ‹ãƒ¥ãƒ¼æ–‡å­—åˆ—ã‚’æ›´æ–°
+                pMenu->ModifyMenu((UINT)pKey->wCmdID, MF_BYCOMMAND, pKey->wCmdID, (LPCTSTR)strName);
+            }
+        }
+    }
 
-	extern CPlugin plugins;
-	for (i=0;i<plugins.arPluginKey.GetSize();i++) {
-		KEY_CONFIG* pKey = (KEY_CONFIG*)plugins.arPluginKey.GetAt(i);
-		if (pKey->wCmdID != 0x0000) {
-			// ƒAƒNƒZƒ‰ƒŒ[ƒ^‚Ìì¬
-			ACCEL	*pAccel = NULL;
-			WORD	wModifiers = 0x0000;
-			if (pKey->dwKeyCode != 0) {
-				wModifiers = HIWORD(pKey->dwKeyCode);
-				pAccel = &m_accelTable[nCount];
-				pAccel->fVirt = FNOINVERT | FVIRTKEY;
-				if (wModifiers & HOTKEYF_ALT    ) pAccel->fVirt |= FALT;
-				if (wModifiers & HOTKEYF_CONTROL) pAccel->fVirt |= FCONTROL;
-				if (wModifiers & HOTKEYF_SHIFT  ) pAccel->fVirt |= FSHIFT;
-				pAccel->key = LOWORD(pKey->dwKeyCode);
-				pAccel->cmd = pKey->wCmdID;
-				nCount++;
-			}
+    extern CPlugin plugins;
+    for (i=0;i<plugins.arPluginKey.GetSize();i++) {
+        KEY_CONFIG* pKey = (KEY_CONFIG*)plugins.arPluginKey.GetAt(i);
+        if (pKey->wCmdID != 0x0000) {
+            // ã‚¢ã‚¯ã‚»ãƒ©ãƒ¬ãƒ¼ã‚¿ã®ä½œæˆ
+            ACCEL   *pAccel = NULL;
+            WORD    wModifiers = 0x0000;
+            if (pKey->dwKeyCode != 0) {
+                wModifiers = HIWORD(pKey->dwKeyCode);
+                pAccel = &m_accelTable[nCount];
+                pAccel->fVirt = FNOINVERT | FVIRTKEY;
+                if (wModifiers & HOTKEYF_ALT    ) pAccel->fVirt |= FALT;
+                if (wModifiers & HOTKEYF_CONTROL) pAccel->fVirt |= FCONTROL;
+                if (wModifiers & HOTKEYF_SHIFT  ) pAccel->fVirt |= FSHIFT;
+                pAccel->key = LOWORD(pKey->dwKeyCode);
+                pAccel->cmd = pKey->wCmdID;
+                nCount++;
+            }
 
-			// ƒƒjƒ…[€–Ú‚Ì‘‚«Š·‚¦
-			if (pMenu != NULL) {
-				CString	strName;
-				pMenu->GetMenuString((UINT)pKey->wCmdID, strName, MF_BYCOMMAND);
+            // ãƒ¡ãƒ‹ãƒ¥ãƒ¼é …ç›®ã®æ›¸ãæ›ãˆ
+            if (pMenu != NULL) {
+                CString strName;
+                pMenu->GetMenuString((UINT)pKey->wCmdID, strName, MF_BYCOMMAND);
 
-				// Œ»İ‚ÌƒAƒNƒZƒ‰ƒŒ[ƒ^ƒL[•”•ª‚ğíœ
-				int		nPos;
-				if ((nPos = strName.Find('\t')) != -1) {
-					strName = strName.Left(nPos);
-				}
+                // ç¾åœ¨ã®ã‚¢ã‚¯ã‚»ãƒ©ãƒ¬ãƒ¼ã‚¿ã‚­ãƒ¼éƒ¨åˆ†ã‚’å‰Šé™¤
+                int     nPos;
+                if ((nPos = strName.Find(_T('\t'))) != -1) {
+                    strName = strName.Left(nPos);
+                }
 
-				if (pAccel != NULL) {
-					// V‚µ‚¢ƒAƒNƒZƒ‰ƒŒ[ƒ^ƒL[•”•ª‚ğ’Ç‰Á
-					strName += '\t';
-					if (wModifiers & HOTKEYF_ALT    ) strName += _T("Alt+");
-					if (wModifiers & HOTKEYF_CONTROL) strName += _T("Ctrl+");
-					if (wModifiers & HOTKEYF_SHIFT  ) strName += _T("Shift+");
-					// ƒL[•”•ª‚ğ’Ç‰Á
-					if (pAccel->key <= 0x91) {
-						strName += g_sKeyName[pAccel->key];
-					} else {
-						strName += _T("?");
-					}
-				}
+                if (pAccel != NULL) {
+                    // æ–°ã—ã„ã‚¢ã‚¯ã‚»ãƒ©ãƒ¬ãƒ¼ã‚¿ã‚­ãƒ¼éƒ¨åˆ†ã‚’è¿½åŠ 
+                    strName += _T('\t');
+                    if (wModifiers & HOTKEYF_ALT    ) strName += _T("Alt+");
+                    if (wModifiers & HOTKEYF_CONTROL) strName += _T("Ctrl+");
+                    if (wModifiers & HOTKEYF_SHIFT  ) strName += _T("Shift+");
+                    // ã‚­ãƒ¼éƒ¨åˆ†ã‚’è¿½åŠ 
+                    if (pAccel->key <= 0x91) {
+                        strName += g_sKeyName[pAccel->key];
+                    } else {
+                        strName += _T("?");
+                    }
+                }
 
-				// ƒƒjƒ…[•¶š—ñ‚ğXV
-				pMenu->ModifyMenu((UINT)pKey->wCmdID, MF_BYCOMMAND, pKey->wCmdID, (LPCTSTR)strName);
-			}
-		}
-	}
+                // ãƒ¡ãƒ‹ãƒ¥ãƒ¼æ–‡å­—åˆ—ã‚’æ›´æ–°
+                pMenu->ModifyMenu((UINT)pKey->wCmdID, MF_BYCOMMAND, pKey->wCmdID, (LPCTSTR)strName);
+            }
+        }
+    }
 
-	// ƒAƒNƒZƒ‰ƒŒ[ƒ^ƒe[ƒuƒ‹‚Ì“o˜^
-	m_hAccel = CreateAcceleratorTable(m_accelTable, nCount);
+    // ã‚¢ã‚¯ã‚»ãƒ©ãƒ¬ãƒ¼ã‚¿ãƒ†ãƒ¼ãƒ–ãƒ«ã®ç™»éŒ²
+    m_hAccel = CreateAcceleratorTable(m_accelTable, nCount);
 
-	pMenu = pMainWnd ? pMainWnd->GetMenu() : NULL;
-	if (pMenu != NULL) {
-		CMenu* pTeikeiMenu = NULL;
-		int nCount = pMenu->GetMenuItemCount();
-		int j; for (int j=0;j<nCount;j++) {
-			CString strTitle;
-			pMenu->GetMenuString(j, strTitle, MF_BYPOSITION);
-			if (strTitle == "•ÒW(&E)") {
-				pMenu = pMenu->GetSubMenu(j);
-				break;
-			}
-		}
-		nCount = pMenu->GetMenuItemCount();
-		for (j=0;j<nCount;j++) {
-			CString strTitle;
-			pMenu->GetMenuString(j, strTitle, MF_BYPOSITION);
-			if (strTitle == "’èŒ^•¶“\‚è•t‚¯") {
-				pTeikeiMenu = pMenu->GetSubMenu(j);
-				break;
-			}
-		}
-		for (int k = 0; k < 3 && pTeikeiMenu; k++) {
-			CMenu* pSubMenu = pTeikeiMenu->GetSubMenu(0);
-			pTeikeiMenu->RemoveMenu(0, MF_BYPOSITION);
-			pTeikeiMenu->AppendMenu(MF_POPUP , (UINT)pSubMenu->GetSafeHmenu(), (LPCTSTR)g_strTeikeiGroupName[k]);
-		}
-	}
+    pMenu = pMainWnd ? pMainWnd->GetMenu() : NULL;
+    if (pMenu != NULL) {
+        CMenu* pTeikeiMenu = NULL;
+        int nCount = pMenu->GetMenuItemCount();
+        int j; for (int j=0;j<nCount;j++) {
+            CString strTitle;
+            pMenu->GetMenuString(j, strTitle, MF_BYPOSITION);
+            if (strTitle == _T("ç·¨é›†(&E)")) {
+                pMenu = pMenu->GetSubMenu(j);
+                break;
+            }
+        }
+        nCount = pMenu->GetMenuItemCount();
+        for (j=0;j<nCount;j++) {
+            CString strTitle;
+            pMenu->GetMenuString(j, strTitle, MF_BYPOSITION);
+            if (strTitle == _T("å®šå‹æ–‡è²¼ã‚Šä»˜ã‘")) {
+                pTeikeiMenu = pMenu->GetSubMenu(j);
+                break;
+            }
+        }
+        for (int k = 0; k < 3 && pTeikeiMenu; k++) {
+            CMenu* pSubMenu = pTeikeiMenu->GetSubMenu(0);
+            pTeikeiMenu->RemoveMenu(0, MF_BYPOSITION);
+            pTeikeiMenu->AppendMenu(MF_POPUP , (UINT_PTR)pSubMenu->GetSafeHmenu(), (LPCTSTR)g_strTeikeiGroupName[k]);
+        }
+    }
 }
 
 //---------------------------------------------------------------------------
-// func:	ƒŒƒWƒXƒgƒŠ‚©‚çWinamp‚ÌƒpƒX‚ğæ‚èo‚·
+// func:    ãƒ¬ã‚¸ã‚¹ãƒˆãƒªã‹ã‚‰Winampã®ãƒ‘ã‚¹ã‚’å–ã‚Šå‡ºã™
 //---------------------------------------------------------------------------
 void CSuperTagEditorApp::GetWinampPath(void)
 {
-	HKEY	hKey;
-	CString strKeyString = "Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\Winamp.exe";
+    HKEY    hKey;
+    CString strKeyString = _T("Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\Winamp.exe");
 
-	g_sOptWinAmpPath = "";
+    g_sOptWinAmpPath = _T("");
 
-	if (RegOpenKeyEx(HKEY_LOCAL_MACHINE, strKeyString, 0, KEY_EXECUTE, &hKey) == ERROR_SUCCESS) {
-		DWORD	dwValueType;
-		DWORD	dwValueSize = FILENAME_MAX;
-		unsigned char	sValue[FILENAME_MAX];
+    if (RegOpenKeyEx(HKEY_LOCAL_MACHINE, strKeyString, 0, KEY_EXECUTE, &hKey) == ERROR_SUCCESS) {
+        DWORD   dwValueType;
+        DWORD   dwValueSize = FILENAME_MAX*sizeof(TCHAR);
+        TCHAR   sValue[FILENAME_MAX];
 
-		/* ƒŒƒWƒXƒgƒŠ’l‚Ìæ“¾ */
-		RegQueryValueEx(hKey, "", NULL, &dwValueType, &sValue[0], &dwValueSize);
+        /* ãƒ¬ã‚¸ã‚¹ãƒˆãƒªå€¤ã®å–å¾— */
+        RegQueryValueEx(hKey, _T(""), NULL, &dwValueType, (LPBYTE)&sValue[0], &dwValueSize);
 
-		/* Œ‹‰Ê‚Ì•\¦ */
-		if (dwValueType == REG_SZ) g_sOptWinAmpPath = sValue;
+        /* çµæœã®è¡¨ç¤º */
+        if (dwValueType == REG_SZ) g_sOptWinAmpPath = sValue;
 
-		/* I—¹ */
-		RegCloseKey(hKey);
-	}
+        /* çµ‚äº† */
+        RegCloseKey(hKey);
+    }
 }
 
-// ƒWƒƒƒ“ƒ‹ƒŠƒXƒg‚Ìİ’è‚ğƒŒƒWƒXƒgƒŠ‚©‚ç“Ç‚İ‚±‚Ş
+// ã‚¸ãƒ£ãƒ³ãƒ«ãƒªã‚¹ãƒˆã®è¨­å®šã‚’ãƒ¬ã‚¸ã‚¹ãƒˆãƒªã‹ã‚‰èª­ã¿ã“ã‚€
 void CSuperTagEditorApp::ReadGenreList(void)
 {
-	CString strINI = m_pszProfileName;
-	InitProfile();
-	int nIndex; for (nIndex = 0; g_genreListSCMPX[nIndex].sName != NULL; nIndex++) {
-		GENRE_LIST	*pGenre = &g_genreListSCMPX[nIndex];
-		CString	strName;
-		strName.Format("%d", pGenre->byGenre);
-		pGenre->bAddList = (DWORD)MyGetProfileInt(sSectionGenreList, strName, 1) ? true : false;
-	}
-	int i; for (i = 0; i < USER_GENRE_LIST_MAX; i++) {
-		CString		strSectionName;
-		strSectionName.Format("haseta\\%s\\%d", sSectionUserGenreList, i);
-		g_genreListUSER[i].bAddList = MyGetProfileInt(strSectionName, sKeyUserGenreAddList, 0) == 0 ? false : true;
-		g_genreListUSER[i].byGenre = (BYTE)MyGetProfileInt(strSectionName, sKeyUserGenreNo, 255);
-		g_genreListUSER[i].sName = MyGetProfileString(strSectionName, sKeyUserGenreName, NULL);
-		if (g_genreListUSER[i].sName.GetLength() == 0) {
-			g_genreListUSER[i].bUse = false;
-		} else {
-			g_genreListUSER[i].bUse = true;
-		}
-	}
-	FreeProfile();
+    int nIndex;
+    for (nIndex = 0; g_genreListSCMPX[nIndex].sName != NULL; nIndex++) {
+        GENRE_LIST  *pGenre = &g_genreListSCMPX[nIndex];
+        CString strName;
+        strName.Format(_T("%d"), pGenre->byGenre);
+        pGenre->bAddList = m_IniFile.ReadInt(sSectionGenreList, strName, 1) ? true : false;
+    }
+    TCHAR buf[2048];
+    int i;
+    for (i = 0; i < USER_GENRE_LIST_MAX; i++) {
+        CString     strSectionName;
+        strSectionName.Format(_T("haseta\\%s\\%d"), sSectionUserGenreList, i);
+        g_genreListUSER[i].bAddList = m_IniFile.ReadInt(strSectionName, sKeyUserGenreAddList, 0) == 0 ? false : true;
+        g_genreListUSER[i].byGenre = (BYTE)m_IniFile.ReadInt(strSectionName, sKeyUserGenreNo, 255);
+        g_genreListUSER[i].sName = m_IniFile.ReadStr(strSectionName, sKeyUserGenreName, NULL, buf, _countof(buf));
+        if (g_genreListUSER[i].sName.GetLength() == 0) {
+            g_genreListUSER[i].bUse = false;
+        } else {
+            g_genreListUSER[i].bUse = true;
+        }
+    }
+    //FreeProfile();
 }
 
-// ƒWƒƒƒ“ƒ‹ƒŠƒXƒg‚Ìİ’è‚ğƒŒƒWƒXƒgƒŠ‚É‘‚«o‚·
+// ã‚¸ãƒ£ãƒ³ãƒ«ãƒªã‚¹ãƒˆã®è¨­å®šã‚’ãƒ¬ã‚¸ã‚¹ãƒˆãƒªã«æ›¸ãå‡ºã™
 void CSuperTagEditorApp::WriteGenreList(void)
 {
-	CString strINI = m_pszProfileName;
-	InitProfile();
-	int nIndex; for (nIndex = 0; g_genreListSCMPX[nIndex].sName != NULL; nIndex++) {
-		GENRE_LIST	*pGenre = &g_genreListSCMPX[nIndex];
-		CString	strName;
-		strName.Format("%d", pGenre->byGenre);
-		MyWriteProfileInt(sSectionGenreList, strName, pGenre->bAddList ? 1 : 0);
-	}
-	if (g_genreListUSER != NULL) {
-		int i; for (i = 0; i < USER_GENRE_LIST_MAX; i++) {
-			CString		strSectionName;
-			strSectionName.Format("haseta\\%s\\%d", sSectionUserGenreList, i);
-			MyWriteProfileInt(strSectionName, sKeyUserGenreAddList, g_genreListUSER[i].bAddList == true ? 1 : 0);
-			MyWriteProfileInt(strSectionName, sKeyUserGenreNo, g_genreListUSER[i].byGenre);
-			MyWriteProfileString(strSectionName, sKeyUserGenreName, g_genreListUSER[i].sName);
-		}
-	}
-	SaveProfile();
-	FreeProfile();
+    int nIndex;
+    for (nIndex = 0; g_genreListSCMPX[nIndex].sName != NULL; nIndex++) {
+        GENRE_LIST  *pGenre = &g_genreListSCMPX[nIndex];
+        CString strName;
+        strName.Format(_T("%d"), pGenre->byGenre);
+        m_IniFile.WriteInt(sSectionGenreList, strName, pGenre->bAddList ? 1 : 0);
+    }
+    if (g_genreListUSER != NULL) {
+        int i; for (i = 0; i < USER_GENRE_LIST_MAX; i++) {
+            CString     strSectionName;
+            strSectionName.Format(_T("haseta\\%s\\%d"), sSectionUserGenreList, i);
+            m_IniFile.WriteInt(strSectionName, sKeyUserGenreAddList, g_genreListUSER[i].bAddList == true ? 1 : 0);
+            m_IniFile.WriteInt(strSectionName, sKeyUserGenreNo, g_genreListUSER[i].byGenre);
+            m_IniFile.WriteStr(strSectionName, sKeyUserGenreName, g_genreListUSER[i].sName);
+        }
+    }
+    m_IniFile.Flush();
 }
 
 void CSuperTagEditorApp::LoadStdProfileSettings(UINT nMaxMRU)  /* StartInaction 053 */
 {
-	ASSERT_VALID(this);
-	ASSERT(m_pRecentFileList == NULL);
+    ASSERT_VALID(this);
+    ASSERT(m_pRecentFileList == NULL);
 
-	if (nMaxMRU != 0) {
-		m_pRecentFileList = new CMyRecentFileList(0, "haseta\\MRU", "MRUFolder%d", nMaxMRU, 60);
-		m_pRecentFileList->ReadList();
-	}
+    if (nMaxMRU != 0) {
+        m_pRecentFileList = new CMyRecentFileList(0, _T("haseta\\MRU"), _T("MRUFolder%d"), nMaxMRU, 60);
+        m_pRecentFileList->ReadList();
+    }
 }
 
 void CSuperTagEditorApp::OnUpdateFileMruFile(CCmdUI* pCmdUI) /* StartInaction 053 */
 {
-	// TODO: ‚±‚ÌˆÊ’u‚É command update UI ƒnƒ“ƒhƒ‰—p‚ÌƒR[ƒh‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
-	m_pRecentFileList->UpdateMenu(pCmdUI);
+    // TODO: ã“ã®ä½ç½®ã« command update UI ãƒãƒ³ãƒ‰ãƒ©ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
+    m_pRecentFileList->UpdateMenu(pCmdUI);
 }
 
 void CSuperTagEditorApp::AddToRecentFileList(LPCTSTR lpszPathName) /* StartInaction 053 */
 {
-	CString strPath = lpszPathName; /* WildCherry2 079 */
-	if (IsFolderName(lpszPathName) == true) {
-		strPath.Delete(strPath.GetLength()-1);
-	}
-	m_pRecentFileList->Add(strPath);
+    CString strPath = lpszPathName; /* WildCherry2 079 */
+    if (IsFolderName(lpszPathName) == true) {
+        strPath.Delete(strPath.GetLength()-1);
+    }
+    m_pRecentFileList->Add(strPath);
 }
 
 BOOL CSuperTagEditorApp::OnOpenRecentFile(UINT nID) /* BeachMonster 104 */
 {
-	// ‘¼‚Ì‚â‚è•û‚ª”»‚ç‚È‚©‚Á‚½‚Ì‚ÅAOnOpenRecentFile()‚ğƒI[ƒo[ƒ‰ƒCƒh‚µ‚Ä©‘O‚Åˆ—‚µ‚½
-	int nIndex = nID - ID_FILE_MRU_FILE1;
-	ASSERT((*m_pRecentFileList)[nIndex].GetLength() != 0);
+    // ä»–ã®ã‚„ã‚Šæ–¹ãŒåˆ¤ã‚‰ãªã‹ã£ãŸã®ã§ã€OnOpenRecentFile()ã‚’ã‚ªãƒ¼ãƒãƒ¼ãƒ©ã‚¤ãƒ‰ã—ã¦è‡ªå‰ã§å‡¦ç†ã—ãŸ
+    int nIndex = nID - ID_FILE_MRU_FILE1;
+    ASSERT((*m_pRecentFileList)[nIndex].GetLength() != 0);
 
-	TRACE2("MRU: open file (%d) '%s'.\n", (nIndex) + 1,
-			(LPCTSTR)(*m_pRecentFileList)[nIndex]);
+    TRACE2("MRU: open file (%d) '%s'.\n", (nIndex) + 1,
+            (LPCTSTR)(*m_pRecentFileList)[nIndex]);
 
-	POSITION pos = GetFirstDocTemplatePosition();
-	if (pos != NULL) {
-		CDocTemplate* pDocTemp = GetNextDocTemplate(pos);
-		if (pDocTemp != NULL) {
-			POSITION docPos = pDocTemp->GetFirstDocPosition();
-			if (docPos != NULL) {
-				CSuperTagEditorDoc* pDoc = (CSuperTagEditorDoc*)pDocTemp->GetNextDoc(docPos);
-				if (pDoc != NULL) {
-					pDoc->OnOpenDocument((*m_pRecentFileList)[nIndex]);
-					return TRUE;
-				}
-			}
-		}
-	}
+    POSITION pos = GetFirstDocTemplatePosition();
+    if (pos != NULL) {
+        CDocTemplate* pDocTemp = GetNextDocTemplate(pos);
+        if (pDocTemp != NULL) {
+            POSITION docPos = pDocTemp->GetFirstDocPosition();
+            if (docPos != NULL) {
+                CSuperTagEditorDoc* pDoc = (CSuperTagEditorDoc*)pDocTemp->GetNextDoc(docPos);
+                if (pDoc != NULL) {
+                    pDoc->OnOpenDocument((*m_pRecentFileList)[nIndex]);
+                    return TRUE;
+                }
+            }
+        }
+    }
 
-	return FALSE;
+    return FALSE;
 }
 
 void CSuperTagEditorApp::OnFavoriteFolder(CString& strFolder)
 {
-	POSITION pos = GetFirstDocTemplatePosition();
-	if (pos != NULL) {
-		CDocTemplate* pDocTemp = GetNextDocTemplate(pos);
-		if (pDocTemp != NULL) {
-			POSITION docPos = pDocTemp->GetFirstDocPosition();
-			if (docPos != NULL) {
-				CSuperTagEditorDoc* pDoc = (CSuperTagEditorDoc*)pDocTemp->GetNextDoc(docPos);
-				if (pDoc != NULL) {
-					pDoc->OnOpenDocument(strFolder);
-					return;
-				}
-			}
-		}
-	}
+    POSITION pos = GetFirstDocTemplatePosition();
+    if (pos != NULL) {
+        CDocTemplate* pDocTemp = GetNextDocTemplate(pos);
+        if (pDocTemp != NULL) {
+            POSITION docPos = pDocTemp->GetFirstDocPosition();
+            if (docPos != NULL) {
+                CSuperTagEditorDoc* pDoc = (CSuperTagEditorDoc*)pDocTemp->GetNextDoc(docPos);
+                if (pDoc != NULL) {
+                    pDoc->OnOpenDocument(strFolder);
+                    return;
+                }
+            }
+        }
+    }
 }
 
 void CSuperTagEditorApp::OnUpdateFavoriteFolder01(CCmdUI* pCmdUI) /* RockDance 124 */
 {
-	// TODO: ‚±‚ÌˆÊ’u‚É command update UI ƒnƒ“ƒhƒ‰—p‚ÌƒR[ƒh‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
-	pCmdUI->Enable(!g_strFavorite[0].IsEmpty());
+    // TODO: ã“ã®ä½ç½®ã« command update UI ãƒãƒ³ãƒ‰ãƒ©ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
+    pCmdUI->Enable(!g_strFavorite[0].IsEmpty());
 }
 
 void CSuperTagEditorApp::OnFavoriteFolder01() /* RockDance 124 */
 {
-	OnFavoriteFolder(g_strFavorite[0]);
+    OnFavoriteFolder(g_strFavorite[0]);
 }
 
 void CSuperTagEditorApp::OnUpdateFavoriteFolder02(CCmdUI* pCmdUI) /* RockDance 124 */
 {
-	// TODO: ‚±‚ÌˆÊ’u‚É command update UI ƒnƒ“ƒhƒ‰—p‚ÌƒR[ƒh‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
-	pCmdUI->Enable(!g_strFavorite[1].IsEmpty());
+    // TODO: ã“ã®ä½ç½®ã« command update UI ãƒãƒ³ãƒ‰ãƒ©ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
+    pCmdUI->Enable(!g_strFavorite[1].IsEmpty());
 }
 
 void CSuperTagEditorApp::OnFavoriteFolder02() /* RockDance 124 */
 {
-	OnFavoriteFolder(g_strFavorite[1]);
+    OnFavoriteFolder(g_strFavorite[1]);
 }
 
 void CSuperTagEditorApp::OnUpdateFavoriteFolder03(CCmdUI* pCmdUI) /* RockDance 124 */
 {
-	// TODO: ‚±‚ÌˆÊ’u‚É command update UI ƒnƒ“ƒhƒ‰—p‚ÌƒR[ƒh‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
-	pCmdUI->Enable(!g_strFavorite[2].IsEmpty());
+    // TODO: ã“ã®ä½ç½®ã« command update UI ãƒãƒ³ãƒ‰ãƒ©ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
+    pCmdUI->Enable(!g_strFavorite[2].IsEmpty());
 }
 
 void CSuperTagEditorApp::OnFavoriteFolder03() /* RockDance 124 */
 {
-	OnFavoriteFolder(g_strFavorite[2]);
+    OnFavoriteFolder(g_strFavorite[2]);
 }
 
 void CSuperTagEditorApp::OnUpdateFavoriteFolder04(CCmdUI* pCmdUI) /* RockDance 124 */
 {
-	// TODO: ‚±‚ÌˆÊ’u‚É command update UI ƒnƒ“ƒhƒ‰—p‚ÌƒR[ƒh‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
-	pCmdUI->Enable(!g_strFavorite[3].IsEmpty());
+    // TODO: ã“ã®ä½ç½®ã« command update UI ãƒãƒ³ãƒ‰ãƒ©ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
+    pCmdUI->Enable(!g_strFavorite[3].IsEmpty());
 }
 
 void CSuperTagEditorApp::OnFavoriteFolder04() /* RockDance 124 */
 {
-	OnFavoriteFolder(g_strFavorite[3]);
+    OnFavoriteFolder(g_strFavorite[3]);
 }
 
 void CSuperTagEditorApp::OnUpdateFavoriteFolder05(CCmdUI* pCmdUI) /* RockDance 124 */
 {
-	// TODO: ‚±‚ÌˆÊ’u‚É command update UI ƒnƒ“ƒhƒ‰—p‚ÌƒR[ƒh‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
-	pCmdUI->Enable(!g_strFavorite[4].IsEmpty());
+    // TODO: ã“ã®ä½ç½®ã« command update UI ãƒãƒ³ãƒ‰ãƒ©ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
+    pCmdUI->Enable(!g_strFavorite[4].IsEmpty());
 }
 
 void CSuperTagEditorApp::OnFavoriteFolder05() /* RockDance 124 */
 {
-	OnFavoriteFolder(g_strFavorite[4]);
+    OnFavoriteFolder(g_strFavorite[4]);
 }
 
 void CSuperTagEditorApp::OnUpdateFavoriteFolder06(CCmdUI* pCmdUI) /* RockDance 124 */
 {
-	// TODO: ‚±‚ÌˆÊ’u‚É command update UI ƒnƒ“ƒhƒ‰—p‚ÌƒR[ƒh‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
-	pCmdUI->Enable(!g_strFavorite[5].IsEmpty());
+    // TODO: ã“ã®ä½ç½®ã« command update UI ãƒãƒ³ãƒ‰ãƒ©ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
+    pCmdUI->Enable(!g_strFavorite[5].IsEmpty());
 }
 
 void CSuperTagEditorApp::OnFavoriteFolder06() /* RockDance 124 */
 {
-	OnFavoriteFolder(g_strFavorite[5]);
+    OnFavoriteFolder(g_strFavorite[5]);
 }
 
 void CSuperTagEditorApp::OnUpdateFavoriteFolder07(CCmdUI* pCmdUI) /* RockDance 124 */
 {
-	// TODO: ‚±‚ÌˆÊ’u‚É command update UI ƒnƒ“ƒhƒ‰—p‚ÌƒR[ƒh‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
-	pCmdUI->Enable(!g_strFavorite[6].IsEmpty());
+    // TODO: ã“ã®ä½ç½®ã« command update UI ãƒãƒ³ãƒ‰ãƒ©ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
+    pCmdUI->Enable(!g_strFavorite[6].IsEmpty());
 }
 
 void CSuperTagEditorApp::OnFavoriteFolder07() /* RockDance 124 */
 {
-	OnFavoriteFolder(g_strFavorite[6]);
+    OnFavoriteFolder(g_strFavorite[6]);
 }
 
 void CSuperTagEditorApp::OnUpdateFavoriteFolder08(CCmdUI* pCmdUI) /* RockDance 124 */
 {
-	// TODO: ‚±‚ÌˆÊ’u‚É command update UI ƒnƒ“ƒhƒ‰—p‚ÌƒR[ƒh‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
-	pCmdUI->Enable(!g_strFavorite[7].IsEmpty());
+    // TODO: ã“ã®ä½ç½®ã« command update UI ãƒãƒ³ãƒ‰ãƒ©ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
+    pCmdUI->Enable(!g_strFavorite[7].IsEmpty());
 }
 
 void CSuperTagEditorApp::OnFavoriteFolder08() /* RockDance 124 */
 {
-	OnFavoriteFolder(g_strFavorite[7]);
+    OnFavoriteFolder(g_strFavorite[7]);
 }
 
 void CSuperTagEditorApp::OnUpdateFavoriteFolder09(CCmdUI* pCmdUI) /* RockDance 124 */
 {
-	// TODO: ‚±‚ÌˆÊ’u‚É command update UI ƒnƒ“ƒhƒ‰—p‚ÌƒR[ƒh‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
-	pCmdUI->Enable(!g_strFavorite[8].IsEmpty());
+    // TODO: ã“ã®ä½ç½®ã« command update UI ãƒãƒ³ãƒ‰ãƒ©ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
+    pCmdUI->Enable(!g_strFavorite[8].IsEmpty());
 }
 
 void CSuperTagEditorApp::OnFavoriteFolder09() /* RockDance 124 */
 {
-	OnFavoriteFolder(g_strFavorite[8]);
+    OnFavoriteFolder(g_strFavorite[8]);
 }
 
 void CSuperTagEditorApp::OnUpdateFavoriteFolder10(CCmdUI* pCmdUI) /* RockDance 124 */
 {
-	// TODO: ‚±‚ÌˆÊ’u‚É command update UI ƒnƒ“ƒhƒ‰—p‚ÌƒR[ƒh‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
-	pCmdUI->Enable(!g_strFavorite[9].IsEmpty());
+    // TODO: ã“ã®ä½ç½®ã« command update UI ãƒãƒ³ãƒ‰ãƒ©ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
+    pCmdUI->Enable(!g_strFavorite[9].IsEmpty());
 }
 
 void CSuperTagEditorApp::OnFavoriteFolder10() /* RockDance 124 */
 {
-	OnFavoriteFolder(g_strFavorite[9]);
+    OnFavoriteFolder(g_strFavorite[9]);
 }
 
 void CSuperTagEditorApp::ReadFixedWordList()
 {
-	TCHAR   drive[_MAX_DRIVE];
-	TCHAR   dir[_MAX_DIR];
-	TCHAR   buff[_MAX_PATH] = {'\0'};
+    TCHAR   drive[_MAX_DRIVE];
+    TCHAR   dir[_MAX_DIR];
+    TCHAR   buff[_MAX_PATH] = {0};
 
-	//©ŒÈƒAƒvƒŠ‚ÌƒpƒXŠ“¾i‘å¬•¶š¯•Ê•t‚«j
-	GetModuleFileName(m_hInstance, buff, _MAX_PATH);
-	_tsplitpath(buff, drive, dir, NULL, NULL);
-	_tmakepath(buff, drive, dir, "FixedWordList", "ini");
+    //è‡ªå·±ã‚¢ãƒ—ãƒªã®ãƒ‘ã‚¹æ‰€å¾—ï¼ˆå¤§å°æ–‡å­—è­˜åˆ¥ä»˜ãï¼‰
+    GetModuleFileName(m_hInstance, buff, _MAX_PATH);
+    _tsplitpath_s(buff, drive, _MAX_DRIVE, dir, _MAX_DIR, NULL, 0, NULL, 0);
+    _tmakepath_s(buff, drive, dir, _T("FixedWordList"), _T("ini"));
 
-	g_arFixedWords.RemoveAll();
-	TRY {
-		CFile	file;
-		if (file.Open(buff, CFile::modeRead|CFile::shareDenyNone)) {
-			CArchive	ar(&file, CArchive::load);
-			CString strLine;
-			while(ar.ReadString(strLine)) {
-				g_arFixedWords.Add(strLine);
-			}
-		}
-	}
-	CATCH( CFileException, e) {
-		CString	str;
-		str.Format("%s ‚Ì“Ç‚İ‚İ‚É¸”s‚µ‚Ü‚µ‚½", buff);
-		MessageBox(NULL, str, "ƒtƒ@ƒCƒ‹ƒGƒ‰[", MB_ICONSTOP|MB_OK|MB_TOPMOST);
-	}
-	END_CATCH
+    g_arFixedWords.RemoveAll();
+    TRY {
+        CFile   file;
+        if (file.Open(buff, CFile::modeRead|CFile::shareDenyNone)) {
+            CArchive    ar(&file, CArchive::load);
+            CString strLine;
+            while(ar.ReadString(strLine)) {
+                g_arFixedWords.Add(strLine);
+            }
+        }
+    }
+    CATCH( CFileException, e) {
+        CString str;
+        str.Format(_T("%s ã®èª­ã¿è¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ"), buff);
+        MessageBox(NULL, str, _T("ãƒ•ã‚¡ã‚¤ãƒ«ã‚¨ãƒ©ãƒ¼"), MB_ICONSTOP|MB_OK|MB_TOPMOST);
+    }
+    END_CATCH
 }
 
 void CSuperTagEditorApp::WriteFixedWordList()
 {
-	TCHAR   drive[_MAX_DRIVE];
-	TCHAR   dir[_MAX_DIR];
-	TCHAR   buff[_MAX_PATH] = {'\0'};
+    TCHAR   drive[_MAX_DRIVE];
+    TCHAR   dir[_MAX_DIR];
+    TCHAR   buff[_MAX_PATH] = {0};
 
-	//©ŒÈƒAƒvƒŠ‚ÌƒpƒXŠ“¾i‘å¬•¶š¯•Ê•t‚«j
-	GetModuleFileName(m_hInstance, buff, _MAX_PATH);
-	_tsplitpath(buff, drive, dir, NULL, NULL);
-	_tmakepath(buff, drive, dir, "FixedWordList", "ini");
+    //è‡ªå·±ã‚¢ãƒ—ãƒªã®ãƒ‘ã‚¹æ‰€å¾—ï¼ˆå¤§å°æ–‡å­—è­˜åˆ¥ä»˜ãï¼‰
+    GetModuleFileName(m_hInstance, buff, _MAX_PATH);
+    _tsplitpath_s(buff, drive, _MAX_DRIVE, dir, _MAX_DIR, NULL, 0, NULL, 0);
+    _tmakepath_s(buff, drive, dir, _T("FixedWordList"), _T("ini"));
 
-	TRY {
-		CFile	file;
-		if (file.Open(buff, CFile::modeCreate|CFile::modeWrite)) {
-			CArchive	ar(&file, CArchive::store);
-			CString strLine;
-			for (int i=0;i<g_arFixedWords.GetSize();i++) {
-				ar.WriteString(g_arFixedWords.GetAt(i) + "\n");
-			}
-		}
-	}
-	CATCH( CFileException, e) {
-		CString	str;
-		str.Format("%s ‚Ì‘‚«‚İ‚É¸”s‚µ‚Ü‚µ‚½", buff);
-		MessageBox(NULL, str, "ƒtƒ@ƒCƒ‹ƒGƒ‰[", MB_ICONSTOP|MB_OK|MB_TOPMOST);
-	}
-	END_CATCH
+    TRY {
+        CFile   file;
+        if (file.Open(buff, CFile::modeCreate|CFile::modeWrite)) {
+            CArchive    ar(&file, CArchive::store);
+            CString strLine;
+            for (int i=0;i<g_arFixedWords.GetSize();i++) {
+                ar.WriteString(g_arFixedWords.GetAt(i) + _T("\n"));
+            }
+        }
+    }
+    CATCH( CFileException, e) {
+        CString str;
+        str.Format(_T("%s ã®æ›¸ãè¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ"), buff);
+        MessageBox(NULL, str, _T("ãƒ•ã‚¡ã‚¤ãƒ«ã‚¨ãƒ©ãƒ¼"), MB_ICONSTOP|MB_OK|MB_TOPMOST);
+    }
+    END_CATCH
 }

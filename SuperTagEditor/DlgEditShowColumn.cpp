@@ -1,4 +1,4 @@
-// DlgEditShowColumn.cpp : ƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“ ƒtƒ@ƒCƒ‹
+// DlgEditShowColumn.cpp : ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³ ãƒ•ã‚¡ã‚¤ãƒ«
 //
 
 #include "stdafx.h"
@@ -13,21 +13,21 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 #ifndef ListView_SetCheckState
-#define ListView_SetCheckState(hwndLV, i, fCheck)	ListView_SetItemState(hwndLV, i, INDEXTOSTATEIMAGEMASK((fCheck)+1), LVIS_STATEIMAGEMASK)
+#define ListView_SetCheckState(hwndLV, i, fCheck) ListView_SetItemState(hwndLV, i, INDEXTOSTATEIMAGEMASK((fCheck)+1), LVIS_STATEIMAGEMASK)
 #endif
 
-#define ListView_GetSelectedItem(listCtrl)			listCtrl.GetNextItem(-1, LVNI_ALL | LVNI_SELECTED | LVIS_FOCUSED)
+#define ListView_GetSelectedItem(listCtrl)         listCtrl.GetNextItem(-1, LVNI_ALL | LVNI_SELECTED | LVIS_FOCUSED)
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgEditShowColumn ƒ_ƒCƒAƒƒO
+// CDlgEditShowColumn ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
 IMPLEMENT_DYNCREATE(CDlgEditShowColumn, COptionPage)
 
 
 CDlgEditShowColumn::CDlgEditShowColumn() : COptionPage(CDlgEditShowColumn::IDD)
 {
-	//{{AFX_DATA_INIT(CDlgEditShowColumn)
-		// ƒƒ‚ - ClassWizard ‚Í‚±‚ÌˆÊ’u‚Éƒ}ƒbƒsƒ“ƒO—p‚Ìƒ}ƒNƒ‚ğ’Ç‰Á‚Ü‚½‚Ííœ‚µ‚Ü‚·B
-	//}}AFX_DATA_INIT
+    //{{AFX_DATA_INIT(CDlgEditShowColumn)
+        // ãƒ¡ãƒ¢ - ClassWizard ã¯ã“ã®ä½ç½®ã«ãƒãƒƒãƒ”ãƒ³ã‚°ç”¨ã®ãƒã‚¯ãƒ­ã‚’è¿½åŠ ã¾ãŸã¯å‰Šé™¤ã—ã¾ã™ã€‚
+    //}}AFX_DATA_INIT
 }
 
 CDlgEditShowColumn::~CDlgEditShowColumn()
@@ -37,243 +37,242 @@ CDlgEditShowColumn::~CDlgEditShowColumn()
 
 void CDlgEditShowColumn::DoDataExchange(CDataExchange* pDX)
 {
-	COptionPage::DoDataExchange(pDX);
-	//{{AFX_DATA_MAP(CDlgEditShowColumn)
-	DDX_Control(pDX, IDC_LIST_COLUMN, m_listColumn);
-	//}}AFX_DATA_MAP
+    COptionPage::DoDataExchange(pDX);
+    //{{AFX_DATA_MAP(CDlgEditShowColumn)
+    DDX_Control(pDX, IDC_LIST_COLUMN, m_listColumn);
+    //}}AFX_DATA_MAP
 }
 
 
 BEGIN_MESSAGE_MAP(CDlgEditShowColumn, COptionPage)
-	//{{AFX_MSG_MAP(CDlgEditShowColumn)
-	ON_BN_CLICKED(IDC_BT_DOWN, OnBtDown)
-	ON_BN_CLICKED(IDC_BT_UP, OnBtUp)
-	ON_BN_CLICKED(IDC_BT_RESET_PAGE, OnBtResetPage)
-	ON_EN_CHANGE(IDC_EDIT_MAX_WIDTH, OnChangeEditMaxWidth)
-	ON_NOTIFY(LVN_ITEMCHANGED, IDC_LIST_COLUMN, OnItemChangedListColumn)
-	ON_BN_DOUBLECLICKED(IDC_BT_DOWN, OnBtDown)
-	ON_BN_DOUBLECLICKED(IDC_BT_UP, OnBtUp)
-	ON_NOTIFY(LVN_ITEMCHANGING, IDC_LIST_COLUMN, OnItemChangingListColumn)
-	//}}AFX_MSG_MAP
+    //{{AFX_MSG_MAP(CDlgEditShowColumn)
+    ON_BN_CLICKED(IDC_BT_DOWN, OnBtDown)
+    ON_BN_CLICKED(IDC_BT_UP, OnBtUp)
+    ON_BN_CLICKED(IDC_BT_RESET_PAGE, OnBtResetPage)
+    ON_EN_CHANGE(IDC_EDIT_MAX_WIDTH, OnChangeEditMaxWidth)
+    ON_NOTIFY(LVN_ITEMCHANGED, IDC_LIST_COLUMN, OnItemChangedListColumn)
+    ON_BN_DOUBLECLICKED(IDC_BT_DOWN, OnBtDown)
+    ON_BN_DOUBLECLICKED(IDC_BT_UP, OnBtUp)
+    ON_NOTIFY(LVN_ITEMCHANGING, IDC_LIST_COLUMN, OnItemChangingListColumn)
+    //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgEditShowColumn ƒƒbƒZ[ƒW ƒnƒ“ƒhƒ‰
+// CDlgEditShowColumn ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒãƒ³ãƒ‰ãƒ©
 
 BOOL CDlgEditShowColumn::OnInitDialog()
 {
-	COptionPage::OnInitDialog();
+    COptionPage::OnInitDialog();
 
-	// TODO: ‚±‚ÌˆÊ’u‚É‰Šú‰»‚Ì•â‘«ˆ—‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
-	// Šg’£ƒXƒ^ƒCƒ‹‚Ìİ’èFƒ`ƒFƒbƒNƒ{ƒbƒNƒX’Ç‰ÁA‚Ps‘I‘ğ
-	DWORD	dwStyle;
-	dwStyle = m_listColumn.SendMessage(LVM_GETEXTENDEDLISTVIEWSTYLE, 0, 0);
-	dwStyle |= LVS_EX_CHECKBOXES | LVS_EX_FULLROWSELECT;
-	m_listColumn.SendMessage(LVM_SETEXTENDEDLISTVIEWSTYLE, 0, dwStyle);
+    // TODO: ã“ã®ä½ç½®ã«åˆæœŸåŒ–ã®è£œè¶³å‡¦ç†ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
+    // æ‹¡å¼µã‚¹ã‚¿ã‚¤ãƒ«ã®è¨­å®šï¼šãƒã‚§ãƒƒã‚¯ãƒœãƒƒã‚¯ã‚¹è¿½åŠ ã€ï¼‘è¡Œé¸æŠ
+    DWORD    dwStyle;
+    dwStyle = m_listColumn.SendMessage(LVM_GETEXTENDEDLISTVIEWSTYLE, 0, 0);
+    dwStyle |= LVS_EX_CHECKBOXES | LVS_EX_FULLROWSELECT;
+    m_listColumn.SendMessage(LVM_SETEXTENDEDLISTVIEWSTYLE, 0, dwStyle);
 
-	RECT	rect;
-	m_listColumn.GetClientRect(&rect);
+    RECT    rect;
+    m_listColumn.GetClientRect(&rect);
 
-	m_listColumn.InsertColumn(0, "€–Ú–¼", LVCFMT_LEFT, rect.right-rect.left-16-48);
-	m_listColumn.InsertColumn(1, "Å‘å•", LVCFMT_LEFT, 48, 1);
-	m_listColumn.DeleteAllItems();					// ƒNƒŠƒA
+    m_listColumn.InsertColumn(0, _T("é …ç›®å"), LVCFMT_LEFT, int((rect.right-rect.left)*0.6));
+    m_listColumn.InsertColumn(1, _T("æœ€å¤§å¹…"), LVCFMT_LEFT, int((rect.right-rect.left)*0.3), 1);
+    m_listColumn.DeleteAllItems();                    // ã‚¯ãƒªã‚¢
 
-	bool bFoundFormat = false; /* Conspiracy 198 */
-	for (int nColumn = COLUMN_TREE_ITEM; nColumn < COLUMN_MAX; nColumn++) {
-		for (int nType = COLUMN_TREE_ITEM; nType < COLUMN_MAX; nType++) {
-			struct COLUMN_STATUS	*Stat = &g_columnStatus[nType];
-			if (Stat->nNumber == nColumn) {
-				extern	const char	***g_sNameList;
-				int		nIndex = m_listColumn.GetItemCount();
-				CString	strMax;
-				strMax.Format("%d", Stat->nWidthMax);
-				m_listColumn.InsertItem(nIndex, g_sNameList[0][1+nType]);
-				m_listColumn.SetItemText(nIndex, 1, strMax);
-				m_listColumn.SetItemData(nIndex, nType);
-				ListView_SetCheckState(m_listColumn.GetSafeHwnd(), nIndex, Stat->bShowFlag);
-				if (nType == COLUMN_FORMAT) {
-					bFoundFormat = true;
-				}
-				break;
-			}
-		}
-	}
-	if (!bFoundFormat) { /* Conspiracy 198 */
-		struct COLUMN_STATUS	*Stat = &g_columnStatus[COLUMN_FORMAT];
-		extern	const char	***g_sNameList;
-		int		nIndex = m_listColumn.GetItemCount();
-		CString	strMax;
-		strMax.Format("%d", Stat->nWidthMax);
-		m_listColumn.InsertItem(nIndex, g_sNameList[0][1+COLUMN_FORMAT]);
-		m_listColumn.SetItemText(nIndex, 1, strMax);
-		m_listColumn.SetItemData(nIndex, COLUMN_FORMAT);
-		ListView_SetCheckState(m_listColumn.GetSafeHwnd(), nIndex, Stat->bShowFlag);
-	}
+    bool bFoundFormat = false; /* Conspiracy 198 */
+    for (int nColumn = COLUMN_TREE_ITEM; nColumn < COLUMN_MAX; nColumn++) {
+        for (int nType = COLUMN_TREE_ITEM; nType < COLUMN_MAX; nType++) {
+            struct COLUMN_STATUS    *Stat = &g_columnStatus[nType];
+            if (Stat->nNumber == nColumn) {
+                extern const TCHAR    ***g_sNameList;
+                int     nIndex = m_listColumn.GetItemCount();
+                CString strMax;
+                strMax.Format(_T("%d"), Stat->nWidthMax);
+                m_listColumn.InsertItem(nIndex, g_sNameList[0][1+nType]);
+                m_listColumn.SetItemText(nIndex, 1, strMax);
+                m_listColumn.SetItemData(nIndex, nType);
+                ListView_SetCheckState(m_listColumn.GetSafeHwnd(), nIndex, Stat->bShowFlag);
+                if (nType == COLUMN_FORMAT) {
+                    bFoundFormat = true;
+                }
+                break;
+            }
+        }
+    }
+    if (!bFoundFormat) { /* Conspiracy 198 */
+        struct COLUMN_STATUS    *Stat = &g_columnStatus[COLUMN_FORMAT];
+        extern const TCHAR    ***g_sNameList;
+        int     nIndex = m_listColumn.GetItemCount();
+        CString strMax;
+        strMax.Format(_T("%d"), Stat->nWidthMax);
+        m_listColumn.InsertItem(nIndex, g_sNameList[0][1+COLUMN_FORMAT]);
+        m_listColumn.SetItemText(nIndex, 1, strMax);
+        m_listColumn.SetItemData(nIndex, COLUMN_FORMAT);
+        ListView_SetCheckState(m_listColumn.GetSafeHwnd(), nIndex, Stat->bShowFlag);
+    }
 
-	SelChangeList();
+    SelChangeList();
 
-	return TRUE;  // ƒRƒ“ƒgƒ[ƒ‹‚ÉƒtƒH[ƒJƒX‚ğİ’è‚µ‚È‚¢‚Æ‚«A–ß‚è’l‚Í TRUE ‚Æ‚È‚è‚Ü‚·
-	              // —áŠO: OCX ƒvƒƒpƒeƒB ƒy[ƒW‚Ì–ß‚è’l‚Í FALSE ‚Æ‚È‚è‚Ü‚·
+    return TRUE;  // ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã«ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ã‚’è¨­å®šã—ãªã„ã¨ãã€æˆ»ã‚Šå€¤ã¯ TRUE ã¨ãªã‚Šã¾ã™
+                  // ä¾‹å¤–: OCX ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ ãƒšãƒ¼ã‚¸ã®æˆ»ã‚Šå€¤ã¯ FALSE ã¨ãªã‚Šã¾ã™
 }
 
 void CDlgEditShowColumn::SwapListItem(int nNum1, int nNum2)
 {
-	LV_ITEM	item1, item2;
-	_TCHAR	szBuff1[256], szBuff2[256];
-	item1.mask = LVIF_TEXT | LVIF_IMAGE | LVIF_STATE | LVIF_INDENT | LVIF_PARAM;
-	item1.iItem = nNum1;
-	item1.iSubItem = 0;
-	item1.pszText = szBuff1;
-	item1.cchTextMax = sizeof(szBuff1);
-	item1.stateMask = 0xFFFF;
-	m_listColumn.GetItem(&item1);
-	item2 = item1;
-	item2.iItem = nNum2;
-	item2.pszText = szBuff2;
-	item2.cchTextMax = sizeof(szBuff2);
-	m_listColumn.GetItem(&item2);
+    LV_ITEM    item1, item2;
+    const int BUFSIZE = 256;
+    _TCHAR    szBuff1[BUFSIZE], szBuff2[BUFSIZE];
+    item1.mask = LVIF_TEXT | LVIF_IMAGE | LVIF_STATE | LVIF_INDENT | LVIF_PARAM;
+    item1.iItem = nNum1;
+    item1.iSubItem = 0;
+    item1.pszText = szBuff1;
+    item1.cchTextMax = BUFSIZE;
+    item1.stateMask = 0xFFFF;
+    m_listColumn.GetItem(&item1);
+    item2 = item1;
+    item2.iItem = nNum2;
+    item2.pszText = szBuff2;
+    item2.cchTextMax = BUFSIZE;
+    m_listColumn.GetItem(&item2);
 
-	item1.iItem = nNum2;
-	m_listColumn.SetItem(&item1);
-	item2.iItem = nNum1;
-	m_listColumn.SetItem(&item2);
+    item1.iItem = nNum2;
+    m_listColumn.SetItem(&item1);
+    item2.iItem = nNum1;
+    m_listColumn.SetItem(&item2);
 
-	// Å‘å•‚à“ü‚ê‘Ö‚¦
-	CString	strWidth1, strWidth2;
-	strWidth1 = m_listColumn.GetItemText(nNum1, 1);
-	strWidth2 = m_listColumn.GetItemText(nNum2, 1);
-	m_listColumn.SetItemText(nNum1, 1, strWidth2);
-	m_listColumn.SetItemText(nNum2, 1, strWidth1);
+    // æœ€å¤§å¹…ã‚‚å…¥ã‚Œæ›¿ãˆ
+    CString strWidth1, strWidth2;
+    strWidth1 = m_listColumn.GetItemText(nNum1, 1);
+    strWidth2 = m_listColumn.GetItemText(nNum2, 1);
+    m_listColumn.SetItemText(nNum1, 1, strWidth2);
+    m_listColumn.SetItemText(nNum2, 1, strWidth1);
 }
 
 void CDlgEditShowColumn::OnBtDown()
 {
-	int		nIndex;
-	nIndex = ListView_GetSelectedItem(m_listColumn);
-	if (nIndex >= 1) {
-		if (nIndex < m_listColumn.GetItemCount()-1) {
-			// ƒf[ƒ^‚ğ“ü‚ê•Ï‚¦‚é
-			SwapListItem(nIndex, nIndex+1);
-			m_listColumn.EnsureVisible(nIndex+1, FALSE);
-		}
-	}
+    int     nIndex;
+    nIndex = ListView_GetSelectedItem(m_listColumn);
+    if (nIndex >= 1) {
+        if (nIndex < m_listColumn.GetItemCount()-1) {
+            // ãƒ‡ãƒ¼ã‚¿ã‚’å…¥ã‚Œå¤‰ãˆã‚‹
+            SwapListItem(nIndex, nIndex+1);
+            m_listColumn.EnsureVisible(nIndex+1, FALSE);
+        }
+    }
 }
 
 void CDlgEditShowColumn::OnBtUp()
 {
-	int		nIndex;
-	nIndex = ListView_GetSelectedItem(m_listColumn);
-	if (nIndex >= 1) {
-		// ƒf[ƒ^‚ğ“ü‚ê•Ï‚¦‚é
-		SwapListItem(nIndex, nIndex-1);
-		m_listColumn.EnsureVisible(nIndex-1, FALSE);
-	}
+    int     nIndex;
+    nIndex = ListView_GetSelectedItem(m_listColumn);
+    if (nIndex >= 1) {
+        // ãƒ‡ãƒ¼ã‚¿ã‚’å…¥ã‚Œå¤‰ãˆã‚‹
+        SwapListItem(nIndex, nIndex-1);
+        m_listColumn.EnsureVisible(nIndex-1, FALSE);
+    }
 }
 
 void CDlgEditShowColumn::OnOK()
 {
-	if (!::IsWindow(m_hWnd))	return;
-	// •ÒWŒã‚Ìó‘Ô‚ğ•Û‘¶
-	int nIndex; for (nIndex = 0; nIndex < m_listColumn.GetItemCount(); nIndex++) {
-		struct COLUMN_STATUS	*Stat;
-		Stat = &g_columnStatus[m_listColumn.GetItemData(nIndex)];
-		Stat->bShowFlag = nIndex ? ListView_GetCheckState(m_listColumn.GetSafeHwnd(), nIndex) : TRUE;
-		Stat->nWidthMax = atoi(m_listColumn.GetItemText(nIndex, 1));
-		Stat->nNumber = COLUMN_TREE_ITEM + nIndex;
-	}
+    if (!::IsWindow(m_hWnd)) return;
+    // ç·¨é›†å¾Œã®çŠ¶æ…‹ã‚’ä¿å­˜
+    int nIndex; for (nIndex = 0; nIndex < m_listColumn.GetItemCount(); nIndex++) {
+        struct COLUMN_STATUS    *Stat;
+        Stat = &g_columnStatus[m_listColumn.GetItemData(nIndex)];
+        Stat->bShowFlag = nIndex ? ListView_GetCheckState(m_listColumn.GetSafeHwnd(), nIndex) : TRUE;
+        Stat->nWidthMax = _ttoi(m_listColumn.GetItemText(nIndex, 1));
+        Stat->nNumber = COLUMN_TREE_ITEM + nIndex;
+    }
 
-	if (g_columnStatus[COLUMN_FILE_NAME].bShowFlag == false) {
-		MessageBox("[•\¦€–Úİ’è]‚Åƒtƒ@ƒCƒ‹–¼‚ª”ñ•\¦‚Éİ’è‚³‚ê‚Ä‚¢‚Ü‚·\n\n"
-		           "STE ã‚Åƒtƒ@ƒCƒ‹–¼‚ğ•ÏX‚µ‚½‚¢ê‡‚ÍAƒtƒ@ƒCƒ‹–¼‚Ì•\¦‚ğ\n"
-				   "—LŒø‚É‚µ‚Ä‚­‚¾‚³‚¢",
-		           "Œx", MB_ICONSTOP|MB_OK|MB_TOPMOST);
-	}
+    if (g_columnStatus[COLUMN_FILE_NAME].bShowFlag == false) {
+        MessageBox(_T("[è¡¨ç¤ºé …ç›®è¨­å®š]ã§ãƒ•ã‚¡ã‚¤ãƒ«åãŒéè¡¨ç¤ºã«è¨­å®šã•ã‚Œã¦ã„ã¾ã™\n\n")
+                   _T("STE ä¸Šã§ãƒ•ã‚¡ã‚¤ãƒ«åã‚’å¤‰æ›´ã—ãŸã„å ´åˆã¯ã€ãƒ•ã‚¡ã‚¤ãƒ«åã®è¡¨ç¤ºã‚’\n")
+                   _T("æœ‰åŠ¹ã«ã—ã¦ãã ã•ã„"),
+                   _T("è­¦å‘Š"), MB_ICONSTOP|MB_OK|MB_TOPMOST);
+    }
 
-	COptionPage::OnOK();
+    COptionPage::OnOK();
 }
 
-// ‰Šú’l‚É–ß‚·
+// åˆæœŸå€¤ã«æˆ»ã™
 void CDlgEditShowColumn::OnBtResetPage()
 {
-	m_listColumn.DeleteAllItems();					// ƒNƒŠƒA
+    m_listColumn.DeleteAllItems();                    // ã‚¯ãƒªã‚¢
 
-	static	int		nColumnMax[] = {
-		0,0,0,0,0,48,48,48,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,56,128,128,128,128,128,0,128,128/* 2003.06.19 add */ /* Conspiracy 196 */ /* Fix 2010 Mimura */
-	};
-
-	for (int nType = COLUMN_TREE_ITEM; nType < COLUMN_MAX; nType++) {
-		extern	const char	***g_sNameList;
-		int		nIndex = m_listColumn.GetItemCount();
-		struct COLUMN_STATUS	*Stat;
-		//Stat = &g_columnStatus[m_listColumn.GetItemData(nType)];
-		Stat = &g_columnStatus[nType];
-		CString	strMax;
-		strMax.Format("%d", nColumnMax[nType]);
-		m_listColumn.InsertItem(nIndex, g_sNameList[0][1+nType]);
-		m_listColumn.SetItemText(nIndex, 1, strMax);
-		m_listColumn.SetItemData(nIndex, nType);
-		ListView_SetCheckState(m_listColumn.GetSafeHwnd(), nIndex, Stat->bShowFlag);
-	}
+    //static    int     nColumnMax[] = {
+    //    0,0,0,0,0,48,48,48,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,56,128,128,128,128,128,0,128,128/* 2003.06.19 add */ /* Conspiracy 196 */ /* Fix 2010 Mimura */
+    //};
+    //MySuperGrid.cpp ã® g_columnStatus ã«é …ç›®ã‚’è¿½åŠ ã—ã¦ã‚‚ã“ã®éƒ¨åˆ†ã®å‡¦ç†ã‚’å¤‰æ›´ã—ãªãã¦ã‚‚æ¸ˆã‚€ã‚ˆã†ã«ä¿®æ­£
+    for (int nType = COLUMN_TREE_ITEM; nType < COLUMN_MAX; nType++) {
+        extern const TCHAR    ***g_sNameList;
+        int     nIndex = m_listColumn.GetItemCount();
+        struct COLUMN_STATUS *Stat = &g_columnStatus[nType];
+        CString strMax;
+        strMax.Format(_T("%d"), Stat->nDefaultWidthMax);
+        m_listColumn.InsertItem(nIndex, g_sNameList[0][1+nType]);
+        m_listColumn.SetItemText(nIndex, 1, strMax);
+        m_listColumn.SetItemData(nIndex, nType);
+        ListView_SetCheckState(m_listColumn.GetSafeHwnd(), nIndex, Stat->bDefaultShowFlag);
+    }
 }
 
 void CDlgEditShowColumn::OnChangeEditMaxWidth()
 {
-	int		nIndex = m_listColumn.GetNextItem(-1, LVNI_ALL | LVNI_SELECTED);
-	if (nIndex != -1) {
-		CString	strText;
-		GetDlgItemText(IDC_EDIT_MAX_WIDTH, strText);
-		m_listColumn.SetItemText(nIndex, 1, strText);
-	}
+    int     nIndex = m_listColumn.GetNextItem(-1, LVNI_ALL | LVNI_SELECTED);
+    if (nIndex != -1) {
+        CString strText;
+        GetDlgItemText(IDC_EDIT_MAX_WIDTH, strText);
+        m_listColumn.SetItemText(nIndex, 1, strText);
+    }
 }
 
 void CDlgEditShowColumn::OnItemChangedListColumn(NMHDR* pNMHDR, LRESULT* pResult)
 {
-	NM_LISTVIEW* pNMListView = (NM_LISTVIEW*)pNMHDR;
+    NM_LISTVIEW* pNMListView = (NM_LISTVIEW*)pNMHDR;
 
-	// ‘I‘ğó‘Ô‚ª•ÏX‚³‚ê‚½‚©H
-	UINT	uMask = LVIS_FOCUSED | LVIS_SELECTED;
-	if ((pNMListView->uOldState & uMask) != (pNMListView->uNewState & uMask)) {
-		SelChangeList();
-	}
+    // é¸æŠçŠ¶æ…‹ãŒå¤‰æ›´ã•ã‚ŒãŸã‹ï¼Ÿ
+    UINT    uMask = LVIS_FOCUSED | LVIS_SELECTED;
+    if ((pNMListView->uOldState & uMask) != (pNMListView->uNewState & uMask)) {
+        SelChangeList();
+    }
 
-	*pResult = 0;
+    *pResult = 0;
 }
 
 void CDlgEditShowColumn::SelChangeList(void)
 {
-	int		nIndex = m_listColumn.GetNextItem(-1, LVNI_ALL | LVNI_SELECTED);
-	if (nIndex != -1) {
-		SetDlgItemText(IDC_EDIT_MAX_WIDTH, m_listColumn.GetItemText(nIndex, 1));
+    int     nIndex = m_listColumn.GetNextItem(-1, LVNI_ALL | LVNI_SELECTED);
+    if (nIndex != -1) {
+        SetDlgItemText(IDC_EDIT_MAX_WIDTH, m_listColumn.GetItemText(nIndex, 1));
 
-		if (nIndex == 0) {
-			GetDlgItem(IDC_BT_UP)->EnableWindow(FALSE);
-			GetDlgItem(IDC_BT_DOWN)->EnableWindow(FALSE);
-		} else {
-			GetDlgItem(IDC_BT_UP)->EnableWindow((nIndex == 1) ? FALSE : TRUE);
-			GetDlgItem(IDC_BT_DOWN)->EnableWindow((nIndex == m_listColumn.GetItemCount()-1) ? FALSE : TRUE);
-		}
-		GetDlgItem(IDC_EDIT_MAX_WIDTH)->EnableWindow(TRUE);
-	} else {
-		GetDlgItem(IDC_BT_UP)->EnableWindow(FALSE);
-		GetDlgItem(IDC_BT_DOWN)->EnableWindow(FALSE);
-		GetDlgItem(IDC_EDIT_MAX_WIDTH)->EnableWindow(FALSE);
-	}
+        if (nIndex == 0) {
+            GetDlgItem(IDC_BT_UP)->EnableWindow(FALSE);
+            GetDlgItem(IDC_BT_DOWN)->EnableWindow(FALSE);
+        } else {
+            GetDlgItem(IDC_BT_UP)->EnableWindow((nIndex == 1) ? FALSE : TRUE);
+            GetDlgItem(IDC_BT_DOWN)->EnableWindow((nIndex == m_listColumn.GetItemCount()-1) ? FALSE : TRUE);
+        }
+        GetDlgItem(IDC_EDIT_MAX_WIDTH)->EnableWindow(TRUE);
+    } else {
+        GetDlgItem(IDC_BT_UP)->EnableWindow(FALSE);
+        GetDlgItem(IDC_BT_DOWN)->EnableWindow(FALSE);
+        GetDlgItem(IDC_EDIT_MAX_WIDTH)->EnableWindow(FALSE);
+    }
 }
 
 void CDlgEditShowColumn::OnItemChangingListColumn(NMHDR* pNMHDR, LRESULT* pResult)
 {
-	NM_LISTVIEW* pNMListView = (NM_LISTVIEW*)pNMHDR;
+    NM_LISTVIEW* pNMListView = (NM_LISTVIEW*)pNMHDR;
 
-	// MP3 List ‚Ìƒ`ƒFƒbƒNó‘Ô‚Í•ÏX•s‰Â
-	if (pNMListView->iItem == 0) {
-		BOOL bChecked = (BOOL)(((pNMListView->uNewState & LVIS_STATEIMAGEMASK)>>12)-1);
-		bChecked = (bChecked < 0) ? FALSE : TRUE;
-		if (bChecked) {								// ƒ`ƒFƒbƒN‚µ‚æ‚¤‚Æ‚µ‚Ä‚¢‚é
-			// –³Œø‰»
-			*pResult = 1;
-			return;
-		}
-	}
+    // MP3 List ã®ãƒã‚§ãƒƒã‚¯çŠ¶æ…‹ã¯å¤‰æ›´ä¸å¯
+    if (pNMListView->iItem == 0) {
+        BOOL bChecked = (BOOL)(((pNMListView->uNewState & LVIS_STATEIMAGEMASK)>>12)-1);
+        bChecked = (bChecked < 0) ? FALSE : TRUE;
+        if (bChecked) {                                // ãƒã‚§ãƒƒã‚¯ã—ã‚ˆã†ã¨ã—ã¦ã„ã‚‹
+            // ç„¡åŠ¹åŒ–
+            *pResult = 1;
+            return;
+        }
+    }
 
-	*pResult = 0;
+    *pResult = 0;
 }

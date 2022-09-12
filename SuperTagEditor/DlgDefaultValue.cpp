@@ -1,4 +1,4 @@
-// DlgDefaultValue.cpp : ƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“ ƒtƒ@ƒCƒ‹
+// DlgDefaultValue.cpp : ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³ ãƒ•ã‚¡ã‚¤ãƒ«
 //
 
 #include "stdafx.h"
@@ -12,19 +12,19 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgDefaultValue ƒvƒƒpƒeƒB ƒy[ƒW
+// CDlgDefaultValue ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ ãƒšãƒ¼ã‚¸
 
 IMPLEMENT_DYNCREATE(CDlgDefaultValue, COptionPage)
 
 CDlgDefaultValue::CDlgDefaultValue() : COptionPage(CDlgDefaultValue::IDD)
 {
-	//{{AFX_DATA_INIT(CDlgDefaultValue)
-	m_bValidFolderSelect = FALSE;
-	m_bValidDupExec = FALSE;
-	m_nRecentFolder = 0;
-	m_bSaveRepDlgPos = FALSE;
-	m_bAudioListShow = FALSE;
-	//}}AFX_DATA_INIT
+    //{{AFX_DATA_INIT(CDlgDefaultValue)
+    m_bValidFolderSelect = FALSE;
+    m_bValidDupExec = FALSE;
+    m_nRecentFolder = 0;
+    m_bSaveRepDlgPos = FALSE;
+    m_bAudioListShow = FALSE;
+    //}}AFX_DATA_INIT
 }
 
 CDlgDefaultValue::~CDlgDefaultValue()
@@ -33,34 +33,34 @@ CDlgDefaultValue::~CDlgDefaultValue()
 
 void CDlgDefaultValue::DoDataExchange(CDataExchange* pDX)
 {
-	COptionPage::DoDataExchange(pDX);
-	//{{AFX_DATA_MAP(CDlgDefaultValue)
-	DDX_Check(pDX, IDC_CHECK_VALID_FOLDER_SELECT, m_bValidFolderSelect);
-	DDX_Check(pDX, IDC_CHECK_DUP_EXEC, m_bValidDupExec);
-	DDX_Text(pDX, IDC_EDIT_RECENT_FOLDER, m_nRecentFolder);
-	DDV_MinMaxInt(pDX, m_nRecentFolder, 1, 16);
-	DDX_Check(pDX, IDC_SAVE_REP_DLG_POS, m_bSaveRepDlgPos);
-	DDX_Check(pDX, IDC_CHECK_AUDIO_LIST_SHOW, m_bAudioListShow);
-	//}}AFX_DATA_MAP
+    COptionPage::DoDataExchange(pDX);
+    //{{AFX_DATA_MAP(CDlgDefaultValue)
+    DDX_Check(pDX, IDC_CHECK_VALID_FOLDER_SELECT, m_bValidFolderSelect);
+    DDX_Check(pDX, IDC_CHECK_DUP_EXEC, m_bValidDupExec);
+    DDX_Text(pDX, IDC_EDIT_RECENT_FOLDER, m_nRecentFolder);
+    DDV_MinMaxInt(pDX, m_nRecentFolder, 1, 16);
+    DDX_Check(pDX, IDC_SAVE_REP_DLG_POS, m_bSaveRepDlgPos);
+    DDX_Check(pDX, IDC_CHECK_AUDIO_LIST_SHOW, m_bAudioListShow);
+    //}}AFX_DATA_MAP
 }
 
 
 BEGIN_MESSAGE_MAP(CDlgDefaultValue, COptionPage)
-	//{{AFX_MSG_MAP(CDlgDefaultValue)
-	ON_BN_CLICKED(IDC_BT_RESET_PAGE, OnBtResetPage)
-	//}}AFX_MSG_MAP
+    //{{AFX_MSG_MAP(CDlgDefaultValue)
+    ON_BN_CLICKED(IDC_BT_RESET_PAGE, OnBtResetPage)
+    //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgDefaultValue ƒƒbƒZ[ƒW ƒnƒ“ƒhƒ‰
+// CDlgDefaultValue ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒãƒ³ãƒ‰ãƒ©
 
-void CDlgDefaultValue::OnBtResetPage() 
+void CDlgDefaultValue::OnBtResetPage()
 {
-	// TODO: ‚±‚ÌˆÊ’u‚ÉƒRƒ“ƒgƒ[ƒ‹’Ê’mƒnƒ“ƒhƒ‰—p‚ÌƒR[ƒh‚ð’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢
-	m_bValidFolderSelect = FALSE;
-	m_bValidDupExec = FALSE;
-	m_nRecentFolder = 5;
-	m_bSaveRepDlgPos = FALSE; /* WildCherry4 086 */
-	m_bAudioListShow = FALSE; /* Conspiracy 194 */
-	UpdateData(FALSE);
+    // TODO: ã“ã®ä½ç½®ã«ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«é€šçŸ¥ãƒãƒ³ãƒ‰ãƒ©ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„
+    m_bValidFolderSelect = FALSE;
+    m_bValidDupExec = FALSE;
+    m_nRecentFolder = 5;
+    m_bSaveRepDlgPos = FALSE; /* WildCherry4 086 */
+    m_bAudioListShow = FALSE; /* Conspiracy 194 */
+    UpdateData(FALSE);
 }

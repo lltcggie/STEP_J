@@ -1,4 +1,4 @@
-// DlgEnvConf.cpp : ƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“ ƒtƒ@ƒCƒ‹
+// DlgEnvConf.cpp : ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³ ãƒ•ã‚¡ã‚¤ãƒ«
 //
 
 #include "stdafx.h"
@@ -12,18 +12,18 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgEnvConf ƒvƒƒpƒeƒB ƒy[ƒW
+// CDlgEnvConf ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ ãƒšãƒ¼ã‚¸
 
 IMPLEMENT_DYNCREATE(CDlgEnvConf, COptionPage)
 
 CDlgEnvConf::CDlgEnvConf() : COptionPage(CDlgEnvConf::IDD)
 {
-	//{{AFX_DATA_INIT(CDlgEnvConf)
-	m_bConfDeleteFile = FALSE;
-	m_bConfDeleteList = FALSE;
-	m_bConfEditModify = FALSE;
-	m_bConfFolderSync = FALSE;
-	//}}AFX_DATA_INIT
+    //{{AFX_DATA_INIT(CDlgEnvConf)
+    m_bConfDeleteFile = FALSE;
+    m_bConfDeleteList = FALSE;
+    m_bConfEditModify = FALSE;
+    m_bConfFolderSync = FALSE;
+    //}}AFX_DATA_INIT
 }
 
 CDlgEnvConf::~CDlgEnvConf()
@@ -32,33 +32,30 @@ CDlgEnvConf::~CDlgEnvConf()
 
 void CDlgEnvConf::DoDataExchange(CDataExchange* pDX)
 {
-	COptionPage::DoDataExchange(pDX);
-	//{{AFX_DATA_MAP(CDlgEnvConf)
-	DDX_Check(pDX, IDC_CH_CONF_DELETE_FILE, m_bConfDeleteFile);
-	DDX_Check(pDX, IDC_CH_CONF_DELETE_LIST, m_bConfDeleteList);
-	DDX_Check(pDX, IDC_CH_CONF_EDIT_MODIFY, m_bConfEditModify);
-	DDX_Check(pDX, IDC_CH_CONF_FOLDER_SYNC, m_bConfFolderSync);
-	//}}AFX_DATA_MAP
+    COptionPage::DoDataExchange(pDX);
+    //{{AFX_DATA_MAP(CDlgEnvConf)
+    DDX_Check(pDX, IDC_CH_CONF_DELETE_FILE, m_bConfDeleteFile);
+    DDX_Check(pDX, IDC_CH_CONF_DELETE_LIST, m_bConfDeleteList);
+    DDX_Check(pDX, IDC_CH_CONF_EDIT_MODIFY, m_bConfEditModify);
+    DDX_Check(pDX, IDC_CH_CONF_FOLDER_SYNC, m_bConfFolderSync);
+    //}}AFX_DATA_MAP
 }
 
 
 BEGIN_MESSAGE_MAP(CDlgEnvConf, COptionPage)
-	//{{AFX_MSG_MAP(CDlgEnvConf)
-	ON_BN_CLICKED(IDC_BT_RESET_PAGE, OnBtResetPage)
-	//}}AFX_MSG_MAP
+    //{{AFX_MSG_MAP(CDlgEnvConf)
+    ON_BN_CLICKED(IDC_BT_RESET_PAGE, OnBtResetPage)
+    //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgEnvConf ƒƒbƒZ[ƒW ƒnƒ“ƒhƒ‰
+// CDlgEnvConf ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒãƒ³ãƒ‰ãƒ©
 
-// ‰Šú’l‚É–ß‚·
-void CDlgEnvConf::OnBtResetPage() 
+// åˆæœŸå€¤ã«æˆ»ã™
+void CDlgEnvConf::OnBtResetPage()
 {
-	((CButton *)GetDlgItem(IDC_CH_CONF_CONV_MP3   ))->SetCheck(TRUE);
-	((CButton *)GetDlgItem(IDC_CH_CONF_CONV_RMP   ))->SetCheck(TRUE);
-	((CButton *)GetDlgItem(IDC_CH_CONF_CONV_ID3V2 ))->SetCheck(TRUE);
-	((CButton *)GetDlgItem(IDC_CH_CONF_DELETE_FILE))->SetCheck(TRUE);
-	((CButton *)GetDlgItem(IDC_CH_CONF_DELETE_LIST))->SetCheck(TRUE);
-	((CButton *)GetDlgItem(IDC_CH_CONF_EDIT_MODIFY))->SetCheck(TRUE);
-	((CButton *)GetDlgItem(IDC_CH_CONF_FOLDER_SYNC))->SetCheck(TRUE);
+    ((CButton *)GetDlgItem(IDC_CH_CONF_DELETE_FILE))->SetCheck(TRUE);
+    ((CButton *)GetDlgItem(IDC_CH_CONF_DELETE_LIST))->SetCheck(TRUE);
+    ((CButton *)GetDlgItem(IDC_CH_CONF_EDIT_MODIFY))->SetCheck(TRUE);
+    ((CButton *)GetDlgItem(IDC_CH_CONF_FOLDER_SYNC))->SetCheck(TRUE);
 }

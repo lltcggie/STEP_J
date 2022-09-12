@@ -1,4 +1,4 @@
-// DlgFixedUpperLower.cpp : ÉCÉìÉvÉäÉÅÉìÉeÅ[ÉVÉáÉì ÉtÉ@ÉCÉã
+// DlgFixedUpperLower.cpp : „Ç§„É≥„Éó„É™„É°„É≥„ÉÜ„Éº„Ç∑„Éß„É≥ „Éï„Ç°„Ç§„É´
 //
 
 #include "stdafx.h"
@@ -12,15 +12,15 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgFixedUpperLower ÉvÉçÉpÉeÉB ÉyÅ[ÉW
+// CDlgFixedUpperLower „Éó„É≠„Éë„ÉÜ„Ç£ „Éö„Éº„Ç∏
 
 IMPLEMENT_DYNCREATE(CDlgFixedUpperLower, COptionPage)
 
 CDlgFixedUpperLower::CDlgFixedUpperLower() : COptionPage(CDlgFixedUpperLower::IDD)
 {
-	//{{AFX_DATA_INIT(CDlgFixedUpperLower)
-	m_strFixedWord = _T("");
-	//}}AFX_DATA_INIT
+    //{{AFX_DATA_INIT(CDlgFixedUpperLower)
+    m_strFixedWord = _T("");
+    //}}AFX_DATA_INIT
 }
 
 CDlgFixedUpperLower::~CDlgFixedUpperLower()
@@ -29,113 +29,113 @@ CDlgFixedUpperLower::~CDlgFixedUpperLower()
 
 void CDlgFixedUpperLower::DoDataExchange(CDataExchange* pDX)
 {
-	COptionPage::DoDataExchange(pDX);
-	//{{AFX_DATA_MAP(CDlgFixedUpperLower)
-	DDX_Control(pDX, IDC_EDIT_FIXED_WORD, m_editFixedWord);
-	DDX_Control(pDX, IDC_BT_DELETE, m_buttonDelete);
-	DDX_Control(pDX, IDC_BT_ADD, m_buttonAdd);
-	DDX_Control(pDX, IDC_LIST_UPPER_LOWER, m_listUpperLower);
-	DDX_Text(pDX, IDC_EDIT_FIXED_WORD, m_strFixedWord);
-	//}}AFX_DATA_MAP
+    COptionPage::DoDataExchange(pDX);
+    //{{AFX_DATA_MAP(CDlgFixedUpperLower)
+    DDX_Control(pDX, IDC_EDIT_FIXED_WORD, m_editFixedWord);
+    DDX_Control(pDX, IDC_BT_DELETE, m_buttonDelete);
+    DDX_Control(pDX, IDC_BT_ADD, m_buttonAdd);
+    DDX_Control(pDX, IDC_LIST_UPPER_LOWER, m_listUpperLower);
+    DDX_Text(pDX, IDC_EDIT_FIXED_WORD, m_strFixedWord);
+    //}}AFX_DATA_MAP
 }
 
 
 BEGIN_MESSAGE_MAP(CDlgFixedUpperLower, COptionPage)
-	//{{AFX_MSG_MAP(CDlgFixedUpperLower)
-	ON_BN_CLICKED(IDC_BT_ADD, OnBtAdd)
-	ON_EN_CHANGE(IDC_EDIT_FIXED_WORD, OnChangeEditFixedWord)
-	ON_BN_CLICKED(IDC_BT_DELETE, OnBtDelete)
-	ON_NOTIFY(LVN_ITEMCHANGED, IDC_LIST_UPPER_LOWER, OnItemchangedListUpperLower)
-	//}}AFX_MSG_MAP
+    //{{AFX_MSG_MAP(CDlgFixedUpperLower)
+    ON_BN_CLICKED(IDC_BT_ADD, OnBtAdd)
+    ON_EN_CHANGE(IDC_EDIT_FIXED_WORD, OnChangeEditFixedWord)
+    ON_BN_CLICKED(IDC_BT_DELETE, OnBtDelete)
+    ON_NOTIFY(LVN_ITEMCHANGED, IDC_LIST_UPPER_LOWER, OnItemchangedListUpperLower)
+    //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgFixedUpperLower ÉÅÉbÉZÅ[ÉW ÉnÉìÉhÉâ
+// CDlgFixedUpperLower „É°„ÉÉ„Çª„Éº„Ç∏ „Éè„É≥„Éâ„É©
 
-void CDlgFixedUpperLower::OnBtAdd() 
+void CDlgFixedUpperLower::OnBtAdd()
 {
-	// TODO: Ç±ÇÃà íuÇ…ÉRÉìÉgÉçÅ[Éãí ímÉnÉìÉhÉâópÇÃÉRÅ[ÉhÇí«â¡ÇµÇƒÇ≠ÇæÇ≥Ç¢
-	UpdateData(TRUE);
-	m_listUpperLower.InsertItem(m_listUpperLower.GetItemCount(), m_strFixedWord);
-	m_arFixedWords.Add(m_strFixedWord);
-	m_strFixedWord.Empty();
-	UpdateData(FALSE);
-	EnableButton();
-	m_buttonAdd.EnableWindow(FALSE);
-	m_bModify = TRUE;
+    // TODO: „Åì„ÅÆ‰ΩçÁΩÆ„Å´„Ç≥„É≥„Éà„É≠„Éº„É´ÈÄöÁü•„Éè„É≥„Éâ„É©Áî®„ÅÆ„Ç≥„Éº„Éâ„ÇíËøΩÂä†„Åó„Å¶„Åè„Å†„Åï„ÅÑ
+    UpdateData(TRUE);
+    m_listUpperLower.InsertItem(m_listUpperLower.GetItemCount(), m_strFixedWord);
+    m_arFixedWords.Add(m_strFixedWord);
+    m_strFixedWord.Empty();
+    UpdateData(FALSE);
+    EnableButton();
+    m_buttonAdd.EnableWindow(FALSE);
+    m_bModify = TRUE;
 }
 
-BOOL CDlgFixedUpperLower::OnInitDialog() 
+BOOL CDlgFixedUpperLower::OnInitDialog()
 {
-	COptionPage::OnInitDialog();
-	
-	// TODO: Ç±ÇÃà íuÇ…èâä˙âªÇÃï‚ë´èàóùÇí«â¡ÇµÇƒÇ≠ÇæÇ≥Ç¢
-	DWORD	dwStyle;
-	dwStyle = m_listUpperLower.SendMessage(LVM_GETEXTENDEDLISTVIEWSTYLE, 0, 0);
-	dwStyle |=LVS_EX_FULLROWSELECT;
-	m_listUpperLower.SendMessage(LVM_SETEXTENDEDLISTVIEWSTYLE, 0, dwStyle);
+    COptionPage::OnInitDialog();
 
-	m_bModify = FALSE;
-	
-	RECT	rect;
-	m_listUpperLower.GetClientRect(&rect);
-	m_listUpperLower.InsertColumn(1, "å≈íËíPåÍ", LVCFMT_LEFT, rect.right-rect.left-16, -1);
-	m_listUpperLower.DeleteAllItems();					// ÉNÉäÉA
-	for (int i=0;i<m_arFixedWords.GetSize();i++) {
-		m_listUpperLower.InsertItem(i, m_arFixedWords.GetAt(i));
-	}
+    // TODO: „Åì„ÅÆ‰ΩçÁΩÆ„Å´ÂàùÊúüÂåñ„ÅÆË£úË∂≥Âá¶ÁêÜ„ÇíËøΩÂä†„Åó„Å¶„Åè„Å†„Åï„ÅÑ
+    DWORD    dwStyle;
+    dwStyle = m_listUpperLower.SendMessage(LVM_GETEXTENDEDLISTVIEWSTYLE, 0, 0);
+    dwStyle |=LVS_EX_FULLROWSELECT;
+    m_listUpperLower.SendMessage(LVM_SETEXTENDEDLISTVIEWSTYLE, 0, dwStyle);
 
-	m_buttonAdd.EnableWindow(FALSE);
-	EnableButton();
+    m_bModify = FALSE;
 
-	return TRUE;  // ÉRÉìÉgÉçÅ[ÉãÇ…ÉtÉHÅ[ÉJÉXÇê›íËÇµÇ»Ç¢Ç∆Ç´ÅAñﬂÇËílÇÕ TRUE Ç∆Ç»ÇËÇ‹Ç∑
-	              // ó·äO: OCX ÉvÉçÉpÉeÉB ÉyÅ[ÉWÇÃñﬂÇËílÇÕ FALSE Ç∆Ç»ÇËÇ‹Ç∑
+    RECT    rect;
+    m_listUpperLower.GetClientRect(&rect);
+    m_listUpperLower.InsertColumn(1, _T("Âõ∫ÂÆöÂçòË™û"), LVCFMT_LEFT, int((rect.right-rect.left)*0.9), -1);
+    m_listUpperLower.DeleteAllItems();                    // „ÇØ„É™„Ç¢
+    for (int i=0;i<m_arFixedWords.GetSize();i++) {
+        m_listUpperLower.InsertItem(i, m_arFixedWords.GetAt(i));
+    }
+
+    m_buttonAdd.EnableWindow(FALSE);
+    EnableButton();
+
+    return TRUE;  // „Ç≥„É≥„Éà„É≠„Éº„É´„Å´„Éï„Ç©„Éº„Ç´„Çπ„ÇíË®≠ÂÆö„Åó„Å™„ÅÑ„Å®„Åç„ÄÅÊàª„ÇäÂÄ§„ÅØ TRUE „Å®„Å™„Çä„Åæ„Åô
+                  // ‰æãÂ§ñ: OCX „Éó„É≠„Éë„ÉÜ„Ç£ „Éö„Éº„Ç∏„ÅÆÊàª„ÇäÂÄ§„ÅØ FALSE „Å®„Å™„Çä„Åæ„Åô
 }
 
-void CDlgFixedUpperLower::OnChangeEditFixedWord() 
+void CDlgFixedUpperLower::OnChangeEditFixedWord()
 {
-	// TODO: Ç±ÇÍÇ™ RICHEDIT ÉRÉìÉgÉçÅ[ÉãÇÃèÍçáÅAÉRÉìÉgÉçÅ[ÉãÇÕÅA lParam É}ÉXÉN
-	// ì‡Ç≈ÇÃò_óùòaÇÃ ENM_CHANGE ÉtÉâÉOïtÇ´Ç≈ CRichEditCrtl().SetEventMask()
-	// ÉÅÉbÉZÅ[ÉWÇÉRÉìÉgÉçÅ[ÉãÇ÷ëóÇÈÇΩÇﬂÇ… COptionPage::OnInitDialog() ä÷êîÇÉIÅ[ÉoÅ[
-	// ÉâÉCÉhÇµÇ»Ç¢å¿ÇËÇ±ÇÃí ímÇëóÇËÇ‹ÇπÇÒÅB
-	
-	// TODO: Ç±ÇÃà íuÇ…ÉRÉìÉgÉçÅ[Éãí ímÉnÉìÉhÉâópÇÃÉRÅ[ÉhÇí«â¡ÇµÇƒÇ≠ÇæÇ≥Ç¢
-	CString strWord;
-	m_editFixedWord.GetWindowText(strWord);
-	if (strWord.IsEmpty()) {
-		m_buttonAdd.EnableWindow(FALSE);
-	} else {
-		m_buttonAdd.EnableWindow(TRUE);
-	}
+    // TODO: „Åì„Çå„Åå RICHEDIT „Ç≥„É≥„Éà„É≠„Éº„É´„ÅÆÂ†¥Âêà„ÄÅ„Ç≥„É≥„Éà„É≠„Éº„É´„ÅØ„ÄÅ lParam „Éû„Çπ„ÇØ
+    // ÂÜÖ„Åß„ÅÆË´ñÁêÜÂíå„ÅÆ ENM_CHANGE „Éï„É©„Ç∞‰ªò„Åç„Åß CRichEditCrtl().SetEventMask()
+    // „É°„ÉÉ„Çª„Éº„Ç∏„Çí„Ç≥„É≥„Éà„É≠„Éº„É´„Å∏ÈÄÅ„Çã„Åü„ÇÅ„Å´ COptionPage::OnInitDialog() Èñ¢Êï∞„Çí„Ç™„Éº„Éê„Éº
+    // „É©„Ç§„Éâ„Åó„Å™„ÅÑÈôê„Çä„Åì„ÅÆÈÄöÁü•„ÇíÈÄÅ„Çä„Åæ„Åõ„Çì„ÄÇ
+
+    // TODO: „Åì„ÅÆ‰ΩçÁΩÆ„Å´„Ç≥„É≥„Éà„É≠„Éº„É´ÈÄöÁü•„Éè„É≥„Éâ„É©Áî®„ÅÆ„Ç≥„Éº„Éâ„ÇíËøΩÂä†„Åó„Å¶„Åè„Å†„Åï„ÅÑ
+    CString strWord;
+    m_editFixedWord.GetWindowText(strWord);
+    if (strWord.IsEmpty()) {
+        m_buttonAdd.EnableWindow(FALSE);
+    } else {
+        m_buttonAdd.EnableWindow(TRUE);
+    }
 }
 
 void CDlgFixedUpperLower::EnableButton()
 {
-	if (m_listUpperLower.GetSelectedCount() == 0) {
-		m_buttonDelete.EnableWindow(FALSE);
-	} else {
-		m_buttonDelete.EnableWindow(TRUE);
-	}
+    if (m_listUpperLower.GetSelectedCount() == 0) {
+        m_buttonDelete.EnableWindow(FALSE);
+    } else {
+        m_buttonDelete.EnableWindow(TRUE);
+    }
 }
 
-void CDlgFixedUpperLower::OnItemchangedListUpperLower(NMHDR* pNMHDR, LRESULT* pResult) 
+void CDlgFixedUpperLower::OnItemchangedListUpperLower(NMHDR* pNMHDR, LRESULT* pResult)
 {
-	NM_LISTVIEW* pNMListView = (NM_LISTVIEW*)pNMHDR;
-	// TODO: Ç±ÇÃà íuÇ…ÉRÉìÉgÉçÅ[Éãí ímÉnÉìÉhÉâópÇÃÉRÅ[ÉhÇí«â¡ÇµÇƒÇ≠ÇæÇ≥Ç¢
-	EnableButton();
+    NM_LISTVIEW* pNMListView = (NM_LISTVIEW*)pNMHDR;
+    // TODO: „Åì„ÅÆ‰ΩçÁΩÆ„Å´„Ç≥„É≥„Éà„É≠„Éº„É´ÈÄöÁü•„Éè„É≥„Éâ„É©Áî®„ÅÆ„Ç≥„Éº„Éâ„ÇíËøΩÂä†„Åó„Å¶„Åè„Å†„Åï„ÅÑ
+    EnableButton();
 
-	*pResult = 0;
+    *pResult = 0;
 }
 
-void CDlgFixedUpperLower::OnBtDelete() 
+void CDlgFixedUpperLower::OnBtDelete()
 {
-	// TODO: Ç±ÇÃà íuÇ…ÉRÉìÉgÉçÅ[Éãí ímÉnÉìÉhÉâópÇÃÉRÅ[ÉhÇí«â¡ÇµÇƒÇ≠ÇæÇ≥Ç¢
-	POSITION pos = m_listUpperLower.GetFirstSelectedItemPosition();
-	if (pos == NULL) {
-		return;
-	}
-	int nIndex = m_listUpperLower.GetNextSelectedItem(pos);
-	m_listUpperLower.DeleteItem(nIndex);
-	m_arFixedWords.RemoveAt(nIndex);
-	m_bModify = TRUE;
+    // TODO: „Åì„ÅÆ‰ΩçÁΩÆ„Å´„Ç≥„É≥„Éà„É≠„Éº„É´ÈÄöÁü•„Éè„É≥„Éâ„É©Áî®„ÅÆ„Ç≥„Éº„Éâ„ÇíËøΩÂä†„Åó„Å¶„Åè„Å†„Åï„ÅÑ
+    POSITION pos = m_listUpperLower.GetFirstSelectedItemPosition();
+    if (pos == NULL) {
+        return;
+    }
+    int nIndex = m_listUpperLower.GetNextSelectedItem(pos);
+    m_listUpperLower.DeleteItem(nIndex);
+    m_arFixedWords.RemoveAt(nIndex);
+    m_bModify = TRUE;
 }

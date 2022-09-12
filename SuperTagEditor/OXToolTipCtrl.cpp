@@ -4,8 +4,8 @@
 
 // Source file : OXToolTipCtrl.cpp
 
-// Copyright © Dundas Software Ltd. 1999, All Rights Reserved                      
-			  
+// Copyright ï½© Dundas Software Ltd. 1999, All Rights Reserved
+
 // //////////////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"
@@ -13,7 +13,7 @@
 #include "SuperGridCtrl.h"
 #include "resource.h"
 
-struct NONCLIENTMETRICS_X501	// NONCLIENTMETRICS 0x501
+struct NONCLIENTMETRICS_X501    // NONCLIENTMETRICS 0x501
 {
     UINT    cbSize;
     int     iBorderWidth;
@@ -21,43 +21,42 @@ struct NONCLIENTMETRICS_X501	// NONCLIENTMETRICS 0x501
     int     iScrollHeight;
     int     iCaptionWidth;
     int     iCaptionHeight;
-    LOGFONTA lfCaptionFont;
+    LOGFONT lfCaptionFont;
     int     iSmCaptionWidth;
     int     iSmCaptionHeight;
-    LOGFONTA lfSmCaptionFont;
+    LOGFONT lfSmCaptionFont;
     int     iMenuWidth;
     int     iMenuHeight;
-    LOGFONTA lfMenuFont;
-    LOGFONTA lfStatusFont;
-    LOGFONTA lfMessageFont;
+    LOGFONT lfMenuFont;
+    LOGFONT lfStatusFont;
+    LOGFONT lfMessageFont;
 };
-
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #undef THIS_FILE
 static char THIS_FILE[] = __FILE__;
 #endif
 
-// TODO: Add message handlers (eg TTM_SETTIPBKCOLOR) and point them 
+// TODO: Add message handlers (eg TTM_SETTIPBKCOLOR) and point them
 //       to the correct functions.
 
-LPCTSTR COXToolTipCtrl::m_szArrowSpace = _T("@");
+LPCTSTR COXToolTipCtrl::m_szArrowSpace = _T("ã€€");
 
 /////////////////////////////////////////////////////////////////////////////
 // COXToolTipCtrl construction
 
 COXToolTipCtrl::COXToolTipCtrl() :
-	m_pParentWnd(NULL),
-	m_rectMargin(2,2,3,3),
+    m_pParentWnd(NULL),
+    m_rectMargin(2,2,3,3),
     m_nMaxWidth(0),
     m_ptOffset(20,0),
     m_pCurrentToolTip(NULL),
-    m_nCheckInterval(200),			// Time between checks of the tooltip - allows 
-									// user to move the mouse to the tooltip before 
-									// it disappears  
-	m_nDisplayDelay(500),			// delay in milliseconds till the tooltip is 
-									// displayed
-	m_nDisplayTime(5000*20),		    // Length of time the tooltip is displayed
+    m_nCheckInterval(200),          // Time between checks of the tooltip - allows
+                                    // user to move the mouse to the tooltip before
+                                    // it disappears
+    m_nDisplayDelay(500),           // delay in milliseconds till the tooltip is
+                                    // displayed
+    m_nDisplayTime(5000*20),        // Length of time the tooltip is displayed
     m_nElapsedTime(0),
     m_bActivated(TRUE),
     m_bTipCancelled(FALSE),
@@ -67,7 +66,7 @@ COXToolTipCtrl::COXToolTipCtrl() :
     m_crTextColor(CLR_DEFAULT),
     m_bUsingSystemFont(TRUE),
     m_dwTextStyle(DT_EXPANDTABS|DT_EXTERNALLEADING|DT_NOPREFIX|DT_WORDBREAK),
-	m_bExtended(FALSE)
+    m_bExtended(FALSE)
 {
     m_arrTools.RemoveAll();
 }
@@ -94,39 +93,39 @@ COXToolTipCtrl::~COXToolTipCtrl()
 // COXToolTipCtrl message handlers
 
 BEGIN_MESSAGE_MAP(COXToolTipCtrl, CWnd)
-	//{{AFX_MSG_MAP(COXToolTipCtrl)
-	ON_WM_PAINT()
-	ON_WM_TIMER()
-	ON_WM_LBUTTONDOWN()
-	ON_WM_LBUTTONUP()
-	ON_WM_SETFOCUS()
-	ON_WM_DESTROY()
-	ON_WM_SETTINGCHANGE()
-	ON_WM_MOUSEACTIVATE()
-	//}}AFX_MSG_MAP
+    //{{AFX_MSG_MAP(COXToolTipCtrl)
+    ON_WM_PAINT()
+    ON_WM_TIMER()
+    ON_WM_LBUTTONDOWN()
+    ON_WM_LBUTTONUP()
+    ON_WM_SETFOCUS()
+    ON_WM_DESTROY()
+    ON_WM_SETTINGCHANGE()
+    ON_WM_MOUSEACTIVATE()
+    //}}AFX_MSG_MAP
     ON_MESSAGE(WM_SETFONT, OnSetFont)
     ON_MESSAGE(WM_GETFONT, OnGetFont)
 END_MESSAGE_MAP()
 
-// --- In  :
+// --- In  :
 // --- Out :
 // --- Returns :
 // --- Effect : Draws the tooltip - called in response to a WM_PAINT message
-void COXToolTipCtrl::OnPaint() 
+void COXToolTipCtrl::OnPaint()
 {
     if (!m_pCurrentToolTip)
         return;
 
     CString str;
-	if (m_bExtended) {
+    if (m_bExtended) {
         str = GetFieldFromString(m_pCurrentToolTip->m_strTipText, 1, _T('\r'));
-	} else {
-		str = m_pCurrentToolTip->m_strTipText;
-	}
+    } else {
+        str = m_pCurrentToolTip->m_strTipText;
+    }
     if (str.IsEmpty())
         return;
 
-	CPaintDC dc(this); // device context for painting
+    CPaintDC dc(this); // device context for painting
 
     CRect rect;
     GetClientRect(rect);
@@ -144,7 +143,7 @@ void COXToolTipCtrl::OnPaint()
         dc.SetTextColor(m_pCurrentToolTip->clrTextColor);
 
     CFont *pOldFont = dc.SelectObject(&m_Font);
-    
+
     // Draw Border
     dc.FillRect(&rect, &Brush);
     dc.SelectStockObject(NULL_BRUSH);
@@ -176,7 +175,7 @@ void COXToolTipCtrl::OnPaint()
             pt[1] = CPoint(rect.right, rect.bottom - size.cy/2/*rect.top + size.cy/2*/);
             pt[2] = CPoint(rect.right - size.cx + nXMargin, rect.bottom - size.cy + nYMargin/*rect.top + size.cy - nYMargin*/);
             pt[3] = pt[0];
-	        dc.Polygon(pt, 4);
+            dc.Polygon(pt, 4);
         }
         //dc.Polygon(pt, 4);
     }
@@ -186,44 +185,43 @@ void COXToolTipCtrl::OnPaint()
     dc.SelectObject(pOldBrush);
     dc.SelectObject(pOldFont);
 }
-
-// --- In  : nIDEvent - The timer event
+// --- Inï£° : nIDEvent - The timer event
 // --- Out :
 // --- Returns :
-// --- Effect : Timer events are used to either Activate the tooltip after 
+// --- Effect : Timer events are used to either Activate the tooltip after
 //              the mouse has been stationary for the specified time, Remove
 //              the tip after a specified display time, or peridodically check
 //              that the mouse is still within the bounds of the tool
-void COXToolTipCtrl::OnTimer(UINT nIDEvent) 
+void COXToolTipCtrl::OnTimer(UINT_PTR nIDEvent)
 {
     CPoint pt;
     COXToolTipInfo *pToolTip = NULL;
 
-	if (nIDEvent == eIDDisplayAfterShow) {
-		KillTimer(nIDEvent);
-	    SetTimer(eIDDisplayToolEvent, m_nDisplayDelay, NULL);
-		return;
-	}
+    if (nIDEvent == eIDDisplayAfterShow) {
+        KillTimer(nIDEvent);
+        SetTimer(eIDDisplayToolEvent, m_nDisplayDelay, NULL);
+        return;
+    }
     if (!m_pCurrentToolTip || m_bTipCancelled)
     {
-		TRACE0("COXToolTipCtrl::OnTimer Kill&Pop\n");
+        TRACE0("COXToolTipCtrl::OnTimer Kill&Pop\n");
         KillTimer(nIDEvent);
         Pop();
         return;
     }
 
-    switch (nIDEvent) 
+    switch (nIDEvent)
     {
         // The mouse has been still for sufficient time. If it's still in the
         // initial tool, then show the tooltip for that tool.
-		case eIDAutoExtendEvent:
-			KillTimer(eIDAutoExtendEvent);
-			if (!m_bExtended) {
-				CRect rect;
-				GetWindowRect(rect);
-				DisplayToolTip(rect.TopLeft(), TRUE);
-			}
-			break;
+        case eIDAutoExtendEvent:
+            KillTimer(eIDAutoExtendEvent);
+            if (!m_bExtended) {
+                CRect rect;
+                GetWindowRect(rect);
+                DisplayToolTip(rect.TopLeft(), TRUE);
+            }
+            break;
         case eIDDisplayToolEvent:
             KillTimer(eIDDisplayToolEvent);
             if (IsCursorInTool(m_pCurrentToolTip))
@@ -237,7 +235,7 @@ void COXToolTipCtrl::OnTimer(UINT nIDEvent)
             }
             break;
 
-        // The tooltip is visible, check it's (a) not been around too long, and 
+        // The tooltip is visible, check it's (a) not been around too long, and
         // (b) still in the bounding rect (or tooltip window). If all is well then
         // reset the egg timer and check again later.
         case eIDCheckToolEvent:
@@ -275,7 +273,7 @@ void COXToolTipCtrl::OnTimer(UINT nIDEvent)
                 //TRACE0("Everything's OK - will check later\n");
                 //SetTimer(eIDCheckToolEvent, m_nCheckInterval, NULL);
             }
-            
+
             break;
 
         default:
@@ -283,81 +281,81 @@ void COXToolTipCtrl::OnTimer(UINT nIDEvent)
     }
 }
 
-// --- In  : nFlags - unused
+// --- In  : nFlags - unused
 //           point -  unused
 // --- Out :
 // --- Returns :
 // --- Effect : Causes a switch between standard and extended info viewing
-void COXToolTipCtrl::OnLButtonDown(UINT /*nFlags*/, CPoint /*point*/) 
+void COXToolTipCtrl::OnLButtonDown(UINT /*nFlags*/, CPoint /*point*/)
 {
     // Sometimes a click comes through the pipeline after the tool
     // has already been removed
-	TRACE0("COXToolTipCtrl::OnLButtonDown\n");
+    TRACE0("COXToolTipCtrl::OnLButtonDown\n");
     if (!m_pCurrentToolTip || m_bTipCancelled)
         return;
 
-	TRACE0("COXToolTipCtrl::OnLButtonDown2\n");
+    TRACE0("COXToolTipCtrl::OnLButtonDown2\n");
     if (TRUE/*m_bHasExtendedText*/)
     {
-	TRACE0("COXToolTipCtrl::OnLButtonDown3\n");
+    TRACE0("COXToolTipCtrl::OnLButtonDown3\n");
         CRect rect;
         GetWindowRect(rect);
         DisplayToolTip(rect.TopLeft(), !m_bExtended);
     }
 
-	TRACE0("COXToolTipCtrl::OnLButtonDown4\n");
+    TRACE0("COXToolTipCtrl::OnLButtonDown4\n");
     if (m_hOldFocusWnd)
         ::SetFocus(m_hOldFocusWnd);
 
-	//CWnd::OnLButtonDown(nFlags, point);
+    //CWnd::OnLButtonDown(nFlags, point);
 }
 
-// --- In  : pOldWnd - Contains the CWnd object that loses the input focus 
-//                    (may be NULL). 
+// --- In  : pOldWnd - Contains the CWnd object that loses the input focus
+//                    (may be NULL).
 // --- Out :
 // --- Returns :
-// --- Effect : Restores the focus back to the previous window (the tooltip does 
+// --- Effect : Restores the focus back to the previous window (the tooltip does
 //              not need the focus at all)
-void COXToolTipCtrl::OnSetFocus(CWnd* pOldWnd) 
+void COXToolTipCtrl::OnSetFocus(CWnd* pOldWnd)
 {
-	CWnd::OnSetFocus(pOldWnd);
+    CWnd::OnSetFocus(pOldWnd);
 
     m_hOldFocusWnd = pOldWnd->GetSafeHwnd();
 }
 
-int COXToolTipCtrl::OnMouseActivate(CWnd*, UINT, 
-									UINT)
+int COXToolTipCtrl::OnMouseActivate(CWnd*, UINT,
+                                    UINT)
 {
-	return MA_NOACTIVATE;
+    return MA_NOACTIVATE;
 }
 
-// --- In  :
+// --- In  :
 // --- Out :
 // --- Returns :
 // --- Effect : Kills off any remaining timers
-void COXToolTipCtrl::OnDestroy() 
+void COXToolTipCtrl::OnDestroy()
 {
     KillTimer(eIDDisplayToolEvent);
     KillTimer(eIDCheckToolEvent);
 
-	CWnd::OnDestroy();
+    CWnd::OnDestroy();
 }
 
-// --- In  : wFlag - system-wide parameter flag (see WM_SETTINGCHANGE)
+// --- In  : wFlag - system-wide parameter flag (see WM_SETTINGCHANGE)
 //           lpszSection - name of changed section or registry has has changes
 // --- Out :
 // --- Returns :
 // --- Effect : If the tooltip font has not been overriden, this updates the
 //              font with the new system tooltip font
-void COXToolTipCtrl::OnSettingChange(UINT uFlags, LPCTSTR lpszSection) 
+void COXToolTipCtrl::OnSettingChange(UINT uFlags, LPCTSTR lpszSection)
 {
-	CWnd::OnSettingChange(uFlags, lpszSection);
-	
+    CWnd::OnSettingChange(uFlags, lpszSection);
+
     if (m_bUsingSystemFont)
         SetLogFont(GetSystemToolTipFont(), TRUE);
 }
 
-// --- In  : hFont - Specifies a handle to the new font
+// --- In  : hFont - Specifies a handle to the new font
 // --- Out :
 // --- Returns : No return value
 // --- Effect : sets the new tooltip font
@@ -372,19 +370,19 @@ LRESULT COXToolTipCtrl::OnSetFont(WPARAM hFont, LPARAM /*lParam */)
         SetLogFont(GetSystemToolTipFont());
         return result;
     }
-    
+
     SetLogFont(&lf, TRUE);
 
     return result;
 }
 
-// --- In  : The parameters are not used
+// --- In  : The parameters are not used
 // --- Out :
 // --- Returns : The return value is a handle to the font used by the control
-// --- Effect : 
+// --- Effect :
 LRESULT COXToolTipCtrl::OnGetFont(WPARAM /*wParam*/, LPARAM /*lParam*/)
 {
-	return (LRESULT) (HFONT) m_Font;
+    return (LRESULT) (HFONT) m_Font;
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -395,19 +393,19 @@ BOOL COXToolTipCtrl::Create(CWnd* pParentWnd)
     m_pParentWnd = pParentWnd;
 
     // Get the class name and create the window
-    CString szClassName = AfxRegisterWndClass(CS_CLASSDC|CS_SAVEBITS, 
+    CString szClassName = AfxRegisterWndClass(CS_CLASSDC|CS_SAVEBITS,
                                               LoadCursor(NULL, IDC_ARROW));
     // Create the window - just don't show it yet.
-    if (!CWnd::CreateEx(WS_EX_TOPMOST, szClassName, _T(""), 
-                        WS_POPUP, 
+    if (!CWnd::CreateEx(WS_EX_TOPMOST, szClassName, _T(""),
+                        WS_POPUP,
                         0, 0, 10, 10, // size & position updated when needed
                         pParentWnd->GetSafeHwnd(), 0, NULL))
-	{
+    {
         return FALSE;
-	}
+    }
 
-	
-	SetLogFont(GetSystemToolTipFont(), false);
+
+    SetLogFont(GetSystemToolTipFont(), false);
 
     return TRUE;
 }
@@ -415,9 +413,9 @@ BOOL COXToolTipCtrl::Create(CWnd* pParentWnd)
 void COXToolTipCtrl::RelayEvent(MSG* pMsg)
 {
     //ASSERT(m_pParentWnd);
-	if (m_pParentWnd == NULL) {
-		return;
-	}
+    if (m_pParentWnd == NULL) {
+        return;
+    }
 
     if (pMsg->message == WM_MOUSEMOVE)
     {
@@ -429,32 +427,32 @@ void COXToolTipCtrl::RelayEvent(MSG* pMsg)
 
         // If the tip has been cancelled and the mouse has moved into a "no tool"
         // area, then we can reset the current tool in order for a new tool to be
-        // set as soon as it goes back into tool territory. 
+        // set as soon as it goes back into tool territory.
         if (!pToolTip && m_bTipCancelled)
             m_pCurrentToolTip = NULL;
 
         if (pToolTip/* && !m_bTipCancelled*/)
-		{
+        {
             if (IsCursorInToolTip())
                 return;
-			NMTTDISPINFO nmtt;
-			nmtt.hdr.hwndFrom = m_hWnd;
-			nmtt.hdr.idFrom   = IDR_MAINFRAME;
-			nmtt.hdr.code     = 2222;
-			nmtt.lpszText     = NULL;
-			nmtt.szText[0]    = '\0';
-			nmtt.hinst        = NULL;
-			nmtt.uFlags       = 0;
+            NMTTDISPINFO nmtt;
+            nmtt.hdr.hwndFrom = m_hWnd;
+            nmtt.hdr.idFrom   = IDR_MAINFRAME;
+            nmtt.hdr.code     = 2222;
+            nmtt.lpszText     = NULL;
+            nmtt.szText[0]    = 0;
+            nmtt.hinst        = NULL;
+            nmtt.uFlags       = 0;
 
-			m_pParentWnd->SendMessage(WM_NOTIFY, (WPARAM) nmtt.hdr.idFrom, (LPARAM) &nmtt);
-			if (nmtt.uFlags == 9999) {
-				m_pCurrentToolTip = pToolTip;
-				m_bTipCancelled = FALSE;
+            m_pParentWnd->SendMessage(WM_NOTIFY, (WPARAM) nmtt.hdr.idFrom, (LPARAM) &nmtt);
+            if (nmtt.uFlags == 9999) {
+                m_pCurrentToolTip = pToolTip;
+                m_bTipCancelled = FALSE;
                 SetTimer(eIDDisplayAfterShow, m_nCheckInterval, NULL);
-				//StartNewTool(pToolTip);
-				return;
-			}
-		}
+                //StartNewTool(pToolTip);
+                return;
+            }
+        }
 
         if (!pToolTip || (m_pCurrentToolTip && (pToolTip == m_pCurrentToolTip)))
            return;
@@ -497,14 +495,14 @@ void COXToolTipCtrl::RelayEvent(MSG* pMsg)
              (pMsg->message == WM_NCLBUTTONDOWN || pMsg->message == WM_NCLBUTTONDBLCLK) ||
              (pMsg->message == WM_NCRBUTTONDOWN || pMsg->message == WM_NCRBUTTONDBLCLK) ||
              (pMsg->message == WM_NCMBUTTONDOWN || pMsg->message == WM_NCMBUTTONDBLCLK) ||
-			 (pMsg->message == WM_MOUSEWHEEL) /* Misirlou 152 */)
+             (pMsg->message == WM_MOUSEWHEEL) /* Misirlou 152 */)
     {
         // The user has interupted the current tool - dismiss it
         Pop();
     }
 }
 
-BOOL COXToolTipCtrl::AddTool(CWnd* pWnd, UINT nIDText, LPCRECT lpRectTool /*=NULL*/, 
+BOOL COXToolTipCtrl::AddTool(CWnd* pWnd, UINT nIDText, LPCRECT lpRectTool /*=NULL*/,
                              UINT nIDTool /*=0*/)
 {
     CString str;
@@ -512,7 +510,7 @@ BOOL COXToolTipCtrl::AddTool(CWnd* pWnd, UINT nIDText, LPCRECT lpRectTool /*=NUL
     return AddTool(pWnd, (LPCTSTR) str, lpRectTool, nIDTool);
 }
 
-BOOL COXToolTipCtrl::AddTool(CWnd* pWnd, LPCTSTR lpszText, 
+BOOL COXToolTipCtrl::AddTool(CWnd* pWnd, LPCTSTR lpszText,
                              LPCRECT lpRectTool,
                              UINT nIDTool)
 {
@@ -544,7 +542,7 @@ BOOL COXToolTipCtrl::AddTool(CWnd* pWnd, LPCTSTR lpszText,
     pToolTip->clrTextColor = m_crTextColor;
     pToolTip->nWidth       = m_nMaxWidth;
     pToolTip->lParam       = 0;
-	pToolTip->m_strTipText.Empty();
+    pToolTip->m_strTipText.Empty();
 
     // Get bounding region for tooltip info
     CRect rect;
@@ -559,7 +557,7 @@ BOOL COXToolTipCtrl::AddTool(CWnd* pWnd, LPCTSTR lpszText,
     }
     m_pParentWnd->ScreenToClient(rect);
     pToolTip->rectBounds = rect;
-        
+
     // add to the list
     m_arrTools.Add(pToolTip);
 
@@ -575,7 +573,7 @@ void COXToolTipCtrl::DelTool(CWnd* pWnd, UINT nIDTool /*=0*/)
         if (!pToolInfo)
             continue;
 
-        if (pWnd->GetSafeHwnd() == pToolInfo->hWnd && 
+        if (pWnd->GetSafeHwnd() == pToolInfo->hWnd &&
             nIDTool == pToolInfo->nIDTool)
         {
             if (pToolInfo == m_pCurrentToolTip)
@@ -609,7 +607,7 @@ void COXToolTipCtrl::SetDelayTime(DWORD dwDuration, int nTime)
 {
     switch (dwDuration)
     {
-        case TTDT_AUTOPOP: 
+        case TTDT_AUTOPOP:
             m_nDisplayTime = nTime;
             break;
         case TTDT_INITIAL:
@@ -625,9 +623,9 @@ int COXToolTipCtrl::GetDelayTime(DWORD dwDuration) const
 {
     switch (dwDuration)
     {
-        case TTDT_AUTOPOP: 
+        case TTDT_AUTOPOP:
             return m_nDisplayTime;
-        case TTDT_INITIAL: 
+        case TTDT_INITIAL:
             return m_nDisplayDelay;
         case TTDT_RESHOW:
         default:
@@ -735,7 +733,7 @@ BOOL COXToolTipCtrl::HitTest(CWnd *pWnd, POINT pt, OXTOOLINFO* pToolInfo) const
         }
     }
 
-    // No tool in window - return 
+    // No tool in window - return
     if (!bFoundToolWnd || pTool == NULL)
         return FALSE;
 
@@ -759,8 +757,8 @@ void COXToolTipCtrl::Pop()
     m_bTipCancelled = TRUE;
 }
 
-BOOL COXToolTipCtrl::GetToolInfo(OXTOOLINFO& ToolInfo, CWnd* pWnd, 
-								 UINT nIDTool)
+BOOL COXToolTipCtrl::GetToolInfo(OXTOOLINFO& ToolInfo, CWnd* pWnd,
+                                 UINT nIDTool)
 {
     COXToolTipInfo *pToolInfo = GetToolInfoPtr(pWnd, nIDTool);
     if (pToolInfo == NULL)
@@ -773,7 +771,7 @@ BOOL COXToolTipCtrl::GetToolInfo(OXTOOLINFO& ToolInfo, CWnd* pWnd,
 
 void COXToolTipCtrl::SetToolInfo(OXTOOLINFO* pToolInfo)
 {
-    COXToolTipInfo *pInfo = GetToolInfoPtr(CWnd::FromHandle(pToolInfo->hwnd), 
+    COXToolTipInfo *pInfo = GetToolInfoPtr(CWnd::FromHandle(pToolInfo->hwnd),
                                         pToolInfo->uId);
 
     if (pToolInfo != NULL)
@@ -785,7 +783,7 @@ void COXToolTipCtrl::SetToolInfo(OXTOOLINFO* pToolInfo)
 
 CString COXToolTipCtrl::GetTooltipText(COXToolTipInfo *pToolTip)
 {
-	TRACE0("COXToolTipCtrl::GetTooltipText\n");
+    TRACE0("COXToolTipCtrl::GetTooltipText\n");
     CString strTooltipText(_T(""));
 
     if (!pToolTip)
@@ -798,7 +796,7 @@ CString COXToolTipCtrl::GetTooltipText(COXToolTipInfo *pToolTip)
         nmtt.hdr.idFrom   = ::GetDlgCtrlID(pToolTip->hWnd);
         nmtt.hdr.code     = TTN_NEEDTEXT;
         nmtt.lpszText     = NULL;
-		nmtt.szText[0]    = '\0';
+        nmtt.szText[0]    = 0;
         nmtt.hinst        = NULL;
         nmtt.uFlags       = 0;
 
@@ -806,9 +804,9 @@ CString COXToolTipCtrl::GetTooltipText(COXToolTipInfo *pToolTip)
 
         if (nmtt.hinst != NULL)
         {
-		    TCHAR sz[512];
-		    UINT nLen = ::LoadString(nmtt.hinst, (UINT) nmtt.lpszText, sz, 512);
-    		ASSERT(nLen < 511);
+            TCHAR sz[512];
+            UINT nLen = ::LoadString(nmtt.hinst, (UINT_PTR) nmtt.lpszText, sz, 512);
+            ASSERT(nLen < 511);
             if (nLen > 0)
                 strTooltipText = sz;
             else
@@ -822,11 +820,11 @@ CString COXToolTipCtrl::GetTooltipText(COXToolTipInfo *pToolTip)
     else
         strTooltipText = pToolTip->strText;
 
-	if (m_bExtended) {
-		strTooltipText = pToolTip->m_strTipText;
-	} else {
-		pToolTip->m_strTipText = strTooltipText;
-	}
+    if (m_bExtended) {
+        strTooltipText = pToolTip->m_strTipText;
+    } else {
+        pToolTip->m_strTipText = strTooltipText;
+    }
     m_bHasExtendedText = (strTooltipText.Find(_T('\r')) != -1);
 
     if (m_bHasExtendedText)
@@ -837,22 +835,22 @@ CString COXToolTipCtrl::GetTooltipText(COXToolTipInfo *pToolTip)
             strTooltipText = GetFieldFromString(strTooltipText, 0, _T('\r')) + m_szArrowSpace;
     }
 
-	TRACE1("COXToolTipCtrl::GetTooltipText [%s]\n", strTooltipText);
+    TRACE1("COXToolTipCtrl::GetTooltipText [%s]\n", strTooltipText);
     return strTooltipText;
 }
 
 LPLOGFONT COXToolTipCtrl::GetSystemToolTipFont() const
 {
-    static LOGFONTA LogFont;
+    static LOGFONT LogFont;
 
-	NONCLIENTMETRICS_X501 ncm = {0};
+    NONCLIENTMETRICS_X501 ncm = {0};
     ncm.cbSize = sizeof(NONCLIENTMETRICS_X501);
-    if (!SystemParametersInfo(SPI_GETNONCLIENTMETRICS, sizeof(NONCLIENTMETRICS_X501), &ncm, 0))
+    if (!SystemParametersInfo(SPI_GETNONCLIENTMETRICS, sizeof(ncm), &ncm, 0))
         return FALSE;
 
-    memcpy(&LogFont, &ncm.lfStatusFont, sizeof(LOGFONTA));
+    memcpy(&LogFont, &ncm.lfStatusFont, sizeof(LOGFONT));
 
-    return &LogFont; 
+    return &LogFont;
 }
 
 BOOL COXToolTipCtrl::SetLogFont(LPLOGFONT lpLogFont, BOOL bRedraw /*=TRUE*/)
@@ -875,12 +873,12 @@ BOOL COXToolTipCtrl::SetLogFont(LPLOGFONT lpLogFont, BOOL bRedraw /*=TRUE*/)
                           m_LogFont.lfHeight == lpSysFont->lfHeight &&
                           m_LogFont.lfCharSet == lpSysFont->lfCharSet &&
                           !_tcscmp(m_LogFont.lfFaceName, lpSysFont->lfFaceName));
-    
+
     // Create the actual font object
     m_Font.DeleteObject();
     m_Font.CreateFontIndirect(&m_LogFont);
 
-    if (bRedraw && ::IsWindow(GetSafeHwnd())) 
+    if (bRedraw && ::IsWindow(GetSafeHwnd()))
         Invalidate();
 
     return TRUE;
@@ -890,19 +888,19 @@ CRect COXToolTipCtrl::GetBoundsRect(CString strText, int nWidth) const
 {
     CWindowDC dc(NULL);
 
-    CFont *pOldFont = (CFont*) dc.SelectObject((CFont*)&m_Font); 
+    CFont *pOldFont = (CFont*) dc.SelectObject((CFont*)&m_Font);
 
     int nLineWidth = nWidth;
-   
+
     if (nLineWidth == 0)
     {
         // Count the number of lines of text
         int nStart = 0, nNumLines = 0;
-		CString strTextCopy=strText;
+        CString strTextCopy=strText;
         do {
             nStart = strTextCopy.Find(_T("\n"));
 
-            // skip found character 
+            // skip found character
             if (nStart >= 0)
                 strTextCopy=strTextCopy.Mid(nStart+1);
 
@@ -928,17 +926,17 @@ CRect COXToolTipCtrl::GetBoundsRect(CString strText, int nWidth) const
     return rect;
 }
 
-CRect COXToolTipCtrl::CalculateInfoBoxRect(CPoint& pt, COXToolTipInfo* pToolTip, 
+CRect COXToolTipCtrl::CalculateInfoBoxRect(CPoint& pt, COXToolTipInfo* pToolTip,
                                            CRect& rectTextBounds) const
-{  
+{
     CRect InfoRect = rectTextBounds;
     InfoRect.OffsetRect(-InfoRect.TopLeft());
 
     InfoRect.OffsetRect(pt);
 
     // Need to check it'll fit on screen
-    CSize ScreenSize(::GetSystemMetrics(SM_CXSCREEN), 
-		::GetSystemMetrics(SM_CYSCREEN));
+    CSize ScreenSize(::GetSystemMetrics(SM_CXSCREEN),
+        ::GetSystemMetrics(SM_CYSCREEN));
 
     // Too far right?
     if (InfoRect.right > ScreenSize.cx)
@@ -957,13 +955,13 @@ CRect COXToolTipCtrl::CalculateInfoBoxRect(CPoint& pt, COXToolTipInfo* pToolTip,
         InfoRect.top = ParentRect.top - nHeight;
         InfoRect.bottom = InfoRect.top + nHeight;
     }
-    
+
     return InfoRect;
 }
 
 void COXToolTipCtrl::StartNewTool(COXToolTipInfo* pToolInfo)
 {
-	TRACE0("COXToolTipCtrl::StartNewTool\n");
+    TRACE0("COXToolTipCtrl::StartNewTool\n");
     KillTimer(eIDDisplayToolEvent);
     KillTimer(eIDCheckToolEvent);
 
@@ -1006,8 +1004,8 @@ COXToolTipInfo* COXToolTipCtrl::FindToolFromPoint(POINT& pt)
     ASSERT(m_pParentWnd);
 
     CWnd* pWnd = GetChildWindowFromPoint(pt);
-    if (!pWnd || 
-         pWnd->GetSafeHwnd() == m_pParentWnd->GetSafeHwnd())
+    if (!pWnd ||
+        pWnd->GetSafeHwnd() == m_pParentWnd->GetSafeHwnd())
         return NULL;
 
     OXTOOLINFO ti;
@@ -1028,7 +1026,7 @@ COXToolTipInfo* COXToolTipCtrl::GetToolInfoPtr(CWnd* pWnd, UINT nIDTool /*=0*/)
         if (!pToolInfo)
             continue;
 
-        if (pWnd->GetSafeHwnd() == pToolInfo->hWnd && 
+        if (pWnd->GetSafeHwnd() == pToolInfo->hWnd &&
             nIDTool == pToolInfo->nIDTool)
         {
             return pToolInfo;
@@ -1067,7 +1065,7 @@ CWnd* COXToolTipCtrl::GetChildWindowFromPoint(POINT& point) const
 
 void COXToolTipCtrl::DisplayToolTip(CPoint& pt, BOOL bExtended /*= FALSE*/)
 {
-	TRACE0("COXToolTipCtrl::DisplayToolTip\n");
+    TRACE0("COXToolTipCtrl::DisplayToolTip\n");
     ASSERT(::IsWindow(m_hWnd));
 
     if (!m_bActivated || !m_pCurrentToolTip)
@@ -1084,19 +1082,19 @@ void COXToolTipCtrl::DisplayToolTip(CPoint& pt, BOOL bExtended /*= FALSE*/)
     rect = CalculateInfoBoxRect(pt, m_pCurrentToolTip, rect);
 
     ShowWindow(SW_HIDE);
-    SetWindowPos(NULL, 
+    SetWindowPos(NULL,
                  rect.left, rect.top,
                  rect.Width(), rect.Height(),
                  SWP_SHOWWINDOW|SWP_NOCOPYBITS|SWP_NOACTIVATE|SWP_NOZORDER);
 
-	if (!bExtended && m_bHasExtendedText) {
-	    SetTimer(eIDAutoExtendEvent, m_nDisplayDelay*5, NULL);
-	} else {
-		KillTimer(eIDAutoExtendEvent);
-	}
-//	ModifyStyle(0, WS_VISIBLE);
-//	ShowWindow(SW_SHOWNA);
-}    
+    if (!bExtended && m_bHasExtendedText) {
+        SetTimer(eIDAutoExtendEvent, m_nDisplayDelay*5, NULL);
+    } else {
+        KillTimer(eIDAutoExtendEvent);
+    }
+//    ModifyStyle(0, WS_VISIBLE);
+//    ShowWindow(SW_SHOWNA);
+}
 
 CString COXToolTipCtrl::GetFieldFromString(CString ref, int nIndex, TCHAR ch) const
 {
@@ -1129,7 +1127,7 @@ CString COXToolTipCtrl::GetFieldFromString(CString ref, int nIndex, TCHAR ch) co
 
     ref.UnlockBuffer();
 
-    if (nCurrent < nIndex) 
+    if (nCurrent < nIndex)
     {
         //TRACE1("Warning: GetStringField - Couldn't find field %d.\n", nIndex);
         return strReturn;

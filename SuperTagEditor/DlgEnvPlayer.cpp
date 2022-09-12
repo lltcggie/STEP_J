@@ -1,4 +1,4 @@
-// DlgEnvPlayer.cpp : ƒCƒ“ƒvƒŠƒƒ“ƒe[ƒVƒ‡ƒ“ ƒtƒ@ƒCƒ‹
+// DlgEnvPlayer.cpp : ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³ ãƒ•ã‚¡ã‚¤ãƒ«
 //
 
 #include "stdafx.h"
@@ -13,16 +13,16 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgEnvPlayer ƒvƒƒpƒeƒB ƒy[ƒW
+// CDlgEnvPlayer ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ ãƒšãƒ¼ã‚¸
 
 IMPLEMENT_DYNCREATE(CDlgEnvPlayer, COptionPage)
 
 CDlgEnvPlayer::CDlgEnvPlayer() : COptionPage(CDlgEnvPlayer::IDD)
 {
-	//{{AFX_DATA_INIT(CDlgEnvPlayer)
-	m_nPlayerType = -1;
-	m_strWinAmpPath = _T("");
-	//}}AFX_DATA_INIT
+    //{{AFX_DATA_INIT(CDlgEnvPlayer)
+    m_nPlayerType = -1;
+    m_strWinAmpPath = _T("");
+    //}}AFX_DATA_INIT
 }
 
 CDlgEnvPlayer::~CDlgEnvPlayer()
@@ -31,58 +31,63 @@ CDlgEnvPlayer::~CDlgEnvPlayer()
 
 void CDlgEnvPlayer::DoDataExchange(CDataExchange* pDX)
 {
-	COptionPage::DoDataExchange(pDX);
-	//{{AFX_DATA_MAP(CDlgEnvPlayer)
-	DDX_Radio(pDX, IDC_RA_PLAYER_WINAMP, m_nPlayerType);
-	DDX_Text(pDX, IDC_ED_WINAMP_PATH, m_strWinAmpPath);
-	//}}AFX_DATA_MAP
+    COptionPage::DoDataExchange(pDX);
+    //{{AFX_DATA_MAP(CDlgEnvPlayer)
+    DDX_Radio(pDX, IDC_RA_PLAYER_WINAMP, m_nPlayerType);
+    DDX_Text(pDX, IDC_ED_WINAMP_PATH, m_strWinAmpPath);
+    //}}AFX_DATA_MAP
 }
 
 
 BEGIN_MESSAGE_MAP(CDlgEnvPlayer, COptionPage)
-	//{{AFX_MSG_MAP(CDlgEnvPlayer)
-	ON_BN_CLICKED(IDC_BT_REF_WINAMP, OnBtRefWinamp)
-	//}}AFX_MSG_MAP
+    //{{AFX_MSG_MAP(CDlgEnvPlayer)
+    ON_BN_CLICKED(IDC_BT_REF_WINAMP, OnBtRefWinamp)
+    //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgEnvPlayer ƒƒbƒZ[ƒW ƒnƒ“ƒhƒ‰
+// CDlgEnvPlayer ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒãƒ³ãƒ‰ãƒ©
 
-BOOL CDlgEnvPlayer::OnInitDialog() 
+BOOL CDlgEnvPlayer::OnInitDialog()
 {
-	COptionPage::OnInitDialog();
+    COptionPage::OnInitDialog();
 
-	return TRUE;  // ƒRƒ“ƒgƒ[ƒ‹‚ÉƒtƒH[ƒJƒX‚ðÝ’è‚µ‚È‚¢‚Æ‚«A–ß‚è’l‚Í TRUE ‚Æ‚È‚è‚Ü‚·
-	              // —áŠO: OCX ƒvƒƒpƒeƒB ƒy[ƒW‚Ì–ß‚è’l‚Í FALSE ‚Æ‚È‚è‚Ü‚·
+    return TRUE;  // ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã«ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ã‚’è¨­å®šã—ãªã„ã¨ãã€æˆ»ã‚Šå€¤ã¯ TRUE ã¨ãªã‚Šã¾ã™
+                  // ä¾‹å¤–: OCX ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ ãƒšãƒ¼ã‚¸ã®æˆ»ã‚Šå€¤ã¯ FALSE ã¨ãªã‚Šã¾ã™
 }
 
-void CDlgEnvPlayer::OnBtRefWinamp() 
+void CDlgEnvPlayer::OnBtRefWinamp()
 {
-	// Œ»ÝŽw’è‚³‚ê‚Ä‚¢‚éƒƒOƒtƒ@ƒCƒ‹–¼‚ðŽæ“¾
-	CString	strFileName;
-	GetDlgItemText(IDC_ED_WINAMP_PATH, strFileName);
+    // ç¾åœ¨æŒ‡å®šã•ã‚Œã¦ã„ã‚‹ãƒ­ã‚°ãƒ•ã‚¡ã‚¤ãƒ«åã‚’å–å¾—
+    CString strFileName;
+    GetDlgItemText(IDC_ED_WINAMP_PATH, strFileName);
 
-	// ƒtƒ@ƒCƒ‹‘I‘ðƒ_ƒCƒAƒƒO‚ðŠJ‚­
-	static	LPCSTR	sFileFilter =	"Execute File(*.exe)|*.EXE|" \
-									"All Files(*.*)|*.*|";
-	CFileDialog		dialog(TRUE, ".exe", strFileName,
-	                       OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT,
-	                       sFileFilter, NULL);
-	if (dialog.DoModal() == IDOK) {
-		CString	strFileName(dialog.GetPathName());
-		strFileName.MakeUpper();
-		if (strFileName.Find("WINAMP.EXE") >= 0) {
-			m_nPlayerType = PLAYER_WINAMP;
-		} else if (strFileName.Find("SCMPX.EXE") >= 0) {
-			m_nPlayerType = PLAYER_SCMPX;
-		} else if (strFileName.Find("KBMPLAY.EXE") >= 0) {
-			m_nPlayerType = PLAYER_KBMPLAY;
-		} else if (strFileName.Find("LILITH.EXE") >= 0) { /* WildCherry 070 */
-			m_nPlayerType = PLAYER_LILITH;
-		} else {
-			m_nPlayerType = PLAYER_EXTEND;
-		}
-		m_strWinAmpPath = dialog.GetPathName();
-		UpdateData(FALSE);
-	}
+    // ãƒ•ã‚¡ã‚¤ãƒ«é¸æŠžãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚’é–‹ã
+    static LPCTSTR sFileFilter = _T("Execute File(*.exe)|*.EXE|") \
+                                 _T("All Files(*.*)|*.*|");
+    CFileDialog     dialog(TRUE, _T(".exe"), strFileName,
+                           OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT,
+                           sFileFilter, NULL);
+    if (dialog.DoModal() == IDOK) {
+        CString strFileName(dialog.GetPathName());
+        strFileName.MakeUpper();
+        if (strFileName.Find(_T("WINAMP.EXE")) >= 0) {
+            m_nPlayerType = PLAYER_WINAMP;
+        } else if (strFileName.Find(_T("SCMPX.EXE")) >= 0) {
+            m_nPlayerType = PLAYER_SCMPX;
+        } else if (strFileName.Find(_T("KBMPLAY.EXE")) >= 0) {
+            m_nPlayerType = PLAYER_KBMPLAY;
+        } else if (strFileName.Find(_T("FOOBAR2000.EXE")) >= 0) {
+            m_nPlayerType = PLAYER_FOOBAR;
+        } else if (strFileName.Find(_T("ULILITH.EXE")) >= 0) {
+            m_nPlayerType = PLAYER_ULILITH;
+        } else if (strFileName.Find(_T("LILITH.EXE")) >= 0) {
+            m_nPlayerType = PLAYER_LILITH;
+        } else {
+            m_nPlayerType = PLAYER_EXTEND;
+        }
+        m_strWinAmpPath = dialog.GetPathName();
+        UpdateData(FALSE);
+    }
 }
+

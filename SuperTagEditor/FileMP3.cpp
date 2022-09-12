@@ -1,22 +1,22 @@
 // ======================================================
-// ŠT  —v    F ‚l‚o‚Rƒtƒ@ƒCƒ‹ŠÇ—ƒNƒ‰ƒX
-// ƒ^[ƒQƒbƒgF Windows95/98/NT
-// ˆ—Œn    F Visual C++ Ver 6.0
-// ì¬Ò    F MERCURY
-// ì¬“ú    F 00/01/18(‰Î)
-// ’˜ìŒ •\‹LF Copyright(C) 2000 MERCURY.
+// æ¦‚  è¦    ï¼š ï¼­ï¼°ï¼“ãƒ•ã‚¡ã‚¤ãƒ«ç®¡ç†ã‚¯ãƒ©ã‚¹
+// ã‚¿ãƒ¼ã‚²ãƒƒãƒˆï¼š Windows95/98/NT
+// å‡¦ç†ç³»    ï¼š Visual C++ Ver 6.0
+// ä½œæˆè€…    ï¼š MERCURY
+// ä½œæˆæ—¥    ï¼š 00/01/18(ç«)
+// è‘—ä½œæ¨©è¡¨è¨˜ï¼š Copyright(C) 2000 MERCURY.
 // ======================================================
 
 
 
 // ======================================
-// =====   ğŒƒRƒ“ƒpƒCƒ‹ƒtƒ‰ƒO     =====
+// =====   æ¡ä»¶ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«ãƒ•ãƒ©ã‚°     =====
 // ======================================
 
 
 
 // ======================================
-// =====   ƒCƒ“ƒNƒ‹[ƒhƒtƒ@ƒCƒ‹     =====
+// =====   ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰ãƒ•ã‚¡ã‚¤ãƒ«     =====
 // ======================================
 #include "stdafx.h"
 #include "FileMP3.h"
@@ -28,1133 +28,1147 @@
 #define USE_SCMPX_GENRE_ANIMEJ g_genreListSCMPX[255].bAddList /* BeachMonster 099 */
 
 // ======================================
-// =====           ’è  ”           =====
+// =====           å®š  æ•°           =====
 // ======================================
 
 
 
 // ======================================
-// =====           ƒ}ƒNƒ           =====
+// =====           ãƒã‚¯ãƒ­           =====
 // ======================================
 
 
 
 // ======================================
-// =====       typedef^enum        =====
+// =====       typedefï¼enum        =====
 // ======================================
 
 
 
 // ======================================
-// =====       \‘¢‘Ì^‹¤—p‘Ì       =====
+// =====       æ§‹é€ ä½“ï¼å…±ç”¨ä½“       =====
 // ======================================
 
 
 
 // ======================================
-// =====         const •Ï”         =====
+// =====         const å¤‰æ•°         =====
 // ======================================
 
 
 
 // ======================================
-// =====        extern •Ï”         =====
+// =====        extern å¤‰æ•°         =====
 // ======================================
-int	 g_nWriteTagProcFlag = 0;
+int  g_nWriteTagProcFlag = 0;
 
 // ======================================
-// =====        static •Ï”         =====
+// =====        static å¤‰æ•°         =====
 // ======================================
-// ƒWƒƒƒ“ƒ‹–¼Ìƒe[ƒuƒ‹
-GENRE_LIST	g_genreListSCMPX[] = {
-	{true,   0, "Blues"},					// 0(ID3 TagŒİŠ·)
-	{true,   1, "Classic Rock"},			// 1(ID3 TagŒİŠ·)
-	{true,   2, "Country"},					// 2(ID3 TagŒİŠ·)
-	{true,   3, "Dance"},					// 3(ID3 TagŒİŠ·)
-	{true,   4, "Disco"},					// 4(ID3 TagŒİŠ·)
-	{true,   5, "Funk"},					// 5(ID3 TagŒİŠ·)
-	{true,   6, "Grunge"},					// 6(ID3 TagŒİŠ·)
-	{true,   7, "Hip-Hop"},					// 7(ID3 TagŒİŠ·)
-	{true,   8, "Jazz"},					// 8(ID3 TagŒİŠ·)
-	{true,   9, "Metal"},					// 9(ID3 TagŒİŠ·)
-	{true,  10, "New Age"},					// 10(ID3 TagŒİŠ·)
-	{true,  11, "Oldies"},					// 11(ID3 TagŒİŠ·)
-	{true,  12, "Other"},					// 12(ID3 TagŒİŠ·)
-	{true,  13, "Pop"},						// 13(ID3 TagŒİŠ·)
-	{true,  14, "R&B"},						// 14(ID3 TagŒİŠ·)
-	{true,  15, "Rap"},						// 15(ID3 TagŒİŠ·)
-	{true,  16, "Reggae"},					// 16(ID3 TagŒİŠ·)
-	{true,  17, "Rock"},					// 17(ID3 TagŒİŠ·)
-	{true,  18, "Techno"},					// 18(ID3 TagŒİŠ·)
-	{true,  19, "Industrial"},				// 19(ID3 TagŒİŠ·)
-	{true,  20, "Alternative"},				// 20(ID3 TagŒİŠ·)
-	{true,  21, "Ska"},						// 21(ID3 TagŒİŠ·)
-	{true,  22, "Death Metal"},				// 22(ID3 TagŒİŠ·)
-	{true,  23, "Pranks"},					// 23(ID3 TagŒİŠ·)
-	{true,  24, "Soundtrack"},				// 24(ID3 TagŒİŠ·)
-	{true,  25, "Euro-Techno"},				// 25(ID3 TagŒİŠ·)
-	{true,  26, "Ambient"},					// 26(ID3 TagŒİŠ·)
-	{true,  27, "Trip-Hop"},				// 27(ID3 TagŒİŠ·)
-	{true,  28, "Vocal"},					// 28(ID3 TagŒİŠ·)
-	{true,  29, "Jazz+Funk"},				// 29(ID3 TagŒİŠ·)
-	{true,  30, "Fusion"},					// 30(ID3 TagŒİŠ·)
-	{true,  31, "Trance"},					// 31(ID3 TagŒİŠ·)
-	{true,  32, "Classical"},				// 32(ID3 TagŒİŠ·)
-	{true,  33, "Instrumental"},			// 33(ID3 TagŒİŠ·)
-	{true,  34, "Acid"},					// 34(ID3 TagŒİŠ·)
-	{true,  35, "House"},					// 35(ID3 TagŒİŠ·)
-	{true,  36, "Game"},					// 36(ID3 TagŒİŠ·)
-	{true,  37, "Sound Clip"},				// 37(ID3 TagŒİŠ·)
-	{true,  38, "Gospel"},					// 38(ID3 TagŒİŠ·)
-	{true,  39, "Noise"},					// 39(ID3 TagŒİŠ·)
-	{true,  40, "AlternRock"},				// 40(ID3 TagŒİŠ·)
-	{true,  41, "Bass"},					// 41(ID3 TagŒİŠ·)
-	{true,  42, "Soul"},					// 42(ID3 TagŒİŠ·)
-	{true,  43, "Punk"},					// 43(ID3 TagŒİŠ·)
-	{true,  44, "Space"},					// 44(ID3 TagŒİŠ·)
-	{true,  45, "Meditative"},				// 45(ID3 TagŒİŠ·)
-	{true,  46, "Instrumental Pop"},		// 46(ID3 TagŒİŠ·)
-	{true,  47, "Instrumental Rock"},		// 47(ID3 TagŒİŠ·)
-	{true,  48, "Ethnic"},					// 48(ID3 TagŒİŠ·)
-	{true,  49, "Gothic"},					// 49(ID3 TagŒİŠ·)
-	{true,  50, "Darkwave"},				// 50(ID3 TagŒİŠ·)
-	{true,  51, "Techno-Industrial"},		// 51(ID3 TagŒİŠ·)
-	{true,  52, "Electronic"},				// 52(ID3 TagŒİŠ·)
-	{true,  53, "Pop-Folk"},				// 53(ID3 TagŒİŠ·)
-	{true,  54, "Eurodance"},				// 54(ID3 TagŒİŠ·)
-	{true,  55, "Dream"},					// 55(ID3 TagŒİŠ·)
-	{true,  56, "Southern Rock"},			// 56(ID3 TagŒİŠ·)
-	{true,  57, "Comedy"},					// 57(ID3 TagŒİŠ·)
-	{true,  58, "Cult"},					// 58(ID3 TagŒİŠ·)
-	{true,  59, "Gangsta"},					// 59(ID3 TagŒİŠ·)
-	{true,  60, "Top 40"},					// 60(ID3 TagŒİŠ·)
-	{true,  61, "Christian Rap"},			// 61(ID3 TagŒİŠ·)
-	{true,  62, "Pop/Funk"},				// 62(ID3 TagŒİŠ·)
-	{true,  63, "Jungle"},					// 63(ID3 TagŒİŠ·)
-	{true,  64, "Native American"},			// 64(ID3 TagŒİŠ·)
-	{true,  65, "Cabaret"},					// 65(ID3 TagŒİŠ·)
-	{true,  66, "New Wave"},				// 66(ID3 TagŒİŠ·)
-	{true,  67, "Psychedelic"},				// 67(ID3 TagŒİŠ·)
-	{true,  68, "Rave"},					// 68(ID3 TagŒİŠ·)
-	{true,  69, "Showtunes"},				// 69(ID3 TagŒİŠ·)
-	{true,  70, "Trailer"},					// 70(ID3 TagŒİŠ·)
-	{true,  71, "Lo-Fi"},					// 71(ID3 TagŒİŠ·)
-	{true,  72, "Tribal"},					// 72(ID3 TagŒİŠ·)
-	{true,  73, "Acid Punk"},				// 73(ID3 TagŒİŠ·)
-	{true,  74, "Acid Jazz"},				// 74(ID3 TagŒİŠ·)
-	{true,  75, "Polka"},					// 75(ID3 TagŒİŠ·)
-	{true,  76, "Retro"},					// 76(ID3 TagŒİŠ·)
-	{true,  77, "Musical"},					// 77(ID3 TagŒİŠ·)
-	{true,  78, "Rock & Roll"},				// 78(ID3 TagŒİŠ·)
-	{true,  79, "Hard Rock"},				// 79(ID3 TagŒİŠ·)
-	{true,  80, "Folk"},					// 80(ID3 TagŒİŠ·)
-	{true,  81, "Folk/Rock"},				// 81(ID3 TagŒİŠ·)
-	{true,  82, "National Folk"},			// 82(ID3 TagŒİŠ·)
-	{true,  83, "Swing"},					// 83(ID3 TagŒİŠ·)
-	{true,  84, "Fast-Fusion"},				// 84(WinampŒİŠ·)
-	{true,  85, "Bebob"},					// 85(WinampŒİŠ·)
-	{true,  86, "Latin"},					// 86(WinampŒİŠ·)
-	{true,  87, "Revival"},					// 87(WinampŒİŠ·)
-	{true,  88, "Celtic"},					// 88(WinampŒİŠ·)
-	{true,  89, "Bluegrass"},				// 89(WinampŒİŠ·)
-	{true,  90, "Avantgarde"},				// 90(WinampŒİŠ·)
-	{true,  91, "Gothic Rock"},				// 91(WinampŒİŠ·)
-	{true,  92, "Progressive Rock"},		// 92(WinampŒİŠ·)
-	{true,  93, "Psychedelic Rock"},		// 93(WinampŒİŠ·)
-	{true,  94, "Symphonic Rock"},			// 94(WinampŒİŠ·)
-	{true,  95, "Slow Rock"},				// 95(WinampŒİŠ·)
-	{true,  96, "Big Band"},				// 96(WinampŒİŠ·)
-	{true,  97, "Chorus"},					// 97(WinampŒİŠ·)
-	{true,  98, "Easy Listening"},			// 98(WinampŒİŠ·)
-	{true,  99, "Acoustic"},				// 99(WinampŒİŠ·)
-	{true, 100, "Humour"},					// 100(WinampŒİŠ·)
-	{true, 101, "Speech"},					// 101(WinampŒİŠ·)
-	{true, 102, "Chanson"},					// 102(WinampŒİŠ·)
-	{true, 103, "Opera"},					// 103(WinampŒİŠ·)
-	{true, 104, "Chamber Music"},			// 104(WinampŒİŠ·)
-	{true, 105, "Sonata"},					// 105(WinampŒİŠ·)
-	{true, 106, "Symphony"},				// 106(WinampŒİŠ·)
-	{true, 107, "Booty Bass"},				// 107(WinampŒİŠ·)
-	{true, 108, "Primus"},					// 108(WinampŒİŠ·)
-	{true, 109, "Porn Groove"},				// 109(WinampŒİŠ·)
-	{true, 110, "Satire"},					// 110(WinampŒİŠ·)
-	{true, 111, "Slow Jam"},				// 111(WinampŒİŠ·)
-	{true, 112, "Club"},					// 112(WinampŒİŠ·)
-	{true, 113, "Tango"},					// 113(WinampŒİŠ·)
-	{true, 114, "Samba"},					// 114(WinampŒİŠ·)
-	{true, 115, "Folklore"},				// 115(WinampŒİŠ·)
-	{true, 116, "Ballad"},					// 116(WinampŒİŠ·)
-	{true, 117, "Power Ballad"},			// 117(WinampŒİŠ·)
-	{true, 118, "Phythmic Soul"},			// 118(WinampŒİŠ·)
-	{true, 119, "Freestyle"},				// 119(WinampŒİŠ·)
-	{true, 120, "Duet"},					// 120(WinampŒİŠ·)
-	{true, 121, "Punk Rock"},				// 121(WinampŒİŠ·)
-	{true, 122, "Drum Solo"},				// 122(WinampŒİŠ·)
-	{true, 123, "A Cappella"},				// 123(WinampŒİŠ·)
-	{true, 124, "Euro-House"},				// 124(WinampŒİŠ·)
-	{true, 125, "Dance Hall"},				// 125(WinampŒİŠ·)
-	{true, 126, "Goa"},						// 126(WinampŒİŠ·)
-	{true, 127, "Drum & Bass"},				// 127(WinampŒİŠ·)
-	{true, 128, "Club-House"},				// 128(WinampŒİŠ·)
-	{true, 129, "Hardcore"},				// 129(WinampŒİŠ·)
-	{true, 130, "Terror"},					// 130(WinampŒİŠ·)
-	{true, 131, "Indie"},					// 131(WinampŒİŠ·)
-	{true, 132, "BritPop"},					// 132(WinampŒİŠ·)
-	{true, 133, "Negerpunk"},				// 133(WinampŒİŠ·)
-	{true, 134, "Polsk Punk"},				// 134(WinampŒİŠ·)
-	{true, 135, "Beat"},					// 135(WinampŒİŠ·)
-	{true, 136, "Christian Gangsta Rap"},	// 136(WinampŒİŠ·)
-	{true, 137, "Heavy Metal"},				// 137(WinampŒİŠ·)
-	{true, 138, "Black Metal"},				// 138(WinampŒİŠ·)
-	{true, 139, "Crossover"},				// 139(WinampŒİŠ·)
-	{true, 140, "Contemporary Christian"},	// 140(WinampŒİŠ·)
-	{true, 141, "Christian Rock"},			// 141(WinampŒİŠ·)
-	{true, 142, "Merengue"},				// 142(WinampŒİŠ·)
-	{true, 143, "Salsa"},					// 143(WinampŒİŠ·)
-	{true, 144, "Thrash Metal"},			// 144(WinampŒİŠ·)
-	{true, 145, "Anime"},					// 145(WinampŒİŠ·)
-	{true, 146, "JPop"},					// 146(WinampŒİŠ·)
-	{true, 147, "Synthpop"},				// 147(WinampŒİŠ·)
-	{false, 148, "–¢’è‹`(148)"},			// 148
-	{false, 148, "–¢’è‹`(148)"},			// 148
-	{false, 149, "–¢’è‹`(149)"},			// 149
-	{false, 150, "–¢’è‹`(150)"},			// 150
-	{false, 151, "–¢’è‹`(151)"},			// 151
-	{false, 152, "–¢’è‹`(152)"},			// 152
-	{false, 153, "–¢’è‹`(153)"},			// 153
-	{false, 154, "–¢’è‹`(154)"},			// 154
-	{false, 155, "–¢’è‹`(155)"},			// 155
-	{false, 156, "–¢’è‹`(156)"},			// 156
-	{false, 157, "–¢’è‹`(157)"},			// 157
-	{false, 158, "–¢’è‹`(158)"},			// 158
-	{false, 159, "–¢’è‹`(159)"},			// 159
-	{false, 160, "–¢’è‹`(160)"},			// 160
-	{false, 161, "–¢’è‹`(161)"},			// 161
-	{false, 162, "–¢’è‹`(162)"},			// 162
-	{false, 163, "–¢’è‹`(163)"},			// 163
-	{false, 164, "–¢’è‹`(164)"},			// 164
-	{false, 165, "–¢’è‹`(165)"},			// 165
-	{false, 166, "–¢’è‹`(166)"},			// 166
-	{false, 167, "–¢’è‹`(167)"},			// 167
-	{false, 168, "–¢’è‹`(168)"},			// 168
-	{false, 169, "–¢’è‹`(169)"},			// 169
-	{false, 170, "–¢’è‹`(170)"},			// 170
-	{false, 171, "–¢’è‹`(171)"},			// 171
-	{false, 172, "–¢’è‹`(172)"},			// 172
-	{false, 173, "–¢’è‹`(173)"},			// 173
-	{false, 174, "–¢’è‹`(174)"},			// 174
-	{false, 175, "–¢’è‹`(175)"},			// 175
-	{false, 176, "–¢’è‹`(176)"},			// 176
-	{false, 177, "–¢’è‹`(177)"},			// 177
-	{false, 178, "–¢’è‹`(178)"},			// 178
-	{false, 179, "–¢’è‹`(179)"},			// 179
-	{false, 180, "–¢’è‹`(180)"},			// 180
-	{false, 181, "–¢’è‹`(181)"},			// 181
-	{false, 182, "–¢’è‹`(182)"},			// 182
-	{false, 183, "–¢’è‹`(183)"},			// 183
-	{false, 184, "–¢’è‹`(184)"},			// 184
-	{false, 185, "–¢’è‹`(185)"},			// 185
-	{false, 186, "–¢’è‹`(186)"},			// 186
-	{false, 187, "–¢’è‹`(187)"},			// 187
-	{false, 188, "–¢’è‹`(188)"},			// 188
-	{false, 189, "–¢’è‹`(189)"},			// 189
-	{false, 190, "–¢’è‹`(190)"},			// 190
-	{false, 191, "–¢’è‹`(191)"},			// 191
-	{false, 192, "–¢’è‹`(192)"},			// 192
-	{false, 193, "–¢’è‹`(193)"},			// 193
-	{false, 194, "–¢’è‹`(194)"},			// 194
-	{false, 195, "–¢’è‹`(195)"},			// 195
-	{false, 196, "–¢’è‹`(196)"},			// 196
-	{false, 197, "–¢’è‹`(197)"},			// 197
-	{false, 198, "–¢’è‹`(198)"},			// 198
-	{false, 199, "–¢’è‹`(199)"},			// 199
-	{false, 200, "–¢’è‹`(200)"},			// 200
-	{false, 201, "–¢’è‹`(201)"},			// 201
-	{false, 202, "–¢’è‹`(202)"},			// 202
-	{false, 203, "–¢’è‹`(203)"},			// 203
-	{false, 204, "–¢’è‹`(204)"},			// 204
-	{false, 205, "–¢’è‹`(205)"},			// 205
-	{false, 206, "–¢’è‹`(206)"},			// 206
-	{false, 207, "–¢’è‹`(207)"},			// 207
-	{false, 208, "–¢’è‹`(208)"},			// 208
-	{false, 209, "–¢’è‹`(209)"},			// 209
-	{false, 210, "–¢’è‹`(210)"},			// 210
-	{false, 211, "–¢’è‹`(211)"},			// 211
-	{false, 212, "–¢’è‹`(212)"},			// 212
-	{false, 213, "–¢’è‹`(213)"},			// 213
-	{false, 214, "–¢’è‹`(214)"},			// 214
-	{false, 215, "–¢’è‹`(215)"},			// 215
-	{false, 216, "–¢’è‹`(216)"},			// 216
-	{false, 217, "–¢’è‹`(217)"},			// 217
-	{false, 218, "–¢’è‹`(218)"},			// 218
-	{false, 219, "–¢’è‹`(219)"},			// 219
-	{false, 220, "–¢’è‹`(220)"},			// 220
-	{false, 221, "–¢’è‹`(221)"},			// 221
-	{false, 222, "–¢’è‹`(222)"},			// 222
-	{false, 223, "–¢’è‹`(223)"},			// 223
-	{false, 224, "–¢’è‹`(224)"},			// 224
-	{false, 225, "–¢’è‹`(225)"},			// 225
-	{false, 226, "–¢’è‹`(226)"},			// 226
-	{false, 227, "–¢’è‹`(227)"},			// 227
-	{false, 228, "–¢’è‹`(228)"},			// 228
-	{false, 229, "–¢’è‹`(229)"},			// 229
-	{false, 230, "–¢’è‹`(230)"},			// 230
-	{false, 231, "–¢’è‹`(231)"},			// 231
-	{false, 232, "–¢’è‹`(232)"},			// 232
-	{false, 233, "–¢’è‹`(233)"},			// 233
-	{false, 234, "–¢’è‹`(234)"},			// 234
-	{false, 235, "–¢’è‹`(235)"},			// 235
-	{false, 236, "–¢’è‹`(236)"},			// 236
-	{false, 237, "–¢’è‹`(237)"},			// 237
-	{false, 238, "–¢’è‹`(238)"},			// 238
-	{false, 239, "–¢’è‹`(239)"},			// 239
-	{false, 240, "–¢’è‹`(240)"},			// 240
-	{false, 241, "–¢’è‹`(241)"},			// 241
-	{false, 242, "–¢’è‹`(242)"},			// 242
-	{false, 243, "–¢’è‹`(243)"},			// 243
-	{false, 244, "–¢’è‹`(244)"},			// 244
-	{false, 245, "–¢’è‹`(245)"},			// 245
-	{false, 246, "–¢’è‹`(246)"},			// 246
-	{false, 247, "–¢’è‹`(247)"},			// 247
-	{false, 248, "Heavy Rock(J)"},			// 248(SCMPXŒİŠ·)
-	{false, 249, "Doom Rock(J)"},			// 249(SCMPXŒİŠ·)
-	{false, 250, "J-POP(J)"},				// 250(SCMPXŒİŠ·)
-	{false, 251, "Seiyu(J)"},				// 251(SCMPXŒİŠ·)
-	{false, 252, "Tecno Ambient(J)"},		// 252(SCMPXŒİŠ·)
-	{false, 253, "Moemoe(J)"},				// 253(SCMPXŒİŠ·)
-	{false, 254, "Tokusatsu(J)"},			// 254(SCMPXŒİŠ·)
-	{false, 255, "Anime(J)"},				// 255(SCMPXŒİŠ·)
-	{false, 255, "–¢w’è"},					// 255
-	{false, 255, NULL},						// I’[ƒR[ƒh
+// ã‚¸ãƒ£ãƒ³ãƒ«åç§°ãƒ†ãƒ¼ãƒ–ãƒ«
+GENRE_LIST  g_genreListSCMPX[] = {
+    {true,   0, _T("Blues")},                   // 0(ID3 Tagäº’æ›)
+    {true,   1, _T("Classic Rock")},            // 1(ID3 Tagäº’æ›)
+    {true,   2, _T("Country")},                 // 2(ID3 Tagäº’æ›)
+    {true,   3, _T("Dance")},                   // 3(ID3 Tagäº’æ›)
+    {true,   4, _T("Disco")},                   // 4(ID3 Tagäº’æ›)
+    {true,   5, _T("Funk")},                    // 5(ID3 Tagäº’æ›)
+    {true,   6, _T("Grunge")},                  // 6(ID3 Tagäº’æ›)
+    {true,   7, _T("Hip-Hop")},                 // 7(ID3 Tagäº’æ›)
+    {true,   8, _T("Jazz")},                    // 8(ID3 Tagäº’æ›)
+    {true,   9, _T("Metal")},                   // 9(ID3 Tagäº’æ›)
+    {true,  10, _T("New Age")},                 // 10(ID3 Tagäº’æ›)
+    {true,  11, _T("Oldies")},                  // 11(ID3 Tagäº’æ›)
+    {true,  12, _T("Other")},                   // 12(ID3 Tagäº’æ›)
+    {true,  13, _T("Pop")},                     // 13(ID3 Tagäº’æ›)
+    {true,  14, _T("R&B")},                     // 14(ID3 Tagäº’æ›)
+    {true,  15, _T("Rap")},                     // 15(ID3 Tagäº’æ›)
+    {true,  16, _T("Reggae")},                  // 16(ID3 Tagäº’æ›)
+    {true,  17, _T("Rock")},                    // 17(ID3 Tagäº’æ›)
+    {true,  18, _T("Techno")},                  // 18(ID3 Tagäº’æ›)
+    {true,  19, _T("Industrial")},              // 19(ID3 Tagäº’æ›)
+    {true,  20, _T("Alternative")},             // 20(ID3 Tagäº’æ›)
+    {true,  21, _T("Ska")},                     // 21(ID3 Tagäº’æ›)
+    {true,  22, _T("Death Metal")},             // 22(ID3 Tagäº’æ›)
+    {true,  23, _T("Pranks")},                  // 23(ID3 Tagäº’æ›)
+    {true,  24, _T("Soundtrack")},              // 24(ID3 Tagäº’æ›)
+    {true,  25, _T("Euro-Techno")},             // 25(ID3 Tagäº’æ›)
+    {true,  26, _T("Ambient")},                 // 26(ID3 Tagäº’æ›)
+    {true,  27, _T("Trip-Hop")},                // 27(ID3 Tagäº’æ›)
+    {true,  28, _T("Vocal")},                   // 28(ID3 Tagäº’æ›)
+    {true,  29, _T("Jazz+Funk")},               // 29(ID3 Tagäº’æ›)
+    {true,  30, _T("Fusion")},                  // 30(ID3 Tagäº’æ›)
+    {true,  31, _T("Trance")},                  // 31(ID3 Tagäº’æ›)
+    {true,  32, _T("Classical")},               // 32(ID3 Tagäº’æ›)
+    {true,  33, _T("Instrumental")},            // 33(ID3 Tagäº’æ›)
+    {true,  34, _T("Acid")},                    // 34(ID3 Tagäº’æ›)
+    {true,  35, _T("House")},                   // 35(ID3 Tagäº’æ›)
+    {true,  36, _T("Game")},                    // 36(ID3 Tagäº’æ›)
+    {true,  37, _T("Sound Clip")},              // 37(ID3 Tagäº’æ›)
+    {true,  38, _T("Gospel")},                  // 38(ID3 Tagäº’æ›)
+    {true,  39, _T("Noise")},                   // 39(ID3 Tagäº’æ›)
+    {true,  40, _T("AlternRock")},              // 40(ID3 Tagäº’æ›)
+    {true,  41, _T("Bass")},                    // 41(ID3 Tagäº’æ›)
+    {true,  42, _T("Soul")},                    // 42(ID3 Tagäº’æ›)
+    {true,  43, _T("Punk")},                    // 43(ID3 Tagäº’æ›)
+    {true,  44, _T("Space")},                   // 44(ID3 Tagäº’æ›)
+    {true,  45, _T("Meditative")},              // 45(ID3 Tagäº’æ›)
+    {true,  46, _T("Instrumental Pop")},        // 46(ID3 Tagäº’æ›)
+    {true,  47, _T("Instrumental Rock")},       // 47(ID3 Tagäº’æ›)
+    {true,  48, _T("Ethnic")},                  // 48(ID3 Tagäº’æ›)
+    {true,  49, _T("Gothic")},                  // 49(ID3 Tagäº’æ›)
+    {true,  50, _T("Darkwave")},                // 50(ID3 Tagäº’æ›)
+    {true,  51, _T("Techno-Industrial")},       // 51(ID3 Tagäº’æ›)
+    {true,  52, _T("Electronic")},              // 52(ID3 Tagäº’æ›)
+    {true,  53, _T("Pop-Folk")},                // 53(ID3 Tagäº’æ›)
+    {true,  54, _T("Eurodance")},               // 54(ID3 Tagäº’æ›)
+    {true,  55, _T("Dream")},                   // 55(ID3 Tagäº’æ›)
+    {true,  56, _T("Southern Rock")},           // 56(ID3 Tagäº’æ›)
+    {true,  57, _T("Comedy")},                  // 57(ID3 Tagäº’æ›)
+    {true,  58, _T("Cult")},                    // 58(ID3 Tagäº’æ›)
+    {true,  59, _T("Gangsta")},                 // 59(ID3 Tagäº’æ›)
+    {true,  60, _T("Top 40")},                  // 60(ID3 Tagäº’æ›)
+    {true,  61, _T("Christian Rap")},           // 61(ID3 Tagäº’æ›)
+    {true,  62, _T("Pop/Funk")},                // 62(ID3 Tagäº’æ›)
+    {true,  63, _T("Jungle")},                  // 63(ID3 Tagäº’æ›)
+    {true,  64, _T("Native American")},         // 64(ID3 Tagäº’æ›)
+    {true,  65, _T("Cabaret")},                 // 65(ID3 Tagäº’æ›)
+    {true,  66, _T("New Wave")},                // 66(ID3 Tagäº’æ›)
+    {true,  67, _T("Psychedelic")},             // 67(ID3 Tagäº’æ›)
+    {true,  68, _T("Rave")},                    // 68(ID3 Tagäº’æ›)
+    {true,  69, _T("Showtunes")},               // 69(ID3 Tagäº’æ›)
+    {true,  70, _T("Trailer")},                 // 70(ID3 Tagäº’æ›)
+    {true,  71, _T("Lo-Fi")},                   // 71(ID3 Tagäº’æ›)
+    {true,  72, _T("Tribal")},                  // 72(ID3 Tagäº’æ›)
+    {true,  73, _T("Acid Punk")},               // 73(ID3 Tagäº’æ›)
+    {true,  74, _T("Acid Jazz")},               // 74(ID3 Tagäº’æ›)
+    {true,  75, _T("Polka")},                   // 75(ID3 Tagäº’æ›)
+    {true,  76, _T("Retro")},                   // 76(ID3 Tagäº’æ›)
+    {true,  77, _T("Musical")},                 // 77(ID3 Tagäº’æ›)
+    {true,  78, _T("Rock & Roll")},             // 78(ID3 Tagäº’æ›)
+    {true,  79, _T("Hard Rock")},               // 79(ID3 Tagäº’æ›)
+    {true,  80, _T("Folk")},                    // 80(ID3 Tagäº’æ›)
+    {true,  81, _T("Folk/Rock")},               // 81(ID3 Tagäº’æ›)
+    {true,  82, _T("National Folk")},           // 82(ID3 Tagäº’æ›)
+    {true,  83, _T("Swing")},                   // 83(ID3 Tagäº’æ›)
+    {true,  84, _T("Fast-Fusion")},             // 84(Winampäº’æ›)
+    {true,  85, _T("Bebob")},                   // 85(Winampäº’æ›)
+    {true,  86, _T("Latin")},                   // 86(Winampäº’æ›)
+    {true,  87, _T("Revival")},                 // 87(Winampäº’æ›)
+    {true,  88, _T("Celtic")},                  // 88(Winampäº’æ›)
+    {true,  89, _T("Bluegrass")},               // 89(Winampäº’æ›)
+    {true,  90, _T("Avantgarde")},              // 90(Winampäº’æ›)
+    {true,  91, _T("Gothic Rock")},             // 91(Winampäº’æ›)
+    {true,  92, _T("Progressive Rock")},        // 92(Winampäº’æ›)
+    {true,  93, _T("Psychedelic Rock")},        // 93(Winampäº’æ›)
+    {true,  94, _T("Symphonic Rock")},          // 94(Winampäº’æ›)
+    {true,  95, _T("Slow Rock")},               // 95(Winampäº’æ›)
+    {true,  96, _T("Big Band")},                // 96(Winampäº’æ›)
+    {true,  97, _T("Chorus")},                  // 97(Winampäº’æ›)
+    {true,  98, _T("Easy Listening")},          // 98(Winampäº’æ›)
+    {true,  99, _T("Acoustic")},                // 99(Winampäº’æ›)
+    {true, 100, _T("Humour")},                  // 100(Winampäº’æ›)
+    {true, 101, _T("Speech")},                  // 101(Winampäº’æ›)
+    {true, 102, _T("Chanson")},                 // 102(Winampäº’æ›)
+    {true, 103, _T("Opera")},                   // 103(Winampäº’æ›)
+    {true, 104, _T("Chamber Music")},           // 104(Winampäº’æ›)
+    {true, 105, _T("Sonata")},                  // 105(Winampäº’æ›)
+    {true, 106, _T("Symphony")},                // 106(Winampäº’æ›)
+    {true, 107, _T("Booty Bass")},              // 107(Winampäº’æ›)
+    {true, 108, _T("Primus")},                  // 108(Winampäº’æ›)
+    {true, 109, _T("Porn Groove")},             // 109(Winampäº’æ›)
+    {true, 110, _T("Satire")},                  // 110(Winampäº’æ›)
+    {true, 111, _T("Slow Jam")},                // 111(Winampäº’æ›)
+    {true, 112, _T("Club")},                    // 112(Winampäº’æ›)
+    {true, 113, _T("Tango")},                   // 113(Winampäº’æ›)
+    {true, 114, _T("Samba")},                   // 114(Winampäº’æ›)
+    {true, 115, _T("Folklore")},                // 115(Winampäº’æ›)
+    {true, 116, _T("Ballad")},                  // 116(Winampäº’æ›)
+    {true, 117, _T("Power Ballad")},            // 117(Winampäº’æ›)
+    {true, 118, _T("Phythmic Soul")},           // 118(Winampäº’æ›)
+    {true, 119, _T("Freestyle")},               // 119(Winampäº’æ›)
+    {true, 120, _T("Duet")},                    // 120(Winampäº’æ›)
+    {true, 121, _T("Punk Rock")},               // 121(Winampäº’æ›)
+    {true, 122, _T("Drum Solo")},               // 122(Winampäº’æ›)
+    {true, 123, _T("A Cappella")},              // 123(Winampäº’æ›)
+    {true, 124, _T("Euro-House")},              // 124(Winampäº’æ›)
+    {true, 125, _T("Dance Hall")},              // 125(Winampäº’æ›)
+    {true, 126, _T("Goa")},                     // 126(Winampäº’æ›)
+    {true, 127, _T("Drum & Bass")},             // 127(Winampäº’æ›)
+    {true, 128, _T("Club-House")},              // 128(Winampäº’æ›)
+    {true, 129, _T("Hardcore")},                // 129(Winampäº’æ›)
+    {true, 130, _T("Terror")},                  // 130(Winampäº’æ›)
+    {true, 131, _T("Indie")},                   // 131(Winampäº’æ›)
+    {true, 132, _T("BritPop")},                 // 132(Winampäº’æ›)
+    {true, 133, _T("Negerpunk")},               // 133(Winampäº’æ›)
+    {true, 134, _T("Polsk Punk")},              // 134(Winampäº’æ›)
+    {true, 135, _T("Beat")},                    // 135(Winampäº’æ›)
+    {true, 136, _T("Christian Gangsta Rap")},   // 136(Winampäº’æ›)
+    {true, 137, _T("Heavy Metal")},             // 137(Winampäº’æ›)
+    {true, 138, _T("Black Metal")},             // 138(Winampäº’æ›)
+    {true, 139, _T("Crossover")},               // 139(Winampäº’æ›)
+    {true, 140, _T("Contemporary Christian")},  // 140(Winampäº’æ›)
+    {true, 141, _T("Christian Rock")},          // 141(Winampäº’æ›)
+    {true, 142, _T("Merengue")},                // 142(Winampäº’æ›)
+    {true, 143, _T("Salsa")},                   // 143(Winampäº’æ›)
+    {true, 144, _T("Thrash Metal")},            // 144(Winampäº’æ›)
+    {true, 145, _T("Anime")},                   // 145(Winampäº’æ›)
+    {true, 146, _T("JPop")},                    // 146(Winampäº’æ›)
+    {true, 147, _T("Synthpop")},                // 147(Winampäº’æ›)
+    {false, 148, _T("æœªå®šç¾©(148)")},            // 148
+    {false, 148, _T("æœªå®šç¾©(148)")},            // 148
+    {false, 149, _T("æœªå®šç¾©(149)")},            // 149
+    {false, 150, _T("æœªå®šç¾©(150)")},            // 150
+    {false, 151, _T("æœªå®šç¾©(151)")},            // 151
+    {false, 152, _T("æœªå®šç¾©(152)")},            // 152
+    {false, 153, _T("æœªå®šç¾©(153)")},            // 153
+    {false, 154, _T("æœªå®šç¾©(154)")},            // 154
+    {false, 155, _T("æœªå®šç¾©(155)")},            // 155
+    {false, 156, _T("æœªå®šç¾©(156)")},            // 156
+    {false, 157, _T("æœªå®šç¾©(157)")},            // 157
+    {false, 158, _T("æœªå®šç¾©(158)")},            // 158
+    {false, 159, _T("æœªå®šç¾©(159)")},            // 159
+    {false, 160, _T("æœªå®šç¾©(160)")},            // 160
+    {false, 161, _T("æœªå®šç¾©(161)")},            // 161
+    {false, 162, _T("æœªå®šç¾©(162)")},            // 162
+    {false, 163, _T("æœªå®šç¾©(163)")},            // 163
+    {false, 164, _T("æœªå®šç¾©(164)")},            // 164
+    {false, 165, _T("æœªå®šç¾©(165)")},            // 165
+    {false, 166, _T("æœªå®šç¾©(166)")},            // 166
+    {false, 167, _T("æœªå®šç¾©(167)")},            // 167
+    {false, 168, _T("æœªå®šç¾©(168)")},            // 168
+    {false, 169, _T("æœªå®šç¾©(169)")},            // 169
+    {false, 170, _T("æœªå®šç¾©(170)")},            // 170
+    {false, 171, _T("æœªå®šç¾©(171)")},            // 171
+    {false, 172, _T("æœªå®šç¾©(172)")},            // 172
+    {false, 173, _T("æœªå®šç¾©(173)")},            // 173
+    {false, 174, _T("æœªå®šç¾©(174)")},            // 174
+    {false, 175, _T("æœªå®šç¾©(175)")},            // 175
+    {false, 176, _T("æœªå®šç¾©(176)")},            // 176
+    {false, 177, _T("æœªå®šç¾©(177)")},            // 177
+    {false, 178, _T("æœªå®šç¾©(178)")},            // 178
+    {false, 179, _T("æœªå®šç¾©(179)")},            // 179
+    {false, 180, _T("æœªå®šç¾©(180)")},            // 180
+    {false, 181, _T("æœªå®šç¾©(181)")},            // 181
+    {false, 182, _T("æœªå®šç¾©(182)")},            // 182
+    {false, 183, _T("æœªå®šç¾©(183)")},            // 183
+    {false, 184, _T("æœªå®šç¾©(184)")},            // 184
+    {false, 185, _T("æœªå®šç¾©(185)")},            // 185
+    {false, 186, _T("æœªå®šç¾©(186)")},            // 186
+    {false, 187, _T("æœªå®šç¾©(187)")},            // 187
+    {false, 188, _T("æœªå®šç¾©(188)")},            // 188
+    {false, 189, _T("æœªå®šç¾©(189)")},            // 189
+    {false, 190, _T("æœªå®šç¾©(190)")},            // 190
+    {false, 191, _T("æœªå®šç¾©(191)")},            // 191
+    {false, 192, _T("æœªå®šç¾©(192)")},            // 192
+    {false, 193, _T("æœªå®šç¾©(193)")},            // 193
+    {false, 194, _T("æœªå®šç¾©(194)")},            // 194
+    {false, 195, _T("æœªå®šç¾©(195)")},            // 195
+    {false, 196, _T("æœªå®šç¾©(196)")},            // 196
+    {false, 197, _T("æœªå®šç¾©(197)")},            // 197
+    {false, 198, _T("æœªå®šç¾©(198)")},            // 198
+    {false, 199, _T("æœªå®šç¾©(199)")},            // 199
+    {false, 200, _T("æœªå®šç¾©(200)")},            // 200
+    {false, 201, _T("æœªå®šç¾©(201)")},            // 201
+    {false, 202, _T("æœªå®šç¾©(202)")},            // 202
+    {false, 203, _T("æœªå®šç¾©(203)")},            // 203
+    {false, 204, _T("æœªå®šç¾©(204)")},            // 204
+    {false, 205, _T("æœªå®šç¾©(205)")},            // 205
+    {false, 206, _T("æœªå®šç¾©(206)")},            // 206
+    {false, 207, _T("æœªå®šç¾©(207)")},            // 207
+    {false, 208, _T("æœªå®šç¾©(208)")},            // 208
+    {false, 209, _T("æœªå®šç¾©(209)")},            // 209
+    {false, 210, _T("æœªå®šç¾©(210)")},            // 210
+    {false, 211, _T("æœªå®šç¾©(211)")},            // 211
+    {false, 212, _T("æœªå®šç¾©(212)")},            // 212
+    {false, 213, _T("æœªå®šç¾©(213)")},            // 213
+    {false, 214, _T("æœªå®šç¾©(214)")},            // 214
+    {false, 215, _T("æœªå®šç¾©(215)")},            // 215
+    {false, 216, _T("æœªå®šç¾©(216)")},            // 216
+    {false, 217, _T("æœªå®šç¾©(217)")},            // 217
+    {false, 218, _T("æœªå®šç¾©(218)")},            // 218
+    {false, 219, _T("æœªå®šç¾©(219)")},            // 219
+    {false, 220, _T("æœªå®šç¾©(220)")},            // 220
+    {false, 221, _T("æœªå®šç¾©(221)")},            // 221
+    {false, 222, _T("æœªå®šç¾©(222)")},            // 222
+    {false, 223, _T("æœªå®šç¾©(223)")},            // 223
+    {false, 224, _T("æœªå®šç¾©(224)")},            // 224
+    {false, 225, _T("æœªå®šç¾©(225)")},            // 225
+    {false, 226, _T("æœªå®šç¾©(226)")},            // 226
+    {false, 227, _T("æœªå®šç¾©(227)")},            // 227
+    {false, 228, _T("æœªå®šç¾©(228)")},            // 228
+    {false, 229, _T("æœªå®šç¾©(229)")},            // 229
+    {false, 230, _T("æœªå®šç¾©(230)")},            // 230
+    {false, 231, _T("æœªå®šç¾©(231)")},            // 231
+    {false, 232, _T("æœªå®šç¾©(232)")},            // 232
+    {false, 233, _T("æœªå®šç¾©(233)")},            // 233
+    {false, 234, _T("æœªå®šç¾©(234)")},            // 234
+    {false, 235, _T("æœªå®šç¾©(235)")},            // 235
+    {false, 236, _T("æœªå®šç¾©(236)")},            // 236
+    {false, 237, _T("æœªå®šç¾©(237)")},            // 237
+    {false, 238, _T("æœªå®šç¾©(238)")},            // 238
+    {false, 239, _T("æœªå®šç¾©(239)")},            // 239
+    {false, 240, _T("æœªå®šç¾©(240)")},            // 240
+    {false, 241, _T("æœªå®šç¾©(241)")},            // 241
+    {false, 242, _T("æœªå®šç¾©(242)")},            // 242
+    {false, 243, _T("æœªå®šç¾©(243)")},            // 243
+    {false, 244, _T("æœªå®šç¾©(244)")},            // 244
+    {false, 245, _T("æœªå®šç¾©(245)")},            // 245
+    {false, 246, _T("æœªå®šç¾©(246)")},            // 246
+    {false, 247, _T("æœªå®šç¾©(247)")},            // 247
+    {false, 248, _T("Heavy Rock(J)")},          // 248(SCMPXäº’æ›)
+    {false, 249, _T("Doom Rock(J)")},           // 249(SCMPXäº’æ›)
+    {false, 250, _T("J-POP(J)")},               // 250(SCMPXäº’æ›)
+    {false, 251, _T("Seiyu(J)")},               // 251(SCMPXäº’æ›)
+    {false, 252, _T("Tecno Ambient(J)")},       // 252(SCMPXäº’æ›)
+    {false, 253, _T("Moemoe(J)")},              // 253(SCMPXäº’æ›)
+    {false, 254, _T("Tokusatsu(J)")},           // 254(SCMPXäº’æ›)
+    {false, 255, _T("Anime(J)")},               // 255(SCMPXäº’æ›)
+    {false, 255, _T("æœªæŒ‡å®š")},                 // 255
+    {false, 255, NULL},                     // çµ‚ç«¯ã‚³ãƒ¼ãƒ‰
 };
-USER_GENRE_LIST*	g_genreListUSER = NULL;
+USER_GENRE_LIST*    g_genreListUSER = NULL;
 
 
 
 // ======================================
-// =====     ŠÖ”ƒvƒƒgƒ^ƒCƒv       =====
+// =====     é–¢æ•°ãƒ—ãƒ­ãƒˆã‚¿ã‚¤ãƒ—       =====
 // ======================================
 
 
 // =============================================
 // GetGenreNameSIF
-// ŠT—v  : ƒWƒƒƒ“ƒ‹”Ô†‚©‚çƒWƒƒƒ“ƒ‹–¼‚ğæ“¾(SIƒtƒB[ƒ‹ƒh—p)
-// ˆø”  : byGenre			= ƒWƒƒƒ“ƒ‹”Ô†
-// –ß‚è’l: const char *		= ƒWƒƒƒ“ƒ‹–¼
+// æ¦‚è¦  : ã‚¸ãƒ£ãƒ³ãƒ«ç•ªå·ã‹ã‚‰ã‚¸ãƒ£ãƒ³ãƒ«åã‚’å–å¾—(SIãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ç”¨)
+// å¼•æ•°  : byGenre          = ã‚¸ãƒ£ãƒ³ãƒ«ç•ªå·
+// æˆ»ã‚Šå€¤: const char *     = ã‚¸ãƒ£ãƒ³ãƒ«å
 // =============================================
-const char *GetGenreNameSIF(BYTE byGenre)
+const TCHAR *GetGenreNameSIF(BYTE byGenre)
 {
-	int		i;
-	for (i = 0; g_genreListSCMPX[i].sName != NULL; i++) {
-		if (g_genreListSCMPX[i].byGenre == byGenre) {
-			if (byGenre == 0xff) {
-				// SCMPX ŒİŠ·‚©‚Ç‚¤‚©‚Å•¶š—ñ‚ğ•Ï‚¦‚é
-				return(g_genreListSCMPX[i].bAddList ? "Anime(J)" : "");
-			}
-			return(g_genreListSCMPX[i].sName);
-		}
-	}
-	return("");
+    int     i;
+    for (i = 0; g_genreListSCMPX[i].sName != NULL; i++) {
+        if (g_genreListSCMPX[i].byGenre == byGenre) {
+            if (byGenre == 0xff) {
+                // SCMPX äº’æ›ã‹ã©ã†ã‹ã§æ–‡å­—åˆ—ã‚’å¤‰ãˆã‚‹
+                return(g_genreListSCMPX[i].bAddList ? _T("Anime(J)") : _T(""));
+            }
+            return(g_genreListSCMPX[i].sName);
+        }
+    }
+    return(_T(""));
 }
 
 // =============================================
 // GetGenreCode
-// ŠT—v  : ƒWƒƒƒ“ƒ‹–¼‚©‚çƒWƒƒƒ“ƒ‹”Ô†‚ğæ“¾
-// ˆø”  : sGenre		= ƒWƒƒƒ“ƒ‹–¼
-// –ß‚è’l: int			= ƒWƒƒƒ“ƒ‹”Ô†(-1:–¢‘Î‰)
+// æ¦‚è¦  : ã‚¸ãƒ£ãƒ³ãƒ«åã‹ã‚‰ã‚¸ãƒ£ãƒ³ãƒ«ç•ªå·ã‚’å–å¾—
+// å¼•æ•°  : sGenre       = ã‚¸ãƒ£ãƒ³ãƒ«å
+// æˆ»ã‚Šå€¤: int          = ã‚¸ãƒ£ãƒ³ãƒ«ç•ªå·(-1:æœªå¯¾å¿œ)
 // =============================================
-int GetGenreCode(const char *sGenre)
+int GetGenreCode(const TCHAR *sGenre)
 {
-	int		i;
-	for (i = 0; g_genreListSCMPX[i].sName != NULL; i++) {
-		if (_strcmpi(g_genreListSCMPX[i].sName, sGenre) == 0) {
-			return(g_genreListSCMPX[i].byGenre);
-		}
-	}
-	for (i = 0; i < USER_GENRE_LIST_MAX; i++) {
-		if (_strcmpi(g_genreListUSER[i].sName, sGenre) == 0 && g_genreListUSER[i].bUse) {
-			return(g_genreListUSER[i].byGenre);
-		}
-	}
-	return(-1);
+    int     i;
+    for (i = 0; g_genreListSCMPX[i].sName != NULL; i++) {
+        if (_tcsicmp(g_genreListSCMPX[i].sName, sGenre) == 0) {
+            return(g_genreListSCMPX[i].byGenre);
+        }
+    }
+    for (i = 0; i < USER_GENRE_LIST_MAX; i++) {
+        if (_tcsicmp(g_genreListUSER[i].sName, sGenre) == 0 && g_genreListUSER[i].bUse) {
+            return(g_genreListUSER[i].byGenre);
+        }
+    }
+    return(-1);
 }
 
-bool IsUserGenre(const char *sGenre)
+bool IsUserGenre(const TCHAR *sGenre)
 {
-	if (strlen(sGenre) == 0) return false; /* WildCherry2 075 */
-	int		i;
-	for (i = 0; g_genreListSCMPX[i].sName != NULL; i++) {
-		if (_strcmpi(g_genreListSCMPX[i].sName, sGenre) == 0) {
-			return false;
-		}
-	}
-	for (i = 0; i < USER_GENRE_LIST_MAX; i++) { 
+    if (_tcslen(sGenre) == 0) return false; /* WildCherry2 075 */
+    int     i;
+    for (i = 0; g_genreListSCMPX[i].sName != NULL; i++) {
+        if (_tcsicmp(g_genreListSCMPX[i].sName, sGenre) == 0) {
+            return false;
+        }
+    }
+    for (i = 0; i < USER_GENRE_LIST_MAX; i++) {
 
-		if (_strcmpi(g_genreListUSER[i].sName, sGenre) == 0 && g_genreListUSER[i].bUse) {
-			return true;
-		}
-	}
-	return true;
+        if (_tcsicmp(g_genreListUSER[i].sName, sGenre) == 0 && g_genreListUSER[i].bUse) {
+            return true;
+        }
+    }
+    return true;
 }
 
-/* Š¿š‚Ì‚PƒoƒCƒg–Ú‚©‚Ç‚¤‚©‚ÌŒŸ¸ */
-#ifndef iskanji
-#define iskanji(c)		((unsigned char)(c) >= 0x81 && (unsigned char)(c) <= 0x9f || (unsigned char)(c) >= 0xe0 && (unsigned char)(c) <= 0xfc)
-#endif
-void StringCopyN(char *sDest, const char *sSrc, int nLen, BOOL bTerm)
+static  bool MyChangeFileName(const TCHAR *sFileName, const TCHAR *sNewName)
 {
-	if (strlen(sSrc) < (unsigned int)nLen) {
-		if (bTerm) strcpy(sDest, sSrc);
-		else       memcpy(sDest, sSrc, strlen(sSrc));
-		return;
-	}
-	while(nLen > 0) {
-		if (iskanji(*sSrc)) {
-			if (nLen >= 2) {
-				*sDest++ = *sSrc++;
-				*sDest++ = *sSrc++;
-			} else {
-				if (bTerm) *sDest = '\0';
-			}
-			nLen -= 2;
-		} else {
-			*sDest++ = *sSrc++;
-			nLen--;
-		}
-	}
+    if (MoveFile(sFileName, sNewName) == FALSE) {
+        CString strBuffer;
+        LPVOID lpMsgBuf;
+        FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER |
+                      FORMAT_MESSAGE_FROM_SYSTEM |
+                      FORMAT_MESSAGE_IGNORE_INSERTS,
+                      NULL, GetLastError(),
+                      MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), // ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆè¨€èª
+                      (LPTSTR)&lpMsgBuf, 0, NULL);
+        strBuffer.Format(_T("å¤‰æ›´å‰ï¼š%s\nå¤‰æ›´å¾Œï¼š%s\n\n%s"), sFileName, sNewName, (const TCHAR *)lpMsgBuf);
+        LocalFree(lpMsgBuf);
+        MessageBox(NULL, strBuffer, _T("ãƒ•ã‚¡ã‚¤ãƒ«åã‚’å¤‰æ›´ã§ãã¾ã›ã‚“ã§ã—ãŸ"), MB_ICONSTOP|MB_OK|MB_TOPMOST);
+        return(false);
+    }
+    return(true);
 }
 
-static	bool MyChangeFileName(const char *sFileName, const char *sNewName)
+static  bool MyCopyFile(const TCHAR *sFileName, const TCHAR *sNewName, bool bMoveFlag)
 {
-	if (MoveFile(sFileName, sNewName) == FALSE) {
-		CString	strBuffer;
-		LPVOID lpMsgBuf;
-		FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER |
-					  FORMAT_MESSAGE_FROM_SYSTEM |
-					  FORMAT_MESSAGE_IGNORE_INSERTS,
-					  NULL, GetLastError(),
-					  MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), // ƒfƒtƒHƒ‹ƒgŒ¾Œê
-					  (LPTSTR)&lpMsgBuf, 0, NULL);
-		strBuffer.Format("•ÏX‘OF%s\n•ÏXŒãF%s\n\n%s", sFileName, sNewName, (const char *)lpMsgBuf);
-		LocalFree(lpMsgBuf);
-		MessageBox(NULL, strBuffer, "ƒtƒ@ƒCƒ‹–¼‚ğ•ÏX‚Å‚«‚Ü‚¹‚ñ‚Å‚µ‚½", MB_ICONSTOP|MB_OK|MB_TOPMOST);
-		return(false);
-	}
-	return(true);
+    BOOL    bResult;
+
+    // ã‚³ãƒ”ãƒ¼ï¼ç§»å‹•ã‚’å®Ÿè¡Œ
+    if (bMoveFlag) {
+        // ç§»å‹•å…ˆã«åŒåã®ãƒ•ã‚¡ã‚¤ãƒ«ãŒã‚ã‚‹å ´åˆã¯ã€äºˆã‚å‰Šé™¤ã™ã‚‹
+        if (SetFileAttributes(sNewName, CFile::normal) == TRUE) {
+            if (DeleteFile(sNewName) == FALSE) {
+//              CString strBuffer;
+//              LPVOID lpMsgBuf;
+//              FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER |
+//                            FORMAT_MESSAGE_FROM_SYSTEM |
+//                            FORMAT_MESSAGE_IGNORE_INSERTS,
+//                            NULL, GetLastError(),
+//                            MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), // ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆè¨€èª
+//                            (LPTSTR)&lpMsgBuf, 0, NULL);
+//              strBuffer.Format("ãƒ•ã‚¡ã‚¤ãƒ«åï¼š%s\n\n%s", sNewName, (const char *)lpMsgBuf);
+//              LocalFree(lpMsgBuf);
+//              MessageBox(NULL, strBuffer, "ãƒ•ã‚¡ã‚¤ãƒ«ã®å‰Šé™¤ã«å¤±æ•—ã—ã¾ã—ãŸ", MB_OK/*MB_ABORTRETRYIGNORE*/|MB_TOPMOST);
+//              return(false);
+            }
+        }
+        bResult = MoveFile(sFileName, sNewName);
+    } else {
+        bResult = CopyFile(sFileName, sNewName, FALSE);
+    }
+
+    // ã‚¨ãƒ©ãƒ¼å‡¦ç†
+    if (bResult == FALSE) {
+        static  const TCHAR *sMessage[][2] = {
+            {_T("ã‚³ãƒ”ãƒ¼å…ƒï¼š%s\nã‚³ãƒ”ãƒ¼å…ˆï¼š%s\n\n%s"), _T("ãƒ•ã‚¡ã‚¤ãƒ«ã®ã‚³ãƒ”ãƒ¼ã«å¤±æ•—ã—ã¾ã—ãŸ")},
+            {_T("ç§»å‹•å…ƒï¼š%s\nç§»å‹•å…ˆï¼š%s\n\n%s"), _T("ãƒ•ã‚¡ã‚¤ãƒ«ã®ç§»å‹•ã«å¤±æ•—ã—ã¾ã—ãŸ")},
+        };
+        CString strBuffer;
+        LPVOID lpMsgBuf;
+        FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER |
+                      FORMAT_MESSAGE_FROM_SYSTEM |
+                      FORMAT_MESSAGE_IGNORE_INSERTS,
+                      NULL, GetLastError(),
+                      MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), // ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆè¨€èª
+                      (LPTSTR)&lpMsgBuf, 0, NULL);
+        strBuffer.Format(sMessage[bMoveFlag?1:0][0], sFileName, sNewName, (const TCHAR *)lpMsgBuf);
+        LocalFree(lpMsgBuf);
+        MessageBox(NULL, strBuffer, sMessage[bMoveFlag?1:0][1], MB_ICONSTOP|MB_OK|MB_TOPMOST);
+        return(false);
+    }
+    return(true);
 }
 
-static	bool MyCopyFile(const char *sFileName, const char *sNewName, bool bMoveFlag)
+static  void ChangeFileAttr(const TCHAR *sFileName, DWORD dwAttr)
 {
-	BOOL	bResult;
-
-	// ƒRƒs[^ˆÚ“®‚ğÀs
-	if (bMoveFlag) {
-		// ˆÚ“®æ‚É“¯–¼‚Ìƒtƒ@ƒCƒ‹‚ª‚ ‚éê‡‚ÍA—\‚ßíœ‚·‚é
-		if (SetFileAttributes(sNewName, CFile::normal) == TRUE) {
-			if (DeleteFile(sNewName) == FALSE) {
-//				CString	strBuffer;
-//				LPVOID lpMsgBuf;
-//				FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER |
-//							  FORMAT_MESSAGE_FROM_SYSTEM |
-//							  FORMAT_MESSAGE_IGNORE_INSERTS,
-//							  NULL, GetLastError(),
-//							  MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), // ƒfƒtƒHƒ‹ƒgŒ¾Œê
-//							  (LPTSTR)&lpMsgBuf, 0, NULL);
-//				strBuffer.Format("ƒtƒ@ƒCƒ‹–¼F%s\n\n%s", sNewName, (const char *)lpMsgBuf);
-//				LocalFree(lpMsgBuf);
-//				MessageBox(NULL, strBuffer, "ƒtƒ@ƒCƒ‹‚Ìíœ‚É¸”s‚µ‚Ü‚µ‚½", MB_OK/*MB_ABORTRETRYIGNORE*/|MB_TOPMOST);
-//				return(false);
-			}
-		}
-		bResult = MoveFile(sFileName, sNewName);
-	} else {
-		bResult = CopyFile(sFileName, sNewName, FALSE);
-	}
-
-	// ƒGƒ‰[ˆ—
-	if (bResult == FALSE) {
-		static	const char *sMessage[][2] = {
-			{"ƒRƒs[Œ³F%s\nƒRƒs[æF%s\n\n%s", "ƒtƒ@ƒCƒ‹‚ÌƒRƒs[‚É¸”s‚µ‚Ü‚µ‚½"},
-			{"ˆÚ“®Œ³F%s\nˆÚ“®æF%s\n\n%s", "ƒtƒ@ƒCƒ‹‚ÌˆÚ“®‚É¸”s‚µ‚Ü‚µ‚½"},
-		};
-		CString	strBuffer;
-		LPVOID lpMsgBuf;
-		FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER |
-					  FORMAT_MESSAGE_FROM_SYSTEM |
-					  FORMAT_MESSAGE_IGNORE_INSERTS,
-					  NULL, GetLastError(),
-					  MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), // ƒfƒtƒHƒ‹ƒgŒ¾Œê
-					  (LPTSTR)&lpMsgBuf, 0, NULL);
-		strBuffer.Format(sMessage[bMoveFlag?1:0][0], sFileName, sNewName, (const char *)lpMsgBuf);
-		LocalFree(lpMsgBuf);
-		MessageBox(NULL, strBuffer, sMessage[bMoveFlag?1:0][1], MB_ICONSTOP|MB_OK|MB_TOPMOST);
-		return(false);
-	}
-	return(true);
+    DWORD   dwAttrNow;
+    if ((dwAttrNow = GetFileAttributes(sFileName)) != (DWORD)-1L) {
+        if (dwAttrNow != dwAttr) {
+            SetFileAttributes(sFileName, dwAttr);
+        }
+    }
 }
 
-static	void ChangeFileAttr(const char *sFileName, DWORD dwAttr)
+// æœ€å¾ŒãŒ '\\' ã«ãªã£ã¦ã„ã‚‹ã‹ã©ã†ã‹ã®ãƒã‚§ãƒƒã‚¯é–¢æ•°
+bool IsFolderName(const TCHAR *sName)
 {
-	DWORD	dwAttrNow;
-	if ((dwAttrNow = GetFileAttributes((LPTSTR)sFileName)) != (DWORD)-1L) {
-		if (dwAttrNow != dwAttr) {
-			SetFileAttributes((LPTSTR)sFileName, dwAttr);
-		}
-	}
-}
-
-// ÅŒã‚ª '\\' ‚É‚È‚Á‚Ä‚¢‚é‚©‚Ç‚¤‚©‚Ìƒ`ƒFƒbƒNŠÖ”
-bool IsFolderName(const char *sName)
-{
-	bool	bResult = false;
-	while(*sName != NULL) {
-		if (iskanji(*sName)) {
-			bResult = false;
-			sName += 2;
-		} else {
-			bResult = (*sName == '\\') ? true : false;
-			sName++;
-		}
-	}
-	return(bResult);
+    const TCHAR *path_delimiter = _tcsrchr(sName, _T('\\'));
+    return path_delimiter && !path_delimiter[1];
 }
 
 
 // =============================================
 // CFileMP3::CFileMP3
-// Func  : ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+// Func  : ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 // Input : none
 // Output: none
 // =============================================
 CFileMP3::CFileMP3()
 {
-	m_fileMP3.fileSpecificInfo = NULL;
-	Initialize();
+    m_fileMP3.fileSpecificInfo = NULL;
+    Initialize();
 }
 
 // =============================================
 // CFileMP3::~CFileMP3
-// Func  : ƒfƒXƒgƒ‰ƒNƒ^
+// Func  : ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 // Input : none
 // Output: none
 // =============================================
 CFileMP3::~CFileMP3()
 {
-	//if (m_fileMP3.fileOGG != NULL)	delete m_fileMP3.fileOGG; /* Conspiracy 196 */
+    //if (m_fileMP3.fileOGG != NULL)    delete m_fileMP3.fileOGG; /* Conspiracy 196 */
 }
 
 // =============================================
 // CFileMP3::InitData
-// ŠT—v  : MP3 ƒtƒ@ƒCƒ‹î•ñ‚Ì\‘¢‘Ì‚ğ‰Šú‰»‚µ‚Ü‚·
-// ˆø”  : fileMP3		= ‰Šú‰»‚·‚é\‘¢‘Ì
-// –ß‚è’l: none
+// æ¦‚è¦  : MP3 ãƒ•ã‚¡ã‚¤ãƒ«æƒ…å ±ã®æ§‹é€ ä½“ã‚’åˆæœŸåŒ–ã—ã¾ã™
+// å¼•æ•°  : fileMP3      = åˆæœŸåŒ–ã™ã‚‹æ§‹é€ ä½“
+// æˆ»ã‚Šå€¤: none
 // =============================================
 void CFileMP3::InitData(FILE_MP3 *fileMP3)
 {
-	extern void InitFileSpecificInfo(FILE_MP3* pFileMP3);
-	if (fileMP3->fileSpecificInfo != NULL) {
-		InitFileSpecificInfo(fileMP3);
-		fileMP3->fileSpecificInfo = NULL;
-	}
+    extern void InitFileSpecificInfo(FILE_MP3* pFileMP3);
+    if (fileMP3->fileSpecificInfo != NULL) {
+        InitFileSpecificInfo(fileMP3);
+        fileMP3->fileSpecificInfo = NULL;
+    }
 
-	fileMP3->bModifyFlag	= false;	// ŠO•”‚©‚ç•ÒW‚³‚ê‚½‚©‚Ç‚¤‚©‚Ìƒtƒ‰ƒO
-	fileMP3->bCheckFlag		= false;	// ƒ`ƒFƒbƒNó‘Ô
-	fileMP3->lFileSize		= 0L;		// ƒtƒ@ƒCƒ‹ƒTƒCƒY
-	fileMP3->time			= CTime(0);	// ƒtƒ@ƒCƒ‹XV“ú
-	fileMP3->timeCreate		= CTime(0);	// ƒtƒ@ƒCƒ‹ì¬“ú
+    fileMP3->bModifyFlag    = false;    // å¤–éƒ¨ã‹ã‚‰ç·¨é›†ã•ã‚ŒãŸã‹ã©ã†ã‹ã®ãƒ•ãƒ©ã‚°
+    fileMP3->bCheckFlag     = false;    // ãƒã‚§ãƒƒã‚¯çŠ¶æ…‹
+    fileMP3->lFileSize      = 0L;       // ãƒ•ã‚¡ã‚¤ãƒ«ã‚µã‚¤ã‚º
+    fileMP3->time           = CTime(0); // ãƒ•ã‚¡ã‚¤ãƒ«æ›´æ–°æ—¥
+    fileMP3->timeCreate     = CTime(0); // ãƒ•ã‚¡ã‚¤ãƒ«ä½œæˆæ—¥
 #ifdef USE_VBMP3_DLL
-	fileMP3->nPlayTime		= 0;		// ‰‰‘tŠÔ(’PˆÊF•b)
+    fileMP3->nPlayTime      = 0;        // æ¼”å¥æ™‚é–“(å˜ä½ï¼šç§’)
 #endif
-	fileMP3->nPlayTime		= -1;		// ‰‰‘tŠÔ(’PˆÊF•b) /* Conspiracy 195 */
-	fileMP3->bExistLyricFile = false;	// ‰ÌŒƒtƒ@ƒCƒ‹‚Ì‘¶İ
-	fileMP3->nFormat		= FILE_FORMAT_UNKNOWN;	// ƒtƒ@ƒCƒ‹Œ`®F–¢’m‚ÌŒ`®
-	fileMP3->strFullPathName.Empty();	// ƒtƒ@ƒCƒ‹–¼(ƒtƒ‹ƒpƒX)
-	fileMP3->strFileName.Empty();		// ƒtƒ@ƒCƒ‹–¼
-	fileMP3->strFilePath.Empty();		// ƒpƒX–¼
+    fileMP3->nPlayTime      = -1;       // æ¼”å¥æ™‚é–“(å˜ä½ï¼šç§’) /* Conspiracy 195 */
+    fileMP3->bExistLyricFile = false;   // æ­Œè©ãƒ•ã‚¡ã‚¤ãƒ«ã®å­˜åœ¨
+    fileMP3->nFormat        = FILE_FORMAT_UNKNOWN;  // ãƒ•ã‚¡ã‚¤ãƒ«å½¢å¼ï¼šæœªçŸ¥ã®å½¢å¼
+    fileMP3->strFullPathName.Empty();   // ãƒ•ã‚¡ã‚¤ãƒ«å(ãƒ•ãƒ«ãƒ‘ã‚¹)
+    fileMP3->strFileName.Empty();       // ãƒ•ã‚¡ã‚¤ãƒ«å
+    fileMP3->strFilePath.Empty();       // ãƒ‘ã‚¹å
 
-	// ID3 ‚ÌƒNƒŠƒA
-	InitDataID3(fileMP3); /* STEP 029 */
+    // ID3 ã®ã‚¯ãƒªã‚¢
+    InitDataID3(fileMP3); /* STEP 029 */
 
-	// SIF ‚ÌƒNƒŠƒA
-	InitDataSIF(fileMP3);
+    // SIF ã®ã‚¯ãƒªã‚¢
+    InitDataSIF(fileMP3);
 }
 
 void CFileMP3::InitDataID3(FILE_MP3 *fileMP3) /* STEP 029 */
 {
-	fileMP3->strTrackName.Empty();		// ƒgƒ‰ƒbƒN–¼
-	fileMP3->strArtistName.Empty();		// ƒA[ƒeƒBƒXƒg–¼
-	fileMP3->strAlbumName.Empty();		// ƒAƒ‹ƒoƒ€–¼
-	fileMP3->strComment.Empty();		// ƒRƒƒ“ƒg
-	fileMP3->strYear.Empty();			// ƒŠƒŠ[ƒX”N†
-	fileMP3->byTrackNumber	= 0xff;		// ƒgƒ‰ƒbƒN”Ô†(”’l•ÒW—p)
-	fileMP3->strTrackNumber.Empty();	// ƒgƒ‰ƒbƒN”Ô†(•¶š—ñ•ÒW—p)
-	fileMP3->byDiskNumber	= 0xff;
-	fileMP3->strDiskNumber.Empty();
-	fileMP3->byGenre		= 0xff;		// ƒWƒƒƒ“ƒ‹”Ô†
-	fileMP3->strGenre.Empty();			// ƒWƒƒƒ“ƒ‹–¼
+    fileMP3->strTrackName.Empty();      // ãƒˆãƒ©ãƒƒã‚¯å
+    fileMP3->strArtistName.Empty();     // ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆå
+    fileMP3->strAlbumName.Empty();      // ã‚¢ãƒ«ãƒãƒ å
+    fileMP3->strComment.Empty();        // ã‚³ãƒ¡ãƒ³ãƒˆ
+    fileMP3->strYear.Empty();           // ãƒªãƒªãƒ¼ã‚¹å¹´å·
+    fileMP3->byTrackNumber  = 0xff;     // ãƒˆãƒ©ãƒƒã‚¯ç•ªå·(æ•°å€¤ç·¨é›†ç”¨)
+    fileMP3->strTrackNumber.Empty();    // ãƒˆãƒ©ãƒƒã‚¯ç•ªå·(æ–‡å­—åˆ—ç·¨é›†ç”¨)
+    fileMP3->byGenre        = 0xff;     // ã‚¸ãƒ£ãƒ³ãƒ«ç•ªå·
+    fileMP3->strGenre.Empty();          // ã‚¸ãƒ£ãƒ³ãƒ«å
+
 }
 
 // =============================================
 //  CFileMP3::InitDataSIF
-//  ŠT—v  : MP3 ƒtƒ@ƒCƒ‹î•ñ‚Ì\‘¢‘Ì‚ğ‰Šú‰»‚µ‚Ü‚·(SIFŠÖ˜A‚Ì‚İ)
-//  ˆø”  : fileMP3		= ‰Šú‰»‚·‚é\‘¢‘Ì
-//  –ß‚è’l: ‚È‚µ
+//  æ¦‚è¦  : MP3 ãƒ•ã‚¡ã‚¤ãƒ«æƒ…å ±ã®æ§‹é€ ä½“ã‚’åˆæœŸåŒ–ã—ã¾ã™(SIFé–¢é€£ã®ã¿)
+//  å¼•æ•°  : fileMP3     = åˆæœŸåŒ–ã™ã‚‹æ§‹é€ ä½“
+//  æˆ»ã‚Šå€¤: ãªã—
 // =============================================
 void CFileMP3::InitDataSIF(FILE_MP3 *fileMP3)
 {
-	// RIFF MP3 ‚Ì SI ƒtƒB[ƒ‹ƒh
-	fileMP3->strTrackNameSI.Empty();	// ‹È–¼
-	fileMP3->strArtistNameSI.Empty();	// ƒA[ƒeƒBƒXƒg–¼
-	fileMP3->strAlbumNameSI.Empty();	// »•i–¼
-	fileMP3->strCommentSI.Empty();		// ƒRƒƒ“ƒg•¶š—ñ
-	fileMP3->strYearSI.Empty();			// ƒŠƒŠ[ƒX”N†
-	fileMP3->strGenreSI.Empty();		// ƒWƒƒƒ“ƒ‹–¼
-	fileMP3->strCopyrightSI.Empty();	// ’˜ìŒ 
-	fileMP3->strEngineerSI.Empty();		// ƒGƒ“ƒWƒjƒA
-	fileMP3->strSourceSI.Empty();		// ƒ\[ƒX
-	fileMP3->strSoftwareSI.Empty();		// ƒ\ƒtƒgƒEƒFƒA
-	fileMP3->strKeywordSI.Empty();		// ƒL[ƒ[ƒh
-	fileMP3->strTechnicianSI.Empty();	// ‹ZpÒ
-	fileMP3->strLyricSI.Empty();		// ‰ÌŒ
-	fileMP3->strCommissionSI.Empty();	// ƒRƒ~ƒbƒVƒ‡ƒ“
+    // RIFF MP3 ã® SI ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰
+    fileMP3->strTrackNameSI.Empty();    // æ›²å
+    fileMP3->strArtistNameSI.Empty();   // ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆå
+    fileMP3->strAlbumNameSI.Empty();    // è£½å“å
+    fileMP3->strCommentSI.Empty();      // ã‚³ãƒ¡ãƒ³ãƒˆæ–‡å­—åˆ—
+    fileMP3->strYearSI.Empty();         // ãƒªãƒªãƒ¼ã‚¹å¹´å·
+    fileMP3->strGenreSI.Empty();        // ã‚¸ãƒ£ãƒ³ãƒ«å
+    fileMP3->strCopyrightSI.Empty();    // è‘—ä½œæ¨©
+    fileMP3->strEngineerSI.Empty();     // ã‚¨ãƒ³ã‚¸ãƒ‹ã‚¢
+    fileMP3->strSourceSI.Empty();       // ã‚½ãƒ¼ã‚¹
+    fileMP3->strSoftwareSI.Empty();     // ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢
+    fileMP3->strKeywordSI.Empty();      // ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰
+    fileMP3->strTechnicianSI.Empty();   // æŠ€è¡“è€…
+    fileMP3->strLyricSI.Empty();        // æ­Œè©
+    fileMP3->strCommissionSI.Empty();   // ã‚³ãƒŸãƒƒã‚·ãƒ§ãƒ³
 
-	if (IsUserGenre(fileMP3->strGenre)) {
-		fileMP3->strGenre = GetGenreNameSIF(fileMP3->byGenre);
-	}
-	fileMP3->strTrackNumber.Empty();
-	if (fileMP3->byTrackNumber != 0xFF) {
-		fileMP3->strTrackNumber.Format("%d", fileMP3->byTrackNumber);
-	}
-	fileMP3->strTrackNumberSI.Empty();
-	fileMP3->strWriterSI.Empty();		// ìŒ
-	fileMP3->strComposerSI.Empty();		// ì‹È
-	fileMP3->strAlbmArtistSI.Empty();	// Albm.ƒA[ƒeƒBƒXƒg
-	fileMP3->strOrigArtistSI.Empty();	// Orig.ƒA[ƒeƒBƒXƒg
-	fileMP3->strURLSI.Empty();			// URL
-	fileMP3->strEncodest.Empty();		// ƒGƒ“ƒR[ƒh‚µ‚½l
-	fileMP3->strOther.Empty();			// ‚»‚Ì‘¼
+    if (IsUserGenre(fileMP3->strGenre)) {
+        fileMP3->strGenre = GetGenreNameSIF(fileMP3->byGenre);
+    }
+    fileMP3->strTrackNumber.Empty();
+    if (fileMP3->byTrackNumber != 0xFF) {
+        fileMP3->strTrackNumber.Format(_T("%d"), fileMP3->byTrackNumber);
+    }
+    fileMP3->strTrackNumberSI.Empty();
+    fileMP3->strTrackTotalSI.Empty();   // ãƒˆãƒ©ãƒƒã‚¯æ•°(Kobarin)
+    fileMP3->strDiscNumberSI.Empty();
+    fileMP3->strDiscTotalSI.Empty();    // ãƒ‡ã‚£ã‚¹ã‚¯æ•°(Kobarin)
+    fileMP3->strWriterSI.Empty();       // ä½œè©
+    fileMP3->strComposerSI.Empty();     // ä½œæ›²
+    fileMP3->strAlbmArtistSI.Empty();   // Albm.ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆ
+    fileMP3->strOrigArtistSI.Empty();   // Orig.ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆ
+    fileMP3->strURLSI.Empty();          // URL
+    fileMP3->strEncodest.Empty();       // ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰ã—ãŸäºº
+    fileMP3->strOther.Empty();          // ãã®ä»–
+
 }
 
 // =============================================
 // CFileMP3::Initialize
-// ŠT—v  : ‰Šú‰»ˆ—
-// ˆø”  : none
-// –ß‚è’l: none
+// æ¦‚è¦  : åˆæœŸåŒ–å‡¦ç†
+// å¼•æ•°  : none
+// æˆ»ã‚Šå€¤: none
 // =============================================
 void CFileMP3::Initialize(void)
 {
-	//m_fileMP3.fileSpecificInfo = NULL;
-	InitData(&m_fileMP3);
+    //m_fileMP3.fileSpecificInfo = NULL;
+    InitData(&m_fileMP3);
 }
 
 // =============================================
 // CFileMP3::DeleteLineEndSpace
-// ŠT—v  : s––‚ÌƒXƒy[ƒX‚ğæ‚èœ‚­
-// ˆø”  : sBuffer		= •¶š—ñ
-// –ß‚è’l: none
+// æ¦‚è¦  : è¡Œæœ«ã®ã‚¹ãƒšãƒ¼ã‚¹ã‚’å–ã‚Šé™¤ã
+// å¼•æ•°  : sBuffer      = æ–‡å­—åˆ—
+// æˆ»ã‚Šå€¤: none
 // =============================================
 void CFileMP3::DeleteLineEndSpace(TCHAR *sBuffer)
 {
-	int		nPos = strlen(sBuffer) - 1;
-	while(nPos >= 0 && sBuffer[nPos] == ' ') {
-		sBuffer[nPos] = '\0';
-		nPos--;
-	}
+#ifndef _UNICODE
+    TCHAR *spc = NULL;
+    while(*sBuffer){
+        if(_istlead(*sBuffer)){
+            if(!sBuffer[1]){
+                *sBuffer = 0;
+                break;
+            }
+            sBuffer+=2;
+            spc = NULL;
+            continue;
+        }
+        if(*sBuffer == _T(' ')){
+            if(!spc){
+                spc = sBuffer;
+            }
+        }
+        else{
+            spc = NULL;
+        }
+    }
+    if(spc){
+        *spc = 0;
+    }
+#else
+    size_t len = _tcslen(sBuffer);
+    while(len >= 1 && sBuffer[len-1] == _T(' ')) {
+        sBuffer[len-1] = 0;
+        len--;
+    }
+#endif
 }
 
 // =============================================
 //  CFileMP3::Attach
-//  ŠT—v  : ƒNƒ‰ƒX‚Éƒtƒ@ƒCƒ‹‚ÉŠÖ˜A•t‚¯‚·‚é
-//  ˆø”  : sFileName	= ƒtƒ@ƒCƒ‹–¼
-//  –ß‚è’l: bool		= true:³íI—¹ / false:ƒGƒ‰[
+//  æ¦‚è¦  : ã‚¯ãƒ©ã‚¹ã«ãƒ•ã‚¡ã‚¤ãƒ«ã«é–¢é€£ä»˜ã‘ã™ã‚‹
+//  å¼•æ•°  : sFileName   = ãƒ•ã‚¡ã‚¤ãƒ«å
+//  æˆ»ã‚Šå€¤: bool        = true:æ­£å¸¸çµ‚äº† / false:ã‚¨ãƒ©ãƒ¼
 // =============================================
-bool CFileMP3::Attach(const char *sFileName)
+bool CFileMP3::Attach(const TCHAR *sFileName)
 {
-	Initialize();
+    Initialize();
 
-	// ƒ^ƒCƒ€ƒXƒ^ƒ“ƒv‚ğæ“¾
-	CFileStatus	fileStatus;
-	if (CFile::GetStatus(sFileName, fileStatus) == FALSE || fileStatus.m_mtime == -1) {
-		fileStatus.m_mtime = CTime(0);
-		fileStatus.m_ctime = CTime(0);
-	}
-	m_fileMP3.time			= fileStatus.m_mtime;	// ƒtƒ@ƒCƒ‹XV“ú
-	m_fileMP3.timeCreate	= fileStatus.m_ctime;	// ƒtƒ@ƒCƒ‹ì¬“ú
-	m_fileMP3.lFileSize		= fileStatus.m_size;	// ƒtƒ@ƒCƒ‹ƒTƒCƒY
+    // ã‚¿ã‚¤ãƒ ã‚¹ã‚¿ãƒ³ãƒ—ã‚’å–å¾—
+    CFileStatus fileStatus = {0};
+    try{//ã‚¿ã‚¤ãƒ ã‚¹ã‚¿ãƒ³ãƒ—ãŒç•°å¸¸ã ã¨ä¾‹å¤–ãŒç™ºç”Ÿã™ã‚‹ã‚‰ã—ã„ã®ã§ã”ã¾ã‹ã™
 
-	// ƒtƒ‹ƒpƒX‚ğƒpƒX–¼‚Æƒtƒ@ƒCƒ‹–¼‚É•ª‰ğ
-	TCHAR	drive[_MAX_DRIVE], dir[_MAX_DIR], fname[_MAX_FNAME], ext[_MAX_EXT];
-	ZeroMemory(ext, sizeof(ext));
-	_tsplitpath(sFileName, drive, dir, fname, ext);
-	m_fileMP3.strFilePath.Format("%s%s", drive, dir);
-	m_fileMP3.strFileName.Format("%s%s", fname, ext);
-	m_fileMP3.strFullPathName = sFileName;
+    if (CFile::GetStatus(sFileName, fileStatus) == FALSE || fileStatus.m_mtime == -1) {
+        fileStatus.m_mtime = CTime(0);
+        fileStatus.m_ctime = CTime(0);
+    }
 
-	// ƒtƒ@ƒCƒ‹î•ñ‚Ì“Ç‚İ‚İ
-	extern bool LoadFile(const char *sFileName, const char *sExt, FILE_MP3* pFileMP3);
-	if (LoadFile(sFileName, &ext[1], &m_fileMP3) == false) {
-		Initialize();
-		return(false);
-	}
+    }catch(...){
+        fileStatus.m_mtime = CTime(0);
+        fileStatus.m_ctime = CTime(0);
+    }
+    m_fileMP3.time          = fileStatus.m_mtime;   // ãƒ•ã‚¡ã‚¤ãƒ«æ›´æ–°æ—¥
+    m_fileMP3.timeCreate    = fileStatus.m_ctime;   // ãƒ•ã‚¡ã‚¤ãƒ«ä½œæˆæ—¥
+    m_fileMP3.lFileSize     = fileStatus.m_size;    // ãƒ•ã‚¡ã‚¤ãƒ«ã‚µã‚¤ã‚º
 
-	// ‰ÌŒƒtƒ@ƒCƒ‹‚Ì‘¶İ‚ğƒ`ƒFƒbƒN
-	if (g_bOptSearchLyricFile) {
-		// ‰ÌŒƒtƒ@ƒCƒ‹‚ğŒŸõ
-		m_fileMP3.bExistLyricFile = SearchLyricsFile(&m_fileMP3).IsEmpty() ? false : true;
-	}
+    // ãƒ•ãƒ«ãƒ‘ã‚¹ã‚’ãƒ‘ã‚¹åã¨ãƒ•ã‚¡ã‚¤ãƒ«åã«åˆ†è§£
+    TCHAR   drive[_MAX_DRIVE], dir[_MAX_DIR], fname[_MAX_FNAME], ext[_MAX_EXT];
+    _tsplitpath_s(sFileName, drive, dir, fname, ext);
+    m_fileMP3.strFilePath.Format(_T("%s%s"), drive, dir);
+    m_fileMP3.strFileName.Format(_T("%s%s"), fname, ext);
+    m_fileMP3.strFullPathName = sFileName;
 
-	return(true);
+    // ãƒ•ã‚¡ã‚¤ãƒ«æƒ…å ±ã®èª­ã¿è¾¼ã¿
+    extern bool LoadFile(const TCHAR *sFileName, const TCHAR *sExt, FILE_MP3* pFileMP3);
+    if (LoadFile(sFileName, &ext[1], &m_fileMP3) == false) {
+        Initialize();
+        return(false);
+    }
+
+    // æ­Œè©ãƒ•ã‚¡ã‚¤ãƒ«ã®å­˜åœ¨ã‚’ãƒã‚§ãƒƒã‚¯
+    if (g_bOptSearchLyricFile) {
+        // æ­Œè©ãƒ•ã‚¡ã‚¤ãƒ«ã‚’æ¤œç´¢
+        m_fileMP3.bExistLyricFile = SearchLyricsFile(&m_fileMP3).IsEmpty() ? false : true;
+    }
+
+    return(true);
 }
 
 // =============================================
 //  CFileMP3::Detach
-//  ŠT—v  : ƒNƒ‰ƒX‚Æƒtƒ@ƒCƒ‹‚ÌŠÖ˜A•t‚¯‚ğíœ‚·‚é
-//  ˆø”  : ‚È‚µ
-//  –ß‚è’l: ‚È‚µ
+//  æ¦‚è¦  : ã‚¯ãƒ©ã‚¹ã¨ãƒ•ã‚¡ã‚¤ãƒ«ã®é–¢é€£ä»˜ã‘ã‚’å‰Šé™¤ã™ã‚‹
+//  å¼•æ•°  : ãªã—
+//  æˆ»ã‚Šå€¤: ãªã—
 // =============================================
 void CFileMP3::Detach(void)
 {
-	Initialize();
+    Initialize();
 }
 
 // =============================================
 //  CFileMP3::WriteTag
-//  ŠT—v  : ƒ^ƒOî•ñ‚ÌXV
-//  ˆø”  : fileMP3		= ƒtƒ@ƒCƒ‹î•ñ
-//        : bKeepTimeStamp= ƒ^ƒCƒ€ƒXƒ^ƒ“ƒv‚ğ•Û‚·‚éƒtƒ‰ƒO
-//  –ß‚è’l: bool		= true:³íI—¹ / false:ƒGƒ‰[
+//  æ¦‚è¦  : ã‚¿ã‚°æƒ…å ±ã®æ›´æ–°
+//  å¼•æ•°  : fileMP3     = ãƒ•ã‚¡ã‚¤ãƒ«æƒ…å ±
+//        : bKeepTimeStamp= ã‚¿ã‚¤ãƒ ã‚¹ã‚¿ãƒ³ãƒ—ã‚’ä¿æŒã™ã‚‹ãƒ•ãƒ©ã‚°
+//  æˆ»ã‚Šå€¤: bool        = true:æ­£å¸¸çµ‚äº† / false:ã‚¨ãƒ©ãƒ¼
 // =============================================
 bool CFileMP3::WriteTag(FILE_MP3 *fileMP3, bool bKeepTimeStamp)
 {
-	CFileStatus	fileStatus;
-	bool	bResult = false;
+    CFileStatus fileStatus;
+    bool    bResult = false;
 
-	if (g_nWriteTagProcFlag == 3) {
-		return(false);						// ˆÈ~’†~
-	}
+    if (g_nWriteTagProcFlag == 3) {
+        return(false);                      // ä»¥é™ä¸­æ­¢
+    }
 
-	// ƒ^ƒCƒ€ƒXƒ^ƒ“ƒv‚ğæ“¾
-	if (CFile::GetStatus(fileMP3->strFullPathName, fileStatus) == FALSE) {
-		return(false);
-	}
-	if (fileStatus.m_mtime == -1)	fileStatus.m_mtime = fileStatus.m_ctime; /* 2005.10.11 “ú‚ª‚¨‚©‚µ‚¢ê‡‚É—‚¿‚È‚¢‚æ‚¤‚É */
-	if (fileStatus.m_atime == -1)	fileStatus.m_atime = fileStatus.m_mtime; /* 2005.10.11 “ú‚ª‚¨‚©‚µ‚¢ê‡‚É—‚¿‚È‚¢‚æ‚¤‚É */
+    try{
+        // ã‚¿ã‚¤ãƒ ã‚¹ã‚¿ãƒ³ãƒ—ã‚’å–å¾—
+        if (CFile::GetStatus(fileMP3->strFullPathName, fileStatus) == FALSE) {
+            return(false);
+        }
+        if (fileStatus.m_mtime == -1)   fileStatus.m_mtime = fileStatus.m_ctime; /* 2005.10.11 æ—¥æ™‚ãŒãŠã‹ã—ã„å ´åˆã«è½ã¡ãªã„ã‚ˆã†ã« */
+        if (fileStatus.m_atime == -1)   fileStatus.m_atime = fileStatus.m_mtime; /* 2005.10.11 æ—¥æ™‚ãŒãŠã‹ã—ã„å ´åˆã«è½ã¡ãªã„ã‚ˆã†ã« */
+    }
+    catch (...) {
+        if (fileStatus.m_mtime == -1)   fileStatus.m_mtime = fileStatus.m_ctime;
+        if (fileStatus.m_atime == -1)   fileStatus.m_atime = fileStatus.m_mtime;
+    }
 
-	// “Ç‚İo‚µê—pƒtƒ@ƒCƒ‹‚ÍAã‘‚«Šm”F‚ğs‚¤
-	if (fileStatus.m_attribute & CFile::readOnly) {
-		if (g_nWriteTagProcFlag != 1) {
-			// ã‘‚«Šm”Fƒ_ƒCƒAƒƒO‚ğŠJ‚­
-			CDlgFileOverWrite	dialog;
-			dialog.m_strFileName = fileMP3->strFullPathName;
-			dialog.m_strSize.Format("%ld byte", fileStatus.m_size);
-			if (fileStatus.m_mtime.GetTime() < 0) {
-				dialog.m_strTimeStamp.Format("----/--/-- --:--:--");
-			} else {
-				dialog.m_strTimeStamp.Format("%04d/%02d/%02d %02d:%02d:%02d",
-											 fileStatus.m_mtime.GetYear(),
-											 fileStatus.m_mtime.GetMonth(),
-											 fileStatus.m_mtime.GetDay(),
-											 fileStatus.m_mtime.GetHour(),
-											 fileStatus.m_mtime.GetMinute(),
-											 fileStatus.m_mtime.GetSecond());
-			}
-			dialog.DoModal();
-			g_nWriteTagProcFlag = dialog.m_nResult;
-			switch(dialog.m_nResult) {
-			case 0:				// ‚±‚Ìƒtƒ@ƒCƒ‹‚ğã‘‚«
-			case 1:				// ˆÈ~‘S‚Äã‘‚«
-				break;
-			case 2:				// ƒXƒLƒbƒv
-			case 3:				// ’†~
-			default:
-				return(false);
-			}
-		}
+    // èª­ã¿å‡ºã—å°‚ç”¨ãƒ•ã‚¡ã‚¤ãƒ«ã¯ã€ä¸Šæ›¸ãç¢ºèªã‚’è¡Œã†
+    if (fileStatus.m_attribute & CFile::readOnly) {
+        if (g_nWriteTagProcFlag != 1) {
+            // ä¸Šæ›¸ãç¢ºèªãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚’é–‹ã
+            CDlgFileOverWrite   dialog;
+            dialog.m_strFileName = fileMP3->strFullPathName;
+            dialog.m_strSize.Format(_T("%ld byte"), fileStatus.m_size);
+            if (fileStatus.m_mtime.GetTime() < 0) {
+                dialog.m_strTimeStamp.Format(_T("----/--/-- --:--:--"));
+            } else {
+                dialog.m_strTimeStamp.Format(_T("%04d/%02d/%02d %02d:%02d:%02d"),
+                                             fileStatus.m_mtime.GetYear(),
+                                             fileStatus.m_mtime.GetMonth(),
+                                             fileStatus.m_mtime.GetDay(),
+                                             fileStatus.m_mtime.GetHour(),
+                                             fileStatus.m_mtime.GetMinute(),
+                                             fileStatus.m_mtime.GetSecond());
+            }
+            dialog.DoModal();
+            g_nWriteTagProcFlag = dialog.m_nResult;
+            switch(dialog.m_nResult) {
+            case 0:             // ã“ã®ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ä¸Šæ›¸ã
+            case 1:             // ä»¥é™å…¨ã¦ä¸Šæ›¸ã
+                break;
+            case 2:             // ã‚¹ã‚­ãƒƒãƒ—
+            case 3:             // ä¸­æ­¢
+            default:
+                return(false);
+            }
+        }
 
-		// “Ç‚İ‚İê—p‘®«‚ğ‰ğœ
-		SetFileAttributes(fileMP3->strFullPathName, CFile::normal);
-		// •ÏXŒã‚É‘®«‚ğ–ß‚³‚¹‚é‚½‚ß‚É bKeepTimeStamp ‚ğ true ‚É‚·‚é
-		bKeepTimeStamp = true;
-	}
+        // èª­ã¿è¾¼ã¿å°‚ç”¨å±æ€§ã‚’è§£é™¤
+        SetFileAttributes(fileMP3->strFullPathName, CFile::normal);
+        // å¤‰æ›´å¾Œã«å±æ€§ã‚’æˆ»ã•ã›ã‚‹ãŸã‚ã« bKeepTimeStamp ã‚’ true ã«ã™ã‚‹
+        bKeepTimeStamp = true;
+    }
 
-	extern bool SaveFile(FILE_MP3* pFileMP3);
-	if ((bResult = SaveFile(fileMP3)) == true) {
-		// ƒtƒ@ƒCƒ‹–¼•ÏŠ·
-		//bResult = ConvFileName(fileMP3);
-	}
+    extern bool SaveFile(FILE_MP3* pFileMP3);
+    if ((bResult = SaveFile(fileMP3)) == true) {
+        // ãƒ•ã‚¡ã‚¤ãƒ«åå¤‰æ›
+        //bResult = ConvFileName(fileMP3);
+    }
 
-	// ƒ^ƒCƒ€ƒXƒ^ƒ“ƒv‚ğƒtƒ@ƒCƒ‹XV‘O‚É–ß‚·
-	if (bResult) {
-		if (bKeepTimeStamp) {
-			if (fileMP3->time.GetTime() != -1) {
-				// ƒtƒ@ƒCƒ‹XVŠÔ‚ğİ’è
-				fileStatus.m_mtime = fileMP3->time;
-				if (g_bOptSyncCreateTime) fileStatus.m_ctime = fileMP3->time;
-			}
-			TRY {
-				CFile::SetStatus(fileMP3->strFullPathName, fileStatus);
-			}
-			CATCH(CFileException, e) {
-				CString	strMsg;
-				strMsg.Format("%s ‚ªƒI[ƒvƒ“‚Å‚«‚Ü‚¹‚ñ‚Å‚µ‚½", fileMP3->strFullPathName);
-				MessageBox(NULL, strMsg, "ƒ^ƒCƒ€ƒXƒ^ƒ“ƒv‚ÌXVƒGƒ‰[", MB_ICONSTOP|MB_OK|MB_TOPMOST);
-				bResult = false;
-			}
-			END_CATCH
-		} else {
-			// XVŒã‚Ìƒ^ƒCƒ€ƒXƒ^ƒ“ƒv‚ğæ“¾
-			if (CFile::GetStatus(fileMP3->strFullPathName, fileStatus) != FALSE) {
-				fileMP3->time = fileStatus.m_mtime;
-			}
-		}
-	}
+    // ã‚¿ã‚¤ãƒ ã‚¹ã‚¿ãƒ³ãƒ—ã‚’ãƒ•ã‚¡ã‚¤ãƒ«æ›´æ–°å‰ã«æˆ»ã™
+    if (bResult) {
+        if (bKeepTimeStamp) {
+            if (fileMP3->time.GetTime() != -1) {
+                // ãƒ•ã‚¡ã‚¤ãƒ«æ›´æ–°æ™‚é–“ã‚’è¨­å®š
+                fileStatus.m_mtime = fileMP3->time;
+                if (g_bOptSyncCreateTime) fileStatus.m_ctime = fileMP3->time;
+            }
+            TRY {
+                CFile::SetStatus(fileMP3->strFullPathName, fileStatus);
+            }
+            CATCH(CFileException, e) {
+                CString strMsg;
+                strMsg.Format(_T("%s ãŒã‚ªãƒ¼ãƒ—ãƒ³ã§ãã¾ã›ã‚“ã§ã—ãŸ"), (LPCWSTR)fileMP3->strFullPathName);
+                MessageBox(NULL, strMsg, _T("ã‚¿ã‚¤ãƒ ã‚¹ã‚¿ãƒ³ãƒ—ã®æ›´æ–°ã‚¨ãƒ©ãƒ¼"), MB_ICONSTOP|MB_OK|MB_TOPMOST);
+                bResult = false;
+            }
+            END_CATCH
+        } else {
+            // æ›´æ–°å¾Œã®ã‚¿ã‚¤ãƒ ã‚¹ã‚¿ãƒ³ãƒ—ã‚’å–å¾—
+            try{
+            if (CFile::GetStatus(fileMP3->strFullPathName, fileStatus) != FALSE) {
+                fileMP3->time = fileStatus.m_mtime;
+            }
+            }
+            catch(...){
+                fileMP3->time = fileStatus.m_mtime;
+            }
+        }
+    }
 
-	return(bResult);
+    return(bResult);
 }
 
 // =============================================
 // CFileMP3::SearchFileReent
-// ŠT—v  : ƒtƒ@ƒCƒ‹ŒŸõFŒŸõˆ—
-// ˆø”  : sDir			= ŒŸõ‚·‚éƒfƒBƒŒƒNƒgƒŠ
-//       : sTargetName	= ŒŸõ‚·‚éƒtƒ@ƒCƒ‹–¼
-// –ß‚è’l: CString		= ”­Œ©‚µ‚½ƒtƒ@ƒCƒ‹‚Ìƒtƒ‹ƒpƒX(IsEmpty():–¢”­Œ©)
+// æ¦‚è¦  : ãƒ•ã‚¡ã‚¤ãƒ«æ¤œç´¢ï¼šæ¤œç´¢å‡¦ç†
+// å¼•æ•°  : sDir         = æ¤œç´¢ã™ã‚‹ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª
+//       : sTargetName  = æ¤œç´¢ã™ã‚‹ãƒ•ã‚¡ã‚¤ãƒ«å
+// æˆ»ã‚Šå€¤: CString   = ç™ºè¦‹ã—ãŸãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ•ãƒ«ãƒ‘ã‚¹(IsEmpty():æœªç™ºè¦‹)
 // =============================================
-CString CFileMP3::SearchFileReent(const char *sDir, const char *sTargetName)
+CString CFileMP3::SearchFileReent(const TCHAR *sDir, const TCHAR *sTargetName)
 {
-	HANDLE	hFindFile;
-	WIN32_FIND_DATA	data;
-	CString	strTargetFile;
+    HANDLE  hFindFile;
+    WIN32_FIND_DATA data;
+    CString strTargetFile;
 
-	// “¯ˆêƒfƒBƒŒƒNƒgƒŠ‚Ì‘S‚Ä‚Ìƒtƒ@ƒCƒ‹‚ğŒŸõ
-	// ŒŸõƒtƒ@ƒCƒ‹‚Ìƒpƒ^[ƒ“‚ğİ’è
-	CString	strCurFile;
-	strCurFile.Format("%s%s", sDir, sTargetName);
-	if ((hFindFile = FindFirstFile(strCurFile, &data)) != INVALID_HANDLE_VALUE) {
-		do {
-			if ((data.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) == 0) {
-				// ƒtƒ@ƒCƒ‹”­Œ©ˆ—
-				strCurFile.Format("%s%s", sDir, data.cFileName);
-				return(strCurFile);
-			}
-		} while(FindNextFile(hFindFile, &data) == TRUE);
-	}
-	if (hFindFile != INVALID_HANDLE_VALUE) FindClose(hFindFile);
+    // åŒä¸€ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã®å…¨ã¦ã®ãƒ•ã‚¡ã‚¤ãƒ«ã‚’æ¤œç´¢
+    // æ¤œç´¢ãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ‘ã‚¿ãƒ¼ãƒ³ã‚’è¨­å®š
+    CString strCurFile;
+    strCurFile.Format(_T("%s%s"), sDir, sTargetName);
+    if ((hFindFile = FindFirstFile(strCurFile, &data)) != INVALID_HANDLE_VALUE) {
+        do {
+            if ((data.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) == 0) {
+                // ãƒ•ã‚¡ã‚¤ãƒ«ç™ºè¦‹å‡¦ç†
+                strCurFile.Format(_T("%s%s"), sDir, data.cFileName);
+                return(strCurFile);
+            }
+        } while(FindNextFile(hFindFile, &data));
+    }
+    if (hFindFile != INVALID_HANDLE_VALUE) FindClose(hFindFile);
 
-	// ƒTƒuƒfƒBƒŒƒNƒgƒŠ‚ÌŒŸõ
-	if (g_bOptSearchLyricsSubDir == true) {
-		strCurFile.Format("%s*.*", sDir);
-		if ((hFindFile = FindFirstFile(strCurFile, &data)) != INVALID_HANDLE_VALUE) {
-			do {
-				if ((data.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) != 0) {
-					if (strcmp(data.cFileName, "." ) != 0		// ƒJƒŒƒ“ƒgƒfƒBƒŒƒNƒgƒŠˆÈŠO
-					&&  strcmp(data.cFileName, "..") != 0		// eƒfƒBƒŒƒNƒgƒŠˆÈŠO
-					&& (data.dwFileAttributes & FILE_ATTRIBUTE_HIDDEN) == 0 /* STEP 032 */) { // ‰B‚µƒtƒHƒ‹ƒ_ˆÈŠO
-						// ƒTƒuƒfƒBƒŒƒNƒgƒŠŒŸõˆ—
-						strCurFile.Format("%s%s\\", sDir, data.cFileName);
-						strTargetFile = SearchFileReent(strCurFile, sTargetName);
-						if (strTargetFile.IsEmpty() == false) {
-							break;				// ƒtƒ@ƒCƒ‹”­Œ©
-						}
-					}
-				}
-			} while(FindNextFile(hFindFile, &data) == TRUE);
-		}
-		if (hFindFile != INVALID_HANDLE_VALUE) FindClose(hFindFile);
-	}
+    // ã‚µãƒ–ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã®æ¤œç´¢
+    if (g_bOptSearchLyricsSubDir == true) {
+        strCurFile.Format(_T("%s*.*"), sDir);
+        if ((hFindFile = FindFirstFile(strCurFile, &data)) != INVALID_HANDLE_VALUE) {
+            do {
+                if ((data.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) != 0) {
+                    if (_tcscmp(data.cFileName, _T(".") ) != 0      // ã‚«ãƒ¬ãƒ³ãƒˆãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªä»¥å¤–
+                    &&  _tcscmp(data.cFileName, _T("..")) != 0      // è¦ªãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªä»¥å¤–
+                    && (data.dwFileAttributes & FILE_ATTRIBUTE_HIDDEN) == 0 /* STEP 032 */) { // éš ã—ãƒ•ã‚©ãƒ«ãƒ€ä»¥å¤–
+                        // ã‚µãƒ–ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªæ¤œç´¢å‡¦ç†
+                        strCurFile.Format(_T("%s%s\\"), sDir, data.cFileName);
+                        strTargetFile = SearchFileReent(strCurFile, sTargetName);
+                        if (strTargetFile.IsEmpty() == false) {
+                            break;              // ãƒ•ã‚¡ã‚¤ãƒ«ç™ºè¦‹
+                        }
+                    }
+                }
+            } while(FindNextFile(hFindFile, &data));
+        }
+        if (hFindFile != INVALID_HANDLE_VALUE) FindClose(hFindFile);
+    }
 
-	return(strTargetFile);
+    return(strTargetFile);
 }
 
 // =============================================
 //  CFileMP3::SearchLyricsFile
-//  ŠT—v  : ‰ÌŒƒtƒ@ƒCƒ‹‚ÌŒŸõ
-//        : —Dæ‡ˆÊFMP3‚Æ“¯‚¶ƒtƒHƒ‹ƒ_¨‰ÌŒƒtƒHƒ‹ƒ_¨‰ÌŒƒtƒHƒ‹ƒ_‚ÌƒTƒuƒfƒBƒŒƒNƒgƒŠ
-//  ˆø”  : fileMP3		= ƒtƒ@ƒCƒ‹î•ñ
-//  –ß‚è’l: CString		= ‰ÌŒƒtƒ@ƒCƒ‹–¼(Œ©‚Â‚©‚ç‚È‚©‚Á‚½ê‡‚Í‹ó)
+//  æ¦‚è¦  : æ­Œè©ãƒ•ã‚¡ã‚¤ãƒ«ã®æ¤œç´¢
+//        : å„ªå…ˆé †ä½ï¼šMP3ã¨åŒã˜ãƒ•ã‚©ãƒ«ãƒ€â†’æ­Œè©ãƒ•ã‚©ãƒ«ãƒ€â†’æ­Œè©ãƒ•ã‚©ãƒ«ãƒ€ã®ã‚µãƒ–ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª
+//  å¼•æ•°  : fileMP3     = ãƒ•ã‚¡ã‚¤ãƒ«æƒ…å ±
+//  æˆ»ã‚Šå€¤: CString  = æ­Œè©ãƒ•ã‚¡ã‚¤ãƒ«å(è¦‹ã¤ã‹ã‚‰ãªã‹ã£ãŸå ´åˆã¯ç©º)
 // =============================================
 CString CFileMP3::SearchLyricsFile(FILE_MP3 *fileMP3)
 {
-	TCHAR	sTextName[FILENAME_MAX+1];
+    TCHAR   sTextName[FILENAME_MAX+1];
 
-	// ‚Ü‚¸‚Í MP3 ƒtƒ@ƒCƒ‹‚Æ“¯‚¶ƒtƒHƒ‹ƒ_‚ğƒ`ƒFƒbƒN
-	TCHAR	drive[_MAX_DRIVE], dir[_MAX_DIR], fname[_MAX_FNAME];
-	_tsplitpath(fileMP3->strFullPathName, drive, dir, fname, NULL);
-	// .lrc ‚ğŒŸõ
-	_tmakepath(sTextName, drive, dir, fname, ".lrc");
-	if (GetFileAttributes(sTextName) != 0xFFFFFFFF) {
-		// ƒtƒ@ƒCƒ‹‚ğ”­Œ©
-		return(CString(sTextName));
-	}
-	// .txt ‚ğŒŸõ
-	_tmakepath(sTextName, drive, dir, fname, ".txt");
-	if (GetFileAttributes(sTextName) != 0xFFFFFFFF) {
-		// ƒtƒ@ƒCƒ‹‚ğ”­Œ©
-		return(CString(sTextName));
-	}
+    // ã¾ãšã¯ MP3 ãƒ•ã‚¡ã‚¤ãƒ«ã¨åŒã˜ãƒ•ã‚©ãƒ«ãƒ€ã‚’ãƒã‚§ãƒƒã‚¯
+    TCHAR   drive[_MAX_DRIVE], dir[_MAX_DIR], fname[_MAX_FNAME];
+    _tsplitpath_s(fileMP3->strFullPathName, drive, _MAX_DRIVE, dir, _MAX_DIR, fname, _MAX_FNAME, NULL, 0);
+    // .lrc ã‚’æ¤œç´¢
+    _tmakepath_s(sTextName, drive, dir, fname, _T(".lrc"));
+    if (GetFileAttributes(sTextName) != 0xFFFFFFFF) {
+        // ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ç™ºè¦‹
+        return(CString(sTextName));
+    }
+    // .txt ã‚’æ¤œç´¢
+    _tmakepath_s(sTextName, drive, dir, fname, _T(".txt"));
+    if (GetFileAttributes(sTextName) != 0xFFFFFFFF) {
+        // ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ç™ºè¦‹
+        return(CString(sTextName));
+    }
 
-	// ‰ÌŒƒtƒ@ƒCƒ‹–¼ì¬
-	if (g_bOptSetLyricsDir == true && g_strOptLyricsPath.IsEmpty() == false) {
-		// w’è‚³‚ê‚½ƒtƒHƒ‹ƒ_
-		TCHAR	sLyricsPath[FILENAME_MAX+1];
-		CString	strTarget;
-		_tsplitpath(fileMP3->strFullPathName, NULL, NULL, fname, NULL);
-		strcpy(sLyricsPath, g_strOptLyricsPath);
-		if (IsFolderName(sLyricsPath) == false) {
-			strcat(sLyricsPath, "\\");
-		}
-		// .lrc ‚ğŒŸõ
-		strTarget.Format("%s.lrc", fname);
-		strTarget = SearchFileReent(sLyricsPath, strTarget);
-		if (strTarget.IsEmpty() == false
-		&&  GetFileAttributes(strTarget) != 0xFFFFFFFF) {
-			// ƒtƒ@ƒCƒ‹‚ğ”­Œ©
-			return(strTarget);
-		}
-		// .txt ‚ğŒŸõ
-		strTarget.Format("%s.txt", fname);
-		strTarget = SearchFileReent(sLyricsPath, strTarget);
-		if (strTarget.IsEmpty() == false
-		&&  GetFileAttributes(strTarget) != 0xFFFFFFFF) {
-			// ƒtƒ@ƒCƒ‹‚ğ”­Œ©
-			return(strTarget);
-		}
-	}
+    // æ­Œè©ãƒ•ã‚¡ã‚¤ãƒ«åä½œæˆ
+    if (g_bOptSetLyricsDir == true && g_strOptLyricsPath.IsEmpty() == false) {
+        // æŒ‡å®šã•ã‚ŒãŸãƒ•ã‚©ãƒ«ãƒ€
+        TCHAR   sLyricsPath[FILENAME_MAX+1];
+        CString strTarget;
+        _tsplitpath_s(fileMP3->strFullPathName, NULL, 0, NULL, 0, fname, _MAX_FNAME, NULL, 0);
+        _tcsncpy_s(sLyricsPath, FILENAME_MAX, g_strOptLyricsPath, _TRUNCATE);
+        if (IsFolderName(sLyricsPath) == false) {
+            _tcsncat_s(sLyricsPath, FILENAME_MAX+1, _T("\\"), _TRUNCATE);
+        }
+        // .lrc ã‚’æ¤œç´¢
+        strTarget.Format(_T("%s.lrc"), fname);
+        strTarget = SearchFileReent(sLyricsPath, strTarget);
+        if (strTarget.IsEmpty() == false
+        &&  GetFileAttributes(strTarget) != 0xFFFFFFFF) {
+            // ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ç™ºè¦‹
+            return(strTarget);
+        }
+        // .txt ã‚’æ¤œç´¢
+        strTarget.Format(_T("%s.txt"), fname);
+        strTarget = SearchFileReent(sLyricsPath, strTarget);
+        if (strTarget.IsEmpty() == false
+        &&  GetFileAttributes(strTarget) != 0xFFFFFFFF) {
+            // ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ç™ºè¦‹
+            return(strTarget);
+        }
+    }
 
-	// Œ©‚Â‚©‚ç‚È‚©‚Á‚½
-	return(CString(""));
+    // è¦‹ã¤ã‹ã‚‰ãªã‹ã£ãŸ
+    return(CString(""));
 }
 
 // =============================================
 //  CFileMP3::ConvFileName
-//  ŠT—v  : ƒtƒ@ƒCƒ‹–¼‚Ì•ÏX
-//        : ¦V‚µ‚¢ƒtƒ@ƒCƒ‹–¼‚Í fileMP3->strFileName ‚ğg—p
-//  ˆø”  : fileMP3		= ƒtƒ@ƒCƒ‹î•ñ
-//  –ß‚è’l: bool		= true:³íI—¹ / false:ƒGƒ‰[
+//  æ¦‚è¦  : ãƒ•ã‚¡ã‚¤ãƒ«åã®å¤‰æ›´
+//        : â€»æ–°ã—ã„ãƒ•ã‚¡ã‚¤ãƒ«åã¯ fileMP3->strFileName ã‚’ä½¿ç”¨
+//  å¼•æ•°  : fileMP3     = ãƒ•ã‚¡ã‚¤ãƒ«æƒ…å ±
+//  æˆ»ã‚Šå€¤: bool        = true:æ­£å¸¸çµ‚äº† / false:ã‚¨ãƒ©ãƒ¼
 // =============================================
 bool CFileMP3::ConvFileName(FILE_MP3 *fileMP3)
 {
-	// ƒtƒ@ƒCƒ‹–¼‚ğ•ª‰ğ
-	CString	strFileName;
-	TCHAR	drive[_MAX_DRIVE], dir[_MAX_DIR], fname[_MAX_FNAME], ext[_MAX_EXT];
-	_tsplitpath(fileMP3->strFullPathName, drive, dir, fname, ext);
-	strFileName.Format("%s%s", fname, ext);
+    // ãƒ•ã‚¡ã‚¤ãƒ«åã‚’åˆ†è§£
+    CString strFileName;
+    TCHAR   drive[_MAX_DRIVE], dir[_MAX_DIR], fname[_MAX_FNAME], ext[_MAX_EXT];
+    _tsplitpath_s(fileMP3->strFullPathName, drive, dir, fname, ext);
+    strFileName.Format(_T("%s%s"), fname, ext);
 
-	if (strcmp(strFileName, fileMP3->strFileName) != 0) {
-		// ƒtƒ@ƒCƒ‹–¼‚ª•ÏX‚³‚ê‚Ä‚¢‚é
-		if (g_bConfFileNameMaxCheck) {
-			if (fileMP3->strFileName.GetLength() > g_nConfFileNameMaxChar) {
-				// ƒtƒ@ƒCƒ‹–¼•¶š”ƒI[ƒo[
-				_tsplitpath(fileMP3->strFileName, NULL, NULL, fname, ext);
-				CDlgFileNameChange dialog;
-				dialog.m_nMaxChar = g_nConfFileNameMaxChar - strlen(ext);
-				dialog.m_strFileName = fname;
-				dialog.m_strOrgFileName = fname;
-				//dialog.m_strMsg.Format("ƒtƒ@ƒCƒ‹–¼‚ğ %d •¶šˆÈ“à‚É•ÏX‚µ‚Ä‚­‚¾‚³‚¢", dialog.m_nMaxChar);
-				dialog.m_strMsgFormat = "ƒtƒ@ƒCƒ‹–¼‚ğ %d(%d) •¶šˆÈ“à‚É•ÏX‚µ‚Ä‚­‚¾‚³‚¢";
-				if (dialog.DoModal() == IDOK) {
-					fileMP3->strFileName = dialog.m_strFileName + ext;
-					_tsplitpath(fileMP3->strFileName, NULL, NULL, fname, ext);
-				}
-			}
-		}
-		TCHAR	sNewName[FILENAME_MAX+1];
-		_tmakepath(sNewName, drive, dir, NULL, NULL);
-		strcat(sNewName, fileMP3->strFileName);
-		if (MyChangeFileName(fileMP3->strFullPathName, sNewName) == false) {
-			return(false);
-		}
+    if (_tcscmp(strFileName, fileMP3->strFileName) != 0) {
+        // ãƒ•ã‚¡ã‚¤ãƒ«åãŒå¤‰æ›´ã•ã‚Œã¦ã„ã‚‹
+        if (g_bConfFileNameMaxCheck) {
+            if (fileMP3->strFileName.GetLength() > g_nConfFileNameMaxChar) {
+                // ãƒ•ã‚¡ã‚¤ãƒ«åæ–‡å­—æ•°ã‚ªãƒ¼ãƒãƒ¼
+                _tsplitpath_s(fileMP3->strFileName, NULL, 0, NULL, 0, fname, _MAX_FNAME, ext, _MAX_EXT);
+                CDlgFileNameChange dialog;
+                int ext_len = _tcslen(ext);
+                if(ext_len > g_nConfFileNameMaxChar){
+                    ext_len = g_nConfFileNameMaxChar;
+                }
+                dialog.m_nMaxChar = g_nConfFileNameMaxChar - ext_len;
+                dialog.m_strFileName = fname;
+                dialog.m_strOrgFileName = fname;
+                //dialog.m_strMsg.Format("ãƒ•ã‚¡ã‚¤ãƒ«åã‚’ %d æ–‡å­—ä»¥å†…ã«å¤‰æ›´ã—ã¦ãã ã•ã„", dialog.m_nMaxChar);
+                dialog.m_strMsgFormat = _T("ãƒ•ã‚¡ã‚¤ãƒ«åã‚’ %d(%d) æ–‡å­—ä»¥å†…ã«å¤‰æ›´ã—ã¦ãã ã•ã„");
+                if (dialog.DoModal() == IDOK) {
+                    fileMP3->strFileName = dialog.m_strFileName + ext;
+                    _tsplitpath_s(fileMP3->strFileName, NULL, 0, NULL, 0, fname, _MAX_FNAME, ext, _MAX_EXT);
+                }
+            }
+        }
+        TCHAR   sNewName[FILENAME_MAX+1];
+        _tmakepath_s(sNewName, drive, dir, NULL, NULL);
+        _tcsncat_s(sNewName, fileMP3->strFileName, _TRUNCATE);
+        if (MyChangeFileName(fileMP3->strFullPathName, sNewName) == false) {
+            return(false);
+        }
 
-		// “¯–¼‚ÌƒeƒLƒXƒgƒtƒ@ƒCƒ‹‚Ìƒtƒ@ƒCƒ‹–¼‚à•ÏŠ·‚·‚é
-		if (g_bOptChangeTextFile) {
-			CString	strLyricsFile;
-			// ‰ÌŒƒtƒ@ƒCƒ‹‚ğŒŸõ
-			strLyricsFile = SearchLyricsFile(fileMP3);
-			if (strLyricsFile.IsEmpty() == false) {
-				// ”­Œ©‚µ‚½‰ÌŒƒtƒ@ƒCƒ‹‚ÌƒpƒX‚ğ•ª‰ğ
-				_tsplitpath(strLyricsFile, drive, dir, fname, ext);
+        // åŒåã®ãƒ†ã‚­ã‚¹ãƒˆãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ•ã‚¡ã‚¤ãƒ«åã‚‚å¤‰æ›ã™ã‚‹
+        if (g_bOptChangeTextFile) {
+            CString strLyricsFile;
+            // æ­Œè©ãƒ•ã‚¡ã‚¤ãƒ«ã‚’æ¤œç´¢
+            strLyricsFile = SearchLyricsFile(fileMP3);
+            if (strLyricsFile.IsEmpty() == false) {
+                // ç™ºè¦‹ã—ãŸæ­Œè©ãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ‘ã‚¹ã‚’åˆ†è§£
+                _tsplitpath_s(strLyricsFile, drive, dir, fname, ext);
 
-				// ‰ÌŒƒtƒ@ƒCƒ‹‚ğƒŠƒl[ƒ€‚·‚é
-				TCHAR	sNewText[FILENAME_MAX+1];
-				_tsplitpath(fileMP3->strFileName, NULL, NULL, fname, NULL);
-				_tmakepath(sNewText, drive, dir, fname, ext);
-				if (MyChangeFileName(strLyricsFile, sNewText) == false) {
-					// return(false);
-				}
-			}
-		}
+                // æ­Œè©ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ãƒªãƒãƒ¼ãƒ ã™ã‚‹
+                TCHAR   sNewText[FILENAME_MAX+1];
+                _tsplitpath_s(fileMP3->strFileName, NULL, 0, NULL, 0, fname, FILENAME_MAX+1, NULL, 0);
+                _tmakepath_s(sNewText, drive, dir, fname, ext);
+                if (MyChangeFileName(strLyricsFile, sNewText) == false) {
+                    // return(false);
+                }
+            }
+        }
 
-		// ƒtƒ@ƒCƒ‹–¼‚ğXV‚·‚é
-		fileMP3->strFullPathName = sNewName;
-	}
+        // ãƒ•ã‚¡ã‚¤ãƒ«åã‚’æ›´æ–°ã™ã‚‹
+        fileMP3->strFullPathName = sNewName;
+    }
 
-	return(true);
+    return(true);
 }
 
 // =============================================
 //  CFileMP3::CopyFile
-//  ŠT—v  : ƒtƒ@ƒCƒ‹‚ÌƒRƒs[^ˆÚ“®
-//  ˆø”  : fileMP3		= ƒtƒ@ƒCƒ‹î•ñ
-//        : sNewDir		= ˆÚ“®æƒtƒHƒ‹ƒ_–¼
-//        : bMoveFlag	= ƒtƒ‰ƒO(true:ˆÚ“®/false:ƒRƒs[)
-//  –ß‚è’l: bool		= true:³íI—¹ / false:ƒGƒ‰[
+//  æ¦‚è¦  : ãƒ•ã‚¡ã‚¤ãƒ«ã®ã‚³ãƒ”ãƒ¼ï¼ç§»å‹•
+//  å¼•æ•°  : fileMP3     = ãƒ•ã‚¡ã‚¤ãƒ«æƒ…å ±
+//        : sNewDir     = ç§»å‹•å…ˆãƒ•ã‚©ãƒ«ãƒ€å
+//        : bMoveFlag   = ãƒ•ãƒ©ã‚°(true:ç§»å‹•/false:ã‚³ãƒ”ãƒ¼)
+//  æˆ»ã‚Šå€¤: bool        = true:æ­£å¸¸çµ‚äº† / false:ã‚¨ãƒ©ãƒ¼
 // =============================================
-bool CFileMP3::CopyFile(FILE_MP3 *fileMP3, const char *sNewDir, bool bMoveFlag)
+bool CFileMP3::CopyFile(FILE_MP3 *fileMP3, const TCHAR *sNewDir, bool bMoveFlag)
 {
-	// ƒtƒ@ƒCƒ‹–¼‚ğ•ª‰ğ
-	CString	strFileName;
-	TCHAR	drive[_MAX_DRIVE], dir[_MAX_DIR], fname[_MAX_FNAME], ext[_MAX_EXT];
-	_tsplitpath(fileMP3->strFullPathName, drive, dir, fname, ext);
-	strFileName.Format("%s%s", fname, ext);
+    // ãƒ•ã‚¡ã‚¤ãƒ«åã‚’åˆ†è§£
+    CString strFileName;
+    TCHAR   drive[_MAX_DRIVE], dir[_MAX_DIR], fname[_MAX_FNAME], ext[_MAX_EXT];
+    _tsplitpath_s(fileMP3->strFullPathName, drive, dir, fname, ext);
+    strFileName.Format(_T("%s%s"), fname, ext);
 
-	if (_strcmpi(fileMP3->strFilePath, sNewDir) != 0) {
-		// ƒtƒ@ƒCƒ‹–¼‚ª•ÏX‚³‚ê‚Ä‚¢‚é
-		CString	strNewName;
-		strNewName.Format("%s%s", sNewDir, strFileName);
-		if (MyCopyFile(fileMP3->strFullPathName, strNewName, bMoveFlag) == false) {
-			// ƒtƒ@ƒCƒ‹‚ÌƒRƒs[^ˆÚ“®‚É¸”s!!
-			return(false);
-		}
+    if (_tcsicmp(fileMP3->strFilePath, sNewDir) != 0) {
+        // ãƒ•ã‚¡ã‚¤ãƒ«åãŒå¤‰æ›´ã•ã‚Œã¦ã„ã‚‹
+        CString strNewName;
+        strNewName.Format(_T("%s%s"), sNewDir, (LPCWSTR)strFileName);
+        if (MyCopyFile(fileMP3->strFullPathName, strNewName, bMoveFlag) == false) {
+            // ãƒ•ã‚¡ã‚¤ãƒ«ã®ã‚³ãƒ”ãƒ¼ï¼ç§»å‹•ã«å¤±æ•—!!
+            return(false);
+        }
 
-		// ˆÚ“®‚Ìê‡‚ÍA‰ÌŒƒtƒ@ƒCƒ‹‚àˆÚ“®‚·‚é
-		if (g_bSyncLyricsFileMove && bMoveFlag == true) {
-			TCHAR	sLyricsFile[FILENAME_MAX+1];
-			// MP3 ƒtƒ@ƒCƒ‹‚Æ“¯‚¶ƒtƒHƒ‹ƒ_‚É‚ ‚é‰ÌŒƒtƒ@ƒCƒ‹‚ğŒŸõ
-			_tsplitpath(fileMP3->strFullPathName, drive, dir, fname, ext);
-			// .lrc => .txt ‚Ì‡‚ÅŒŸõ
-			int i; for (i = 0; i < 2; i++) {
-				LPSTR	sLyricsExt = (i == 0) ? ".lrc" : ".txt";
-				_tmakepath(sLyricsFile, drive, dir, fname, sLyricsExt);
-				if (GetFileAttributes(sLyricsFile) != 0xFFFFFFFF) {
-					// ƒtƒ@ƒCƒ‹‚ğ”­Œ©F‰ÌŒƒtƒ@ƒCƒ‹‚ğˆÚ“®‚·‚é
-					CString	strNewName;
-					strNewName.Format("%s%s%s", sNewDir, fname, sLyricsExt);
-					if (MyCopyFile(sLyricsFile, strNewName, true) == false) {
-						// ¸”s!!
-						// return(false);
-					}
-					break;
-				}
-			}
-		}
+        // ç§»å‹•ã®å ´åˆã¯ã€æ­Œè©ãƒ•ã‚¡ã‚¤ãƒ«ã‚‚ç§»å‹•ã™ã‚‹
+        if (g_bSyncLyricsFileMove && bMoveFlag == true) {
+            TCHAR   sLyricsFile[FILENAME_MAX+1];
+            // MP3 ãƒ•ã‚¡ã‚¤ãƒ«ã¨åŒã˜ãƒ•ã‚©ãƒ«ãƒ€ã«ã‚ã‚‹æ­Œè©ãƒ•ã‚¡ã‚¤ãƒ«ã‚’æ¤œç´¢
+            _tsplitpath_s(fileMP3->strFullPathName, drive, dir, fname, ext);
+            // .lrc => .txt ã®é †ã§æ¤œç´¢
+            int i; for (i = 0; i < 2; i++) {
+                LPTSTR  sLyricsExt = (i == 0) ? _T(".lrc") : _T(".txt");
+                _tmakepath_s(sLyricsFile, drive, dir, fname, sLyricsExt);
+                if (GetFileAttributes(sLyricsFile) != 0xFFFFFFFF) {
+                    // ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ç™ºè¦‹ï¼šæ­Œè©ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ç§»å‹•ã™ã‚‹
+                    CString strNewName;
+                    strNewName.Format(_T("%s%s%s"), sNewDir, fname, sLyricsExt);
+                    if (MyCopyFile(sLyricsFile, strNewName, true) == false) {
+                        // å¤±æ•—!!
+                        // return(false);
+                    }
+                    break;
+                }
+            }
+        }
 
-		// ŠÇ—î•ñ‚Ìƒtƒ@ƒCƒ‹–¼‚ğXV‚·‚é
-		if (bMoveFlag) {
-			fileMP3->strFilePath = sNewDir;
-			fileMP3->strFullPathName = strNewName;
-		}
-	}
+        // ç®¡ç†æƒ…å ±ã®ãƒ•ã‚¡ã‚¤ãƒ«åã‚’æ›´æ–°ã™ã‚‹
+        if (bMoveFlag) {
+            fileMP3->strFilePath = sNewDir;
+            fileMP3->strFullPathName = strNewName;
+        }
+    }
 
-	return(true);
+    return(true);
 }
 
 CString CFileMP3::GetIntTrackNo(const CString &no)
 {
-	//ƒgƒ‰ƒbƒN”Ô†
-	if (IsNumeric(no)) {
-		return no;
-	} else {
-		/* BeachMonster 094 */
-		{
-			int index = 0;
-			for (int i=1;i<no.GetLength();i++) {
-				if (IsNumeric(no.Left(i))) {
-					index = i;
-					continue;
-				} else {
-					break;
-				}
-			}
-			if (index == 0) {
-				//return "255";
-			} else {
-				CString track;
-				track.Format("%d",atoi(no.Left(index)));
-				return track;
-			}
-		}
-		{
-			int index = 0;
-			for (int i=1;i<no.GetLength();i++) {
-				if (IsNumeric(no.Right(i))) {
-					index = i;
-					continue;
-				} else {
-					break;
-				}
-			}
-			if (index == 0) {
-				return "";
-			} else {
-				CString track;
-				track.Format("%d",atoi(no.Right(index)));
-				return track;
-			}
-		}
-	}
+    //ãƒˆãƒ©ãƒƒã‚¯ç•ªå·
+    if (IsNumeric(no)) {
+        return no;
+    } else {
+        /* BeachMonster 094 */
+        {
+            int index = 0;
+            for (int i=1;i<no.GetLength();i++) {
+                if (IsNumeric(no.Left(i))) {
+                    index = i;
+                    continue;
+                } else {
+                    break;
+                }
+            }
+            if (index == 0) {
+                //return "255";
+            } else {
+                CString track;
+                track.Format(_T("%d"), _ttoi(no.Left(index)));
+                return track;
+            }
+        }
+        {
+            int index = 0;
+            for (int i=1;i<no.GetLength();i++) {
+                if (IsNumeric(no.Right(i))) {
+                    index = i;
+                    continue;
+                } else {
+                    break;
+                }
+            }
+            if (index == 0) {
+                return "";
+            } else {
+                CString track;
+                track.Format(_T("%d"), _ttoi(no.Right(index)));
+                return track;
+            }
+        }
+    }
 }
 
-CString CFileMP3::GetIntDiskNo(const CString &no)
+CString CFileMP3::GetIntDiscNo(const CString &no)
 {
-	//ƒgƒ‰ƒbƒN”Ô†
-	if (IsNumeric(no)) {
-		return no;
-	} else {
-		/* BeachMonster 094 */
-		{
-			int index = 0;
-			for (int i=1;i<no.GetLength();i++) {
-				if (IsNumeric(no.Left(i))) {
-					index = i;
-					continue;
-				} else {
-					break;
-				}
-			}
-			if (index == 0) {
-				//return "255";
-			} else {
-				CString disk;
-				disk.Format("%d",atoi(no.Left(index)));
-				return disk;
-			}
-		}
-		{
-			int index = 0;
-			for (int i=1;i<no.GetLength();i++) {
-				if (IsNumeric(no.Right(i))) {
-					index = i;
-					continue;
-				} else {
-					break;
-				}
-			}
-			if (index == 0) {
-				return "";
-			} else {
-				CString disk;
-				disk.Format("%d",atoi(no.Right(index)));
-				return disk;
-			}
-		}
-	}
+    //ãƒˆãƒ©ãƒƒã‚¯ç•ªå·
+    if (IsNumeric(no)) {
+        return no;
+    } else {
+        /* BeachMonster 094 */
+        {
+            int index = 0;
+            for (int i=1;i<no.GetLength();i++) {
+                if (IsNumeric(no.Left(i))) {
+                    index = i;
+                    continue;
+                } else {
+                    break;
+                }
+            }
+            if (index == 0) {
+                //return "255";
+            } else {
+                CString Disc;
+                Disc.Format(_T("%d"), _ttoi(no.Left(index)));
+                return Disc;
+            }
+        }
+        {
+            int index = 0;
+            for (int i=1;i<no.GetLength();i++) {
+                if (IsNumeric(no.Right(i))) {
+                    index = i;
+                    continue;
+                } else {
+                    break;
+                }
+            }
+            if (index == 0) {
+                return "";
+            } else {
+                CString Disc;
+                Disc.Format(_T("%d"), _ttoi(no.Right(index)));
+                return Disc;
+            }
+        }
+    }
 }
 
 
 bool CFileMP3::IsNumeric(const CString &str)
 {
-	if (str.IsEmpty()) {
-		return TRUE/*FALSE*/; /* WildCherry 063 */
-	}
-	for (int i=0;i<str.GetLength();i++) {
-		if (_ismbblead(str[i])) {
-			// Š¿šƒŠ[ƒfƒBƒ“ƒOƒoƒCƒg
-			i++;
-			return FALSE;
-		} else {
-			if (!isdigit(str[i])) {
-				return FALSE;
-			}
-		}
-	}
-	return TRUE;
+    if (str.IsEmpty()) {
+        return TRUE/*FALSE*/; /* WildCherry 063 */
+    }
+    for (int i=0;i<str.GetLength();i++) {
+        if (_istlead(str[i])) {
+            // æ¼¢å­—ãƒªãƒ¼ãƒ‡ã‚£ãƒ³ã‚°ãƒã‚¤ãƒˆ
+            i++;
+            return FALSE;
+        } else {
+            if (!_istdigit(str[i])) {
+                return FALSE;
+            }
+        }
+    }
+    return TRUE;
 }

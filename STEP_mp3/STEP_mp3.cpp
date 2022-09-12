@@ -1,107 +1,115 @@
-// STEP_mp3.cpp : DLL —p‚Ì‰Šú‰»ˆ—‚Ì’è‹`‚ğs‚¢‚Ü‚·B
+// STEP_mp3.cpp : DLL ç”¨ã®åˆæœŸåŒ–å‡¦ç†ã®å®šç¾©ã‚’è¡Œã„ã¾ã™ã€‚
 //
 
 #include "stdafx.h"
 #include "STEP_mp3.h"
-#include "ID3v2/Id3tagv2.h"
-#include "ID3v2/RMP.h"
+#include "Id3tagv1.h"
+#include "Id3tagv2.h"
+#include "RMP.h"
+#include "Mp3Info.h"
 #include "STEPlugin.h"
 
 #include "DlgFileRmpID3v2.h"
 #include "DlgDefaultValue.h"
 #include "DlgConvID3v2Version.h"
 
+#include "STEP_mp3_ConvFormat.h"
+#include "..\SuperTagEditor\INI\ini.h"
+//è¨­å®šã®èª­ã¿æ›¸ã
+//WritePrivateProfileString ã¯ãƒ•ã‚¡ã‚¤ãƒ«ãŒå­˜åœ¨ã—ãªã„å ´åˆã‚„ã€
+//å…ƒãƒ•ã‚¡ã‚¤ãƒ«ãŒ ANSI ã ã¨ ANSI ã§æ–‡å­—åˆ—ã‚’æ›¸ãè¾¼ã‚€
+//ä½¿ã„è¾›ã„ã®ã§ STEP æœ¬ä½“ã® INI èª­ã¿æ›¸ãã‚¯ãƒ©ã‚¹ã‚’ä½¿ã„å›ã™
+//UTF8/UTF16/ANSI å¯¾å¿œ
+
+#define STEP_API
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #undef THIS_FILE
 static char THIS_FILE[] = __FILE__;
 #endif
 
-extern bool GetValues_mp3infp(FILE_INFO *pFileMP3);
-extern void Free_mp3infp();
-
 #pragma pack(push, 1)
-struct	ID3TAG	{						// <<< ID3 Tag ‚Ìƒf[ƒ^Œ`® >>>
-	BYTE	byData[128];				// 128ƒoƒCƒgƒf[ƒ^
+struct  ID3TAG  {                       // <<< ID3 Tag ã®ãƒ‡ãƒ¼ã‚¿å½¢å¼ >>>
+    BYTE    byData[128];                // 128ãƒã‚¤ãƒˆãƒ‡ãƒ¼ã‚¿
 };
 
-#define ID3_LEN_TRACK_NAME		30		// ƒgƒ‰ƒbƒN–¼    (•¶š—ñc30BYTE)
-#define ID3_LEN_ARTIST_NAME		30		// ƒA[ƒeƒBƒXƒg–¼(•¶š—ñc30BYTE)
-#define ID3_LEN_ALBUM_NAME		30		// ƒAƒ‹ƒoƒ€–¼    (•¶š—ñc30BYTE)
-#define ID3_LEN_COMMENT			30		// ƒRƒƒ“ƒg      (•¶š—ñc30BYTE)
-#define ID3_LEN_YEAR			4		// ƒŠƒŠ[ƒX”N†  (•¶š—ñc 4BYTE)
+#define ID3_LEN_TRACK_NAME      30      // ãƒˆãƒ©ãƒƒã‚¯å    (æ–‡å­—åˆ—â€¦30BYTE)
+#define ID3_LEN_ARTIST_NAME     30      // ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆå(æ–‡å­—åˆ—â€¦30BYTE)
+#define ID3_LEN_ALBUM_NAME      30      // ã‚¢ãƒ«ãƒãƒ å    (æ–‡å­—åˆ—â€¦30BYTE)
+#define ID3_LEN_COMMENT         30      // ã‚³ãƒ¡ãƒ³ãƒˆ      (æ–‡å­—åˆ—â€¦30BYTE)
+#define ID3_LEN_YEAR            4       // ãƒªãƒªãƒ¼ã‚¹å¹´å·  (æ–‡å­—åˆ—â€¦ 4BYTE)
 
-struct	ID3TAG_V10	{							// <<< ID3 Tag v1.0 ‚Ìƒf[ƒ^Œ`® >>>
-	TCHAR	sTAG[3];							// "TAG"         (•¶š—ñc 3BYTE)
-	TCHAR	sTrackName[ID3_LEN_TRACK_NAME];		// ƒgƒ‰ƒbƒN–¼    (•¶š—ñc30BYTE)
-	TCHAR	sArtistName[ID3_LEN_ARTIST_NAME];	// ƒA[ƒeƒBƒXƒg–¼(•¶š—ñc30BYTE)
-	TCHAR	sAlbumName[ID3_LEN_ALBUM_NAME];		// ƒAƒ‹ƒoƒ€–¼    (•¶š—ñc30BYTE)
-	TCHAR	sYear[4];							// ƒŠƒŠ[ƒX”N†  (•¶š—ñc 4BYTE)
-	TCHAR	sComment[ID3_LEN_COMMENT];			// ƒRƒƒ“ƒg      (•¶š—ñc30BYTE)
-	BYTE	byGenre;							// ƒWƒƒƒ“ƒ‹”Ô†  (”šcc 1BYTE)
+struct  ID3TAG_V10  {                           // <<< ID3 Tag v1.0 ã®ãƒ‡ãƒ¼ã‚¿å½¢å¼ >>>
+    char    sTAG[3];                            // "TAG"         (æ–‡å­—åˆ—â€¦ 3BYTE)
+    char    sTrackName[ID3_LEN_TRACK_NAME];     // ãƒˆãƒ©ãƒƒã‚¯å    (æ–‡å­—åˆ—â€¦30BYTE)
+    char    sArtistName[ID3_LEN_ARTIST_NAME];   // ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆå(æ–‡å­—åˆ—â€¦30BYTE)
+    char    sAlbumName[ID3_LEN_ALBUM_NAME];     // ã‚¢ãƒ«ãƒãƒ å    (æ–‡å­—åˆ—â€¦30BYTE)
+    char    sYear[4];                           // ãƒªãƒªãƒ¼ã‚¹å¹´å·  (æ–‡å­—åˆ—â€¦ 4BYTE)
+    char    sComment[ID3_LEN_COMMENT];          // ã‚³ãƒ¡ãƒ³ãƒˆ      (æ–‡å­—åˆ—â€¦30BYTE)
+    BYTE    byGenre;                            // ã‚¸ãƒ£ãƒ³ãƒ«ç•ªå·  (æ•°å­—â€¦â€¦ 1BYTE)
 };
 
-struct	ID3TAG_V11	{							// <<< ID3 Tag v1.1 ‚Ìƒf[ƒ^Œ`® >>>
-	TCHAR	sTAG[3];							// "TAG"         (•¶š—ñc 3BYTE)
-	TCHAR	sTrackName[ID3_LEN_TRACK_NAME];		// ƒgƒ‰ƒbƒN–¼    (•¶š—ñc30BYTE)
-	TCHAR	sArtistName[ID3_LEN_ARTIST_NAME];	// ƒA[ƒeƒBƒXƒg–¼(•¶š—ñc30BYTE)
-	TCHAR	sAlbumName[ID3_LEN_ALBUM_NAME];		// ƒAƒ‹ƒoƒ€–¼    (•¶š—ñc30BYTE)
-	TCHAR	sYear[4];							// ƒŠƒŠ[ƒX”N†  (•¶š—ñc 4BYTE)
-	TCHAR	sComment[ID3_LEN_COMMENT-2];		// ƒRƒƒ“ƒg      (•¶š—ñc30BYTE)
-	TCHAR	cZero;								// '\0'          (•¶š—ñc 1BYTE)
-	BYTE	byTrackNumber;						// ƒgƒ‰ƒbƒN”Ô†  (”šcc 1BYTE)
-	BYTE	byGenre;							// ƒWƒƒƒ“ƒ‹”Ô†  (”šcc 1BYTE)
+struct  ID3TAG_V11  {                           // <<< ID3 Tag v1.1 ã®ãƒ‡ãƒ¼ã‚¿å½¢å¼ >>>
+    char    sTAG[3];                            // "TAG"         (æ–‡å­—åˆ—â€¦ 3BYTE)
+    char    sTrackName[ID3_LEN_TRACK_NAME];     // ãƒˆãƒ©ãƒƒã‚¯å    (æ–‡å­—åˆ—â€¦30BYTE)
+    char    sArtistName[ID3_LEN_ARTIST_NAME];   // ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆå(æ–‡å­—åˆ—â€¦30BYTE)
+    char    sAlbumName[ID3_LEN_ALBUM_NAME];     // ã‚¢ãƒ«ãƒãƒ å    (æ–‡å­—åˆ—â€¦30BYTE)
+    char    sYear[4];                           // ãƒªãƒªãƒ¼ã‚¹å¹´å·  (æ–‡å­—åˆ—â€¦ 4BYTE)
+    char    sComment[ID3_LEN_COMMENT-2];        // ã‚³ãƒ¡ãƒ³ãƒˆ      (æ–‡å­—åˆ—â€¦30BYTE)
+    char    cZero;                              // '\0'          (æ–‡å­—åˆ—â€¦ 1BYTE)
+    BYTE    byTrackNumber;                      // ãƒˆãƒ©ãƒƒã‚¯ç•ªå·  (æ•°å­—â€¦â€¦ 1BYTE)
+    BYTE    byGenre;                            // ã‚¸ãƒ£ãƒ³ãƒ«ç•ªå·  (æ•°å­—â€¦â€¦ 1BYTE)
 };
 #pragma pack(pop)
 
 //
-//	ƒƒ‚!
+//  ãƒ¡ãƒ¢!
 //
-//		‚±‚Ì DLL ‚ª MFC DLL ‚É‘Î‚µ‚Ä“®“I‚ÉƒŠƒ“ƒN‚³‚ê‚éê‡A
-//		MFC “à‚ÅŒÄ‚Ño‚³‚ê‚é‚±‚Ì DLL ‚©‚çƒGƒNƒXƒ|[ƒg‚³‚ê‚½
-//		‚Ç‚ÌŠÖ”‚àŠÖ”‚ÌÅ‰‚É’Ç‰Á‚³‚ê‚é AFX_MANAGE_STATE
-//		ƒ}ƒNƒ‚ğŠÜ‚ñ‚Å‚¢‚È‚¯‚ê‚Î‚È‚è‚Ü‚¹‚ñB
+//      ã“ã® DLL ãŒ MFC DLL ã«å¯¾ã—ã¦å‹•çš„ã«ãƒªãƒ³ã‚¯ã•ã‚Œã‚‹å ´åˆã€
+//      MFC å†…ã§å‘¼ã³å‡ºã•ã‚Œã‚‹ã“ã® DLL ã‹ã‚‰ã‚¨ã‚¯ã‚¹ãƒãƒ¼ãƒˆã•ã‚ŒãŸ
+//      ã©ã®é–¢æ•°ã‚‚é–¢æ•°ã®æœ€åˆã«è¿½åŠ ã•ã‚Œã‚‹ AFX_MANAGE_STATE
+//      ãƒã‚¯ãƒ­ã‚’å«ã‚“ã§ã„ãªã‘ã‚Œã°ãªã‚Šã¾ã›ã‚“ã€‚
 //
-//		—á:
+//      ä¾‹:
 //
-//		extern "C" BOOL PASCAL EXPORT ExportedFunction()
-//		{
-//			AFX_MANAGE_STATE(AfxGetStaticModuleState());
-//			// ’ÊíŠÖ”‚Ì–{‘Ì‚Í‚±‚ÌˆÊ’u‚É‚ ‚è‚Ü‚·
-//		}
+//      extern "C" BOOL PASCAL EXPORT ExportedFunction()
+//      {
+//          AFX_MANAGE_STATE(AfxGetStaticModuleState());
+//          // é€šå¸¸é–¢æ•°ã®æœ¬ä½“ã¯ã“ã®ä½ç½®ã«ã‚ã‚Šã¾ã™
+//      }
 //
-//		‚±‚Ìƒ}ƒNƒ‚ªŠeŠÖ”‚ÉŠÜ‚Ü‚ê‚Ä‚¢‚é‚±‚ÆAMFC “à‚Ì
-//		‚Ç‚ÌŒÄ‚Ño‚µ‚æ‚è—Dæ‚·‚é‚±‚Æ‚Í”ñí‚Éd—v‚Å‚·B
-//		‚±‚ê‚ÍŠÖ”“à‚ÌÅ‰‚ÌƒXƒe[ƒgƒƒ“ƒg‚Å‚È‚¯‚ê‚Î‚È
-//		‚ç‚È‚¢‚±‚Æ‚ğˆÓ–¡‚µ‚Ü‚·AƒRƒ“ƒXƒgƒ‰ƒNƒ^‚ª MFC
-//		DLL “à‚Ö‚ÌŒÄ‚Ño‚µ‚ğs‚¤‰Â”\«‚ª‚ ‚é‚Ì‚ÅAƒIƒu
-//		ƒWƒFƒNƒg•Ï”‚ÌéŒ¾‚æ‚è‚à‘O‚Å‚È‚¯‚ê‚Î‚È‚è‚Ü‚¹‚ñB
+//      ã“ã®ãƒã‚¯ãƒ­ãŒå„é–¢æ•°ã«å«ã¾ã‚Œã¦ã„ã‚‹ã“ã¨ã€MFC å†…ã®
+//      ã©ã®å‘¼ã³å‡ºã—ã‚ˆã‚Šå„ªå…ˆã™ã‚‹ã“ã¨ã¯éå¸¸ã«é‡è¦ã§ã™ã€‚
+//      ã“ã‚Œã¯é–¢æ•°å†…ã®æœ€åˆã®ã‚¹ãƒ†ãƒ¼ãƒˆãƒ¡ãƒ³ãƒˆã§ãªã‘ã‚Œã°ãª
+//      ã‚‰ãªã„ã“ã¨ã‚’æ„å‘³ã—ã¾ã™ã€ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ãŒ MFC
+//      DLL å†…ã¸ã®å‘¼ã³å‡ºã—ã‚’è¡Œã†å¯èƒ½æ€§ãŒã‚ã‚‹ã®ã§ã€ã‚ªãƒ–
+//      ã‚¸ã‚§ã‚¯ãƒˆå¤‰æ•°ã®å®£è¨€ã‚ˆã‚Šã‚‚å‰ã§ãªã‘ã‚Œã°ãªã‚Šã¾ã›ã‚“ã€‚
 //
-//		Ú×‚É‚Â‚¢‚Ä‚Í MFC ƒeƒNƒjƒJƒ‹ ƒm[ƒg 33 ‚¨‚æ‚Ñ
-//		58 ‚ğQÆ‚µ‚Ä‚­‚¾‚³‚¢B
+//      è©³ç´°ã«ã¤ã„ã¦ã¯ MFC ãƒ†ã‚¯ãƒ‹ã‚«ãƒ« ãƒãƒ¼ãƒˆ 33 ãŠã‚ˆã³
+//      58 ã‚’å‚ç…§ã—ã¦ãã ã•ã„ã€‚
 //
 
 /////////////////////////////////////////////////////////////////////////////
 // CSTEP_mp3App
 
 BEGIN_MESSAGE_MAP(CSTEP_mp3App, CWinApp)
-	//{{AFX_MSG_MAP(CSTEP_mp3App)
-		// ƒƒ‚ - ClassWizard ‚Í‚±‚ÌˆÊ’u‚Éƒ}ƒbƒsƒ“ƒO—p‚Ìƒ}ƒNƒ‚ğ’Ç‰Á‚Ü‚½‚Ííœ‚µ‚Ü‚·B
-		//        ‚±‚ÌˆÊ’u‚É¶¬‚³‚ê‚éƒR[ƒh‚ğ•ÒW‚µ‚È‚¢‚Å‚­‚¾‚³‚¢B
-	//}}AFX_MSG_MAP
+    //{{AFX_MSG_MAP(CSTEP_mp3App)
+        // ãƒ¡ãƒ¢ - ClassWizard ã¯ã“ã®ä½ç½®ã«ãƒãƒƒãƒ”ãƒ³ã‚°ç”¨ã®ãƒã‚¯ãƒ­ã‚’è¿½åŠ ã¾ãŸã¯å‰Šé™¤ã—ã¾ã™ã€‚
+        //        ã“ã®ä½ç½®ã«ç”Ÿæˆã•ã‚Œã‚‹ã‚³ãƒ¼ãƒ‰ã‚’ç·¨é›†ã—ãªã„ã§ãã ã•ã„ã€‚
+    //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// CSTEP_mp3App ‚Ì\’z
+// CSTEP_mp3App ã®æ§‹ç¯‰
 
 CSTEP_mp3App::CSTEP_mp3App()
 {
-	// TODO: ‚±‚ÌˆÊ’u‚É\’z—p‚ÌƒR[ƒh‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢B
-	// ‚±‚±‚É InitInstance ‚Ì’†‚Ìd—v‚È‰Šú‰»ˆ—‚ğ‚·‚×‚Ä‹Lq‚µ‚Ä‚­‚¾‚³‚¢B
+    // TODO: ã“ã®ä½ç½®ã«æ§‹ç¯‰ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¦ãã ã•ã„ã€‚
+    // ã“ã“ã« InitInstance ã®ä¸­ã®é‡è¦ãªåˆæœŸåŒ–å‡¦ç†ã‚’ã™ã¹ã¦è¨˜è¿°ã—ã¦ãã ã•ã„ã€‚
 }
 
 /////////////////////////////////////////////////////////////////////////////
-// —Bˆê‚Ì CSTEP_mp3App ƒIƒuƒWƒFƒNƒg
+// å”¯ä¸€ã® CSTEP_mp3App ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 
 CSTEP_mp3App theApp;
 
@@ -112,1588 +120,1580 @@ UINT nFileTypeMP3V11;
 UINT nFileTypeID3V2;
 UINT nFileTypeRMP;
 
-enum	{SIF_CONV_ALL_FIELD, SIF_CONV_LENGTH_OK};
+enum    {SIF_CONV_ALL_FIELD, SIF_CONV_LENGTH_OK};
 
 CString strINI;
-// ƒIƒvƒVƒ‡ƒ“İ’è
-bool	bOptAutoConvID3v2;
-bool	bOptAutoConvRMP;
-int		nOptSIFieldConvType;
-bool	bOptID3v2ID3tagAutoWrite;
-bool	bOptRmpID3tagAutoWrite;
-bool	bOptID3v2GenreAddNumber;
-bool	bOptChangeFileExt;
-bool	bOptID3v2GenreListSelect;
-bool	bOptRmpGenreListSelect;
-bool	bOptID3v2ID3tagAutoDelete;
-CString	strOptSoftwareTag;
-bool	bOptNotUnSyncAlways;
-bool	bOptUnSyncNew;
-int		nId3v2Encode;
-int		nId3v2Version;
-int		nId3v2EncodeNew;
-int		nId3v2VersionNew;
-int		nId3v2EncodeConv;
-int		nId3v2VersionConv;
+// ã‚ªãƒ—ã‚·ãƒ§ãƒ³è¨­å®š
 
-// ƒRƒ}ƒ“ƒhID
-UINT nIDFileConvAutoID3;
-UINT nIDFileConvMP3;
-UINT nIDFileConvID3v2;
-UINT nIDFileConvRMP;
-//UINT nIDConvSIFieldToID3Tag; /* 1.02 –{‘Ì•W€‹@”\‚ğg‚¤ */
-UINT nIDDeleteID3;
-UINT nIDConvID3v2Version;
+const bool bOptAutoConvID3v2 = true;extern const bool bOptAutoConvID3v2_default = true;
+//bool    bOptAutoConvRMP;            extern const bool bOptAutoConvRMP_default = true;
+int     nOptSIFieldConvType;        extern const int  nOptSIFieldConvType_default = SIF_CONV_ALL_FIELD;
+bool    bOptID3v2ID3tagAutoWrite;   extern const bool bOptID3v2ID3tagAutoWrite_default = true;
+bool    bOptRmpID3tagAutoWrite;     extern const bool bOptRmpID3tagAutoWrite_default = true;
+bool    bOptID3v2GenreAddNumber;    extern const bool bOptID3v2GenreAddNumber_default = false;
+bool    bOptChangeFileExt;          extern const bool bOptChangeFileExt_default = false;
+bool    bOptID3v2GenreListSelect;   extern const bool bOptID3v2GenreListSelect_default = false; //ä»–ã®ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ã«åˆã‚ã›ãŸã¤ã‚‚ã‚Šã ã£ãŸãŒä¸å…·åˆå ±å‘Šãƒ»è¦æœ›ãŒå¤šã™ãã‚‹ã®ã§åˆæœŸå€¤ã‚’ STEP_M ã®é ƒã«æˆ»ã™(ã®ã‚’ã‚„ã£ã±ã‚Šã‚„ã‚ãŸ)(true ã ã¨ STEP_M ä»¥å‰ã¨åŒã˜)
+bool    bOptRmpGenreListSelect;     extern const bool bOptRmpGenreListSelect_default = false;   //åŒä¸Š(ä»Šã•ã‚‰ RMP ã‚’ä½¿ã†äººã¯ã„ãªã„ã¨æ€ã†ãŒ)
+bool    bOptID3v2ID3tagAutoDelete;  extern const bool bOptID3v2ID3tagAutoDelete_default = true;
+CString strOptSoftwareTag;          extern const TCHAR strOptSoftwareTag_default[] = _T("");
 
+bool    bOptUnSync;                 extern const bool bOptUnSync_default = false;
+
+int     nId3v2Encode;               extern const int  nId3v2Encode_default = 0; //ID3v2 æ–‡å­—ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰(å¤‰æ›´ã—ãªã„)
+int     nId3v2Version;              extern const int  nId3v2Version_default = 0;//ID3v2 ãƒãƒ¼ã‚¸ãƒ§ãƒ³(å¤‰æ›´ã—ãªã„)
+int     nId3v2EncodeNew;            extern const int  nId3v2EncodeNew_default = 1; //æ–°è¦ä½œæˆæ™‚ ID3v2 æ–‡å­—ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰(UTF16)
+int     nId3v2VersionNew;           extern const int  nId3v2VersionNew_default = 1;//æ–°è¦ä½œæˆæ™‚ ID3v2 ãƒãƒ¼ã‚¸ãƒ§ãƒ³(v2.3)
+int     nId3v2EncodeConv = nId3v2Encode_default;
+int     nId3v2VersionConv = nId3v2Version_default;
+bool    bOptUnSyncConv = bOptUnSync_default;
+
+const bool    bAutoISO8859_1toUtf16 = true;
+//â†‘added by Kobarin
+//ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰ã®æŒ‡å®šãŒã€Œå¤‰æ›´ãªã—ã€ã§æ›´æ–°å‰ãŒã€ŒISO_8859_1ã€ã®ã¨ãã€UNICODE å›ºæœ‰æ–‡å­—
+//ä½¿ç”¨æ™‚ã¯ UTF16 ã«å¤‰æ›ã™ã‚‹å ´åˆã« true
+//è¨­å®šå‡ºæ¥ãŸæ–¹ãŒè‰¯ã„ã‹ã‚‚ã—ã‚Œãªã„ãŒã€é¢å€’ãªã®ã§å¸¸ã«æœ‰åŠ¹
+//ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰ã®æŒ‡å®šãŒæ˜ç¤ºçš„ã«ã€ŒISO_8859_1ã€ã¨ãªã£ã¦ã„ã‚‹å ´åˆã¯ãã¡ã‚‰ã‚’å„ªå…ˆ
+
+// ã‚³ãƒãƒ³ãƒ‰ID
+//UINT nIDFileConvAutoID3;//æ¨™æº–MP3/ID3v2 å½¢å¼ã«è‡ªå‹•å¤‰æ›(å»ƒæ­¢)
+UINT nIDFileConvMP3;     //ID3v1 ã«å¤‰æ›
+UINT nIDFileConvID3v2;   //ID3v2 ã«å¤‰æ›&ID3v2ãƒãƒ¼ã‚¸ãƒ§ãƒ³/æ–‡å­—ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰ã®å¤‰æ›
+UINT nIDFileConvRMP;     //RIFF MP3 å½¢å¼ã«å¤‰æ›
+UINT nIDDeleteID3;       //ID3v1/v2 ã‚’å‰Šé™¤
+//UINT nIDConvID3v2Version;//ID3v2ãƒãƒ¼ã‚¸ãƒ§ãƒ³/æ–‡å­—ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰ã®å¤‰æ›(å»ƒæ­¢)(ID3v2 ã«å¤‰æ›ã¨çµ±åˆ)
+
+bool ID3v1IsEmpty(FILE_INFO *pFileMP3)
+{//ID3v1 ãŒç©ºã®å ´åˆã¯ true ã‚’è¿”ã™
+    if(GetTrackName(pFileMP3)[0]){
+        return false;
+    }
+    if(GetArtistName(pFileMP3)[0]){
+        return false;
+    }
+    if(GetAlbumName(pFileMP3)[0]){
+        return false;
+    }
+    if(GetYear(pFileMP3)[0]){
+        return false;
+    }
+    if(GetComment(pFileMP3)[0]){
+        return false;
+    }
+    if(GetBGenre(pFileMP3) != 0xFF){
+        return false;
+    }
+    if(GetBTrackNumber(pFileMP3) != 0xFF){
+        return false;
+    }
+    return true;
+}
+#ifdef _UNICODE
+static bool IsUnicodeStr(const WCHAR *str)
+{//UNICODE å›ºæœ‰ã®(ANSI ã§è¡¨ç¾å‡ºæ¥ãªã„)æ–‡å­—ã‚’ä½¿ç”¨ã—ã¦ã„ã‚‹å ´åˆã¯ true ã‚’è¿”ã™
+    int len_ansi = WideCharToMultiByte(CP_ACP, 0, str, -1, 0, 0, NULL, NULL);
+    char *str_ansi = (char*)malloc(len_ansi);
+    WideCharToMultiByte(CP_ACP, 0, str, -1, str_ansi, len_ansi, NULL, NULL);
+    //UTF16 ã«æˆ»ã—ã¦å…ƒã®æ–‡å­—åˆ—ã¨ä¸€è‡´ã™ã‚‹ã‹ç¢ºèª
+    int len_utf16 = MultiByteToWideChar(CP_ACP, 0, str_ansi, -1, 0, 0);
+    WCHAR *str_utf16 = (WCHAR*)malloc(len_utf16*sizeof(WCHAR));
+    MultiByteToWideChar(CP_ACP, 0, str_ansi, -1, str_utf16, len_utf16);
+    bool bRet = (wcscmp(str, str_utf16) != 0);
+    free(str_utf16);
+    free(str_ansi);
+    return bRet;
+}
+#endif
 STEP_API LPCTSTR WINAPI STEPGetPluginInfo(void)
 {
-	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-	return "Version 1.02 Copyright (C) 2003-2006 haseta\r\nVersion 1.04M Copyright (C) 2008-2010 Mimura\r\nMP3(ID3v1/ID3v2)/RIFFŒ`®‚ğƒTƒ|[ƒg‚µ‚Ä‚¢‚Ü‚·";
+    AFX_MANAGE_STATE(AfxGetStaticModuleState());
+    return _T("Version 1.02 Copyright (C) 2003-2006 haseta\r\n")
+           _T("Version 1.04M Copyright (C) 2008-2010 Mimura\r\n")
+           _T("Version 1.07 Copyright (C) 2016-2019 Kobarin\r\n")
+           _T("MP3(ID3v1/ID3v2)/RIFFå½¢å¼ã‚’ã‚µãƒãƒ¼ãƒˆã—ã¦ã„ã¾ã™");
 }
 
 void AddConvMenu(HMENU hMenu) {
-	InsertMenu(hMenu, MF_BYPOSITION, MF_BYPOSITION | MFT_SEPARATOR, 0, NULL);
-	InsertMenu(hMenu, MF_BYPOSITION, MF_BYPOSITION | MFT_STRING, nIDFileConvMP3, "•W€MP3Œ`®‚É•ÏŠ·");
-	InsertMenu(hMenu, MF_BYPOSITION, MF_BYPOSITION | MFT_STRING, nIDFileConvRMP, "RIFF MP3Œ`®‚É•ÏŠ·");
-	InsertMenu(hMenu, MF_BYPOSITION, MF_BYPOSITION | MFT_STRING, nIDFileConvID3v2, "ID3v2Œ`®‚É•ÏŠ·");
-	InsertMenu(hMenu, MF_BYPOSITION, MF_BYPOSITION | MFT_STRING, nIDFileConvAutoID3, "•W€MP3Œ`®/ID3v2Œ`®‚É©“®•ÏŠ·");
-	InsertMenu(hMenu, MF_BYPOSITION, MF_BYPOSITION | MFT_STRING, nIDConvID3v2Version, "ID3v2ƒo[ƒWƒ‡ƒ“/•¶šƒGƒ“ƒR[ƒh‚Ì•ÏŠ·");
-//	InsertMenu(hMenu, MF_BYPOSITION, MF_BYPOSITION | MFT_SEPARATOR, 0, NULL);
-//	InsertMenu(hMenu, MF_BYPOSITION, MF_BYPOSITION | MFT_STRING, nIDConvSIFieldToID3Tag, "SI/ID3v2ƒtƒB[ƒ‹ƒh‚©‚çID3tag‚É•ÏŠ·");
+    InsertMenu(hMenu, MF_BYPOSITION, MF_BYPOSITION | MFT_SEPARATOR, 0, NULL);
+    InsertMenu(hMenu, MF_BYPOSITION, MF_BYPOSITION | MFT_STRING, nIDFileConvMP3, _T("ID3v1 ã«å¤‰æ›(MP3)"));
+    InsertMenu(hMenu, MF_BYPOSITION, MF_BYPOSITION | MFT_STRING, nIDFileConvRMP, _T("RIFF MP3 ã«å¤‰æ›(MP3)"));
+    InsertMenu(hMenu, MF_BYPOSITION, MF_BYPOSITION | MFT_STRING, nIDFileConvID3v2, _T("ID3v2 ã«å¤‰æ›/ãƒãƒ¼ã‚¸ãƒ§ãƒ³ãƒ»æ–‡å­—ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰å¤‰æ›(MP3)"));
+//    InsertMenu(hMenu, MF_BYPOSITION, MF_BYPOSITION | MFT_STRING, nIDConvID3v2Version, _T("ID3v2ãƒãƒ¼ã‚¸ãƒ§ãƒ³/æ–‡å­—ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰ã®å¤‰æ›"));
 }
 
 void AddEditMenu(HMENU hMenu) {
-	char szMenu[100];
-	MENUITEMINFO mii;
-	mii.cbSize = sizeof(MENUITEMINFO);
-	mii.fMask = MIIM_TYPE;
-	bool bAddDeleteID3 = false;
-	for (int iPos=0;iPos<GetMenuItemCount(hMenu);iPos++) {
-		mii.dwTypeData = (LPTSTR)szMenu;
-		mii.cch = sizeof(szMenu)-1;
-		if (GetMenuItemInfo(hMenu, iPos, true, &mii)) {
-			if (mii.fType == MFT_STRING) {
-				if (strcmp(szMenu, "•ÒW‘O‚Ìó‘Ô‚É–ß‚·") == 0) {
-					InsertMenu(hMenu, iPos, MF_BYPOSITION | MFT_STRING, nIDDeleteID3, "ID3tag‚ğíœ");
-					bAddDeleteID3 = true;
-					iPos++;
-				}
-			}
-		}
-	}
+    TCHAR szMenu[100];
+    MENUITEMINFO mii = {0};
+    mii.cbSize = sizeof(MENUITEMINFO);
+    mii.fMask = MIIM_TYPE;
+    bool bAddDeleteID3 = false;
+    for (int iPos=0;iPos<GetMenuItemCount(hMenu);iPos++) {
+        mii.dwTypeData = (LPTSTR)szMenu;
+        mii.cch = sizeof(szMenu)/sizeof(TCHAR)-1;
+        if (GetMenuItemInfo(hMenu, iPos, true, &mii)) {
+            if (mii.fType == MFT_STRING) {
+                if (_tcscmp(szMenu, _T("ç·¨é›†å‰ã®çŠ¶æ…‹ã«æˆ»ã™")) == 0) {
+                    InsertMenu(hMenu, iPos, MF_BYPOSITION | MFT_STRING, nIDDeleteID3, _T("ID3v1/v2 ã‚’å‰Šé™¤(MP3)"));
+                    bAddDeleteID3 = true;
+                    iPos++;
+                }
+            }
+        }
+    }
 
-	if (!bAddDeleteID3) {
-		InsertMenu(hMenu, MF_BYPOSITION, MF_BYPOSITION | MFT_STRING, nIDDeleteID3, "ID3tag‚ğíœ");
-	}
+    if (!bAddDeleteID3) {
+        InsertMenu(hMenu, MF_BYPOSITION, MF_BYPOSITION | MFT_STRING, nIDDeleteID3, _T("ID3v1/v2 ã‚’å‰Šé™¤(MP3)"));
+    }
 }
 
-STEP_API bool WINAPI STEPInit(UINT pID, LPCTSTR szPluginFolder)
+extern "C" STEP_API bool WINAPI STEPInit(UINT pID, LPCTSTR szPluginFolder)
 {
-	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-	if (Initialize() == false)	return false;
-	nPluginID = pID;
+    AFX_MANAGE_STATE(AfxGetStaticModuleState());
+    if (Initialize() == false)  return false;
+    nPluginID = pID;
 
-	// INIƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ
-	strINI = szPluginFolder;
-	strINI += "STEP_mp3.ini";
-	bOptAutoConvID3v2 = GetPrivateProfileInt("RMP_ID3V2", "AutoConvID3v2", 1, strINI) ? true : false;
-	bOptAutoConvRMP = GetPrivateProfileInt("RMP_ID3V2", "AutoConvRMP", 0, strINI) ? true : false;
-	nOptSIFieldConvType = GetPrivateProfileInt("RMP_ID3V2", "SIFieldConvType", SIF_CONV_ALL_FIELD, strINI);
-	bOptID3v2ID3tagAutoWrite = GetPrivateProfileInt("RMP_ID3V2", "ID3v2ID3tagAutoWrite", 1, strINI) ? true : false;
-	bOptRmpID3tagAutoWrite = GetPrivateProfileInt("RMP_ID3V2", "RmpID3tagAutoWrite", 1, strINI) ? true : false;
-	bOptID3v2GenreListSelect = GetPrivateProfileInt("RMP_ID3V2", "ID3v2GenreListSelect", 1, strINI) ? true : false;
-	bOptRmpGenreListSelect = GetPrivateProfileInt("RMP_ID3V2", "RmpGenreListSelect", 1, strINI) ? true : false;
-	bOptID3v2ID3tagAutoDelete = GetPrivateProfileInt("RMP_ID3V2", "ID3v2ID3tagAutoDelete", 0, strINI) ? true : false;
-	bOptID3v2GenreAddNumber = false/* 2005.08.23 GetPrivateProfileInt("RMP_ID3V2", "ID3v2GenreAddNumber", 0, strINI) ? true : false*/;
-	bOptChangeFileExt = GetPrivateProfileInt("RMP_ID3V2", "ChangeFileExt", 0, strINI) ? true : false;
+    // INIãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿
+    strINI = szPluginFolder;
+    strINI +=_T( "STEP_mp3.ini");
+    CIniFile iniFile(strINI);
+    //bOptAutoConvID3v2 = true;//iniFile.ReadInt(_T("RMP_ID3V2"), _T("AutoConvID3v2"), bOptAutoConvID3v2_default)!=0;
+    //bOptAutoConvRMP = true;//iniFile.ReadInt(_T("RMP_ID3V2"), _T("AutoConvRMP"), bOptAutoConvRMP_default)!=0;
+    nOptSIFieldConvType = iniFile.ReadInt(_T("RMP_ID3V2"), _T("SIFieldConvType"), nOptSIFieldConvType_default);
+    bOptID3v2ID3tagAutoWrite = iniFile.ReadInt(_T("RMP_ID3V2"), _T("ID3v2ID3tagAutoWrite"), bOptID3v2ID3tagAutoWrite_default) != 0;
+    bOptRmpID3tagAutoWrite = iniFile.ReadInt(_T("RMP_ID3V2"), _T("RmpID3tagAutoWrite"), bOptRmpID3tagAutoWrite_default) != 0;
+    bOptID3v2GenreListSelect = iniFile.ReadInt(_T("RMP_ID3V2"), _T("ID3v2GenreListSelect"), bOptID3v2GenreListSelect_default) != 0;
+    bOptRmpGenreListSelect = iniFile.ReadInt(_T("RMP_ID3V2"), _T("RmpGenreListSelect"), bOptRmpGenreListSelect_default) != 0;
+    bOptID3v2ID3tagAutoDelete = iniFile.ReadInt(_T("RMP_ID3V2"), _T("ID3v2ID3tagAutoDelete"), bOptID3v2ID3tagAutoDelete_default) != 0;
+    bOptID3v2GenreAddNumber = false;// 2005.08.23 iniFile.ReadInt("RMP_ID3V2", "ID3v2GenreAddNumber", bOptID3v2GenreAddNumber_default) != 0;
+    bOptChangeFileExt = iniFile.ReadInt(_T("RMP_ID3V2"), _T("ChangeFileExt"), bOptChangeFileExt_default) != 0;
+    iniFile.ReadStr(_T("OTHER"), _T("SoftwareTag"), __T(""), strOptSoftwareTag.GetBufferSetLength(255+1), 255);
+    strOptSoftwareTag.ReleaseBuffer();
 
-	GetPrivateProfileString("OTHER", "SoftwareTag", "", strOptSoftwareTag.GetBufferSetLength(255+1), 255, strINI);
-	strOptSoftwareTag.ReleaseBuffer();
+    bOptUnSync = iniFile.ReadInt(_T("OTHER"), _T("ID3v2UnSync"), bOptUnSync_default) != 0;
 
-	bOptNotUnSyncAlways = GetPrivateProfileInt("OTHER", "ID3v2NotUnSync", 0, strINI) ? true : false;
-	bOptUnSyncNew = GetPrivateProfileInt("OTHER", "ID3v2UnSyncNew", 0, strINI) ? true : false;
+    nId3v2Encode = iniFile.ReadInt(_T("OTHER"), _T("ID3v2CharEncode"), nId3v2Encode_default);
+    nId3v2Version = iniFile.ReadInt(_T("OTHER"), _T("ID3v2Version"), nId3v2Version_default);
+    nId3v2EncodeNew = iniFile.ReadInt(_T("OTHER"), _T("ID3v2CharEncodeNew"), nId3v2EncodeNew_default);
+    nId3v2VersionNew = iniFile.ReadInt(_T("OTHER"), _T("ID3v2VersionNew"), nId3v2VersionNew_default);
 
-	nId3v2Encode = GetPrivateProfileInt("OTHER", "ID3v2CharEncode", 0, strINI);
-	nId3v2Version = GetPrivateProfileInt("OTHER", "ID3v2Version", 0, strINI);
-	nId3v2EncodeNew = GetPrivateProfileInt("OTHER", "ID3v2CharEncodeNew", 0, strINI);
-	nId3v2VersionNew = GetPrivateProfileInt("OTHER", "ID3v2VersionNew", 0, strINI);
+    //å€¤ã®ç¯„å›²ãƒã‚§ãƒƒã‚¯(ãƒ¦ãƒ¼ã‚¶ãƒ¼ãŒæ‰‹å‹•ã§iniã‚’æ›¸ãæ›ãˆãŸå ´åˆã«å¿µã®ç‚º)
+    switch(nId3v2Encode){
+    //å¤‰æ›´ãªã—: ISO_8859_1: UTF-16:  UTF-8:
+    case 0:         case 1: case 2: case 3: break;
+    default: nId3v2Encode = nId3v2Encode_default; break;
+    }
+    switch (nId3v2Version) {
+    //å¤‰æ›´ãªã—ï¼š  v2.2:   v2.3:   v2.4:
+    case 0:     case 1: case 2: case 3: break;
+    default: nId3v2Version = nId3v2Version_default; break;
+    }
+    switch (nId3v2EncodeNew) {
+    //ISO_8859_1: UTF-16:  UTF-8:
+    case 0:       case 1: case 2:break;
+    default: nId3v2EncodeNew = nId3v2EncodeNew_default; break;
+    }
+    switch (nId3v2VersionNew) {
+    //v2.2:   v2.3:   v2.4:
+    case 0: case 1: case 2: break;
+    default: nId3v2VersionNew = nId3v2VersionNew_default; break;
+    }
+    //ID3v2.2/2.3 ã§ UTF8 ã‚’ä½¿ã‚ãªã„ã‚ˆã†ã«
+    if (nId3v2Encode == 2 && nId3v2Version != 2) {
+        nId3v2Encode = 1;//UTF16 ã«ã™ã‚‹
+    }
+    if (nId3v2EncodeNew == 2 && nId3v2VersionNew != 2) {
+        nId3v2EncodeNew = 1;//UTF16 ã«ã™ã‚‹
+    }
+    //
+    // ã‚µãƒãƒ¼ãƒˆã—ã¦ã„ã‚‹æ‹¡å¼µå­ã‚’ç™»éŒ²
+    HBITMAP hMP3Bitmap = LoadBitmap(theApp.m_hInstance, MAKEINTRESOURCE(IDB_BITMAP_MP3));
+    HBITMAP hMP3V1Bitmap = LoadBitmap(theApp.m_hInstance, MAKEINTRESOURCE(IDB_BITMAP_MP3));
+    HBITMAP hMP3V11Bitmap = LoadBitmap(theApp.m_hInstance, MAKEINTRESOURCE(IDB_BITMAP_MP3));
+    HBITMAP hID3v2Bitmap = LoadBitmap(theApp.m_hInstance, MAKEINTRESOURCE(IDB_BITMAP_ID3V2));
+    HBITMAP hRMPBitmap = LoadBitmap(theApp.m_hInstance, MAKEINTRESOURCE(IDB_BITMAP_RMP));
+    nFileTypeMP3 = STEPRegisterExt(nPluginID, _T("mp3"), hMP3Bitmap);
+    nFileTypeMP3V1 = STEPRegisterExt(nPluginID, _T("mp3"), hMP3V1Bitmap);
+    nFileTypeMP3V11 = STEPRegisterExt(nPluginID, _T("mp3"), hMP3V11Bitmap);
+    nFileTypeID3V2 = STEPRegisterExt(nPluginID, _T("mp3"), hID3v2Bitmap);
+    nFileTypeRMP = STEPRegisterExt(nPluginID, _T("rmp"), hRMPBitmap);
+    DeleteObject(hMP3Bitmap);
+    DeleteObject(hMP3V1Bitmap);
+    DeleteObject(hMP3V11Bitmap);
+    DeleteObject(hID3v2Bitmap);
+    DeleteObject(hRMPBitmap);
 
-	// ƒTƒ|[ƒg‚µ‚Ä‚¢‚éŠg’£q‚ğ“o˜^
-	HBITMAP hMP3Bitmap = LoadBitmap(theApp.m_hInstance, MAKEINTRESOURCE(IDB_BITMAP_MP3));
-	HBITMAP hMP3V1Bitmap = LoadBitmap(theApp.m_hInstance, MAKEINTRESOURCE(IDB_BITMAP_MP3));
-	HBITMAP hMP3V11Bitmap = LoadBitmap(theApp.m_hInstance, MAKEINTRESOURCE(IDB_BITMAP_MP3));
-	HBITMAP hID3v2Bitmap = LoadBitmap(theApp.m_hInstance, MAKEINTRESOURCE(IDB_BITMAP_ID3V2));
-	HBITMAP hRMPBitmap = LoadBitmap(theApp.m_hInstance, MAKEINTRESOURCE(IDB_BITMAP_RMP));
-	nFileTypeMP3 = STEPRegisterExt(nPluginID, "mp3", hMP3Bitmap);
-	nFileTypeMP3V1 = STEPRegisterExt(nPluginID, "mp3", hMP3V1Bitmap);
-	nFileTypeMP3V11 = STEPRegisterExt(nPluginID, "mp3", hMP3V11Bitmap);
-	nFileTypeID3V2 = STEPRegisterExt(nPluginID, "mp3", hID3v2Bitmap);
-	nFileTypeRMP = STEPRegisterExt(nPluginID, "rmp", hRMPBitmap);
-	DeleteObject(hMP3Bitmap);
-	DeleteObject(hMP3V1Bitmap);
-	DeleteObject(hMP3V11Bitmap);
-	DeleteObject(hID3v2Bitmap);
-	DeleteObject(hRMPBitmap);
+    // ãƒ„ãƒ¼ãƒ«ãƒãƒ¼ã¸ã®ç™»éŒ²
+    COLORMAP map; // èƒŒæ™¯è‰²ã®å¤‰æ›
+    map.from = RGB(192,192,192);
+    map.to = GetSysColor(COLOR_3DFACE);
 
-	// ƒc[ƒ‹ƒo[‚Ö‚Ì“o˜^
-	COLORMAP map; // ”wŒiF‚Ì•ÏŠ·
-	map.from = RGB(192,192,192);
-	map.to = GetSysColor(COLOR_3DFACE);
+    nIDFileConvMP3 = STEPGetCommandID();
+    STEPAddToolBarButton(CreateMappedBitmap(theApp.m_hInstance, IDB_FILE_CONV_MP3, 0, &map, 1), nIDFileConvMP3, _T("STEP_mp3_FILE_CONV_MP3"));
+    STEPKeyAssign(nIDFileConvMP3, _T("ID3v1 ã«å¤‰æ›"), _T("STEP_mp3_KEY_FILE_CONV_MP3"));
 
-	nIDFileConvMP3 = STEPGetCommandID();
-	STEPAddToolBarButton(CreateMappedBitmap(theApp.m_hInstance, IDB_FILE_CONV_MP3, 0, &map, 1), nIDFileConvMP3, "STEP_mp3_FILE_CONV_MP3");
-	STEPKeyAssign(nIDFileConvMP3, "•W€MP3Œ`®‚É•ÏŠ·", "STEP_mp3_KEY_FILE_CONV_MP3");
+    nIDFileConvRMP = STEPGetCommandID();
+    STEPAddToolBarButton(CreateMappedBitmap(theApp.m_hInstance, IDB_FILE_CONV_RMP, 0, &map, 1), nIDFileConvRMP, _T("STEP_mp3_FILE_CONV_RMP"));
+    STEPKeyAssign(nIDFileConvRMP, _T("RIFF MP3 ã«å¤‰æ›"), _T("STEP_mp3_KEY_FILE_CONV_RMP"));
 
-	nIDFileConvRMP = STEPGetCommandID();
-	STEPAddToolBarButton(CreateMappedBitmap(theApp.m_hInstance, IDB_FILE_CONV_RMP, 0, &map, 1), nIDFileConvRMP, "STEP_mp3_FILE_CONV_RMP");
-	STEPKeyAssign(nIDFileConvRMP, "RIFF MP3Œ`®‚É•ÏŠ·", "STEP_mp3_KEY_FILE_CONV_RMP");
+    nIDFileConvID3v2 = STEPGetCommandID();
+    STEPAddToolBarButton(CreateMappedBitmap(theApp.m_hInstance, IDB_FILE_CONV_ID3V2, 0, &map, 1), nIDFileConvID3v2, _T("STEP_mp3_FILE_CONV_ID3V2"));
+    STEPKeyAssign(nIDFileConvID3v2, _T("ID3v2 ã«å¤‰æ›"), _T("STEP_mp3_KEY_FILE_CONV_ID3V2"));
 
-	nIDFileConvID3v2 = STEPGetCommandID();
-	STEPAddToolBarButton(CreateMappedBitmap(theApp.m_hInstance, IDB_FILE_CONV_ID3V2, 0, &map, 1), nIDFileConvID3v2, "STEP_mp3_FILE_CONV_ID3V2");
-	STEPKeyAssign(nIDFileConvID3v2, "ID3v2 Œ`®‚É•ÏŠ·", "STEP_mp3_KEY_FILE_CONV_ID3V2");
+    nIDDeleteID3 = STEPGetCommandID();
+    STEPKeyAssign(nIDDeleteID3, _T("ID3v1/v2 ã‚’å‰Šé™¤"), _T("STEP_mp3_KEY_DELETE_ID3"));
 
-	nIDFileConvAutoID3 = STEPGetCommandID();
-	STEPAddToolBarButton(CreateMappedBitmap(theApp.m_hInstance, IDB_FILE_CONV_AUTO_ID3, 0, &map, 1), nIDFileConvAutoID3, "STEP_mp3_FILE_CONV_AUTO_ID3");
-	STEPKeyAssign(nIDFileConvAutoID3, "•W€MP3Œ`®/ID3v2 Œ`®‚É©“®•ÏŠ·", "STEP_mp3_KEY_FILE_CONV_AUTO_ID3");
+    //nIDConvID3v2Version = STEPGetCommandID();
+    //STEPKeyAssign(nIDConvID3v2Version, _T("ID3v2ãƒãƒ¼ã‚¸ãƒ§ãƒ³/æ–‡å­—ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰ã®å¤‰æ›"), _T("STEP_mp3_KEY_CONV_ID3V2_VERSION"));
 
-//	nIDConvSIFieldToID3Tag = STEPGetCommandID();
-//	STEPKeyAssign(nIDConvSIFieldToID3Tag, "SI/ID3v2ƒtƒB[ƒ‹ƒh‚©‚çID3tag‚É•ÏŠ·", "STEP_mp3_KEY_CONV_SI_FIELD_TO_ID3TAG");
-
-	nIDDeleteID3 = STEPGetCommandID();
-	STEPKeyAssign(nIDDeleteID3, "ID3tag ‚ğíœ", "STEP_mp3_KEY_DELETE_ID3");
-
-	nIDConvID3v2Version = STEPGetCommandID();
-	STEPKeyAssign(nIDConvID3v2Version, "ID3v2ƒo[ƒWƒ‡ƒ“/•¶šƒGƒ“ƒR[ƒh‚Ì•ÏŠ·", "STEP_mp3_KEY_CONV_ID3V2_VERSION");
-
-	return true;
+    return true;
 }
 
-STEP_API void WINAPI STEPFinalize() {
-	Finalize();
+extern "C" STEP_API void WINAPI STEPFinalize() {
+    Finalize();
 }
 
-STEP_API UINT WINAPI STEPGetAPIVersion(void)
+extern "C" STEP_API UINT WINAPI STEPGetAPIVersion(void)
 {
-	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-	return STEP_API_VERSION;
+    AFX_MANAGE_STATE(AfxGetStaticModuleState());
+    return STEP_API_VERSION;
 }
 
-STEP_API LPCTSTR WINAPI STEPGetPluginName(void)
+extern "C" STEP_API LPCTSTR WINAPI STEPGetPluginName(void)
 {
-	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-	return "STEP_mp3";
+    AFX_MANAGE_STATE(AfxGetStaticModuleState());
+    return _T("STEP_mp3");
 }
 
-STEP_API bool WINAPI STEPSupportSIF(UINT nFormat) {
-	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-	if (nFormat == nFileTypeMP3 || nFormat == nFileTypeMP3V1 || nFormat == nFileTypeMP3V11) {
-		return false;
-	}
-	if (nFormat == nFileTypeID3V2) {
-		return true;
-	}
-	if (nFormat == nFileTypeRMP) {
-		return true;
-	}
-	return true;
+extern "C" STEP_API bool WINAPI STEPSupportSIF(UINT nFormat) {
+    AFX_MANAGE_STATE(AfxGetStaticModuleState());
+    if (nFormat == nFileTypeMP3 || nFormat == nFileTypeMP3V1 || nFormat == nFileTypeMP3V11) {
+        if(bOptAutoConvID3v2){
+            return true;
+        }
+        return false;
+    }
+    if (nFormat == nFileTypeID3V2) {
+        return true;
+    }
+    if (nFormat == nFileTypeRMP) {
+        return true;
+    }
+    return true;
 }
 
-STEP_API bool WINAPI STEPSupportTrackNumberSIF(UINT nFormat) {
-	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-	if (nFormat == nFileTypeID3V2) {
-		return true;
-	}
-	if ((nFormat == nFileTypeMP3  || nFormat == nFileTypeMP3V1 || nFormat == nFileTypeMP3V11) && bOptAutoConvID3v2) {
-		return true;
-	}
-	return false;
+extern "C" STEP_API bool WINAPI STEPSupportTrackNumberSIF(UINT nFormat) {
+    AFX_MANAGE_STATE(AfxGetStaticModuleState());
+    if (nFormat == nFileTypeID3V2) {
+        return true;
+    }
+    if ((nFormat == nFileTypeMP3  || nFormat == nFileTypeMP3V1 || nFormat == nFileTypeMP3V11) && bOptAutoConvID3v2) {
+        return true;
+    }
+    return false;
 }
 
-STEP_API bool WINAPI STEPSupportGenreSIF(UINT nFormat) {
-	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-	if (nFormat == nFileTypeID3V2) {
-		return true;
-	}
-	if (nFormat == nFileTypeRMP) {
-		return true;
-	}
-	if ((nFormat == nFileTypeMP3  || nFormat == nFileTypeMP3V1 || nFormat == nFileTypeMP3V11) && (bOptAutoConvID3v2 || bOptAutoConvRMP)) {
-		return true;
-	}
-	return false;
+extern "C" STEP_API bool WINAPI STEPSupportGenreSIF(UINT nFormat) {
+    AFX_MANAGE_STATE(AfxGetStaticModuleState());
+    if (nFormat == nFileTypeID3V2) {
+        return true;
+    }
+    if (nFormat == nFileTypeRMP) {
+        return true;
+    }
+    if ((nFormat == nFileTypeMP3  || nFormat == nFileTypeMP3V1 || nFormat == nFileTypeMP3V11) && (bOptAutoConvID3v2 /*|| bOptAutoConvRMP*/)) {
+        return true;
+    }
+    return false;
 }
 
-STEP_API CONTROLTYPE WINAPI STEPGetControlType(UINT nFormat, COLUMNTYPE nColumn, bool isEditSIF)
+extern "C" STEP_API CONTROLTYPE WINAPI STEPGetControlType(UINT nFormat, COLUMNTYPE nColumn, bool isEditSIF)
 {
-	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-	switch (nColumn) {
-	case COLUMN_TRACK_NAME:
-	case COLUMN_ARTIST_NAME:
-	case COLUMN_ALBUM_NAME:
-	case COLUMN_TRACK_NUMBER:
-	case COLUMN_DISK_NUMBER:
-	case COLUMN_YEAR:
-		if (!isEditSIF && TYPE_IS_MP3(nFormat) && bOptID3v2ID3tagAutoWrite) {
-			return _NULL;
-		}
-		if (!isEditSIF && TYPE_IS_RMP(nFormat) && bOptRmpID3tagAutoWrite) {
-			return _NULL;
-		}
-		/* 2005.09.20 add */
-		if (!isEditSIF && bOptID3v2ID3tagAutoDelete && !TYPE_IS_RMP(nFormat)) {
-			if ((!bOptAutoConvRMP && TYPE_IS_MP3V1(nFormat)) || TYPE_IS_MP3V2(nFormat)) {
-				return _NULL;
-			}
-		}
-		return _EDIT;
-	case COLUMN_GENRE:
-		if (!isEditSIF && TYPE_IS_MP3(nFormat) && bOptID3v2ID3tagAutoWrite) {
-			return _NULL;
-		}
-		if (!isEditSIF && TYPE_IS_RMP(nFormat) && bOptRmpID3tagAutoWrite) {
-			return _NULL;
-		}
-		//if (!isEditSIF && (bOptID3v2ID3tagAutoWrite || bOptRmpID3tagAutoWrite)) {
-		//	return _NULL;
-		//}
-		if (TYPE_IS_MP3V2(nFormat) && isEditSIF) {
-			if (bOptID3v2GenreListSelect) {
-				return _CBOX;
-			} else {
-				return _EDIT;
-			}
-		}
-		if (TYPE_IS_RMP(nFormat) && isEditSIF) {
-			if (bOptRmpGenreListSelect) {
-				return _CBOX;
-			} else {
-				return _EDIT;
-			}
-		}
-		return _CBOX;
-	case COLUMN_SOFTWARE:
-	case COLUMN_COPYRIGHT:
-		//if (!isEditSIF && (bOptID3v2ID3tagAutoWrite || bOptRmpID3tagAutoWrite)) {
-		//	return _NULL;
-		//}
-		if (isEditSIF) {
-			return _EDIT;
-		} else {
-			return _NULL;
-		}
-	case COLUMN_COMMENT:
-		if (!isEditSIF && TYPE_IS_MP3(nFormat) && bOptID3v2ID3tagAutoWrite) {
-			return _NULL;
-		}
-		if (!isEditSIF && TYPE_IS_RMP(nFormat) && bOptRmpID3tagAutoWrite) {
-			return _NULL;
-		}
-		//if (!isEditSIF && (bOptID3v2ID3tagAutoWrite || bOptRmpID3tagAutoWrite)) {
-		//	return _NULL;
-		//}
-		if ((isEditSIF && TYPE_IS_MP3V1(nFormat) && bOptAutoConvID3v2) || (isEditSIF && TYPE_IS_MP3V2(nFormat))) {
-			return _MEDIT;
-		} else {
-			return _EDIT;
-		}
-	case COLUMN_WRITER:
-	case COLUMN_COMPOSER:
-	case COLUMN_ALBM_ARTIST:
-	case COLUMN_ORIG_ARTIST:
-	case COLUMN_URL:
-	case COLUMN_ENCODEST:
-		//if (!isEditSIF && (bOptID3v2ID3tagAutoWrite || bOptRmpID3tagAutoWrite)) {
-		//	return _NULL;
-		//}
-		if (!isEditSIF) {
-			return _NULL;
-		}
-		if ((TYPE_IS_MP3V1(nFormat) && bOptAutoConvID3v2) || nFormat == nFileTypeID3V2) {
-			return _EDIT;
-		} else {
-			return _NULL;
-		}
-	case COLUMN_SOURCE:
-	case COLUMN_KEYWORD:
-	case COLUMN_TECHNICIAN:
-	case COLUMN_LYRIC:
-	case COLUMN_COMMISSION:
-		if (!isEditSIF && TYPE_IS_MP3(nFormat) && bOptID3v2ID3tagAutoWrite) {
-			return _NULL;
-		}
-		if (!isEditSIF && TYPE_IS_RMP(nFormat) && bOptRmpID3tagAutoWrite) {
-			return _NULL;
-		}
-		//if (!isEditSIF && (bOptID3v2ID3tagAutoWrite || bOptRmpID3tagAutoWrite)) {
-		//	return _NULL;
-		//}
-		if (!isEditSIF) {
-			return _NULL;
-		}
-		if ((TYPE_IS_MP3V1(nFormat) && bOptAutoConvRMP) || nFormat == nFileTypeRMP) {
-			return _EDIT;
-		} else {
-			return _NULL;
-		}
-	case COLUMN_ENGINEER:
-		if (!isEditSIF && TYPE_IS_MP3(nFormat) && bOptID3v2ID3tagAutoWrite) {
-			return _NULL;
-		}
-		if (!isEditSIF && TYPE_IS_RMP(nFormat) && bOptRmpID3tagAutoWrite) {
-			return _NULL;
-		}
-		//if (!isEditSIF && (bOptID3v2ID3tagAutoWrite || bOptRmpID3tagAutoWrite)) {
-		//	return _NULL;
-		//}
-		if (!isEditSIF) {
-			return _NULL;
-		}
-		if (((TYPE_IS_MP3V1(nFormat) && bOptAutoConvRMP) || nFormat == nFileTypeRMP) ||
-			 ((TYPE_IS_MP3V1(nFormat) && bOptAutoConvID3v2) || nFormat == nFileTypeID3V2)){
-			return _EDIT;
-		} else {
-			return _NULL;
-		}
-	}
-	return _NULL;
+    AFX_MANAGE_STATE(AfxGetStaticModuleState());
+    switch (nColumn) {
+    case COLUMN_TRACK_NAME:
+    case COLUMN_ARTIST_NAME:
+    case COLUMN_ALBUM_NAME:
+    case COLUMN_TRACK_NUMBER:
+    case COLUMN_YEAR:
+        if (!isEditSIF && TYPE_IS_MP3(nFormat) && bOptID3v2ID3tagAutoWrite) {
+            return _NULL;
+        }
+        if (!isEditSIF && TYPE_IS_RMP(nFormat) && bOptRmpID3tagAutoWrite) {
+            return _NULL;
+        }
+        if (!isEditSIF && TYPE_IS_MP3(nFormat) && bOptID3v2ID3tagAutoDelete) {
+            return _NULL;
+        }
+        return _EDIT;
+    case COLUMN_GENRE:
+        if (!isEditSIF && TYPE_IS_MP3(nFormat) && bOptID3v2ID3tagAutoWrite) {
+            return _NULL;
+        }
+        if (!isEditSIF && TYPE_IS_RMP(nFormat) && bOptRmpID3tagAutoWrite) {
+            return _NULL;
+        }
+        if (!isEditSIF && TYPE_IS_MP3(nFormat) && bOptID3v2ID3tagAutoDelete) {
+            return _NULL;
+        }
+        if (TYPE_IS_MP3V2(nFormat) && isEditSIF) {
+            if (bOptID3v2GenreListSelect) {
+                return _CBOX;
+            } else {
+                return _EDIT;
+            }
+        }
+        if (TYPE_IS_RMP(nFormat) && isEditSIF) {
+            if (bOptRmpGenreListSelect) {
+                return _CBOX;
+            } else {
+                return _EDIT;
+            }
+        }
+        return _CBOX;
+    case COLUMN_SOFTWARE:
+    case COLUMN_COPYRIGHT:
+        if (isEditSIF) {
+            return _EDIT;
+        } else {
+            return _NULL;
+        }
+    case COLUMN_COMMENT:
+        if (!isEditSIF && TYPE_IS_MP3(nFormat) && bOptID3v2ID3tagAutoWrite) {
+            return _NULL;
+        }
+        if (!isEditSIF && TYPE_IS_MP3(nFormat) && bOptID3v2ID3tagAutoDelete) {
+            return _NULL;
+        }
+        if (!isEditSIF && TYPE_IS_RMP(nFormat) && bOptRmpID3tagAutoWrite) {
+            return _NULL;
+        }
+        if ((isEditSIF && TYPE_IS_MP3V1(nFormat) && bOptAutoConvID3v2) || (isEditSIF && TYPE_IS_MP3V2(nFormat))) {
+            return _MEDIT;
+        } else {
+            return _EDIT;
+        }
+    case COLUMN_TRACK_TOTAL: //ID3v2 å°‚ç”¨
+    case COLUMN_DISC_NUMBER:
+    case COLUMN_DISC_TOTAL:
+    case COLUMN_WRITER:
+    case COLUMN_COMPOSER:
+    case COLUMN_ALBM_ARTIST:
+    case COLUMN_ORIG_ARTIST:
+    case COLUMN_URL:
+    case COLUMN_ENCODEST:
+        if (!isEditSIF) {
+            return _NULL;
+        }
+        if(TYPE_IS_RMP(nFormat)){
+            return _NULL;
+        }
+        return _EDIT;
+    case COLUMN_SOURCE:     //RIFF MP3 å°‚ç”¨
+    case COLUMN_KEYWORD:
+    case COLUMN_TECHNICIAN:
+    case COLUMN_LYRIC:
+    case COLUMN_COMMISSION:
+        if (!isEditSIF) {
+            return _NULL;
+        }
+        if (!TYPE_IS_RMP(nFormat)){
+            return _EDIT;
+        }
+        return _NULL;
+    case COLUMN_ENGINEER:
+        if (!isEditSIF) {
+            return _NULL;
+        }
+        return _EDIT;
+    }
+    return _NULL;
 }
 
-STEP_API UINT WINAPI STEPGetColumnMax(UINT nFormat, COLUMNTYPE nColumn, bool isEditSIF) {
-	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-	if (!isEditSIF) {
-		switch (nColumn) {
-		case COLUMN_TRACK_NAME:		return ID3_LEN_TRACK_NAME;
-		case COLUMN_ARTIST_NAME:	return ID3_LEN_ARTIST_NAME;
-		case COLUMN_ALBUM_NAME:		return ID3_LEN_ALBUM_NAME;
-		case COLUMN_TRACK_NUMBER:	return 3;
-		case COLUMN_DISK_NUMBER:	return 3;
-		case COLUMN_YEAR:			return ID3_LEN_YEAR;
-		case COLUMN_GENRE:			return 128; // ID3v1‚Ìê‡AƒWƒƒƒ“ƒ‹–¼Ì‚Æ“ü—Í‚Å‚«‚éÅ‘å’·‚Íˆá‚¤‚Ì‚Å
-		case COLUMN_COMMENT:		return ID3_LEN_COMMENT;
-		default:					return 0;
-		}
-	}
-	if (((nFormat == nFileTypeMP3 || nFormat == nFileTypeMP3V1 || nFormat == nFileTypeMP3V11) && bOptAutoConvID3v2) || nFormat == nFileTypeID3V2) {
-		switch (nColumn) {
-		case COLUMN_TRACK_NAME:		// ƒgƒ‰ƒbƒN–¼
-		case COLUMN_ARTIST_NAME:	// ƒA[ƒeƒBƒXƒg–¼
-		case COLUMN_ALBUM_NAME:		// ƒAƒ‹ƒoƒ€–¼
-		case COLUMN_TRACK_NUMBER:	// ƒgƒ‰ƒbƒN”Ô†
-		case COLUMN_DISK_NUMBER:	// ƒfƒBƒXƒN”Ô†
-		case COLUMN_YEAR:			// ƒŠƒŠ[ƒX”N†
-		case COLUMN_GENRE:			// ƒWƒƒƒ“ƒ‹”Ô†
-		case COLUMN_COPYRIGHT:		// ’˜ìŒ 
-		case COLUMN_SOFTWARE:		// ƒ\ƒtƒgƒEƒFƒA
-		case COLUMN_WRITER:			// ìŒ
-		case COLUMN_COMPOSER:		// ì‹È
-		case COLUMN_ALBM_ARTIST:	// Albm.ƒA[ƒeƒBƒXƒg
-		case COLUMN_ORIG_ARTIST:	// Orig.ƒA[ƒeƒBƒXƒg
-		case COLUMN_URL:			// URL
-		case COLUMN_ENCODEST:		// ƒGƒ“ƒR[ƒh‚µ‚½l
-		case COLUMN_ENGINEER:		// ƒGƒ“ƒWƒjƒAio”Åj
-			//return 256;
-		case COLUMN_COMMENT:		// ƒRƒƒ“ƒg
-			return 2048; /* 2003.06.20 ‘‚â‚µ‚½ */
-		}
-	} else {
-		switch (nColumn) {
-		case COLUMN_TRACK_NUMBER:	// ƒgƒ‰ƒbƒN”Ô†
-			return 3;
-		case COLUMN_DISK_NUMBER:	// ƒfƒBƒXƒN”Ô†
-			return 3;
-		case COLUMN_TRACK_NAME:		// ƒgƒ‰ƒbƒN–¼
-		case COLUMN_ARTIST_NAME:	// ƒA[ƒeƒBƒXƒg–¼
-		case COLUMN_ALBUM_NAME:		// ƒAƒ‹ƒoƒ€–¼
-		case COLUMN_YEAR:			// ƒŠƒŠ[ƒX”N†
-		case COLUMN_GENRE:			// ƒWƒƒƒ“ƒ‹”Ô†
-		case COLUMN_COMMENT:		// ƒRƒƒ“ƒg
-		case COLUMN_COPYRIGHT:		// ’˜ìŒ 
-		case COLUMN_ENGINEER:		// ƒGƒ“ƒWƒjƒA(»ìÒ)
-		case COLUMN_SOURCE:			// ƒ\[ƒX
-		case COLUMN_SOFTWARE:		// ƒ\ƒtƒgƒEƒFƒA
-		case COLUMN_KEYWORD:		// ƒL[ƒ[ƒh
-		case COLUMN_TECHNICIAN:		// ‹ZpÒ
-		case COLUMN_LYRIC:			// ‰ÌŒ
-			return 2048;
-		}
-	}
-	return 0;
+extern "C" STEP_API UINT WINAPI STEPGetColumnMax(UINT nFormat, COLUMNTYPE nColumn, bool isEditSIF) {
+    AFX_MANAGE_STATE(AfxGetStaticModuleState());
+    if (!isEditSIF) {
+        switch (nColumn) {
+        case COLUMN_TRACK_NAME:     return ID3_LEN_TRACK_NAME;
+        case COLUMN_ARTIST_NAME:    return ID3_LEN_ARTIST_NAME;
+        case COLUMN_ALBUM_NAME:     return ID3_LEN_ALBUM_NAME;
+        case COLUMN_TRACK_NUMBER:   return 3;
+        case COLUMN_YEAR:           return ID3_LEN_YEAR;
+        case COLUMN_GENRE:          return 128; // ID3v1ã®å ´åˆã€ã‚¸ãƒ£ãƒ³ãƒ«åç§°ã¨å…¥åŠ›ã§ãã‚‹æœ€å¤§é•·ã¯é•ã†ã®ã§
+        case COLUMN_COMMENT:        return ID3_LEN_COMMENT;
+        default:                    return 0;
+        }
+    }
+    if (((nFormat == nFileTypeMP3 || nFormat == nFileTypeMP3V1 || nFormat == nFileTypeMP3V11) && bOptAutoConvID3v2) || nFormat == nFileTypeID3V2) {
+        switch (nColumn) {
+        case COLUMN_TRACK_NAME:     // ãƒˆãƒ©ãƒƒã‚¯å
+        case COLUMN_ARTIST_NAME:    // ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆå
+        case COLUMN_ALBUM_NAME:     // ã‚¢ãƒ«ãƒãƒ å
+        case COLUMN_YEAR:           // ãƒªãƒªãƒ¼ã‚¹å¹´å·
+        case COLUMN_GENRE:          // ã‚¸ãƒ£ãƒ³ãƒ«ç•ªå·
+        case COLUMN_COPYRIGHT:      // è‘—ä½œæ¨©
+        case COLUMN_SOFTWARE:       // ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢
+        case COLUMN_WRITER:         // ä½œè©
+        case COLUMN_COMPOSER:       // ä½œæ›²
+        case COLUMN_ALBM_ARTIST:    // Albm.ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆ
+        case COLUMN_ORIG_ARTIST:    // Orig.ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆ
+        case COLUMN_URL:            // URL
+        case COLUMN_ENCODEST:       // ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰ã—ãŸäºº
+        case COLUMN_ENGINEER:       // ã‚¨ãƒ³ã‚¸ãƒ‹ã‚¢ï¼ˆå‡ºç‰ˆï¼‰
+        case COLUMN_COMMENT:        // ã‚³ãƒ¡ãƒ³ãƒˆ
+            return 2048; /* 2003.06.20 å¢—ã‚„ã—ãŸ */
+        case COLUMN_TRACK_NUMBER:   // ãƒˆãƒ©ãƒƒã‚¯ç•ªå·
+        case COLUMN_TRACK_TOTAL:    // ãƒˆãƒ©ãƒƒã‚¯æ•°
+        case COLUMN_DISC_NUMBER:    // ãƒ‡ã‚£ã‚¹ã‚¯ç•ªå·
+        case COLUMN_DISC_TOTAL:     // ãƒ‡ã‚£ã‚¹ã‚¯æ•°
+            return 32;
+        }
+    } else {
+        switch (nColumn) {
+        case COLUMN_TRACK_NUMBER:   // ãƒˆãƒ©ãƒƒã‚¯ç•ªå·
+        case COLUMN_TRACK_TOTAL:    // ãƒˆãƒ©ãƒƒã‚¯æ•°
+        case COLUMN_DISC_NUMBER:    // ãƒ‡ã‚£ã‚¹ã‚¯ç•ªå·
+        case COLUMN_DISC_TOTAL:     // ãƒ‡ã‚£ã‚¹ã‚¯æ•°
+            return 32;
+        case COLUMN_TRACK_NAME:     // ãƒˆãƒ©ãƒƒã‚¯å
+        case COLUMN_ARTIST_NAME:    // ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆå
+        case COLUMN_ALBUM_NAME:     // ã‚¢ãƒ«ãƒãƒ å
+        case COLUMN_YEAR:           // ãƒªãƒªãƒ¼ã‚¹å¹´å·
+        case COLUMN_GENRE:          // ã‚¸ãƒ£ãƒ³ãƒ«ç•ªå·
+        case COLUMN_COMMENT:        // ã‚³ãƒ¡ãƒ³ãƒˆ
+        case COLUMN_COPYRIGHT:      // è‘—ä½œæ¨©
+        case COLUMN_ENGINEER:       // ã‚¨ãƒ³ã‚¸ãƒ‹ã‚¢(è£½ä½œè€…)
+        case COLUMN_SOURCE:         // ã‚½ãƒ¼ã‚¹
+        case COLUMN_SOFTWARE:       // ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢
+        case COLUMN_KEYWORD:        // ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰
+        case COLUMN_TECHNICIAN:     // æŠ€è¡“è€…
+        case COLUMN_LYRIC:          // æ­Œè©
+            return 2048;
+        }
+    }
+    return 0;
 }
 
-// ID3 Tag v1.0/v1.1 ‚©‚Ç‚¤‚©‚ğ’²‚×‚é
-static	bool	IsID3Tag(const ID3TAG *data) {
-	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-	return((((const ID3TAG_V10 *)(data))->sTAG[0] == 'T' &&
-			((const ID3TAG_V10 *)(data))->sTAG[1] == 'A' &&
-			((const ID3TAG_V10 *)(data))->sTAG[2] == 'G') ? true : false);
+// ID3 Tag v1.0/v1.1 ã‹ã©ã†ã‹ã‚’èª¿ã¹ã‚‹
+static  bool    IsID3Tag(const ID3TAG *data) {
+    return((((const ID3TAG_V10 *)(data))->sTAG[0] == 'T' &&
+            ((const ID3TAG_V10 *)(data))->sTAG[1] == 'A' &&
+            ((const ID3TAG_V10 *)(data))->sTAG[2] == 'G') ? true : false);
 }
-// ID3 Tag v1.0 ‚©‚Ç‚¤‚©‚ğ’²‚×‚é
-static	bool	IsID3Tag10(const ID3TAG *data) {
-	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-	return(((IsID3Tag(data) && (((const ID3TAG_V11 *)data)->cZero != '\0') || ((const ID3TAG_V11 *)data)->byTrackNumber == '\0')) ? true : false);
+// ID3 Tag v1.0 ã‹ã©ã†ã‹ã‚’èª¿ã¹ã‚‹
+static  bool    IsID3Tag10(const ID3TAG *data) {
+    return(((IsID3Tag(data) && (((const ID3TAG_V11 *)data)->cZero != '\0') || ((const ID3TAG_V11 *)data)->byTrackNumber == '\0')) ? true : false);
 }
-// ID3 Tag v1.1 ‚©‚Ç‚¤‚©‚ğ’²‚×‚é
-static	bool	IsID3Tag11(const ID3TAG *data) {
-	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-	return(((IsID3Tag(data) && (((const ID3TAG_V11 *)data)->cZero == '\0') && ((const ID3TAG_V11 *)data)->byTrackNumber != '\0'))? true : false);
+// ID3 Tag v1.1 ã‹ã©ã†ã‹ã‚’èª¿ã¹ã‚‹
+static  bool    IsID3Tag11(const ID3TAG *data) {
+    return(((IsID3Tag(data) && (((const ID3TAG_V11 *)data)->cZero == '\0') && ((const ID3TAG_V11 *)data)->byTrackNumber != '\0'))? true : false);
 }
 
-/* Š¿š‚Ì‚PƒoƒCƒg–Ú‚©‚Ç‚¤‚©‚ÌŒŸ¸ */
-#ifndef iskanji
-#define iskanji(c)		((unsigned char)(c) >= 0x81 && (unsigned char)(c) <= 0x9f || (unsigned char)(c) >= 0xe0 && (unsigned char)(c) <= 0xfc)
+void StringCopyN(TCHAR *sDest, const TCHAR *sSrc, int nLen);//sDest ã®ã‚µã‚¤ã‚ºã¯ (nLen+1) ä»¥ä¸Šã‚ã‚‹ã“ã¨ãŒå‰æ
+
+void StringCopyN(TCHAR *sDest, const TCHAR *sSrc, int nLen)
+{//é•·ã• nLen ã ã‘ sDest ã«ã‚³ãƒ”ãƒ¼(ID3v2=>ID3v1, RIFF=>ID3v1ç”¨)
+ //sDest ã®ã‚µã‚¤ã‚ºã¯ nLen+1 ä»¥ä¸Šã‚ã‚‹ã“ã¨ãŒå‰æ
+ //nLen ã¯ ANSI æ›ç®—ã®é•·ã•ã§ã‚ã‚‹ãŸã‚ã€UNICODE ç‰ˆã§ã¯ nLen æ–‡å­—ã‚³ãƒ”ãƒ¼ã§ã¯ãªã„ã“ã¨ã«æ³¨æ„
+ //ä¾‹ãˆã° sSrc ãŒåŠè§’æ–‡å­—ã ã‘ã§æ§‹æˆã•ã‚Œã¦ã„ã‚‹å ´åˆã¯ nLen æ–‡å­—ã®ã‚³ãƒ”ãƒ¼ã¨ãªã‚‹ãŒã€
+ //sSrc ãŒå…¨è§’æ–‡å­—ã ã‘ã§æ§‹æˆã•ã‚Œã¦ã„ã‚‹å ´åˆã¯ nLen/2 æ–‡å­—ã®ã‚³ãƒ”ãƒ¼ã¨ãªã‚‹
+ //UNICODE ç‰ˆã§ã¯ sSrc ã« ANSI ã§è¡¨ç¾å‡ºæ¥ãªã„æ–‡å­—ã‚’å«ã‚€ã¨ ? ã‚„ä»£æ›¿æ–‡å­—ã«ç½®æ›ã•ã‚Œã‚‹ã“ã¨ã«æ³¨æ„
+#ifndef _UNICODE
+    _mbsncpy_s((unsigned char*)sDest, (nLen+1), (unsigned char*)sSrc, _TRUNCATE);
+    //â†‘_mbsncpy_s ã§ãƒãƒ«ãƒãƒã‚¤ãƒˆã®ï¼’ãƒã‚¤ãƒˆç›®ãŒåˆ‡ã‚Œã‚‹ã“ã¨ã¯ãªã„ç­ˆã ãŒå¿µã®ãŸã‚ãƒã‚§ãƒƒã‚¯
+    int i = 0;
+    while(sDest[i]){
+        if(IsDBCSLeadByte((BYTE)sDest[i])){
+            if(!sDest[i+1]){//æ–‡å­—åˆ—ãŒåˆ‡ã‚Œã¦ã„ã‚‹
+                sDest[i] = 0;
+                break;
+            }
+            i += 2;
+        }
+        else{
+            i++;
+        }
+    }
+#else
+    CHAR* str_ansi = (CHAR*)malloc(static_cast<size_t>(nLen) + 1);
+    //nLen ã«ã‚ˆã£ã¦ãƒãƒ«ãƒãƒã‚¤ãƒˆã®ï¼’ãƒã‚¤ãƒˆç›®ã§åˆ‡ã‚Œã‚‹å ´åˆã€
+    //åˆ‡ã‚Œã‚‹æ–‡å­—(ãƒãƒ«ãƒãƒã‚¤ãƒˆ1æ–‡å­—ç›®)ã« 0 ãŒå…¥ã‚‰ãªã„
+    ZeroMemory(str_ansi, nLen+1);//â†‘ãªã®ã§ãƒ¡ãƒ¢ãƒªã‚’ã‚¼ãƒ­ã‚¯ãƒªã‚¢ã—ã¦ãŠã(ã©ã“ã§åˆ‡ã‚Œã‚‹ã‹åˆ†ã‹ã‚‰ãªã„ã®ã§)
+    int len_ansi = WideCharToMultiByte(CP_ACP, 0, sSrc, -1, 0, 0, NULL, NULL);
+    WideCharToMultiByte(CP_ACP, 0, sSrc, -1, str_ansi, nLen, NULL, NULL);
+    str_ansi[nLen] = 0;
+    //ãƒãƒ«ãƒãƒã‚¤ãƒˆã®ï¼’ãƒã‚¤ãƒˆç›®ã§åˆ‡ã‚Œã¦ã„ã‚‹ã‹ã©ã†ã‹ç¢ºèª
+    //(OS ã«ã‚ˆã£ã¦æŒ™å‹•ãŒç•°ãªã‚‹ã‹ã‚‚ã—ã‚Œãªã„ã®ã§)
+    int i = 0;
+    while(str_ansi[i]){
+        if(IsDBCSLeadByte((BYTE)str_ansi[i])){
+            if(!str_ansi[i+1]){//æ–‡å­—åˆ—ãŒåˆ‡ã‚Œã¦ã„ã‚‹
+                str_ansi[i] = 0;
+                break;
+            }
+            i += 2;
+        }
+        else{
+            i++;
+        }
+    }
+    MultiByteToWideChar(CP_ACP, 0, str_ansi, -1, sDest, nLen);
+    free(str_ansi);
+    sDest[nLen] = 0;
 #endif
-void	StringCopyN(char *, const char *, int, BOOL = TRUE);
-void	StringCopyN2(char *, const char *, int, BOOL = TRUE);
-void StringCopyN(char *sDest, const char *sSrc, int nLen, BOOL bTerm)
-{
-	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-	if (strlen(sSrc) < (unsigned int)nLen) {
-		if (bTerm) strcpy(sDest, sSrc);
-		else       memcpy(sDest, sSrc, strlen(sSrc));
-		return;
-	}
-	while(nLen > 0) {
-		if (iskanji(*sSrc)) {
-			if (nLen >= 2) {
-				*sDest++ = *sSrc++;
-				*sDest++ = *sSrc++;
-			} else {
-				if (bTerm) *sDest = '\0';
-			}
-			nLen -= 2;
-		} else {
-			*sDest++ = *sSrc++;
-			nLen--;
-		}
-	}
-}
-void StringCopyN2(char *sDest, const char *sSrc, int nLen, BOOL bTerm)
-{
-	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-	bool bCR = false;
-	while(nLen > 0) {
-		if (*sSrc == '\r') bCR = true;
-		if (iskanji(*sSrc)) {
-			if (nLen >= 2) {
-				if (!bCR) {
-					*sDest++ = *sSrc++;
-					*sDest++ = *sSrc++;
-				} else {
-					if (bTerm) *sDest++ = '\0';
-					if (bTerm) *sDest++ = '\0';
-				}
-			} else {
-				if (bTerm) *sDest = '\0';
-			}
-			nLen -= 2;
-		} else {
-			if (!bCR) {
-				*sDest++ = *sSrc++;
-			} else {
-				if (bTerm) *sDest++ = '\0';
-			}
-			nLen--;
-		}
-	}
-}
-
-void DeleteLineEndSpace(TCHAR *sBuffer)
-{
-	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-	int		nPos = strlen(sBuffer) - 1;
-	while(nPos >= 0 && sBuffer[nPos] == ' ') {
-		sBuffer[nPos] = '\0';
-		nPos--;
-	}
 }
 
 void setFileType(CId3tagv2& id3v2, FILE_INFO *pFileMP3)
 {
-	CString strFileTypeName;
-	switch(id3v2.GetVer()){
-	case 0x0200:
-		strFileTypeName = "MP3(ID3v2.2";
-		break;
-	case 0x0300:
-		strFileTypeName = "MP3(ID3v2.3";
-		break;
-	case 0x0400:
-		strFileTypeName = "MP3(ID3v2.4";
-		break;
-	default:
-		strFileTypeName = "MP3(ID3v2.?";
-		break;
-	}
-	if (GetFormat(pFileMP3) == nFileTypeMP3V1) {
-		strFileTypeName = strFileTypeName + "+v1.0";
-	}
-	if (GetFormat(pFileMP3) == nFileTypeMP3V11) {
-		strFileTypeName = strFileTypeName + "+v1.1";
-	}
-	strFileTypeName = strFileTypeName + ")";
-	if (id3v2.GetCharEncode() == CId3tagv2::ID3V2CHARENCODE_ISO_8859_1) {
-	} else if (id3v2.GetCharEncode() == CId3tagv2::ID3V2CHARENCODE_UTF_16) {
-		strFileTypeName = strFileTypeName + ",UTF16";
-	} else if (id3v2.GetCharEncode() == CId3tagv2::ID3V2CHARENCODE_UTF_16BE) {
-		strFileTypeName = strFileTypeName + ",UTF16BE";
-	} else if (id3v2.GetCharEncode() == CId3tagv2::ID3V2CHARENCODE_UTF_8) {
-		strFileTypeName = strFileTypeName + ",UTF8";
-	}
-	//if (id3v2.GetUniocdeEncode()) {
-	//	strFileTypeName = strFileTypeName + ",Uni";
-	//}
-	if (id3v2.GetUnSynchronization()) {
-		strFileTypeName = strFileTypeName + ",US";
-	}
-	SetFileTypeName(pFileMP3, strFileTypeName);
-	SetFormat(pFileMP3, nFileTypeID3V2);		// ƒtƒ@ƒCƒ‹Œ`®FMP3(ID3v2)
+    CString strFileTypeName;
+    switch(id3v2.GetVer()){
+    case 0x0200:
+        strFileTypeName = _T("MP3(ID3v2.2");
+        break;
+    case 0x0300:
+        strFileTypeName = _T("MP3(ID3v2.3");
+        break;
+    case 0x0400:
+        strFileTypeName = _T("MP3(ID3v2.4");
+        break;
+    default:
+        strFileTypeName = _T("MP3(ID3v2.?");
+        break;
+    }
+    if (GetFormat(pFileMP3) == nFileTypeMP3V1) {
+        strFileTypeName = strFileTypeName + _T("+v1.0");
+    }
+    if (GetFormat(pFileMP3) == nFileTypeMP3V11) {
+        strFileTypeName = strFileTypeName + _T("+v1.1");
+    }
+    strFileTypeName = strFileTypeName + _T(")");
+    if (id3v2.GetCharEncoding() == CId3tagv2::ID3V2CHARENCODING_ISO_8859_1) {
+    } else if (id3v2.GetCharEncoding() == CId3tagv2::ID3V2CHARENCODING_UTF_16) {
+        strFileTypeName = strFileTypeName + _T(",UTF16");
+    } else if (id3v2.GetCharEncoding() == CId3tagv2::ID3V2CHARENCODING_UTF_16BE) {
+        strFileTypeName = strFileTypeName + _T(",UTF16BE");
+    } else if (id3v2.GetCharEncoding() == CId3tagv2::ID3V2CHARENCODING_UTF_8) {
+        strFileTypeName = strFileTypeName + _T(",UTF8");
+    }
+    if (id3v2.GetUnSynchronization()) {
+        strFileTypeName = strFileTypeName + _T(",US");
+    }
+    SetFileTypeName(pFileMP3, strFileTypeName);
+    SetFormat(pFileMP3, nFileTypeID3V2);        // ãƒ•ã‚¡ã‚¤ãƒ«å½¢å¼ï¼šMP3(ID3v2)
 }
 
-bool ReadTagID3(LPCSTR sFileName, FILE_INFO *pFileMP3, char *sHead)
+bool ReadTagID3(LPCTSTR sFileName, FILE_INFO *pFileMP3)
 {
-	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-	TRY {
-		ID3TAG	tag;
-		CFile	file(sFileName, CFile::modeRead | CFile::shareDenyNone);
-
-		// æ“ª‚Ì‚SƒoƒCƒg‚ğæ“¾
-		if (sHead != NULL && file.Read(sHead, 4) != 4) {
-			// “Ç‚İ‚İ¸”s
-			return(false);
-		}
-
-		if (GetFileSize(pFileMP3) > sizeof(ID3TAG)) {
-			// === ID3 tag v1.0/1.1 ‚Ì“Ç‚İ‚İ ===
-			// ƒtƒ@ƒCƒ‹‚ÌÅŒã‚Ì128ƒoƒCƒg‚ğæ“¾
-			file.Seek(-(int)(sizeof(ID3TAG)), CFile::end);
-			if (file.Read(&tag.byData[0], sizeof(ID3TAG)) != sizeof(ID3TAG)) {
-				// “Ç‚İ‚İ¸”s
-				return(false);
-			}
-
-			if (IsID3Tag(&tag) == true) {
-				// ID3 tag ‚ª‘¶İ‚·‚é
-				ID3TAG_V11	*pTag = (ID3TAG_V11 *)&tag;
-				TCHAR	sBuffer[30+1];
-				// ƒgƒ‰ƒbƒN–¼
-				StringCopyN(sBuffer, pTag->sTrackName, ID3_LEN_TRACK_NAME);
-				sBuffer[ID3_LEN_TRACK_NAME] = '\0';
-				DeleteLineEndSpace(sBuffer);
-				SetTrackName(pFileMP3, sBuffer);
-				// ƒA[ƒeƒBƒXƒg–¼
-				StringCopyN(sBuffer, pTag->sArtistName, ID3_LEN_ARTIST_NAME);
-				sBuffer[ID3_LEN_ARTIST_NAME] = '\0';
-				DeleteLineEndSpace(sBuffer);
-				SetArtistName(pFileMP3, sBuffer);
-				// ƒAƒ‹ƒoƒ€–¼
-				StringCopyN(sBuffer, pTag->sAlbumName, ID3_LEN_ALBUM_NAME);
-				sBuffer[ID3_LEN_ALBUM_NAME] = '\0';
-				DeleteLineEndSpace(sBuffer);
-				SetAlbumName(pFileMP3, sBuffer);
-				// ƒŠƒŠ[ƒX”N†
-				StringCopyN(sBuffer, pTag->sYear, ID3_LEN_YEAR);
-				sBuffer[ID3_LEN_YEAR] = '\0';
-				DeleteLineEndSpace(sBuffer);
-				SetYear(pFileMP3, sBuffer);
-				// ƒRƒƒ“ƒg
-				if (IsID3Tag11(&tag) == true) {
-					// ID3 tag Ver 1.1
-					StringCopyN(sBuffer, pTag->sComment, ID3_LEN_COMMENT-2);
-					sBuffer[28] = '\0';
-					DeleteLineEndSpace(sBuffer);
-					SetComment(pFileMP3, sBuffer);
-					// ƒgƒ‰ƒbƒN”Ô†
-					SetBTrackNumber(pFileMP3, pTag->byTrackNumber);
-					if (GetBTrackNumber(pFileMP3) == 0x00) {
-						SetBTrackNumber(pFileMP3, 0xff);
-					}
-					SetFormat(pFileMP3, nFileTypeMP3V11);	// ƒtƒ@ƒCƒ‹Œ`®FMP3V1.1
-					SetFileTypeName(pFileMP3, "MP3(ID3v1.1)");
-				} else {
-					// ID3 tag Ver 1.0
-					StringCopyN(sBuffer, pTag->sComment, ID3_LEN_COMMENT);
-					sBuffer[30] = '\0';
-					DeleteLineEndSpace(sBuffer);
-					SetComment(pFileMP3, sBuffer);
-					// ƒgƒ‰ƒbƒN”Ô†
-					SetBTrackNumber(pFileMP3, 0xff);
-					SetFormat(pFileMP3, nFileTypeMP3V1);	// ƒtƒ@ƒCƒ‹Œ`®FMP3V1.0
-					SetFileTypeName(pFileMP3, "MP3(ID3v1.0)");
-				}
-				// ƒWƒƒƒ“ƒ‹”Ô†
-				SetBGenre(pFileMP3, pTag->byGenre);
-				SetGenre(pFileMP3, STEPGetGenreNameSIF(pTag->byGenre));
-			} else {
-				SetFileTypeName(pFileMP3, "MP3");
-				SetFormat(pFileMP3, nFileTypeMP3);	// ƒtƒ@ƒCƒ‹Œ`®FMP3
-			}
-
-			// ƒtƒ@ƒCƒ‹‚ğ•Â‚¶‚é
-			file.Close();
-		}
-	}
-	CATCH(CFileException, e) {
-		CString	strMsg;
-		strMsg.Format("%s ‚ªƒI[ƒvƒ“‚Å‚«‚Ü‚¹‚ñ‚Å‚µ‚½", sFileName);
-		MessageBox(NULL, strMsg, "ƒtƒ@ƒCƒ‹‚ÌƒI[ƒvƒ“¸”s", MB_ICONSTOP|MB_OK|MB_TOPMOST);
-		return(false);
-	}
-	END_CATCH
-
-	return true ;
+    AFX_MANAGE_STATE(AfxGetStaticModuleState());
+    CId3tagv1 id3v1;
+    id3v1.Load(sFileName);
+    if(id3v1.IsEnable()){
+        SetTrackName(pFileMP3, id3v1.GetTitle());  //ãƒˆãƒ©ãƒƒã‚¯å
+        SetArtistName(pFileMP3, id3v1.GetArtist());//ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆå
+        SetAlbumName(pFileMP3, id3v1.GetAlbum());  //ã‚¢ãƒ«ãƒãƒ å
+        SetYear(pFileMP3, id3v1.GetYear());        //ãƒªãƒªãƒ¼ã‚¹å¹´å·
+        SetComment(pFileMP3, id3v1.GetComment());  //ã‚³ãƒ¡ãƒ³ãƒˆ
+        CString strTrackNo = id3v1.GetTrackNo();
+        SetTrackNumber(pFileMP3, strTrackNo);
+        if(!strTrackNo.IsEmpty()){
+            SetFormat(pFileMP3, nFileTypeMP3V11);   // ãƒ•ã‚¡ã‚¤ãƒ«å½¢å¼ï¼šMP3V1.1
+            SetFileTypeName(pFileMP3, _T("MP3(ID3v1.1)"));
+        } else {
+            SetFormat(pFileMP3, nFileTypeMP3V1);    // ãƒ•ã‚¡ã‚¤ãƒ«å½¢å¼ï¼šMP3V1.0
+            SetFileTypeName(pFileMP3, _T("MP3(ID3v1.0)"));
+        }
+        SetGenre(pFileMP3, id3v1.GetGenre());
+        // ã‚¸ãƒ£ãƒ³ãƒ«ç•ªå·
+        //SetBGenre(pFileMP3, pTag->byGenre);
+        //SetGenre(pFileMP3, STEPGetGenreNameSIF(pTag->byGenre));
+    }
+    else {
+    //ã“ã®é–¢æ•°ãŒå‘¼ã°ã‚ŒãŸæ™‚ç‚¹ã§ãƒ•ã‚¡ã‚¤ãƒ«ã‚ªãƒ¼ãƒ—ãƒ³ã¯æˆåŠŸã—ã¦ã„ã‚‹ç­ˆãªã®ã§
+    //id3tag ã®æœ‰ç„¡ã«é–¢ã‚ã‚‰ãšã€Œãƒ•ã‚¡ã‚¤ãƒ«å½¢å¼ï¼šMP3ã€ã¨ã™ã‚‹
+        SetFileTypeName(pFileMP3, _T("MP3"));
+        SetFormat(pFileMP3, nFileTypeMP3);  // ãƒ•ã‚¡ã‚¤ãƒ«å½¢å¼ï¼šMP3
+    }
+    return true;
 }
 
-bool ReadTagID3v2(LPCSTR sFileName, FILE_INFO *pFileMP3)
+bool ReadTagID3v2(LPCTSTR sFileName, FILE_INFO *pFileMP3)
 {
-	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-	// ID3v2 ƒ^ƒO‚Ìæ“¾
-	CId3tagv2	id3v2/*(USE_SCMPX_GENRE_ANIMEJ)*/;
-	if (id3v2.Load(sFileName) != ERROR_SUCCESS// “Ç‚İ‚İ¸”s
-	||  id3v2.IsEnable() == FALSE			// ID3v2 ‚Å‚Í‚È‚¢
-	||  !TRUE/*id3v2.IsSafeVer()*/) {				// –¢‘Î‰‚Ìƒo[ƒWƒ‡ƒ“
-		// “Ç‚İ‚İ¸”s
-		if (id3v2.GetVer() > 0x0000 && !TRUE/*id3v2.IsSafeVer()*/) {
-			return(true);
-		}
-		return(false);
-	}
+    AFX_MANAGE_STATE(AfxGetStaticModuleState());
+    // ID3v2 ã‚¿ã‚°ã®å–å¾—
+    CId3tagv2   id3v2/*(USE_SCMPX_GENRE_ANIMEJ)*/;
+    if (id3v2.Load(sFileName) != ERROR_SUCCESS// èª­ã¿è¾¼ã¿å¤±æ•—
+    ||  id3v2.IsEnable() == FALSE           // ID3v2 ã§ã¯ãªã„
+    ||  !TRUE/*id3v2.IsSafeVer()*/) {               // æœªå¯¾å¿œã®ãƒãƒ¼ã‚¸ãƒ§ãƒ³
+        // èª­ã¿è¾¼ã¿å¤±æ•—
+        if (id3v2.GetVer() > 0x0000 && !TRUE/*id3v2.IsSafeVer()*/) {
+            return(true);
+        }
+        return(false);
+    }
 
-	// *** ƒ^ƒOî•ñ‚Ìİ’è ***
-	SetTrackNameSI(pFileMP3, id3v2.GetTitle());		// ƒ^ƒCƒgƒ‹
-	SetArtistNameSI(pFileMP3, id3v2.GetArtist());		// ƒA[ƒeƒBƒXƒg–¼
-	SetAlbumNameSI(pFileMP3, id3v2.GetAlbum());		// ƒAƒ‹ƒoƒ€–¼
-	SetYearSI(pFileMP3, id3v2.GetYear());				// ƒŠƒŠ[ƒX
-	SetCommentSI(pFileMP3, id3v2.GetComment());		// ƒRƒƒ“ƒg
-	SetGenreSI(pFileMP3, id3v2.GetGenre());			// ƒWƒƒƒ“ƒ‹–¼
-	SetTrackNumberSI(pFileMP3, id3v2.GetTrackNo());		// ƒgƒ‰ƒbƒN”Ô†
-	SetDiskNumberSI(pFileMP3, id3v2.GetDiskNo());		// ƒfƒBƒXƒN”Ô†
-	SetSoftwareSI(pFileMP3, id3v2.GetEncoder());		// ƒGƒ“ƒR[ƒ_
-	SetCopyrightSI(pFileMP3, id3v2.GetCopyright());	// ’˜ìŒ 
-	SetWriterSI(pFileMP3,id3v2.GetWriter());			// ìŒ
-	SetComposerSI(pFileMP3, id3v2.GetComposer());		// ì‹È
-	SetAlbumArtistSI(pFileMP3, id3v2.GetAlbmArtist());	// Albm. ƒA[ƒeƒBƒXƒg
-	SetOrigArtistSI(pFileMP3, id3v2.GetOrigArtist());	// Orig.ƒA[ƒeƒBƒXƒg
-	SetURLSI(pFileMP3, id3v2.GetUrl());				// URL
-	SetEncodest(pFileMP3, id3v2.GetEncodest());			// ƒGƒ“ƒR[ƒh‚µ‚½l
-	SetEngineerSI(pFileMP3,id3v2.GetEngineer());		// ƒGƒ“ƒWƒjƒAio”Åj
+    // *** ã‚¿ã‚°æƒ…å ±ã®è¨­å®š ***
+    SetTrackNameSI(pFileMP3, id3v2.GetTitle());     // ã‚¿ã‚¤ãƒˆãƒ«
+    SetArtistNameSI(pFileMP3, id3v2.GetArtist());   // ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆå
+    SetAlbumNameSI(pFileMP3, id3v2.GetAlbum());     // ã‚¢ãƒ«ãƒãƒ å
+    SetYearSI(pFileMP3, id3v2.GetYear());           // ãƒªãƒªãƒ¼ã‚¹
+    SetCommentSI(pFileMP3, id3v2.GetComment());     // ã‚³ãƒ¡ãƒ³ãƒˆ
+    SetGenreSI(pFileMP3, id3v2.GetGenre());         // ã‚¸ãƒ£ãƒ³ãƒ«å
+    {//ãƒˆãƒ©ãƒƒã‚¯ç•ªå·
+     // x/y å½¢å¼ã«ãªã£ã¦ã„ã‚Œã° y ã®æ–¹ã‚’ãƒˆãƒ©ãƒƒã‚¯æ•°ã¨ã—ã¦å‡¦ç†
+        CString strTrackNo = id3v2.GetTrackNo();
+        TCHAR *trk_number = strTrackNo.GetBuffer();
+        TCHAR *trk_total = _tcschr(trk_number, _T('/'));
+        if(trk_total){
+            *trk_total++ = 0;
+        }
+        SetTrackNumberSI(pFileMP3, trk_number);
+        if(trk_total){
+            SetTrackTotalSI(pFileMP3, trk_total);
+        }
+        strTrackNo.ReleaseBuffer();
+    }
+    {//ãƒ‡ã‚£ã‚¹ã‚¯ç•ªå·
+     //x/y å½¢å¼ã«ãªã£ã¦ã„ã‚Œã° y ã®æ–¹ã‚’ãƒ‡ã‚£ã‚¹ã‚¯æ•°ã¨ã—ã¦å‡¦ç†
+        CString strDiscNo = id3v2.GetDiscNo();
+        TCHAR *disc_number = strDiscNo.GetBuffer();
+        TCHAR *disc_total = _tcschr(disc_number, _T('/'));
+        if(disc_total){
+            *disc_total++ = 0;
+        }
+        SetDiscNumberSI(pFileMP3, disc_number);
+        if(disc_total){
+            SetDiscTotalSI(pFileMP3, disc_total);
+        }
+        strDiscNo.ReleaseBuffer();
+    }
+    SetSoftwareSI(pFileMP3, id3v2.GetEncoder());        // ã‚¨ãƒ³ã‚³ãƒ¼ãƒ€
+    SetCopyrightSI(pFileMP3, id3v2.GetCopyright());     // è‘—ä½œæ¨©
+    SetWriterSI(pFileMP3,id3v2.GetWriter());            // ä½œè©
+    SetComposerSI(pFileMP3, id3v2.GetComposer());       // ä½œæ›²
+    SetAlbumArtistSI(pFileMP3, id3v2.GetAlbumArtist()); // Albm. ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆ
+    SetOrigArtistSI(pFileMP3, id3v2.GetOrigArtist());   // Orig.ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆ
+    SetURLSI(pFileMP3, id3v2.GetUrl());                 // URL
+    SetEncodest(pFileMP3, id3v2.GetEncodedBy());        // ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰ã—ãŸäºº
+    SetEngineerSI(pFileMP3,id3v2.GetEngineer());        // ã‚¨ãƒ³ã‚¸ãƒ‹ã‚¢ï¼ˆå‡ºç‰ˆï¼‰
 
-//	SetFileTypeName(pFileMP3, "MP3(ID3v2)");
-	setFileType(id3v2, pFileMP3);
-	return(true);
+//  SetFileTypeName(pFileMP3, "MP3(ID3v2)");
+    setFileType(id3v2, pFileMP3);
+    return(true);
 }
 
-bool ReadTagSIF(LPCSTR sFileName, FILE_INFO *pFileMP3)
+bool ReadTagSIF(LPCTSTR sFileName, FILE_INFO *pFileMP3)
 {
-	CRMP rmp/*(USE_SCMPX_GENRE_ANIMEJ)*/;
-	if (rmp.Load(GetFullPath(pFileMP3))  != ERROR_SUCCESS	// “Ç‚İ‚İ¸”s
-		||  rmp.IsEnable() == FALSE) {
-		// “Ç‚İ‚İ¸”s
-		return(false);
-	}
+    CRMP rmp/*(USE_SCMPX_GENRE_ANIMEJ)*/;
+    if (rmp.Load(GetFullPath(pFileMP3))  != ERROR_SUCCESS   // èª­ã¿è¾¼ã¿å¤±æ•—
+        ||  rmp.IsEnable() == FALSE) {
+        // èª­ã¿è¾¼ã¿å¤±æ•—
+        return(false);
+    }
 
-	// “Ç‚İ‚İ¬Œ÷
-	// SI ƒtƒB[ƒ‹ƒh
-	SetTrackNameSI(pFileMP3,	rmp.GetNAM());	// ‹È–¼
-	SetArtistNameSI(pFileMP3,	rmp.GetART());	// ƒA[ƒeƒBƒXƒg–¼
-	SetAlbumNameSI(pFileMP3,	rmp.GetPRD());	// »•i–¼
-	SetCommentSI(pFileMP3,		rmp.GetCMT());	// ƒRƒƒ“ƒg•¶š—ñ
-	SetYearSI(pFileMP3,			rmp.GetCRD());	// ƒŠƒŠ[ƒX”N†
-	SetGenreSI(pFileMP3,		rmp.GetGNR());	// ƒWƒƒƒ“ƒ‹–¼
-	SetCopyrightSI(pFileMP3,	rmp.GetCOP());	// ’˜ìŒ 
-	SetEngineerSI(pFileMP3,		rmp.GetENG());	// ƒGƒ“ƒWƒjƒA
-	SetSourceSI(pFileMP3,		rmp.GetSRC());	// ƒ\[ƒX
-	SetSoftwareSI(pFileMP3,		rmp.GetSFT());	// ƒ\ƒtƒgƒEƒFƒA
-	SetKeywordSI(pFileMP3,		rmp.GetKEY());	// ƒL[ƒ[ƒh
-	SetTechnicianSI(pFileMP3,	rmp.GetTCH());	// ‹ZpÒ
-	SetLyricSI(pFileMP3,		rmp.GetLYC());	// ‰ÌŒ
-	SetCommissionSI(pFileMP3,	rmp.GetCMS());	// ƒRƒ~ƒbƒVƒ‡ƒ“
+    // èª­ã¿è¾¼ã¿æˆåŠŸ
+    // SI ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰
+    SetTrackNameSI(pFileMP3,    rmp.GetNAM());  // æ›²å
+    SetArtistNameSI(pFileMP3,   rmp.GetART());  // ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆå
+    SetAlbumNameSI(pFileMP3,    rmp.GetPRD());  // è£½å“å
+    SetCommentSI(pFileMP3,      rmp.GetCMT());  // ã‚³ãƒ¡ãƒ³ãƒˆæ–‡å­—åˆ—
+    SetYearSI(pFileMP3,         rmp.GetCRD());  // ãƒªãƒªãƒ¼ã‚¹å¹´å·
+    SetGenreSI(pFileMP3,        rmp.GetGNR());  // ã‚¸ãƒ£ãƒ³ãƒ«å
+    SetCopyrightSI(pFileMP3,    rmp.GetCOP());  // è‘—ä½œæ¨©
+    SetEngineerSI(pFileMP3,     rmp.GetENG());  // ã‚¨ãƒ³ã‚¸ãƒ‹ã‚¢
+    SetSourceSI(pFileMP3,       rmp.GetSRC());  // ã‚½ãƒ¼ã‚¹
+    SetSoftwareSI(pFileMP3,     rmp.GetSFT());  // ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢
+    SetKeywordSI(pFileMP3,      rmp.GetKEY());  // ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰
+    SetTechnicianSI(pFileMP3,   rmp.GetTCH());  // æŠ€è¡“è€…
+    SetLyricSI(pFileMP3,        rmp.GetLYC());  // æ­Œè©
+    SetCommissionSI(pFileMP3,   rmp.GetCMS());  // ã‚³ãƒŸãƒƒã‚·ãƒ§ãƒ³
+    CString strFileTypeName = _T("RIFF MP3");
+    if (GetFormat(pFileMP3) == nFileTypeMP3V1) {
+        strFileTypeName = strFileTypeName + _T("+ID3v1.0");
+    }
+    if (GetFormat(pFileMP3) == nFileTypeMP3V11) {
+        strFileTypeName = strFileTypeName + _T("+ID3v1.1");
+    }
+    SetFormat(pFileMP3, nFileTypeRMP);      // ãƒ•ã‚¡ã‚¤ãƒ«å½¢å¼ï¼šRIFF MP3
+    SetFileTypeName(pFileMP3, strFileTypeName);
 
-	SetFormat(pFileMP3, nFileTypeRMP);		// ƒtƒ@ƒCƒ‹Œ`®FRIFF MP3
-	SetFileTypeName(pFileMP3, "RIFF MP3");
+    //if (bOptRmpID3tagAutoWrite)
+    //    SetGenreSI(pFileMP3, GetGenre(pFileMP3));
 
-	if (bOptRmpID3tagAutoWrite)
-		SetGenreSI(pFileMP3, GetGenre(pFileMP3));
-
-	return(true);
+    return(true);
 }
 
 bool LoadFileMP3(FILE_INFO *pFileMP3)
 {
-	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-	// === ID3v1.0/1.1 Œ`®ƒtƒ@ƒCƒ‹ ===
-	char	sHead[5] = {' ', ' ', ' ', ' ', '\0'};
-	if (ReadTagID3(GetFullPath(pFileMP3), pFileMP3, &sHead[0]) == false) {
-		// “Ç‚İ‚İ¸”s
-		return false;
-	}
+    AFX_MANAGE_STATE(AfxGetStaticModuleState());
+    // === ID3v1.0/1.1 å½¢å¼ãƒ•ã‚¡ã‚¤ãƒ« ===
+    BYTE Head[4] = {0};
+    CString strFileName = GetFullPath(pFileMP3);
+    FILE *fp;
+    _tfopen_s(&fp, strFileName, _T("rb"));
+    if(!fp){
+        CString strMsg;
+        strMsg.Format(_T("%s ãŒã‚ªãƒ¼ãƒ—ãƒ³ã§ãã¾ã›ã‚“ã§ã—ãŸ"), strFileName);
+        MessageBox(NULL, strMsg, _T("ãƒ•ã‚¡ã‚¤ãƒ«ã®ã‚ªãƒ¼ãƒ—ãƒ³å¤±æ•—"), MB_ICONSTOP|MB_OK|MB_TOPMOST);
+        return false;
+    }
+    fread(Head, 1, 4, fp);
+    fclose(fp);
+    ReadTagID3(strFileName, pFileMP3);
 
-	// === ID3v2 Œ`®ƒtƒ@ƒCƒ‹ ===
-	if (strncmp(sHead, "ID3", 3) == 0) {
-		if (bOptAutoConvID3v2/*bOptID3v2ID3tagAutoWrite*/) {
-			SetGenreSI(pFileMP3, GetGenre(pFileMP3));
-			SetTrackNumberSI(pFileMP3, GetTrackNumber(pFileMP3));
-			SetDiskNumberSI(pFileMP3, GetDiskNumber(pFileMP3));
-		}
-		if (ReadTagID3v2(GetFullPath(pFileMP3), pFileMP3) == false) {
-			MessageBox(NULL, "ID3v2 ƒ^ƒO‚Ì“Ç‚İ‚İ‚É¸”s‚µ‚Ü‚µ‚½", GetFullPath(pFileMP3), MB_ICONSTOP|MB_OK|MB_TOPMOST);
-			return false;
-		}
-	}
-	else
-	// === RIFF MP3 Œ`®ƒtƒ@ƒCƒ‹(SIƒtƒB[ƒ‹ƒh‚Ì“Ç‚İ‚İ) ===
-	if (strcmp(sHead, "RIFF") == 0) {
-		if (ReadTagSIF(GetFullPath(pFileMP3), pFileMP3) == false) {
-			MessageBox(NULL, "RIFF MP3 ƒ^ƒO‚Ì“Ç‚İ‚İ‚É¸”s‚µ‚Ü‚µ‚½", GetFullPath(pFileMP3), MB_ICONSTOP|MB_OK|MB_TOPMOST);
-			return(false);
-		}
-	}
-	else
-	// === ID3v1.0/1.1 ‚Ì‚İ ===
-	{
-		if (bOptAutoConvID3v2 || bOptAutoConvRMP/*bOptID3v2ID3tagAutoWrite*/) {
-			SetGenreSI(pFileMP3, GetGenre(pFileMP3));
-			SetTrackNumberSI(pFileMP3, GetTrackNumber(pFileMP3));
-			SetDiskNumberSI(pFileMP3, GetDiskNumber(pFileMP3));
-		}
-	}
+    if (memcmp(Head, "ID3", 3) == 0) {
+        // === ID3v2 å½¢å¼ãƒ•ã‚¡ã‚¤ãƒ« ===
+        if (bOptAutoConvID3v2/*bOptID3v2ID3tagAutoWrite*/) {
+            SetGenreSI(pFileMP3, GetGenre(pFileMP3));
+            SetTrackNumberSI(pFileMP3, GetTrackNumber(pFileMP3));
+        }
+        if (ReadTagID3v2(strFileName, pFileMP3) == false) {
+            MessageBox(NULL, _T("ID3v2 ã‚¿ã‚°ã®èª­ã¿è¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ"), GetFullPath(pFileMP3), MB_ICONSTOP|MB_OK|MB_TOPMOST);
+            return false;
+        }
+    }
+    else if (memcmp(Head, "RIFF", 4) == 0) {
+        // === RIFF MP3 å½¢å¼ãƒ•ã‚¡ã‚¤ãƒ«(SIãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã®èª­ã¿è¾¼ã¿) ===
+        if (ReadTagSIF(strFileName, pFileMP3) == false) {
+            MessageBox(NULL, _T("RIFF MP3 ã‚¿ã‚°ã®èª­ã¿è¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ"), GetFullPath(pFileMP3), MB_ICONSTOP|MB_OK|MB_TOPMOST);
+            return(false);
+        }
+    }
+    else{// === ID3v1.0/1.1 ã®ã¿ ===
+        if (bOptAutoConvID3v2 /*|| bOptAutoConvRMP*/) {
+            if(GetBGenre(pFileMP3) != 0xFF){
+                SetGenreSI(pFileMP3, GetGenre(pFileMP3));
+            }
+            else{
+                SetGenreSI(pFileMP3, _T(""));
+            }
+            SetTrackNumberSI(pFileMP3, GetTrackNumber(pFileMP3));
+        }
+        SetTrackNameSI(pFileMP3, GetTrackName(pFileMP3));
+        SetArtistNameSI(pFileMP3, GetArtistName(pFileMP3));
+        SetAlbumNameSI(pFileMP3, GetAlbumName(pFileMP3));
+        SetCommentSI(pFileMP3, GetComment(pFileMP3));
+        SetYearSI(pFileMP3, GetYear(pFileMP3));
+    }
 
-	// mp3infp‚É‚æ‚èæ“¾
-	GetValues_mp3infp(pFileMP3);
+    // mp3infpã«ã‚ˆã‚Šå–å¾—
+    //GetValues_mp3infp(pFileMP3);
+    CMp3Info mp3info;
+    if(mp3info.Load(GetFullPath(pFileMP3))){
+        SetAudioFormat(pFileMP3, mp3info.GetFormatString());
+        CString strTimeString = mp3info.GetTimeString();
+        TCHAR *time = strTimeString.GetBuffer();
+        //szTime = "xx:xx (xxxsec) ã®ã‚ˆã†ã«ãªã£ã¦ã„ã‚‹
+        TCHAR *pszSec = _tcschr(time, _T('('));
+        if(pszSec){
+            pszSec++;
+            TCHAR *end;
+            int sec = _tcstol(pszSec, &end, 10);
+            SetPlayTime(pFileMP3, sec);
+        }
+        strTimeString.ReleaseBuffer();
+    }
 
-	return true;
+    return true;
 }
 
 STEP_API UINT WINAPI STEPLoad(FILE_INFO *pFileMP3, LPCTSTR szExt)
 {
-	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-	if (stricmp(szExt, "mp3") == 0 || stricmp(szExt, "rmp") == 0) {
-		if (LoadFileMP3(pFileMP3) == false) {
-			return STEP_ERROR;
-		}
-		if (GetFormat(pFileMP3) != FILE_FORMAT_UNKNOWN) {
-			return STEP_SUCCESS;
-		}
-	}
-	return STEP_UNKNOWN_FORMAT;
+    AFX_MANAGE_STATE(AfxGetStaticModuleState());
+    if (_tcsicmp(szExt, _T("mp3")) == 0 || _tcsicmp(szExt, _T("rmp")) == 0) {
+        if (LoadFileMP3(pFileMP3) == false) {
+            return STEP_ERROR;
+        }
+        if (GetFormat(pFileMP3) != FILE_FORMAT_UNKNOWN) {
+            return STEP_SUCCESS;
+        }
+    }
+    return STEP_UNKNOWN_FORMAT;
 }
 
 bool WriteTagID3(FILE_INFO *pFileMP3)
 {
-	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-	TRY {
-		ID3TAG	tag;
-		CFile	file(GetFullPath(pFileMP3), CFile::modeReadWrite | CFile::shareDenyWrite);
-		if (file.GetLength() > sizeof(ID3TAG)) {
-			// ƒtƒ@ƒCƒ‹‚ÌÅŒã‚Ì128ƒoƒCƒg‚ğæ“¾
-			file.Seek(-(int)(sizeof(ID3TAG)), CFile::end);
-			if (file.Read(&tag.byData[0], sizeof(ID3TAG)) != sizeof(ID3TAG)) {
-				// “Ç‚İ‚İ¸”s
-				return false;
-			}
-			if (IsID3Tag(&tag) == false) {
-				// ƒtƒ@ƒCƒ‹‚ÌÅŒã‚ÉƒV[ƒN
-				file.Seek(0, CFile::end);
-			} else {
-				file.Seek(-(int)(sizeof(ID3TAG)), CFile::end);
-			}
+    AFX_MANAGE_STATE(AfxGetStaticModuleState());
+    CId3tagv1 id3v1;
 
-			// ƒXƒy[ƒX‚Å–„‚ß‚é
-			memset(&tag, 0x00/*0x20*/, sizeof(ID3TAG));
-
-			ID3TAG_V11	*pTag = (ID3TAG_V11 *)&tag;
-			pTag->sTAG[0] = 'T';
-			pTag->sTAG[1] = 'A';
-			pTag->sTAG[2] = 'G';
-
-			int		nLen;
-			// ƒgƒ‰ƒbƒN–¼
-			nLen = strlen(GetTrackName(pFileMP3));
-			if (nLen > ID3_LEN_TRACK_NAME) nLen = ID3_LEN_TRACK_NAME;
-			StringCopyN(&pTag->sTrackName[0], GetTrackName(pFileMP3), nLen, FALSE);
-
-			// ƒA[ƒeƒBƒXƒg–¼
-			nLen = strlen(GetArtistName(pFileMP3));
-			if (nLen > ID3_LEN_ARTIST_NAME) nLen = ID3_LEN_ARTIST_NAME;
-			StringCopyN(&pTag->sArtistName[0], GetArtistName(pFileMP3), nLen, FALSE);
-
-			// ƒAƒ‹ƒoƒ€–¼
-			nLen = strlen(GetAlbumName(pFileMP3));
-			if (nLen > ID3_LEN_ALBUM_NAME) nLen = ID3_LEN_ALBUM_NAME;
-			StringCopyN(&pTag->sAlbumName[0], GetAlbumName(pFileMP3), nLen, FALSE);
-
-			// ƒŠƒŠ[ƒX”N†
-			nLen = strlen(GetYear(pFileMP3));
-			if (nLen > ID3_LEN_YEAR) nLen = ID3_LEN_YEAR;
-			StringCopyN(&pTag->sYear[0], GetYear(pFileMP3), nLen, FALSE);
-
-			if (GetBTrackNumber(pFileMP3) == 0xff) {
-				// ID3 tag Ver 1.0
-				// ƒRƒƒ“ƒg
-				nLen = strlen(GetComment(pFileMP3));
-				if (nLen > ID3_LEN_COMMENT) nLen = ID3_LEN_COMMENT;
-				memset(&pTag->sComment[0], 0x00, ID3_LEN_COMMENT);
-				StringCopyN2(&pTag->sComment[0], GetComment(pFileMP3), nLen, FALSE);
-
-				// Äİ’è
-				SetFormat(pFileMP3, nFileTypeMP3V1);	// ƒtƒ@ƒCƒ‹Œ`®FMP3V1.0
-				SetFileTypeName(pFileMP3, "MP3(ID3v1.0)");
-			} else {
-				// ID3 tag Ver 1.1
-				// ƒRƒƒ“ƒg
-				nLen = strlen(GetComment(pFileMP3));
-				if (nLen > ID3_LEN_COMMENT-2) nLen = ID3_LEN_COMMENT-2;
-				memset(&pTag->sComment[0], 0x00, ID3_LEN_COMMENT-2);
-				StringCopyN2(&pTag->sComment[0], GetComment(pFileMP3), nLen, FALSE);
-
-				pTag->cZero = '\0';
-				// ƒgƒ‰ƒbƒN”Ô†
-				pTag->byTrackNumber = GetBTrackNumber(pFileMP3);
-
-				// Äİ’è
-				CString strTrackNumber;
-				strTrackNumber.Format("%d", pTag->byTrackNumber);
-				SetTrackNumber(pFileMP3, strTrackNumber);
-				SetFormat(pFileMP3, nFileTypeMP3V11);	// ƒtƒ@ƒCƒ‹Œ`®FMP3V1.1
-				SetFileTypeName(pFileMP3, "MP3(ID3v1.1)");
-			}
-			// ƒWƒƒƒ“ƒ‹
-			pTag->byGenre = GetBGenre(pFileMP3);
-			SetGenre(pFileMP3, STEPGetGenreNameSIF(pTag->byGenre));
-
-			file.Write(pTag, sizeof(ID3TAG));
-		}
-	}
-	CATCH(CFileException, e) {
-		CString	strMsg;
-		strMsg.Format("%s ‚ªƒI[ƒvƒ“‚Å‚«‚Ü‚¹‚ñ‚Å‚µ‚½", GetFullPath(pFileMP3));
-		MessageBox(NULL, strMsg, "ƒtƒ@ƒCƒ‹‚ÌƒI[ƒvƒ“¸”s", MB_ICONSTOP|MB_OK|MB_TOPMOST);
-		return false;
-	}
-	END_CATCH
-
-	return true;
+    id3v1.SetTitle(GetTrackName(pFileMP3));  //ãƒˆãƒ©ãƒƒã‚¯å
+    id3v1.SetArtist(GetArtistName(pFileMP3));//ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆå
+    id3v1.SetAlbum(GetAlbumName(pFileMP3));  //ã‚¢ãƒ«ãƒãƒ å
+    id3v1.SetYear(GetYear(pFileMP3));        //ãƒªãƒªãƒ¼ã‚¹å¹´å·
+    id3v1.SetComment(GetComment(pFileMP3));  //ã‚³ãƒ¡ãƒ³ãƒˆ
+    BYTE byTrackNumber = GetBTrackNumber(pFileMP3);
+    if(byTrackNumber != 0xFF){
+        id3v1.SetTrackNo(byTrackNumber);
+        // å†è¨­å®š
+        CString strTrackNumber;
+        strTrackNumber.Format(_T("%d"), byTrackNumber);
+        SetTrackNumber(pFileMP3, strTrackNumber);
+        SetFormat(pFileMP3, nFileTypeMP3V11);   // ãƒ•ã‚¡ã‚¤ãƒ«å½¢å¼ï¼šMP3V1.1
+        SetFileTypeName(pFileMP3, _T("MP3(ID3v1.1)"));
+    }
+    else{
+        // å†è¨­å®š
+        SetFormat(pFileMP3, nFileTypeMP3V1);    // ãƒ•ã‚¡ã‚¤ãƒ«å½¢å¼ï¼šMP3V1.0
+        SetFileTypeName(pFileMP3, _T("MP3(ID3v1.0)"));
+    }
+    // ã‚¸ãƒ£ãƒ³ãƒ«
+    BYTE byGenre = GetBGenre(pFileMP3);
+    id3v1.SetGenre(byGenre);
+    SetGenre(pFileMP3, STEPGetGenreNameSIF(byGenre));
+    if(id3v1.Save(GetFullPath(pFileMP3)) != 0){
+        CString strMsg;
+        strMsg.Format(_T("%s ãŒã‚ªãƒ¼ãƒ—ãƒ³ã§ãã¾ã›ã‚“ã§ã—ãŸ"), GetFullPath(pFileMP3));
+        MessageBox(NULL, strMsg, _T("ãƒ•ã‚¡ã‚¤ãƒ«ã®ã‚ªãƒ¼ãƒ—ãƒ³å¤±æ•—"), MB_ICONSTOP|MB_OK|MB_TOPMOST);
+        return false;
+    }
+    return true;
 }
-
 
 bool ConvID3tagToSIField(FILE_INFO *pFileMP3)
 {
-	SetModifyFlag(pFileMP3, true);						// •ÏX‚³‚ê‚½ƒtƒ‰ƒO‚ğƒZƒbƒg
-	SetTrackNameSI(pFileMP3, GetTrackName(pFileMP3));	// ‹È–¼
-	SetArtistNameSI(pFileMP3, GetArtistName(pFileMP3));	// ƒA[ƒeƒBƒXƒg–¼
-	SetAlbumNameSI(pFileMP3, GetAlbumName(pFileMP3));	// »•i–¼
-	SetCommentSI(pFileMP3, GetComment(pFileMP3));		// ƒRƒƒ“ƒg•¶š—ñ
-	SetYearSI(pFileMP3, GetYear(pFileMP3));				// ƒŠƒŠ[ƒX”N†
+    SetModifyFlag(pFileMP3, true);                      // å¤‰æ›´ã•ã‚ŒãŸãƒ•ãƒ©ã‚°ã‚’ã‚»ãƒƒãƒˆ
+    SetTrackNameSI(pFileMP3, GetTrackName(pFileMP3));   // æ›²å
+    SetArtistNameSI(pFileMP3, GetArtistName(pFileMP3)); // ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆå
+    SetAlbumNameSI(pFileMP3, GetAlbumName(pFileMP3));   // è£½å“å
+    SetCommentSI(pFileMP3, GetComment(pFileMP3));       // ã‚³ãƒ¡ãƒ³ãƒˆæ–‡å­—åˆ—
+    SetYearSI(pFileMP3, GetYear(pFileMP3));             // ãƒªãƒªãƒ¼ã‚¹å¹´å·
 
-#define LIMIT_TEXT_LENGTH(strID3, nLen)	{			\
-	TCHAR	sWorkBuffer[nLen+1];					\
-	StringCopyN(sWorkBuffer, GetValue(pFileMP3, strID3), nLen);			\
-	sWorkBuffer[nLen] = '\0';						\
-	SetValue(pFileMP3, strID3, sWorkBuffer);			\
+#define LIMIT_TEXT_LENGTH(strID3, nLen) {           \
+    TCHAR   sWorkBuffer[nLen+1];                    \
+    StringCopyN(sWorkBuffer, GetValue(pFileMP3, strID3), nLen);         \
+    sWorkBuffer[nLen] = '\0';                       \
+    SetValue(pFileMP3, strID3, sWorkBuffer);            \
 }
-	// ID3 tag ‚Ì•¶š”‚ğ’²®(©“®•ÏŠ·‚Ìˆ×‚Ì‘Îˆ)
-	LIMIT_TEXT_LENGTH(FIELD_TRACK_NAME		, ID3_LEN_TRACK_NAME);
-	LIMIT_TEXT_LENGTH(FIELD_ARTIST_NAME		, ID3_LEN_ARTIST_NAME);
-	LIMIT_TEXT_LENGTH(FIELD_ALBUM_NAME		, ID3_LEN_ALBUM_NAME);
-	LIMIT_TEXT_LENGTH(FIELD_YEAR			, ID3_LEN_YEAR);
-	if (GetBTrackNumber(pFileMP3) != (BYTE)0xff) {
-		LIMIT_TEXT_LENGTH(FIELD_COMMENT, ID3_LEN_COMMENT-2);
-	} else {
-		LIMIT_TEXT_LENGTH(FIELD_COMMENT, ID3_LEN_COMMENT);
-	}
+    // ID3 tag ã®æ–‡å­—æ•°ã‚’èª¿æ•´(è‡ªå‹•å¤‰æ›ã®ç‚ºã®å¯¾å‡¦)
+    LIMIT_TEXT_LENGTH(FIELD_TRACK_NAME      , ID3_LEN_TRACK_NAME);
+    LIMIT_TEXT_LENGTH(FIELD_ARTIST_NAME     , ID3_LEN_ARTIST_NAME);
+    LIMIT_TEXT_LENGTH(FIELD_ALBUM_NAME      , ID3_LEN_ALBUM_NAME);
+    LIMIT_TEXT_LENGTH(FIELD_YEAR            , ID3_LEN_YEAR);
+    if (GetBTrackNumber(pFileMP3) != (BYTE)0xff) {
+        LIMIT_TEXT_LENGTH(FIELD_COMMENT, ID3_LEN_COMMENT-2);
+    } else {
+        LIMIT_TEXT_LENGTH(FIELD_COMMENT, ID3_LEN_COMMENT);
+    }
 #undef LIMIT_TEXT_LENGTH
-	// ƒ\ƒtƒgƒEƒFƒA‚Ìİ’è
-	UINT nFormat = GetFormat(pFileMP3);
-	if (!(nFormat == nFileTypeMP3 || nFormat == nFileTypeMP3V1 || nFormat == nFileTypeMP3V11)) {
-		if (strlen(GetSoftwareSI(pFileMP3)) == 0) {
-			SetSoftwareSI(pFileMP3, strOptSoftwareTag);
-		}
-	}
+    // ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢ã®è¨­å®š
+    UINT nFormat = GetFormat(pFileMP3);
+    if (!(nFormat == nFileTypeMP3 || nFormat == nFileTypeMP3V1 || nFormat == nFileTypeMP3V11)) {
+        if (_tcslen(GetSoftwareSI(pFileMP3)) == 0) {
+            SetSoftwareSI(pFileMP3, strOptSoftwareTag);
+        }
+    }
 
-	if (strlen(GetGenreSI(pFileMP3)) == 0 || false /* í‚ÉÄİ’è¨–¢İ’è‚Ì‚İ */) {
-		//SetGenreSI(pFileMP3, STEPGetGenreNameSIF(GetBGenre(pFileMP3)));
-		SetGenreSI(pFileMP3, GetGenre(pFileMP3));
-	}
-	if (strlen(GetTrackNumberSI(pFileMP3)) == 0) { /* –¢İ’è‚Ì‚İ */
-		SetTrackNumberSI(pFileMP3, GetTrackNumber(pFileMP3));
-	}
-	if (strlen(GetDiskNumberSI(pFileMP3)) == 0) { /* –¢İ’è‚Ì‚İ */
-		SetDiskNumberSI(pFileMP3, GetDiskNumber(pFileMP3));
-	}
-	return true;
+    if (_tcslen(GetGenreSI(pFileMP3)) == 0 || false /* å¸¸ã«å†è¨­å®šâ†’æœªè¨­å®šæ™‚ã®ã¿ */) {
+        //SetGenreSI(pFileMP3, STEPGetGenreNameSIF(GetBGenre(pFileMP3)));
+        SetGenreSI(pFileMP3, GetGenre(pFileMP3));
+    }
+    if (_tcslen(GetTrackNumberSI(pFileMP3)) == 0) { /* æœªè¨­å®šæ™‚ã®ã¿ */
+        SetTrackNumberSI(pFileMP3, GetTrackNumber(pFileMP3));
+    }
+    return true;
+}
+
+static void COPY_FIELD(FILE_INFO *pFileMP3, FIELDTYPE fieldType, const CString& strSIF, int len)
+{// ã‚³ãƒ”ãƒ¼å¯¾è±¡ã®ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã‹ã©ã†ã‹ã‚’ãƒã‚§ãƒƒã‚¯ã—ã¦ã€å¿…è¦ãªå ´åˆã ã‘ã‚³ãƒ”ãƒ¼ã—ã¾ã™
+ //UNIOCDE ç‰ˆã§ã¯ len ãŒæ–‡å­—æ•°ã§å˜ç´”ãªé•·ã•æ¯”è¼ƒã§ã¯ã†ã¾ãã„ã‹ãªã„ã®ã§ã€
+ //StringCopyN ã§ ANSI æ›ç®— ã§ã® len æ–‡å­—ã‚³ãƒ”ãƒ¼ã—ãŸå ´åˆã®æ–‡å­—åˆ—ã§å¿…è¦ã‹å¦ã‹ã‚’åˆ¤æ–­ã™ã‚‹
+    TCHAR* sBuffer = (TCHAR*)malloc((static_cast<unsigned long long>(len) + 1) * sizeof(TCHAR));
+    StringCopyN(sBuffer, strSIF, len);//é•·ã• len ã¾ã§ã‚³ãƒ”ãƒ¼
+    if (nOptSIFieldConvType == SIF_CONV_ALL_FIELD || //å¸¸ã«ã‚³ãƒ”ãƒ¼
+        _tcscmp(sBuffer, strSIF) == 0) {             //é•·ã• len ã¾ã§ã‚³ãƒ”ãƒ¼ã—ãŸã‚‚ã®ã¨åŒã˜ãªã‚‰ã‚³ãƒ”ãƒ¼
+        SetValue(pFileMP3, fieldType, sBuffer);
+    }
+    free(sBuffer);
 }
 
 void ConvSIFieldToID3tag(FILE_INFO *pFileMP3)
 {
-	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-	char	sBuffer[256+1];
+    AFX_MANAGE_STATE(AfxGetStaticModuleState());
+    //TCHAR   sBuffer[256+1];
 
-	if (GetFormat(pFileMP3) != nFileTypeID3V2 && GetFormat(pFileMP3) != nFileTypeRMP) {
-		return;
-	}
+    //if (GetFormat(pFileMP3) != nFileTypeID3V2 && GetFormat(pFileMP3) != nFileTypeRMP) {
+    //    return;
+    //}
 
-	SetModifyFlag(pFileMP3, TRUE);				// •ÏX‚³‚ê‚½ƒtƒ‰ƒO‚ğƒZƒbƒg
+    SetModifyFlag(pFileMP3, TRUE);              // å¤‰æ›´ã•ã‚ŒãŸãƒ•ãƒ©ã‚°ã‚’ã‚»ãƒƒãƒˆ
 
-// ƒRƒs[‘ÎÛ‚ÌƒtƒB[ƒ‹ƒh‚©‚Ç‚¤‚©‚ğƒ`ƒFƒbƒN‚µ‚ÄA•K—v‚Èê‡‚¾‚¯ƒRƒs[‚µ‚Ü‚·
-#define COPY_FIELD(strID3, strSIF, len)	{			\
-	if (nOptSIFieldConvType == SIF_CONV_ALL_FIELD	\
-	|| strlen(strSIF) <= (len)) {					\
-		StringCopyN(sBuffer, strSIF, len);			\
-		sBuffer[len] = '\0';						\
-		SetValue(pFileMP3, strID3, sBuffer);		\
-	}												\
+/*
+// ã‚³ãƒ”ãƒ¼å¯¾è±¡ã®ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã‹ã©ã†ã‹ã‚’ãƒã‚§ãƒƒã‚¯ã—ã¦ã€å¿…è¦ãªå ´åˆã ã‘ã‚³ãƒ”ãƒ¼ã—ã¾ã™
+#define COPY_FIELD(strID3, strSIF, len) {           \
+    if (nOptSIFieldConvType == SIF_CONV_ALL_FIELD   \
+    || _tcslen(strSIF) <= (len)) {                  \
+        StringCopyN(sBuffer, strSIF, len);          \
+        sBuffer[len] = '\0';                        \
+        SetValue(pFileMP3, strID3, sBuffer);        \
+    }                                               \
 }
-#define COPY_FIELD2(strID3, strSIF, len)	{			\
-	if (nOptSIFieldConvType == SIF_CONV_ALL_FIELD	\
-	|| strlen(strSIF) <= (len)) {					\
-		StringCopyN2(sBuffer, strSIF, len);			\
-		sBuffer[len] = '\0';						\
-		SetValue(pFileMP3, strID3, sBuffer);		\
-	}												\
-}
-	// ‹È–¼
-	COPY_FIELD(FIELD_TRACK_NAME, GetTrackNameSI(pFileMP3), ID3_LEN_TRACK_NAME);
-	// ƒA[ƒeƒBƒXƒg–¼
-	COPY_FIELD(FIELD_ARTIST_NAME, GetArtistNameSI(pFileMP3), ID3_LEN_ARTIST_NAME);
-	// ƒAƒ‹ƒoƒ€–¼
-	COPY_FIELD(FIELD_ALBUM_NAME, GetAlbumNameSI(pFileMP3), ID3_LEN_ALBUM_NAME);
-	// ƒgƒ‰ƒbƒN”Ô† //ƒRƒƒ“ƒgİ’è‚æ‚èæ‚Éˆ—‚·‚é
-	if (strlen(GetTrackNumberSI(pFileMP3)) == 0) {
-		if (GetFormat(pFileMP3) == nFileTypeID3V2) {
-			SetBTrackNumber(pFileMP3, (BYTE)0xff);
-		}
-	} else {
-		SetBTrackNumber(pFileMP3, (BYTE)STEPGetIntegerTrackNumber(GetTrackNumberSI(pFileMP3)));
-	}
-	// ƒfƒBƒXƒN”Ô†
-	if (strlen(GetDiskNumberSI(pFileMP3)) == 0) {
-		if (GetFormat(pFileMP3) == nFileTypeID3V2) {
-			SetBDiskNumber(pFileMP3, (BYTE)0xff);
-		}
-	} else {
-		SetBDiskNumber(pFileMP3, (BYTE)STEPGetIntegerDiskNumber(GetDiskNumberSI(pFileMP3)));
-	}
-	// ƒRƒƒ“ƒg•¶š—ñ
-	if (GetBTrackNumber(pFileMP3) == (BYTE)0xff) {
-		// ID3 v1.0
-		COPY_FIELD2(FIELD_COMMENT, GetCommentSI(pFileMP3), ID3_LEN_COMMENT);
-	} else {
-		// ID3 v1.1
-		COPY_FIELD2(FIELD_COMMENT, GetCommentSI(pFileMP3), ID3_LEN_COMMENT-2);
-	}
-	// ƒŠƒŠ[ƒX”N†
-	COPY_FIELD(FIELD_YEAR, GetYearSI(pFileMP3), ID3_LEN_YEAR);
-	// ƒWƒƒƒ“ƒ‹
-	SetBGenre(pFileMP3, STEPGetGenreCode(GetGenreSI(pFileMP3)));
-	SetGenre(pFileMP3, STEPGetGenreNameSIF(GetBGenre(pFileMP3)));
-#undef COPY_FIELD
-#undef COPY_FIELD2
+*/
+    //â†‘é–¢æ•°åŒ–
+    // æ›²å
+    COPY_FIELD(pFileMP3, FIELD_TRACK_NAME, GetTrackNameSI(pFileMP3), ID3_LEN_TRACK_NAME);
+    // ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆå
+    COPY_FIELD(pFileMP3, FIELD_ARTIST_NAME, GetArtistNameSI(pFileMP3), ID3_LEN_ARTIST_NAME);
+    // ã‚¢ãƒ«ãƒãƒ å
+    COPY_FIELD(pFileMP3, FIELD_ALBUM_NAME, GetAlbumNameSI(pFileMP3), ID3_LEN_ALBUM_NAME);
+    // ãƒˆãƒ©ãƒƒã‚¯ç•ªå· //ã‚³ãƒ¡ãƒ³ãƒˆè¨­å®šã‚ˆã‚Šå…ˆã«å‡¦ç†ã™ã‚‹
+    if (_tcslen(GetTrackNumberSI(pFileMP3)) == 0) {
+        if (GetFormat(pFileMP3) == nFileTypeID3V2) {
+            SetBTrackNumber(pFileMP3, (BYTE)0xff);
+        }
+    } else {
+        SetBTrackNumber(pFileMP3, (BYTE)STEPGetIntegerTrackNumber(GetTrackNumberSI(pFileMP3)));
+    }
+    // ã‚³ãƒ¡ãƒ³ãƒˆæ–‡å­—åˆ—
+    if (GetBTrackNumber(pFileMP3) == (BYTE)0xff) {
+        // ID3 v1.0
+        COPY_FIELD(pFileMP3, FIELD_COMMENT, GetCommentSI(pFileMP3), ID3_LEN_COMMENT);
+    } else {
+        // ID3 v1.1
+        COPY_FIELD(pFileMP3, FIELD_COMMENT, GetCommentSI(pFileMP3), ID3_LEN_COMMENT-2);
+    }
+    // ãƒªãƒªãƒ¼ã‚¹å¹´å·
+    COPY_FIELD(pFileMP3, FIELD_YEAR, GetYearSI(pFileMP3), ID3_LEN_YEAR);
+    // ã‚¸ãƒ£ãƒ³ãƒ«
+    SetBGenre(pFileMP3, STEPGetGenreCode(GetGenreSI(pFileMP3)));
+    SetGenre(pFileMP3, STEPGetGenreNameSIF(GetBGenre(pFileMP3)));
+//#undef COPY_FIELD
+//#undef COPY_FIELD2
 
-	return;
+    return;
 }
+
 
 bool WriteTagID3v2(FILE_INFO *pFileMP3)
 {
-	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-	// ID3v2 ƒ^ƒO‚Ìæ“¾
-	CId3tagv2	id3v2/*(USE_SCMPX_GENRE_ANIMEJ)*/;
-	if (id3v2.Load(GetFullPath(pFileMP3))  != ERROR_SUCCESS	// “Ç‚İ‚İ¸”s
-	||  id3v2.IsEnable() == FALSE			// ID3v2 ‚Å‚Í‚È‚¢
-	||  !TRUE/*id3v2.IsSafeVer()*/) {				// –¢‘Î‰‚Ìƒo[ƒWƒ‡ƒ“
-		// “Ç‚İ‚İ¸”s
-		return(false);
-	}
+    AFX_MANAGE_STATE(AfxGetStaticModuleState());
+    // ID3v2 ã‚¿ã‚°ã®å–å¾—
+    CId3tagv2   id3v2/*(USE_SCMPX_GENRE_ANIMEJ)*/;
+    if (id3v2.Load(GetFullPath(pFileMP3))  != ERROR_SUCCESS // èª­ã¿è¾¼ã¿å¤±æ•—
+    ||  id3v2.IsEnable() == FALSE           // ID3v2 ã§ã¯ãªã„
+    ||  !TRUE/*id3v2.IsSafeVer()*/) {               // æœªå¯¾å¿œã®ãƒãƒ¼ã‚¸ãƒ§ãƒ³
+        // èª­ã¿è¾¼ã¿å¤±æ•—
+        return(false);
+    }
 
-	switch (nId3v2Version) {
-	case 1:	// v2.2
-		id3v2.SetVer(0x0200);
-		break;
-	case 2:	// v2.3
-		id3v2.SetVer(0x0300);
-		break;
-	case 3:	// v2.4
-		id3v2.SetVer(0x0400);
-		break;
-	default:
-		break;
-	}
-	switch (nId3v2Encode) {
-	case 1:
-		id3v2.SetCharEncode(CId3tagv2::ID3V2CHARENCODE_ISO_8859_1);
-		break;
-	case 2:
-		id3v2.SetCharEncode(CId3tagv2::ID3V2CHARENCODE_UTF_16);
-		break;
-	case 3:
-		id3v2.SetCharEncode(CId3tagv2::ID3V2CHARENCODE_UTF_8);
-		break;
-	//case 4:
-	//	id3v2.SetCharEncode(CId3tagv2::ID3V2CHARENCODE_UTF_16BE);
-	//	break;
-	default:
-		break;
-	}
+    switch (nId3v2Version) {
+    case 1: // v2.2
+        id3v2.SetVer(0x0200);
+        break;
+    case 2: // v2.3
+        id3v2.SetVer(0x0300);
+        break;
+    case 3: // v2.4
+        id3v2.SetVer(0x0400);
+        break;
+    default:
+        break;
+    }
+    switch (nId3v2Encode) {
+    case 1:
+        id3v2.SetCharEncoding(CId3tagv2::ID3V2CHARENCODING_ISO_8859_1);
+        break;
+    case 2:
+        id3v2.SetCharEncoding(CId3tagv2::ID3V2CHARENCODING_UTF_16);
+        break;
+    case 3:
+        id3v2.SetCharEncoding(CId3tagv2::ID3V2CHARENCODING_UTF_8);
+        break;
+    //case 4:
+    //  id3v2.SetCharEncoding(CId3tagv2::ID3V2CHARENCODING_UTF_16BE);
+    //  break;
+    default:
+        break;
+    }
+    // ID3tag ã®è‡ªå‹•æ›´æ–°
+//  if (bOptID3v2ID3tagAutoWrite) {
+//      ConvSIFieldToID3tag(pFileMP3);
+//  }
+    // ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢ã®è¨­å®š
+    if (_tcslen(GetSoftwareSI(pFileMP3)) == 0) {
+        SetSoftwareSI(pFileMP3, strOptSoftwareTag);
+    }
 
-	// ID3tag ‚Ì©“®XV
-//	if (bOptID3v2ID3tagAutoWrite) {
-//		ConvSIFieldToID3tag(pFileMP3);
-//	}
-	// ƒ\ƒtƒgƒEƒFƒA‚Ìİ’è
-	if (strlen(GetSoftwareSI(pFileMP3)) == 0) {
-		SetSoftwareSI(pFileMP3, strOptSoftwareTag);
-	}
+#ifdef _UNICODE
+    if(nId3v2Encode == 0 && //ã€ŒID3v2 ã®ä¿å­˜å½¢å¼ã€-ã€Œæ–‡å­—ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰ã€-ã€Œå¤‰æ›´ã—ãªã„ã€
+        id3v2.GetCharEncoding() == CId3tagv2::ID3V2CHARENCODING_ISO_8859_1 && //æ›´æ–°å‰ãŒ ISO_8859_1
+        bAutoISO8859_1toUtf16){
+    //by Kobarin
+    //å¤‰æ›´ã—ãªã„è¨­å®šã§ã‚‚ã€æ›´æ–°å‰ã®æ–‡å­—ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰ãŒ ISO_8859_1 ã®å ´åˆã¯æ›´æ–°å¾Œã®æ–¹ã§ UNICODE å›ºæœ‰
+    //ã®æ–‡å­—ã‚’ä½¿ç”¨ã—ã¦ã„ã‚‹ã‹ã©ã†ã‹ã‚’ãƒã‚§ãƒƒã‚¯ã—ã€ä½¿ç”¨ã—ã¦ã„ã‚‹å ´åˆã¯ UTF16 ã§æ›¸ãè¾¼ã‚€
+        if(IsUnicodeStr(GetTrackNameSI(pFileMP3)) ||
+           IsUnicodeStr(GetArtistNameSI(pFileMP3)) ||
+           IsUnicodeStr(GetAlbumNameSI(pFileMP3)) ||
+           IsUnicodeStr(GetSoftwareSI(pFileMP3)) ||
+           IsUnicodeStr(GetTrackNumberSI(pFileMP3)) ||
+           IsUnicodeStr(GetTrackTotalSI(pFileMP3)) ||
+           IsUnicodeStr(GetDiscNumberSI(pFileMP3)) ||
+           IsUnicodeStr(GetDiscTotalSI(pFileMP3)) ||
+           IsUnicodeStr(GetCommentSI(pFileMP3)) ||
+           IsUnicodeStr(GetCopyrightSI(pFileMP3)) ||
+           IsUnicodeStr(GetWriterSI(pFileMP3)) ||
+           IsUnicodeStr(GetComposerSI(pFileMP3)) ||
+           IsUnicodeStr(GetAlbumArtistSI(pFileMP3)) ||
+           IsUnicodeStr(GetOrigArtistSI(pFileMP3)) ||
+           IsUnicodeStr(GetURLSI(pFileMP3)) ||
+           IsUnicodeStr(GetEncodest(pFileMP3)) ||
+           IsUnicodeStr(GetEngineerSI(pFileMP3)) ||
+           IsUnicodeStr(GetGenreSI(pFileMP3)) ||
+           0){
+            id3v2.SetCharEncoding(CId3tagv2::ID3V2CHARENCODING_UTF_16);
+        }
+    }
+#endif
 
-	// *** ƒ^ƒOî•ñ‚Ìİ’è ***
-	id3v2.SetTitle(GetTrackNameSI(pFileMP3));			// ƒ^ƒCƒgƒ‹
-	id3v2.SetArtist(GetArtistNameSI(pFileMP3));			// ƒA[ƒeƒBƒXƒg–¼
-	id3v2.SetAlbum(GetAlbumNameSI(pFileMP3));			// ƒAƒ‹ƒoƒ€–¼
-	id3v2.SetYear(GetYearSI(pFileMP3));					// ƒŠƒŠ[ƒX
-	id3v2.SetEncoder(GetSoftwareSI(pFileMP3));			// ƒGƒ“ƒR[ƒ_
-	id3v2.SetTrackNo(GetTrackNumberSI(pFileMP3));		// ƒgƒ‰ƒbƒN”Ô†
-	id3v2.SetDiskNo(GetDiskNumberSI(pFileMP3));			// ƒfƒBƒXƒN”Ô†
-	id3v2.SetComment(GetCommentSI(pFileMP3));			// ƒRƒƒ“ƒg
-	id3v2.SetCopyright(GetCopyrightSI(pFileMP3));		// ’˜ìŒ 
-	id3v2.SetWriter(GetWriterSI(pFileMP3));				// ìŒ
-	id3v2.SetComposer(GetComposerSI(pFileMP3));			// ì‹È
-	id3v2.SetAlbmArtist(GetAlbumArtistSI(pFileMP3));		// Albm. ƒA[ƒeƒBƒXƒg
-	id3v2.SetOrigArtist(GetOrigArtistSI(pFileMP3));		// Orig.ƒA[ƒeƒBƒXƒg
-	id3v2.SetUrl(GetURLSI(pFileMP3));					// URL
-	id3v2.SetEncodest(GetEncodest(pFileMP3));			// ƒGƒ“ƒR[ƒh‚µ‚½l
-	id3v2.SetEngineer(GetEngineerSI(pFileMP3));			// ƒGƒ“ƒWƒjƒAio”Åj
-	// ƒWƒƒƒ“ƒ‹–¼
-	CString	strGenre;
-	BYTE	byGenre;
-	byGenre = STEPGetGenreCode(GetGenreSI(pFileMP3));
-	if (!strlen(GetGenreSI(pFileMP3)) == 0) {
-		if (byGenre == (BYTE)0xff || STEPIsUserGenre(GetGenreSI(pFileMP3)) || bOptID3v2GenreAddNumber == false) strGenre.Format("%s", GetGenreSI(pFileMP3));
-		else                       strGenre.Format("(%d)%s", STEPGetGenreCode(GetGenreSI(pFileMP3)), GetGenreSI(pFileMP3));
-	}
-	id3v2.SetGenre(strGenre/* 2005.08.23 del , bOptID3v2GenreAddNumber*/);
+    // *** ã‚¿ã‚°æƒ…å ±ã®è¨­å®š ***
+    id3v2.SetTitle(GetTrackNameSI(pFileMP3));           // ã‚¿ã‚¤ãƒˆãƒ«
+    id3v2.SetArtist(GetArtistNameSI(pFileMP3));         // ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆå
+    id3v2.SetAlbum(GetAlbumNameSI(pFileMP3));           // ã‚¢ãƒ«ãƒãƒ å
+    id3v2.SetYear(GetYearSI(pFileMP3));                 // ãƒªãƒªãƒ¼ã‚¹
+    id3v2.SetEncoder(GetSoftwareSI(pFileMP3));          // ã‚¨ãƒ³ã‚³ãƒ¼ãƒ€
+    {//ãƒˆãƒ©ãƒƒã‚¯ç•ªå·/ãƒˆãƒ©ãƒƒã‚¯æ•°
+     //ãƒˆãƒ©ãƒƒã‚¯æ•°ç”¨ã® ID ãŒ ID3v2 ã«ã¯ãªã„ã®ã§ "ãƒˆãƒ©ãƒƒã‚¯ç•ªå·/ãƒˆãƒ©ãƒƒã‚¯æ•°" ã®
+     //ã‚ˆã†ãªæ–‡å­—åˆ—ã«å¤‰æ›ã—ã¦ãƒˆãƒ©ãƒƒã‚¯æ•°ã«æ›¸ãè¾¼ã‚€
+        CString strTrackNumber = GetTrackNumberSI(pFileMP3);
+        CString strTrackTotal = GetTrackTotalSI(pFileMP3);
+        if(!strTrackNumber.IsEmpty() && !strTrackTotal.IsEmpty()){
+            strTrackNumber = strTrackNumber + _T("/") + strTrackTotal;
+        }
+        id3v2.SetTrackNo(strTrackNumber);
+    }
+    {//ãƒ‡ã‚£ã‚¹ã‚¯ç•ªå·/ãƒ‡ã‚£ã‚¹ã‚¯æ•°
+     //ãƒ‡ã‚£ã‚¹ã‚¯æ•°ç”¨ã® ID ãŒ ID3v2 ã«ã¯ãªã„ã®ã§ "ãƒ‡ã‚£ã‚¹ã‚¯ç•ªå·/ãƒ‡ã‚£ã‚¹ã‚¯æ•°" ã®
+     //ã‚ˆã†ãªæ–‡å­—åˆ—ã«å¤‰æ›ã—ã¦ãƒ‡ã‚£ã‚¹ã‚¯æ•°ã«æ›¸ãè¾¼ã‚€
+        CString strDiscNumber = GetDiscNumberSI(pFileMP3);
+        CString strDiscTotal = GetDiscTotalSI(pFileMP3);
+        if(!strDiscNumber.IsEmpty() && !strDiscTotal.IsEmpty()){
+            strDiscNumber = strDiscNumber + _T("/") + strDiscTotal;
+        }
+        id3v2.SetDiscNo(strDiscNumber);
+    }
+    id3v2.SetComment(GetCommentSI(pFileMP3));           // ã‚³ãƒ¡ãƒ³ãƒˆ
+    id3v2.SetCopyright(GetCopyrightSI(pFileMP3));       // è‘—ä½œæ¨©
+    id3v2.SetWriter(GetWriterSI(pFileMP3));             // ä½œè©
+    id3v2.SetComposer(GetComposerSI(pFileMP3));         // ä½œæ›²
+    id3v2.SetAlbumArtist(GetAlbumArtistSI(pFileMP3));   // Albm. ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆ
+    id3v2.SetOrigArtist(GetOrigArtistSI(pFileMP3));     // Orig.ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆ
+    id3v2.SetUrl(GetURLSI(pFileMP3));                   // URL
+    id3v2.SetEncodedBy(GetEncodest(pFileMP3));          // ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰ã—ãŸäºº
+    id3v2.SetEngineer(GetEngineerSI(pFileMP3));         // ã‚¨ãƒ³ã‚¸ãƒ‹ã‚¢ï¼ˆå‡ºç‰ˆï¼‰
+    // ã‚¸ãƒ£ãƒ³ãƒ«å
+    CString strGenre;
+    BYTE    byGenre;
+    byGenre = STEPGetGenreCode(GetGenreSI(pFileMP3));
+    if (!_tcslen(GetGenreSI(pFileMP3)) == 0) {
+        if (byGenre == (BYTE)0xff || STEPIsUserGenre(GetGenreSI(pFileMP3)) || bOptID3v2GenreAddNumber == false) strGenre.Format(_T("%s"), GetGenreSI(pFileMP3));
+        else                       strGenre.Format(_T("(%d)%s"), STEPGetGenreCode(GetGenreSI(pFileMP3)), GetGenreSI(pFileMP3));
+    }
+    id3v2.SetGenre(strGenre/* 2005.08.23 del , bOptID3v2GenreAddNumber*/);
 
-	// *** ƒ^ƒOî•ñ‚ğXV‚·‚é ***
-	//return(id3v2.Save(/*AfxGetMainWnd()->GetSafeHwnd(),*/ GetFullPath(pFileMP3)) == ERROR_SUCCESS ? true : false);
-	bool result = id3v2.Save(GetFullPath(pFileMP3)) == ERROR_SUCCESS ? true : false;
-	if (result) {
-		setFileType(id3v2, pFileMP3);
-	}
-	return result;
+    id3v2.SetUnSynchronization(bOptUnSync);//ãƒ•ãƒ¬ãƒ¼ãƒ éåŒæœŸåŒ–
+    // *** ã‚¿ã‚°æƒ…å ±ã‚’æ›´æ–°ã™ã‚‹ ***
+    bool result = id3v2.Save(GetFullPath(pFileMP3)) == ERROR_SUCCESS;
+    if (result) {
+        setFileType(id3v2, pFileMP3);
+    }
+    return result;
 }
 
 bool WriteTagSIF(FILE_INFO *pFileMP3)
 {
-	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-	if (strlen(GetSoftwareSI(pFileMP3)) == 0) {
-		SetSoftwareSI(pFileMP3, strOptSoftwareTag);
-	}
+    AFX_MANAGE_STATE(AfxGetStaticModuleState());
+    if (_tcslen(GetSoftwareSI(pFileMP3)) == 0) {
+        SetSoftwareSI(pFileMP3, strOptSoftwareTag);
+    }
 
-	CRMP rmp/*(USE_SCMPX_GENRE_ANIMEJ)*/;
-	if (rmp.Load(GetFullPath(pFileMP3))  != ERROR_SUCCESS	// “Ç‚İ‚İ¸”s
-		||  rmp.IsEnable() == FALSE) {
-		// “Ç‚İ‚İ¸”s
-		return(false);
-	}
+    CRMP rmp/*(USE_SCMPX_GENRE_ANIMEJ)*/;
+    if (rmp.Load(GetFullPath(pFileMP3))  != ERROR_SUCCESS   // èª­ã¿è¾¼ã¿å¤±æ•—
+        ||  rmp.IsEnable() == FALSE) {
+        // èª­ã¿è¾¼ã¿å¤±æ•—
+        return(false);
+    }
 
-	bool isNeedID3 = false;
-	if (strlen(GetTrackName(pFileMP3))	> 0)	isNeedID3 = true;
-	if (strlen(GetArtistName(pFileMP3))	> 0)	isNeedID3 = true;
-	if (strlen(GetAlbumName(pFileMP3))	> 0)	isNeedID3 = true;
-	if (strlen(GetComment(pFileMP3))	> 0)	isNeedID3 = true;
-	if (strlen(GetYear(pFileMP3))		> 0)	isNeedID3 = true;
-	if (strlen(GetGenre(pFileMP3))		> 0)	isNeedID3 = true;
-	if (strlen(GetTrackNumber(pFileMP3))> 0)	isNeedID3 = true;
-	if (isNeedID3 && !rmp.HasId3tag()) {
-		rmp.SetHasId3tag(TRUE);
-	}
+    bool isNeedID3 = false;
+    if (_tcslen(GetTrackName(pFileMP3)) > 0)    isNeedID3 = true;
+    if (_tcslen(GetArtistName(pFileMP3))> 0)    isNeedID3 = true;
+    if (_tcslen(GetAlbumName(pFileMP3)) > 0)    isNeedID3 = true;
+    if (_tcslen(GetComment(pFileMP3))   > 0)    isNeedID3 = true;
+    if (_tcslen(GetYear(pFileMP3))      > 0)    isNeedID3 = true;
+    if (_tcslen(GetGenre(pFileMP3))     > 0)    isNeedID3 = true;
+    if (_tcslen(GetTrackNumber(pFileMP3))> 0)   isNeedID3 = true;
+    if (isNeedID3 && !rmp.HasId3tag()) {
+        rmp.SetHasId3tag(TRUE);
+    }
 
-	// ID3tag ‚Ì©“®XV
-	//if (bOptRmpID3tagAutoWrite) {
-	//	ConvSIFieldToID3tag(pFileMP3);
-	//}
+    // SI ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã‚’æ›´æ–°
+    rmp.SetNAM(GetTrackNameSI(pFileMP3));   // æ›²å
+    rmp.SetART(GetArtistNameSI(pFileMP3));  // ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆå
+    rmp.SetPRD(GetAlbumNameSI(pFileMP3));   // è£½å“å
+    rmp.SetCMT(GetCommentSI(pFileMP3));     // ã‚³ãƒ¡ãƒ³ãƒˆæ–‡å­—åˆ—
+    rmp.SetCRD(GetYearSI(pFileMP3));        // ãƒªãƒªãƒ¼ã‚¹å¹´å·
+    rmp.SetGNR(GetGenreSI(pFileMP3));       // ã‚¸ãƒ£ãƒ³ãƒ«å
+    rmp.SetCOP(GetCopyrightSI(pFileMP3));   // è‘—ä½œæ¨©
+    rmp.SetENG(GetEngineerSI(pFileMP3));    // ã‚¨ãƒ³ã‚¸ãƒ‹ã‚¢
+    rmp.SetSRC(GetSourceSI(pFileMP3));      // ã‚½ãƒ¼ã‚¹
+    rmp.SetSFT(GetSoftwareSI(pFileMP3));    // ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢
+    rmp.SetKEY(GetKeywordSI(pFileMP3));     // ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰
+    rmp.SetTCH(GetTechnicianSI(pFileMP3));  // æŠ€è¡“è€…
+    rmp.SetLYC(GetLyricSI(pFileMP3));       // æ­Œè©
+    rmp.SetCMS(GetCommissionSI(pFileMP3));  // ã‚³ãƒŸãƒƒã‚·ãƒ§ãƒ³
+    // SI ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã‚’æ›´æ–°
+    bool result = rmp.Save(GetFullPath(pFileMP3)) == ERROR_SUCCESS ? true : false;
+    if (result) {
+        rmp.Release();
+        if (isNeedID3) {
+            result = WriteTagID3(pFileMP3);
+        }
+        SetFormat(pFileMP3, nFileTypeRMP);      // ãƒ•ã‚¡ã‚¤ãƒ«å½¢å¼ï¼šRIFF MP3
+        SetFileTypeName(pFileMP3, _T("RIFF MP3"));
+    }
+    return result;
+}
 
-	// SI ƒtƒB[ƒ‹ƒh‚ğXV
-	rmp.SetNAM(GetTrackNameSI(pFileMP3));	// ‹È–¼
-	rmp.SetART(GetArtistNameSI(pFileMP3));	// ƒA[ƒeƒBƒXƒg–¼
-	rmp.SetPRD(GetAlbumNameSI(pFileMP3));	// »•i–¼
-	rmp.SetCMT(GetCommentSI(pFileMP3));		// ƒRƒƒ“ƒg•¶š—ñ
-	rmp.SetCRD(GetYearSI(pFileMP3));		// ƒŠƒŠ[ƒX”N†
-	rmp.SetGNR(GetGenreSI(pFileMP3));		// ƒWƒƒƒ“ƒ‹–¼
-	rmp.SetCOP(GetCopyrightSI(pFileMP3));	// ’˜ìŒ 
-	rmp.SetENG(GetEngineerSI(pFileMP3));	// ƒGƒ“ƒWƒjƒA
-	rmp.SetSRC(GetSourceSI(pFileMP3));		// ƒ\[ƒX
-	rmp.SetSFT(GetSoftwareSI(pFileMP3));	// ƒ\ƒtƒgƒEƒFƒA
-	rmp.SetKEY(GetKeywordSI(pFileMP3));		// ƒL[ƒ[ƒh
-	rmp.SetTCH(GetTechnicianSI(pFileMP3));	// ‹ZpÒ
-	rmp.SetLYC(GetLyricSI(pFileMP3));		// ‰ÌŒ
-	rmp.SetCMS(GetCommissionSI(pFileMP3));	// ƒRƒ~ƒbƒVƒ‡ƒ“
-	// SI ƒtƒB[ƒ‹ƒh‚ğXV
-	bool result = rmp.Save(NULL, GetFullPath(pFileMP3)) == ERROR_SUCCESS ? true : false;
-	if (result) {
-		rmp.Release();
-		if (isNeedID3) {
-			result = WriteTagID3(pFileMP3);
-		}
-		SetFormat(pFileMP3, nFileTypeRMP);		// ƒtƒ@ƒCƒ‹Œ`®FRIFF MP3
-		SetFileTypeName(pFileMP3, "RIFF MP3");
-	}
-	return result;
+static bool CheckLimitId3v1(const TCHAR *str, int nLimit, bool bCheckUnicode)
+{//by Kobarin
+ //id3v1 ã®åˆ¶é™å†…ãªã‚‰ true ã‚’ã€åˆ¶é™ã‚’è¶…ãˆã¦ã„ãŸã‚‰ false ã‚’è¿”ã™
+ //æ–‡å­—åˆ— str ã‚’ ANSI ã«å¤‰æ›ã—ã¦é•·ã•ãŒ nLimit ã‚’è¶…ãˆãŸã‚‰ true ã‚’è¿”ã™
+ //bCheckUnicode == true ã®å ´åˆã¯ UNICODE å›ºæœ‰æ–‡å­—ã‚’ä½¿ã£ã¦ã„ã‚‹ã‹ã©ã†ã‹ã‚‚èª¿ã¹ã‚‹
+ //UNICODE ç‰ˆã§ã¯ str ãŒ UNICODE å›ºæœ‰æ–‡å­—ã‚’ä½¿ç”¨ã—ã¦ã„ã‚‹å ´åˆã‚‚ false ã‚’è¿”ã™
+#ifndef _UNICODE
+    return (strlen(str) <= nLimit);//é•·ã•ã®ç¢ºèªã ã‘ã§ OK(str ã¯å…ƒã€… ANSI ãªã®ã§)
+#else
+    int len_ansi = WideCharToMultiByte(CP_ACP, 0, str, -1, 0, 0, NULL, NULL);
+    char *str_ansi = (char*)malloc(len_ansi);
+    WideCharToMultiByte(CP_ACP, 0, str, -1, str_ansi, len_ansi, NULL, NULL);
+    bool bRet = (strlen(str_ansi) <= nLimit);
+    if(bRet && bCheckUnicode){//é•·ã•ã¯ OK
+    //UTF16 ã«æˆ»ã—ã¦å…ƒã®æ–‡å­—åˆ—ã¨ä¸€è‡´ã™ã‚‹ã‹ç¢ºèª
+        int len_utf16 = MultiByteToWideChar(CP_ACP, 0, str_ansi, -1, 0, 0);
+        WCHAR *str_utf16 = (WCHAR*)malloc(len_utf16*sizeof(WCHAR));
+        MultiByteToWideChar(CP_ACP, 0, str_ansi, -1, str_utf16, len_utf16);
+        if(wcscmp(str, str_utf16) != 0){//å…ƒã®æ–‡å­—åˆ—ã¨ä¸ä¸€è‡´
+            bRet = false;//UNICODE å›ºæœ‰æ–‡å­—ã‚’ä½¿ç”¨ã—ã¦ã„ã‚‹
+        }
+        free(str_utf16);
+    }
+    free(str_ansi);
+    return bRet;
+#endif
 }
 
 bool IsCreateID3v2(FILE_INFO *pFileMP3)
-{
-	if (strlen(GetTrackName(pFileMP3))	> ID3_LEN_TRACK_NAME)	return true;
-	if (strlen(GetArtistName(pFileMP3))	> ID3_LEN_ARTIST_NAME)	return true;
-	if (strlen(GetAlbumName(pFileMP3))	> ID3_LEN_ALBUM_NAME)	return true;
-	if (strlen(GetComment(pFileMP3))	> ID3_LEN_COMMENT-2)	return true;
-	if (strlen(GetYear(pFileMP3))		> ID3_LEN_YEAR)			return true;
-	if (STEPIsUserGenre(GetGenreSI(pFileMP3)))					return true;
-	if (CString(GetComment(pFileMP3)).Find('\n') > -1)			return true;
-	if (!STEPIsNumeric(GetTrackNumberSI(pFileMP3)))				return true;
-	if (!STEPIsNumeric(GetDiskNumberSI(pFileMP3)))				return true;
-	/*
-	if (strlen(GetCopyrightSI(pFileMP3)) > 0)					return true;	// ’˜ìŒ 
-	if (strlen(GetComposerSI(pFileMP3)) > 0)					return true;	// ì‹È
-	if (strlen(GetOrigArtistSI(pFileMP3)) > 0)					return true;	// Orig.ƒA[ƒeƒBƒXƒg
-	if (strlen(GetURLSI(pFileMP3)) > 0)							return true;	// URL
-	if (strlen(GetEncodest(pFileMP3)) > 0)						return true;	// ƒGƒ“ƒR[ƒh‚µ‚½l
-	if (strlen(GetSoftwareSI(pFileMP3)) > 0
-		&& strcmp(GetSoftwareSI(pFileMP3), strOptSoftwareTag) != 0)		return true;	// ƒ\ƒtƒgƒEƒFƒA
-	*/
-	return false;
+{//ID3v2 ã«è‡ªå‹•å¤‰æ›ã™ã¹ãã‹ã©ã†ã‹ã®åˆ¤åˆ¥
+ //é•·ã•ã«åŠ ãˆã¦ UNICODE å›ºæœ‰æ–‡å­—ã‚’ä½¿ã£ã¦ã„ã‚‹ã‹ã®åˆ¤åˆ¥ã‚‚è¡Œã†ã‚ˆã†ã«ã—ãŸ
+    if (!CheckLimitId3v1(GetTrackName(pFileMP3), ID3_LEN_TRACK_NAME, true)) return true;
+    if (!CheckLimitId3v1(GetArtistName(pFileMP3), ID3_LEN_ARTIST_NAME, true))   return true;
+    if (!CheckLimitId3v1(GetAlbumName(pFileMP3), ID3_LEN_ALBUM_NAME, true)) return true;
+    if (!CheckLimitId3v1(GetComment(pFileMP3), ID3_LEN_COMMENT-2, true))        return true;
+    if (!CheckLimitId3v1(GetYear(pFileMP3), ID3_LEN_YEAR, true))        return true;
+
+    if (STEPIsUserGenre(GetGenreSI(pFileMP3)))                  return true;
+    if (CString(GetComment(pFileMP3)).Find('\n') > -1)          return true;
+    if (!STEPIsNumeric(GetTrackNumberSI(pFileMP3)))             return true;
+    /*
+    if (_tcslen(GetCopyrightSI(pFileMP3)) > 0)                  return true;    // è‘—ä½œæ¨©
+    if (_tcslen(GetComposerSI(pFileMP3)) > 0)                   return true;    // ä½œæ›²
+    if (_tcslen(GetOrigArtistSI(pFileMP3)) > 0)                 return true;    // Orig.ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆ
+    if (_tcslen(GetURLSI(pFileMP3)) > 0)                            return true;    // URL
+    if (_tcslen(GetEncodest(pFileMP3)) > 0)                     return true;    // ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰ã—ãŸäºº
+    if (_tcslen(GetSoftwareSI(pFileMP3)) > 0
+        && _tcscmp(GetSoftwareSI(pFileMP3), strOptSoftwareTag) != 0)        return true;    // ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢
+    */
+    return false;
 }
 
 bool IsCreateRMP(FILE_INFO *pFileMP3)
-{
-	if (strlen(GetTrackName(pFileMP3))	> ID3_LEN_TRACK_NAME)	return true;
-	if (strlen(GetArtistName(pFileMP3))	> ID3_LEN_ARTIST_NAME)	return true;
-	if (strlen(GetAlbumName(pFileMP3))	> ID3_LEN_ALBUM_NAME)	return true;
-	if (strlen(GetComment(pFileMP3))	> ID3_LEN_COMMENT-2)	return true;
-	if (strlen(GetYear(pFileMP3))		> ID3_LEN_YEAR)			return true;
-	if (STEPIsUserGenre(GetGenreSI(pFileMP3)))					return true;
-	/*
-	if (strlen(GetCopyrightSI(pFileMP3))	> 0)	return true;
-	rmp.SetENG(GetEngineerSI(pFileMP3));	// ƒGƒ“ƒWƒjƒA
-	rmp.SetSRC(GetSourceSI(pFileMP3));		// ƒ\[ƒX
-	rmp.SetSFT(GetSoftwareSI(pFileMP3));	// ƒ\ƒtƒgƒEƒFƒA
-	rmp.SetKEY(GetKeywordSI(pFileMP3));		// ƒL[ƒ[ƒh
-	rmp.SetTCH(GetTechnicianSI(pFileMP3));	// ‹ZpÒ
-	rmp.SetLYC(GetLyricSI(pFileMP3));		// ‰ÌŒ
-	rmp.SetCMS(GetCommissionSI(pFileMP3));	// ƒRƒ~ƒbƒVƒ‡ƒ“
-	*/
+{//RMP(RIFF MP3)ã«å¤‰æ›ã™ã¹ãã‹ã©ã†ã‹ã®åˆ¤åˆ¥
+ //é•·ã•ãŒ ID3v1 ã®åˆ¶é™ã‚’è¶…ãˆã¦ã‚‹ã‹ã©ã†ã‹ã ã‘ã§åˆ¤åˆ¥
+    //UNICODE ã®å ´åˆã€é•·ã•ã®ãƒã‚§ãƒƒã‚¯ã¯ _tcslen ã§ã¯ä¸ååˆ†(ãƒãƒ«ãƒãƒã‚¤ãƒˆæ–‡å­—ã‚‚1æ–‡å­—ã¨ã—ã¦æ•°ãˆã‚‹ã®ã§)
+    //UNICODE å›ºæœ‰ã®æ–‡å­—ã‚’ä½¿ç”¨ã—ã¦ã„ã‚‹ã‹ã©ã†ã‹ã¯èª¿ã¹ãªã„(ã©ã†ã› UNICODE ã§æ›¸ãè¾¼ã‚ãªã„ã®ã§)
+    if (!CheckLimitId3v1(GetTrackName(pFileMP3), ID3_LEN_TRACK_NAME, false))    return true;
+    if (!CheckLimitId3v1(GetArtistName(pFileMP3), ID3_LEN_ARTIST_NAME, false))  return true;
+    if (!CheckLimitId3v1(GetAlbumName(pFileMP3), ID3_LEN_ALBUM_NAME, false))    return true;
+    if (!CheckLimitId3v1(GetComment(pFileMP3), ID3_LEN_COMMENT-2, false))       return true;
+    if (!CheckLimitId3v1(GetYear(pFileMP3), ID3_LEN_YEAR, false))       return true;
 
-	return false;
+    if (STEPIsUserGenre(GetGenreSI(pFileMP3)))                  return true;
+    return false;
 }
 
 bool IsCreateID3v2SI(FILE_INFO *pFileMP3, bool bID3v1Only = FALSE)
-{
-	if (strlen(GetTrackNameSI(pFileMP3))	> ID3_LEN_TRACK_NAME)	return true;
-	if (strlen(GetArtistNameSI(pFileMP3))	> ID3_LEN_ARTIST_NAME)	return true;
-	if (strlen(GetAlbumNameSI(pFileMP3))	> ID3_LEN_ALBUM_NAME)	return true;
-	if (strlen(GetCommentSI(pFileMP3))		> ID3_LEN_COMMENT-2)	return true;
-	if (strlen(GetYearSI(pFileMP3))			> ID3_LEN_YEAR)			return true;
-	if (STEPIsUserGenre(GetGenreSI(pFileMP3)))						return true;
-	if (CString(GetCommentSI(pFileMP3)).Find('\n') > -1)			return true;
-	if (!STEPIsNumeric(GetTrackNumberSI(pFileMP3)))					return true;
-	if (!STEPIsNumeric(GetDiskNumberSI(pFileMP3)))					return true;
-	if (bID3v1Only == TRUE)	return false;
-	if (strlen(GetCopyrightSI(pFileMP3)) > 0)						return true;	// ’˜ìŒ 
-	if (strlen(GetComposerSI(pFileMP3)) > 0)						return true;	// ì‹È
-	if (strlen(GetOrigArtistSI(pFileMP3)) > 0)						return true;	// Orig.ƒA[ƒeƒBƒXƒg
-	if (strlen(GetAlbumArtistSI(pFileMP3)) > 0)						return true;	// Albm.ƒA[ƒeƒBƒXƒg
-	if (strlen(GetWriterSI(pFileMP3)) > 0)							return true;	// ìŒÒ
-	if (strlen(GetURLSI(pFileMP3)) > 0)								return true;	// URL
-	if (strlen(GetEncodest(pFileMP3)) > 0)							return true;	// ƒGƒ“ƒR[ƒh‚µ‚½l
-	if (strlen(GetEngineerSI(pFileMP3)) > 0)						return true;	// ƒGƒ“ƒWƒjƒA
-	if (strlen(GetSoftwareSI(pFileMP3)) > 0
-		&& strcmp(GetSoftwareSI(pFileMP3), strOptSoftwareTag) != 0)		return true;	// ƒ\ƒtƒgƒEƒFƒA
-	return false;
+{//SIF ã®æ–¹ã«å…¥åŠ›ã•ã‚ŒãŸã‚¿ã‚°æƒ…å ±ã‹ã‚‰ ID3v2 ã«è‡ªå‹•å¤‰æ›ã™ã¹ãã‹ã©ã†ã‹ã®åˆ¤åˆ¥ï¼Ÿ
+    if (!CheckLimitId3v1(GetTrackNameSI(pFileMP3), ID3_LEN_TRACK_NAME, true))   return true;
+    if (!CheckLimitId3v1(GetArtistNameSI(pFileMP3), ID3_LEN_ARTIST_NAME, true)) return true;
+    if (!CheckLimitId3v1(GetAlbumNameSI(pFileMP3), ID3_LEN_ALBUM_NAME, true))   return true;
+    if (!CheckLimitId3v1(GetCommentSI(pFileMP3), ID3_LEN_COMMENT-2, true))      return true;
+    if (!CheckLimitId3v1(GetYearSI(pFileMP3), ID3_LEN_YEAR, true))      return true;
+
+    if (STEPIsUserGenre(GetGenreSI(pFileMP3)))                      return true;
+    if (CString(GetCommentSI(pFileMP3)).Find(_T('\n')) > -1)            return true;
+    if (!STEPIsNumeric(GetTrackNumberSI(pFileMP3)))                 return true;
+    //if (!STEPIsNumeric(GetDiscNumberSI(pFileMP3)))                  return true;//æ•°å€¤ã‹ã©ã†ã‹ã«é–¢ã‚ã‚‰ãš Discç•ªå·ã¯ ID3v1 ã§ã¯æ›¸ãè¾¼ã‚ãªã„ã‚ˆã†ãªâ€¦ãƒ»ã€‚
+    if (bID3v1Only == TRUE) return false;
+    if (_tcslen(GetTrackTotalSI(pFileMP3)) > 0)                     return true;    // ãƒˆãƒ©ãƒƒã‚¯æ•°
+    if (_tcslen(GetDiscNumberSI(pFileMP3)) > 0)                     return true;    // ãƒ‡ã‚£ã‚¹ã‚¯ç•ªå·
+    if (_tcslen(GetDiscTotalSI(pFileMP3)) > 0)                      return true;    // ãƒ‡ã‚£ã‚¹ã‚¯æ•°
+    if (_tcslen(GetCopyrightSI(pFileMP3)) > 0)                      return true;    // è‘—ä½œæ¨©
+    if (_tcslen(GetComposerSI(pFileMP3)) > 0)                       return true;    // ä½œæ›²
+    if (_tcslen(GetOrigArtistSI(pFileMP3)) > 0)                     return true;    // Orig.ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆ
+    if (_tcslen(GetAlbumArtistSI(pFileMP3)) > 0)                        return true;    // Albm.ã‚¢ãƒ¼ãƒ†ã‚£ã‚¹ãƒˆ
+    if (_tcslen(GetWriterSI(pFileMP3)) > 0)                         return true;    // ä½œè©è€…
+    if (_tcslen(GetURLSI(pFileMP3)) > 0)                                return true;    // URL
+    if (_tcslen(GetEncodest(pFileMP3)) > 0)                         return true;    // ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰ã—ãŸäºº
+    if (_tcslen(GetEngineerSI(pFileMP3)) > 0)                       return true;    // ã‚¨ãƒ³ã‚¸ãƒ‹ã‚¢
+    if (_tcslen(GetSoftwareSI(pFileMP3)) > 0
+        && _tcscmp(GetSoftwareSI(pFileMP3), strOptSoftwareTag) != 0)        return true;    // ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢
+    return false;
 }
 
+/*
 bool IsMatchID3SI(FILE_INFO* pFileMP3)
 {
-	if (CString(GetTrackName(pFileMP3)) != GetTrackNameSI(pFileMP3))		return false;
-	if (CString(GetArtistName(pFileMP3)) != GetArtistNameSI(pFileMP3))		return false;
-	if (CString(GetAlbumName(pFileMP3)) != GetAlbumNameSI(pFileMP3))		return false;
-	if (CString(GetComment(pFileMP3)) != GetCommentSI(pFileMP3))			return false;
-	if (CString(GetYear(pFileMP3)) != GetYearSI(pFileMP3))					return false;
-	if (CString(GetGenre(pFileMP3)) != GetGenreSI(pFileMP3))				return false;
-	if (CString(GetTrackNumber(pFileMP3)) != GetTrackNumberSI(pFileMP3))	return false;
-	if (CString(GetDiskNumber(pFileMP3)) != GetDiskNumberSI(pFileMP3))		return false;
-	return true;
-}
+    if (CString(GetTrackName(pFileMP3)) != GetTrackNameSI(pFileMP3))        return false;
+    if (CString(GetArtistName(pFileMP3)) != GetArtistNameSI(pFileMP3))      return false;
+    if (CString(GetAlbumName(pFileMP3)) != GetAlbumNameSI(pFileMP3))        return false;
+    if (CString(GetComment(pFileMP3)) != GetCommentSI(pFileMP3))            return false;
+    if (CString(GetYear(pFileMP3)) != GetYearSI(pFileMP3))                  return false;
+    if (CString(GetGenre(pFileMP3)) != GetGenreSI(pFileMP3))                return false;
+    if (CString(GetTrackNumber(pFileMP3)) != GetTrackNumberSI(pFileMP3))    return false;
+    return true;
+}*/
 
 void copySIField(FILE_INFO *pFileMP3)
 {
-	if (GetFormat(pFileMP3) != nFileTypeRMP) {
-		CString strTrackNumber = GetTrackNumberSI(pFileMP3);
-		if (strTrackNumber.IsEmpty()) {
-			SetBTrackNumber(pFileMP3, 0xff);
-		} else {
-			SetBTrackNumber(pFileMP3, (BYTE)STEPGetIntegerTrackNumber(strTrackNumber));
-		}
+    if (GetFormat(pFileMP3) != nFileTypeRMP) {
+        CString strTrackNumber = GetTrackNumberSI(pFileMP3);
+        if (strTrackNumber.IsEmpty()) {
+            SetBTrackNumber(pFileMP3, 0xff);
+        } else {
+            SetBTrackNumber(pFileMP3, (BYTE)STEPGetIntegerTrackNumber(strTrackNumber));
+        }
+    }
 
-		CString strDiskNumber = GetDiskNumberSI(pFileMP3);
-		if (strDiskNumber.IsEmpty()) {
-			SetBDiskNumber(pFileMP3, 0xff);
-		} else {
-			SetBDiskNumber(pFileMP3, (BYTE)STEPGetIntegerDiskNumber(strDiskNumber));
-		}
-	}
-
-	CString strGenre = STEPGetGenreNameSIF(STEPGetGenreCode(GetGenreSI(pFileMP3)));
-	SetGenre(pFileMP3, strGenre);
-	SetBGenre(pFileMP3, STEPGetGenreCode(GetGenreSI(pFileMP3)));
+    CString strGenre = STEPGetGenreNameSIF(STEPGetGenreCode(GetGenreSI(pFileMP3)));
+    SetGenre(pFileMP3, strGenre);
+    SetBGenre(pFileMP3, STEPGetGenreCode(GetGenreSI(pFileMP3)));
 }
 
 STEP_API UINT WINAPI STEPSave(FILE_INFO *pFileMP3)
 {
-	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-	UINT nFormat = GetFormat(pFileMP3);
+    AFX_MANAGE_STATE(AfxGetStaticModuleState());
+    UINT nFormat = GetFormat(pFileMP3);
 
-/***
-	if ((bOptID3v2ID3tagAutoWrite || bOptRmpID3tagAutoWrite || bOptAutoConvID3v2 || bOptAutoConvRMP) &&
-		(nFormat == nFileTypeMP3 || nFormat == nFileTypeMP3V1 || nFormat == nFileTypeMP3V11)) {
-		// ID3tag©“®XV‚Ìê‡‚ÍSI‚Éİ’è‚³‚ê‚é‚Ì‚ÅƒRƒs[
-		copySIField(pFileMP3);
-	}
-***/
-	if (bOptID3v2ID3tagAutoWrite && nFormat == nFileTypeID3V2) {
-		copySIField(pFileMP3);
-	}
-	if (bOptRmpID3tagAutoWrite && nFormat == nFileTypeRMP) {
-		copySIField(pFileMP3);
-	}
+    CString strTrack = GetTrackNameSI(pFileMP3);
 
-	if (nFormat == nFileTypeMP3 || nFormat == nFileTypeMP3V1 || nFormat == nFileTypeMP3V11) {
-		// MP3 => RMP/ID3v2 ©“®ƒtƒH[ƒ}ƒbƒg•ÏŠ·ˆ—
-		if (bOptAutoConvID3v2) {
-			if (IsCreateID3v2(pFileMP3) || IsCreateID3v2SI(pFileMP3)/* || !IsMatchID3SI(pFileMP3)*/) {
-				// ID3tag©“®XV‚Ìê‡‚ÍSI‚Éİ’è‚³‚ê‚é‚Ì‚ÅƒRƒs[
-				copySIField(pFileMP3);
-				extern bool WINAPI ConvFileFormatID3v2(FILE_INFO* pFileInfo, int nProcFlag, HWND hWnd);
-				if (ConvFileFormatID3v2(pFileMP3, 0, NULL) == false) {
-					return STEP_ERROR;
-				} else {
-					return STEP_SUCCESS; // ƒ^ƒO‚ğ•ÏŠ·ˆ—‚ÅXV‚µ‚Ä‚¢‚é‚Ì‚ÅI—¹
-				}
-			} else {
-				// ID3tag©“®XV‚Ìê‡‚ÍSI‚Éİ’è‚³‚ê‚é‚Ì‚ÅƒRƒs[
-				copySIField(pFileMP3);
-			}
-		} else if (bOptAutoConvRMP) {
-			if (IsCreateRMP(pFileMP3) /*|| !IsMatchID3SI(pFileMP3)*/) {
-				// ID3tag©“®XV‚Ìê‡‚ÍSI‚Éİ’è‚³‚ê‚é‚Ì‚ÅƒRƒs[
-				copySIField(pFileMP3);
-				extern bool WINAPI ConvFileFormatRMP(FILE_INFO* pFileInfo, int nProcFlag, HWND hWnd);
-				if (ConvFileFormatRMP(pFileMP3, 0, NULL) == false) {
-					return STEP_ERROR;
-				} else {
-					return STEP_SUCCESS; // ƒ^ƒO‚ğ•ÏŠ·ˆ—‚ÅXV‚µ‚Ä‚¢‚é‚Ì‚ÅI—¹
-				}
-			} else {
-				// ID3tag©“®XV‚Ìê‡‚ÍSI‚Éİ’è‚³‚ê‚é‚Ì‚ÅƒRƒs[
-				copySIField(pFileMP3);
-			}
-		}
-		if (WriteTagID3(pFileMP3) == false) { // ©“®•ÏŠ·‚µ‚È‚¢‚Æ‚«
-			return STEP_ERROR;
-		}
-		ConvID3tagToSIField(pFileMP3);
-		return STEP_SUCCESS;
-	}
-	if (nFormat == nFileTypeID3V2) {
-		// ID3tag ‚Ì©“®XV
-		if (bOptID3v2ID3tagAutoWrite) {
-			ConvSIFieldToID3tag(pFileMP3);
-		}
-
-		if (WriteTagID3(pFileMP3) == false) { // FileTypeİ’è‚Ì‚½‚ßID3v2‚Ì‘O‚É‘‚«Š·‚¦
-			return STEP_ERROR;
-		}
-		if (bOptID3v2ID3tagAutoDelete) {
-			SetFormat(pFileMP3, nFileTypeID3V2);
-		}
-		if (WriteTagID3v2(pFileMP3) == false) {
-			return STEP_ERROR;
-		}
-		if (bOptID3v2ID3tagAutoDelete) {
-			// ID3 tag‚ğíœ
-			extern bool DeleteTagID3v1(const char *sFileName, HWND hWnd);
-			DeleteTagID3v1(GetFullPath(pFileMP3), NULL);
-		}
-		return STEP_SUCCESS;
-	}
-	if (nFormat == nFileTypeRMP) {
-		// ID3tag ‚Ì©“®XV
-		if (bOptRmpID3tagAutoWrite) {
-			ConvSIFieldToID3tag(pFileMP3);
-		}
-		if (WriteTagSIF(pFileMP3) == false) {
-			return STEP_ERROR;
-		}
-		return STEP_SUCCESS;
-	}
-	return STEP_UNKNOWN_FORMAT;
+    if (nFormat == nFileTypeMP3 || nFormat == nFileTypeMP3V1 || nFormat == nFileTypeMP3V11) {
+        // MP3 => ID3v2 è‡ªå‹•ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆå¤‰æ›å‡¦ç†
+        copySIField(pFileMP3);
+        if (MakeTagID3v2(GetFullPath(pFileMP3), NULL) == false){
+            return STEP_ERROR;
+        }
+        else {
+            nFormat = nFileTypeID3V2;
+            SetFormat(pFileMP3, nFileTypeID3V2);
+        }
+    }
+    if (nFormat == nFileTypeID3V2) {
+        // ID3tag ã®è‡ªå‹•æ›´æ–°
+        if (bOptID3v2ID3tagAutoWrite) {
+            ConvSIFieldToID3tag(pFileMP3);
+        }
+        if (bOptID3v2ID3tagAutoDelete) {
+            SetFormat(pFileMP3, nFileTypeID3V2);
+        }
+        else if (WriteTagID3(pFileMP3) == false) { // FileTypeè¨­å®šã®ãŸã‚ID3v2ã®å‰ã«æ›¸ãæ›ãˆ
+            return STEP_ERROR;
+        }
+        if (WriteTagID3v2(pFileMP3) == false) {
+            return STEP_ERROR;
+        }
+        if (bOptID3v2ID3tagAutoDelete) {
+            // ID3 tagã‚’å‰Šé™¤
+            DeleteTagID3v1(GetFullPath(pFileMP3), NULL);
+            STEPInitDataID3(pFileMP3);
+        }
+        else if(ID3v1IsEmpty(pFileMP3)){//ID3v1 ãŒç©ºã®å ´åˆã¯å‰Šé™¤
+            DeleteTagID3v1(GetFullPath(pFileMP3), NULL);
+        }
+        //LoadFileMP3(pFileMP3);//è¿½åŠ (æ›´æ–°å¾Œã®å®Ÿéš›ã®æ–‡å­—åˆ—ãƒ‡ãƒ¼ã‚¿ãŒè¡¨ç¤ºã«åæ˜ ã•ã‚Œã‚‹ã‚ˆã†ã«ã™ã‚‹)
+        return STEP_SUCCESS;
+    }
+    if (nFormat == nFileTypeRMP) {
+        // ID3tag ã®è‡ªå‹•æ›´æ–°
+        if (bOptRmpID3tagAutoWrite) {
+            ConvSIFieldToID3tag(pFileMP3);
+        }
+        if (WriteTagSIF(pFileMP3) == false) {
+            return STEP_ERROR;
+        }
+        if(ID3v1IsEmpty(pFileMP3)){//ID3v1 ãŒç©ºã®å ´åˆã¯å‰Šé™¤
+            DeleteTagID3v1(GetFullPath(pFileMP3), NULL);
+        }
+        //LoadFileMP3(pFileMP3);//è¿½åŠ (æ›´æ–°å¾Œã®å®Ÿéš›ã®æ–‡å­—åˆ—ãƒ‡ãƒ¼ã‚¿ãŒè¡¨ç¤ºã«åæ˜ ã•ã‚Œã‚‹ã‚ˆã†ã«ã™ã‚‹)
+        return STEP_SUCCESS;
+    }
+    return STEP_UNKNOWN_FORMAT;
 }
 
 STEP_API void WINAPI STEPShowOptionDialog(HWND hWnd)
 {
-	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-	CPropertySheet page;
-	CDlgFileRmpID3v2 dlg1;
-	CDlgDefaultValue dlg2;
-	page.SetTitle(CString(STEPGetPluginName()) + " ƒIƒvƒVƒ‡ƒ“İ’è");
-	dlg1.m_bRmpID3tagAutoWrite = bOptRmpID3tagAutoWrite;
-	dlg1.m_bAutoConvRMP = bOptAutoConvRMP;
-	dlg1.m_nSIFieldConvertType = nOptSIFieldConvType;
-	dlg1.m_bRmpGenreListSelect = bOptRmpGenreListSelect;
-	dlg1.m_bChangeFileExt = bOptChangeFileExt;
-	dlg1.m_bAutoConvID3v2 = bOptAutoConvID3v2;
-	dlg1.m_bID3v2ID3tagAutoWrite = bOptID3v2ID3tagAutoWrite;
-	dlg1.m_bID3v2GenreListSelect = bOptID3v2GenreListSelect;
-	dlg1.m_bID3v2GenreAddNumber = bOptID3v2GenreAddNumber;
-	dlg1.m_bID3v2Id3tagAutoDelete = bOptID3v2ID3tagAutoDelete;
-	page.AddPage(&dlg1);
-	dlg2.m_strSoftwareTag = strOptSoftwareTag;
-	dlg2.m_bID3v2UnSync = bOptNotUnSyncAlways;
-	dlg2.m_bID3v2UnSyncNew = bOptUnSyncNew;
-	dlg2.m_nId3v2Encode = nId3v2Encode;
-	dlg2.m_nId3v2Version = nId3v2Version;
-	dlg2.m_nId3v2EncodeNew = nId3v2EncodeNew;
-	dlg2.m_nId3v2VersionNew = nId3v2VersionNew;
+    AFX_MANAGE_STATE(AfxGetStaticModuleState());
+    CPropertySheet page;
+    CDlgFileRmpID3v2 dlg1;
+    CDlgDefaultValue dlg2;
+    page.SetTitle(CString(STEPGetPluginName()) + " ã‚ªãƒ—ã‚·ãƒ§ãƒ³è¨­å®š");
+    dlg1.m_bRmpID3tagAutoWrite = bOptRmpID3tagAutoWrite;
+    dlg1.m_bAutoConvRMP = true;//bOptAutoConvRMP;
+    dlg1.m_nSIFieldConvertType = nOptSIFieldConvType;
+    dlg1.m_bRmpGenreListSelect = bOptRmpGenreListSelect;
+    dlg1.m_bChangeFileExt = bOptChangeFileExt;
+    dlg1.m_bAutoConvID3v2 = bOptAutoConvID3v2;
+    dlg1.m_bID3v2ID3tagAutoWrite = bOptID3v2ID3tagAutoWrite;
+    dlg1.m_bID3v2GenreListSelect = bOptID3v2GenreListSelect;
+    dlg1.m_bID3v2GenreAddNumber = bOptID3v2GenreAddNumber;
+    dlg1.m_bID3v2Id3tagAutoDelete = bOptID3v2ID3tagAutoDelete;
+    page.AddPage(&dlg1);
+    dlg2.m_strSoftwareTag = strOptSoftwareTag;
+    dlg2.m_bID3v2UnSync = bOptUnSync;
+    dlg2.m_nId3v2Encode = nId3v2Encode;
+    dlg2.m_nId3v2Version = nId3v2Version;
+    dlg2.m_nId3v2EncodeNew = nId3v2EncodeNew;
+    dlg2.m_nId3v2VersionNew = nId3v2VersionNew;
 
-	page.AddPage(&dlg2);
-	if (page.DoModal() == IDOK) {
-		bOptRmpID3tagAutoWrite = dlg1.m_bRmpID3tagAutoWrite ? true : false;
-		bOptAutoConvRMP = dlg1.m_bAutoConvRMP ? true : false;
-		nOptSIFieldConvType = dlg1.m_nSIFieldConvertType;
-		bOptRmpGenreListSelect = dlg1.m_bRmpGenreListSelect ? true : false;
-		bOptChangeFileExt = dlg1.m_bChangeFileExt ? true : false;
-		bOptAutoConvID3v2 = dlg1.m_bAutoConvID3v2 ? true : false;
-		bOptID3v2ID3tagAutoWrite = dlg1.m_bID3v2ID3tagAutoWrite ? true : false;
-		bOptID3v2GenreListSelect = dlg1.m_bID3v2GenreListSelect ? true : false;
-		bOptID3v2GenreAddNumber = dlg1.m_bID3v2GenreAddNumber ? true : false;
-		bOptID3v2ID3tagAutoDelete = dlg1.m_bID3v2Id3tagAutoDelete ? true : false;
-		strOptSoftwareTag = dlg2.m_strSoftwareTag;
-		bOptNotUnSyncAlways = dlg2.m_bID3v2UnSync ? true : false;
-		bOptUnSyncNew = dlg2.m_bID3v2UnSyncNew ? true : false;
-		nId3v2Encode = dlg2.m_nId3v2Encode;
-		nId3v2Version = dlg2.m_nId3v2Version;
-		nId3v2EncodeNew = dlg2.m_nId3v2EncodeNew;
-		nId3v2VersionNew = dlg2.m_nId3v2VersionNew;
+    page.AddPage(&dlg2);
+    if (page.DoModal() == IDOK) {
+        bOptRmpID3tagAutoWrite = dlg1.m_bRmpID3tagAutoWrite ? true : false;
+        //bOptAutoConvRMP = dlg1.m_bAutoConvRMP ? true : false;
+        nOptSIFieldConvType = dlg1.m_nSIFieldConvertType;
+        bOptRmpGenreListSelect = dlg1.m_bRmpGenreListSelect ? true : false;
+        bOptChangeFileExt = dlg1.m_bChangeFileExt ? true : false;
+        //bOptAutoConvID3v2 = dlg1.m_bAutoConvID3v2 ? true : false;
+        bOptID3v2ID3tagAutoWrite = dlg1.m_bID3v2ID3tagAutoWrite ? true : false;
+        bOptID3v2GenreListSelect = dlg1.m_bID3v2GenreListSelect ? true : false;
+        bOptID3v2GenreAddNumber = dlg1.m_bID3v2GenreAddNumber ? true : false;
+        bOptID3v2ID3tagAutoDelete = dlg1.m_bID3v2Id3tagAutoDelete ? true : false;
+        strOptSoftwareTag = dlg2.m_strSoftwareTag;
+        bOptUnSync = dlg2.m_bID3v2UnSync ? true : false;
+        nId3v2Encode = dlg2.m_nId3v2Encode;
+        nId3v2Version = dlg2.m_nId3v2Version;
+        nId3v2EncodeNew = dlg2.m_nId3v2EncodeNew;
+        nId3v2VersionNew = dlg2.m_nId3v2VersionNew;
+        //INIã«ä¿å­˜
+        //WritePrivateProfileString ã¯ãƒ•ã‚¡ã‚¤ãƒ«ãŒå­˜åœ¨ã—ãªã„å ´åˆã‚„ã€
+        //å…ƒãƒ•ã‚¡ã‚¤ãƒ«ãŒ ANSI ã ã¨ ANSI ã§æ–‡å­—åˆ—ã‚’æ›¸ãè¾¼ã‚€
+        CIniFile iniFile(strINI);
+        //iniFile.WriteInt(_T("RMP_ID3V2"), _T("AutoConvID3v2"), bOptAutoConvID3v2);//å»ƒæ­¢
+        //iniFile.WriteInt(_T("RMP_ID3V2"), _T("AutoConvRMP"), bOptAutoConvRMP);   //å»ƒæ­¢
+        iniFile.WriteInt(_T("RMP_ID3V2"), _T("SIFieldConvType"), nOptSIFieldConvType == SIF_CONV_ALL_FIELD);
+        iniFile.WriteInt(_T("RMP_ID3V2"), _T("ID3v2ID3tagAutoWrite"), bOptID3v2ID3tagAutoWrite);
+        iniFile.WriteInt(_T("RMP_ID3V2"), _T("RmpID3tagAutoWrite"), bOptRmpID3tagAutoWrite);
+        iniFile.WriteInt(_T("RMP_ID3V2"), _T("ID3v2GenreListSelect"), bOptID3v2GenreListSelect);
+        iniFile.WriteInt(_T("RMP_ID3V2"), _T("RmpGenreListSelect"), bOptRmpGenreListSelect);
+        iniFile.WriteInt(_T("RMP_ID3V2"), _T("ID3v2ID3tagAutoDelete"), bOptID3v2ID3tagAutoDelete);
+        iniFile.WriteInt(_T("RMP_ID3V2"), _T("ID3v2GenreAddNumber"), bOptID3v2GenreAddNumber);
+        iniFile.WriteInt(_T("RMP_ID3V2"), _T("ChangeFileExt"), bOptChangeFileExt);
+        //OTHER
+        iniFile.WriteStr(_T("OTHER"), _T("SoftwareTag"), strOptSoftwareTag);
+        iniFile.WriteInt(_T("OTHER"), _T("ID3v2UnSync"), bOptUnSync);
+        iniFile.WriteInt(_T("OTHER"), _T("ID3v2CharEncode"), nId3v2Encode);
+        iniFile.WriteInt(_T("OTHER"), _T("ID3v2Version"), nId3v2Version);
+        iniFile.WriteInt(_T("OTHER"), _T("ID3v2CharEncodeNew"), nId3v2EncodeNew);
+        iniFile.WriteInt(_T("OTHER"), _T("ID3v2VersionNew"), nId3v2VersionNew);
 
-		// INI‚É•Û‘¶
-		WritePrivateProfileString("RMP_ID3V2", "AutoConvID3v2", bOptAutoConvID3v2 ? "1" : "0", strINI);
-		WritePrivateProfileString("RMP_ID3V2", "AutoConvRMP", bOptAutoConvRMP  ? "1" : "0", strINI);
-		WritePrivateProfileString("RMP_ID3V2", "SIFieldConvType", nOptSIFieldConvType == SIF_CONV_ALL_FIELD ? "0" : "1", strINI);
-		WritePrivateProfileString("RMP_ID3V2", "ID3v2ID3tagAutoWrite", bOptID3v2ID3tagAutoWrite ? "1" : "0", strINI);
-		WritePrivateProfileString("RMP_ID3V2", "RmpID3tagAutoWrite", bOptRmpID3tagAutoWrite ? "1" : "0", strINI);
-		WritePrivateProfileString("RMP_ID3V2", "ID3v2GenreListSelect", bOptID3v2GenreListSelect ? "1" : "0", strINI);
-		WritePrivateProfileString("RMP_ID3V2", "RmpGenreListSelect", bOptRmpGenreListSelect ? "1" : "0", strINI);
-		WritePrivateProfileString("RMP_ID3V2", "ID3v2ID3tagAutoDelete", bOptID3v2ID3tagAutoDelete ? "1" : "0", strINI);
-		WritePrivateProfileString("RMP_ID3V2", "ID3v2GenreAddNumber", bOptID3v2GenreAddNumber ? "1" : "0", strINI);
-		WritePrivateProfileString("RMP_ID3V2", "ChangeFileExt", bOptChangeFileExt ? "1" : "0", strINI);
+        iniFile.Flush();//ä¿å­˜å®Ÿè¡Œ(ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã§ Flush ã¯å‘¼ã°ã‚Œãªã„)
 
-		WritePrivateProfileString("OTHER", "SoftwareTag", strOptSoftwareTag, strINI);
-
-		WritePrivateProfileString("OTHER", "ID3v2NotUnSync", bOptNotUnSyncAlways ? "1" : "0", strINI);
-		WritePrivateProfileString("OTHER", "ID3v2UnSyncNew", bOptUnSyncNew ? "1" : "0", strINI);
-
-		CString sValue;
-		sValue.Format("%d", nId3v2Encode);
-		WritePrivateProfileString("OTHER", "ID3v2CharEncode", sValue, strINI);
-		sValue.Format("%d", nId3v2Version);
-		WritePrivateProfileString("OTHER", "ID3v2Version", sValue, strINI);
-		sValue.Format("%d", nId3v2EncodeNew);
-		WritePrivateProfileString("OTHER", "ID3v2CharEncodeNew", sValue, strINI);
-		sValue.Format("%d", nId3v2VersionNew);
-		WritePrivateProfileString("OTHER", "ID3v2VersionNew", sValue, strINI);
-
-		STEPUpdateCellInfo();
-	}
+        STEPUpdateCellInfo();
+    }
 }
 
 STEP_API LPCTSTR WINAPI STEPGetToolTipText(UINT nID)
 {
-	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-	if (nID == nIDFileConvAutoID3) {
-		return "•W€MP3Œ`®/ID3v2Œ`®‚É©“®•ÏŠ·";
-	}
-	if (nID == nIDFileConvMP3) {
-		return "•W€MP3Œ`®‚É•ÏŠ·";
-	}
-	if (nID == nIDFileConvID3v2) {
-		return "ID3v2Œ`®‚É•ÏŠ·";
-	}
-	if (nID == nIDFileConvRMP) {
-		return "RIFF MP3Œ`®‚É•ÏŠ·";
-	}
-//	if (nID == nIDConvSIFieldToID3Tag) {
-//		return "SI/ID3v2ƒtƒB[ƒ‹ƒh‚©‚çID3tag‚É•ÏŠ·";
-//	}
-	if (nID == nIDDeleteID3) {
-		return "ID3tag‚ğíœ";
-	}
-	if (nID == nIDConvID3v2Version) {
-		return "ID3v2ƒo[ƒWƒ‡ƒ“‚Ì•ÏŠ·";
-	}
-	return NULL;
+    AFX_MANAGE_STATE(AfxGetStaticModuleState());
+    if (nID == nIDFileConvMP3) {
+        return _T("ID3v1 ã«å¤‰æ›(éæ¨å¥¨)");
+    }
+    if (nID == nIDFileConvID3v2) {
+        return _T("ID3v2 ã«å¤‰æ›");
+    }
+    if (nID == nIDFileConvRMP) {
+        return _T("RIFF MP3 ã«å¤‰æ›(éæ¨å¥¨)");
+    }
+    if (nID == nIDDeleteID3) {
+        return _T("ID3v1/v2 ã‚’å‰Šé™¤");
+    }
+    //if (nID == nIDConvID3v2Version) {
+    //    return _T("ID3v2ãƒãƒ¼ã‚¸ãƒ§ãƒ³ã®å¤‰æ›");
+    //}
+    return NULL;
 }
 
 STEP_API LPCTSTR WINAPI STEPGetStatusMessage(UINT nID)
 {
-	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-	if (nID == nIDFileConvAutoID3) {
-		return "ƒ^ƒO‚Ì“ü—ÍŒ…”/“à—e‚É‚æ‚Á‚Ä•W€MP3Œ`®‚Ü‚½‚ÍID3v2Œ`®‚Ì‚¢‚¸‚ê‚©‚É•ÏŠ·‚µ‚Ü‚·";
-	}
-	if (nID == nIDFileConvMP3) {
-		return "‘I‘ğ‚³‚ê‚Ä‚¢‚éƒtƒ@ƒCƒ‹‚ğ•W€MP3Œ`®‚É•ÏŠ·‚µ‚Ü‚·";
-	}
-	if (nID == nIDFileConvID3v2) {
-		return "‘I‘ğ‚³‚ê‚Ä‚¢‚éƒtƒ@ƒCƒ‹‚ğID3v2Œ`®‚É•ÏŠ·‚µ‚Ü‚·";
-	}
-	if (nID == nIDFileConvRMP) {
-		return "‘I‘ğ‚³‚ê‚Ä‚¢‚éƒtƒ@ƒCƒ‹‚ğRIFF MP3Œ`®‚É•ÏŠ·‚µ‚Ü‚·";
-	}
-//	if (nID == nIDConvSIFieldToID3Tag) {
-//		return "SI/ID3v2ƒtƒB[ƒ‹ƒh‚©‚çID3tag‚É•ÏŠ·‚µ‚Ü‚·";
-//	}
-	if (nID == nIDDeleteID3) {
-		return "‘I‘ğ‚³‚ê‚Ä‚¢‚éMP3ƒtƒ@ƒCƒ‹‚ÌID3tag‚ğíœ‚µ‚Ü‚·";
-	}
-	if (nID == nIDConvID3v2Version) {
-		return "ID3v2ƒo[ƒWƒ‡ƒ“/•¶šƒGƒ“ƒR[ƒh‚Ì•ÏŠ·";
-	}
-	return NULL;
+    AFX_MANAGE_STATE(AfxGetStaticModuleState());
+    //if (nID == nIDFileConvAutoID3) {
+    //    return _T("ã‚¿ã‚°ã®å…¥åŠ›æ¡æ•°/å†…å®¹ã«ã‚ˆã£ã¦æ¨™æº–MP3å½¢å¼ã¾ãŸã¯ID3v2å½¢å¼ã®ã„ãšã‚Œã‹ã«å¤‰æ›ã—ã¾ã™");
+    //}
+    if (nID == nIDFileConvMP3) {
+        return _T("é¸æŠä¸­ã® MP3 ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ ID3v1 ã«å¤‰æ›ã—ã¾ã™ã€‚ID3v1 ã¸ã®å¤‰æ›ã¯ãŠå‹§ã‚ã—ã¾ã›ã‚“ã€‚é€šå¸¸ã¯ ID3v2 ã®ä½¿ç”¨ã‚’ãŠå‹§ã‚ã—ã¾ã™ã€‚");
+    }
+    if (nID == nIDFileConvID3v2) {
+        return _T("é¸æŠä¸­ã® MP3 ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ ID3v2 ã«å¤‰æ›ã—ã¾ã™ã€‚ID3 ã®ãƒãƒ¼ã‚¸ãƒ§ãƒ³ã¨æ–‡å­—ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰ã€ãƒ•ãƒ¬ãƒ¼ãƒ éåŒæœŸåŒ–ã®æœ‰ç„¡ã‚’æŒ‡å®šå‡ºæ¥ã¾ã™ã€‚");
+    }
+    if (nID == nIDFileConvRMP) {
+        return _T("é¸æŠä¸­ã® MP3 ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ RIFF MP3 ã«å¤‰æ›ã—ã¾ã™ã€‚RIFF MP3 ã¸ã®å¤‰æ›ã¯ãŠå‹§ã‚ã—ã¾ã›ã‚“ã€‚é€šå¸¸ã¯ ID3v2 ã®ä½¿ç”¨ã‚’ãŠå‹§ã‚ã—ã¾ã™ã€‚");
+    }
+    if (nID == nIDDeleteID3) {
+        return _T("é¸æŠä¸­ã® MP3 ãƒ•ã‚¡ã‚¤ãƒ«ã‹ã‚‰ ID3v1/v2 ã‚’å‰Šé™¤ã—ã¾ã™");
+    }
+//    if (nID == nIDConvID3v2Version) {
+//        return _T("ID3v2ãƒãƒ¼ã‚¸ãƒ§ãƒ³/æ–‡å­—ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰ã®å¤‰æ›");
+//    }
+    return NULL;
 }
 
 STEP_API bool WINAPI STEPOnUpdateCommand(UINT nID)
 {
-	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-	if (nID == nIDFileConvAutoID3) {
-		if (STEPGetSelectedItem() < 0) return false;
-		else return true;
-	}
-	if (nID == nIDFileConvMP3) {
-		if (STEPGetSelectedItem() < 0) return false;
-		else return true;
-	}
-	if (nID == nIDFileConvID3v2) {
-		if (STEPGetSelectedItem() < 0) return false;
-		else return true;
-	}
-	if (nID == nIDFileConvRMP) {
-		if (STEPGetSelectedItem() < 0) return false;
-		else return true;
-	}
-//	if (nID == nIDConvSIFieldToID3Tag) {
-//		if (STEPGetSelectedItem() < 0) return false;
-//		else return true;
-//	}
-	if (nID == nIDDeleteID3) {
-		if (STEPGetSelectedItem() < 0) return false;
-		else return true;
-	}
-	if (nID == nIDConvID3v2Version) {
-		if (STEPGetSelectedItem() < 0) return false;
-		else return true;
-	}
-	return false;
+    AFX_MANAGE_STATE(AfxGetStaticModuleState());
+    //if (nID == nIDFileConvAutoID3) {
+    //    if (STEPGetSelectedItem() < 0) return false;
+    //    else return true;
+    //}
+    if (nID == nIDFileConvMP3) {
+        if (STEPGetSelectedItem() < 0) return false;
+        else return true;
+    }
+    if (nID == nIDFileConvID3v2) {
+        if (STEPGetSelectedItem() < 0) return false;
+        else return true;
+    }
+    if (nID == nIDFileConvRMP) {
+        if (STEPGetSelectedItem() < 0) return false;
+        else return true;
+    }
+    if (nID == nIDDeleteID3) {
+        if (STEPGetSelectedItem() < 0) return false;
+        else return true;
+    }
+//    if (nID == nIDConvID3v2Version) {
+//        if (STEPGetSelectedItem() < 0) return false;
+//        else return true;
+//    }
+    return false;
 }
 
 STEP_API bool WINAPI STEPOnCommand(UINT nID, HWND hWnd)
 {
-	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-	if (nID == nIDFileConvAutoID3) {
-		static	const char *sMessage = "‘I‘ğ‚³‚ê‚Ä‚¢‚éƒtƒ@ƒCƒ‹‚ğ •W€MP3 Œ`® ‚Ü‚½‚Í ID3v2 Œ`®‚É•ÏŠ·‚µ‚Ü‚·\n\n"
-									   "•ÏŠ·‚ğÀs‚µ‚Ä‚à‚æ‚ë‚µ‚¢‚Å‚·‚©H";
-		if (/*g_bConfConvID3v2 == false || */MessageBox(hWnd, sMessage, "•W€MP3 Œ`®/ID3v2 Œ`®‚É•ÏŠ·", MB_YESNO|MB_TOPMOST) == IDYES) {
-			extern bool WINAPI ConvFileFormatAuto(FILE_INFO*, int, HWND);
-			STEPProcessSelectedFilesForUpdate("•W€MP3Œ`®/ID3v2 Œ`®‚É•ÏŠ·’†.....", ConvFileFormatAuto);
-		}
-		return true;
-	}
-	if (nID == nIDFileConvMP3) {
-		static	const char *sMessage = "‘I‘ğ‚³‚ê‚Ä‚¢‚éƒtƒ@ƒCƒ‹‚ğ•W€MP3 Œ`®‚É•ÏŠ·‚µ‚Ü‚·\n"
-									   "•W€MP3 Œ`®‚É•ÏŠ·‚·‚é‚ÆAƒ^ƒOî•ñ‚Ìˆê•”‚ğ¸‚¤‰Â”\«‚ª‚ ‚è‚Ü‚·\n\n"
-									   "•ÏŠ·‚ğÀs‚µ‚Ä‚à‚æ‚ë‚µ‚¢‚Å‚·‚©H";
-		if (/*g_bConfConvMP3 == false || */MessageBox(hWnd, sMessage, "•W€MP3 Œ`®‚É•ÏŠ·", MB_YESNO|MB_TOPMOST) == IDYES) {
-			extern bool WINAPI ConvFileFormatMP3(FILE_INFO*, int, HWND);
-			STEPProcessSelectedFilesForUpdate("•W€MP3 Œ`®‚É•ÏŠ·’†.....", ConvFileFormatMP3);
-		}
-		return true;
-	}
-	if (nID == nIDFileConvID3v2) {
-		static	const char *sMessage = "‘I‘ğ‚³‚ê‚Ä‚¢‚éƒtƒ@ƒCƒ‹‚ğ ID3v2 Œ`®‚É•ÏŠ·‚µ‚Ü‚·\n\n"
-									   "•ÏŠ·‚ğÀs‚µ‚Ä‚à‚æ‚ë‚µ‚¢‚Å‚·‚©H";
-		if (/*g_bConfConvID3v2 == false || */MessageBox(hWnd, sMessage, "ID3v2 Œ`®‚É•ÏŠ·", MB_YESNO|MB_TOPMOST) == IDYES) {
-			extern bool WINAPI ConvFileFormatID3v2(FILE_INFO*, int, HWND);
-			STEPProcessSelectedFilesForUpdate("ID3v2 Œ`®‚É•ÏŠ·’†.....", ConvFileFormatID3v2);
-		}
-		return true;
-	}
-	if (nID == nIDFileConvRMP) {
-		static	const char *sMessage = "‘I‘ğ‚³‚ê‚Ä‚¢‚éƒtƒ@ƒCƒ‹‚ğ RIFF MP3 Œ`®‚É•ÏŠ·‚µ‚Ü‚·\n\n"
-									   "•ÏŠ·‚ğÀs‚µ‚Ä‚à‚æ‚ë‚µ‚¢‚Å‚·‚©H";
-		if (/*g_bConfConvRMP == false || */MessageBox(hWnd, sMessage, "RIFF MP3 Œ`®‚É•ÏŠ·", MB_YESNO|MB_TOPMOST) == IDYES) {
-			extern bool WINAPI ConvFileFormatRMP(FILE_INFO*, int, HWND);
-			STEPProcessSelectedFilesForUpdate("RIFF MP3 Œ`®‚É•ÏŠ·’†.....", ConvFileFormatRMP);
-		}
-		return true;
-	}
-//	if (nID == nIDConvSIFieldToID3Tag) {
-//		extern bool WINAPI ConvSiFieldToTd3tag(FILE_INFO*, int, HWND);
-//		STEPProcessSelectedFilesForUpdate("SI/ID3v2ƒtƒB[ƒ‹ƒh‚©‚çID3tag‚É•ÏŠ·’†.....", ConvSiFieldToTd3tag);
-//		return true;
-//	}
-	if (nID == nIDDeleteID3) {
-		static	const char *sMessage = "‘I‘ğ‚³‚ê‚Ä‚¢‚éƒtƒ@ƒCƒ‹‚ÌID3v1ƒ^ƒO‚ğíœ‚µ‚Ü‚·\n\n"
-									   "Às‚µ‚Ä‚à‚æ‚ë‚µ‚¢‚Å‚·‚©H";
-		if (MessageBox(hWnd, sMessage, "ID3tag íœ", MB_YESNO|MB_TOPMOST) == IDYES) {
-			extern bool WINAPI DeleteId3tag(FILE_INFO*, int, HWND);
-			STEPProcessSelectedFilesForUpdate("ID3tag ‚ğíœ’†.....", DeleteId3tag);
-		}
-		return true;
-	}
-	if (nID == nIDConvID3v2Version) {
-		CDlgConvID3v2Version dlg;
-		dlg.m_nId3v2Encode = nId3v2Encode;
-		dlg.m_nId3v2Version = nId3v2Version;
-		if (dlg.DoModal() == IDOK) {
-			nId3v2EncodeConv = dlg.m_nId3v2Encode;
-			nId3v2VersionConv = dlg.m_nId3v2Version;
-			extern bool WINAPI ConvID3v2Version(FILE_INFO*, int, HWND);
-			STEPProcessSelectedFilesForUpdate("ID3v2 ƒo[ƒWƒ‡ƒ“/•¶šƒGƒ“ƒR[ƒh‚ğ•ÏŠ·’†.....", ConvID3v2Version);
-		}
-		return true;
-	}
-
-	return false;
+    AFX_MANAGE_STATE(AfxGetStaticModuleState());//STEP æœ¬ä½“ã®é–¢æ•°ã‚’å‘¼ã³å‡ºã—å‰ã«è§£é™¤ã—ãªã‘ã‚Œã°ãªã‚‰ãªã„
+    /*if (nID == nIDFileConvAutoID3) {
+        static const TCHAR sMessage[] = _T("é¸æŠã•ã‚Œã¦ã„ã‚‹ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ æ¨™æº–MP3 å½¢å¼ ã¾ãŸã¯ ID3v2 å½¢å¼ã«å¤‰æ›ã—ã¾ã™\n\n")
+                                        _T("å¤‰æ›ã‚’å®Ÿè¡Œã—ã¦ã‚‚ã‚ˆã‚ã—ã„ã§ã™ã‹ï¼Ÿ");
+        if (MessageBox(hWnd, sMessage, _T("æ¨™æº–MP3 å½¢å¼/ID3v2 å½¢å¼ã«å¤‰æ›"), MB_YESNO|MB_TOPMOST) == IDYES) {
+            STEPProcessSelectedFilesForUpdate(_T("æ¨™æº–MP3å½¢å¼/ID3v2 å½¢å¼ã«å¤‰æ›ä¸­....."), ConvFileFormatAuto);
+        }
+        return true;
+    }*/
+    if (nID == nIDFileConvMP3) {
+        static const TCHAR sMessage[] = _T("é¸æŠä¸­ã® MP3 ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ ID3v1 ã«å¤‰æ›ã—ã¾ã™ã€‚\n")
+                                        _T("ID3v1 ã®ä½¿ç”¨ã¯æ¨å¥¨ã—ã¾ã›ã‚“ã€‚\n")
+                                        _T("é€šå¸¸ã¯ ID3v2 ã®ä½¿ç”¨ã‚’ãŠå‹§ã‚ã—ã¾ã™ã€‚\n\n")
+                                        _T("ID3v1 ã«ã¯æ–‡å­—åˆ—é•·ã¨æ‰±ãˆã‚‹æ–‡å­—ã«åˆ¶é™ãŒã‚ã‚‹ãŸã‚ã€å¤‰æ›å¾Œã«\r\n")
+                                        _T("æƒ…å ±ã®ä¸€éƒ¨ã‚’å¤±ã†ã“ã¨ãŒã‚ã‚Šã¾ã™ã€‚\n\n")
+                                        _T("å¤‰æ›ã‚’å®Ÿè¡Œã—ã¦ã‚‚ã‚ˆã‚ã—ã„ã§ã™ã‹ï¼Ÿ");
+        if (MessageBox(hWnd, sMessage, _T("ID3v1 ã«å¤‰æ›"), MB_YESNO|MB_TOPMOST|MB_ICONWARNING) == IDYES) {
+            STEPProcessSelectedFilesForUpdate(_T("ID3v1 ã«å¤‰æ›ä¸­....."), ConvFileFormatID3v1);
+        }
+        return true;
+    }
+    if (nID == nIDFileConvRMP) {
+        static  const TCHAR sMessage[] = _T("é¸æŠä¸­ã® MP3 ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ RIFF MP3 ã«å¤‰æ›ã—ã¾ã™ã€‚\n")
+                                         _T("RIFF MP3 ã®ä½¿ç”¨ã¯æ¨å¥¨ã—ã¾ã›ã‚“ã€‚\n")
+                                         _T("é€šå¸¸ã¯ ID3v2 ã®ä½¿ç”¨ã‚’ãŠå‹§ã‚ã—ã¾ã™ã€‚\n\n")
+                                         _T("RIFF MP3 ã«ã¯æ‰±ãˆã‚‹æ–‡å­—ã«åˆ¶é™ãŒã‚ã‚‹ãŸã‚ã€å¤‰æ›å¾Œã«\r\n")
+                                         _T("æƒ…å ±ã®ä¸€éƒ¨ã‚’å¤±ã†ã“ã¨ãŒã‚ã‚Šã¾ã™ã€‚\r\n")
+                                         _T("ã¾ãŸå¯¾å¿œã‚½ãƒ•ãƒˆãŒå°‘ãªã„ç‚ºã€ã‚½ãƒ•ãƒˆã«ã‚ˆã£ã¦ã¯ã‚¿ã‚°æƒ…å ±ã‚’\r\n")
+                                         _T("å–å¾—å‡ºæ¥ãªã„ã“ã¨ãŒã‚ã‚Šã¾ã™ã€‚\n\n")
+                                         _T("å¤‰æ›ã‚’å®Ÿè¡Œã—ã¦ã‚‚ã‚ˆã‚ã—ã„ã§ã™ã‹ï¼Ÿ");
+        if (MessageBox(hWnd, sMessage, _T("RIFF MP3 ã«å¤‰æ›"), MB_YESNO|MB_TOPMOST|MB_ICONWARNING) == IDYES) {
+            STEPProcessSelectedFilesForUpdate(_T("RIFF MP3 ã«å¤‰æ›ä¸­....."), ConvFileFormatRMP);
+        }
+        return true;
+    }
+    if (nID == nIDDeleteID3) {
+        {
+        static const TCHAR sMessage[] = _T("é¸æŠä¸­ã® MP3 ãƒ•ã‚¡ã‚¤ãƒ«ã‹ã‚‰ ID3v1 ã‚’å‰Šé™¤ã—ã¾ã™\n\n")
+                                        _T("å®Ÿè¡Œã—ã¦ã‚‚ã‚ˆã‚ã—ã„ã§ã™ã‹ï¼Ÿ\r\n")
+                                        _T("ID3v2 ã®å‰Šé™¤ã¯ã“ã®ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚’é–‰ã˜ãŸå¾Œã«ç¢ºèªã—ã¾ã™");
+        int ret = MessageBox(hWnd, sMessage, _T("ID3v1 å‰Šé™¤"), MB_YESNOCANCEL|MB_TOPMOST);
+        if(ret == IDCANCEL){
+            return true;
+        }
+        if(ret == IDYES) {
+            STEPProcessSelectedFilesForUpdate(_T("ID3v1 ã‚’å‰Šé™¤ä¸­....."), DeleteId3tagv1);
+        }
+        }
+        {
+        static const TCHAR sMessage[] = _T("é¸æŠä¸­ã® MP3 ãƒ•ã‚¡ã‚¤ãƒ«ã‹ã‚‰ ID3v2 ã‚’å‰Šé™¤ã—ã¾ã™\n\n")
+                                        _T("å®Ÿè¡Œã—ã¦ã‚‚ã‚ˆã‚ã—ã„ã§ã™ã‹ï¼Ÿ\r\n")
+                                        _T("RIFF MP3 ã®ã‚¿ã‚°ã‚’å‰Šé™¤ã™ã‚‹ã«ã¯ã€ä¸€åº¦ ID3v1 ã‹ ID3v2 ã«å¤‰æ›ã—ã¦ä¸‹ã•ã„\r\n");
+        if (MessageBox(hWnd, sMessage, _T("ID3v2 å‰Šé™¤"), MB_YESNO | MB_TOPMOST) == IDYES) {
+            STEPProcessSelectedFilesForUpdate(_T("ID3v2 ã‚’å‰Šé™¤ä¸­....."), DeleteId3tagv2);
+        }
+        }
+        return true;
+    }
+    if (nID == nIDFileConvID3v2) {
+        int ret;
+        int nOldId3v2Encode = nId3v2Encode;
+        int nOldId3v2Version = nId3v2Version;
+        bool bOldOptUnSync = bOptUnSync;
+        {
+            AFX_MANAGE_STATE(AfxGetStaticModuleState());//ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚’è¡¨ç¤ºã™ã‚‹é–“ã ã‘æœ‰åŠ¹
+            CDlgConvID3v2Version dlg;
+            dlg.m_nId3v2Encode = nId3v2Encode;
+            dlg.m_nId3v2Version = nId3v2Version;
+            dlg.m_bID3v2UnSync = bOptUnSync;
+            ret = dlg.DoModal();
+            if (ret == IDOK){
+                nId3v2EncodeConv = dlg.m_nId3v2Encode;
+                nId3v2VersionConv = dlg.m_nId3v2Version;
+                bOptUnSyncConv = dlg.m_bID3v2UnSync;
+            }
+        }
+        if (ret == IDOK){
+            STEPProcessSelectedFilesForUpdate(_T("ID3v2 ã«å¤‰æ› & ID3v2 ãƒãƒ¼ã‚¸ãƒ§ãƒ³/æ–‡å­—ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰ã‚’å¤‰æ›ä¸­....."), ConvID3v2Version);
+            nId3v2Encode = nOldId3v2Encode;
+            nId3v2Version = nOldId3v2Version;
+            bOptUnSync = bOldOptUnSync;
+        }
+        return true;
+    }
+    return false;
 }
 
 STEP_API void WINAPI STEPOnLoadMenu(HMENU hMenu, UINT nType)
 {
-	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-	switch (nType) {
-	case MENU_SELECT_FOLDER:
-	case MENU_FILE_RANGE:
-	case MENU_FILE_EDIT_OK:
-		AddConvMenu(hMenu);
-		AddEditMenu(hMenu);
-		break;
-	}
+    AFX_MANAGE_STATE(AfxGetStaticModuleState());
+    switch (nType) {
+    case MENU_SELECT_FOLDER:
+    case MENU_FILE_RANGE:
+    case MENU_FILE_EDIT_OK:
+        AddConvMenu(hMenu);
+        AddEditMenu(hMenu);
+        break;
+    }
 }
 
 STEP_API void WINAPI STEPOnLoadMainMenu()
 {
-	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-	// ƒƒjƒ…[‚Ö‚Ì’Ç‰Á
-	HMENU hMenu = STEPGetMenu(MENU_CONV);
-	AddConvMenu(hMenu);
-	hMenu = STEPGetMenu(MENU_EDIT);
-	AddEditMenu(hMenu);
+    AFX_MANAGE_STATE(AfxGetStaticModuleState());
+    // ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã¸ã®è¿½åŠ 
+    HMENU hMenu = STEPGetMenu(MENU_CONV);
+    AddConvMenu(hMenu);
+    hMenu = STEPGetMenu(MENU_EDIT);
+    AddEditMenu(hMenu);
 }
 
 STEP_API bool WINAPI STEPOnConvSiFieldToId3tag(FILE_INFO* pFileInfo)
 {
-	ConvSIFieldToID3tag(pFileInfo);
-	return false;
+    ConvSIFieldToID3tag(pFileInfo);
+    return false;
 }
