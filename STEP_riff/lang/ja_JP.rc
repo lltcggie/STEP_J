@@ -1,0 +1,24 @@
+// Microsoft Visual C++ generated resource script.
+
+#pragma code_page(65001) // UTF-8
+
+LANGUAGE LANG_JAPANESE, SUBLANG_DEFAULT
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_DLG_SETUP DIALOGEX 0, 0, 222, 73
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "AVI/WAV"
+FONT 9, "Meiryo UI", 0, 0, 0x0
+BEGIN
+    CONTROL         "WAV形式のジャンル名はリストから選択する(※再起動後有効)",IDC_CH_WAV_GENRE_LIST_SELECT,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,7,213,20
+    CONTROL         "AVI形式のジャンル名はリストから選択する(※再起動後有効)",IDC_CH_AVI_GENRE_LIST_SELECT,
+                    "Button",BS_AUTOCHECKBOX | BS_MULTILINE  WS_TABSTOP,7,32,213,20
+    CONTROL         "WAV形式でトラック番号の編集を許可する(STEP_J では常に許可)",IDC_CH_WAV_SUPPORT_TRACK_NUMBER,
+                    "Button",BS_AUTOCHECKBOX | BS_MULTILINE | WS_DISABLED | WS_TABSTOP,7,55,213,20
+END

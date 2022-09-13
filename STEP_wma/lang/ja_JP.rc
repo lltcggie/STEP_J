@@ -1,0 +1,21 @@
+// Microsoft Visual C++ generated resource script.
+
+#pragma code_page(65001) // UTF-8
+
+LANGUAGE LANG_JAPANESE, SUBLANG_DEFAULT
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_DLG_SETUP DIALOG DISCARDABLE  0, 0, 175, 73
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "WMA"
+FONT 9, "Meiryo UI"
+BEGIN
+    CONTROL         "ジャンル名はリストから選択する(※再起動後有効)",
+                    IDC_CH_GENRE_LIST_SELECT,"Button",BS_AUTOCHECKBOX |
+                    BS_MULTILINE | WS_TABSTOP,7,7,162,20
+END

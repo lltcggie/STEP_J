@@ -12,11 +12,17 @@
 /////////////////////////////////////////////////////////////////////////////
 #undef APSTUDIO_READONLY_SYMBOLS
 
+//////////////////////////////////////////////////////////////////////////////
+// Languages
+
+#include "lang/en_US.rc"
+#include "lang/ja_JP.rc"
+
 /////////////////////////////////////////////////////////////////////////////
 // 日本語 (日本) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)
-LANGUAGE LANG_JAPANESE, SUBLANG_DEFAULT
+LANGUAGE LANG_ENGLISH, SUBLANG_DEFAULT
 #pragma code_page(65001)
 
 #ifdef APSTUDIO_INVOKED
@@ -65,25 +71,6 @@ END
 IDB_BITMAP_WAV          BITMAP                  "bitmap1-24.bmp"
 
 IDB_BITMAP_AVI          BITMAP                  "bmp00001-24.bmp"
-
-
-/////////////////////////////////////////////////////////////////////////////
-//
-// Dialog
-//
-
-IDD_DLG_SETUP DIALOGEX 0, 0, 222, 73
-STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "AVI/WAV"
-FONT 9, "Meiryo UI", 0, 0, 0x0
-BEGIN
-    CONTROL         "WAV形式のジャンル名はリストから選択する(※再起動後有効)",IDC_CH_WAV_GENRE_LIST_SELECT,
-                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,7,213,10
-    CONTROL         "AVI形式のジャンル名はリストから選択する(※再起動後有効)",IDC_CH_AVI_GENRE_LIST_SELECT,
-                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,22,213,10
-    CONTROL         "WAV形式でトラック番号の編集を許可する(STEP_K では常に許可)",IDC_CH_WAV_SUPPORT_TRACK_NUMBER,
-                    "Button",BS_AUTOCHECKBOX | WS_DISABLED | WS_TABSTOP,7,45,213,10
-END
 
 
 /////////////////////////////////////////////////////////////////////////////

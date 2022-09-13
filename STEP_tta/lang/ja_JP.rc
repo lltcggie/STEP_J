@@ -1,0 +1,24 @@
+// Microsoft Visual C++ generated resource script.
+
+#pragma code_page(65001) // UTF-8
+
+LANGUAGE LANG_JAPANESE, SUBLANG_DEFAULT
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_DLG_SETUP DIALOGEX 0, 0, 213, 75
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "True Audio"
+FONT 9, "Meiryo UI", 0, 0, 0x0
+BEGIN
+    CONTROL         "ジャンル名はリストから選択する(※再起動後有効)",IDC_CH_GENRE_LIST_SELECT,
+                    "Button",BS_AUTOCHECKBOX | BS_MULTILINE | WS_TABSTOP,7,7,199,20
+    GROUPBOX        "ID3v2",IDC_STATIC,7,26,199,38
+    CONTROL         "ID3v2 を ID3v1 にコピー(オフの場合は個別に編集)",IDC_CH_ID3TAG_AUTO_WRITE,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,38,194,10
+    CONTROL         "ID3v1 を作成しない(更新時に削除)",IDC_CH_ID3TAG_AUTO_DELETE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,50,194,10
+END

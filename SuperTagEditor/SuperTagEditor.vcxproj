@@ -83,6 +83,7 @@
     <LinkIncremental>false</LinkIncremental>
     <IntDir>$(SolutionDir)_temp\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
     <OutDir>$(SolutionDir)_bin\$(PlatformShortName)\</OutDir>
+    <EmbedManifest>true</EmbedManifest>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)_bin\$(PlatformShortName)\</OutDir>
@@ -208,6 +209,8 @@ copy $(ProjectDir)..\Help\SuperTagEditor.chm /b $(outputpath)..\
     <Manifest />
     <Manifest>
       <EnableDpiAwareness>true</EnableDpiAwareness>
+      <AdditionalManifestFiles>
+      </AdditionalManifestFiles>
     </Manifest>
     <PostBuildEvent>
       <Command>copy $(ProjectDir)..\*.txt /b $(outputpath)..\

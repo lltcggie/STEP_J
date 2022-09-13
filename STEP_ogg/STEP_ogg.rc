@@ -12,12 +12,18 @@
 /////////////////////////////////////////////////////////////////////////////
 #undef APSTUDIO_READONLY_SYMBOLS
 
+//////////////////////////////////////////////////////////////////////////////
+// Languages
+
+#include "lang/en_US.rc"
+#include "lang/ja_JP.rc"
+
 /////////////////////////////////////////////////////////////////////////////
 // 日本語 resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)
 #ifdef _WIN32
-LANGUAGE LANG_JAPANESE, SUBLANG_DEFAULT
+LANGUAGE LANG_ENGLISH, SUBLANG_DEFAULT
 #pragma code_page(65001)
 #endif //_WIN32
 
@@ -65,21 +71,6 @@ END
 //
 
 IDB_BITMAP_OGG          BITMAP  DISCARDABLE     "bitmap1-24.bmp"
-
-/////////////////////////////////////////////////////////////////////////////
-//
-// Dialog
-//
-
-IDD_DLG_SETUP DIALOG DISCARDABLE  0, 0, 175, 73
-STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "Ogg Vorbis"
-FONT 9, "Meiryo UI"
-BEGIN
-    CONTROL         "ジャンル名はリストから選択する(※再起動後有効)",
-                    IDC_CH_GENRE_LIST_SELECT,"Button",BS_AUTOCHECKBOX |
-                    WS_TABSTOP,7,7,162,10
-END
 
 
 /////////////////////////////////////////////////////////////////////////////
