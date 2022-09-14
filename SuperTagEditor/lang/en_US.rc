@@ -1,0 +1,2117 @@
+// Microsoft Visual C++ generated resource script.
+
+#pragma code_page(65001) // UTF-8
+
+LANGUAGE LANG_ENGLISH, SUBLANG_DEFAULT
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU
+BEGIN
+    POPUP "File (&F)"
+    BEGIN
+        MENUITEM "Clear list (&N)",                 ID_FILE_NEW
+        MENUITEM "Open folder (&F)",                 ID_OPEN_FOLDER
+        MENUITEM "Update tag info (&S)",                 ID_SAVE_ALL_TAG
+        MENUITEM SEPARATOR
+        POPUP "Output list (&L)"
+        BEGIN
+            MENUITEM "01: list",                     ID_WRITE_LIST1
+            MENUITEM "02: List",                     ID_WRITE_LIST2
+            MENUITEM "03: List",                     ID_WRITE_LIST3
+            MENUITEM "04: List",                     ID_WRITE_LIST4
+            MENUITEM "05: List",                     ID_WRITE_LIST5
+        END
+        MENUITEM SEPARATOR
+        POPUP "Move file(&M)"
+        BEGIN
+            MENUITEM "Format 1",                         ID_MOVE_FOLDER_01
+            MENUITEM "Format 2",                         ID_MOVE_FOLDER_02
+            MENUITEM "Format 3",                         ID_MOVE_FOLDER_03
+            MENUITEM "Format 4",                         ID_MOVE_FOLDER_04
+            MENUITEM "Format 5",                         ID_MOVE_FOLDER_05
+        END
+        MENUITEM SEPARATOR
+        POPUP "Recently used folder (&R)"
+        BEGIN
+            MENUITEM "Recently used folders",                   ID_FILE_MRU_FILE1, GRAYED
+        END
+        POPUP "Favorite Folder (&A)"
+        BEGIN
+            MENUITEM "Favorite 1",                      ID_FAVORITE_FOLDER_01
+            MENUITEM "Favorite 2",                      ID_FAVORITE_FOLDER_02
+            MENUITEM "Favorite 3",                      ID_FAVORITE_FOLDER_03
+            MENUITEM "Favorite 4",                      ID_FAVORITE_FOLDER_04
+            MENUITEM "Favorite 5",                      ID_FAVORITE_FOLDER_05
+            MENUITEM "Favorite 6",                      ID_FAVORITE_FOLDER_06
+            MENUITEM "Favorite 7",                      ID_FAVORITE_FOLDER_07
+            MENUITEM "Favorite 8",                      ID_FAVORITE_FOLDER_08
+            MENUITEM "Favorite 9",                      ID_FAVORITE_FOLDER_09
+            MENUITEM "Favorite 10",                     ID_FAVORITE_FOLDER_10
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "Exit(&X)",                      ID_APP_EXIT
+    END
+    POPUP "Edit(&E)"
+    BEGIN
+        MENUITEM "Cut(&T)",                    ID_EDIT_CUT
+        MENUITEM "Copy (&C)",                     ID_EDIT_COPY
+        MENUITEM "Paste (&P)",                    ID_EDIT_PASTE
+        MENUITEM "Paste in addition (&B)",                 ID_EDIT_PASTE_ADD
+        POPUP "Paste Canned Text"
+        BEGIN
+            POPUP "Group 1"
+            BEGIN
+                MENUITEM "Regular 1",                         ID_TEIKEI_01
+                MENUITEM "Regular 2",                         ID_TEIKEI_02
+                MENUITEM "Regular 3",                         ID_TEIKEI_03
+                MENUITEM "Regular 4",                         ID_TEIKEI_04
+                MENUITEM "Regular 5",                         ID_TEIKEI_05
+                MENUITEM "Regular 6",                         ID_TEIKEI_06
+                MENUITEM "Regular 7",                         ID_TEIKEI_07
+                MENUITEM "Regular 8",                         ID_TEIKEI_08
+                MENUITEM "Regular 9",                         ID_TEIKEI_09
+                MENUITEM "Regular 10",                        ID_TEIKEI_10
+            END
+            POPUP "Group 2"
+            BEGIN
+                MENUITEM "Regular 1",                         ID_TEIKEI_2_01
+                MENUITEM "Regular 2",                         ID_TEIKEI_2_02
+                MENUITEM "Regular 3",                         ID_TEIKEI_2_03
+                MENUITEM "Regular 4",                         ID_TEIKEI_2_04
+                MENUITEM "Regular 5",                         ID_TEIKEI_2_05
+                MENUITEM "Regular 6",                         ID_TEIKEI_2_06
+                MENUITEM "Regular 7",                         ID_TEIKEI_2_07
+                MENUITEM "Regular 8",                         ID_TEIKEI_2_08
+                MENUITEM "Regular 9",                         ID_TEIKEI_2_09
+                MENUITEM "Regular 10",                        ID_TEIKEI_2_10
+            END
+            POPUP "Group 3"
+            BEGIN
+                MENUITEM "Regular 1",                         ID_TEIKEI_3_01
+                MENUITEM "Regular 2",                         ID_TEIKEI_3_02
+                MENUITEM "Regular 3",                         ID_TEIKEI_3_03
+                MENUITEM "Regular 4",                         ID_TEIKEI_3_04
+                MENUITEM "Regular 5",                         ID_TEIKEI_3_05
+                MENUITEM "Regular 6",                         ID_TEIKEI_3_06
+                MENUITEM "Regular 7",                         ID_TEIKEI_3_07
+                MENUITEM "Regular 8",                         ID_TEIKEI_3_08
+                MENUITEM "Regular 9",                         ID_TEIKEI_3_09
+                MENUITEM "Regular 10",                        ID_TEIKEI_3_10
+            END
+        END
+        POPUP "Format Copy"
+        BEGIN
+            MENUITEM "Format 1",                         ID_EDIT_COPY_FORMAT_01
+            MENUITEM "Format 2",                         ID_EDIT_COPY_FORMAT_02
+            MENUITEM "Format 3",                         ID_EDIT_COPY_FORMAT_03
+            MENUITEM "Format 4",                         ID_EDIT_COPY_FORMAT_04
+            MENUITEM "Format 5",                         ID_EDIT_COPY_FORMAT_05
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "Drop Copy (&D)",                 ID_CELL_COPY_DOWN
+        MENUITEM "Sequential number(&N) in the downward",                  ID_SET_NUMBER
+        MENUITEM "Add drop Sequential number",                   ID_SET_NUMBER_ADD
+        MENUITEM SEPARATOR
+        MENUITEM "Search...(&F)",                   ID_EDIT_FIND
+        MENUITEM "Replace...(&R)",                   ID_EDIT_REPLACE
+        MENUITEM SEPARATOR
+        MENUITEM "Delete from list",                     ID_SELECT_DELETE_LIST
+        MENUITEM "Delete file",                     ID_SELECT_DELETE_FILE
+        MENUITEM "Restore to pre-edit state",                   ID_SELECT_EDIT_DESTORY
+        MENUITEM SEPARATOR
+        MENUITEM "Synchronization of folder structure",                   ID_FOLDER_TREE_SYNC
+        MENUITEM "Synchronize folder structure (check only)",           ID_CHECK_FILE_SYNC
+        MENUITEM SEPARATOR
+        MENUITEM "Remove leading/trailing whitespace",               ID_DELETE_CHAR_SPACE
+        MENUITEM "Delete leading/trailing n characters",                ID_DELETE_CHAR
+    END
+    POPUP "View(&V)"
+    BEGIN
+        MENUITEM "Toolbar (&T)",                   ID_VIEW_TOOLBAR
+        MENUITEM "Status bar (&S)",                 ID_VIEW_STATUS_BAR
+        MENUITEM SEPARATOR
+        MENUITEM "Adjust all column widths (&W)",              ID_ADJUST_COLUMN_WIDTH
+        MENUITEM SEPARATOR
+        MENUITEM "Sort by... (&R)",                 ID_SORT_LIST
+        MENUITEM "Rerun sort(&D)",                ID_SORT_LIST_DIRECT
+        MENUITEM "Update classification display (&C)",                 ID_EXEC_CLASSIFICATION
+        MENUITEM SEPARATOR
+        MENUITEM "View/edit ID3 tag (&I)",           ID_EDIT_TD3_TAG
+        MENUITEM "Show/Edit SI/ID3v2 fields (&F)",     ID_EDIT_FIELD_SI
+        MENUITEM "[ID3 tag] ⇄[SI/ID3v2 field] switching (&X)", ID_EDIT_CHANGE_FIELD
+        MENUITEM SEPARATOR
+        MENUITEM "Move cursor to the right after changing item",             ID_END_EDIT_RIGHT, CHECKED
+    END
+    POPUP "Convert(&C)"
+    BEGIN
+        POPUP "Default conversion (&D)"
+        BEGIN
+            MENUITEM "Filename ⇒ track name(&F)",          ID_CONV_FILENAME_TO_TRACKNAME
+            MENUITEM "Track name ⇒ File name (&T)",          ID_CONV_TRACKNAME_TO_FILENAME
+        END
+        POPUP "User-specified conversion (&U)"
+        BEGIN
+            MENUITEM "Tag info ⇒ Filename(&T)",           ID_CONV_TAG2FILE_USER
+            MENUITEM "Filename ⇒ Tag info (&F)",           ID_CONV_FILE2TAG_USER
+            POPUP "Switch format (&C)"
+            BEGIN
+                MENUITEM "Format 1",                         ID_CONV_FORMAT_USER_01
+                MENUITEM "Format 2",                         ID_CONV_FORMAT_USER_02
+                MENUITEM "Format 3",                         ID_CONV_FORMAT_USER_03
+                MENUITEM "Format 4",                         ID_CONV_FORMAT_USER_04
+                MENUITEM "Format 5",                         ID_CONV_FORMAT_USER_05
+            END
+            MENUITEM "Formatting... (&O)",                 ID_CONV_USER_SETUP
+        END
+        POPUP "Extended format conversion (&E)"
+        BEGIN
+            MENUITEM "Format 1",                         ID_CONV_FORMAT_EX_01
+            MENUITEM "Format 2",                         ID_CONV_FORMAT_EX_02
+            MENUITEM "Format 3",                         ID_CONV_FORMAT_EX_03
+            MENUITEM "Format 4",                         ID_CONV_FORMAT_EX_04
+            MENUITEM "Format 5",                         ID_CONV_FORMAT_EX_05
+            MENUITEM "Format 6",                         ID_CONV_FORMAT_EX_06
+            MENUITEM "Format 7",                         ID_CONV_FORMAT_EX_07
+            MENUITEM "Format 8",                         ID_CONV_FORMAT_EX_08
+            MENUITEM "Format 9",                         ID_CONV_FORMAT_EX_09
+            MENUITEM "Format 10",                        ID_CONV_FORMAT_EX_10
+            MENUITEM "Formatting... (&O)",                 ID_CONV_EX_SETUP
+        END
+        POPUP "Tag info conversion (&T)"
+        BEGIN
+            MENUITEM "Format 1",                         ID_CONV_TAG_TO_TAG_01
+            MENUITEM "Format 2",                         ID_CONV_TAG_TO_TAG_02
+            MENUITEM "Format 3",                         ID_CONV_TAG_TO_TAG_03
+            MENUITEM "Format 4",                         ID_CONV_TAG_TO_TAG_04
+            MENUITEM "Format 5",                         ID_CONV_TAG_TO_TAG_05
+            MENUITEM "Formatting... (&O)",                 ID_CONV_TAG2TAG_SETUP
+        END
+        MENUITEM SEPARATOR
+        POPUP "Half-width ⇒ Full-width"
+        BEGIN
+            MENUITEM "All",                          ID_CONV_STR_ZEN_ALL
+            MENUITEM "Symbols",                        ID_CONV_STR_ZEN_KIGOU
+            MENUITEM "Numbers",                        ID_CONV_STR_ZEN_SUJI
+            MENUITEM "Katakana",                      ID_CONV_STR_ZEN_KATA
+            MENUITEM "Alphabet",                   ID_CONV_STR_ZEN_ALPHA
+        END
+        POPUP "Full-width ⇒ Half-width"
+        BEGIN
+            MENUITEM "All",                          ID_CONV_STR_HAN_ALL
+            MENUITEM "Symbols",                        ID_CONV_STR_HAN_KIGOU
+            MENUITEM "Numbers",                        ID_CONV_STR_HAN_SUJI
+            MENUITEM "Katakana",                      ID_CONV_STR_HAN_KATA
+            MENUITEM "Alphabet",                   ID_CONV_STR_HAN_ALPHA
+        END
+        MENUITEM "Lower ⇒ Upper",                  ID_CONV_STR_TO_UPPER
+        MENUITEM "Upper ⇒ Lower",                  ID_CONV_STR_TO_LOWER
+        MENUITEM "Only the first letter of a word is capitalized",                ID_CONV_STR_FIRST_UPPER
+        MENUITEM "Fixed case",                    ID_CONV_STR_FIXED_UPPER_LOWER
+        MENUITEM "Hiragana ⇒ Katakana",                ID_CONV_STR_HIRA2KATA
+        MENUITEM "Katakana ⇒ Hiragana",                ID_CONV_STR_KATA2HIRA
+        MENUITEM "Unification of character types... (&C)",               ID_UNIFY_CHAR
+        MENUITEM SEPARATOR
+        MENUITEM "Convert SI/ID3v2 field to ID3tag",    ID_CONV_SI_FIELD_TO_ID3TAG
+    END
+    POPUP "Playlist (&P)"
+    BEGIN
+        MENUITEM "Load playlist (&L)",             ID_LOAD_PLAYLIST
+        MENUITEM "Output playlist (&P)",               ID_WRITE_PLAYLIST
+        MENUITEM "Tree Classification Playlist Output (&E)",          ID_WRITE_TREE_PLAYLIST
+        MENUITEM SEPARATOR
+        MENUITEM "Check all files (&A)",          ID_ALL_FILES_CHECK
+        MENUITEM "Uncheck all files (&D)",         ID_ALL_FILES_UNCHECK
+        MENUITEM "Reverse check status (&X)",             ID_REVERSE_CHECK
+        MENUITEM SEPARATOR
+        MENUITEM "Select checked files (&C)",      ID_CHECK_FILES_SELECT
+        MENUITEM "Check selected files (&S)",           ID_SELECT_FILES_CHECK
+        MENUITEM "Uncheck selected files (&U)",          ID_SELECT_FILES_UNCHECK
+        MENUITEM SEPARATOR
+        MENUITEM "Check with conditions... (&I)",          ID_CHECK_WORD
+        MENUITEM "Check file name length",               ID_CHECK_FILENAME_MAX
+        MENUITEM SEPARATOR
+        MENUITEM "Select cell brackets under tree (&A)",             ID_SELECT_TREE_COLUM
+        MENUITEM "Select all files under the tree at once (&F)",         ID_SELECT_TREE_FILE
+        MENUITEM SEPARATOR
+        MENUITEM "Move cursor position to parent tree (&M)",          ID_MOVE_TO_PARENT
+        MENUITEM "Move cursor position one tree up",           ID_MOVE_TO_PREVIOUS
+        MENUITEM "Move cursor position one tree down",           ID_MOVE_TO_NEXT
+    END
+    POPUP "Player Control (&P)"
+    BEGIN
+        MENUITEM "Prev (&P)",                    ID_WINAMP_PLAY_PREV
+        MENUITEM "Play(&P)",                      ID_WINAMP_PLAY
+        MENUITEM "Stop (&S)",                      ID_WINAMP_STOP
+        MENUITEM "Next (&N)",                    ID_WINAMP_PLAY_NEXT
+        MENUITEM "Exit (&X)",                 ID_WINAMP_EXIT
+    END
+    POPUP "Option (&O)"
+    BEGIN
+        MENUITEM "Font settings... (&F)",               ID_SET_LIST_FONT
+        MENUITEM SEPARATOR
+        MENUITEM "Setting Options... (&O)",              ID_DLG_ENVIRONMENT
+        MENUITEM SEPARATOR
+        MENUITEM "Canned text... (&T)",                  ID_DLG_TEIKEI
+        MENUITEM "Favorite Folder...",               ID_DLG_FAVORITES
+        MENUITEM SEPARATOR
+        MENUITEM "Customize the toolbar...",             ID_POPUP_CUSTOMIZE
+        MENUITEM SEPARATOR
+        MENUITEM "Plug in... (&P)",                ID_DLG_SETUP_PLUGIN
+    END
+    POPUP "Help(&H)"
+    BEGIN
+        MENUITEM "Help (&C)",                      ID_HELP_INDEX
+        MENUITEM "About (&A)...",              ID_APP_ABOUT
+    END
+END
+
+IDR_MENU_CELL_RANGE MENU
+BEGIN
+    POPUP "Pop-up"
+    BEGIN
+        POPUP "Extended format conversion"
+        BEGIN
+            MENUITEM "Format 1",                         ID_CONV_FORMAT_EX_01
+            MENUITEM "Format 2",                         ID_CONV_FORMAT_EX_02
+            MENUITEM "Format 3",                         ID_CONV_FORMAT_EX_03
+            MENUITEM "Format 4",                         ID_CONV_FORMAT_EX_04
+            MENUITEM "Format 5",                         ID_CONV_FORMAT_EX_05
+            MENUITEM "Format 6",                         ID_CONV_FORMAT_EX_06
+            MENUITEM "Format 7",                         ID_CONV_FORMAT_EX_07
+            MENUITEM "Format 8",                         ID_CONV_FORMAT_EX_08
+            MENUITEM "Format 9",                         ID_CONV_FORMAT_EX_09
+            MENUITEM "Format 10",                        ID_CONV_FORMAT_EX_10
+        END
+        POPUP "Tag info conversion (&T)"
+        BEGIN
+            MENUITEM "Format 1",                         ID_CONV_TAG_TO_TAG_01
+            MENUITEM "Format 2",                         ID_CONV_TAG_TO_TAG_02
+            MENUITEM "Format 3",                         ID_CONV_TAG_TO_TAG_03
+            MENUITEM "Format 4",                         ID_CONV_TAG_TO_TAG_04
+            MENUITEM "Format 5",                         ID_CONV_TAG_TO_TAG_05
+            MENUITEM "Formatting... (&O)",                 ID_CONV_TAG2TAG_SETUP
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "Cut",                        ID_EDIT_CUT
+        MENUITEM "Copy",                         ID_EDIT_COPY
+        MENUITEM "Paste",                        ID_EDIT_PASTE
+        MENUITEM "Paste in addition (&B)",                 ID_EDIT_PASTE_ADD
+        POPUP "Paste Canned Text"
+        BEGIN
+            POPUP "Group 1"
+            BEGIN
+                MENUITEM "Regular 1",                         ID_TEIKEI_01
+                MENUITEM "Regular 2",                         ID_TEIKEI_02
+                MENUITEM "Regular 3",                         ID_TEIKEI_03
+                MENUITEM "Regular 4",                         ID_TEIKEI_04
+                MENUITEM "Regular 5",                         ID_TEIKEI_05
+                MENUITEM "Regular 6",                         ID_TEIKEI_06
+                MENUITEM "Regular 7",                         ID_TEIKEI_07
+                MENUITEM "Regular 8",                         ID_TEIKEI_08
+                MENUITEM "Regular 9",                         ID_TEIKEI_09
+                MENUITEM "Regular 10",                        ID_TEIKEI_10
+            END
+            POPUP "Group 2"
+            BEGIN
+                MENUITEM "Regular 1",                         ID_TEIKEI_2_01
+                MENUITEM "Regular 2",                         ID_TEIKEI_2_02
+                MENUITEM "Regular 3",                         ID_TEIKEI_2_03
+                MENUITEM "Regular 4",                         ID_TEIKEI_2_04
+                MENUITEM "Regular 5",                         ID_TEIKEI_2_05
+                MENUITEM "Regular 6",                         ID_TEIKEI_2_06
+                MENUITEM "Regular 7",                         ID_TEIKEI_2_07
+                MENUITEM "Regular 8",                         ID_TEIKEI_2_08
+                MENUITEM "Regular 9",                         ID_TEIKEI_2_09
+                MENUITEM "Regular 10",                        ID_TEIKEI_2_10
+            END
+            POPUP "Group 3"
+            BEGIN
+                MENUITEM "Regular 1",                         ID_TEIKEI_3_01
+                MENUITEM "Regular 2",                         ID_TEIKEI_3_02
+                MENUITEM "Regular 3",                         ID_TEIKEI_3_03
+                MENUITEM "Regular 4",                         ID_TEIKEI_3_04
+                MENUITEM "Regular 5",                         ID_TEIKEI_3_05
+                MENUITEM "Regular 6",                         ID_TEIKEI_3_06
+                MENUITEM "Regular 7",                         ID_TEIKEI_3_07
+                MENUITEM "Regular 8",                         ID_TEIKEI_3_08
+                MENUITEM "Regular 9",                         ID_TEIKEI_3_09
+                MENUITEM "Regular 10",                        ID_TEIKEI_3_10
+            END
+        END
+        MENUITEM SEPARATOR
+        POPUP "Half-width ⇒ Full-width"
+        BEGIN
+            MENUITEM "All",                          ID_CONV_STR_ZEN_ALL
+            MENUITEM "Symbols",                        ID_CONV_STR_ZEN_KIGOU
+            MENUITEM "Numbers",                        ID_CONV_STR_ZEN_SUJI
+            MENUITEM "Katakana",                      ID_CONV_STR_ZEN_KATA
+            MENUITEM "Alphabet",                   ID_CONV_STR_ZEN_ALPHA
+        END
+        POPUP "Full-width ⇒ Half-width"
+        BEGIN
+            MENUITEM "All",                          ID_CONV_STR_HAN_ALL
+            MENUITEM "Symbols",                        ID_CONV_STR_HAN_KIGOU
+            MENUITEM "Numbers",                        ID_CONV_STR_HAN_SUJI
+            MENUITEM "Katakana",                      ID_CONV_STR_HAN_KATA
+            MENUITEM "Alphabet",                   ID_CONV_STR_HAN_ALPHA
+        END
+        MENUITEM "Lower ⇒ Upper",                  ID_CONV_STR_TO_UPPER
+        MENUITEM "Upper ⇒ Lower",                  ID_CONV_STR_TO_LOWER
+        MENUITEM "Only the first letter of a word is capitalized",                ID_CONV_STR_FIRST_UPPER
+        MENUITEM "Fixed case",                    ID_CONV_STR_FIXED_UPPER_LOWER
+        MENUITEM "Hiragana ⇒ Katakana",                ID_CONV_STR_HIRA2KATA
+        MENUITEM "Katakana ⇒ Hiragana",                ID_CONV_STR_KATA2HIRA
+        MENUITEM "Unification of character types... (&C)",               ID_UNIFY_CHAR
+        MENUITEM SEPARATOR
+        MENUITEM "Drop Copy",                     ID_CELL_COPY_DOWN
+        MENUITEM "Drop Sequential number",                      ID_SET_NUMBER
+        MENUITEM "Add drop Sequential number",                   ID_SET_NUMBER_ADD
+        MENUITEM SEPARATOR
+        MENUITEM "Delete leading/trailing n characters",                ID_DELETE_CHAR
+    END
+END
+
+IDR_MENU_FILE_RANGE MENU
+BEGIN
+    POPUP "Pop-up"
+    BEGIN
+        POPUP "Default conversion (&D)"
+        BEGIN
+            MENUITEM "Filename ⇒ track name(&F)",          ID_CONV_FILENAME_TO_TRACKNAME
+            MENUITEM "Track name ⇒ File name (&T)",          ID_CONV_TRACKNAME_TO_FILENAME
+        END
+        POPUP "User-specified conversion (&U)"
+        BEGIN
+            MENUITEM "Tag info ⇒ Filename(&T)",           ID_CONV_TAG2FILE_USER
+            MENUITEM "Filename ⇒ Tag info (&F)",           ID_CONV_FILE2TAG_USER
+            POPUP "Switch format (&C)"
+            BEGIN
+                MENUITEM "Format 1",                         ID_CONV_FORMAT_USER_01
+                MENUITEM "Format 2",                         ID_CONV_FORMAT_USER_02
+                MENUITEM "Format 3",                         ID_CONV_FORMAT_USER_03
+                MENUITEM "Format 4",                         ID_CONV_FORMAT_USER_04
+                MENUITEM "Format 5",                         ID_CONV_FORMAT_USER_05
+            END
+            MENUITEM "Formatting... (&O)",                 ID_CONV_USER_SETUP
+        END
+        MENUITEM SEPARATOR
+        POPUP "Format Copy"
+        BEGIN
+            MENUITEM "Format 1",                         ID_EDIT_COPY_FORMAT_01
+            MENUITEM "Format 2",                         ID_EDIT_COPY_FORMAT_02
+            MENUITEM "Format 3",                         ID_EDIT_COPY_FORMAT_03
+            MENUITEM "Format 4",                         ID_EDIT_COPY_FORMAT_04
+            MENUITEM "Format 5",                         ID_EDIT_COPY_FORMAT_05
+        END
+        MENUITEM SEPARATOR
+        POPUP "Check Status Change"
+        BEGIN
+            MENUITEM "Check all files",              ID_ALL_FILES_CHECK
+            MENUITEM "Uncheck all files",             ID_ALL_FILES_UNCHECK
+            MENUITEM "Reverse check status",                 ID_REVERSE_CHECK
+            MENUITEM "Check selected files",               ID_SELECT_FILES_CHECK
+            MENUITEM "Uncheck selected files",              ID_SELECT_FILES_UNCHECK
+            MENUITEM "Check with specified conditions",                 ID_CHECK_WORD
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "Search...(&F)",                   ID_EDIT_FIND
+        MENUITEM "Replace...(&R)",                   ID_EDIT_REPLACE
+        MENUITEM SEPARATOR
+        MENUITEM "Delete from list",                     ID_SELECT_DELETE_LIST
+        MENUITEM "Delete file",                     ID_SELECT_DELETE_FILE
+        MENUITEM "Restore to pre-edit state",                   ID_SELECT_EDIT_DESTORY
+        MENUITEM SEPARATOR
+        MENUITEM "Convert SI/ID3v2 field to ID3tag",    ID_CONV_SI_FIELD_TO_ID3TAG
+        MENUITEM SEPARATOR
+        POPUP "Move file(&M)"
+        BEGIN
+            MENUITEM "Format 1",                         ID_MOVE_FOLDER_01
+            MENUITEM "Format 2",                         ID_MOVE_FOLDER_02
+            MENUITEM "Format 3",                         ID_MOVE_FOLDER_03
+            MENUITEM "Format 4",                         ID_MOVE_FOLDER_04
+            MENUITEM "Format 5",                         ID_MOVE_FOLDER_05
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "Playing",                    ID_WINAMP_PLAY
+        MENUITEM "Output playlist",                   ID_WRITE_PLAYLIST
+    END
+END
+
+IDR_MENU_SELECT_FOLDER MENU
+BEGIN
+    POPUP "Pop-up"
+    BEGIN
+        POPUP "Default conversion (&D)"
+        BEGIN
+            MENUITEM "Filename ⇒ track name(&F)",          ID_CONV_FILENAME_TO_TRACKNAME
+            MENUITEM "Track name ⇒ File name (&T)",          ID_CONV_TRACKNAME_TO_FILENAME
+        END
+        POPUP "User-specified conversion (&U)"
+        BEGIN
+            MENUITEM "Tag info ⇒ Filename(&T)",           ID_CONV_TAG2FILE_USER
+            MENUITEM "Filename ⇒ Tag info (&F)",           ID_CONV_FILE2TAG_USER
+            POPUP "Switch format (&C)"
+            BEGIN
+                MENUITEM "Format 1",                         ID_CONV_FORMAT_USER_01
+                MENUITEM "Format 2",                         ID_CONV_FORMAT_USER_02
+                MENUITEM "Format 3",                         ID_CONV_FORMAT_USER_03
+                MENUITEM "Format 4",                         ID_CONV_FORMAT_USER_04
+                MENUITEM "Format 5",                         ID_CONV_FORMAT_USER_05
+            END
+            MENUITEM "Formatting... (&O)",                 ID_CONV_USER_SETUP
+        END
+        MENUITEM SEPARATOR
+        POPUP "Format Copy"
+        BEGIN
+            MENUITEM "Format 1",                         ID_EDIT_COPY_FORMAT_01
+            MENUITEM "Format 2",                         ID_EDIT_COPY_FORMAT_02
+            MENUITEM "Format 3",                         ID_EDIT_COPY_FORMAT_03
+            MENUITEM "Format 4",                         ID_EDIT_COPY_FORMAT_04
+            MENUITEM "Format 5",                         ID_EDIT_COPY_FORMAT_05
+        END
+        MENUITEM SEPARATOR
+        POPUP "Check Status Change"
+        BEGIN
+            MENUITEM "Check all files",              ID_ALL_FILES_CHECK
+            MENUITEM "Uncheck all files",             ID_ALL_FILES_UNCHECK
+            MENUITEM "Reverse check status",                 ID_REVERSE_CHECK
+            MENUITEM "Check selected files",               ID_SELECT_FILES_CHECK
+            MENUITEM "Uncheck selected files",              ID_SELECT_FILES_UNCHECK
+            MENUITEM "Check with specified conditions",                 ID_CHECK_WORD
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "Search...(&F)",                   ID_EDIT_FIND
+        MENUITEM "Replace...(&R)",                   ID_EDIT_REPLACE
+        MENUITEM SEPARATOR
+        MENUITEM "Delete from list",                     ID_SELECT_DELETE_LIST
+        MENUITEM "Delete file",                     ID_SELECT_DELETE_FILE
+        MENUITEM "Restore to pre-edit state",                   ID_SELECT_EDIT_DESTORY
+        MENUITEM SEPARATOR
+        MENUITEM "Convert SI/ID3v2 field to ID3tag",    ID_CONV_SI_FIELD_TO_ID3TAG
+        MENUITEM SEPARATOR
+        POPUP "Move file(&M)"
+        BEGIN
+            MENUITEM "Format 1",                         ID_MOVE_FOLDER_01
+            MENUITEM "Format 2",                         ID_MOVE_FOLDER_02
+            MENUITEM "Format 3",                         ID_MOVE_FOLDER_03
+            MENUITEM "Format 4",                         ID_MOVE_FOLDER_04
+            MENUITEM "Format 5",                         ID_MOVE_FOLDER_05
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "Output playlist",                   ID_WRITE_PLAYLIST
+        MENUITEM SEPARATOR
+        MENUITEM "Calculate the total",                       ID_CALC_FOLDER_TOTAL
+    END
+END
+
+IDR_MENU_FILE_EDIT_OK MENU
+BEGIN
+    POPUP "Pop-up"
+    BEGIN
+        POPUP "Default conversion (&D)"
+        BEGIN
+            MENUITEM "Filename ⇒ track name(&F)",          ID_CONV_FILENAME_TO_TRACKNAME
+            MENUITEM "Track name ⇒ File name (&T)",          ID_CONV_TRACKNAME_TO_FILENAME
+        END
+        POPUP "User-specified conversion (&U)"
+        BEGIN
+            MENUITEM "Tag info ⇒ Filename(&T)",           ID_CONV_TAG2FILE_USER
+            MENUITEM "Filename ⇒ Tag info (&F)",           ID_CONV_FILE2TAG_USER
+            POPUP "Switch format (&C)"
+            BEGIN
+                MENUITEM "Format 1",                         ID_CONV_FORMAT_USER_01
+                MENUITEM "Format 2",                         ID_CONV_FORMAT_USER_02
+                MENUITEM "Format 3",                         ID_CONV_FORMAT_USER_03
+                MENUITEM "Format 4",                         ID_CONV_FORMAT_USER_04
+                MENUITEM "Format 5",                         ID_CONV_FORMAT_USER_05
+            END
+            MENUITEM "Formatting... (&O)",                 ID_CONV_USER_SETUP
+        END
+        POPUP "Extended format conversion (&E)"
+        BEGIN
+            MENUITEM "Format 1",                         ID_CONV_FORMAT_EX_01
+            MENUITEM "Format 2",                         ID_CONV_FORMAT_EX_02
+            MENUITEM "Format 3",                         ID_CONV_FORMAT_EX_03
+            MENUITEM "Format 4",                         ID_CONV_FORMAT_EX_04
+            MENUITEM "Format 5",                         ID_CONV_FORMAT_EX_05
+            MENUITEM "Format 6",                         ID_CONV_FORMAT_EX_06
+            MENUITEM "Format 7",                         ID_CONV_FORMAT_EX_07
+            MENUITEM "Format 8",                         ID_CONV_FORMAT_EX_08
+            MENUITEM "Format 9",                         ID_CONV_FORMAT_EX_09
+            MENUITEM "Format 10",                        ID_CONV_FORMAT_EX_10
+            MENUITEM "Formatting... (&O)",                 ID_CONV_EX_SETUP
+        END
+        POPUP "Tag info conversion (&T)"
+        BEGIN
+            MENUITEM "Format 1",                         ID_CONV_TAG_TO_TAG_01
+            MENUITEM "Format 2",                         ID_CONV_TAG_TO_TAG_02
+            MENUITEM "Format 3",                         ID_CONV_TAG_TO_TAG_03
+            MENUITEM "Format 4",                         ID_CONV_TAG_TO_TAG_04
+            MENUITEM "Format 5",                         ID_CONV_TAG_TO_TAG_05
+            MENUITEM "Formatting... (&O)",                 ID_CONV_TAG2TAG_SETUP
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "Cut",                        ID_EDIT_CUT
+        MENUITEM "Copy",                         ID_EDIT_COPY
+        MENUITEM "Paste",                        ID_EDIT_PASTE
+        MENUITEM "Paste in addition (&B)",                 ID_EDIT_PASTE_ADD
+        POPUP "Paste Canned Text"
+        BEGIN
+            POPUP "Group 1"
+            BEGIN
+                MENUITEM "Regular 1",                         ID_TEIKEI_01
+                MENUITEM "Regular 2",                         ID_TEIKEI_02
+                MENUITEM "Regular 3",                         ID_TEIKEI_03
+                MENUITEM "Regular 4",                         ID_TEIKEI_04
+                MENUITEM "Regular 5",                         ID_TEIKEI_05
+                MENUITEM "Regular 6",                         ID_TEIKEI_06
+                MENUITEM "Regular 7",                         ID_TEIKEI_07
+                MENUITEM "Regular 8",                         ID_TEIKEI_08
+                MENUITEM "Regular 9",                         ID_TEIKEI_09
+                MENUITEM "Regular 10",                        ID_TEIKEI_10
+            END
+            POPUP "Group 2"
+            BEGIN
+                MENUITEM "Regular 1",                         ID_TEIKEI_2_01
+                MENUITEM "Regular 2",                         ID_TEIKEI_2_02
+                MENUITEM "Regular 3",                         ID_TEIKEI_2_03
+                MENUITEM "Regular 4",                         ID_TEIKEI_2_04
+                MENUITEM "Regular 5",                         ID_TEIKEI_2_05
+                MENUITEM "Regular 6",                         ID_TEIKEI_2_06
+                MENUITEM "Regular 7",                         ID_TEIKEI_2_07
+                MENUITEM "Regular 8",                         ID_TEIKEI_2_08
+                MENUITEM "Regular 9",                         ID_TEIKEI_2_09
+                MENUITEM "Regular 10",                        ID_TEIKEI_2_10
+            END
+            POPUP "Group 3"
+            BEGIN
+                MENUITEM "Regular 1",                         ID_TEIKEI_3_01
+                MENUITEM "Regular 2",                         ID_TEIKEI_3_02
+                MENUITEM "Regular 3",                         ID_TEIKEI_3_03
+                MENUITEM "Regular 4",                         ID_TEIKEI_3_04
+                MENUITEM "Regular 5",                         ID_TEIKEI_3_05
+                MENUITEM "Regular 6",                         ID_TEIKEI_3_06
+                MENUITEM "Regular 7",                         ID_TEIKEI_3_07
+                MENUITEM "Regular 8",                         ID_TEIKEI_3_08
+                MENUITEM "Regular 9",                         ID_TEIKEI_3_09
+                MENUITEM "Regular 10",                        ID_TEIKEI_3_10
+            END
+        END
+        MENUITEM SEPARATOR
+        POPUP "Half-width ⇒ Full-width"
+        BEGIN
+            MENUITEM "All",                          ID_CONV_STR_ZEN_ALL
+            MENUITEM "Symbols",                        ID_CONV_STR_ZEN_KIGOU
+            MENUITEM "Numbers",                        ID_CONV_STR_ZEN_SUJI
+            MENUITEM "Katakana",                      ID_CONV_STR_ZEN_KATA
+            MENUITEM "Alphabet",                   ID_CONV_STR_ZEN_ALPHA
+        END
+        POPUP "Full-width ⇒ Half-width"
+        BEGIN
+            MENUITEM "All",                          ID_CONV_STR_HAN_ALL
+            MENUITEM "Symbols",                        ID_CONV_STR_HAN_KIGOU
+            MENUITEM "Numbers",                        ID_CONV_STR_HAN_SUJI
+            MENUITEM "Katakana",                      ID_CONV_STR_HAN_KATA
+            MENUITEM "Alphabet",                   ID_CONV_STR_HAN_ALPHA
+        END
+        MENUITEM "Lower ⇒ Upper",                  ID_CONV_STR_TO_UPPER
+        MENUITEM "Upper ⇒ Lower",                  ID_CONV_STR_TO_LOWER
+        MENUITEM "Only the first letter of a word is capitalized",                ID_CONV_STR_FIRST_UPPER
+        MENUITEM "Fixed case",                    ID_CONV_STR_FIXED_UPPER_LOWER
+        MENUITEM "Hiragana ⇒ Katakana",                ID_CONV_STR_HIRA2KATA
+        MENUITEM "Katakana ⇒ Hiragana",                ID_CONV_STR_KATA2HIRA
+        MENUITEM "Unification of character types... (&C)",               ID_UNIFY_CHAR
+        MENUITEM SEPARATOR
+        MENUITEM "Delete leading/trailing n characters",                ID_DELETE_CHAR
+        MENUITEM SEPARATOR
+        POPUP "Check Status Change"
+        BEGIN
+            MENUITEM "Check all files",              ID_ALL_FILES_CHECK
+            MENUITEM "Uncheck all files",             ID_ALL_FILES_UNCHECK
+            MENUITEM "Reverse check status",                 ID_REVERSE_CHECK
+            MENUITEM "Check selected files",               ID_SELECT_FILES_CHECK
+            MENUITEM "Uncheck selected files",              ID_SELECT_FILES_UNCHECK
+            MENUITEM "Check with specified conditions",                 ID_CHECK_WORD
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "Delete from list",                     ID_SELECT_DELETE_LIST
+        MENUITEM "Delete file",                     ID_SELECT_DELETE_FILE
+        MENUITEM "Restore to pre-edit state",                   ID_SELECT_EDIT_DESTORY
+        MENUITEM SEPARATOR
+        MENUITEM "Convert SI/ID3v2 field to ID3tag",    ID_CONV_SI_FIELD_TO_ID3TAG
+        MENUITEM SEPARATOR
+        POPUP "Move file(&M)"
+        BEGIN
+            MENUITEM "Format 1",                         ID_MOVE_FOLDER_01
+            MENUITEM "Format 2",                         ID_MOVE_FOLDER_02
+            MENUITEM "Format 3",                         ID_MOVE_FOLDER_03
+            MENUITEM "Format 4",                         ID_MOVE_FOLDER_04
+            MENUITEM "Format 5",                         ID_MOVE_FOLDER_05
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "Playing",                    ID_WINAMP_PLAY
+        MENUITEM "Output playlist",                   ID_WRITE_PLAYLIST
+    END
+END
+
+IDR_MENU_CONV_FORMAT_USER MENU
+BEGIN
+    POPUP "User Format Switching"
+    BEGIN
+        MENUITEM "Format 1",                         ID_CONV_FORMAT_USER_01
+        MENUITEM "Format 2",                         ID_CONV_FORMAT_USER_02
+        MENUITEM "Format 3",                         ID_CONV_FORMAT_USER_03
+        MENUITEM "Format 4",                         ID_CONV_FORMAT_USER_04
+        MENUITEM "Format 5",                         ID_CONV_FORMAT_USER_05
+    END
+END
+
+CG_IDR_POPUP_DK_TOOL_BAR MENU
+BEGIN
+    POPUP "Customizing the Toolbar"
+    BEGIN
+        MENUITEM "Customizing the Toolbar",                ID_POPUP_CUSTOMIZE
+    END
+END
+
+IDR_MENU_TEIKEI MENU
+BEGIN
+    POPUP "Paste Canned Text"
+    BEGIN
+        POPUP "Group 1"
+        BEGIN
+            MENUITEM "Regular 1",                         ID_TEIKEI_01
+            MENUITEM "Regular 2",                         ID_TEIKEI_02
+            MENUITEM "Regular 3",                         ID_TEIKEI_03
+            MENUITEM "Regular 4",                         ID_TEIKEI_04
+            MENUITEM "Regular 5",                         ID_TEIKEI_05
+            MENUITEM "Regular 6",                         ID_TEIKEI_06
+            MENUITEM "Regular 7",                         ID_TEIKEI_07
+            MENUITEM "Regular 8",                         ID_TEIKEI_08
+            MENUITEM "Regular 9",                         ID_TEIKEI_09
+            MENUITEM "Regular 10",                        ID_TEIKEI_10
+        END
+        POPUP "Group 2"
+        BEGIN
+            MENUITEM "Regular 1",                         ID_TEIKEI_2_01
+            MENUITEM "Regular 2",                         ID_TEIKEI_2_02
+            MENUITEM "Regular 3",                         ID_TEIKEI_2_03
+            MENUITEM "Regular 4",                         ID_TEIKEI_2_04
+            MENUITEM "Regular 5",                         ID_TEIKEI_2_05
+            MENUITEM "Regular 6",                         ID_TEIKEI_2_06
+            MENUITEM "Regular 7",                         ID_TEIKEI_2_07
+            MENUITEM "Regular 8",                         ID_TEIKEI_2_08
+            MENUITEM "Regular 9",                         ID_TEIKEI_2_09
+            MENUITEM "Regular 10",                        ID_TEIKEI_2_10
+        END
+        POPUP "Group 3"
+        BEGIN
+            MENUITEM "Regular 1",                         ID_TEIKEI_3_01
+            MENUITEM "Regular 2",                         ID_TEIKEI_3_02
+            MENUITEM "Regular 3",                         ID_TEIKEI_3_03
+            MENUITEM "Regular 4",                         ID_TEIKEI_3_04
+            MENUITEM "Regular 5",                         ID_TEIKEI_3_05
+            MENUITEM "Regular 6",                         ID_TEIKEI_3_06
+            MENUITEM "Regular 7",                         ID_TEIKEI_3_07
+            MENUITEM "Regular 8",                         ID_TEIKEI_3_08
+            MENUITEM "Regular 9",                         ID_TEIKEI_3_09
+            MENUITEM "Regular 10",                        ID_TEIKEI_3_10
+        END
+    END
+END
+
+IDR_MENU_FAVORITE_FOLDER MENU
+BEGIN
+    POPUP "Favorite Folder"
+    BEGIN
+        MENUITEM "Favorite 1",                      ID_FAVORITE_FOLDER_01
+        MENUITEM "Favorite 2",                      ID_FAVORITE_FOLDER_02
+        MENUITEM "Favorite 3",                      ID_FAVORITE_FOLDER_03
+        MENUITEM "Favorite 4",                      ID_FAVORITE_FOLDER_04
+        MENUITEM "Favorite 5",                      ID_FAVORITE_FOLDER_05
+        MENUITEM "Favorite 6",                      ID_FAVORITE_FOLDER_06
+        MENUITEM "Favorite 7",                      ID_FAVORITE_FOLDER_07
+        MENUITEM "Favorite 8",                      ID_FAVORITE_FOLDER_08
+        MENUITEM "Favorite 9",                      ID_FAVORITE_FOLDER_09
+        MENUITEM "Favorite 10",                     ID_FAVORITE_FOLDER_10
+    END
+END
+
+IDR_MENU_CONV_FORMAT_USER_T2F MENU
+BEGIN
+    POPUP "Tag info ⇒ Filename"
+    BEGIN
+        MENUITEM "Convert in the selected format",                 ID_CONV_TAG2FILE_USER_SUB
+        MENUITEM "Format 1",                         ID_CONV_FORMAT_USER_T2F_01
+        MENUITEM "Format 2",                         ID_CONV_FORMAT_USER_T2F_02
+        MENUITEM "Format 3",                         ID_CONV_FORMAT_USER_T2F_03
+        MENUITEM "Format 4",                         ID_CONV_FORMAT_USER_T2F_04
+        MENUITEM "Format 5",                         ID_CONV_FORMAT_USER_T2F_05
+    END
+END
+
+IDR_MENU_CONV_FORMAT_USER_F2T MENU
+BEGIN
+    POPUP "Filename ⇒ Tag info"
+    BEGIN
+        MENUITEM "Convert in the selected format",                 ID_CONV_FILE2TAG_USER_SUB
+        MENUITEM "Format 1",                         ID_CONV_FORMAT_USER_F2T_01
+        MENUITEM "Format 2",                         ID_CONV_FORMAT_USER_F2T_02
+        MENUITEM "Format 3",                         ID_CONV_FORMAT_USER_F2T_03
+        MENUITEM "Format 4",                         ID_CONV_FORMAT_USER_F2T_04
+        MENUITEM "Format 5",                         ID_CONV_FORMAT_USER_F2T_05
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOGEX 0, 0, 224, 310
+STYLE DS_SETFONT | DS_MODALFRAME | DS_SETFOREGROUND | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Version"
+FONT 8, "Segoe UI", 400, 0, 0x80
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,7,7,20,20
+    CONTROL         "STEP_J Version x.xx",IDC_ST_VERSION,"Static",SS_LEFTNOWORDWRAP | SS_NOPREFIX | WS_GROUP,30,10,186,48
+    DEFPUSHBUTTON   "OK",IDOK,90,290,50,14,WS_GROUP
+    LTEXT           "Modified version by jarupxx\nPlease send bug reports, requests, complaints, etc. to the contact above.\nPlease do not contact the original author.",IDC_STATIC,7,58,209,34,SS_SUNKEN
+    LTEXT           "Original Author\nSuperTagEditor\nCopyright (C) 2000 MERCURY\nhttp://www5.wisnet.ne.jp/~mercury/",IDC_STATIC,7,95,209,37,SS_SUNKEN
+    LTEXT           "STEP\nCopyright (C) 2001-2006 haseta\nhttps://hp.vector.co.jp/authors/VA012911/",IDC_STATIC,7,131,209,28,SS_SUNKEN
+    LTEXT           "STEP_M\nCopyright (C) 2008-2010 Mimura\nhttps://mimumimu.net/",IDC_STATIC,7,159,209,28,SS_SUNKEN
+    LTEXT           "STEP_K\nCopyright (C) 2016-2021 Kobarin\nhttps://kobarin.sakura.ne.jp/",IDC_STATIC,7,186,209,28,SS_SUNKEN
+    LTEXT           "This software incorporates mp3infp/u source code for ID3Tag/RIFF/OggVorbis/MP4/ApeTag/VQF tag acquisition and update.\n\nmp3infp/u\nCopyright (C) 1998-2019 T-Matsuo, Rem, K.Takata\nhttps://github.com/k-takata/mp3infp/releases",IDC_STATIC,7,217,209,65,SS_SUNKEN
+END
+
+IDR_MAINFRAME DIALOGEX 0, 0, 330, 16
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+FONT 8, "Segoe UI", 0, 0, 0x0
+BEGIN
+    LTEXT           "Static",IDC_STATIC,5,4,171,8
+END
+
+CG_IDD_PROGRESS DIALOGEX 0, 0, 187, 63
+STYLE DS_SETFONT | DS_MODALFRAME | DS_SETFOREGROUND | DS_FIXEDSYS | WS_POPUP | WS_VISIBLE | WS_CAPTION
+FONT 8, "Segoe UI", 0, 0, 0x0
+BEGIN
+    CONTROL         "Progress1",CG_IDC_PROGDLG_PROGRESS,"msctls_progress32",WS_BORDER,26,23,154,13
+    LTEXT           " 0 %",CG_IDC_PROGDLG_PERCENT,7,27,18,8
+    LTEXT           "Searching for files",IDC_ST_MESSAGE,7,7,173,8
+    PUSHBUTTON      "Aborted",IDCANCEL,68,42,50,14
+END
+
+IDD_DLG_LIST_SORT DIALOGEX 0, 0, 194, 209
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Sort Method Settings Dialog"
+FONT 8, "Segoe UI", 0, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,46,188,40,14
+    PUSHBUTTON      "Cancel",IDCANCEL,106,188,40,14
+    COMBOBOX        IDC_LIST_KEY1,13,19,84,54,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "↓Z to A",IDC_RA_UP_SORT1,"Button",BS_AUTORADIOBUTTON | WS_GROUP,98,19,42,10
+    CONTROL         "↓A to Z",IDC_RA_DOWN_SORT1,"Button",BS_AUTORADIOBUTTON,142,19,42,10
+    GROUPBOX        "Key 1 (highest priority)",IDC_STATIC,7,7,180,31
+    COMBOBOX        IDC_LIST_KEY2,13,54,84,55,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "↓Z to A",IDC_RA_UP_SORT2,"Button",BS_AUTORADIOBUTTON | WS_GROUP,98,54,42,10
+    CONTROL         "↓A to Z",IDC_RA_DOWN_SORT2,"Button",BS_AUTORADIOBUTTON,142,54,42,10
+    GROUPBOX        "Key 2",IDC_STATIC,7,42,180,31
+    COMBOBOX        IDC_LIST_KEY3,13,89,84,58,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "↓Z to A",IDC_RA_UP_SORT3,"Button",BS_AUTORADIOBUTTON | WS_GROUP,98,89,42,10
+    CONTROL         "↓A to Z",IDC_RA_DOWN_SORT3,"Button",BS_AUTORADIOBUTTON,142,89,42,10
+    GROUPBOX        "Key 3",IDC_STATIC,7,77,180,31
+    COMBOBOX        IDC_LIST_KEY4,13,124,84,55,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "↓Z to A",IDC_RA_UP_SORT4,"Button",BS_AUTORADIOBUTTON | WS_GROUP,98,124,42,10
+    CONTROL         "↓A to Z",IDC_RA_DOWN_SORT4,"Button",BS_AUTORADIOBUTTON,142,124,42,10
+    GROUPBOX        "Key 4",IDC_STATIC,7,112,180,31
+    COMBOBOX        IDC_LIST_KEY5,13,159,84,58,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "↓Z to A",IDC_RA_UP_SORT5,"Button",BS_AUTORADIOBUTTON | WS_GROUP,98,159,42,10
+    CONTROL         "↓A to Z",IDC_RA_DOWN_SORT5,"Button",BS_AUTORADIOBUTTON,142,159,42,10
+    GROUPBOX        "Key 5",IDC_STATIC,7,147,180,31
+END
+
+IDD_DLG_SET_CLASSIFICATION DIALOGEX 0, 0, 179, 213
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Classification Settings"
+FONT 8, "Segoe UI", 0, 0, 0x0
+BEGIN
+    CONTROL         "Categorized by folder structure",IDC_RA_FOLDER,"Button",BS_AUTORADIOBUTTON | WS_GROUP,15,21,132,10
+    CONTROL         "Classified by tag information",IDC_RA_FILE_TAG,"Button",BS_AUTORADIOBUTTON,15,36,132,10
+    GROUPBOX        "Classification Method",IDC_STATIC,7,7,165,144
+    LTEXT           "Hierarchy 1",IDC_ST_CLASS1,16,54,42,10
+    COMBOBOX        IDC_LIST_CLASS1,60,53,92,70,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Hierarchy 2",IDC_ST_CLASS2,16,73,42,10
+    COMBOBOX        IDC_LIST_CLASS2,60,72,92,70,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Hierarchy 3",IDC_ST_CLASS3,16,92,42,10
+    COMBOBOX        IDC_LIST_CLASS3,60,91,92,71,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Hierarchy 4",IDC_ST_CLASS4,16,111,42,10
+    COMBOBOX        IDC_LIST_CLASS4,60,110,92,69,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Hierarchy 5",IDC_ST_CLASS5,16,130,42,10
+    COMBOBOX        IDC_LIST_CLASS5,60,129,92,68,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "* Not available for[Categorized by folder structure]\nWill take effect the next time the file is read",IDC_STATIC,
+                    "Static",SS_LEFTNOWORDWRAP | WS_GROUP,7,169,165,17
+    CONTROL         "Update the classification display with the latest information.",IDC_CH_EXEC_CLASSIFICATION,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,156,165,10
+    PUSHBUTTON      "Reset",IDC_BT_RESET_PAGE,7,192,48,14
+END
+
+IDD_DLG_FILE_OVERWRITE DIALOGEX 0, 0, 253, 107
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "File Overwrite Confirmation Dialog"
+FONT 8, "Segoe UI", 0, 0, 0x0
+BEGIN
+    LTEXT           "The read-only attribute is set, may I overwrite it?",IDC_STATIC,7,7,212,8
+    LTEXT           "File Name",IDC_STATIC,7,26,36,10
+    EDITTEXT        IDC_ED_FILENAME,45,24,201,14,ES_AUTOHSCROLL | ES_READONLY
+    LTEXT           "Modified",IDC_STATIC,7,45,36,10
+    EDITTEXT        IDC_ED_TIME_STAMP,45,43,81,14,ES_AUTOHSCROLL | ES_READONLY
+    LTEXT           "Size",IDC_STATIC,7,64,36,10
+    EDITTEXT        IDC_ED_SIZE,45,62,81,14,ES_AUTOHSCROLL | ES_READONLY
+    DEFPUSHBUTTON   "Overwrite this file (&O)",IDC_BT_OVERWRITE,7,86,75,14
+    PUSHBUTTON      "Overwrite all files (&A)",IDC_BT_ALL_OVERWRITE,86,86,65,14
+    PUSHBUTTON      "Skip(&S)",IDC_BT_SKIP,156,86,43,14
+    PUSHBUTTON      "Aborted",IDCANCEL,203,86,43,14
+END
+
+IDD_DLG_USER_CONV_FORMAT DIALOGEX 0, 0, 228, 274
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "User conversion format"
+FONT 8, "Segoe UI", 0, 0, 0x0
+BEGIN
+    LTEXT           "Current Format",IDC_STATIC,7,9,60,8
+    COMBOBOX        IDC_LIST_FORMAT_TYPE,72,8,100,63,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Rename",IDC_BT_NAME_CHANGE,178,7,35,14
+    EDITTEXT        IDC_ED_FORMAT_TAG2FILE,13,38,193,14,ES_AUTOHSCROLL
+    GROUPBOX        "Tag info ⇒ Filename",IDC_STATIC,7,26,205,32
+    EDITTEXT        IDC_ED_FORMAT_FILE2TAG,13,73,193,14,ES_AUTOHSCROLL
+    GROUPBOX        "Filename ⇒ Tag info",IDC_STATIC,7,62,205,32
+    PUSHBUTTON      "Artist Name - %ARTIST_NAME%",IDC_BT_ARTIST_NAME,13,110,195,12,BS_LEFT
+    PUSHBUTTON      "Album Name - %ALBUM_NAME%",IDC_BT_ALBUM_NAME,13,122,195,12,BS_LEFT
+    PUSHBUTTON      "Track Name - %TRACK_NAME%",IDC_BT_TRACK_NAME,13,134,195,12,BS_LEFT
+    PUSHBUTTON      "Release Year - %RELEASE_YEAR%",IDC_BT_RELEASE_YEAR,13,146,195,12,BS_LEFT
+    PUSHBUTTON      "Track number - %TRACK_NUMBER%",IDC_BT_TRACK_NUMBER,13,158,195,12,BS_LEFT
+    PUSHBUTTON      "Track number (output as 2 digits) - %TRACK_NUMBER2%",IDC_BT_TRACK_NUMBER2,13,170,195,12,BS_LEFT
+    PUSHBUTTON      "Disk number - %DISC_NUMBER%",IDC_BT_DISC_NUMBER,13,182,195,12,BS_LEFT
+    PUSHBUTTON      "Comments - %COMMENT%",IDC_BT_COMMENT,13,206,195,12,BS_LEFT
+    GROUPBOX        "List of available variables (see var_list2.txt)",IDC_STATIC,7,98,205,126
+    PUSHBUTTON      "Disk number (output as 2 digits) - %DISC_NUMBER2%",IDC_BT_DISC_NUMBER2,13,194,195,12,BS_LEFT
+    LTEXT           "Tag Information ⇒ File Name is a function that limits the destination cell of the ""Extended Conversion Format"" to the file name.\nFile Name ⇒ Tag Information is a function that limits the source cell to the file name.",IDC_STATIC,6,226,209,42,SS_SUNKEN
+END
+
+IDD_DLG_NAME_CHANGE DIALOGEX 0, 0, 125, 49
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Rename Dialog"
+FONT 8, "Segoe UI", 0, 0, 0x0
+BEGIN
+    EDITTEXT        IDC_EDIT_NAME,34,7,84,14,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,17,28,37,14
+    PUSHBUTTON      "Cancel",IDCANCEL,69,28,37,14
+    LTEXT           "Name",IDC_STATIC,7,8,26,10
+END
+
+IDD_DLG_SAVE_PLAYLIST DIALOGEX 0, 0, 187, 135
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Playlist Output Settings Dialog"
+FONT 8, "Segoe UI", 0, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,28,114,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,108,114,50,14
+    GROUPBOX        "Settings",IDC_STATIC,7,7,173,29
+    CONTROL         "Always output absolute paths",IDC_CH_OUTPUT_FULLPATH,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,13,20,140,10
+END
+
+IDD_DLG_LOAD_PLAYLIST DIALOGEX 0, 0, 171, 141
+STYLE DS_SETFONT | DS_MODALFRAME | DS_SETFOREGROUND | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Playlist Input Settings Dialog"
+FONT 8, "Segoe UI", 0, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,28,120,41,14
+    PUSHBUTTON      "Cancel",IDCANCEL,101,120,41,14
+    CONTROL         "Register",IDC_RA_ADD_LIST_ON,"Button",BS_AUTORADIOBUTTON | WS_GROUP,14,21,68,10
+    CONTROL         "Do not register",IDC_RA_ADD_LIST_OFF,"Button",BS_AUTORADIOBUTTON,90,21,68,10
+    GROUPBOX        "Subscribe to the list",IDC_STATIC,7,7,157,49
+    CONTROL         "Clear the list before reading it",IDC_CH_CLEAR_LIST,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,39,136,10
+    CONTROL         "Check",IDC_RA_FILE_CHECK_ON,"Button",BS_AUTORADIOBUTTON | WS_GROUP,14,77,68,10
+    CONTROL         "Do not check",IDC_RA_FILE_CHECK_OFF,"Button",BS_AUTORADIOBUTTON,90,77,68,10
+    GROUPBOX        "Check mark settings",IDC_STATIC,7,63,157,49
+    CONTROL         "Clear checkmarks before reading",IDC_CH_CLEAR_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,95,136,10
+END
+
+IDD_DLG_SEARCH_STATE DIALOGEX 0, 0, 162, 151
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Search Settings Dialog"
+FONT 8, "Segoe UI", 0, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "Next",IDOK,26,130,43,14
+    PUSHBUTTON      "Cancel",IDCANCEL,93,130,43,14
+    LTEXT           "Find",IDC_STATIC,7,9,32,10
+    COMBOBOX        IDC_ED_SEARCH_WORD,50,7,105,14,CBS_OEMCONVERT
+    LTEXT           "Replace",IDC_STATIC,7,32,32,10
+    COMBOBOX        IDC_ED_REPLACE_WORD,50,26,105,14,CBS_OEMCONVERT
+    CONTROL         "Use regular expression for replace string",IDC_CH_REGEXP,"Button",BS_AUTOCHECKBOX | BS_MULTILINE | WS_TABSTOP,13,54,135,20
+    CONTROL         "Case sensitive",IDC_CH_CHECK_UL,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,13,73,101,10
+    CONTROL         "Search only the selected area",IDC_CH_RANGE_SELECTED,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,13,87,135,10
+    LTEXT           "Search direction",IDC_STATIC,14,105,31,8
+    COMBOBOX        IDC_LIST_SEARCH_DIR,50,103,94,40,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "Operation Setting",IDC_STATIC,7,47,148,76
+END
+
+IDD_DLG_CHECK_WORD DIALOGEX 0, 0, 163, 163
+STYLE DS_SETFONT | DS_MODALFRAME | DS_SETFOREGROUND | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Check with specified conditions"
+FONT 8, "Segoe UI", 0, 0, 0x0
+BEGIN
+    LTEXT           "String",IDC_STATIC,7,10,22,8
+    EDITTEXT        IDC_ED_SEARCH_WORD,34,7,122,14,ES_AUTOHSCROLL
+    LTEXT           "Subject",IDC_STATIC,7,30,26,8
+    COMBOBOX        IDC_LIST_TARGET,34,27,95,67,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Use regular expression for replace string",IDC_CH_REGEXP,"Button",BS_AUTOCHECKBOX | BS_MULTILINE | WS_TABSTOP,13,54,135,20
+    CONTROL         "Case sensitive",IDC_CH_CHECK_UL,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,13,74,101,10
+    CONTROL         "Search only the range of selected rows",IDC_CH_RANGE_SELECTED,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,13,88,122,10
+    CONTROL         "Only if an exact match",IDC_CH_MATCH_COMPLETE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,13,102,92,10
+    CONTROL         "Leave unchecked selected",IDC_CH_MATCH_SELECTED,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,13,116,103,10
+    GROUPBOX        "Operation Setting",IDC_STATIC,7,48,149,87
+    DEFPUSHBUTTON   "Execution",IDOK,32,142,38,14
+    PUSHBUTTON      "Cancel",IDCANCEL,92,142,38,14
+END
+
+IDD_DLG_KEY_CONFIG DIALOGEX 0, 0, 211, 242
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Key Assignment"
+FONT 8, "Segoe UI", 0, 0, 0x0
+BEGIN
+    LTEXT           "Command (&C)",IDC_STATIC,7,6,60,10
+    COMBOBOX        IDC_LIST_GROUP,7,19,100,62,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LISTBOX         IDC_LIST_COMMAND,7,37,100,199,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Hot key (&K)",IDC_STATIC,114,6,60,10
+    LISTBOX         IDC_LIST_KEY,114,19,91,179,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "CTRL(&T)",IDC_CH_CTRL,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,117,204,45,10
+    CONTROL         "ALT(&A)",IDC_CH_ALT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,165,204,40,10
+    LTEXT           "*Some combinations may not be available.",IDC_STATIC,114,219,92,18
+END
+
+IDD_DLG_CONV_FORMAT_EX DIALOGEX 0, 0, 228, 302
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Extended Conversion Format"
+FONT 8, "Segoe UI", 0, 0, 0x0
+BEGIN
+    LTEXT           "Name",IDC_STATIC,6,7,25,10
+    COMBOBOX        IDC_LIST_FORMAT_TYPE,34,7,140,63,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Rename",IDC_BT_NAME_CHANGE,178,6,35,14
+    LTEXT           "Format",IDC_STATIC,6,24,25,10
+    EDITTEXT        IDC_EDIT_FORMAT,34,23,178,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "File name (without extension) - %FILE_NAME%",IDC_BT_FILE_NAME,13,52,195,12,BS_LEFT
+    PUSHBUTTON      "Artist Name - %ARTIST_NAME%",IDC_BT_ARTIST_NAME,13,64,195,12,BS_LEFT
+    PUSHBUTTON      "Album Name - %ALBUM_NAME%",IDC_BT_ALBUM_NAME,13,76,195,12,BS_LEFT
+    PUSHBUTTON      "Track Name - %TRACK_NAME%",IDC_BT_TRACK_NAME,13,88,195,12,BS_LEFT
+    PUSHBUTTON      "Release Year - %RELEASE_YEAR%",IDC_BT_RELEASE_YEAR,13,100,195,12,BS_LEFT
+    PUSHBUTTON      "Track number - %TRACK_NUMBER%",IDC_BT_TRACK_NUMBER,13,112,195,12,BS_LEFT
+    PUSHBUTTON      "Track number (output as 2 digits) - %TRACK_NUMBER2%",IDC_BT_TRACK_NUMBER2,13,124,195,12,BS_LEFT
+    PUSHBUTTON      "Disk number - %DISC_NUMBER%",IDC_BT_DISC_NUMBER,13,136,195,12,BS_LEFT
+    PUSHBUTTON      "Comments - %COMMENT%",IDC_BT_COMMENT,13,160,195,12,BS_LEFT
+    PUSHBUTTON      "Sequential number - %NUMBER%",IDC_BT_NUMBER,13,172,195,12,BS_LEFT
+    PUSHBUTTON      "Sequential number 2 (add if interrupted) - %NUMBER2%",IDC_BT_NUMBER2,13,184,195,12,BS_LEFT
+    PUSHBUTTON      "Run-time input type fixed string - %STRING%",IDC_BT_FIX_STRING,13,196,195,12,BS_LEFT
+    GROUPBOX        "List of available variables (see var_list2.txt)",IDC_STATIC,7,41,205,159
+    LTEXT           "Initial value",IDC_STATIC,11,232,42,8
+    EDITTEXT        IDC_ED_INIT_NUMBER,56,228,16,14,ES_AUTOHSCROLL
+    LTEXT           "Increments",IDC_STATIC,74,232,40,8
+    EDITTEXT        IDC_ED_ADD_NUMBER,114,228,16,14,ES_AUTOHSCROLL
+    LTEXT           "Digits",IDC_STATIC,136,232,40,8
+    EDITTEXT        IDC_ED_MIN_COLUMN,186,228,16,14,ES_AUTOHSCROLL
+    CONTROL         "If a writable cell is interrupted, the sequential number is reset to its initial value",IDC_CH_SPACE_INIT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,9,244,173,10
+    GROUPBOX        "Sequential Numbering",IDC_STATIC,6,218,205,39
+    PUSHBUTTON      "Disk number (output as 2 digits) - %DISC_NUMBER2%",IDC_BT_DISC_NUMBER2,13,148,195,12,BS_LEFT
+    LTEXT           "%DISC_NUMBER2%-%TRACK_NUMBER2%-%TRACK_NAME% is a function that, when executed when disk number=2, track number=3, track name=AAAA, will convert the target cell as ""02-03-AAAA"".",IDC_STATIC,2,258,209,38,SS_SUNKEN
+END
+
+IDD_DLG_EDIT_SHOW_COLUMN DIALOGEX 0, 0, 205, 215
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Display item settings"
+FONT 8, "Segoe UI", 0, 0, 0x0
+BEGIN
+    CONTROL         "List2",IDC_LIST_COLUMN,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | WS_BORDER | WS_TABSTOP,7,7,127,181
+    PUSHBUTTON      "Up",IDC_BT_UP,138,7,60,14
+    PUSHBUTTON      "Down",IDC_BT_DOWN,138,28,60,14
+    LTEXT           "*Changes will take effect at the next startup",IDC_STATIC,7,192,127,16
+    PUSHBUTTON      "Reset",IDC_BT_RESET_PAGE,140,194,58,14
+    GROUPBOX        "Maximum column width",IDC_STATIC,139,57,61,60,BS_MULTILINE
+    EDITTEXT        IDC_EDIT_MAX_WIDTH,145,79,49,14,ES_AUTOHSCROLL
+    LTEXT           "*0 is unlimited",IDC_STATIC,145,96,50,8
+END
+
+IDD_DLG_ENV_CONF DIALOGEX 0, 0, 199, 105
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Confirmation message"
+FONT 8, "Segoe UI", 400, 0, 0x80
+BEGIN
+    CONTROL         "Rmoving a file from the list",IDC_CH_CONF_DELETE_LIST,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,20,170,10
+    CONTROL         "Deleting a file.",IDC_CH_CONF_DELETE_FILE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,34,170,10
+    CONTROL         "You run[Folder Synchronization]",IDC_CH_CONF_EDIT_MODIFY,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,48,170,10
+    GROUPBOX        "Display confirmation message",IDC_STATIC,7,7,185,70
+    CONTROL         "You run[Folder Synchronization]",IDC_CH_CONF_FOLDER_SYNC,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,62,170,10
+    PUSHBUTTON      "Reset",IDC_BT_RESET_PAGE,7,84,50,14
+END
+
+IDD_DLG_REPLACE_WORD DIALOGEX 0, 0, 223, 151
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Replace"
+FONT 8, "Segoe UI", 0, 0, 0x0
+BEGIN
+    LTEXT           "Search(&F)",IDC_STATIC,7,10,26,8
+    CONTROL         "",IDC_ED_SEARCH_WORD,"ComboBoxEx32",CBS_DROPDOWN | CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP,36,8,122,51
+    LTEXT           "Replace(&H)",IDC_ST_REPLACE,7,28,27,8
+    CONTROL         "",IDC_ED_REPLACE_WORD,"ComboBoxEx32",CBS_DROPDOWN | CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP,36,27,122,53
+    LTEXT           "Target (&I)",IDC_STATIC,7,52,25,8
+    COMBOBOX        IDC_LIST_TARGET,36,50,95,67,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "Operation Setting",IDC_STATIC,7,70,147,71
+    CONTROL         "Use regular expression for search string (&E)",IDC_CH_REGEXP,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,13,82,115,10
+    CONTROL         "Case sensitive (&C)",IDC_CH_CHECK_UL,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,13,96,112,10
+    CONTROL         "Search only the range of selected rows (&L)",IDC_CH_RANGE_SELECTED,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,13,110,132,10
+    CONTROL         "Only if an exact match (&M)",IDC_CH_MATCH_COMPLETE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,13,124,104,10
+    PUSHBUTTON      "Prev (&P)",ID_BT_SEARCH_BEFORE,167,7,49,14
+    DEFPUSHBUTTON   "Next (&N)",ID_BT_SEARCH_NEXT,167,25,49,14
+    PUSHBUTTON      "Calcel",IDCANCEL,167,49,49,14
+    PUSHBUTTON      "Replace(&R)",ID_BT_REPLACE,167,74,49,14
+    PUSHBUTTON      "Replace All (&A)",IDOK,167,92,49,14
+END
+
+IDD_DLG_REPLACE_FILENAME DIALOGEX 0, 0, 203, 255
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "File name character substitution"
+FONT 8, "Segoe UI", 0, 0, 0x0
+BEGIN
+    CONTROL         "Replace the following characters in the filename",IDC_CH_FILENAME_MULTI_BYTE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,7,119,10
+    GROUPBOX        "Substitution character setting",IDC_STATIC,7,23,191,101
+    EDITTEXT        IDC_ED_BEFORE1,14,38,17,14,ES_READONLY | NOT WS_TABSTOP
+    LTEXT           "⇒",IDC_STATIC,35,40,12,8
+    EDITTEXT        IDC_ED_AFTER1,47,38,17,14
+    EDITTEXT        IDC_ED_BEFORE2,77,38,17,14,ES_READONLY | NOT WS_TABSTOP
+    LTEXT           "⇒",IDC_STATIC,98,40,12,8
+    EDITTEXT        IDC_ED_AFTER2,111,38,17,14
+    EDITTEXT        IDC_ED_BEFORE3,138,38,17,14,ES_READONLY | NOT WS_TABSTOP
+    LTEXT           "⇒",IDC_STATIC,159,40,12,8
+    EDITTEXT        IDC_ED_AFTER3,173,38,17,14
+    EDITTEXT        IDC_ED_BEFORE4,14,57,17,14,ES_READONLY | NOT WS_TABSTOP
+    LTEXT           "⇒",IDC_STATIC,35,60,12,8
+    EDITTEXT        IDC_ED_AFTER4,47,57,17,14
+    EDITTEXT        IDC_ED_BEFORE5,77,57,17,14,ES_READONLY | NOT WS_TABSTOP
+    LTEXT           "⇒",IDC_STATIC,98,60,12,8
+    EDITTEXT        IDC_ED_AFTER5,111,57,17,14
+    EDITTEXT        IDC_ED_BEFORE6,138,57,17,14,ES_READONLY | NOT WS_TABSTOP
+    LTEXT           "⇒",IDC_STATIC,159,60,12,8
+    EDITTEXT        IDC_ED_AFTER6,173,57,17,14
+    EDITTEXT        IDC_ED_BEFORE7,14,77,17,14,ES_READONLY | NOT WS_TABSTOP
+    LTEXT           "⇒",IDC_STATIC,35,80,12,8
+    EDITTEXT        IDC_ED_AFTER7,47,77,17,14
+    EDITTEXT        IDC_ED_BEFORE8,77,77,17,14,ES_READONLY | NOT WS_TABSTOP
+    LTEXT           "⇒",IDC_STATIC,98,80,12,8
+    EDITTEXT        IDC_ED_AFTER8,111,77,17,14
+    EDITTEXT        IDC_ED_BEFORE9,138,77,17,14,ES_READONLY | NOT WS_TABSTOP
+    LTEXT           "⇒",IDC_STATIC,159,80,12,8
+    EDITTEXT        IDC_ED_AFTER9,173,77,17,14
+    EDITTEXT        IDC_ED_BEFORE10,14,96,17,14,ES_READONLY | NOT WS_TABSTOP
+    LTEXT           "⇒",IDC_STATIC,35,99,12,8
+    EDITTEXT        IDC_ED_AFTER10,47,96,17,14
+    EDITTEXT        IDC_ED_BEFORE11,77,96,17,14,ES_READONLY | NOT WS_TABSTOP
+    LTEXT           "⇒",IDC_STATIC,98,99,12,8
+    EDITTEXT        IDC_ED_AFTER11,111,96,17,14
+    EDITTEXT        IDC_ED_BEFORE12,138,96,17,14,ES_READONLY | NOT WS_TABSTOP
+    LTEXT           "⇒",IDC_STATIC,159,99,12,8
+    EDITTEXT        IDC_ED_AFTER12,173,96,17,14
+    LTEXT           "(↑half-width space)",IDC_STATIC,138,112,54,8
+    GROUPBOX        "Substitution character setting",IDC_STATIC,7,133,191,55
+    EDITTEXT        IDC_ED_USER_BEFORE1,14,147,17,14
+    LTEXT           "⇒",IDC_STATIC,35,149,8,8
+    EDITTEXT        IDC_ED_USER_AFTER1,47,147,17,14
+    EDITTEXT        IDC_ED_USER_BEFORE2,77,147,17,14
+    LTEXT           "⇒",IDC_STATIC,98,149,8,8
+    EDITTEXT        IDC_ED_USER_AFTER2,111,147,17,14
+    EDITTEXT        IDC_ED_USER_BEFORE3,138,147,17,14
+    LTEXT           "⇒",IDC_STATIC,159,149,8,8
+    EDITTEXT        IDC_ED_USER_AFTER3,173,147,17,14
+    EDITTEXT        IDC_ED_USER_BEFORE4,14,167,17,14
+    LTEXT           "⇒",IDC_STATIC,35,169,8,8
+    EDITTEXT        IDC_ED_USER_AFTER4,47,167,17,14
+    EDITTEXT        IDC_ED_USER_BEFORE5,77,167,17,14
+    LTEXT           "⇒",IDC_STATIC,98,169,8,8
+    EDITTEXT        IDC_ED_USER_AFTER5,111,167,17,14
+    EDITTEXT        IDC_ED_USER_BEFORE6,138,167,17,14
+    LTEXT           "⇒",IDC_STATIC,159,169,8,8
+    EDITTEXT        IDC_ED_USER_AFTER6,173,167,17,14
+    LTEXT           "Unification of extensions.",IDC_STATIC,7,197,45,10
+    CONTROL         "As is",IDC_RADIO_EXT_NONE,"Button",BS_AUTORADIOBUTTON | WS_GROUP,53,197,39,10
+    CONTROL         "Lowercase",IDC_RADIO_EXT_LOWER,"Button",BS_AUTORADIOBUTTON,96,197,39,10
+    CONTROL         "Upper case",IDC_RADIO_EXT_UPPER,"Button",BS_AUTORADIOBUTTON,139,197,39,10
+    PUSHBUTTON      "Unification of character types...",IDC_BT_FILENAME_UNIFY,7,213,56,14
+    PUSHBUTTON      "Reset",IDC_BT_RESET_PAGE,7,234,48,14
+END
+
+IDD_DLG_FIXED_STRING DIALOGEX 0, 0, 125, 53
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Fixed String Input Dialog"
+FONT 8, "Segoe UI", 0, 0, 0x0
+BEGIN
+    EDITTEXT        IDC_EDIT_NAME,34,7,84,14,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,17,32,37,14
+    PUSHBUTTON      "Cancel",IDCANCEL,69,32,37,14
+    LTEXT           "String",IDC_STATIC,7,10,24,8
+END
+
+IDD_DLG_SETUP_GENRE DIALOGEX 0, 0, 199, 213
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Genre Setting"
+FONT 8, "Segoe UI", 0, 0, 0x0
+BEGIN
+    CONTROL         "List1",IDC_LIST_GENRE,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | WS_BORDER | WS_TABSTOP,7,7,117,199
+    PUSHBUTTON      "Check all",IDC_BT_CHECK_ALL,130,7,62,14
+    PUSHBUTTON      "Uncheck all",IDC_BT_UNCHECK_ALL,130,27,62,14
+    GROUPBOX        "Compatible",IDC_STATIC,133,45,60,73
+    PUSHBUTTON      "ID3 v1.1",IDC_BT_CHECK_ID3,140,57,46,14
+    PUSHBUTTON      "Winamp",IDC_BT_CHECK_WINAMP,140,78,46,14
+    PUSHBUTTON      "SCMPX",IDC_BT_CHECK_SCMPX,140,99,46,14
+    PUSHBUTTON      "Reset",IDC_BT_RESET_PAGE,130,125,62,14
+    GROUPBOX        "User designation",IDC_STATIC,132,147,60,59
+    PUSHBUTTON      "Add",IDC_BT_ADD_USER,140,162,46,14
+    PUSHBUTTON      "Delete",IDC_BT_DEL_USER,140,183,46,14
+END
+
+IDD_DLG_FOLDER_SYNC DIALOGEX 0, 0, 203, 137
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Folder Synchronization"
+FONT 8, "Segoe UI", 0, 0, 0x0
+BEGIN
+    CONTROL         "Enable folder synchronization (not available in STEP_J)",IDC_CH_ENABLE_FOLDER_SYNC,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP | WS_DISABLED,7,7,189,10
+    EDITTEXT        IDC_ED_ROOT_FOLDER,13,34,150,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "...",IDC_BT_REF_ROOT,165,34,28,14
+    CONTROL         "Open a folder specification dialog each time at runtime",IDC_CH_SELECT_ALWAYS,"Button",BS_AUTOCHECKBOX | WS_TABSTOP | WS_DISABLED,13,51,146,10
+    GROUPBOX        "Folder corresponding to ""Root"" of the tree",IDC_ST_ROOT_FOLDER,7,22,189,44
+    GROUPBOX        "Operation Setting",IDC_ST_OPTION,7,72,189,41
+    CONTROL         "Folders emptied by moving files are deleted",IDC_CH_DELETE_FOLDER,"Button",BS_AUTOCHECKBOX | WS_TABSTOP | WS_DISABLED,13,84,160,10
+    CONTROL         "Also include lyrics files in the same folder",IDC_CH_MOVE_LYRICS_FILE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP | WS_DISABLED,13,98,143,10
+    PUSHBUTTON      "Reset",IDC_BT_RESET_PAGE,7,116,48,14
+END
+
+IDD_DLG_ENV_PLAYER DIALOGEX 0, 0, 203, 134
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Player"
+FONT 8, "Segoe UI", 0, 0, 0x0
+BEGIN
+    GROUPBOX        "Select a Player",IDC_STATIC,6,7,192,81
+    CONTROL         "Winamp",IDC_RA_PLAYER_WINAMP,"Button",BS_AUTORADIOBUTTON | WS_GROUP,15,18,43,10
+    CONTROL         "SCMPX(*1)",IDC_RA_PLAYER_SCMPX,"Button",BS_AUTORADIOBUTTON,95,18,53,10
+    CONTROL         "KbMedia Player",IDC_RA_PLAYER_KBMEDIA,"Button",BS_AUTORADIOBUTTON,15,32,66,10
+    CONTROL         "foobar2000",IDC_RA_PLAYER_FOOBAR2000,"Button",BS_AUTORADIOBUTTON,95,32,53,10
+    CONTROL         "Lilith",IDC_RA_PLAYER_LILITH,"Button",BS_AUTORADIOBUTTON,15,45,29,10
+    CONTROL         "uLilith",IDC_RA_PLAYER_ULILITH,"Button",BS_AUTORADIOBUTTON,95,45,33,10
+    CONTROL         "Other Players (*1)",IDC_RA_PLAYER_EXT,"Button",BS_AUTORADIOBUTTON,15,60,84,10
+    LTEXT           "(*1) Controls other than playback (stop/previous/next song) are not possible",IDC_STATIC,10,76,186,8
+    GROUPBOX        "Path to the player",IDC_STATIC,6,94,192,31
+    EDITTEXT        IDC_ED_WINAMP_PATH,10,107,152,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "...",IDC_BT_REF_WINAMP,165,107,28,14
+END
+
+IDD_DLG_WRITE_FORM DIALOGEX 0, 0, 191, 143
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "List output"
+FONT 8, "Segoe UI", 0, 0, 0x0
+BEGIN
+    LTEXT           "Name",IDC_STATIC,7,9,25,10
+    COMBOBOX        IDC_LIST_FORMAT_TYPE,34,8,118,63,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Rename",IDC_BT_NAME_CHANGE,154,7,35,14
+    LTEXT           "Format File",IDC_STATIC,12,61,37,8
+    EDITTEXT        IDC_EDIT_FILENAME,57,39,111,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "...",IDC_BT_REF_FILE,169,39,13,14
+    LTEXT           "Extension",IDC_STATIC,12,61,24,8
+    EDITTEXT        IDC_EDIT_EXT_NAME,57,57,34,14,ES_AUTOHSCROLL
+    LTEXT           "*Specify including a period",IDC_STATIC,95,56,69,16
+    CONTROL         "Output full-width spaces for empty items (e.g., HTML)",IDC_CH_IS_HTML,"Button",BS_AUTOCHECKBOX | BS_MULTILINE | WS_TABSTOP,13,73,164,20
+    CONTROL         "Output only the selected files",IDC_CH_WRITE_SELECTED,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,13,93,126,10
+    GROUPBOX        "Settings",IDC_STATIC,7,27,177,95
+    LTEXT           "[Note] %FILE_NAME% Contains the extension",IDC_STATIC,7,128,175,8
+    CONTROL         "Output as HTML",IDC_CH_WRITE_HTML,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,13,108,79,10
+END
+
+IDD_CUSTOM_FILE_OPEN DIALOGEX 0, 0, 177, 14
+STYLE DS_SETFONT | DS_3DLOOK | DS_CONTROL | WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS
+FONT 8, "Segoe UI", 400, 0, 0x80
+BEGIN
+    CONTROL         "Additional output at the end of the file if overwriting",IDC_CH_FILE_ADDPEND,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,2,166,10
+END
+
+IDD_DLG_ENVIRONMENT DIALOGEX 0, 0, 228, 287
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Options"
+FONT 8, "Segoe UI", 0, 0, 0x0
+BEGIN
+    GROUPBOX        "User Interface",IDC_STATIC,7,7,213,64
+    CONTROL         "Move cursor down on [Enter] after changing item.",IDC_CH_EDIT_OK_DOWN,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,11,18,200,10
+    CONTROL         "Start item editing at[Enter](move down when unchecked)",IDC_CH_ENTER_BEGIN_EDIT,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,11,31,200,10
+    CONTROL         "Cancel cell editing with a single ESC key press",IDC_CH_ESC_EDIT_CANCEL,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,11,44,200,10
+    CONTROL         "When editing directly, use the cursor keys to move cells",IDC_CH_ENABLE_EDIT_CURSOR_EXIT,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,11,57,200,10
+    GROUPBOX        "Operation Setting",IDC_STATIC,7,73,213,188
+    CONTROL         "Do not change the timestamp",IDC_CH_KEEP_TIME_STAMP,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,11,84,200,10
+    CONTROL         "Synchronize file creation date and time with modification date and time",IDC_CH_SYNC_CREATE_TIME,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,11,97,200,10
+    CONTROL         "Automatically open the last opened folder on startup",IDC_CH_AUTO_OPEN_FOLDER,"Button",BS_AUTOCHECKBOX | BS_MULTILINE | WS_TABSTOP,11,110,200,10
+    CONTROL         "Adjust column widths in real time",IDC_CH_LOAD_FILE_ADJUST_COLUMN,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,11,123,200,10
+    CONTROL         "Check state when file is read",IDC_CH_LOAD_FILE_CHECKED,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,11,136,200,10
+    CONTROL         "Do not display file names in the Audio List",IDC_CH_HIDE_MP3_LIST_FILE,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,11,149,200,10
+    CONTROL         "Add files in subfolders",IDC_CH_DROP_SEARCH_SUBFOLDER,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,11,163,200,10
+    CONTROL         "Case sensitive when sorting",IDC_CH_SORT_IGNORE_CASE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,11,177,200,10
+    CONTROL         "Equalize full-width and half-width characters when sorting",IDC_CH_SORT_IGNORE_ZENHAN,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,11,191,200,10
+    CONTROL         "Display the number of Tracks / total playing time / total size",IDC_CH_SHOW_TOTAL_PARENT,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,11,219,200,10
+    PUSHBUTTON      "Reset",IDC_BT_RESET_PAGE,7,266,50,14
+    CONTROL         "Sorting Hiragana and Katakana are considered",IDC_CH_SORT_IGNORE_KATAHIRA,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,11,205,200,10
+    CONTROL         "Display full-width spaces/line breaks, etc",IDC_CH_SHOW_ZEN_SPACE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,11,233,200,10
+    CONTROL         "Show Tips",IDC_CH_SHOW_TIPS,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,11,247,200,10
+END
+
+IDD_DLG_LYRIC DIALOGEX 0, 0, 203, 105
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Lyrics"
+FONT 8, "Segoe UI", 0, 0, 0x0
+BEGIN
+    PUSHBUTTON      "Reset",IDC_BT_RESET_PAGE,7,89,48,14
+    CONTROL         "Automatically change the file name of the lyrics file as well",IDC_CH_CHANGE_TEXT_FILENAME,
+                    "Button",BS_AUTOCHECKBOX | BS_MULTILINE | WS_TABSTOP,11,18,180,20
+    CONTROL         "Specify a folder for lyrics files",IDC_CH_SET_LYRICS_DIR,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,11,36,180,10
+    EDITTEXT        IDC_ED_LYRICS_PATH,11,49,152,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "...",IDC_BT_REF_LYRICS,165,49,28,14
+    CONTROL         "Search subdirectories as well",IDC_CH_SEARCH_LYRICS_SUB_DIR,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,11,65,180,10
+    GROUPBOX        "Lyrics File",-1,7,7,189,79
+END
+
+IDD_DLG_DELETE_CHAR DIALOGEX 0, 0, 103, 63
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Delete n characters"
+FONT 8, "Segoe UI", 0, 0, 0x0
+BEGIN
+    LTEXT           "Number of characters to remove",IDC_STATIC,7,10,118,8
+    EDITTEXT        IDC_EDIT_DELETE_CHAR,130,7,22,14,ES_AUTOHSCROLL
+    CONTROL         "Head",IDC_RADIO_ADD_START,"Button",BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,18,28,50,10
+    CONTROL         "End",IDC_RADIO_ADD_END,"Button",BS_AUTORADIOBUTTON,74,28,50,10
+    DEFPUSHBUTTON   "OK",IDOK,30,42,34,14
+    PUSHBUTTON      "Cancel",IDCANCEL,88,42,34,14
+END
+
+IDD_DLG_ADD_NUMBER DIALOGEX 0, 0, 203, 117
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Add sequential numbers"
+FONT 8, "Segoe UI", 0, 0, 0x0
+BEGIN
+    LTEXT           "Digits",IDC_STATIC,136,10,36,10
+    EDITTEXT        IDC_EDIT_NUMBER_WIDTH,176,7,22,14,ES_AUTOHSCROLL
+    LTEXT           "Location",IDC_STATIC,7,28,30,8
+    CONTROL         "Head",IDC_RADIO_ADD_START,"Button",BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,44,27,52,10
+    CONTROL         "End",IDC_RADIO_ADD_END,"Button",BS_AUTORADIOBUTTON,97,27,41,10
+    CONTROL         "Replacement",IDC_RADIO_REPLACE,"Button",BS_AUTORADIOBUTTON,140,27,60,10
+    LTEXT           "Separator",IDC_STATIC,7,44,50,8
+    EDITTEXT        IDC_EDIT_NUMBER_SEPARATOR,44,42,22,14,ES_AUTOHSCROLL
+    LTEXT           "Head",IDC_STATIC,7,65,30,8
+    EDITTEXT        IDC_EDIT_ADD_BEFORE,44,62,22,14,ES_AUTOHSCROLL
+    LTEXT           "End",IDC_STATIC,70,65,30,8
+    EDITTEXT        IDC_EDIT_ADD_AFTER,108,62,22,14,ES_AUTOHSCROLL
+    LTEXT           "Add",IDC_STATIC,136,65,30,8
+    CONTROL         "If a writable cell is interrupted, the sequential number is reset to its initial value",IDC_CH_SPACE_INIT,"Button",BS_AUTOCHECKBOX | BS_MULTILINE | WS_TABSTOP,7,78,169,20
+    DEFPUSHBUTTON   "OK",IDOK,50,98,34,14
+    PUSHBUTTON      "Cancel",IDCANCEL,98,98,34,14
+    LTEXT           "Initial value",IDC_STATIC,7,5,30,20
+    EDITTEXT        IDC_ED_INIT_NUMBER,40,7,22,14,ES_AUTOHSCROLL
+    LTEXT           "Increments",IDC_STATIC,70,10,36,10
+    EDITTEXT        IDC_ED_ADD_NUMBER,110,7,22,14,ES_AUTOHSCROLL
+END
+
+IDD_DLG_MOVE_FOLDER DIALOGEX 0, 0, 228, 304
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Destination Folder Format"
+FONT 8, "Segoe UI", 0, 0, 0x0
+BEGIN
+    LTEXT           "Name",IDC_STATIC,6,7,25,10
+    COMBOBOX        IDC_LIST_FORMAT_TYPE,34,7,140,63,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Rename",IDC_BT_NAME_CHANGE,178,6,35,14
+    LTEXT           "Format",IDC_STATIC,6,24,25,10
+    EDITTEXT        IDC_EDIT_FORMAT,34,23,178,14,ES_AUTOHSCROLL
+    CONTROL         "Set the initial value to copy",IDC_CHECK_COPY,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,26,40,180,10
+    GROUPBOX        "List of available variables (see var_list2.txt)",IDC_STATIC,7,56,205,146
+    PUSHBUTTON      "File name (without extension) - %FILE_NAME%",IDC_BT_FILE_NAME,13,67,195,12,BS_LEFT
+    PUSHBUTTON      "Artist Name - %ARTIST_NAME%",IDC_BT_ARTIST_NAME,13,79,195,12,BS_LEFT
+    PUSHBUTTON      "Album Name - %ALBUM_NAME%",IDC_BT_ALBUM_NAME,13,91,195,12,BS_LEFT
+    PUSHBUTTON      "Track Name - %TRACK_NAME%",IDC_BT_TRACK_NAME,13,103,195,12,BS_LEFT
+    PUSHBUTTON      "Release Year - %RELEASE_YEAR%",IDC_BT_RELEASE_YEAR,13,115,195,12,BS_LEFT
+    PUSHBUTTON      "Track number - %TRACK_NUMBER%",IDC_BT_TRACK_NUMBER,13,127,195,12,BS_LEFT
+    PUSHBUTTON      "Track number (output as 2 digits) - %TRACK_NUMBER2%",IDC_BT_TRACK_NUMBER2,13,139,195,12,BS_LEFT
+    PUSHBUTTON      "Disk number - %DISC_NUMBER%",IDC_BT_DISC_NUMBER,13,151,195,12,BS_LEFT
+    PUSHBUTTON      "Comments - %COMMENT%",IDC_BT_COMMENT,13,175,195,12,BS_LEFT
+    PUSHBUTTON      "Run-time input type fixed string - %STRING%",IDC_BT_FIX_STRING,13,187,195,12,BS_LEFT
+    LTEXT           "Initial Folder",IDC_STATIC,6,213,50,8
+    EDITTEXT        IDC_EDIT_INIT_PATH,64,210,116,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "...",IDC_BT_REF,185,210,28,14
+    LTEXT           "*Move/copy to folder selected at run time if format is not yet entered",IDC_STATIC,6,228,200,20
+    PUSHBUTTON      "Disk number (output as 2 digits) - %DISC_NUMBER2%",IDC_BT_DISC_NUMBER2,13,163,195,12,BS_LEFT
+    LTEXT           "%ARTIST_NAME%\\ If%ALBUM_NAME% is run with the C:\\Music\ folder specified, this function will move or copy the currently selected file under the C:\\Music\Artist name\Artist name\Album name\ folder.",IDC_STATIC,6,246,202,56,SS_NOPREFIX | SS_SUNKEN
+END
+
+IDD_DLG_SETUP_USER_GENRE DIALOGEX 0, 0, 187, 191
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "User genre settings"
+FONT 8, "Segoe UI", 0, 0, 0x0
+BEGIN
+    LTEXT           "Name",IDC_STATIC,7,13,25,8
+    EDITTEXT        IDC_EDIT_NAME,36,11,87,14,ES_AUTOHSCROLL
+    CONTROL         "List1",IDC_LIST_GENRE,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | WS_BORDER | WS_TABSTOP,7,29,117,155
+    PUSHBUTTON      "Add",IDC_BT_ADD,130,7,50,14,WS_DISABLED
+    PUSHBUTTON      "Cancel",IDCANCEL,130,27,50,14
+END
+
+IDD_DLG_FILENAME_MAX_CHECK DIALOGEX 0, 0, 228, 71
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Maximum number of characters in file name"
+FONT 8, "Segoe UI", 0, 0, 0x0
+BEGIN
+    CONTROL         "Check the maximum number of characters in a file name",IDC_CH_FILENAME_MAX_CHECK,"Button",BS_AUTOCHECKBOX | BS_MULTILINE | WS_TABSTOP,7,2,186,20
+    LTEXT           "Maximum number of characters",IDC_STATIC,22,27,39,8
+    EDITTEXT        IDC_ED_MAX_CHAR,64,24,22,14
+    LTEXT           "Include extensions ("".mp3"")",IDC_STATIC,89,27,108,8
+    CONTROL         "If the maximum number of characters is exceeded, change the color",IDC_CH_FILENAME_MAX_CELL_COLOR,
+                    "Button",BS_AUTOCHECKBOX | BS_MULTILINE | WS_TABSTOP,22,41,178,20
+END
+
+IDD_DLG_FILENAME_CHANGE DIALOGEX 0, 0, 290, 81
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Rename File"
+FONT 8, "Segoe UI", 0, 0, 0x0
+BEGIN
+    LTEXT           "",IDC_STATIC_MSG,7,7,276,8
+    EDITTEXT        IDC_EDIT_NAME,7,42,276,14,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,100,60,37,14
+    PUSHBUTTON      "Cancel",IDCANCEL,152,60,37,14
+    EDITTEXT        IDC_EDIT_NAME_ORG,7,23,276,14,ES_AUTOHSCROLL | ES_READONLY
+END
+
+IDD_DIALOG_TEIKEI DIALOGEX 0, 0, 219, 223
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Paste Canned Text"
+FONT 8, "Segoe UI", 0, 0, 0x0
+BEGIN
+    LTEXT           "Name",IDC_STATIC,7,11,25,8
+    EDITTEXT        IDC_EDIT_TEIKEI_GROUP_NAME,36,9,143,14,ES_AUTOHSCROLL
+    LTEXT           "01",IDC_STATIC,10,31,12,8
+    EDITTEXT        IDC_EDIT_TEIKEI_01,24,28,163,14,ES_AUTOHSCROLL
+    LTEXT           "02",IDC_STATIC,10,50,12,8
+    EDITTEXT        IDC_EDIT_TEIKEI_2,24,47,163,14,ES_AUTOHSCROLL
+    LTEXT           "03",IDC_STATIC,10,68,12,8
+    EDITTEXT        IDC_EDIT_TEIKEI_3,24,66,163,14,ES_AUTOHSCROLL
+    LTEXT           "04",IDC_STATIC,10,88,12,8
+    EDITTEXT        IDC_EDIT_TEIKEI_4,24,85,163,14,ES_AUTOHSCROLL
+    LTEXT           "05",IDC_STATIC,10,107,12,8
+    EDITTEXT        IDC_EDIT_TEIKEI_5,24,104,163,14,ES_AUTOHSCROLL
+    LTEXT           "06",IDC_STATIC,10,127,12,8
+    EDITTEXT        IDC_EDIT_TEIKEI_6,24,123,163,14,ES_AUTOHSCROLL
+    LTEXT           "07",IDC_STATIC,10,146,12,8
+    EDITTEXT        IDC_EDIT_TEIKEI_7,24,142,163,14,ES_AUTOHSCROLL
+    LTEXT           "08",IDC_STATIC,10,165,12,8
+    EDITTEXT        IDC_EDIT_TEIKEI_8,24,161,163,14,ES_AUTOHSCROLL
+    LTEXT           "09",IDC_STATIC,10,183,12,8
+    EDITTEXT        IDC_EDIT_TEIKEI_9,24,180,163,14,ES_AUTOHSCROLL
+    LTEXT           "10",IDC_STATIC,10,202,12,8
+    EDITTEXT        IDC_EDIT_TEIKEI_10,24,199,163,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Details",IDC_BT_DETAIL_01,192,28,20,14
+    PUSHBUTTON      "Details",IDC_BT_DETAIL_02,192,47,20,14
+    PUSHBUTTON      "Details",IDC_BT_DETAIL_03,192,66,20,14
+    PUSHBUTTON      "Details",IDC_BT_DETAIL_04,192,85,20,14
+    PUSHBUTTON      "Details",IDC_BT_DETAIL_05,192,104,20,14
+    PUSHBUTTON      "Details",IDC_BT_DETAIL_06,192,123,20,14
+    PUSHBUTTON      "Details",IDC_BT_DETAIL_07,192,142,20,14
+    PUSHBUTTON      "Details",IDC_BT_DETAIL_08,192,161,20,14
+    PUSHBUTTON      "Details",IDC_BT_DETAIL_09,192,180,20,14
+    PUSHBUTTON      "Details",IDC_BT_DETAIL_10,192,199,20,14
+END
+
+IDD_DLG_DEFAUT_VALUE DIALOGEX 0, 0, 203, 181
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Advanced"
+FONT 8, "Segoe UI", 0, 0, 0x0
+BEGIN
+    CONTROL         "Enable 'Delete from list', 'Delete file', and 'Revert to pre-edit state' for single folders as well",IDC_CHECK_VALID_FOLDER_SELECT,
+                    "Button",BS_AUTOCHECKBOX | BS_MULTILINE | WS_TABSTOP,7,10,189,17
+    CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDHORZ,7,31,189,1
+    CONTROL         "Allow multiple startups",IDC_CHECK_DUP_EXEC,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,38,170,10
+    CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDHORZ,7,54,189,1
+    LTEXT           "Number of recently used folders to display (1-16)",IDC_STATIC,7,62,116,8
+    EDITTEXT        IDC_EDIT_RECENT_FOLDER,124,59,16,14,ES_AUTOHSCROLL
+    LTEXT           "*Reboot required",IDC_STATIC,146,62,38,8
+    CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDHORZ,7,77,189,1
+    CONTROL         "Remember the location of the 'Find' and 'Replace' dialogs",IDC_SAVE_REP_DLG_POS,"Button",BS_AUTOCHECKBOX | BS_MULTILINE | WS_TABSTOP,7,79,170,20
+    CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDHORZ,7,100,189,1
+    CONTROL         "Show classifications in the Audio List across the width of the column",IDC_CHECK_AUDIO_LIST_SHOW,
+                    "Button",BS_AUTOCHECKBOX | BS_MULTILINE | WS_TABSTOP,7,104,182,20
+    PUSHBUTTON      "Reset",IDC_BT_RESET_PAGE,7,137,48,14
+END
+
+IDD_DIALOG_TEIKEI_PASTE DIALOGEX 0, 0, 135, 129
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Paste Canned Text"
+FONT 8, "Segoe UI", 0, 0, 0x0
+BEGIN
+    CONTROL         "Replace(&R)",IDC_RADIO_REPLACE,"Button",BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,7,11,70,10
+    CONTROL         "Add head (&F)",IDC_RADIO_FRONT,"Button",BS_AUTORADIOBUTTON,7,24,70,10
+    CONTROL         "Add end (&B)",IDC_RADIO_BACK,"Button",BS_AUTORADIOBUTTON,7,36,70,10
+    CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDHORZ,7,50,121,1
+    CONTROL         "Add space when adding (&S)",IDC_CHECK_ADD_SPACE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,54,120,10
+    CONTROL         "Append the following characters (&A)",IDC_CHECK_ADD_CHAR,"Button",BS_AUTOCHECKBOX | BS_MULTILINE | WS_TABSTOP,7,66,91,20
+    LTEXT           "Head",IDC_STATIC,17,91,20,8
+    EDITTEXT        IDC_EDIT_ADD_FRONT,44,88,21,14,ES_AUTOHSCROLL
+    LTEXT           "End",IDC_STATIC,70,91,20,8
+    EDITTEXT        IDC_EDIT_ADD_BACK,97,88,21,14,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,90,7,38,14
+    PUSHBUTTON      "Cancel",IDCANCEL,90,24,38,14
+    CONTROL         "Show this dialog when pasting",IDC_CH_SHOW_DIALOG,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,112,117,10
+    CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDHORZ,8,106,120,1
+END
+
+IDD_DIALOG_UNIFY_CHAR DIALOGEX 0, 0, 273, 141
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Uniformity of character types"
+FONT 8, "Segoe UI", 0, 0, 0x0
+BEGIN
+    LTEXT           "Convert with the specified pattern.",IDC_STATIC,7,7,140,8
+    LTEXT           "Symbols",IDC_STATIC,16,24,41,8
+    CONTROL         "As is",IDC_CONV_KIGOU_NONE,"Button",BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,60,23,40,10
+    CONTROL         "Full-width",IDC_CONV_KIGOU_ZEN,"Button",BS_AUTORADIOBUTTON,108,23,50,10
+    CONTROL         "Half-width",IDC_CONV_KIGOU_HAN,"Button",BS_AUTORADIOBUTTON,164,23,50,10
+    LTEXT           "Numbers",IDC_STATIC,16,38,41,8
+    CONTROL         "As is",IDC_CONV_SUJI_NONE,"Button",BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,60,37,40,10
+    CONTROL         "Full-width",IDC_CONV_SUJI_ZEN,"Button",BS_AUTORADIOBUTTON,108,37,50,10
+    CONTROL         "Half-width",IDC_CONV_SUJI_HAN,"Button",BS_AUTORADIOBUTTON,164,37,50,10
+    LTEXT           "Katakana",IDC_STATIC,16,52,41,8
+    CONTROL         "As is",IDC_CONV_KATA_NONE,"Button",BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,60,51,40,10
+    CONTROL         "Full-width",IDC_CONV_KATA_ZEN,"Button",BS_AUTORADIOBUTTON,108,51,50,10
+    CONTROL         "Half-width",IDC_CONV_KATA_HAN,"Button",BS_AUTORADIOBUTTON,164,51,50,10
+    LTEXT           "Alphabet",IDC_STATIC,16,65,41,8
+    CONTROL         "As is",IDC_CONV_ALPHA_NONE,"Button",BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,60,64,40,10
+    CONTROL         "Full-width",IDC_CONV_ALPHA_ZEN,"Button",BS_AUTORADIOBUTTON,108,64,50,10
+    CONTROL         "Half-width",IDC_CONV_ALPHA_HAN,"Button",BS_AUTORADIOBUTTON,164,64,50,10
+    LTEXT           "Upper case lower case",IDC_STATIC,16,79,41,8
+    CONTROL         "As is",IDC_CONV_UPLOW_NONE,"Button",BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,60,78,40,10
+    CONTROL         "Uppercase",IDC_CONV_UPLOW_UPPER,"Button",BS_AUTORADIOBUTTON,108,78,50,10
+    CONTROL         "Lowercase",IDC_CONV_UPLOW_LOWER,"Button",BS_AUTORADIOBUTTON,164,78,50,10
+    CONTROL         "Only the first letter of a word is capitalized",IDC_CONV_FIRST_UPPER,"Button",BS_AUTORADIOBUTTON,70,91,172,10
+    LTEXT           "Hiragana Katakana",IDC_STATIC,16,106,41,8
+    CONTROL         "As is",IDC_CONV_HIRAKATA_NONE,"Button",BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,60,105,40,10
+    CONTROL         "Hiragana",IDC_CONV_HIRAKATA_HIRA,"Button",BS_AUTORADIOBUTTON,108,105,50,10
+    CONTROL         "Katakana",IDC_CONV_HIRAKATA_KATA,"Button",BS_AUTORADIOBUTTON,164,105,50,10
+    LTEXT           "Fixed case",IDC_STATIC,16,122,41,8
+    CONTROL         "I don't",IDC_CONV_FIXED_UPPER_LOWER_NONE,"Button",BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,60,120,40,10
+    CONTROL         "I do",IDC_CONV_FIXED_UPPER_LOWER,"Button",BS_AUTORADIOBUTTON,108,120,50,10
+    DEFPUSHBUTTON   "OK",IDOK,216,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,216,24,50,14
+END
+
+IDD_CUSTOM_FILE_OPEN_PLAYLIST DIALOGEX 0, 0, 155, 13
+STYLE DS_SETFONT | DS_3DLOOK | DS_FIXEDSYS | DS_CONTROL | WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS
+FONT 8, "Segoe UI", 0, 0, 0x0
+BEGIN
+    CONTROL         "Show Playlist Input Settings Dialog",IDC_CH_SHOW_LOAD_PLAYLIST,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,2,2,150,10
+END
+
+IDD_DIALOG_FAVORITES DIALOGEX 0, 0, 207, 223
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Favorite Folder"
+FONT 8, "Segoe UI", 0, 0, 0x0
+BEGIN
+    LTEXT           "01",IDC_STATIC,10,12,16,8
+    EDITTEXT        IDC_EDIT_FAVORITES1,29,9,133,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "...",IDC_BT_REF_FAVORITES1,175,9,26,14
+    LTEXT           "02",IDC_STATIC,10,31,16,8
+    EDITTEXT        IDC_EDIT_FAVORITES2,29,29,133,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "...",IDC_BT_REF_FAVORITES2,175,29,26,14
+    LTEXT           "03",IDC_STATIC,10,49,16,8
+    EDITTEXT        IDC_EDIT_FAVORITES3,29,47,133,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "...",IDC_BT_REF_FAVORITES3,175,47,26,14
+    LTEXT           "04",IDC_STATIC,10,69,16,8
+    EDITTEXT        IDC_EDIT_FAVORITES4,29,67,133,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "...",IDC_BT_REF_FAVORITES4,175,67,26,14
+    LTEXT           "05",IDC_STATIC,10,88,16,8
+    EDITTEXT        IDC_EDIT_FAVORITES5,29,86,133,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "...",IDC_BT_REF_FAVORITES5,175,86,26,14
+    LTEXT           "06",IDC_STATIC,10,108,16,8
+    EDITTEXT        IDC_EDIT_FAVORITES6,29,106,133,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "...",IDC_BT_REF_FAVORITES6,175,106,26,14
+    LTEXT           "07",IDC_STATIC,10,127,16,8
+    EDITTEXT        IDC_EDIT_FAVORITES7,29,125,133,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "...",IDC_BT_REF_FAVORITES7,175,125,26,14
+    LTEXT           "08",IDC_STATIC,10,146,16,8
+    EDITTEXT        IDC_EDIT_FAVORITES8,29,143,133,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "...",IDC_BT_REF_FAVORITES8,175,143,26,14
+    LTEXT           "09",IDC_STATIC,10,164,16,8
+    EDITTEXT        IDC_EDIT_FAVORITES9,29,162,133,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "...",IDC_BT_REF_FAVORITES9,175,162,26,14
+    LTEXT           "10",IDC_STATIC,10,183,16,8
+    EDITTEXT        IDC_EDIT_FAVORITES10,29,181,133,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "...",IDC_BT_REF_FAVORITES10,175,181,26,14
+    PUSHBUTTON      "OK",IDOK,49,203,42,14
+    PUSHBUTTON      "Cancel",IDCANCEL,115,203,42,14
+END
+
+IDD_DLG_COPY_FORMAT DIALOGEX 0, 0, 228, 204
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Format Copy"
+FONT 8, "Segoe UI", 0, 0, 0x0
+BEGIN
+    LTEXT           "Name",IDC_STATIC,6,7,25,10
+    COMBOBOX        IDC_LIST_FORMAT_TYPE,34,7,140,63,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Rename",IDC_BT_NAME_CHANGE,178,6,35,14
+    LTEXT           "Format",IDC_STATIC,6,24,25,10
+    EDITTEXT        IDC_EDIT_FORMAT,34,23,178,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "File name (without extension) - %FILE_NAME%",IDC_BT_FILE_NAME,13,54,195,12,BS_LEFT
+    PUSHBUTTON      "Artist Name - %ARTIST_NAME%",IDC_BT_ARTIST_NAME,13,66,195,12,BS_LEFT
+    PUSHBUTTON      "Album Name - %ALBUM_NAME%",IDC_BT_ALBUM_NAME,13,78,195,12,BS_LEFT
+    PUSHBUTTON      "Track Name - %TRACK_NAME%",IDC_BT_TRACK_NAME,13,90,195,12,BS_LEFT
+    PUSHBUTTON      "Release Year - %RELEASE_YEAR%",IDC_BT_RELEASE_YEAR,13,102,195,12,BS_LEFT
+    PUSHBUTTON      "Track number - %TRACK_NUMBER%",IDC_BT_TRACK_NUMBER,13,114,195,12,BS_LEFT
+    PUSHBUTTON      "Track number (output as 2 digits) - %TRACK_NUMBER2%",IDC_BT_TRACK_NUMBER2,13,126,195,12,BS_LEFT
+    PUSHBUTTON      "Disk number - %DISC_NUMBER%",IDC_BT_DISC_NUMBER,13,138,195,12,BS_LEFT
+    PUSHBUTTON      "Comments - %COMMENT%",IDC_BT_COMMENT,13,162,195,12,BS_LEFT
+    PUSHBUTTON      "Run-time input type fixed string - %STRING%",IDC_BT_FIX_STRING,13,174,195,12,BS_LEFT
+    GROUPBOX        "List of available variables (see var_list2.txt)",IDC_STATIC,7,43,205,151
+    PUSHBUTTON      "Disk number (output as 2 digits) - %DISC_NUMBER2%",IDC_BT_DISC_NUMBER2,13,150,195,12,BS_LEFT
+END
+
+IDD_DLG_SETUP_PLUGIN DIALOGEX 0, 0, 199, 215
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Plug-in Settings"
+FONT 8, "Segoe UI", 0, 0, 0x0
+BEGIN
+    CONTROL         "List1",IDC_LIST_PLUGIN,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_NOSORTHEADER | WS_BORDER | WS_TABSTOP,7,7,117,125
+    PUSHBUTTON      "OK",IDOK,131,7,61,14
+    PUSHBUTTON      "Up(&U)",IDC_BT_UP,131,29,61,14,WS_DISABLED
+    PUSHBUTTON      "Down (&D)",IDC_BT_DOWN,131,51,61,14,WS_DISABLED
+    PUSHBUTTON      "Setting(&S)",IDC_BT_SETUP,131,73,61,14,WS_DISABLED
+    PUSHBUTTON      "Install (&I)",IDC_BT_INSTALL,131,95,61,14
+    EDITTEXT        IDC_EDIT_INFO,7,142,185,52,ES_MULTILINE | ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_READONLY | ES_WANTRETURN | WS_VSCROLL | WS_HSCROLL
+    LTEXT           "*The order in which the plug-ins are loaded will take effect after the restart",IDC_STATIC,7,200,162,8
+    PUSHBUTTON      "Uninstall(&U)",IDC_BT_UNINSTALL,131,117,61,14,WS_DISABLED
+END
+
+IDD_DIALOG_CONV DIALOGEX 0, 0, 215, 203
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Conversion"
+FONT 8, "Segoe UI", 400, 0, 0x80
+BEGIN
+    CONTROL         """Capitalize only the first letter of a word"" to exclude the following words:",IDC_CHECK_FIRST_UPPER_IGNORE_WORD,
+                    "Button",BS_AUTOCHECKBOX |BS_MULTILINE | WS_TABSTOP,7,7,192,20
+    EDITTEXT        IDC_EDIT_FIRST_UPPER_IGNORE_WORD,27,30,161,14,ES_AUTOHSCROLL
+    LTEXT           "* Use lowercase letters and separate words from each other with commas",IDC_STATIC,27,45,166,20
+    LTEXT           "* If the word is at the beginning of a sentence, it is not excluded",IDC_STATIC,27,64,166,20
+    LTEXT           "The word following the following letters shall be the beginning of the sentence",IDC_STATIC,19,82,174,20
+    EDITTEXT        IDC_EDIT_FIRST_UPPER_SENTENCE_SEPARATOR,27,104,161,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Reset",IDC_BT_RESET_PAGE,8,184,49,14
+    CONTROL         "Allow user-specified conversions to be performed without format switching",IDC_CHECK_USER_CONV_MENU,
+                    "Button",BS_AUTOCHECKBOX | BS_MULTILINE | WS_TABSTOP,7,120,190,20
+    CONTROL         "Full/Half-width Conversion: Treat ""、。「」・"" are treated as katakana",IDC_CH_ZENHAN_KIGOU_KANA,
+                    "Button",BS_AUTOCHECKBOX | BS_MULTILINE | WS_TABSTOP,7,142,190,20
+    CONTROL         "Auto replace full-width tilde with wave dash (～)",IDC_CH_AUTO_TILDE_2_WAVE_DASH,
+                    "Button",BS_AUTOCHECKBOX | BS_MULTILINE | WS_TABSTOP,7,160,190,20
+END
+
+IDD_DLG_USER_CONV_FORMAT_TAG2TAG DIALOGEX 0, 0, 228, 252
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Tag Information Conversion Format"
+FONT 8, "Segoe UI", 0, 0, 0x0
+BEGIN
+    LTEXT           "Name",IDC_STATIC,6,7,25,10
+    COMBOBOX        IDC_LIST_FORMAT_TYPE,34,7,140,63,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Rename",IDC_BT_NAME_CHANGE,178,6,35,14
+    EDITTEXT        IDC_ED_FORMAT,34,23,178,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Artist Name - %ARTIST_NAME%",IDC_BT_ARTIST_NAME,13,52,195,12,BS_LEFT
+    PUSHBUTTON      "Album Name - %ALBUM_NAME%",IDC_BT_ALBUM_NAME,13,64,195,12,BS_LEFT
+    PUSHBUTTON      "Track Name - %TRACK_NAME%",IDC_BT_TRACK_NAME,13,76,195,12,BS_LEFT
+    PUSHBUTTON      "Release Year - %RELEASE_YEAR%",IDC_BT_RELEASE_YEAR,13,88,195,12,BS_LEFT
+    PUSHBUTTON      "Track number - %TRACK_NUMBER%",IDC_BT_TRACK_NUMBER,13,100,195,12,BS_LEFT
+    PUSHBUTTON      "Track number (output as 2 digits) - %TRACK_NUMBER2%",IDC_BT_TRACK_NUMBER2,13,112,195,12,BS_LEFT
+    PUSHBUTTON      "Disk number - %DISC_NUMBER%",IDC_BT_DISC_NUMBER,13,124,195,12,BS_LEFT
+    PUSHBUTTON      "Comments - %COMMENT%",IDC_BT_COMMENT,13,148,195,12,BS_LEFT
+    GROUPBOX        "List of available variables (see var_list2.txt)",IDC_STATIC,7,41,205,125
+    LTEXT           "Format",IDC_STATIC,6,24,25,10
+    PUSHBUTTON      "Disk number (output as 2 digits) - %DISC_NUMBER2%",IDC_BT_DISC_NUMBER2,13,136,195,12,BS_LEFT
+    LTEXT           "If%ARTIST_NAME%-%ALBUM_NAME%-%TRACK_NAME% is run when the cell being selected is ""AA-BB-CC"", the function will sort them as\nartist name ⇒ AA\nalbum name ⇒ BB\ntrack name ⇒ CC\n.",IDC_STATIC,2,176,209,68,SS_SUNKEN
+END
+
+IDD_DLG_FILE_OVERWRITE2 DIALOGEX 0, 0, 325, 107
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "File Overwrite Confirmation Dialog"
+FONT 8, "Segoe UI", 0, 0, 0x0
+BEGIN
+    LTEXT           "The file exists, are you sure you want to overwrite it?",IDC_STATIC,7,7,200,8
+    LTEXT           "File Name",IDC_STATIC,7,26,46,10
+    EDITTEXT        IDC_ED_FILENAME,55,24,263,14,ES_AUTOHSCROLL | ES_READONLY
+    LTEXT           "Modified",IDC_STATIC,7,45,46,10
+    EDITTEXT        IDC_ED_TIME_STAMP,55,43,81,14,ES_AUTOHSCROLL | ES_READONLY
+    LTEXT           "Size",IDC_STATIC,7,64,46,10
+    EDITTEXT        IDC_ED_SIZE,55,62,81,14,ES_AUTOHSCROLL | ES_READONLY
+    DEFPUSHBUTTON   "Overwrite this file (&O)",IDC_BT_OVERWRITE,5,86,75,14
+    PUSHBUTTON      "Overwrite all files (&A)",IDC_BT_ALL_OVERWRITE,85,86,75,14
+    PUSHBUTTON      "Skip(&S)",IDC_BT_SKIP,227,86,43,14
+    PUSHBUTTON      "Aborted",IDCANCEL,276,86,43,14
+    PUSHBUTTON      "Save As(&R)",IDC_BT_RENAME,167,86,52,14
+END
+
+IDD_DLG_FIXED_UPPER_LOWER DIALOGEX 0, 0, 187, 217
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Fixed case"
+FONT 8, "Segoe UI", 0, 0, 0x0
+BEGIN
+    EDITTEXT        IDC_EDIT_FIXED_WORD,63,11,58,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Add",IDC_BT_ADD,130,11,50,14
+    PUSHBUTTON      "Delete",IDC_BT_DELETE,130,32,50,14
+    CONTROL         "List3",IDC_LIST_UPPER_LOWER,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | WS_BORDER | WS_TABSTOP,7,32,114,178
+    LTEXT           "Fixed words",IDC_STATIC,6,14,54,8
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,1,0
+ PRODUCTVERSION 1,0,1,0
+ FILEFLAGSMASK 0x17L
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "041104b0"
+        BEGIN
+            VALUE "Comments", "オリジナルはMERCURY様、haseta様、Mimura様、Kobarin様"
+            VALUE "CompanyName", "jarupxx"
+            VALUE "FileDescription", "STEP_J"
+            VALUE "FileVersion", "1.0.1.0"
+            VALUE "InternalName", "STEP_J"
+            VALUE "LegalCopyright", "Copyright (C) 2022 jarupxx"
+            VALUE "OriginalFilename", "SuperTagEditor.exe"
+            VALUE "ProductName", "五代目 SuperTagEditor STEP_J"
+            VALUE "ProductVersion", "1.0.1.0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x411, 1200
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE
+BEGIN
+    IDR_MAINFRAME           "SuperTagEditor\n\nTagEdit\nSuperTagEditor File (*.ste)\n.ste\nSuperTagEditor.Document\nSuperTagEditor Document"
+END
+
+STRINGTABLE
+BEGIN
+    AFX_IDS_APP_TITLE       "SuperTagEditor"
+    AFX_IDS_IDLEMESSAGE     "Ready"
+END
+
+STRINGTABLE
+BEGIN
+    ID_INDICATOR_EXT        "EXT"
+    ID_INDICATOR_CAPS       "CAP"
+    ID_INDICATOR_NUM        "NUM"
+    ID_INDICATOR_SCRL       "SCRL"
+    ID_INDICATOR_OVR        "Reps"
+    ID_INDICATOR_REC        "Rec"
+    ID_INDICATOR_KANA       "Kana"
+    ID_INDICATOR_LOCATION   "99：99"
+    ID_INDICATOR_SIZE       " "
+    ID_INDICATOR_INPUT_MODE " "
+END
+
+STRINGTABLE
+BEGIN
+    ID_FILE_NEW             "Clear the list of files being read\nClear the list"
+    ID_FILE_OPEN            "Open an existing file\nOpen"
+    ID_FILE_CLOSE           "Close the file you are working on\nclose"
+    ID_FILE_SAVE            "Update modified tag information\nUpdate tag information"
+    ID_FILE_SAVE_AS         "Save the file you are working on with a new name\nSave as"
+END
+
+STRINGTABLE
+BEGIN
+    ID_APP_ABOUT            "Show program information, version and copyright\nversion information"
+    ID_APP_EXIT             "Exit\nExit"
+END
+
+STRINGTABLE
+BEGIN
+    ID_FILE_MRU_FILE1       "Open specified fielder"
+    ID_FILE_MRU_FILE2       "Open specified fielder"
+    ID_FILE_MRU_FILE3       "Open specified fielder"
+    ID_FILE_MRU_FILE4       "Open specified fielder"
+    ID_FILE_MRU_FILE5       "Open specified fielder"
+    ID_FILE_MRU_FILE6       "Open specified fielder"
+    ID_FILE_MRU_FILE7       "Open specified fielder"
+    ID_FILE_MRU_FILE8       "Open specified fielder"
+    ID_FILE_MRU_FILE9       "Open specified fielder"
+    ID_FILE_MRU_FILE10      "Open specified fielder"
+    ID_FILE_MRU_FILE11      "Open specified fielder"
+    ID_FILE_MRU_FILE12      "Open specified fielder"
+    ID_FILE_MRU_FILE13      "Open specified fielder"
+    ID_FILE_MRU_FILE14      "Open specified fielder"
+    ID_FILE_MRU_FILE15      "Open specified fielder"
+    ID_FILE_MRU_FILE16      "Open specified fielder"
+END
+
+STRINGTABLE
+BEGIN
+    ID_NEXT_PANE            "Switch to next window\nnext pane"
+    ID_PREV_PANE            "Switch to previous window\nprevious pane"
+END
+
+STRINGTABLE
+BEGIN
+    ID_WINDOW_SPLIT         "Split the window you are working on\nsplit"
+END
+
+STRINGTABLE
+BEGIN
+    ID_EDIT_CLEAR           "Erase Selection\nErase"
+    ID_EDIT_CLEAR_ALL       "Erase All\nErase All"
+    ID_EDIT_COPY            "Copy selection and save to clipboard\ncopy"
+    ID_EDIT_CUT             "Crop a selection and save it to the clipboard\ncrop"
+    ID_EDIT_FIND            "Search for a specified string\nsearch"
+    ID_EDIT_PASTE           "Paste clipboard content\npaste"
+    ID_EDIT_REPEAT          "Repeat the last action performed\nRepeat"
+    ID_EDIT_REPLACE         "Replace the specified string with another string\nreplace"
+    ID_EDIT_SELECT_ALL      "Select everything in the file\nSelect all"
+    ID_EDIT_UNDO            "Undo the last action performed\nUndo"
+    ID_EDIT_REDO            "Repeat the last action performed\nRepeat"
+END
+
+STRINGTABLE
+BEGIN
+    ID_VIEW_TOOLBAR         "Show/hide toolbar\nToggle toolbar visibility"
+    ID_VIEW_STATUS_BAR      "Show/hide status bar\ntoggle status bar visibility"
+    ID_VIEW_AUTOARRANGE     "Automatically align icons"
+END
+
+STRINGTABLE
+BEGIN
+    AFX_IDS_SCSIZE          "Resize window"
+    AFX_IDS_SCMOVE          "Change window position"
+    AFX_IDS_SCMINIMIZE      "Minimize window"
+    AFX_IDS_SCMAXIMIZE      "Maximize window"
+    AFX_IDS_SCNEXTWINDOW    "Switch to next window"
+    AFX_IDS_SCPREVWINDOW    "Switch to previous window"
+    AFX_IDS_SCCLOSE         "Close the window you are working in and instruct the user to save the changed file"
+END
+
+STRINGTABLE
+BEGIN
+    AFX_IDS_SCRESTORE       "Reset window to normal size"
+    AFX_IDS_SCTASKLIST      "Application Switching"
+END
+
+STRINGTABLE
+BEGIN
+    ID_VIEW_SMALLICON       "Display objects as small icons.\nSmall icons"
+    ID_VIEW_LARGEICON       "Display objects as large icons.\nLarge icons"
+    ID_VIEW_LIST            "Lists objects\nList"
+    ID_VIEW_DETAILS         "Displays detailed information about each object in the window.\nDetails"
+    ID_VIEW_LINEUP          "Align icons"
+    ID_VIEW_BYNAME          "Sort icons by name"
+END
+
+STRINGTABLE
+BEGIN
+    ID_OPEN_FOLDER          "Open folder\nOpen folder"
+    ID_CELL_COPY_DOWN       "Copy the contents of the item downwards\nCopy Downwards"
+    ID_SAVE_ALL_TAG         "Update modified tag information\nUpdate tag information"
+    ID_CONV_FILENAME_TO_TRACKNAME "Convert to\nfilename ⇒ trackname"
+    ID_CONV_TRACKNAME_TO_FILENAME "Convert to track name ⇒ filename\ntrack name ⇒ filename"
+    ID_CONV_TAG2FILE_USER   "Convert[Tag]to[Filename]in user-specified format\nTag info ⇒ filename"
+    ID_CONV_FILE2TAG_USER   "Convert[Filename]to[Tag]in user-specified format\nFilename ⇒ tag info"
+    ID_DLG_ENVIRONMENT      "Open the Options Settings dialog\nOptions Settings"
+    ID_SET_NUMBER           "Set sequential numbers from 1 downward in the selected cells\nsequential numbers downward"
+    ID_DLG_KEY_CUSTOMIZE    "Open key customization dialog\nkey customization dialog"
+    ID_WINAMP_PLAY          "Play the currently selected song in the player\nPlay"
+    ID_WINAMP_STOP          "Stop player playback\nstop"
+    ID_WINAMP_EXIT          "Exit player\nExit player"
+END
+
+STRINGTABLE
+BEGIN
+    CG_IDS_PROGRESS_CAPTION "Loading file..."
+    IDS_PROPSHT_CAPTION     "Property Sheet"
+END
+
+STRINGTABLE
+BEGIN
+    ID_EDIT_FIELD_SI        "View/edit SI/ID3v2 fields\nView/edit SI/ID3v2 fields"
+    ID_EDIT_TD3_TAG         "View/edit ID3 tags at\nView/edit ID3 tags"
+    ID_EDIT_CHANGE_FIELD    "[ID3 tag] <⇒[SI/ID3v2 field] display toggle\n[ID3 tag] <⇒[SI/ID3v2 field] toggle"
+    ID_CONV_SI_FIELD_TO_ID3TAG
+                            "Convert SI/ID3v2 field to ID3tag field\nSI/ID3v2 field to ID3tag"
+    ID_SORT_LIST            "Sort by up to 3 keys\nsort"
+    ID_SET_CLASS            "Set how files are classified\nClassification Settings Dialog"
+    ID_VIEW_DIALOG_BAR      "Show/hide the file information bar\nToggle the display of the file information bar"
+    ID_WRITE_PLAYLIST       "Output the checked files to a playlist\nOutput playlist"
+    ID_DLG_USER_FORMAT      "Open the User Conversion Formatting Dialog\nUser Conversion Formatting Dialog"
+    ID_WINAMP_PLAY_NEXT     "Play the next song in the player's playlist\nto the next song"
+    ID_WINAMP_PLAY_PREV     "Play the previous song in the player's playlist\nto the previous song"
+    ID_LOAD_PLAYLIST        "Load playlist\nLoad playlist"
+    ID_CHECK_WORD           "Check mark with condition\ncheck with condition"
+END
+
+STRINGTABLE
+BEGIN
+    ID_SELECT_FILES_CHECK   "Check all selected files\nCheck selected files"
+    ID_SELECT_FILES_UNCHECK "Uncheck all selected files\nUncheck selected files"
+    ID_SELECT_DELETE_LIST   "Remove the selected file from the list\nRemove from list"
+    ID_SELECT_DELETE_FILE   "Selected files will be erased\nMove files"
+    ID_SELECT_EDIT_DESTORY  "Restore the selected file to its pre-edit state\nRestore to pre-edit state"
+    ID_DLG_KEY_CONFIG       "Open key customization dialog\nkey customization dialog"
+    ID_DLG_EDIT_SHOW_COLUMN "Open the Display Item Settings Dialog\nDisplay Item Settings Dialog"
+    ID_ALL_FILES_CHECK      "Check all files\nCheck all files"
+    ID_REVERSE_CHECK        "Reverses the check status of all files\nReverses the check status"
+    ID_ALL_FILES_UNCHECK    "Uncheck all files\nUncheck all files"
+    ID_CHECK_FILES_SELECT   "Make the checked files selected\nSelect the checked files"
+    ID_EXEC_CLASSIFICATION  "Update the Classification Display to the latest status\nUpdate Classification Display"
+    ID_ADJUST_COLUMN_WIDTH  "Adjust the column width of each item to the longest\nAdjust all column widths"
+    ID_CONV_FORMAT_EX_01    "Convert with Extended Conversion Format 1\nFormat 1"
+    ID_CONV_FORMAT_EX_02    "Formats used in user-specified conversions\nFormat 2"
+END
+
+STRINGTABLE
+BEGIN
+    ID_CONV_FORMAT_EX_03    "Convert with Extended Conversion Format 3\nFormat 3"
+    ID_CONV_FORMAT_EX_04    "Convert with Extended Conversion Format 4\nFormat 4"
+    ID_CONV_FORMAT_EX_05    "Convert with Extended Conversion Format 5\nFormat 5"
+    ID_CONV_FORMAT_EX_06    "Convert with Extended Conversion Format 6\nFormat 6"
+    ID_CONV_FORMAT_EX_07    "Convert with Extended Conversion Format 7\nFormat 7"
+    ID_CONV_FORMAT_EX_08    "Convert with Extended Conversion Format 8\nFormat 8"
+    ID_CONV_FORMAT_EX_09    "Convert with Extended Conversion Format 9\nFormat 9"
+    ID_CONV_FORMAT_EX_10    "Convert with Extended Conversion Format 10\nFormat 10"
+    ID_CONV_STR_LOWER       "Convert the contents of the selected cell to lowercase\nConvert to lowercase"
+    ID_CONV_STR_UPPER       "Convert the contents of the selected cell to uppercase\nConvert to uppercase"
+    ID_CONV_STR_HANKAKU     "Convert the contents of the selected cell to half-width\nConvert to half-width"
+    ID_CONV_STR_KANA        "Full-width Kana Conversion\nFull-width Kana Conversion"
+    ID_CONV_STR_KATA        "Convert the contents of the selected cells to full-width kana\nConvert to full-width kana"
+    ID_CONV_STR_HIRA        "Convert the contents of the selected cells to full-width kana\nConvert to full-width kana"
+    ID_CONV_STR_ZEN_SUJI    "Convert numbers from half-width to full-width\nnumbers only"
+END
+
+STRINGTABLE
+BEGIN
+    ID_CONV_STR_ZEN_KATA    "Convert katakana from half-width to full-width\nkatakana only"
+    ID_CONV_STR_ZEN_ALPHA   "Convert half-width to full-width alphabets\nAlphabets only"
+    ID_CONV_STR_HAN_ALL     "Convert characters from full-width to half-width\nAll"
+    ID_CONV_STR_HAN_SUJI    "Convert numbers from full-width to half-width\nNumbers only"
+    ID_CONV_STR_HAN_KATA    "Convert katakana from full-width to half-width\nKatakana only"
+    ID_CONV_STR_HAN_ALPHA   "Convert full-width to half-width alphabets.\nAlphabets only"
+    ID_MENUITEM32838        "\nLower ⇒ Upper"
+    ID_CONV_STR_TO_UPPER    "Convert letters from lowercase to uppercase\nLower ⇒ Upper"
+    ID_CONV_STR_TO_LOWER    "Convert letters from uppercase to lowercase\nUpper ⇒ Lower"
+    ID_CONV_STR_FIRST_UPPER "Convert only the first letter of a word to uppercase and the rest to lowercase\nFirst letter of a word is upper"
+    ID_CONV_STR_HIRA2KATA   "Convert full-width hiragana to full-width katakana\nHiragana ⇒ Katakana"
+    ID_CONV_STR_KATA2HIRA   "Convert full-width katakana to full-width hiragana\nKatakana ⇒ Hiragana"
+    ID_CONV_STR_ZEN_ALL     "Convert characters from half-width to full-width\nAll"
+    ID_FOLDER_TREE_SYNC     "Synchronize the actual folder structure to match the STE tree view\nSynchronize folder structure"
+    ID_CHECK_FILE_SYNC      "Only files that are checked will be[フォルダ構成を同期]\nSynchronize folder configuration (check only)"
+    ID_DLG_ENVIRONMENT_NORMAL "Open the Options Settings dialog\nOptions Settings"
+END
+
+STRINGTABLE
+BEGIN
+    ID_DLG_ENVIRONMENT_CONV "Open the Options Settings dialog for settings related to the conversion\nConversion"
+    ID_DLG_ENVIRONMENT_ADVANCED "Open the Options Settings dialog for advanced settings for advanced users\nadvanced users"
+    ID_CONV_STR_ZEN_KIGOU   "Convert symbols from half-width to full-width\nSymbols only"
+    ID_CONV_STR_HAN_KIGOU   "Convert symbols from full-width to half-width\nSymbols only"
+    ID_SORT_LIST_DIRECT     "Re-run the sort with the same settings as before\nRe-run the sort"
+    ID_WRITE_LIST1          "01: list\n01: list"
+    ID_WRITE_LIST2          "02: list\n02: list"
+    ID_WRITE_LIST3          "03: list\n03: list"
+    ID_WRITE_LIST4          "04: list\n04: list"
+    ID_WRITE_LIST5          "05: list\n05: list"
+    ID_WRITE_TREE_PLAYLIST  "Output playlist files classified by tree structure\nOutput playlist for tree classification"
+    ID_SET_LIST_FONT        "Open the Font Settings dialog\nFont Settings"
+    ID_DELETE_CHAR          "Delete n characters from the beginning/end of the selected cell\nDelete n characters from the beginning/end"
+END
+
+STRINGTABLE
+BEGIN
+    ID_SET_NUMBER_ADD       "Add a sequential number from 1 downward to the beginning or end of the selected cells\nAdd a sequential number downward"
+    ID_MOVE_FOLDER_01       "Copy/Move in destination folder format 1\nCopy/Move 1"
+    ID_MOVE_FOLDER_02       "Copy/Move in destination folder format 2\nCopy/Move 2"
+    ID_MOVE_FOLDER_03       "Copy/Move in destination folder format 3\nCopy/Move 3"
+    ID_MOVE_FOLDER_04       "Copy/Move in destination folder format 4\nCopy/Move 4"
+    ID_MOVE_FOLDER_05       "Copy/Move in destination folder format 5\nCopy/Move 5"
+    ID_SELECT_TREE_COLUM    "Make a batch of cells in the files under the tree selected\nBatch-select-cells-in-tree"
+    ID_CONV_FORMAT_USER_01  "Formats used in user-specified conversions\nFormat 1"
+    ID_CONV_FORMAT_USER_02  "Formats used in user-specified conversions\nFormat 2"
+    ID_CONV_FORMAT_USER_03  "Formats used in user-specified conversions\nFormat 3"
+    ID_TEIKEI_01            "Paste canned text\nCanned text"
+    ID_TEIKEI_02            "Paste canned text\nCanned text"
+    ID_TEIKEI_03            "Paste canned text\nCanned text"
+    ID_TEIKEI_04            "Paste canned text\nCanned text"
+END
+
+STRINGTABLE
+BEGIN
+    ID_TEIKEI_05            "Paste canned text\nCanned text"
+    ID_TEIKEI_06            "Paste canned text\nCanned text"
+    ID_TEIKEI_07            "Paste canned text\nCanned text"
+    ID_TEIKEI_08            "Paste canned text\nCanned text"
+    ID_TEIKEI_09            "Paste canned text\nCanned text"
+    ID_TEIKEI_10            "Paste canned text\nCanned text"
+    ID_CHECK_FILENAME_MAX   "Checks the filename length of the selected file and prompts you to change it if the maximum number of characters is exceeded\nCheck filename length"
+    ID_CONV_FORMAT_USER     "Switching the format used in user-specified conversions\nSwitching User Formats"
+    ID_TEIKEI               "Paste canned text\nPaste canned text"
+END
+
+STRINGTABLE
+BEGIN
+    ID_POPUP_CUSTOMIZE      "Customize Toolbar\nCustomize Toolbar"
+END
+
+STRINGTABLE
+BEGIN
+    ID_DLG_TEIKEI           "Open the Canned Text Settings dialog used for canned text pasting\nCanned text"
+    ID_TEIKEI_2_01          "Paste canned text\nCanned text"
+    ID_TEIKEI_2_02          "Paste canned text\nCanned text"
+    ID_TEIKEI_2_03          "Paste canned text\nCanned text"
+    ID_TEIKEI_2_04          "Paste canned text\nCanned text"
+    ID_TEIKEI_2_05          "Paste canned text\nCanned text"
+    ID_TEIKEI_2_06          "Paste canned text\nCanned text"
+    ID_TEIKEI_2_07          "Paste canned text\nCanned text"
+    ID_TEIKEI_2_08          "Paste canned text\nCanned text"
+    ID_TEIKEI_2_09          "Paste canned text\nCanned text"
+    ID_TEIKEI_2_10          "Paste canned text\nCanned text"
+    ID_TEIKEI_3_01          "Paste canned text\nCanned text"
+    ID_TEIKEI_3_02          "Paste canned text\nCanned text"
+    ID_TEIKEI_3_03          "Paste canned text\nCanned text"
+END
+
+STRINGTABLE
+BEGIN
+    ID_TEIKEI_3_04          "Paste canned text\nCanned text"
+    ID_TEIKEI_3_05          "Paste canned text\nCanned text"
+    ID_TEIKEI_3_06          "Paste canned text\nCanned text"
+    ID_TEIKEI_3_07          "Paste canned text\nCanned text"
+    ID_TEIKEI_3_08          "Paste canned text\nCanned text"
+    ID_TEIKEI_3_09          "Paste canned text\nCanned text"
+    ID_TEIKEI_3_10          "Paste canned text\nCanned text"
+    ID_UNIFY_CHAR           "Unify character types\nUnify character types"
+    ID_CONV_FORMAT_USER_04  "Formats used in user-specified conversions\nFormat 4"
+    ID_CONV_FORMAT_USER_05  "Formats used in user-specified conversions\nFormat 5"
+    ID_END_EDIT_RIGHT       "Move cursor right on[Enter]after item change\nMove cursor right after item change"
+END
+
+STRINGTABLE
+BEGIN
+    ID_DLG_FAVORITES        "Open the Favorite Folder Settings dialog\nFavorite Folders"
+    ID_FAVORITE_FOLDER_01   "Open Favorite Folder 1\nFavorite Folder 1"
+    ID_FAVORITE_FOLDER_02   "Open Favorite Folder 2\nFavorite Folder 2"
+    ID_FAVORITE_FOLDER_03   "Open Favorite Folder 3\nFavorite Folder 3"
+    ID_FAVORITE_FOLDER_04   "Open Favorite Folder 4\nFavorite Folder 4"
+    ID_FAVORITE_FOLDER_05   "Open Favorite Folder 5\nFavorite Folder 5"
+    ID_FAVORITE_FOLDER_06   "Open Favorite Folder 6\nFavorite Folder 6"
+    ID_FAVORITE_FOLDER_07   "Open Favorite Folder 7\nFavorite Folder 7"
+    ID_FAVORITE_FOLDER_08   "Open Favorite Folder 8\nFavorite Folder 8"
+    ID_FAVORITE_FOLDER_09   "Open Favorite Folder 9\nFavorite Folder 9"
+END
+
+STRINGTABLE
+BEGIN
+    ID_FAVORITE_FOLDER_10   "Open Favorite Folder 10\nFavorite Folder 10"
+    ID_FAVORITES_FOLDER     "Open your favorite folders\nFavorite folders"
+    ID_CALC_FOLDER_TOTAL    "Calculate Track Count/Total Performance Time/Total Size\nCalculate Total"
+    ID_EDIT_PASTE_ADD       "Paste clipboard contents into cell contents additionally\nPaste additionally"
+    ID_EDIT_COPY_FORMAT_01  "Copy the selected file according to the format and save it to the clipboard\nFormat-copy"
+    ID_EDIT_COPY_FORMAT_02  "Copy the selected file according to the format and save it to the clipboard\nFormat-copy"
+    ID_EDIT_COPY_FORMAT_03  "Copy the selected file according to the format and save it to the clipboard\nFormat-copy"
+    ID_EDIT_COPY_FORMAT_04  "Copy the selected file according to the format and save it to the clipboard\nFormat-copy"
+    ID_EDIT_COPY_FORMAT_05  "Copy the selected file according to the format and save it to the clipboard\nFormat-copy"
+    ID_DELETE_CHAR_SPACE    "Delete leading/trailing whitespace characters (spaces/tabs) in selected cells\nDelete leading/trailing whitespace characters"
+END
+
+STRINGTABLE
+BEGIN
+    ID_DLG_SETUP_PLUGIN     "Configure plugin settings.\nPlugin Settings"
+    ID_CONV_STR_KAN2HIRA    "Convert Kanji characters to full-width Hiragana\nKanji ⇒ Hiragana"
+    ID_CONV_STR_ROMAJI      "Convert to Roman\nRoman"
+    ID_CONV_DEFAULT         "Formatting\nSet default formatting"
+    ID_CONV_DEFAULT_SETUP   "Formatting\nformat the default conversion"
+    ID_CONV_USER_SETUP      "Set formatting for user-specified conversions\nFormatting"
+    ID_CONV_EX_SETUP        "Set formatting for extended format conversion\nFormatting"
+    ID_SELECT_TREE_FILE     "Select all files under the tree at once\nSelect all files in the tree at once"
+    ID_MOVE_TO_PARENT       "Move cursor position to parent tree\nMove cursor to parent tree"
+    ID_MOVE_TO_PREVIOUS     "Move the cursor position one tree up\nMove the cursor position one tree up"
+    ID_MOVE_TO_NEXT         "Move cursor position one tree down\nMove cursor position one tree down"
+    ID_CONV_FORMAT_USER_EXEC_01 "Tag info ⇒ filename in format 1 execute\nExecute in format 1"
+END
+
+STRINGTABLE
+BEGIN
+    ID_CONV_FORMAT_USER_T2F_01
+                            "Convert[Tag]to[Filename]in user-specified format\nTag info ⇒ filename"
+    ID_CONV_FORMAT_USER_T2F_02
+                            "Convert[Tag]to[Filename]in user-specified format\nTag info ⇒ filename"
+    ID_CONV_FORMAT_USER_T2F_03
+                            "Convert[Tag]to[Filename]in user-specified format\nTag info ⇒ filename"
+    ID_CONV_FORMAT_USER_T2F_04
+                            "Convert[Tag]to[Filename]in user-specified format\nTag info ⇒ filename"
+    ID_CONV_FORMAT_USER_T2F_05
+                            "Convert[Tag]to[Filename]in user-specified format\nTag info ⇒ filename"
+    ID_CONV_FORMAT_USER_T2F_SELECTED
+                            "Convert[Tag]to[Filename]in user-specified format\nTag info ⇒ filename"
+    ID_CONV_FORMAT_USER_F2T_01
+                            "Convert[Filename]to[Tag]in user-specified format\nFilename ⇒ tag info"
+    ID_CONV_FORMAT_USER_F2T_02
+                            "Convert[Filename]to[Tag]in user-specified format\nFilename ⇒ tag info"
+    ID_CONV_FORMAT_USER_F2T_03
+                            "Convert[Filename]to[Tag]in user-specified format\nFilename ⇒ tag info"
+    ID_CONV_FORMAT_USER_F2T_04
+                            "Convert[Filename]to[Tag]in user-specified format\nFilename ⇒ tag info"
+    ID_CONV_FORMAT_USER_F2T_05
+                            "Convert[Filename]to[Tag]in user-specified format\nFilename ⇒ tag info"
+    ID_CONV_FILE2TAG_USER_SUB
+                            "Convert[Filename]to[Tag]in user-specified format\nFilename ⇒ tag info"
+    ID_CONV_TAG2FILE_USER_SUB
+                            "Convert[Tag]to[Filename]in user-specified format\nTag info ⇒ filename"
+    ID_CONV_TAG_TO_TAG_01   "Convert with Tag Information Conversion Format 1\nFormat 1"
+    ID_CONV_TAG_TO_TAG_02   "Convert with Tag Information Conversion Format 2\nFormat 2"
+END
+
+STRINGTABLE
+BEGIN
+    ID_CONV_TAG_TO_TAG_03   "Convert with Tag Information Conversion Format 3\nFormat 3"
+    ID_CONV_TAG_TO_TAG_04   "Convert with Tag Information Conversion Format 4\nFormat 4"
+    ID_CONV_TAG_TO_TAG_05   "Convert with Tag Information Conversion Format 5\nFormat 5"
+    ID_CONV_TAG2TAG_SETUP   "Set the format for Tag Information Conversion\nFormatting"
+    ID_CONV_STR_FIXED_UPPER_LOWER "Converts the case of predefined words as specified\nFixed-case"
+    ID_TEIKEI_TOOL          "Paste canned text\nPaste canned text"
+END

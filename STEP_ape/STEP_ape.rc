@@ -12,11 +12,17 @@
 /////////////////////////////////////////////////////////////////////////////
 #undef APSTUDIO_READONLY_SYMBOLS
 
+//////////////////////////////////////////////////////////////////////////////
+// Languages
+
+#include "lang/en_US.rc"
+#include "lang/ja_JP.rc"
+
 /////////////////////////////////////////////////////////////////////////////
 // 日本語 (日本) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)
-LANGUAGE LANG_JAPANESE, SUBLANG_DEFAULT
+LANGUAGE LANG_ENGLISH, SUBLANG_DEFAULT
 #pragma code_page(65001)
 
 #ifdef APSTUDIO_INVOKED
@@ -65,21 +71,6 @@ END
 IDB_BITMAP_APE          BITMAP                  "bitmap1-24.bmp"
 
 IDB_BITMAP_MPC          BITMAP                  "bmp00001-24.bmp"
-
-
-/////////////////////////////////////////////////////////////////////////////
-//
-// Dialog
-//
-
-IDD_DLG_SETUP DIALOG 0, 0, 175, 73
-STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "Monkey's Audio"
-FONT 9, "Meiryo UI"
-BEGIN
-    CONTROL         "ジャンル名はリストから選択する(※再起動後有効)",IDC_CH_GENRE_LIST_SELECT,
-                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,7,162,10
-END
 
 
 /////////////////////////////////////////////////////////////////////////////
