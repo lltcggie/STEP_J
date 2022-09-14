@@ -1021,7 +1021,7 @@ BOOL COptionSheet::OnInitDialog()
     , 0
     , 0
     , 0
-    , TEXT("Meiryo UI")
+    , TEXT("Segoe UI")
     );
 
     // Set the icon

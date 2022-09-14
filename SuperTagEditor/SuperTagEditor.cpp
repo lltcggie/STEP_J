@@ -1399,7 +1399,7 @@ void CSuperTagEditorApp::ReadRegistry(void)
 
     // ウィンドウのフォントを読み込む
     CString strFont;
-    strFont = m_IniFile.ReadStr(sSectionFont, sKeyFontFace, _T("Meiryo UI"), buf, _countof(buf));
+    strFont = m_IniFile.ReadStr(sSectionFont, sKeyFontFace, _T("Segoe UI"), buf, _countof(buf));
     _tcsncpy_s(g_fontReport.lfFaceName, (const TCHAR *)strFont, _TRUNCATE);
     g_fontReport.lfHeight           = m_IniFile.ReadInt(sSectionFont, sKeyFontHeight, -MulDiv(9, CClientDC(0).GetDeviceCaps(LOGPIXELSY), 72));
     g_fontReport.lfWidth            = m_IniFile.ReadInt(sSectionFont, sKeyFontWidth, 0);
