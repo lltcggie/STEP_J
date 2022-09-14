@@ -208,7 +208,7 @@ copy $(ProjectDir)..\Help\SuperTagEditor.chm /b $(outputpath)..\
     </Bscmake>
     <Manifest />
     <Manifest>
-      <EnableDpiAwareness>true</EnableDpiAwareness>
+      <EnableDpiAwareness>PerMonitorHighDPIAware</EnableDpiAwareness>
       <AdditionalManifestFiles>
       </AdditionalManifestFiles>
     </Manifest>
