@@ -1766,22 +1766,22 @@ END
 
 STRINGTABLE
 BEGIN
-    ID_FILE_MRU_FILE1       "指定のﾌｨﾙﾀﾞを開く"
-    ID_FILE_MRU_FILE2       "指定のﾌｨﾙﾀﾞを開く"
-    ID_FILE_MRU_FILE3       "指定のﾌｨﾙﾀﾞを開く"
-    ID_FILE_MRU_FILE4       "指定のﾌｨﾙﾀﾞを開く"
-    ID_FILE_MRU_FILE5       "指定のﾌｨﾙﾀﾞを開く"
-    ID_FILE_MRU_FILE6       "指定のﾌｨﾙﾀﾞを開く"
-    ID_FILE_MRU_FILE7       "指定のﾌｨﾙﾀﾞを開く"
-    ID_FILE_MRU_FILE8       "指定のﾌｨﾙﾀﾞを開く"
-    ID_FILE_MRU_FILE9       "指定のﾌｨﾙﾀﾞを開く"
-    ID_FILE_MRU_FILE10      "指定のﾌｨﾙﾀﾞを開く"
-    ID_FILE_MRU_FILE11      "指定のﾌｨﾙﾀﾞを開く"
-    ID_FILE_MRU_FILE12      "指定のﾌｨﾙﾀﾞを開く"
-    ID_FILE_MRU_FILE13      "指定のﾌｨﾙﾀﾞを開く"
-    ID_FILE_MRU_FILE14      "指定のﾌｨﾙﾀﾞを開く"
-    ID_FILE_MRU_FILE15      "指定のﾌｨﾙﾀﾞを開く"
-    ID_FILE_MRU_FILE16      "指定のﾌｨﾙﾀﾞを開く"
+    ID_FILE_MRU_FILE1       "指定のフォルダを開く"
+    ID_FILE_MRU_FILE2       "指定のフォルダを開く"
+    ID_FILE_MRU_FILE3       "指定のフォルダを開く"
+    ID_FILE_MRU_FILE4       "指定のフォルダを開く"
+    ID_FILE_MRU_FILE5       "指定のフォルダを開く"
+    ID_FILE_MRU_FILE6       "指定のフォルダを開く"
+    ID_FILE_MRU_FILE7       "指定のフォルダを開く"
+    ID_FILE_MRU_FILE8       "指定のフォルダを開く"
+    ID_FILE_MRU_FILE9       "指定のフォルダを開く"
+    ID_FILE_MRU_FILE10      "指定のフォルダを開く"
+    ID_FILE_MRU_FILE11      "指定のフォルダを開く"
+    ID_FILE_MRU_FILE12      "指定のフォルダを開く"
+    ID_FILE_MRU_FILE13      "指定のフォルダを開く"
+    ID_FILE_MRU_FILE14      "指定のフォルダを開く"
+    ID_FILE_MRU_FILE15      "指定のフォルダを開く"
+    ID_FILE_MRU_FILE16      "指定のフォルダを開く"
 END
 
 STRINGTABLE
@@ -2054,7 +2054,7 @@ BEGIN
     ID_EDIT_COPY_FORMAT_03  "選択ファイルを書式に従ってコピーしてクリップボードに保存\n書式コピー"
     ID_EDIT_COPY_FORMAT_04  "選択ファイルを書式に従ってコピーしてクリップボードに保存\n書式コピー"
     ID_EDIT_COPY_FORMAT_05  "選択ファイルを書式に従ってコピーしてクリップボードに保存\n書式コピー"
-    ID_DELETE_CHAR_SPACE    "選択されているセルの先頭/末尾にある空白文字(半角全角ｽﾍﾟｰｽ/ﾀﾌﾞ)を削除する\n先頭/末尾の空白文字を削除"
+    ID_DELETE_CHAR_SPACE    "選択されているセルの先頭/末尾にある空白文字(半角全角スペース/タブ)を削除する\n先頭/末尾の空白文字を削除"
 END
 
 STRINGTABLE
@@ -2064,7 +2064,7 @@ BEGIN
     ID_CONV_STR_ROMAJI      "ローマ字に変換します\nローマ字"
     ID_CONV_DEFAULT         "書式設定\nデフォルト書式を設定"
     ID_CONV_DEFAULT_SETUP   "書式設定\nデフォルト変換の書式を設定"
-    ID_CONV_USER_SETUP      "ﾕｰｻﾞｰ指定変換の書式を設定\n書式設定"
+    ID_CONV_USER_SETUP      "ユーザー指定変換の書式を設定\n書式設定"
     ID_CONV_EX_SETUP        "拡張書式変換の書式を設定\n書式設定"
     ID_SELECT_TREE_FILE     "ツリー配下のファイルを一括で選択状態にします\nツリーのファイルを一括選択"
     ID_MOVE_TO_PARENT       "カーソル位置を親ツリーへ移動します\nカーソルを親ツリーへ移動"
