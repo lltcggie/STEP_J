@@ -13,7 +13,7 @@ LANGUAGE LANG_ENGLISH, SUBLANG_DEFAULT
 IDD_DLG_CONV_ID3V2_VERSION DIALOGEX 0, 0, 215, 142
 STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "ID3v2 version/character code conversion"
-FONT 8, "Segoe UI", 0, 0, 0x0
+FONT 9, "Segoe UI", 0, 0, 0x0
 BEGIN
     LTEXT           "Convert ID3v2 version and character encoding for the selected DSF file\nAre you sure you want to perform the conversion?\nRecommended settings if unsure\n\nVersion： ID3v2.3\nCharacter encoding： UTF-16",IDC_STATIC,7,7,201,55
     LTEXT           "Version",IDC_STATIC,14,85,70,8
@@ -27,7 +27,7 @@ END
 IDD_DLG_SETUP DIALOGEX 0, 0, 309, 176
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "DSF"
-FONT 8, "Segoe UI", 400, 0, 0x1
+FONT 9, "Segoe UI", 400, 0, 0x1
 BEGIN
     CONTROL         "Genre names are selected from a list (*effective after reboot)",IDC_CH_GENRE_LIST_SELECT,
                     "Button",BS_AUTOCHECKBOX |BS_MULTILINE | WS_TABSTOP,16,108,250,20
@@ -48,7 +48,7 @@ END
 IDD_DLG_SETUP_OTHER DIALOGEX 0, 0, 309, 176
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Other"
-FONT 8, "Segoe UI", 400, 0, 0x1
+FONT 9, "Segoe UI", 400, 0, 0x1
 BEGIN
     LTEXT           "ID3v2 Save format",IDC_STATIC,7,7,79,9
     COMBOBOX        IDC_COMBO_ID3V2_VERSION,68,17,57,62,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP

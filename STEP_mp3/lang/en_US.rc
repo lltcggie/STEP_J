@@ -13,7 +13,7 @@ LANGUAGE LANG_ENGLISH, SUBLANG_DEFAULT
 IDD_DLG_FILE_RMP_ID3V2 DIALOGEX 0, 0, 240, 223
 STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "RIFF MP3/ID3v2"
-FONT 8, "Segoe UI", 0, 0, 0x0
+FONT 9, "Segoe UI", 0, 0, 0x0
 BEGIN
     GROUPBOX        "Common Settings",IDC_STATIC,7,7,226,46
     GROUPBOX        "Target items when converting to ID3v1",IDC_STATIC,11,19,222,28
@@ -45,7 +45,7 @@ END
 IDD_DLG_DEFAUT_VALUE DIALOGEX 0, 0, 239, 219
 STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Other"
-FONT 8, "Segoe UI", 0, 0, 0x0
+FONT 9, "Segoe UI", 0, 0, 0x0
 BEGIN
     LTEXT           "Software Defaults",IDC_STATIC,7,15,78,10
     EDITTEXT        IDC_SOFTWARE_TAG,88,14,144,14,ES_AUTOHSCROLL
@@ -68,7 +68,7 @@ END
 IDD_DLG_CONV_ID3V2_VERSION DIALOGEX 0, 0, 232, 242
 STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Convert to ID3v2 & convert version/character encoding"
-FONT 8, "Segoe UI", 0, 0, 0x0
+FONT 9, "Segoe UI", 0, 0, 0x0
 BEGIN
     LTEXT           "Converts the selected MP3 file to ID3v2. Convert (if necessary)\nID3v2 version and character encoding.\nAre you sure you want to perform the conversion?\nRecommended\n\nVersion: ID3v2.3\nCharacter encoding: UTF-16\nDesynchronize ID3v2 frames: Off",IDC_STATIC,7,2,206,71
     LTEXT           "Version",IDC_STATIC,14,80,39,8
