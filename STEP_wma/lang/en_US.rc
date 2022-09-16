@@ -13,7 +13,7 @@ LANGUAGE LANG_ENGLISH, SUBLANG_DEFAULT
 IDD_DLG_SETUP DIALOG DISCARDABLE  0, 0, 175, 73
 STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "WMA"
-FONT 8, "Segoe UI"
+FONT 9, "Segoe UI"
 BEGIN
     CONTROL         "Genre names are selected from a list (*effective after reboot)",
                     IDC_CH_GENRE_LIST_SELECT,"Button",BS_AUTOCHECKBOX |
