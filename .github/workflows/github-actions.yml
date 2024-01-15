@@ -11,7 +11,7 @@ jobs:
         arch: ["x64"]
     runs-on: windows-2022
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Get short SHA
         id: slug
         run: echo "::set-output name=sha7::$(git rev-parse --short HEAD)"
@@ -33,7 +33,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Download artifacts
         uses: actions/download-artifact@v3
         with:
