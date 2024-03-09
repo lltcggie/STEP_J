@@ -41,7 +41,7 @@ void DlgAddNumber::DoDataExchange(CDataExchange* pDX)
     DDX_Radio(pDX, IDC_RADIO_ADD_START, m_nAddPosition);
     DDX_Check(pDX, IDC_CH_SPACE_INIT, m_bSpaceInitNumber);
     DDX_Text(pDX, IDC_ED_ADD_NUMBER, m_nAddNumber);
-    DDV_MinMaxUInt(pDX, m_nAddNumber, 1, 99);
+    DDV_MinMaxUInt(pDX, m_nAddNumber, 0, 99);
     DDX_Text(pDX, IDC_ED_INIT_NUMBER, m_nInitNumber);
     DDV_MinMaxUInt(pDX, m_nInitNumber, 0, 9999);
     DDX_Text(pDX, IDC_EDIT_ADD_AFTER, m_strAfter);
