@@ -274,7 +274,6 @@
     <ClCompile Include="libplatform\io\File_win32.cpp" />
     <ClCompile Include="libplatform\number\random_win32.cpp" />
     <ClCompile Include="libplatform\platform_win32.cpp" />
-    <ClCompile Include="libplatform\process\process_win32.cpp" />
     <ClCompile Include="libplatform\sys\error.cpp" />
     <ClCompile Include="libplatform\time\time.cpp" />
     <ClCompile Include="libplatform\time\time_win32.cpp" />

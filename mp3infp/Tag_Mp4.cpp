@@ -59,6 +59,9 @@ void CTag_Mp4::ClearMetadata()
 	m_strMetadata_Comment = _T("");
 	m_strMetadata_Tool = _T("");
     m_strMetadata_Copyright = _T("");//追加 by Kobarin
+    m_strMetadata_AlbumSort = _T("");
+    m_strMetadata_AlbumArtistSort = _T("");
+    m_strMetadata_ArtistSort = _T("");
 }
 
 static CString _CnvMetadata(const char *utf8val)
@@ -321,7 +324,22 @@ DWORD CTag_Mp4::Load(LPCTSTR szFileName)
         if (tags->copyright)//追加 by Kobarin
         {
             m_strMetadata_Copyright = _CnvMetadata(tags->copyright);
-        }//ここまで
+        }
+
+        if (tags->sortAlbum)
+        {
+            m_strMetadata_AlbumSort = _CnvMetadata(tags->sortAlbum);
+        }
+
+        if (tags->sortAlbumArtist)
+        {
+            m_strMetadata_AlbumArtistSort = _CnvMetadata(tags->sortAlbumArtist);
+        }
+
+        if (tags->sortArtist)
+        {
+            m_strMetadata_ArtistSort = _CnvMetadata(tags->sortArtist);
+        }
         
         MP4TagsFree(tags);
 	}
@@ -601,6 +619,9 @@ DWORD CTag_Mp4::Save(LPCTSTR szFileName)
 		SetTagString(tags, m_strMetadata_Comment, MP4TagsSetComments);
 		SetTagString(tags, m_strMetadata_Tool, MP4TagsSetEncodingTool);
         SetTagString(tags, m_strMetadata_Copyright, MP4TagsSetCopyright);//追加 by Kobarin
+        SetTagString(tags, m_strMetadata_AlbumSort, MP4TagsSetSortAlbum);
+        SetTagString(tags, m_strMetadata_AlbumArtistSort, MP4TagsSetSortAlbumArtist);
+        SetTagString(tags, m_strMetadata_ArtistSort, MP4TagsSetSortArtist);
 
 		MP4TagsStore(tags, mp4file);
 		MP4TagsFree(tags);

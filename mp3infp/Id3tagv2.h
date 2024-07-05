@@ -186,6 +186,12 @@ public:
     void SetWriter(LPCTSTR writer){SetId3String("TEXT", writer);}
     CString GetEngineer() { return GetId3String("TPUB"); }
     void SetEngineer(LPCTSTR engineer) { SetId3String("TPUB", engineer); }
+    CString GetAlbumSort() { return GetId3String("TSOA"); }
+    void SetAlbumSort(LPCTSTR albumSort) { SetId3String("TSOA", albumSort); }
+    CString GetAlbumArtistSort() { return GetId3String("TSO2"); }
+    void SetAlbumArtistSort(LPCTSTR albumSort) { SetId3String("TSO2", albumSort); }
+    CString GetArtistSort() { return GetId3String("TSOP"); }
+    void SetArtistSort(LPCTSTR albumSort) { SetId3String("TSOP", albumSort); }
 
     //
 	DWORD Load(LPCTSTR szFileName);

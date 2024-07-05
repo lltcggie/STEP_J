@@ -34,6 +34,11 @@ namespace mp4v2 { namespace impl {
 
 ///////////////////////////////////////////////////////////////////////////////
 
+#define PROTECT_WRITE_OPERATION() \
+    if( !IsWriteMode() ) {\
+        throw new EXCEPTION("operation not permitted in read mode"); \
+    }
+
 MP4File::MP4File( ) :
     m_file             ( NULL )
     , m_fileOriginalSize ( 0 )
@@ -64,8 +69,9 @@ void MP4File::Init()
     m_bufReadBits = 0;
     m_numWriteBits = 0;
     m_bufWriteBits = 0;
-    m_editName = NULL;
-    m_trakName[0] = '\0';
+
+    m_editName[0] = 0;
+    m_trakName[0] = 0;
 }
 
 MP4File::~MP4File()
@@ -74,7 +80,6 @@ MP4File::~MP4File()
     for( uint32_t i = 0; i < m_pTracks.Size(); i++ )
         delete m_pTracks[i];
     MP4Free( m_memoryBuffer ); // just in case
-    CHECK_AND_FREE( m_editName );
     delete m_file;
 }
 
@@ -90,25 +95,26 @@ MP4File::GetFilename() const
     return m_file->name;
 }
 
-void MP4File::Read( const char* name, const MP4FileProvider* provider )
+void MP4File::Read( const char* fileName, const MP4FileProvider* provider, const MP4IOCallbacks* callbacks, void* handle )
 {
-    Open( name, File::MODE_READ, provider );
+    Open( fileName, File::MODE_READ, provider, callbacks, handle );
     ReadFromFile();
     CacheProperties();
 }
 
-void MP4File::Create( const char*            fileName,
-                      uint32_t               flags,
-                      const MP4FileProvider* provider,
-                      int                    add_ftyp,
-                      int                    add_iods,
-                      char*                  majorBrand,
-                      uint32_t               minorVersion,
-                      char**                 supportedBrands,
-                      uint32_t               supportedBrandsCount )
+void MP4File::Create( const char*           fileName,
+                      const MP4IOCallbacks* callbacks,
+                      void*                 handle,
+                      uint32_t              flags,
+                      int                   add_ftyp,
+                      int                   add_iods,
+                      char*                 majorBrand,
+                      uint32_t              minorVersion,
+                      char**                supportedBrands,
+                      uint32_t              supportedBrandsCount )
 {
     m_createFlags = flags;
-    Open( fileName, File::MODE_CREATE, provider );
+    Open( fileName, File::MODE_CREATE, NULL, callbacks, handle );
 
     // generate a skeletal atom tree
     m_pRootAtom = MP4Atom::CreateAtom(*this, NULL, NULL);
@@ -159,10 +165,11 @@ void MP4File::Check64BitStatus (const char *atomName)
     }
 }
 
-
-bool MP4File::Modify( const char* fileName )
+bool MP4File::Modify( const char*           fileName,
+                      const MP4IOCallbacks* callbacks,
+                      void*                 handle )
 {
-    Open( fileName, File::MODE_MODIFY, NULL );
+    Open( fileName, File::MODE_MODIFY, NULL, callbacks, handle );
     ReadFromFile();
 
     // find the moov atom
@@ -188,12 +195,12 @@ bool MP4File::Modify( const char* fileName )
             const char* type = pAtom->GetType();
 
             // get rid of any trailing free or skips
-            if (!strcmp(type, "free") || !strcmp(type, "skip")) {
+            if (strequal(type, "free") || strequal(type, "skip")) {
                 m_pRootAtom->DeleteChildAtom(pAtom);
                 continue;
             }
 
-            if (strcmp(type, "moov")) {
+            if (!strequal(type, "moov")) {
                 if (pLastAtom == NULL) {
                     pLastAtom = pAtom;
                     lastAtomIsMoov = false;
@@ -205,9 +212,7 @@ bool MP4File::Modify( const char* fileName )
 
             // multiple moov atoms?!?
             if (pAtom != pMoovAtom) {
-                throw new Exception(
-                    "Badly formed mp4 file, multiple moov atoms",
-                    __FILE__,__LINE__,__FUNCTION__);
+                throw new EXCEPTION("Badly formed mp4 file, multiple moov atoms");
             }
 
             if (lastAtomIsMoov) {
@@ -243,11 +248,20 @@ bool MP4File::Modify( const char* fileName )
 
     numAtoms = m_pRootAtom->GetNumberOfChildAtoms();
 
-    // insert another mdat prior to moov atom (the last atom)
-    MP4Atom* pMdatAtom = InsertChildAtom(m_pRootAtom, "mdat", numAtoms - 1);
+    // unless there already is an empty mdat atom,
+    // insert another one prior to moov atom (the last atom)
+    if (numAtoms > 1)
+    {
+        MP4Atom* pPreviousAtom = m_pRootAtom->GetChildAtom(numAtoms - 2);
+        if (!strequal(pPreviousAtom->GetType(), "mdat") || pPreviousAtom->GetSize() > 0)
+        {
+            MP4Atom* pMdatAtom = InsertChildAtom(m_pRootAtom, "mdat", numAtoms - 1);
 
-    // start writing new mdat
-    pMdatAtom->BeginWrite(Use64Bits("mdat"));
+            // start writing new mdat
+            pMdatAtom->BeginWrite(Use64Bits("mdat"));
+        }
+    }
+
     return true;
 }
 
@@ -279,7 +293,7 @@ void MP4File::Optimize( const char* srcFileName, const char* dstFileName )
 
     try {
         // file source to optimize
-        Open( srcFileName, File::MODE_READ, NULL );
+        Open( srcFileName, File::MODE_READ );
         ReadFromFile();
         CacheProperties(); // of moov atom
 
@@ -287,7 +301,7 @@ void MP4File::Optimize( const char* srcFileName, const char* dstFileName )
         m_file = NULL;
 
         // optimized file destination
-        Open( dname.c_str(), File::MODE_CREATE, NULL );
+        Open( dname.c_str(), File::MODE_CREATE );
         dst = m_file;
 
         SetIntegerProperty( "moov.mvhd.modificationTime", MP4GetAbsTimestamp() );
@@ -355,7 +369,7 @@ void MP4File::RewriteMdat( File& src, File& dst )
                 continue;
 
             // prefer hint tracks to media tracks if times are equal
-            if( nextChunkTimes[i] == nextTime && strcmp( m_pTracks[i]->GetType(), MP4_HINT_TRACK_TYPE ))
+            if( nextChunkTimes[i] == nextTime && !strequal( m_pTracks[i]->GetType(), MP4_HINT_TRACK_TYPE ))
                 continue;
 
             // this is our current choice of tracks
@@ -388,15 +402,28 @@ void MP4File::RewriteMdat( File& src, File& dst )
     delete [] nextChunkTimes;
 }
 
-void MP4File::Open( const char* name, File::Mode mode, const MP4FileProvider* provider )
+void MP4File::Open( const char*            fileName,
+                    File::Mode             mode,
+                    const MP4FileProvider* fileProvider,
+                    const MP4IOCallbacks*  callbacks,
+                    void*                  handle )
 {
     ASSERT( !m_file );
 
-    m_file = new File( name, mode, provider ? new io::CustomFileProvider( *provider ) : NULL );
+    const char* name = fileName;
+    io::FileProvider* provider = NULL;
+    if (fileProvider)
+        provider = new io::CustomFileProvider( *fileProvider );
+    else if (callbacks) {
+        name = "<callbacks>";
+        provider = new io::CallbacksFileProvider( *callbacks, handle );
+    }
+
+    m_file = new File( name, mode, provider );
     if( m_file->open() ) {
         ostringstream msg;
         msg << "open(" << name << ") failed";
-        throw new Exception( msg.str(), __FILE__, __LINE__, __FUNCTION__);
+        throw new EXCEPTION(msg.str());
     }
 
     switch( mode ) {
@@ -468,7 +495,7 @@ void MP4File::GenerateTracks()
 
             MP4Track* pTrack = NULL;
             try {
-                if (!strcmp(pTypeProperty->GetValue(), MP4_HINT_TRACK_TYPE)) {
+                if (strequal(pTypeProperty->GetValue(), MP4_HINT_TRACK_TYPE)) {
                     pTrack = new MP4RtpHintTrack(*this, *pTrakAtom);
                 } else {
                     pTrack = new MP4Track(*this, *pTrakAtom);
@@ -481,7 +508,7 @@ void MP4File::GenerateTracks()
             }
 
             // remember when we encounter the OD track
-            if (pTrack && !strcmp(pTrack->GetType(), MP4_OD_TRACK_TYPE)) {
+            if (pTrack && strequal(pTrack->GetType(), MP4_OD_TRACK_TYPE)) {
                 if (m_odTrackId == MP4_INVALID_TRACK_ID) {
                     m_odTrackId = pTrackIdProperty->GetValue();
                 } else {
@@ -517,55 +544,43 @@ void MP4File::BeginWrite()
 void MP4File::FinishWrite(uint32_t options)
 {
     // remove empty moov.udta.meta.ilst
-    {
-        MP4Atom* ilst = FindAtom( "moov.udta.meta.ilst" );
-        if( ilst ) {
-            if( ilst->GetNumberOfChildAtoms() == 0 ) {
-                ilst->GetParentAtom()->DeleteChildAtom( ilst );
-                delete ilst;
-            }
+    if( MP4Atom* ilst = FindAtom( "moov.udta.meta.ilst" ) ) {
+        if( ilst->GetNumberOfChildAtoms() == 0 ) {
+            ilst->GetParentAtom()->DeleteChildAtom( ilst );
+            delete ilst;
         }
     }
 
     // remove empty moov.udta.meta
-    {
-        MP4Atom* meta = FindAtom( "moov.udta.meta" );
-        if( meta ) {
-            if( meta->GetNumberOfChildAtoms() == 0 ) {
+    if( MP4Atom* meta = FindAtom( "moov.udta.meta" ) ) {
+        if( meta->GetNumberOfChildAtoms() == 0 ) {
+            meta->GetParentAtom()->DeleteChildAtom( meta );
+            delete meta;
+        }
+        else if( meta->GetNumberOfChildAtoms() == 1 ) {
+            if( ATOMID( meta->GetChildAtom( 0 )->GetType() ) == ATOMID( "hdlr" )) {
                 meta->GetParentAtom()->DeleteChildAtom( meta );
                 delete meta;
-            }
-            else if( meta->GetNumberOfChildAtoms() == 1 ) {
-                if( ATOMID( meta->GetChildAtom( 0 )->GetType() ) == ATOMID( "hdlr" )) {
-                    meta->GetParentAtom()->DeleteChildAtom( meta );
-                    delete meta;
-                }
             }
         }
     }
 
     // remove empty moov.udta.name
-    {
-        MP4Atom* name = FindAtom( "moov.udta.name" );
-        if( name ) {
-            unsigned char *val = NULL;
-            uint32_t valSize = 0;
-            GetBytesProperty("moov.udta.name.value", (uint8_t**)&val, &valSize);
-            if( valSize == 0 ) {
-                name->GetParentAtom()->DeleteChildAtom( name );
-                delete name;
-            }
+    if( MP4Atom* name = FindAtom( "moov.udta.name" ) ) {
+        unsigned char *val = NULL;
+        uint32_t valSize = 0;
+        GetBytesProperty("moov.udta.name.value", (uint8_t**)&val, &valSize);
+        if( valSize == 0 ) {
+            name->GetParentAtom()->DeleteChildAtom( name );
+            delete name;
         }
     }
 
     // remove empty moov.udta
-    {
-        MP4Atom* udta = FindAtom( "moov.udta" );
-        if( udta ) {
-            if( udta->GetNumberOfChildAtoms() == 0 ) {
-                udta->GetParentAtom()->DeleteChildAtom( udta );
-                delete udta;
-            }
+    if( MP4Atom* udta = FindAtom( "moov.udta" ) ) {
+        if( udta->GetNumberOfChildAtoms() == 0 ) {
+            udta->GetParentAtom()->DeleteChildAtom( udta );
+            delete udta;
         }
     }
 
@@ -578,9 +593,14 @@ void MP4File::FinishWrite(uint32_t options)
     // ask root atom to write
     m_pRootAtom->FinishWrite();
 
-    // finished all writes, if position < size then file has shrunk and
-    // we mark remaining bytes as free atom; otherwise trailing garbage remains.
-    if( GetPosition() < GetSize() ) {
+    // check if we can move the moov atom to the front
+    MoveMoovAtomToFront();
+
+    // finished all writes, if position < size then the file has
+    // shrunk and we first mark the remaining bytes with a free
+    // atom, then attempt to truncate
+    uint64_t endPosition = GetPosition();
+    if( endPosition < GetSize() ) {
         MP4RootAtom* root = (MP4RootAtom*)FindAtom( "" );
         ASSERT( root );
 
@@ -596,6 +616,78 @@ void MP4File::FinishWrite(uint32_t options)
         freeAtom->SetSize( size );
         root->AddChildAtom( freeAtom );
         freeAtom->Write();
+
+        // now attempt to truncate the file at the previous end position
+        // this is done after marking the area as free, because if truncate
+        // fails it may leave the file inaccessible, preventing us from
+        // inserting the free atom afterwards
+        m_file->truncate(endPosition);
+    }
+}
+
+void MP4File::MoveMoovAtomToFront()
+{
+    // makes sense only if there is a moov atom and at least one mdat atom
+    MP4Atom* moov = FindAtom("moov");
+    if (!moov || !FindAtom("mdat"))
+        return;
+
+    uint32_t numAtoms = m_pRootAtom->GetNumberOfChildAtoms();
+    for (uint32_t i = 0; i < numAtoms; i++) {
+        MP4Atom* atom = m_pRootAtom->GetChildAtom(i);
+        const char* type = atom->GetType();
+
+        // abort upon reaching a moov or mdat atom
+        if (strequal(type, "moov") || strequal(type, "mdat"))
+            break;
+
+        // check if this is a free atom and it's not 64 bit (extremely unlikely, so we don't handle that case)
+        if (!strequal(type, "free") || atom->GetLargesizeMode() || atom->GetSize() > (0xFFFFFFFF - 8))
+            continue;
+
+        uint32_t moovSize = moov->GetSize();
+        uint32_t freeSize = atom->GetSize();
+        uint64_t freeStart = atom->GetStart();
+
+        if (freeSize == moovSize) {
+            m_pRootAtom->DeleteChildAtom(atom);
+            m_pRootAtom->DeleteChildAtom(moov);
+            m_pRootAtom->InsertChildAtom(moov, i);
+
+            delete atom;
+
+            m_file->seek(freeStart);
+
+            moov->Write();
+        }
+        else if (freeSize >= moovSize + 8) {
+            m_pRootAtom->DeleteChildAtom(moov);
+            m_pRootAtom->InsertChildAtom(moov, i);
+
+            atom->SetSize(freeSize - moovSize - 8);
+
+            m_file->seek(freeStart);
+
+            moov->Write();
+            atom->Write();
+        }
+        else
+            continue;
+
+        // position file pointer after last mdat atom
+        numAtoms = m_pRootAtom->GetNumberOfChildAtoms();
+        for (int j = numAtoms - 1; j >= 0; j--) {
+            MP4Atom* atom = m_pRootAtom->GetChildAtom(j);
+            if (!strequal(atom->GetType(), "mdat"))
+                continue;
+
+            m_file->seek(atom->GetEnd());
+            break;
+        }
+
+        // write atoms after last mdat again
+        m_pRootAtom->FinishWrite();
+        break;
     }
 }
 
@@ -627,15 +719,7 @@ void MP4File::Close(uint32_t options)
 void MP4File::Rename(const char* oldFileName, const char* newFileName)
 {
     if( FileSystem::rename( oldFileName, newFileName ))
-        throw new PlatformException( sys::getLastErrorStr(), sys::getLastError(), __FILE__, __LINE__, __FUNCTION__ );
-}
-
-void MP4File::ProtectWriteOperation(const char* file,
-                                    int         line,
-                                    const char* func )
-{
-    if( !IsWriteMode() )
-        throw new Exception( "operation not permitted in read mode", file, line, func );
+        throw new PLATFORM_EXCEPTION(sys::getLastErrorStr(), sys::getLastError());
 }
 
 MP4Track* MP4File::GetTrack(MP4TrackId trackId)
@@ -646,7 +730,7 @@ MP4Track* MP4File::GetTrack(MP4TrackId trackId)
 MP4Atom* MP4File::FindAtom(const char* name)
 {
     MP4Atom* pAtom = NULL;
-    if (!name || !strcmp(name, "")) {
+    if (!name || strequal(name, "")) {
         pAtom = m_pRootAtom;
     } else {
         pAtom = m_pRootAtom->FindAtom(name);
@@ -744,7 +828,7 @@ void MP4File::FindIntegerProperty(const char* name,
     if (!FindProperty(name, ppProperty, pIndex)) {
         ostringstream msg;
         msg << "no such property - " << name;
-        throw new Exception(msg.str(), __FILE__, __LINE__, __FUNCTION__);
+        throw new EXCEPTION(msg.str());
     }
 
     switch ((*ppProperty)->GetType()) {
@@ -757,7 +841,7 @@ void MP4File::FindIntegerProperty(const char* name,
     default:
         ostringstream msg;
         msg << "type mismatch - property " << name << " type " << (*ppProperty)->GetType();
-        throw new Exception(msg.str(), __FILE__, __LINE__, __FUNCTION__);
+        throw new EXCEPTION(msg.str());
     }
 }
 
@@ -773,7 +857,7 @@ uint64_t MP4File::GetIntegerProperty(const char* name)
 
 void MP4File::SetIntegerProperty(const char* name, uint64_t value)
 {
-    ProtectWriteOperation(__FILE__, __LINE__, __FUNCTION__);
+    PROTECT_WRITE_OPERATION();
 
     MP4Property* pProperty = NULL;
     uint32_t index = 0;
@@ -789,12 +873,12 @@ void MP4File::FindFloatProperty(const char* name,
     if (!FindProperty(name, ppProperty, pIndex)) {
         ostringstream msg;
         msg << "no such property - " << name;
-        throw new Exception(msg.str(), __FILE__, __LINE__, __FUNCTION__);
+        throw new EXCEPTION(msg.str());
     }
     if ((*ppProperty)->GetType() != Float32Property) {
         ostringstream msg;
         msg << "type mismatch - property " << name << " type " << (*ppProperty)->GetType();
-        throw new Exception(msg.str(), __FILE__, __LINE__, __FUNCTION__);
+        throw new EXCEPTION(msg.str());
     }
 }
 
@@ -810,7 +894,7 @@ float MP4File::GetFloatProperty(const char* name)
 
 void MP4File::SetFloatProperty(const char* name, float value)
 {
-    ProtectWriteOperation(__FILE__, __LINE__, __FUNCTION__);
+    PROTECT_WRITE_OPERATION();
 
     MP4Property* pProperty;
     uint32_t index;
@@ -826,12 +910,12 @@ void MP4File::FindStringProperty(const char* name,
     if (!FindProperty(name, ppProperty, pIndex)) {
         ostringstream msg;
         msg << "no such property - " << name;
-        throw new Exception(msg.str(), __FILE__, __LINE__, __FUNCTION__);
+        throw new EXCEPTION(msg.str());
     }
     if ((*ppProperty)->GetType() != StringProperty) {
         ostringstream msg;
         msg << "type mismatch - property " << name << " type " << (*ppProperty)->GetType();
-        throw new Exception(msg.str(), __FILE__, __LINE__, __FUNCTION__);
+        throw new EXCEPTION(msg.str());
     }
 }
 
@@ -847,7 +931,7 @@ const char* MP4File::GetStringProperty(const char* name)
 
 void MP4File::SetStringProperty(const char* name, const char* value)
 {
-    ProtectWriteOperation(__FILE__, __LINE__, __FUNCTION__);
+    PROTECT_WRITE_OPERATION();
 
     MP4Property* pProperty;
     uint32_t index;
@@ -863,12 +947,12 @@ void MP4File::FindBytesProperty(const char* name,
     if (!FindProperty(name, ppProperty, pIndex)) {
         ostringstream msg;
         msg << "no such property " << name;
-        throw new Exception(msg.str(), __FILE__, __LINE__, __FUNCTION__);
+        throw new EXCEPTION(msg.str());
     }
     if ((*ppProperty)->GetType() != BytesProperty) {
         ostringstream msg;
         msg << "type mismatch - property " << name << " - type " <<  (*ppProperty)->GetType();
-        throw new Exception(msg.str(), __FILE__, __LINE__, __FUNCTION__);
+        throw new EXCEPTION(msg.str());
     }
 }
 
@@ -886,7 +970,7 @@ void MP4File::GetBytesProperty(const char* name,
 void MP4File::SetBytesProperty(const char* name,
                                const uint8_t* pValue, uint32_t valueSize)
 {
-    ProtectWriteOperation(__FILE__, __LINE__, __FUNCTION__);
+    PROTECT_WRITE_OPERATION();
 
     MP4Property* pProperty;
     uint32_t index;
@@ -901,7 +985,7 @@ void MP4File::SetBytesProperty(const char* name,
 
 MP4TrackId MP4File::AddTrack(const char* type, uint32_t timeScale)
 {
-    ProtectWriteOperation(__FILE__, __LINE__, __FUNCTION__);
+    PROTECT_WRITE_OPERATION();
 
     // create and add new trak atom
     MP4Atom* pTrakAtom = AddChildAtom("moov", "trak");
@@ -944,7 +1028,7 @@ MP4TrackId MP4File::AddTrack(const char* type, uint32_t timeScale)
 
     // now have enough to create MP4Track object
     MP4Track* pTrack = NULL;
-    if (!strcmp(normType, MP4_HINT_TRACK_TYPE)) {
+    if (strequal(normType, MP4_HINT_TRACK_TYPE)) {
         pTrack = new MP4RtpHintTrack(*this, *pTrakAtom);
     } else {
         pTrack = new MP4Track(*this, *pTrakAtom);
@@ -952,7 +1036,7 @@ MP4TrackId MP4File::AddTrack(const char* type, uint32_t timeScale)
     m_pTracks.Add(pTrack);
 
     // mark non-hint tracks as enabled
-    if (strcmp(normType, MP4_HINT_TRACK_TYPE)) {
+    if (!strequal(normType, MP4_HINT_TRACK_TYPE)) {
         SetTrackIntegerProperty(trackId, "tkhd.flags", 1);
     }
 
@@ -1165,7 +1249,7 @@ MP4TrackId MP4File::AddODTrack()
     // until a demonstrated need emerges
     // we limit ourselves to one object description track
     if (m_odTrackId != MP4_INVALID_TRACK_ID) {
-        throw new Exception("object description track already exists",__FILE__, __LINE__, __FUNCTION__);
+        throw new EXCEPTION("object description track already exists");
     }
 
     m_odTrackId = AddSystemsTrack(MP4_OD_TRACK_TYPE);
@@ -1440,7 +1524,7 @@ MP4TrackId MP4File::AddAC3AudioTrack(
     if (pSampleRateProperty) {
         pSampleRateProperty->SetValue(samplingRate);
     } else {
-        throw new Exception("no ac-3.samplingRate property", __FILE__, __LINE__, __FUNCTION__);
+        throw new EXCEPTION("no ac-3.samplingRate property");
     }
 
     MP4BitfieldProperty* pBitfieldProperty = NULL;
@@ -1451,7 +1535,7 @@ MP4TrackId MP4File::AddAC3AudioTrack(
         pBitfieldProperty->SetValue(fscod);
         pBitfieldProperty = NULL;
     } else {
-        throw new Exception("no dac3.fscod property", __FILE__, __LINE__, __FUNCTION__);
+        throw new EXCEPTION("no dac3.fscod property");
     }
 
     FindProperty(MakeTrackName(trackId, "mdia.minf.stbl.stsd.ac-3.dac3.bsid"),
@@ -1460,7 +1544,7 @@ MP4TrackId MP4File::AddAC3AudioTrack(
         pBitfieldProperty->SetValue(bsid);
         pBitfieldProperty = NULL;
     } else {
-        throw new Exception("no dac3.bsid property", __FILE__, __LINE__, __FUNCTION__);
+        throw new EXCEPTION("no dac3.bsid property");
     }
 
     FindProperty(MakeTrackName(trackId, "mdia.minf.stbl.stsd.ac-3.dac3.bsmod"),
@@ -1469,7 +1553,7 @@ MP4TrackId MP4File::AddAC3AudioTrack(
         pBitfieldProperty->SetValue(bsmod);
         pBitfieldProperty = NULL;
     } else {
-        throw new Exception("no dac3.bsmod property", __FILE__, __LINE__, __FUNCTION__);
+        throw new EXCEPTION("no dac3.bsmod property");
     }
 
     FindProperty(MakeTrackName(trackId, "mdia.minf.stbl.stsd.ac-3.dac3.acmod"),
@@ -1478,7 +1562,7 @@ MP4TrackId MP4File::AddAC3AudioTrack(
         pBitfieldProperty->SetValue(acmod);
         pBitfieldProperty = NULL;
     } else {
-        throw new Exception("no dac3.acmod property", __FILE__, __LINE__, __FUNCTION__);
+        throw new EXCEPTION("no dac3.acmod property");
     }
 
     FindProperty(MakeTrackName(trackId, "mdia.minf.stbl.stsd.ac-3.dac3.lfeon"),
@@ -1487,7 +1571,7 @@ MP4TrackId MP4File::AddAC3AudioTrack(
         pBitfieldProperty->SetValue(lfeon);
         pBitfieldProperty = NULL;
     } else {
-        throw new Exception("no dac3.lfeon property", __FILE__, __LINE__, __FUNCTION__);
+        throw new EXCEPTION("no dac3.lfeon property");
     }
 
     FindProperty(MakeTrackName(trackId, "mdia.minf.stbl.stsd.ac-3.dac3.bit_rate_code"),
@@ -1496,7 +1580,7 @@ MP4TrackId MP4File::AddAC3AudioTrack(
         pBitfieldProperty->SetValue(bit_rate_code);
         pBitfieldProperty = NULL;
     } else {
-        throw new Exception("no dac3.bit_rate_code property", __FILE__, __LINE__, __FUNCTION__);
+        throw new EXCEPTION("no dac3.bit_rate_code property");
     }
 
     AddDescendantAtoms(MakeTrackName(trackId, NULL), "udta.name");
@@ -1527,8 +1611,6 @@ MP4TrackId MP4File::AddEncAudioTrack(uint32_t timeScale,
                                      bool use_ismacryp
                                     )
 {
-    uint32_t original_fmt = 0;
-
     MP4TrackId trackId = AddTrack(MP4_AUDIO_TRACK_TYPE, timeScale);
 
     AddTrackToOd(trackId);
@@ -1550,7 +1632,7 @@ MP4TrackId MP4File::AddEncAudioTrack(uint32_t timeScale,
     /* set all the ismacryp-specific values */
     // original format is mp4a
     if (use_ismacryp) {
-        original_fmt = ATOMID("mp4a");
+        uint32_t original_fmt = ATOMID("mp4a");
         SetTrackIntegerProperty(trackId,
                                 "mdia.minf.stbl.stsd.enca.sinf.frma.data-format",
                                 original_fmt);
@@ -2323,7 +2405,7 @@ void MP4File::AddChapter(MP4TrackId chapterTrackId, MP4Duration chapterDuration,
 {
     if (MP4_INVALID_TRACK_ID == chapterTrackId)
     {
-        throw new Exception("No chapter track given",__FILE__, __LINE__, __FUNCTION__);
+        throw new EXCEPTION("No chapter track given");
     }
 
     uint32_t sampleLength = 0;
@@ -2335,14 +2417,12 @@ void MP4File::AddChapter(MP4TrackId chapterTrackId, MP4Duration chapterDuration,
     {
         textLen = min((uint32_t)strlen(chapterTitle), (uint32_t)MP4V2_CHAPTER_TITLE_MAX);
         if (0 < textLen)
-        {
-            strncpy(text, chapterTitle, textLen);
-        }
+            strncpy(text, chapterTitle, MP4V2_CHAPTER_TITLE_MAX);
     }
     else
     {
         MP4Track * pChapterTrack = GetTrack(chapterTrackId);
-        snprintf( text, 1023, "Chapter %03d", pChapterTrack->GetNumberOfSamples() + 1 );
+        snprintf( text, 1023, "Chapter %03" PRIu32, pChapterTrack->GetNumberOfSamples() + 1 );
         textLen = (uint32_t)strlen(text);
     }
 
@@ -2386,25 +2466,19 @@ void MP4File::AddNeroChapter(MP4Timestamp chapterStart, const char * chapterTitl
     MP4Integer32Property * pCount = (MP4Integer32Property*)pChpl->GetProperty(3);
     pCount->IncrementValue();
 
-    char buffer[256];
+    char buffer[256] = { 0 };
 
     if (0 == chapterTitle)
-    {
-        snprintf( buffer, 255, "Chapter %03d", pCount->GetValue() );
-    }
+        snprintf( buffer, 255, "Chapter %03" PRIu32, pCount->GetValue() );
     else
-    {
-        int len = min((uint32_t)strlen(chapterTitle), (uint32_t)255);
-        strncpy( buffer, chapterTitle, len );
-        buffer[len] = 0;
-    }
+        strncpy( buffer, chapterTitle, 255 );
 
     MP4TableProperty * pTable;
     if (pChpl->FindProperty("chpl.chapters", (MP4Property **)&pTable))
     {
         MP4Integer64Property * pStartTime = (MP4Integer64Property *) pTable->GetProperty(0);
         MP4StringProperty * pName = (MP4StringProperty *) pTable->GetProperty(1);
-        if (pStartTime && pTable)
+        if (pStartTime && pName)
         {
             pStartTime->AddValue(chapterStart);
             pName->AddValue(buffer);
@@ -2425,9 +2499,8 @@ MP4TrackId MP4File::FindChapterReferenceTrack(MP4TrackId chapterTrackId, char * 
             {
                 if( 0 != trackName )
                 {
-                    int nameLen = min((uint32_t)strlen(name), (uint32_t)trackNameSize);
-                    strncpy(trackName, name, nameLen);
-                    trackName[nameLen] = 0;
+                    strncpy(trackName, name, trackNameSize - 1);
+                    trackName[trackNameSize - 1] = 0;
                 }
 
                 return m_pTracks[i]->GetId();
@@ -2476,14 +2549,10 @@ MP4ChapterType MP4File::DeleteChapters(MP4ChapterType chapterType, MP4TrackId ch
 
         // no text track given, find a suitable
         if (MP4_INVALID_TRACK_ID == chapterTrackId)
-        {
-            chapterTrackId = FindChapterTrack(trackName, 127);
-        }
+            chapterTrackId = FindChapterTrack(trackName, 128);
 
         if (MP4_INVALID_TRACK_ID != chapterTrackId)
-        {
-            FindChapterReferenceTrack(chapterTrackId, trackName, 127);
-        }
+            FindChapterReferenceTrack(chapterTrackId, trackName, 128);
 
         if (MP4_INVALID_TRACK_ID != chapterTrackId && 0 != trackName[0])
         {
@@ -2634,9 +2703,8 @@ MP4ChapterType MP4File::GetChapters(MP4Chapter_t ** chapterList, uint32_t * chap
         for (i = 0, j = 1; i < counter; ++i, ++j)
         {
             // insert the chapter title
-            uint32_t len = min((uint32_t)strlen(name), (uint32_t)MP4V2_CHAPTER_TITLE_MAX);
-            strncpy(chapters[i].title, name, len);
-            chapters[i].title[len] = 0;
+            strncpy(chapters[i].title, name, MP4V2_CHAPTER_TITLE_MAX);
+            chapters[i].title[MP4V2_CHAPTER_TITLE_MAX] = 0;
 
             // calculate the duration
             MP4Duration duration = 0;
@@ -2793,7 +2861,7 @@ void MP4File::ChangeMovieTimeScale(uint32_t timescale)
 
 void MP4File::DeleteTrack(MP4TrackId trackId)
 {
-    ProtectWriteOperation(__FILE__, __LINE__, __FUNCTION__);
+    PROTECT_WRITE_OPERATION();
 
     uint32_t trakIndex = FindTrakAtomIndex(trackId);
     uint16_t trackIndex = FindTrackIndex(trackId);
@@ -2831,13 +2899,13 @@ uint32_t MP4File::GetNumberOfTracks(const char* type, uint8_t subType)
     const char* normType = MP4NormalizeTrackType(type);
 
     for (uint32_t i = 0; i < m_pTracks.Size(); i++) {
-        if (!strcmp(normType, m_pTracks[i]->GetType())) {
+        if (strequal(normType, m_pTracks[i]->GetType())) {
             if (subType) {
-                if (strcmp(normType, MP4_AUDIO_TRACK_TYPE) == 0) {
+                if (strequal(normType, MP4_AUDIO_TRACK_TYPE)) {
                     if (subType != GetTrackEsdsObjectTypeId(m_pTracks[i]->GetId())) {
                         continue;
                     }
-                } else if (strcmp(normType, MP4_VIDEO_TRACK_TYPE)) {
+                } else if (strequal(normType, MP4_VIDEO_TRACK_TYPE)) {
                     if (subType != GetTrackEsdsObjectTypeId(m_pTracks[i]->GetId())) {
                         continue;
                     }
@@ -2883,8 +2951,7 @@ MP4TrackId MP4File::AllocTrackId()
     }
 
     // extreme case where mp4 file has 2^16 tracks in it
-    throw new Exception("too many existing tracks", __FILE__, __LINE__, __FUNCTION__);
-    return MP4_INVALID_TRACK_ID;        // to keep MSVC happy
+    throw new EXCEPTION("too many existing tracks");
 }
 
 MP4TrackId MP4File::FindTrackId(uint16_t trackIndex,
@@ -2898,13 +2965,13 @@ MP4TrackId MP4File::FindTrackId(uint16_t trackIndex,
     const char* normType = MP4NormalizeTrackType(type);
 
     for (uint32_t i = 0; i < m_pTracks.Size(); i++) {
-        if (!strcmp(normType, m_pTracks[i]->GetType())) {
+        if (strequal(normType, m_pTracks[i]->GetType())) {
             if (subType) {
-                if (strcmp(normType, MP4_AUDIO_TRACK_TYPE) == 0) {
+                if (strequal(normType, MP4_AUDIO_TRACK_TYPE)) {
                     if (subType != GetTrackEsdsObjectTypeId(m_pTracks[i]->GetId())) {
                         continue;
                     }
-                } else if (strcmp(normType, MP4_VIDEO_TRACK_TYPE) == 0) {
+                } else if (strequal(normType, MP4_VIDEO_TRACK_TYPE)) {
                     if (subType != GetTrackEsdsObjectTypeId(m_pTracks[i]->GetId())) {
                         continue;
                     }
@@ -2922,8 +2989,7 @@ MP4TrackId MP4File::FindTrackId(uint16_t trackIndex,
 
     ostringstream msg;
     msg << "Track index doesn't exist - track " << trackIndex << " type " << type;
-    throw new Exception(msg.str(),__FILE__, __LINE__, __FUNCTION__);
-    return MP4_INVALID_TRACK_ID; // satisfy MS compiler
+    throw new EXCEPTION(msg.str());
 }
 
 uint16_t MP4File::FindTrackIndex(MP4TrackId trackId)
@@ -2936,8 +3002,7 @@ uint16_t MP4File::FindTrackIndex(MP4TrackId trackId)
 
     ostringstream msg;
     msg << "Track id " << trackId << " doesn't exist";
-    throw new Exception(msg.str(),__FILE__, __LINE__, __FUNCTION__);
-    return (uint16_t)-1; // satisfy MS compiler
+    throw new EXCEPTION(msg.str());
 }
 
 uint16_t MP4File::FindTrakAtomIndex(MP4TrackId trackId)
@@ -2952,8 +3017,7 @@ uint16_t MP4File::FindTrakAtomIndex(MP4TrackId trackId)
 
     ostringstream msg;
     msg << "Track id " << trackId << " doesn't exist";
-    throw new Exception(msg.str(),__FILE__, __LINE__, __FUNCTION__);
-    return (uint16_t)-1; // satisfy MS compiler
+    throw new EXCEPTION(msg.str());
 }
 
 uint32_t MP4File::GetSampleSize(MP4TrackId trackId, MP4SampleId sampleId)
@@ -3035,7 +3099,7 @@ void MP4File::WriteSample(
     MP4Duration    renderingOffset,
     bool           isSyncSample )
 {
-    ProtectWriteOperation(__FILE__, __LINE__, __FUNCTION__);
+    PROTECT_WRITE_OPERATION();
     m_pTracks[FindTrackIndex(trackId)]->WriteSample(
         pBytes, numBytes, duration, renderingOffset, isSyncSample );
     m_pModificationProperty->SetValue( MP4GetAbsTimestamp() );
@@ -3050,7 +3114,7 @@ void MP4File::WriteSampleDependency(
     bool           isSyncSample,
     uint32_t       dependencyFlags )
 {
-    ProtectWriteOperation(__FILE__, __LINE__, __FUNCTION__);
+    PROTECT_WRITE_OPERATION();
     m_pTracks[FindTrackIndex(trackId)]->WriteSampleDependency(
         pBytes, numBytes, duration, renderingOffset, isSyncSample, dependencyFlags );
     m_pModificationProperty->SetValue( MP4GetAbsTimestamp() );
@@ -3059,7 +3123,7 @@ void MP4File::WriteSampleDependency(
 void MP4File::SetSampleRenderingOffset(MP4TrackId trackId,
                                        MP4SampleId sampleId, MP4Duration renderingOffset)
 {
-    ProtectWriteOperation(__FILE__, __LINE__, __FUNCTION__);
+    PROTECT_WRITE_OPERATION();
     m_pTracks[FindTrackIndex(trackId)]->
     SetSampleRenderingOffset(sampleId, renderingOffset);
 
@@ -3092,12 +3156,13 @@ char* MP4File::MakeTrackName(MP4TrackId trackId, const char* name)
 {
     uint16_t trakIndex = FindTrakAtomIndex(trackId);
 
-    if (name == NULL || name[0] == '\0') {
+    if (name == NULL || name[0] == 0) {
         snprintf(m_trakName, sizeof(m_trakName),
                  "moov.trak[%u]", trakIndex);
     } else {
-        snprintf(m_trakName, sizeof(m_trakName),
-                 "moov.trak[%u].%s", trakIndex, name);
+        if (snprintf(m_trakName, sizeof(m_trakName),
+                     "moov.trak[%u].%s", trakIndex, name) >= (int) sizeof(m_trakName))
+            return NULL;
     }
     return m_trakName;
 }
@@ -3180,7 +3245,7 @@ bool MP4File::GetTrackLanguage( MP4TrackId trackId, char* code )
 
 bool MP4File::SetTrackLanguage( MP4TrackId trackId, const char* code )
 {
-    ProtectWriteOperation(__FILE__, __LINE__, __FUNCTION__);
+    PROTECT_WRITE_OPERATION();
 
     ostringstream oss;
     oss << "moov.trak[" << FindTrakAtomIndex(trackId) << "].mdia.mdhd.language";
@@ -3229,7 +3294,7 @@ bool MP4File::GetTrackName( MP4TrackId trackId, char** name )
 
 bool MP4File::SetTrackName( MP4TrackId trackId, const char* name )
 {
-    ProtectWriteOperation(__FILE__, __LINE__, __FUNCTION__);
+    PROTECT_WRITE_OPERATION();
     char atomstring[40];
     MP4Atom *pMetaAtom;
     MP4BytesProperty *pMetadataProperty = NULL;
@@ -3275,7 +3340,7 @@ uint32_t MP4File::GetTimeScale()
 void MP4File::SetTimeScale(uint32_t value)
 {
     if (value == 0) {
-        throw new Exception("invalid value", __FILE__, __LINE__, __FUNCTION__);
+        throw new EXCEPTION("invalid value");
     }
     m_pTimeScaleProperty->SetValue(value);
 }
@@ -3416,6 +3481,9 @@ const char *MP4File::GetTrackMediaDataName (MP4TrackId trackId)
     MP4Atom *pAtom =
         FindAtom(MakeTrackName(trackId,
                                "mdia.minf.stbl.stsd"));
+    if ( pAtom == NULL )
+       return NULL;
+
     if (pAtom->GetNumberOfChildAtoms() != 1) {
         log.errorf("%s: \"%s\": track %d has more than 1 child atoms in stsd", 
                    __FUNCTION__, GetFilename().c_str(), trackId);
@@ -3434,7 +3502,7 @@ uint32_t MP4File::GetTrackTimeScale(MP4TrackId trackId)
 void MP4File::SetTrackTimeScale(MP4TrackId trackId, uint32_t value)
 {
     if (value == 0) {
-        throw new Exception("invalid value", __FILE__, __LINE__, __FUNCTION__);
+        throw new EXCEPTION("invalid value");
     }
     SetTrackIntegerProperty(trackId, "mdia.mdhd.timeScale", value);
 }
@@ -3486,25 +3554,6 @@ uint8_t MP4File::GetTrackAudioMpeg4Type(MP4TrackId trackId)
         }
         mpeg4Type = 32 +
                     (((pEsConfig[0] & 0x7) << 3) | ((pEsConfig[1] >> 5) & 0x7));
-    }
-    // 2009-06-16 Rem, 2010-05-27 K.Takata
-    //check sbr. irresponsibly adapted from gpac.tar.gz/gpac/src/lib/mp4v2/src/media_tools/av_parsers.c
-    else if (mpeg4Type == 2) {
-        if (esConfigSize > 1) {
-            if (pEsConfig[1] & 0x2) {
-                if ((esConfigSize > 5)
-                        && ((pEsConfig[3] & 0x3 << 9) + (pEsConfig[4] << 1) + (pEsConfig[5] >> 7) == 0x2b7)
-                        && (pEsConfig[5] & 0x2)) {
-                    mpeg4Type = 5;
-                }
-            } else {
-                if ((esConfigSize > 4)
-                        && ((pEsConfig[2] << 3) + (pEsConfig[3] >> 5) == 0x2b7)
-                        && (pEsConfig[4] & 0x80)) {
-                    mpeg4Type = 5;
-                }
-            }
-        }
     }
 
     free(pEsConfig);
@@ -3602,7 +3651,7 @@ void MP4File::SetTrackESConfiguration(MP4TrackId trackId,
                      (MP4Property**)&pConfigDescrProperty) == false ||
             pConfigDescrProperty == NULL) {
         // probably trackId refers to a hint track
-        throw new Exception("no such property", __FILE__, __LINE__, __FUNCTION__);
+        throw new EXCEPTION("no such property");
     }
 
     // lookup the property to store the configuration
@@ -3728,8 +3777,8 @@ void MP4File::SetHintTrackSdp(MP4TrackId hintTrackId, const char* sdpString)
 {
     MP4Track* pTrack = m_pTracks[FindTrackIndex(hintTrackId)];
 
-    if (strcmp(pTrack->GetType(), MP4_HINT_TRACK_TYPE)) {
-        throw new Exception("track is not a hint track", __FILE__, __LINE__, __FUNCTION__);
+    if (!strequal(pTrack->GetType(), MP4_HINT_TRACK_TYPE)) {
+        throw new EXCEPTION("track is not a hint track");
     }
 
     (void)AddDescendantAtoms(
@@ -3768,8 +3817,8 @@ void MP4File::GetHintTrackRtpPayload(
 {
     MP4Track* pTrack = m_pTracks[FindTrackIndex(hintTrackId)];
 
-    if (strcmp(pTrack->GetType(), MP4_HINT_TRACK_TYPE)) {
-        throw new Exception("track is not a hint track", __FILE__, __LINE__, __FUNCTION__);
+    if (!strequal(pTrack->GetType(), MP4_HINT_TRACK_TYPE)) {
+        throw new EXCEPTION("track is not a hint track");
     }
 
     ((MP4RtpHintTrack*)pTrack)->GetPayload(
@@ -3784,8 +3833,8 @@ void MP4File::SetHintTrackRtpPayload(MP4TrackId hintTrackId,
 {
     MP4Track* pTrack = m_pTracks[FindTrackIndex(hintTrackId)];
 
-    if (strcmp(pTrack->GetType(), MP4_HINT_TRACK_TYPE)) {
-        throw new Exception("track is not a hint track", __FILE__, __LINE__, __FUNCTION__);
+    if (!strequal(pTrack->GetType(), MP4_HINT_TRACK_TYPE)) {
+        throw new EXCEPTION("track is not a hint track");
     }
 
     uint8_t payloadNumber;
@@ -3834,8 +3883,7 @@ uint8_t MP4File::AllocRtpPayloadNumber()
     }
 
     if (payload >= 128) {
-        throw new Exception("no more available rtp payload numbers",
-                            __FILE__, __LINE__, __FUNCTION__);
+        throw new EXCEPTION("no more available rtp payload numbers");
     }
 
     return payload;
@@ -3846,9 +3894,8 @@ MP4TrackId MP4File::GetHintTrackReferenceTrackId(
 {
     MP4Track* pTrack = m_pTracks[FindTrackIndex(hintTrackId)];
 
-    if (strcmp(pTrack->GetType(), MP4_HINT_TRACK_TYPE)) {
-        throw new Exception("track is not a hint track",
-                            __FILE__, __LINE__, __FUNCTION__);
+    if (!strequal(pTrack->GetType(), MP4_HINT_TRACK_TYPE)) {
+        throw new EXCEPTION("track is not a hint track");
     }
 
     MP4Track* pRefTrack = ((MP4RtpHintTrack*)pTrack)->GetRefTrack();
@@ -3866,8 +3913,8 @@ void MP4File::ReadRtpHint(
 {
     MP4Track* pTrack = m_pTracks[FindTrackIndex(hintTrackId)];
 
-    if (strcmp(pTrack->GetType(), MP4_HINT_TRACK_TYPE)) {
-        throw new Exception("track is not a hint track", __FILE__, __LINE__, __FUNCTION__);
+    if (!strequal(pTrack->GetType(), MP4_HINT_TRACK_TYPE)) {
+        throw new EXCEPTION("track is not a hint track");
     }
     ((MP4RtpHintTrack*)pTrack)->
     ReadHint(hintSampleId, pNumPackets);
@@ -3878,9 +3925,8 @@ uint16_t MP4File::GetRtpHintNumberOfPackets(
 {
     MP4Track* pTrack = m_pTracks[FindTrackIndex(hintTrackId)];
 
-    if (strcmp(pTrack->GetType(), MP4_HINT_TRACK_TYPE)) {
-        throw new Exception("track is not a hint track",
-                            __FILE__, __LINE__, __FUNCTION__);
+    if (!strequal(pTrack->GetType(), MP4_HINT_TRACK_TYPE)) {
+        throw new EXCEPTION("track is not a hint track");
     }
     return ((MP4RtpHintTrack*)pTrack)->GetHintNumberOfPackets();
 }
@@ -3891,9 +3937,8 @@ int8_t MP4File::GetRtpPacketBFrame(
 {
     MP4Track* pTrack = m_pTracks[FindTrackIndex(hintTrackId)];
 
-    if (strcmp(pTrack->GetType(), MP4_HINT_TRACK_TYPE)) {
-        throw new Exception("track is not a hint track",
-                            __FILE__, __LINE__, __FUNCTION__);
+    if (!strequal(pTrack->GetType(), MP4_HINT_TRACK_TYPE)) {
+        throw new EXCEPTION("track is not a hint track");
     }
     return ((MP4RtpHintTrack*)pTrack)->GetPacketBFrame(packetIndex);
 }
@@ -3904,9 +3949,8 @@ int32_t MP4File::GetRtpPacketTransmitOffset(
 {
     MP4Track* pTrack = m_pTracks[FindTrackIndex(hintTrackId)];
 
-    if (strcmp(pTrack->GetType(), MP4_HINT_TRACK_TYPE)) {
-        throw new Exception("track is not a hint track",
-                            __FILE__, __LINE__, __FUNCTION__);
+    if (!strequal(pTrack->GetType(), MP4_HINT_TRACK_TYPE)) {
+        throw new EXCEPTION("track is not a hint track");
     }
     return ((MP4RtpHintTrack*)pTrack)->GetPacketTransmitOffset(packetIndex);
 }
@@ -3922,8 +3966,8 @@ void MP4File::ReadRtpPacket(
 {
     MP4Track* pTrack = m_pTracks[FindTrackIndex(hintTrackId)];
 
-    if (strcmp(pTrack->GetType(), MP4_HINT_TRACK_TYPE)) {
-        throw new Exception("track is not a hint track", __FILE__, __LINE__, __FUNCTION__);
+    if (!strequal(pTrack->GetType(), MP4_HINT_TRACK_TYPE)) {
+        throw new EXCEPTION("track is not a hint track");
     }
     ((MP4RtpHintTrack*)pTrack)->ReadPacket(
         packetIndex, ppBytes, pNumBytes,
@@ -3935,8 +3979,8 @@ MP4Timestamp MP4File::GetRtpTimestampStart(
 {
     MP4Track* pTrack = m_pTracks[FindTrackIndex(hintTrackId)];
 
-    if (strcmp(pTrack->GetType(), MP4_HINT_TRACK_TYPE)) {
-        throw new Exception("track is not a hint track", __FILE__, __LINE__, __FUNCTION__);
+    if (!strequal(pTrack->GetType(), MP4_HINT_TRACK_TYPE)) {
+        throw new EXCEPTION("track is not a hint track");
     }
     return ((MP4RtpHintTrack*)pTrack)->GetRtpTimestampStart();
 }
@@ -3947,9 +3991,8 @@ void MP4File::SetRtpTimestampStart(
 {
     MP4Track* pTrack = m_pTracks[FindTrackIndex(hintTrackId)];
 
-    if (strcmp(pTrack->GetType(), MP4_HINT_TRACK_TYPE)) {
-        throw new Exception("track is not a hint track",
-                            __FILE__, __LINE__, __FUNCTION__);
+    if (!strequal(pTrack->GetType(), MP4_HINT_TRACK_TYPE)) {
+        throw new EXCEPTION("track is not a hint track");
     }
     ((MP4RtpHintTrack*)pTrack)->SetRtpTimestampStart(rtpStart);
 }
@@ -3957,12 +4000,12 @@ void MP4File::SetRtpTimestampStart(
 void MP4File::AddRtpHint(MP4TrackId hintTrackId,
                          bool isBframe, uint32_t timestampOffset)
 {
-    ProtectWriteOperation(__FILE__, __LINE__, __FUNCTION__);
+    PROTECT_WRITE_OPERATION();
 
     MP4Track* pTrack = m_pTracks[FindTrackIndex(hintTrackId)];
 
-    if (strcmp(pTrack->GetType(), MP4_HINT_TRACK_TYPE)) {
-        throw new Exception("track is not a hint track", __FILE__, __LINE__, __FUNCTION__);
+    if (!strequal(pTrack->GetType(), MP4_HINT_TRACK_TYPE)) {
+        throw new EXCEPTION("track is not a hint track");
     }
     ((MP4RtpHintTrack*)pTrack)->AddHint(isBframe, timestampOffset);
 }
@@ -3970,12 +4013,12 @@ void MP4File::AddRtpHint(MP4TrackId hintTrackId,
 void MP4File::AddRtpPacket(
     MP4TrackId hintTrackId, bool setMbit, int32_t transmitOffset)
 {
-    ProtectWriteOperation(__FILE__, __LINE__, __FUNCTION__);
+    PROTECT_WRITE_OPERATION();
 
     MP4Track* pTrack = m_pTracks[FindTrackIndex(hintTrackId)];
 
-    if (strcmp(pTrack->GetType(), MP4_HINT_TRACK_TYPE)) {
-        throw new Exception("track is not a hint track", __FILE__, __LINE__, __FUNCTION__);
+    if (!strequal(pTrack->GetType(), MP4_HINT_TRACK_TYPE)) {
+        throw new EXCEPTION("track is not a hint track");
     }
     ((MP4RtpHintTrack*)pTrack)->AddPacket(setMbit, transmitOffset);
 }
@@ -3983,13 +4026,12 @@ void MP4File::AddRtpPacket(
 void MP4File::AddRtpImmediateData(MP4TrackId hintTrackId,
                                   const uint8_t* pBytes, uint32_t numBytes)
 {
-    ProtectWriteOperation(__FILE__, __LINE__, __FUNCTION__);
+    PROTECT_WRITE_OPERATION();
 
     MP4Track* pTrack = m_pTracks[FindTrackIndex(hintTrackId)];
 
-    if (strcmp(pTrack->GetType(), MP4_HINT_TRACK_TYPE)) {
-        throw new Exception("track is not a hint track",
-                            __FILE__, __LINE__, __FUNCTION__);
+    if (!strequal(pTrack->GetType(), MP4_HINT_TRACK_TYPE)) {
+        throw new EXCEPTION("track is not a hint track");
     }
     ((MP4RtpHintTrack*)pTrack)->AddImmediateData(pBytes, numBytes);
 }
@@ -3997,13 +4039,12 @@ void MP4File::AddRtpImmediateData(MP4TrackId hintTrackId,
 void MP4File::AddRtpSampleData(MP4TrackId hintTrackId,
                                MP4SampleId sampleId, uint32_t dataOffset, uint32_t dataLength)
 {
-    ProtectWriteOperation(__FILE__, __LINE__, __FUNCTION__);
+    PROTECT_WRITE_OPERATION();
 
     MP4Track* pTrack = m_pTracks[FindTrackIndex(hintTrackId)];
 
-    if (strcmp(pTrack->GetType(), MP4_HINT_TRACK_TYPE)) {
-        throw new Exception("track is not a hint track",
-                            __FILE__, __LINE__, __FUNCTION__);
+    if (!strequal(pTrack->GetType(), MP4_HINT_TRACK_TYPE)) {
+        throw new EXCEPTION("track is not a hint track");
     }
     ((MP4RtpHintTrack*)pTrack)->AddSampleData(
         sampleId, dataOffset, dataLength);
@@ -4011,13 +4052,12 @@ void MP4File::AddRtpSampleData(MP4TrackId hintTrackId,
 
 void MP4File::AddRtpESConfigurationPacket(MP4TrackId hintTrackId)
 {
-    ProtectWriteOperation(__FILE__, __LINE__, __FUNCTION__);
+    PROTECT_WRITE_OPERATION();
 
     MP4Track* pTrack = m_pTracks[FindTrackIndex(hintTrackId)];
 
-    if (strcmp(pTrack->GetType(), MP4_HINT_TRACK_TYPE)) {
-        throw new Exception("track is not a hint track",
-                            __FILE__, __LINE__, __FUNCTION__);
+    if (!strequal(pTrack->GetType(), MP4_HINT_TRACK_TYPE)) {
+        throw new EXCEPTION("track is not a hint track");
     }
     ((MP4RtpHintTrack*)pTrack)->AddESConfigurationPacket();
 }
@@ -4025,13 +4065,12 @@ void MP4File::AddRtpESConfigurationPacket(MP4TrackId hintTrackId)
 void MP4File::WriteRtpHint(MP4TrackId hintTrackId,
                            MP4Duration duration, bool isSyncSample)
 {
-    ProtectWriteOperation(__FILE__, __LINE__, __FUNCTION__);
+    PROTECT_WRITE_OPERATION();
 
     MP4Track* pTrack = m_pTracks[FindTrackIndex(hintTrackId)];
 
-    if (strcmp(pTrack->GetType(), MP4_HINT_TRACK_TYPE)) {
-        throw new Exception("track is not a hint track",
-                            __FILE__, __LINE__, __FUNCTION__);
+    if (!strequal(pTrack->GetType(), MP4_HINT_TRACK_TYPE)) {
+        throw new EXCEPTION("track is not a hint track");
     }
     ((MP4RtpHintTrack*)pTrack)->WriteHint(duration, isSyncSample);
 }
@@ -4084,19 +4123,19 @@ uint8_t MP4File::ConvertTrackTypeToStreamType(const char* trackType)
 {
     uint8_t streamType;
 
-    if (!strcmp(trackType, MP4_OD_TRACK_TYPE)) {
+    if (strequal(trackType, MP4_OD_TRACK_TYPE)) {
         streamType = MP4ObjectDescriptionStreamType;
-    } else if (!strcmp(trackType, MP4_SCENE_TRACK_TYPE)) {
+    } else if (strequal(trackType, MP4_SCENE_TRACK_TYPE)) {
         streamType = MP4SceneDescriptionStreamType;
-    } else if (!strcmp(trackType, MP4_CLOCK_TRACK_TYPE)) {
+    } else if (strequal(trackType, MP4_CLOCK_TRACK_TYPE)) {
         streamType = MP4ClockReferenceStreamType;
-    } else if (!strcmp(trackType, MP4_MPEG7_TRACK_TYPE)) {
+    } else if (strequal(trackType, MP4_MPEG7_TRACK_TYPE)) {
         streamType = MP4Mpeg7StreamType;
-    } else if (!strcmp(trackType, MP4_OCI_TRACK_TYPE)) {
+    } else if (strequal(trackType, MP4_OCI_TRACK_TYPE)) {
         streamType = MP4OCIStreamType;
-    } else if (!strcmp(trackType, MP4_IPMP_TRACK_TYPE)) {
+    } else if (strequal(trackType, MP4_IPMP_TRACK_TYPE)) {
         streamType = MP4IPMPStreamType;
-    } else if (!strcmp(trackType, MP4_MPEGJ_TRACK_TYPE)) {
+    } else if (strequal(trackType, MP4_MPEGJ_TRACK_TYPE)) {
         streamType = MP4MPEGJStreamType;
     } else {
         streamType = MP4UserPrivateStreamType;
@@ -4114,13 +4153,11 @@ char* MP4File::MakeTrackEditName(
 {
     char* trakName = MakeTrackName(trackId, NULL);
 
-    if (m_editName == NULL) {
-        m_editName = (char *)malloc(1024);
-        if (m_editName == NULL) return NULL;
-    }
-    snprintf(m_editName, 1024,
-             "%s.edts.elst.entries[%u].%s",
-             trakName, editId - 1, name);
+    if (snprintf(m_editName, sizeof(m_editName),
+                 "%s.edts.elst.entries[%u].%s",
+                 trakName, editId - 1, name) >= (int) sizeof(m_editName))
+        return NULL;
+
     return m_editName;
 }
 
@@ -4128,7 +4165,7 @@ MP4EditId MP4File::AddTrackEdit(
     MP4TrackId trackId,
     MP4EditId editId)
 {
-    ProtectWriteOperation(__FILE__, __LINE__, __FUNCTION__);
+    PROTECT_WRITE_OPERATION();
     return m_pTracks[FindTrackIndex(trackId)]->AddEdit(editId);
 }
 
@@ -4136,7 +4173,7 @@ void MP4File::DeleteTrackEdit(
     MP4TrackId trackId,
     MP4EditId editId)
 {
-    ProtectWriteOperation(__FILE__, __LINE__, __FUNCTION__);
+    PROTECT_WRITE_OPERATION();
     m_pTracks[FindTrackIndex(trackId)]->DeleteEdit(editId);
 }
 

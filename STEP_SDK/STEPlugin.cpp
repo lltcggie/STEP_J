@@ -291,6 +291,15 @@ inline LPCTSTR GetEncodest(FILE_INFO* info) {
 inline LPCTSTR GetOther(FILE_INFO* info) {
     return GetValue(info, FIELD_OTHER);
 }
+inline LPCTSTR GetAlbumSort(FILE_INFO* info) {
+    return GetValue(info, FIELD_ALBUM_SORT);
+}
+inline LPCTSTR GetAlbumArtistSort(FILE_INFO* info) {
+    return GetValue(info, FIELD_ALBM_ARTIST_SORT);
+}
+inline LPCTSTR GetArtistSort(FILE_INFO* info) {
+    return GetValue(info, FIELD_ARTIST_SORT);
+}
 inline LPCTSTR GetFileTypeName(FILE_INFO* info) {
     return GetValue(info, FILED_FILE_TYPE_NAME);
 }
@@ -405,6 +414,15 @@ inline void SetEncodest(FILE_INFO* info, LPCTSTR szValue) {
 }
 inline void SetOther(FILE_INFO* info, LPCTSTR szValue) {
     SetValue(info, FIELD_OTHER, szValue);
+}
+inline void SetAlbumSort(FILE_INFO* info, LPCTSTR szValue) {
+    SetValue(info, FIELD_ALBUM_SORT, szValue);
+}
+inline void SetAlbumArtistSort(FILE_INFO* info, LPCTSTR szValue) {
+    SetValue(info, FIELD_ALBM_ARTIST_SORT, szValue);
+}
+inline void SetArtistSort(FILE_INFO* info, LPCTSTR szValue) {
+    SetValue(info, FIELD_ARTIST_SORT, szValue);
 }
 inline void SetFileTypeName(FILE_INFO* info, LPCTSTR szValue) {
     SetValue(info, FILED_FILE_TYPE_NAME, szValue);

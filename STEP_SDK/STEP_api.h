@@ -31,7 +31,7 @@ enum {
 };
 
 /* ファイル形式 */
-enum    {
+enum {
     FILE_FORMAT_UNKNOWN = 1,    // ファイル形式：未知の形式
     // その他はプラグイン毎に定義
 };
@@ -81,6 +81,9 @@ enum COLUMNTYPE {
     COLUMN_FILE_TYPE,       // ファイルの種類
     COLUMN_FORMAT,          // フォーマット
     COLUMN_OTHER,           // その他
+    COLUMN_ALBUM_SORT,      // アルバム読み
+    COLUMN_ALBM_ARTIST_SORT,// Albm.アーティスト読み
+    COLUMN_ARTIST_SORT,     // アーティスト読み
     COLUMN_FILE_CTIME,      // ファイル作成日 /* 2003.06.19 add */
     COLUMN_MAX,
 };
@@ -125,13 +128,16 @@ enum FIELDTYPE {
     FIELD_URL_SI,                   // URL
     FIELD_ENCODEST,                 // エンコードした人
     FIELD_OTHER,                    // その他
+    FIELD_ALBUM_SORT,               // アルバム読み
+    FIELD_ALBM_ARTIST_SORT,         // Albm.アーティスト読み
+    FIELD_ARTIST_SORT,              // アーティスト読み
     FILED_FILE_TYPE_NAME,           // ファイルタイプ文字列
     FIELD_MAX
 };
 
 /* ファイル情報 */
 typedef struct _FILE_INFO {
-    void*    pFileMP3;
+    void* pFileMP3;
 } FILE_INFO;
 
 /**--------------------------------------------------------------------**/
