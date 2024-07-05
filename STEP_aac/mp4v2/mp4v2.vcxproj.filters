@@ -24,9 +24,6 @@
     <ClCompile Include="libplatform\number\random_win32.cpp">
       <Filter>libplatform</Filter>
     </ClCompile>
-    <ClCompile Include="libplatform\process\process_win32.cpp">
-      <Filter>libplatform</Filter>
-    </ClCompile>
     <ClCompile Include="libplatform\time\time_win32.cpp">
       <Filter>libplatform</Filter>
     </ClCompile>

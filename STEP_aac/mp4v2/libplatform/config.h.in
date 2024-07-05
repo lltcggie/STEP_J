@@ -30,9 +30,16 @@
 /* Define to 1 if you have the <unistd.h> header file. */
 #undef HAVE_UNISTD_H
 
-/* Define to the sub-directory in which libtool stores uninstalled libraries.
-   */
+/* Define to the sub-directory where libtool stores uninstalled libraries. */
 #undef LT_OBJDIR
+
+/* libtool defines DLL_EXPORT for windows dll
+   builds, but we use MP4V2_EXPORTS instead. */
+#ifdef DLL_EXPORT
+# define MP4V2_EXPORTS
+#else
+# define MP4V2_USE_STATIC_LIB
+#endif
 
 /* Define to 1 if LFS should be activated */
 #undef NEED_LFS_ACTIVATION
