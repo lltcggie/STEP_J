@@ -27,6 +27,7 @@ enum{
     FLA_ENCODEDBY,  //ソフトウェア
     FLA_ALBUMSORT,  //アルバム読み
     FLA_ALBUMARTISTSORT, //Albm.アーティスト読み
+    FLA_ARTISTSORT, //アーティスト読み
     FLA_LAST
 };
 */
@@ -50,6 +51,7 @@ static const char *g_field_names[] =
     "encoded by", //FLA_ENCODEDBY
     "albumsort",  //FLA_ALBUMSORT
     "albumartistsort", //FLA_ALBUMARTISTSORT
+    "artistsort", //FLA_ARTISTSORT
     NULL          //FLA_LAST
 };
 static FLAC__byte reservoir_[FLAC__MAX_BLOCK_SIZE * 2 * 2 * 2]; /* *2 for max bytes-per-sample, *2 for max channels, another *2 for overflow */
@@ -765,6 +767,7 @@ bool LoadFileFLAC(FILE_INFO *pFile)
     SetSoftwareSI(pFile, FileTag.values[FLA_ENCODEDBY]);
     SetAlbumSort(pFile, FileTag.values[FLA_ALBUMSORT]);
     SetAlbumArtistSort(pFile, FileTag.values[FLA_ALBUMARTISTSORT]);
+    SetArtistSort(pFile, FileTag.values[FLA_ARTISTSORT]);
     SetPlayTime(pFile, FileTag.duration);
 
     TCHAR format[256];
@@ -810,6 +813,7 @@ bool WriteFileFLAC(FILE_INFO *pFile)
     FileTag.values[FLA_ENCODEDBY] = (TCHAR*)GetSoftwareSI(pFile);
     FileTag.values[FLA_ALBUMSORT] = (TCHAR*)GetAlbumSort(pFile);
     FileTag.values[FLA_ALBUMARTISTSORT] = (TCHAR*)GetAlbumArtistSort(pFile);
+    FileTag.values[FLA_ARTISTSORT] = (TCHAR*)GetArtistSort(pFile);
     bool ret = Flac_Tag_Write_File_Tag(GetFullPath(pFile), &FileTag) ? TRUE : FALSE;
     //free(FileTag.track);
     //free(FileTag.track_total);

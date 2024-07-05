@@ -89,6 +89,7 @@ struct    FILE_MP3    {
     CString strEngineer;                // エンジニア（出版）/* ADD MIMURA */
     CString strAlbumSort;               // アルバム読み
     CString strAlbumArtistSort;         // Albm.アーティスト読み
+    CString strArtistSort;              // アーティスト読み
 
     void*    fileSpecificInfo;          // ファイル固有情報
 

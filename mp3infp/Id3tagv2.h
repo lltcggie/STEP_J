@@ -190,6 +190,8 @@ public:
     void SetAlbumSort(LPCTSTR albumSort) { SetId3String("TSOA", albumSort); }
     CString GetAlbumArtistSort() { return GetId3String("TSO2"); }
     void SetAlbumArtistSort(LPCTSTR albumSort) { SetId3String("TSO2", albumSort); }
+    CString GetArtistSort() { return GetId3String("TSOP"); }
+    void SetArtistSort(LPCTSTR albumSort) { SetId3String("TSOP", albumSort); }
 
     //
 	DWORD Load(LPCTSTR szFileName);

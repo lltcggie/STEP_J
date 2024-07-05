@@ -297,6 +297,9 @@ inline LPCTSTR GetAlbumSort(FILE_INFO* info) {
 inline LPCTSTR GetAlbumArtistSort(FILE_INFO* info) {
     return GetValue(info, FIELD_ALBM_ARTIST_SORT);
 }
+inline LPCTSTR GetArtistSort(FILE_INFO* info) {
+    return GetValue(info, FIELD_ARTIST_SORT);
+}
 inline LPCTSTR GetFileTypeName(FILE_INFO* info) {
     return GetValue(info, FILED_FILE_TYPE_NAME);
 }
@@ -417,6 +420,9 @@ inline void SetAlbumSort(FILE_INFO* info, LPCTSTR szValue) {
 }
 inline void SetAlbumArtistSort(FILE_INFO* info, LPCTSTR szValue) {
     SetValue(info, FIELD_ALBM_ARTIST_SORT, szValue);
+}
+inline void SetArtistSort(FILE_INFO* info, LPCTSTR szValue) {
+    SetValue(info, FIELD_ARTIST_SORT, szValue);
 }
 inline void SetFileTypeName(FILE_INFO* info, LPCTSTR szValue) {
     SetValue(info, FILED_FILE_TYPE_NAME, szValue);

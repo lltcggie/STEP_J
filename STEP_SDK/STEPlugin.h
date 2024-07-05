@@ -91,6 +91,7 @@ extern LPCTSTR GetEncodest(FILE_INFO* info);
 extern LPCTSTR GetOther(FILE_INFO* info);
 extern LPCTSTR GetAlbumSort(FILE_INFO* info);
 extern LPCTSTR GetAlbumArtistSort(FILE_INFO* info);
+extern LPCTSTR GetArtistSort(FILE_INFO* info);
 extern LPCTSTR GetFileTypeName(FILE_INFO* info);
 extern void SetFullPathName(FILE_INFO* info, LPCTSTR szValue);
 extern void SetFileName(FILE_INFO* info, LPCTSTR szValue);
@@ -131,6 +132,7 @@ extern void SetEncodest(FILE_INFO* info, LPCTSTR szValue);
 extern void SetOther(FILE_INFO* info, LPCTSTR szValue);
 extern void SetAlbumSort(FILE_INFO* info, LPCTSTR szValue);
 extern void SetAlbumArtistSort(FILE_INFO* info, LPCTSTR szValue);
+extern void SetArtistSort(FILE_INFO* info, LPCTSTR szValue);
 extern void SetFileTypeName(FILE_INFO* info, LPCTSTR szValue);
 
 extern bool isModify(FILE_INFO*);

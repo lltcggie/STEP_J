@@ -601,6 +601,7 @@ void CFileMP3::InitDataSIF(FILE_MP3 *fileMP3)
     fileMP3->strOther.Empty();          // その他
     fileMP3->strAlbumSort.Empty();      // アルバム読み
     fileMP3->strAlbumArtistSort.Empty();// Albm.アーティスト読み
+    fileMP3->strArtistSort.Empty();     // アーティスト読み
 
 }
 
