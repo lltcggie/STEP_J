@@ -25,6 +25,7 @@ enum{
     FLA_COMPOSER,   //作曲者
     FLA_PERFORMER,  //演奏者
     FLA_ENCODEDBY,  //ソフトウェア
+    FLA_ALBUMSORT,  //アルバム読み
     FLA_LAST
 };
 

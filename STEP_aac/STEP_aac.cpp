@@ -163,6 +163,7 @@ STEP_API CONTROLTYPE WINAPI STEPGetControlType(UINT nFormat, COLUMNTYPE nColumn,
     case COLUMN_KEYWORD:
     case COLUMN_SOFTWARE:
     case COLUMN_ALBM_ARTIST:
+    case COLUMN_ALBUM_SORT:
         return _EDIT;
     case COLUMN_COMMENT:
         return _MEDIT;
@@ -194,6 +195,7 @@ STEP_API UINT WINAPI STEPGetColumnMax(UINT nFormat, COLUMNTYPE nColumn, bool isE
     case COLUMN_KEYWORD:        return 1024;
     case COLUMN_SOFTWARE:       return 1024;
     case COLUMN_ALBM_ARTIST:    return 1024;
+    case COLUMN_ALBUM_SORT:     return 1024;
     }
     return 0;
 }

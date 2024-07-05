@@ -208,6 +208,12 @@ void SetAttribute(LPCWSTR pwszName, WMT_ATTR_DATATYPE type, BYTE* pValue, DWORD 
                 strData = strPrev + _T(";") + strData;
             }
             SetSoftwareSI(pFileMP3, strData);
+        } else if(_tcsicmp(strName, _T("WM/AlbumSortOrder")) == 0){
+            if (bAppend) {
+                strPrev = GetAlbumSort(pFileMP3);
+                strData = strPrev + _T(";") + strData;
+            }
+            SetSoftwareSI(pFileMP3, strData);
         } else if(_tcsicmp(strName, _T("WM/Codec")) == 0){
             CString str = strData;
         }

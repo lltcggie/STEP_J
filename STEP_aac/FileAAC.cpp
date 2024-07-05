@@ -17,6 +17,7 @@ bool LoadFileAAC(FILE_INFO *pFile)
     SetGenreSI(pFile, TagMp4.GetMetadata_Genre());
     SetKeywordSI(pFile, TagMp4.GetMetadata_Group());
     SetCopyrightSI(pFile, TagMp4.GetMetadata_Copyright());
+    SetAlbumSort(pFile, TagMp4.GetMetadata_AlbumSort());
 
     TCHAR buf[256];
     int tracknumber = TagMp4.GetMetadata_Track1();
@@ -96,6 +97,7 @@ bool WriteFileAAC(FILE_INFO *pFile)
     TagMp4.SetMetadata_Year(GetYearSI(pFile));
     TagMp4.SetMetadata_Group(GetKeywordSI(pFile));
     TagMp4.SetMetadata_Copyright(GetCopyrightSI(pFile));
+    TagMp4.SetMetadata_AlbumSort(GetAlbumSort(pFile));
 
     CString strTrackNumber = GetTrackNumberSI(pFile);
     CString strTrackTotal = GetTrackTotalSI(pFile);

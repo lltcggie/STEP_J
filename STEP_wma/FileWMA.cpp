@@ -48,6 +48,7 @@ LPCWSTR ID3TagDefs[] =
     L"WM/AlbumArtist",  // WMP9
     L"WM/Writer",
     L"WM/ToolName",     //ソフトウェア
+    L"WM/AlbumSortOrder", //アルバム読み
     NULL,
 } ;
 
@@ -215,7 +216,8 @@ bool WriteFileWMA(FILE_INFO *pFileMP3)
         WriteAttributeStr(pHeaderInfo, L"WM/AlbumArtist"  , GetAlbumArtistSI(pFileMP3), TRUE);
         WriteAttributeStr(pHeaderInfo, L"WM/Writer"    , GetWriterSI(pFileMP3), TRUE);
         WriteAttributeStr(pHeaderInfo, L"WM/Publisher" , GetEngineerSI(pFileMP3), TRUE); // WMP9
-        WriteAttributeStr(pHeaderInfo, L"WM/ToolName"  , GetSoftwareSI(pFileMP3), TRUE);
+        WriteAttributeStr(pHeaderInfo, L"WM/ToolName", GetSoftwareSI(pFileMP3), TRUE);
+        WriteAttributeStr(pHeaderInfo, L"WM/AlbumSortOrder", GetAlbumSort(pFileMP3), TRUE);
 
         hr = pEditor->Flush();
         if (FAILED(hr)) {

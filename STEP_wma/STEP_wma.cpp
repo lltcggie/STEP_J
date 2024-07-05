@@ -160,6 +160,7 @@ STEP_API CONTROLTYPE WINAPI STEPGetControlType(UINT nFormat, COLUMNTYPE nColumn,
     case COLUMN_ALBM_ARTIST: /* Mimura add */
     case COLUMN_WRITER: /* Mimura add */
     case COLUMN_SOFTWARE:
+    case COLUMN_ALBUM_SORT:
         return _EDIT;
     case COLUMN_COMMENT:
         return _MEDIT;
@@ -191,6 +192,7 @@ STEP_API UINT WINAPI STEPGetColumnMax(UINT nFormat, COLUMNTYPE nColumn, bool isE
     case COLUMN_ALBM_ARTIST:    return 1024; /* Mimura add */
     case COLUMN_WRITER:            return 1024; /* Mimura add */
     case COLUMN_SOFTWARE:        return 1024;
+    case COLUMN_ALBUM_SORT:      return 1024;
     case COLUMN_TRACK_NUMBER:    return 32;
     case COLUMN_DISC_NUMBER:    return 32;
     }

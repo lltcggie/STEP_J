@@ -186,6 +186,8 @@ public:
     void SetWriter(LPCTSTR writer){SetId3String("TEXT", writer);}
     CString GetEngineer() { return GetId3String("TPUB"); }
     void SetEngineer(LPCTSTR engineer) { SetId3String("TPUB", engineer); }
+    CString GetAlbumSort() { return GetId3String("TSOA"); }
+    void SetAlbumSort(LPCTSTR albumSort) { SetId3String("TSOA", albumSort); }
 
     //
 	DWORD Load(LPCTSTR szFileName);

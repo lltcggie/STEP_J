@@ -41,6 +41,7 @@ public:
 	CString GetMetadata_Comment(){return m_strMetadata_Comment;};
 	CString GetMetadata_Tool(){return m_strMetadata_Tool;};
     CString GetMetadata_Copyright() { return m_strMetadata_Copyright; }//追加 by Kobarin
+    CString GetMetadata_AlbumSort() { return m_strMetadata_AlbumSort; }
 
 	void ClearMetadata();
 
@@ -61,6 +62,7 @@ public:
 	void SetMetadata_Comment(LPCTSTR val){m_strMetadata_Comment = val;};
 	void SetMetadata_Tool(LPCTSTR val){m_strMetadata_Tool = val;};
     void SetMetadata_Copyright(LPCTSTR val) { m_strMetadata_Copyright = val; }//追加 by Kobarin
+    void SetMetadata_AlbumSort(LPCTSTR val) { m_strMetadata_AlbumSort = val; }
 
 private:
 	BOOL m_bEnable;
@@ -85,6 +87,7 @@ private:
 	CString m_strMetadata_Comment;
 	CString m_strMetadata_Tool;
     CString m_strMetadata_Copyright;//追加 by Kobarin
+    CString m_strMetadata_AlbumSort;
 };
 
 #endif // !defined(AFX_TAG_MP4_H__3AA1F354_4166_4AB1_AD82_5003C432CAC7__INCLUDED_)
