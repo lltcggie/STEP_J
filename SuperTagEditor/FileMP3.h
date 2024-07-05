@@ -88,6 +88,7 @@ struct    FILE_MP3    {
     CString strOther;                   // その他(OggVorbisの非標準タグ) /* Conspiracy 196 */
     CString strEngineer;                // エンジニア（出版）/* ADD MIMURA */
     CString strAlbumSort;               // アルバム読み
+    CString strAlbumArtistSort;         // Albm.アーティスト読み
 
     void*    fileSpecificInfo;          // ファイル固有情報
 

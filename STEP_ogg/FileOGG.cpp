@@ -30,6 +30,7 @@ bool LoadFileOGG(FILE_INFO *pFileMP3)
     CString strComposer;
     CString strSoftware;
     CString strAlbumSort;
+    CString strAlbumArtistSort;
     struct _VORBISCOMMENT_{
         TCHAR *szField;
         CString *pstrContents;
@@ -50,6 +51,7 @@ bool LoadFileOGG(FILE_INFO *pFileMP3)
         {_T("COMPOSER"),    &strComposer},    //作曲者
         {_T("ENCODED BY"),  &strSoftware},    //ソフトウェア
         {_T("ALBUMSORT"),   &strAlbumSort},   //アルバム読み
+        {_T("ALBUMARTISTSORT"), &strAlbumArtistSort},  //Albm.アーティスト読み
         {NULL,          NULL}
     };
     int i = 0;
@@ -73,6 +75,7 @@ bool LoadFileOGG(FILE_INFO *pFileMP3)
     SetComposerSI(pFileMP3, strComposer);
     SetSoftwareSI(pFileMP3, strSoftware);
     SetAlbumSort(pFileMP3, strAlbumSort);
+    SetAlbumArtistSort(pFileMP3, strAlbumArtistSort);
 
 #if 0
     { // 非標準タグ
@@ -153,6 +156,7 @@ bool WriteFileOGG(FILE_INFO *pFileMP3)
     CString strComposer = GetComposerSI(pFileMP3);
     CString strSoftware = GetSoftwareSI(pFileMP3);
     CString strAlbumSort = GetAlbumSort(pFileMP3);
+    CString strAlbumArtistSort = GetAlbumArtistSort(pFileMP3);
     struct _VORBISCOMMENT_{
         TCHAR *szField;
         CString *pstrContents;
@@ -173,6 +177,7 @@ bool WriteFileOGG(FILE_INFO *pFileMP3)
         {_T("COMPOSER"),    &strComposer},    //作曲者
         {_T("ENCODED BY"),  &strSoftware},    //ソフトウェア
         {_T("ALBUMSORT"),   &strAlbumSort},   //アルバム読み
+        {_T("ALBUMARTISTSORT"), &strAlbumArtistSort}, //Albm.アーティスト読み
         {NULL,          NULL}
     };
     int i = 0;
@@ -217,6 +222,7 @@ bool LoadFileOPUS(FILE_INFO *pFileMP3)
     CString strDiscNumber;
     CString strDiscTotal;
     CString strAlbumSort;
+    CString strAlbumArtistSort;
     struct _OPUSCOMMENT_{
         const char *cszField;
         CString *pstrContents;
@@ -234,6 +240,7 @@ bool LoadFileOPUS(FILE_INFO *pFileMP3)
         {"DISCNUMBER",  &strDiscNumber},  //ディスク番号
         {"DISCTOTAL",   &strDiscTotal},   //ディスク数
         {"ALBUMSORT",   &strAlbumSort},   //アルバム読み
+        {"ALBUMARTISTSORT", &strAlbumArtistSort}, //Albm.アーティスト読み
         {NULL,          NULL}
     };
     int i = 0;
@@ -258,6 +265,7 @@ bool LoadFileOPUS(FILE_INFO *pFileMP3)
     SetDiscNumberSI(pFileMP3, strDiscNumber);
     SetDiscTotalSI(pFileMP3, strDiscTotal);
     SetAlbumSort(pFileMP3, strAlbumSort);
+    SetAlbumArtistSort(pFileMP3, strAlbumArtistSort);
     const OpusHead *opusHead = op_head(pOpusFile, -1);
     if(opusHead){
         const int samplerate = opusHead->input_sample_rate;
@@ -314,6 +322,7 @@ bool WriteFileOPUS(FILE_INFO *pFileMP3)
     CString strDiscNumber = GetDiscNumberSI(pFileMP3);
     CString strDiscTotal = GetDiscTotalSI(pFileMP3);
     CString strAlbumSort = GetAlbumSort(pFileMP3);
+    CString strAlbumArtistSort = GetAlbumArtistSort(pFileMP3);
 
     struct _OPUSCOMMENT_{
         const char *cszField;
@@ -331,6 +340,7 @@ bool WriteFileOPUS(FILE_INFO *pFileMP3)
         {"DISCNUMBER",  &strDiscNumber},  //ディスク番号
         {"DISCTOTAL",   &strDiscTotal},   //ディスク数
         {"ALBUMSORT",   &strAlbumSort},   //アルバム読み
+        {"ALBUMARTISTSORT", &strAlbumArtistSort}, //Albm.アーティスト読み
         {NULL,          NULL}
     };
     int i = 0;

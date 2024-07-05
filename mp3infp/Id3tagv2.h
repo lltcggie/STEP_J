@@ -188,6 +188,8 @@ public:
     void SetEngineer(LPCTSTR engineer) { SetId3String("TPUB", engineer); }
     CString GetAlbumSort() { return GetId3String("TSOA"); }
     void SetAlbumSort(LPCTSTR albumSort) { SetId3String("TSOA", albumSort); }
+    CString GetAlbumArtistSort() { return GetId3String("TSO2"); }
+    void SetAlbumArtistSort(LPCTSTR albumSort) { SetId3String("TSO2", albumSort); }
 
     //
 	DWORD Load(LPCTSTR szFileName);

@@ -481,6 +481,7 @@ extern "C" STEP_API CONTROLTYPE WINAPI STEPGetControlType(UINT nFormat, COLUMNTY
     case COLUMN_URL:
     case COLUMN_ENCODEST:
     case COLUMN_ALBUM_SORT:
+    case COLUMN_ALBM_ARTIST_SORT:
         if (!isEditSIF) {
             return _NULL;
         }
@@ -541,6 +542,7 @@ extern "C" STEP_API UINT WINAPI STEPGetColumnMax(UINT nFormat, COLUMNTYPE nColum
         case COLUMN_ENGINEER:       // エンジニア（出版）
         case COLUMN_COMMENT:        // コメント
         case COLUMN_ALBUM_SORT:     // アルバム読み
+        case COLUMN_ALBM_ARTIST_SORT: // Albm.アーティスト読み
             return 2048; /* 2003.06.20 増やした */
         case COLUMN_TRACK_NUMBER:   // トラック番号
         case COLUMN_TRACK_TOTAL:    // トラック数
@@ -775,7 +777,8 @@ bool ReadTagID3v2(LPCTSTR sFileName, FILE_INFO *pFileMP3)
     SetURLSI(pFileMP3, id3v2.GetUrl());                 // URL
     SetEncodest(pFileMP3, id3v2.GetEncodedBy());        // エンコードした人
     SetEngineerSI(pFileMP3,id3v2.GetEngineer());        // エンジニア（出版）
-    SetAlbumSort(pFileMP3,id3v2.GetAlbumSort());        // アルバム読み
+    SetAlbumSort(pFileMP3, id3v2.GetAlbumSort());        // アルバム読み
+    SetAlbumArtistSort(pFileMP3,id3v2.GetAlbumArtistSort()); // Albm.アーティスト読み
 
 //  SetFileTypeName(pFileMP3, "MP3(ID3v2)");
     setFileType(id3v2, pFileMP3);
@@ -1180,6 +1183,7 @@ bool WriteTagID3v2(FILE_INFO *pFileMP3)
     id3v2.SetEncodedBy(GetEncodest(pFileMP3));          // エンコードした人
     id3v2.SetEngineer(GetEngineerSI(pFileMP3));         // エンジニア（出版）
     id3v2.SetAlbumSort(GetAlbumSort(pFileMP3));         // アルバム読み
+    id3v2.SetAlbumArtistSort(GetAlbumArtistSort(pFileMP3));         // Albm.アーティスト読み
     // ジャンル名
     CString strGenre;
     BYTE    byGenre;
@@ -1347,6 +1351,7 @@ bool IsCreateID3v2SI(FILE_INFO *pFileMP3, bool bID3v1Only = FALSE)
     if (_tcslen(GetSoftwareSI(pFileMP3)) > 0
         && _tcscmp(GetSoftwareSI(pFileMP3), strOptSoftwareTag) != 0)        return true;    // ソフトウェア
     if (_tcslen(GetAlbumSort(pFileMP3)) > 0)                        return true;    // アルバム読み
+    if (_tcslen(GetAlbumArtistSort(pFileMP3)) > 0)                  return true;    // Albm.アーティスト読み
     return false;
 }
 

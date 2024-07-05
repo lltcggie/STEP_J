@@ -841,6 +841,8 @@ extern "C" STEP_API LPCTSTR WINAPI STEPGetValue(FILE_INFO* pFileInfo, FIELDTYPE 
         return pFileMP3->strOther;
     case FIELD_ALBUM_SORT:              // アルバム読み
         return pFileMP3->strAlbumSort;
+    case FIELD_ALBM_ARTIST_SORT:        // Albm.アーティスト読み
+        return pFileMP3->strAlbumArtistSort;
     case FILED_FILE_TYPE_NAME:          // ファイルタイプ文字列
         return pFileMP3->strFileTypeName;
     }
@@ -969,6 +971,9 @@ extern "C" STEP_API void WINAPI STEPSetValue(FILE_INFO* pFileInfo, FIELDTYPE nFi
         break;
     case FIELD_ALBUM_SORT:              // アルバム読み
         pFileMP3->strAlbumSort = szValue;
+        break;
+    case FIELD_ALBM_ARTIST_SORT:        // Albm.アーティスト読み
+        pFileMP3->strAlbumArtistSort = szValue;
         break;
     case FILED_FILE_TYPE_NAME:          // ファイルタイプ文字列
         pFileMP3->strFileTypeName = szValue;

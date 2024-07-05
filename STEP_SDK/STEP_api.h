@@ -82,6 +82,7 @@ enum COLUMNTYPE {
     COLUMN_FORMAT,          // フォーマット
     COLUMN_OTHER,           // その他
     COLUMN_ALBUM_SORT,      // アルバム読み
+    COLUMN_ALBM_ARTIST_SORT,// Albm.アーティスト読み
     COLUMN_FILE_CTIME,      // ファイル作成日 /* 2003.06.19 add */
     COLUMN_MAX,
 };
@@ -127,6 +128,7 @@ enum FIELDTYPE {
     FIELD_ENCODEST,                 // エンコードした人
     FIELD_OTHER,                    // その他
     FIELD_ALBUM_SORT,               // アルバム読み
+    FIELD_ALBM_ARTIST_SORT,         // Albm.アーティスト読み
     FILED_FILE_TYPE_NAME,           // ファイルタイプ文字列
     FIELD_MAX
 };
